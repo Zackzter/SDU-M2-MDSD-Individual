@@ -1,0 +1,150 @@
+grammar mdsd.RPG with org.eclipse.xtext.common.Terminals
+
+generate rPG "http://www.RPG.mdsd"
+
+SystemRPG:
+	'game' name=ID declarations+=Declaration*;
+	
+Declaration:
+	Locations | Relations | Moves | Entities | Teams | Attributes;
+	
+Locations:
+	'location' loc+=Loc+
+;
+
+Loc:
+	name=ID 'opponents' oname=ID
+;
+
+Relations:
+	'relations' type+=Type+
+;
+
+//Simple implementation for now so it can work
+Type:
+	'type' name=ID tExpression=TypeExpression?
+;
+
+TypeExpression:
+	strong=[Type] (',' strong2+=[Type])*  '<' currentT=[Type] '<' weak=[Type] (',' weak2+=[Type])*
+;
+
+
+Moves:
+	'moves' move+=Move+
+;
+
+Move:
+	'move' name=ID eType=EType (power=Power)? att+=AltAttribute*
+;
+
+EType:
+	'type' type=[Type]
+;
+
+Attributes:
+	'attributes' attribute+=Attribute+
+;
+
+Attribute:
+	'attribute' (name=ID aVal=AttributeValues)
+;
+
+Health:
+	'Health:' AtomicNumber
+;
+
+Power:
+	'Power:' AtomicNumber
+;
+
+AttributeValues:
+	'is' (lTypes=LegalType | value=AtomicNumber) | (rule=Rule|require=Require)
+;
+
+AltAttribute:
+	'attribute' attriburte+=[Attribute]+ (av=AttributeValues)?
+;
+
+//Sum cannot find the signs needed for the expression but want an AtomicNumber instead
+Rule:
+	'if' attribute=[Attribute] comp=Comparator value=AtomicNumber 'then' attribute2=[Attribute] sum=Sum val=AtomicNumber
+;
+
+Entities:
+	'entities' entity+=Entity+
+;
+
+Entity:
+	'entity' name=ID eType=EType health=Health power=Power att+=AltAttribute* eMoves+=EntityMoves*
+;
+
+EntityMoves:
+	'move' move+=[Move]+
+;
+
+Teams:
+	'teams' Require? bs=BattleSize team+=Team+
+;
+
+Team:
+	'team' name=ID members+=Members+
+;
+
+Members:
+	'members' entity+=[Entity]+
+;
+
+BattleSize:
+	'battling_member_count' value=AtomicNumber req=Require?
+;
+
+
+Require:
+	'require' ORcondition | ORcondition
+;
+
+ORcondition returns Proposition:
+	ANDcondition ('OR' {or.left=current} right=ANDcondition)*
+;
+
+ANDcondition returns Proposition:
+	Statement ('AND'{and.left=current} right=Statement)*
+	
+;
+
+Statement returns Proposition:
+	NumberComparing | '(' ORcondition ')'
+;
+
+NumberComparing:
+	left=Sum comp=Comparator right=Sum
+;
+
+Comparator:
+	'<' | '<=' | '==' | '>=' | '>'
+;
+
+Sum:
+	Multiply (('+' {Add.left=current} | '-' {Sub.left=current}) right=Multiply)*
+;
+
+Multiply:
+	AtomicNumber (('*' {Mult.left=current} | '/' {Div.left=current}) right=AtomicNumber)*
+;
+
+CalcOp:
+	'+' | '-' | '*' | '/'
+;
+
+AtomicNumber:
+	value=Float | value2=INT | op=CalcOp
+;
+
+Float:
+	INT '.' INT
+;
+
+LegalType:
+	'Float' | 'Integer'
+;
