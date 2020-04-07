@@ -1,0 +1,79 @@
+game ChampsOfNorth
+location Denmark opponents Crusaders
+relations 
+	type Viking
+		Priest, Archer < Viking < Warrior
+	type Priest
+		Archer < Priest< Viking, Warrior
+	type Archer
+		Viking < Archer < Priest
+	type Warrior
+		 Viking < Warrior < Archer
+
+
+attributes
+	attribute power is Integer
+	attribute health is 500
+	attribute energy is Integer
+	attribute speed is Integer
+	attribute current_health is Integer
+	attribute health2 require speed > energy AND speed+3 >power
+
+moves 
+	move Axe_Throw
+		type Viking
+		power is 30 
+		energy is 100
+		effect if speed > 1 then speed*0.5 
+		
+		
+	move Heal  
+		type Priest 
+		energy is 50 
+		power is 30 
+		effect if energy > 29 AND current_health != health then current_health+power 
+	move Arrow_Rain 
+		type Priest
+		power is 20
+		energy is 65
+		effect if health > 0 then health-power 
+	move Stab
+		type Warrior
+		power is 10
+		energy is 5
+		effect if health > 0 then health-power
+ 
+entities
+	entity Bluetooth 
+		type Viking 
+		speed is 5 
+		energy is 250
+		move Axe_Throw
+	
+	entity Dio
+		type Priest
+		speed is 7
+		energy is 500
+		move Heal
+	
+	entity Karl
+		type Archer
+		speed is 15
+		energy is 350
+		move Arrow_Rain
+	
+	entity Lewis
+		type Warrior
+		speed is 10
+		energy is 200
+		move Stab
+		
+		
+	
+
+teams
+	battling_member_count 2 require 1 > 0
+	team Team1
+		members Bluetooth Karl
+	team Crusaders 
+		members Dio Lewis

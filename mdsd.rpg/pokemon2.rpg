@@ -1,0 +1,61 @@
+game pokemon
+location Johto opponents Team2
+relations 
+	type fire
+		grass, bug < fire < water 
+	type grass
+		water < grass < fire, bug
+	type water
+		fire < water < grass 
+	type bug
+		grass < bug < fire
+
+
+attributes
+	attribute pp is Integer  
+	attribute power is Integer
+	attribute hp is Float 
+	attribute speed is Integer
+	attribute max_hp is Integer
+
+moves 
+	move Ember 
+		type fire
+		power is 45 
+		pp is 25
+		effect if hp > 0 then hp-power
+		effect if fire AND hp < max_hp then hp+power
+	move Water_Gun
+		type water 
+		power is 40
+		pp is 25
+		effect if hp > 0 then hp-power
+	move Razor_Leaf  
+		type grass 
+		pp is 25
+		power is 55
+		effect if hp > 0 then hp-power
+ 
+entities
+	entity Cyndaquil 
+		type fire 
+		hp is 10
+		move Ember
+	
+	entity Totodile
+		type water
+		hp is 12
+		move Water_Gun
+	
+	entity Chikorita
+		type grass
+		hp is 8
+		move Razor_Leaf
+	
+
+teams
+	battling_member_count 1 require 1 > 0
+	team Team1
+		members Cyndaquil
+	team Team2 
+		members Totodile Chikorita
