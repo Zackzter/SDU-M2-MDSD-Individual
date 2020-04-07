@@ -5,3 +5,7 @@
 !/.gitignore
 
 # Folder to not ignore
+!/mdsd.rpg/
+
+/mdsd.rpg/bin/mdsd/generator/.RPGGenerator.xtendbin
+/mdsd.rpg/xtend-gen/mdsd/generator/.RPGGenerator.xtendbin
