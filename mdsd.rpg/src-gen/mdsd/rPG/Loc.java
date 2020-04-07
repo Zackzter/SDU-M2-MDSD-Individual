@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.Loc#getName <em>Name</em>}</li>
- *   <li>{@link mdsd.rPG.Loc#getOname <em>Oname</em>}</li>
+ *   <li>{@link mdsd.rPG.Loc#getTeam <em>Team</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getLoc()
@@ -47,25 +47,25 @@ public interface Loc extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Oname</b></em>' attribute.
+   * Returns the value of the '<em><b>Team</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Oname</em>' attribute.
-   * @see #setOname(String)
-   * @see mdsd.rPG.RPGPackage#getLoc_Oname()
+   * @return the value of the '<em>Team</em>' reference.
+   * @see #setTeam(Team)
+   * @see mdsd.rPG.RPGPackage#getLoc_Team()
    * @model
    * @generated
    */
-  String getOname();
+  Team getTeam();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.Loc#getOname <em>Oname</em>}' attribute.
+   * Sets the value of the '{@link mdsd.rPG.Loc#getTeam <em>Team</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Oname</em>' attribute.
-   * @see #getOname()
+   * @param value the new value of the '<em>Team</em>' reference.
+   * @see #getTeam()
    * @generated
    */
-  void setOname(String value);
+  void setTeam(Team value);
 
 } // Loc

@@ -13,7 +13,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Loc">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="oname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="team" eType="#//Team"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Relations" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" upperBound="-1" eType="#//Type"
@@ -41,10 +41,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eType" eType="#//EType"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="power" eType="#//Power"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="att" upperBound="-1" eType="#//AltAttribute"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" upperBound="-1"
+        eType="#//Effect" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
@@ -58,8 +58,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="aVal" eType="#//AttributeValues"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Health"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Power"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Effect"/>
   <eClassifiers xsi:type="ecore:EClass" name="AttributeValues">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lTypes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//AtomicNumber"
@@ -74,14 +73,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="av" eType="#//AttributeValues"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Rule">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//AtomicNumber"
+  <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="#//Effect">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" eType="#//Proposition"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute2" eType="#//Attribute"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sum" eType="#//Sum" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="val" eType="#//AtomicNumber"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="change" eType="#//Sum"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entities" eSuperTypes="#//Declaration">
@@ -91,10 +86,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Entity">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eType" eType="#//EType"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="health" eType="#//Health"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="power" eType="#//Power"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="att" upperBound="-1" eType="#//AltAttribute"
         containment="true"/>
@@ -127,7 +118,9 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Require" eSuperTypes="#//Teams"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Proposition" eSuperTypes="#//Require"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Proposition" eSuperTypes="#//Require">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NumberComparing" eSuperTypes="#//Proposition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Sum" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -135,10 +128,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Sum"/>
   <eClassifiers xsi:type="ecore:EClass" name="Multiply" eSuperTypes="#//Sum"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AtomicNumber" eSuperTypes="#//Health #//Power #//Multiply">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="op" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicNumber" eSuperTypes="#//Multiply">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="or" eSuperTypes="#//Proposition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Proposition"

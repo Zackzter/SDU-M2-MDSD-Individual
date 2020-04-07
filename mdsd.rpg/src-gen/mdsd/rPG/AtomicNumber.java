@@ -13,81 +13,35 @@ package mdsd.rPG;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.AtomicNumber#getValue <em>Value</em>}</li>
- *   <li>{@link mdsd.rPG.AtomicNumber#getValue2 <em>Value2</em>}</li>
- *   <li>{@link mdsd.rPG.AtomicNumber#getOp <em>Op</em>}</li>
+ *   <li>{@link mdsd.rPG.AtomicNumber#getAttribute <em>Attribute</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getAtomicNumber()
  * @model
  * @generated
  */
-public interface AtomicNumber extends Health, Power, Multiply
+public interface AtomicNumber extends Multiply
 {
   /**
-   * Returns the value of the '<em><b>Value</b></em>' attribute.
+   * Returns the value of the '<em><b>Attribute</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Value</em>' attribute.
-   * @see #setValue(String)
-   * @see mdsd.rPG.RPGPackage#getAtomicNumber_Value()
+   * @return the value of the '<em>Attribute</em>' reference.
+   * @see #setAttribute(Attribute)
+   * @see mdsd.rPG.RPGPackage#getAtomicNumber_Attribute()
    * @model
    * @generated
    */
-  String getValue();
+  Attribute getAttribute();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.AtomicNumber#getValue <em>Value</em>}' attribute.
+   * Sets the value of the '{@link mdsd.rPG.AtomicNumber#getAttribute <em>Attribute</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value</em>' attribute.
-   * @see #getValue()
+   * @param value the new value of the '<em>Attribute</em>' reference.
+   * @see #getAttribute()
    * @generated
    */
-  void setValue(String value);
-
-  /**
-   * Returns the value of the '<em><b>Value2</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Value2</em>' attribute.
-   * @see #setValue2(int)
-   * @see mdsd.rPG.RPGPackage#getAtomicNumber_Value2()
-   * @model
-   * @generated
-   */
-  int getValue2();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.AtomicNumber#getValue2 <em>Value2</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value2</em>' attribute.
-   * @see #getValue2()
-   * @generated
-   */
-  void setValue2(int value);
-
-  /**
-   * Returns the value of the '<em><b>Op</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Op</em>' attribute.
-   * @see #setOp(String)
-   * @see mdsd.rPG.RPGPackage#getAtomicNumber_Op()
-   * @model
-   * @generated
-   */
-  String getOp();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.AtomicNumber#getOp <em>Op</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Op</em>' attribute.
-   * @see #getOp()
-   * @generated
-   */
-  void setOp(String value);
+  void setAttribute(Attribute value);
 
 } // AtomicNumber

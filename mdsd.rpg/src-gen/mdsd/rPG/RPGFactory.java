@@ -132,22 +132,13 @@ public interface RPGFactory extends EFactory
   Attribute createAttribute();
 
   /**
-   * Returns a new object of class '<em>Health</em>'.
+   * Returns a new object of class '<em>Effect</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Health</em>'.
+   * @return a new object of class '<em>Effect</em>'.
    * @generated
    */
-  Health createHealth();
-
-  /**
-   * Returns a new object of class '<em>Power</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Power</em>'.
-   * @generated
-   */
-  Power createPower();
+  Effect createEffect();
 
   /**
    * Returns a new object of class '<em>Attribute Values</em>'.

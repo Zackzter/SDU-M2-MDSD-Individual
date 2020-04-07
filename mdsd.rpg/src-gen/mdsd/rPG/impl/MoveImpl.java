@@ -7,8 +7,8 @@ import java.util.Collection;
 
 import mdsd.rPG.AltAttribute;
 import mdsd.rPG.EType;
+import mdsd.rPG.Effect;
 import mdsd.rPG.Move;
-import mdsd.rPG.Power;
 import mdsd.rPG.RPGPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -35,8 +35,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link mdsd.rPG.impl.MoveImpl#getName <em>Name</em>}</li>
  *   <li>{@link mdsd.rPG.impl.MoveImpl#getEType <em>EType</em>}</li>
- *   <li>{@link mdsd.rPG.impl.MoveImpl#getPower <em>Power</em>}</li>
  *   <li>{@link mdsd.rPG.impl.MoveImpl#getAtt <em>Att</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.MoveImpl#getEffect <em>Effect</em>}</li>
  * </ul>
  *
  * @generated
@@ -74,16 +74,6 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
   protected EType eType;
 
   /**
-   * The cached value of the '{@link #getPower() <em>Power</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getPower()
-   * @generated
-   * @ordered
-   */
-  protected Power power;
-
-  /**
    * The cached value of the '{@link #getAtt() <em>Att</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -92,6 +82,16 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
    * @ordered
    */
   protected EList<AltAttribute> att;
+
+  /**
+   * The cached value of the '{@link #getEffect() <em>Effect</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getEffect()
+   * @generated
+   * @ordered
+   */
+  protected EList<Effect> effect;
 
   /**
    * <!-- begin-user-doc -->
@@ -195,56 +195,6 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
    * @generated
    */
   @Override
-  public Power getPower()
-  {
-    return power;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetPower(Power newPower, NotificationChain msgs)
-  {
-    Power oldPower = power;
-    power = newPower;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.MOVE__POWER, oldPower, newPower);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setPower(Power newPower)
-  {
-    if (newPower != power)
-    {
-      NotificationChain msgs = null;
-      if (power != null)
-        msgs = ((InternalEObject)power).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.MOVE__POWER, null, msgs);
-      if (newPower != null)
-        msgs = ((InternalEObject)newPower).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.MOVE__POWER, null, msgs);
-      msgs = basicSetPower(newPower, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.MOVE__POWER, newPower, newPower));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EList<AltAttribute> getAtt()
   {
     if (att == null)
@@ -260,16 +210,31 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
    * @generated
    */
   @Override
+  public EList<Effect> getEffect()
+  {
+    if (effect == null)
+    {
+      effect = new EObjectContainmentEList<Effect>(Effect.class, this, RPGPackage.MOVE__EFFECT);
+    }
+    return effect;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
       case RPGPackage.MOVE__ETYPE:
         return basicSetEType(null, msgs);
-      case RPGPackage.MOVE__POWER:
-        return basicSetPower(null, msgs);
       case RPGPackage.MOVE__ATT:
         return ((InternalEList<?>)getAtt()).basicRemove(otherEnd, msgs);
+      case RPGPackage.MOVE__EFFECT:
+        return ((InternalEList<?>)getEffect()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -288,10 +253,10 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
         return getName();
       case RPGPackage.MOVE__ETYPE:
         return getEType();
-      case RPGPackage.MOVE__POWER:
-        return getPower();
       case RPGPackage.MOVE__ATT:
         return getAtt();
+      case RPGPackage.MOVE__EFFECT:
+        return getEffect();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -313,12 +278,13 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
       case RPGPackage.MOVE__ETYPE:
         setEType((EType)newValue);
         return;
-      case RPGPackage.MOVE__POWER:
-        setPower((Power)newValue);
-        return;
       case RPGPackage.MOVE__ATT:
         getAtt().clear();
         getAtt().addAll((Collection<? extends AltAttribute>)newValue);
+        return;
+      case RPGPackage.MOVE__EFFECT:
+        getEffect().clear();
+        getEffect().addAll((Collection<? extends Effect>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -340,11 +306,11 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
       case RPGPackage.MOVE__ETYPE:
         setEType((EType)null);
         return;
-      case RPGPackage.MOVE__POWER:
-        setPower((Power)null);
-        return;
       case RPGPackage.MOVE__ATT:
         getAtt().clear();
+        return;
+      case RPGPackage.MOVE__EFFECT:
+        getEffect().clear();
         return;
     }
     super.eUnset(featureID);
@@ -364,10 +330,10 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case RPGPackage.MOVE__ETYPE:
         return eType != null;
-      case RPGPackage.MOVE__POWER:
-        return power != null;
       case RPGPackage.MOVE__ATT:
         return att != null && !att.isEmpty();
+      case RPGPackage.MOVE__EFFECT:
+        return effect != null && !effect.isEmpty();
     }
     return super.eIsSet(featureID);
   }

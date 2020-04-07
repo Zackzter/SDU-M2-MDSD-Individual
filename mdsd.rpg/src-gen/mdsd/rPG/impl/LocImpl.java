@@ -5,10 +5,12 @@ package mdsd.rPG.impl;
 
 import mdsd.rPG.Loc;
 import mdsd.rPG.RPGPackage;
+import mdsd.rPG.Team;
 
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -22,7 +24,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.impl.LocImpl#getName <em>Name</em>}</li>
- *   <li>{@link mdsd.rPG.impl.LocImpl#getOname <em>Oname</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.LocImpl#getTeam <em>Team</em>}</li>
  * </ul>
  *
  * @generated
@@ -50,24 +52,14 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getOname() <em>Oname</em>}' attribute.
+   * The cached value of the '{@link #getTeam() <em>Team</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getOname()
+   * @see #getTeam()
    * @generated
    * @ordered
    */
-  protected static final String ONAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getOname() <em>Oname</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOname()
-   * @generated
-   * @ordered
-   */
-  protected String oname = ONAME_EDEFAULT;
+  protected Team team;
 
   /**
    * <!-- begin-user-doc -->
@@ -121,9 +113,29 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
    * @generated
    */
   @Override
-  public String getOname()
+  public Team getTeam()
   {
-    return oname;
+    if (team != null && team.eIsProxy())
+    {
+      InternalEObject oldTeam = (InternalEObject)team;
+      team = (Team)eResolveProxy(oldTeam);
+      if (team != oldTeam)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RPGPackage.LOC__TEAM, oldTeam, team));
+      }
+    }
+    return team;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Team basicGetTeam()
+  {
+    return team;
   }
 
   /**
@@ -132,12 +144,12 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
    * @generated
    */
   @Override
-  public void setOname(String newOname)
+  public void setTeam(Team newTeam)
   {
-    String oldOname = oname;
-    oname = newOname;
+    Team oldTeam = team;
+    team = newTeam;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.LOC__ONAME, oldOname, oname));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.LOC__TEAM, oldTeam, team));
   }
 
   /**
@@ -152,8 +164,9 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
     {
       case RPGPackage.LOC__NAME:
         return getName();
-      case RPGPackage.LOC__ONAME:
-        return getOname();
+      case RPGPackage.LOC__TEAM:
+        if (resolve) return getTeam();
+        return basicGetTeam();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -171,8 +184,8 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
       case RPGPackage.LOC__NAME:
         setName((String)newValue);
         return;
-      case RPGPackage.LOC__ONAME:
-        setOname((String)newValue);
+      case RPGPackage.LOC__TEAM:
+        setTeam((Team)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -191,8 +204,8 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
       case RPGPackage.LOC__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RPGPackage.LOC__ONAME:
-        setOname(ONAME_EDEFAULT);
+      case RPGPackage.LOC__TEAM:
+        setTeam((Team)null);
         return;
     }
     super.eUnset(featureID);
@@ -210,8 +223,8 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
     {
       case RPGPackage.LOC__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RPGPackage.LOC__ONAME:
-        return ONAME_EDEFAULT == null ? oname != null : !ONAME_EDEFAULT.equals(oname);
+      case RPGPackage.LOC__TEAM:
+        return team != null;
     }
     return super.eIsSet(featureID);
   }
@@ -229,8 +242,6 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", oname: ");
-    result.append(oname);
     result.append(')');
     return result.toString();
   }

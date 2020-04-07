@@ -13,14 +13,13 @@ Locations:
 ;
 
 Loc:
-	name=ID 'opponents' oname=ID
+	name=ID 'opponents' team=[Team]
 ;
 
 Relations:
 	'relations' type+=Type+
 ;
 
-//Simple implementation for now so it can work
 Type:
 	'type' name=ID tExpression=TypeExpression?
 ;
@@ -35,7 +34,7 @@ Moves:
 ;
 
 Move:
-	'move' name=ID eType=EType (power=Power)? att+=AltAttribute*
+	'move' name=ID eType=EType att+=AltAttribute* effect+=Effect*
 ;
 
 EType:
@@ -50,33 +49,33 @@ Attribute:
 	'attribute' (name=ID aVal=AttributeValues)
 ;
 
-Health:
-	'Health:' AtomicNumber
-;
 
-Power:
-	'Power:' AtomicNumber
+Effect:
+	'effect'  Rule 
 ;
 
 AttributeValues:
 	'is' (lTypes=LegalType | value=AtomicNumber) | (rule=Rule|require=Require)
 ;
 
+//Gives warning with only name
 AltAttribute:
-	'attribute' attriburte+=[Attribute]+ (av=AttributeValues)?
+	 attriburte+=[Attribute]+ (av=AttributeValues)?
 ;
 
 //Sum cannot find the signs needed for the expression but want an AtomicNumber instead
 Rule:
-	'if' attribute=[Attribute] comp=Comparator value=AtomicNumber 'then' attribute2=[Attribute] sum=Sum val=AtomicNumber
+	'if' operator=ORcondition  'then'
+		change=Sum 
 ;
+
 
 Entities:
 	'entities' entity+=Entity+
 ;
 
 Entity:
-	'entity' name=ID eType=EType health=Health power=Power att+=AltAttribute* eMoves+=EntityMoves*
+	'entity' name=ID eType=EType  att+=AltAttribute* eMoves+=EntityMoves*
 ;
 
 EntityMoves:
@@ -114,7 +113,7 @@ ANDcondition returns Proposition:
 ;
 
 Statement returns Proposition:
-	NumberComparing | '(' ORcondition ')'
+	NumberComparing | '(' ORcondition ')' | type=[Type]
 ;
 
 NumberComparing:
@@ -122,7 +121,7 @@ NumberComparing:
 ;
 
 Comparator:
-	'<' | '<=' | '==' | '>=' | '>'
+	'<' | '<=' | '==' | '>=' | '>' | '!='
 ;
 
 Sum:
@@ -133,12 +132,9 @@ Multiply:
 	AtomicNumber (('*' {Mult.left=current} | '/' {Div.left=current}) right=AtomicNumber)*
 ;
 
-CalcOp:
-	'+' | '-' | '*' | '/'
-;
 
 AtomicNumber:
-	value=Float | value2=INT | op=CalcOp
+	{AtomicNumber} Float | {AtomicNumber} INT | attribute=[Attribute] 
 ;
 
 Float:

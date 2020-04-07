@@ -3,7 +3,6 @@
  */
 package mdsd.rPG;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,150 +13,58 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.Rule#getAttribute <em>Attribute</em>}</li>
- *   <li>{@link mdsd.rPG.Rule#getComp <em>Comp</em>}</li>
- *   <li>{@link mdsd.rPG.Rule#getValue <em>Value</em>}</li>
- *   <li>{@link mdsd.rPG.Rule#getAttribute2 <em>Attribute2</em>}</li>
- *   <li>{@link mdsd.rPG.Rule#getSum <em>Sum</em>}</li>
- *   <li>{@link mdsd.rPG.Rule#getVal <em>Val</em>}</li>
+ *   <li>{@link mdsd.rPG.Rule#getOperator <em>Operator</em>}</li>
+ *   <li>{@link mdsd.rPG.Rule#getChange <em>Change</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getRule()
  * @model
  * @generated
  */
-public interface Rule extends EObject
+public interface Rule extends Effect
 {
   /**
-   * Returns the value of the '<em><b>Attribute</b></em>' reference.
+   * Returns the value of the '<em><b>Operator</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Attribute</em>' reference.
-   * @see #setAttribute(Attribute)
-   * @see mdsd.rPG.RPGPackage#getRule_Attribute()
-   * @model
-   * @generated
-   */
-  Attribute getAttribute();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Rule#getAttribute <em>Attribute</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Attribute</em>' reference.
-   * @see #getAttribute()
-   * @generated
-   */
-  void setAttribute(Attribute value);
-
-  /**
-   * Returns the value of the '<em><b>Comp</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Comp</em>' attribute.
-   * @see #setComp(String)
-   * @see mdsd.rPG.RPGPackage#getRule_Comp()
-   * @model
-   * @generated
-   */
-  String getComp();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Rule#getComp <em>Comp</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Comp</em>' attribute.
-   * @see #getComp()
-   * @generated
-   */
-  void setComp(String value);
-
-  /**
-   * Returns the value of the '<em><b>Value</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Value</em>' containment reference.
-   * @see #setValue(AtomicNumber)
-   * @see mdsd.rPG.RPGPackage#getRule_Value()
+   * @return the value of the '<em>Operator</em>' containment reference.
+   * @see #setOperator(Proposition)
+   * @see mdsd.rPG.RPGPackage#getRule_Operator()
    * @model containment="true"
    * @generated
    */
-  AtomicNumber getValue();
+  Proposition getOperator();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.Rule#getValue <em>Value</em>}' containment reference.
+   * Sets the value of the '{@link mdsd.rPG.Rule#getOperator <em>Operator</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value</em>' containment reference.
-   * @see #getValue()
+   * @param value the new value of the '<em>Operator</em>' containment reference.
+   * @see #getOperator()
    * @generated
    */
-  void setValue(AtomicNumber value);
+  void setOperator(Proposition value);
 
   /**
-   * Returns the value of the '<em><b>Attribute2</b></em>' reference.
+   * Returns the value of the '<em><b>Change</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Attribute2</em>' reference.
-   * @see #setAttribute2(Attribute)
-   * @see mdsd.rPG.RPGPackage#getRule_Attribute2()
-   * @model
-   * @generated
-   */
-  Attribute getAttribute2();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Rule#getAttribute2 <em>Attribute2</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Attribute2</em>' reference.
-   * @see #getAttribute2()
-   * @generated
-   */
-  void setAttribute2(Attribute value);
-
-  /**
-   * Returns the value of the '<em><b>Sum</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Sum</em>' containment reference.
-   * @see #setSum(Sum)
-   * @see mdsd.rPG.RPGPackage#getRule_Sum()
+   * @return the value of the '<em>Change</em>' containment reference.
+   * @see #setChange(Sum)
+   * @see mdsd.rPG.RPGPackage#getRule_Change()
    * @model containment="true"
    * @generated
    */
-  Sum getSum();
+  Sum getChange();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.Rule#getSum <em>Sum</em>}' containment reference.
+   * Sets the value of the '{@link mdsd.rPG.Rule#getChange <em>Change</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Sum</em>' containment reference.
-   * @see #getSum()
+   * @param value the new value of the '<em>Change</em>' containment reference.
+   * @see #getChange()
    * @generated
    */
-  void setSum(Sum value);
-
-  /**
-   * Returns the value of the '<em><b>Val</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Val</em>' containment reference.
-   * @see #setVal(AtomicNumber)
-   * @see mdsd.rPG.RPGPackage#getRule_Val()
-   * @model containment="true"
-   * @generated
-   */
-  AtomicNumber getVal();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Rule#getVal <em>Val</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Val</em>' containment reference.
-   * @see #getVal()
-   * @generated
-   */
-  void setVal(AtomicNumber value);
+  void setChange(Sum value);
 
 } // Rule

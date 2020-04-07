@@ -9,8 +9,6 @@ import mdsd.rPG.AltAttribute;
 import mdsd.rPG.EType;
 import mdsd.rPG.Entity;
 import mdsd.rPG.EntityMoves;
-import mdsd.rPG.Health;
-import mdsd.rPG.Power;
 import mdsd.rPG.RPGPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -37,8 +35,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link mdsd.rPG.impl.EntityImpl#getName <em>Name</em>}</li>
  *   <li>{@link mdsd.rPG.impl.EntityImpl#getEType <em>EType</em>}</li>
- *   <li>{@link mdsd.rPG.impl.EntityImpl#getHealth <em>Health</em>}</li>
- *   <li>{@link mdsd.rPG.impl.EntityImpl#getPower <em>Power</em>}</li>
  *   <li>{@link mdsd.rPG.impl.EntityImpl#getAtt <em>Att</em>}</li>
  *   <li>{@link mdsd.rPG.impl.EntityImpl#getEMoves <em>EMoves</em>}</li>
  * </ul>
@@ -76,26 +72,6 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
    * @ordered
    */
   protected EType eType;
-
-  /**
-   * The cached value of the '{@link #getHealth() <em>Health</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getHealth()
-   * @generated
-   * @ordered
-   */
-  protected Health health;
-
-  /**
-   * The cached value of the '{@link #getPower() <em>Power</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getPower()
-   * @generated
-   * @ordered
-   */
-  protected Power power;
 
   /**
    * The cached value of the '{@link #getAtt() <em>Att</em>}' containment reference list.
@@ -219,106 +195,6 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
    * @generated
    */
   @Override
-  public Health getHealth()
-  {
-    return health;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetHealth(Health newHealth, NotificationChain msgs)
-  {
-    Health oldHealth = health;
-    health = newHealth;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.ENTITY__HEALTH, oldHealth, newHealth);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setHealth(Health newHealth)
-  {
-    if (newHealth != health)
-    {
-      NotificationChain msgs = null;
-      if (health != null)
-        msgs = ((InternalEObject)health).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.ENTITY__HEALTH, null, msgs);
-      if (newHealth != null)
-        msgs = ((InternalEObject)newHealth).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.ENTITY__HEALTH, null, msgs);
-      msgs = basicSetHealth(newHealth, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.ENTITY__HEALTH, newHealth, newHealth));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Power getPower()
-  {
-    return power;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetPower(Power newPower, NotificationChain msgs)
-  {
-    Power oldPower = power;
-    power = newPower;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.ENTITY__POWER, oldPower, newPower);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setPower(Power newPower)
-  {
-    if (newPower != power)
-    {
-      NotificationChain msgs = null;
-      if (power != null)
-        msgs = ((InternalEObject)power).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.ENTITY__POWER, null, msgs);
-      if (newPower != null)
-        msgs = ((InternalEObject)newPower).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.ENTITY__POWER, null, msgs);
-      msgs = basicSetPower(newPower, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.ENTITY__POWER, newPower, newPower));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EList<AltAttribute> getAtt()
   {
     if (att == null)
@@ -355,10 +231,6 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
     {
       case RPGPackage.ENTITY__ETYPE:
         return basicSetEType(null, msgs);
-      case RPGPackage.ENTITY__HEALTH:
-        return basicSetHealth(null, msgs);
-      case RPGPackage.ENTITY__POWER:
-        return basicSetPower(null, msgs);
       case RPGPackage.ENTITY__ATT:
         return ((InternalEList<?>)getAtt()).basicRemove(otherEnd, msgs);
       case RPGPackage.ENTITY__EMOVES:
@@ -381,10 +253,6 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
         return getName();
       case RPGPackage.ENTITY__ETYPE:
         return getEType();
-      case RPGPackage.ENTITY__HEALTH:
-        return getHealth();
-      case RPGPackage.ENTITY__POWER:
-        return getPower();
       case RPGPackage.ENTITY__ATT:
         return getAtt();
       case RPGPackage.ENTITY__EMOVES:
@@ -409,12 +277,6 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
         return;
       case RPGPackage.ENTITY__ETYPE:
         setEType((EType)newValue);
-        return;
-      case RPGPackage.ENTITY__HEALTH:
-        setHealth((Health)newValue);
-        return;
-      case RPGPackage.ENTITY__POWER:
-        setPower((Power)newValue);
         return;
       case RPGPackage.ENTITY__ATT:
         getAtt().clear();
@@ -444,12 +306,6 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
       case RPGPackage.ENTITY__ETYPE:
         setEType((EType)null);
         return;
-      case RPGPackage.ENTITY__HEALTH:
-        setHealth((Health)null);
-        return;
-      case RPGPackage.ENTITY__POWER:
-        setPower((Power)null);
-        return;
       case RPGPackage.ENTITY__ATT:
         getAtt().clear();
         return;
@@ -474,10 +330,6 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case RPGPackage.ENTITY__ETYPE:
         return eType != null;
-      case RPGPackage.ENTITY__HEALTH:
-        return health != null;
-      case RPGPackage.ENTITY__POWER:
-        return power != null;
       case RPGPackage.ENTITY__ATT:
         return att != null && !att.isEmpty();
       case RPGPackage.ENTITY__EMOVES:

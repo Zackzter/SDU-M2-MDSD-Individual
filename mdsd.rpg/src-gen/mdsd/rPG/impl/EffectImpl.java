@@ -3,7 +3,7 @@
  */
 package mdsd.rPG.impl;
 
-import mdsd.rPG.Power;
+import mdsd.rPG.Effect;
 import mdsd.rPG.RPGPackage;
 
 import org.eclipse.emf.ecore.EClass;
@@ -12,19 +12,19 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Power</b></em>'.
+ * An implementation of the model object '<em><b>Effect</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class PowerImpl extends MinimalEObjectImpl.Container implements Power
+public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected PowerImpl()
+  protected EffectImpl()
   {
     super();
   }
@@ -37,7 +37,7 @@ public class PowerImpl extends MinimalEObjectImpl.Container implements Power
   @Override
   protected EClass eStaticClass()
   {
-    return RPGPackage.Literals.POWER;
+    return RPGPackage.Literals.EFFECT;
   }
 
-} //PowerImpl
+} //EffectImpl

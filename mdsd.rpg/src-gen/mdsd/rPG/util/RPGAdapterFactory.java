@@ -136,14 +136,9 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createAttributeAdapter();
       }
       @Override
-      public Adapter caseHealth(Health object)
+      public Adapter caseEffect(Effect object)
       {
-        return createHealthAdapter();
-      }
-      @Override
-      public Adapter casePower(Power object)
-      {
-        return createPowerAdapter();
+        return createEffectAdapter();
       }
       @Override
       public Adapter caseAttributeValues(AttributeValues object)
@@ -458,31 +453,16 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.Health <em>Health</em>}'.
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Effect <em>Effect</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see mdsd.rPG.Health
+   * @see mdsd.rPG.Effect
    * @generated
    */
-  public Adapter createHealthAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.Power <em>Power</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see mdsd.rPG.Power
-   * @generated
-   */
-  public Adapter createPowerAdapter()
+  public Adapter createEffectAdapter()
   {
     return null;
   }

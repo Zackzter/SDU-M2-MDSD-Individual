@@ -77,8 +77,7 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.ETYPE: return createEType();
       case RPGPackage.ATTRIBUTES: return createAttributes();
       case RPGPackage.ATTRIBUTE: return createAttribute();
-      case RPGPackage.HEALTH: return createHealth();
-      case RPGPackage.POWER: return createPower();
+      case RPGPackage.EFFECT: return createEffect();
       case RPGPackage.ATTRIBUTE_VALUES: return createAttributeValues();
       case RPGPackage.ALT_ATTRIBUTE: return createAltAttribute();
       case RPGPackage.RULE: return createRule();
@@ -256,22 +255,10 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
-  public Health createHealth()
+  public Effect createEffect()
   {
-    HealthImpl health = new HealthImpl();
-    return health;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Power createPower()
-  {
-    PowerImpl power = new PowerImpl();
-    return power;
+    EffectImpl effect = new EffectImpl();
+    return effect;
   }
 
   /**

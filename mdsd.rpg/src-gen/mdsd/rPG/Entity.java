@@ -18,8 +18,6 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link mdsd.rPG.Entity#getName <em>Name</em>}</li>
  *   <li>{@link mdsd.rPG.Entity#getEType <em>EType</em>}</li>
- *   <li>{@link mdsd.rPG.Entity#getHealth <em>Health</em>}</li>
- *   <li>{@link mdsd.rPG.Entity#getPower <em>Power</em>}</li>
  *   <li>{@link mdsd.rPG.Entity#getAtt <em>Att</em>}</li>
  *   <li>{@link mdsd.rPG.Entity#getEMoves <em>EMoves</em>}</li>
  * </ul>
@@ -73,50 +71,6 @@ public interface Entity extends EObject
    * @generated
    */
   void setEType(EType value);
-
-  /**
-   * Returns the value of the '<em><b>Health</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Health</em>' containment reference.
-   * @see #setHealth(Health)
-   * @see mdsd.rPG.RPGPackage#getEntity_Health()
-   * @model containment="true"
-   * @generated
-   */
-  Health getHealth();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Entity#getHealth <em>Health</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Health</em>' containment reference.
-   * @see #getHealth()
-   * @generated
-   */
-  void setHealth(Health value);
-
-  /**
-   * Returns the value of the '<em><b>Power</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Power</em>' containment reference.
-   * @see #setPower(Power)
-   * @see mdsd.rPG.RPGPackage#getEntity_Power()
-   * @model containment="true"
-   * @generated
-   */
-  Power getPower();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Entity#getPower <em>Power</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Power</em>' containment reference.
-   * @see #getPower()
-   * @generated
-   */
-  void setPower(Power value);
 
   /**
    * Returns the value of the '<em><b>Att</b></em>' containment reference list.

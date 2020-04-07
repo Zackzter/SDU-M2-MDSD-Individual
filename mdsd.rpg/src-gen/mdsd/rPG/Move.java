@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link mdsd.rPG.Move#getName <em>Name</em>}</li>
  *   <li>{@link mdsd.rPG.Move#getEType <em>EType</em>}</li>
- *   <li>{@link mdsd.rPG.Move#getPower <em>Power</em>}</li>
  *   <li>{@link mdsd.rPG.Move#getAtt <em>Att</em>}</li>
+ *   <li>{@link mdsd.rPG.Move#getEffect <em>Effect</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getMove()
@@ -73,28 +73,6 @@ public interface Move extends EObject
   void setEType(EType value);
 
   /**
-   * Returns the value of the '<em><b>Power</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Power</em>' containment reference.
-   * @see #setPower(Power)
-   * @see mdsd.rPG.RPGPackage#getMove_Power()
-   * @model containment="true"
-   * @generated
-   */
-  Power getPower();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Move#getPower <em>Power</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Power</em>' containment reference.
-   * @see #getPower()
-   * @generated
-   */
-  void setPower(Power value);
-
-  /**
    * Returns the value of the '<em><b>Att</b></em>' containment reference list.
    * The list contents are of type {@link mdsd.rPG.AltAttribute}.
    * <!-- begin-user-doc -->
@@ -105,5 +83,17 @@ public interface Move extends EObject
    * @generated
    */
   EList<AltAttribute> getAtt();
+
+  /**
+   * Returns the value of the '<em><b>Effect</b></em>' containment reference list.
+   * The list contents are of type {@link mdsd.rPG.Effect}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Effect</em>' containment reference list.
+   * @see mdsd.rPG.RPGPackage#getMove_Effect()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Effect> getEffect();
 
 } // Move

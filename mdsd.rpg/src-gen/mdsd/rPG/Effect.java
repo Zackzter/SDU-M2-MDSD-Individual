@@ -7,14 +7,14 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Power</b></em>'.
+ * A representation of the model object '<em><b>Effect</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see mdsd.rPG.RPGPackage#getPower()
+ * @see mdsd.rPG.RPGPackage#getEffect()
  * @model
  * @generated
  */
-public interface Power extends EObject
+public interface Effect extends EObject
 {
-} // Power
+} // Effect

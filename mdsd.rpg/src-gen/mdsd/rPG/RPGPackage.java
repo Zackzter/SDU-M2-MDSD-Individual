@@ -161,13 +161,13 @@ public interface RPGPackage extends EPackage
   int LOC__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Oname</b></em>' attribute.
+   * The feature id for the '<em><b>Team</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LOC__ONAME = 1;
+  int LOC__TEAM = 1;
 
   /**
    * The number of structural features of the '<em>Loc</em>' class.
@@ -364,22 +364,22 @@ public interface RPGPackage extends EPackage
   int MOVE__ETYPE = 1;
 
   /**
-   * The feature id for the '<em><b>Power</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MOVE__POWER = 2;
-
-  /**
    * The feature id for the '<em><b>Att</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MOVE__ATT = 3;
+  int MOVE__ATT = 2;
+
+  /**
+   * The feature id for the '<em><b>Effect</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MOVE__EFFECT = 3;
 
   /**
    * The number of structural features of the '<em>Move</em>' class.
@@ -484,42 +484,23 @@ public interface RPGPackage extends EPackage
   int ATTRIBUTE_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link mdsd.rPG.impl.HealthImpl <em>Health</em>}' class.
+   * The meta object id for the '{@link mdsd.rPG.impl.EffectImpl <em>Effect</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see mdsd.rPG.impl.HealthImpl
-   * @see mdsd.rPG.impl.RPGPackageImpl#getHealth()
+   * @see mdsd.rPG.impl.EffectImpl
+   * @see mdsd.rPG.impl.RPGPackageImpl#getEffect()
    * @generated
    */
-  int HEALTH = 12;
+  int EFFECT = 12;
 
   /**
-   * The number of structural features of the '<em>Health</em>' class.
+   * The number of structural features of the '<em>Effect</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int HEALTH_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link mdsd.rPG.impl.PowerImpl <em>Power</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see mdsd.rPG.impl.PowerImpl
-   * @see mdsd.rPG.impl.RPGPackageImpl#getPower()
-   * @generated
-   */
-  int POWER = 13;
-
-  /**
-   * The number of structural features of the '<em>Power</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int POWER_FEATURE_COUNT = 0;
+  int EFFECT_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.AttributeValuesImpl <em>Attribute Values</em>}' class.
@@ -529,7 +510,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAttributeValues()
    * @generated
    */
-  int ATTRIBUTE_VALUES = 14;
+  int ATTRIBUTE_VALUES = 13;
 
   /**
    * The feature id for the '<em><b>LTypes</b></em>' attribute.
@@ -584,7 +565,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAltAttribute()
    * @generated
    */
-  int ALT_ATTRIBUTE = 15;
+  int ALT_ATTRIBUTE = 14;
 
   /**
    * The feature id for the '<em><b>Attriburte</b></em>' reference list.
@@ -621,61 +602,25 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getRule()
    * @generated
    */
-  int RULE = 16;
+  int RULE = 15;
 
   /**
-   * The feature id for the '<em><b>Attribute</b></em>' reference.
+   * The feature id for the '<em><b>Operator</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RULE__ATTRIBUTE = 0;
+  int RULE__OPERATOR = EFFECT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Comp</b></em>' attribute.
+   * The feature id for the '<em><b>Change</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RULE__COMP = 1;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__VALUE = 2;
-
-  /**
-   * The feature id for the '<em><b>Attribute2</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__ATTRIBUTE2 = 3;
-
-  /**
-   * The feature id for the '<em><b>Sum</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__SUM = 4;
-
-  /**
-   * The feature id for the '<em><b>Val</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__VAL = 5;
+  int RULE__CHANGE = EFFECT_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Rule</em>' class.
@@ -684,7 +629,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RULE_FEATURE_COUNT = 6;
+  int RULE_FEATURE_COUNT = EFFECT_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.EntitiesImpl <em>Entities</em>}' class.
@@ -694,7 +639,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEntities()
    * @generated
    */
-  int ENTITIES = 17;
+  int ENTITIES = 16;
 
   /**
    * The feature id for the '<em><b>Entity</b></em>' containment reference list.
@@ -722,7 +667,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEntity()
    * @generated
    */
-  int ENTITY = 18;
+  int ENTITY = 17;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -743,31 +688,13 @@ public interface RPGPackage extends EPackage
   int ENTITY__ETYPE = 1;
 
   /**
-   * The feature id for the '<em><b>Health</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ENTITY__HEALTH = 2;
-
-  /**
-   * The feature id for the '<em><b>Power</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ENTITY__POWER = 3;
-
-  /**
    * The feature id for the '<em><b>Att</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY__ATT = 4;
+  int ENTITY__ATT = 2;
 
   /**
    * The feature id for the '<em><b>EMoves</b></em>' containment reference list.
@@ -776,7 +703,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENTITY__EMOVES = 5;
+  int ENTITY__EMOVES = 3;
 
   /**
    * The number of structural features of the '<em>Entity</em>' class.
@@ -785,7 +712,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENTITY_FEATURE_COUNT = 6;
+  int ENTITY_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.EntityMovesImpl <em>Entity Moves</em>}' class.
@@ -795,7 +722,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEntityMoves()
    * @generated
    */
-  int ENTITY_MOVES = 19;
+  int ENTITY_MOVES = 18;
 
   /**
    * The feature id for the '<em><b>Move</b></em>' reference list.
@@ -823,7 +750,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getTeams()
    * @generated
    */
-  int TEAMS = 20;
+  int TEAMS = 19;
 
   /**
    * The feature id for the '<em><b>Bs</b></em>' containment reference.
@@ -860,7 +787,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getTeam()
    * @generated
    */
-  int TEAM = 21;
+  int TEAM = 20;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -897,7 +824,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMembers()
    * @generated
    */
-  int MEMBERS = 22;
+  int MEMBERS = 21;
 
   /**
    * The feature id for the '<em><b>Entity</b></em>' reference list.
@@ -925,7 +852,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getBattleSize()
    * @generated
    */
-  int BATTLE_SIZE = 23;
+  int BATTLE_SIZE = 22;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -962,7 +889,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getRequire()
    * @generated
    */
-  int REQUIRE = 24;
+  int REQUIRE = 23;
 
   /**
    * The feature id for the '<em><b>Bs</b></em>' containment reference.
@@ -999,7 +926,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getProposition()
    * @generated
    */
-  int PROPOSITION = 25;
+  int PROPOSITION = 24;
 
   /**
    * The feature id for the '<em><b>Bs</b></em>' containment reference.
@@ -1020,13 +947,22 @@ public interface RPGPackage extends EPackage
   int PROPOSITION__TEAM = REQUIRE__TEAM;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROPOSITION__TYPE = REQUIRE_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Proposition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PROPOSITION_FEATURE_COUNT = REQUIRE_FEATURE_COUNT + 0;
+  int PROPOSITION_FEATURE_COUNT = REQUIRE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.NumberComparingImpl <em>Number Comparing</em>}' class.
@@ -1036,7 +972,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getNumberComparing()
    * @generated
    */
-  int NUMBER_COMPARING = 26;
+  int NUMBER_COMPARING = 25;
 
   /**
    * The feature id for the '<em><b>Bs</b></em>' containment reference.
@@ -1055,6 +991,15 @@ public interface RPGPackage extends EPackage
    * @ordered
    */
   int NUMBER_COMPARING__TEAM = PROPOSITION__TEAM;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NUMBER_COMPARING__TYPE = PROPOSITION__TYPE;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1100,7 +1045,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSum()
    * @generated
    */
-  int SUM = 27;
+  int SUM = 26;
 
   /**
    * The number of structural features of the '<em>Sum</em>' class.
@@ -1119,7 +1064,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMultiply()
    * @generated
    */
-  int MULTIPLY = 28;
+  int MULTIPLY = 27;
 
   /**
    * The number of structural features of the '<em>Multiply</em>' class.
@@ -1138,34 +1083,16 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAtomicNumber()
    * @generated
    */
-  int ATOMIC_NUMBER = 29;
+  int ATOMIC_NUMBER = 28;
 
   /**
-   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * The feature id for the '<em><b>Attribute</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ATOMIC_NUMBER__VALUE = HEALTH_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Value2</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ATOMIC_NUMBER__VALUE2 = HEALTH_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Op</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ATOMIC_NUMBER__OP = HEALTH_FEATURE_COUNT + 2;
+  int ATOMIC_NUMBER__ATTRIBUTE = MULTIPLY_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Atomic Number</em>' class.
@@ -1174,7 +1101,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATOMIC_NUMBER_FEATURE_COUNT = HEALTH_FEATURE_COUNT + 3;
+  int ATOMIC_NUMBER_FEATURE_COUNT = MULTIPLY_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.orImpl <em>or</em>}' class.
@@ -1184,7 +1111,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getor()
    * @generated
    */
-  int OR = 30;
+  int OR = 29;
 
   /**
    * The feature id for the '<em><b>Bs</b></em>' containment reference.
@@ -1203,6 +1130,15 @@ public interface RPGPackage extends EPackage
    * @ordered
    */
   int OR__TEAM = PROPOSITION__TEAM;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OR__TYPE = PROPOSITION__TYPE;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1239,7 +1175,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getand()
    * @generated
    */
-  int AND = 31;
+  int AND = 30;
 
   /**
    * The feature id for the '<em><b>Bs</b></em>' containment reference.
@@ -1258,6 +1194,15 @@ public interface RPGPackage extends EPackage
    * @ordered
    */
   int AND__TEAM = PROPOSITION__TEAM;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AND__TYPE = PROPOSITION__TYPE;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1294,7 +1239,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAdd()
    * @generated
    */
-  int ADD = 32;
+  int ADD = 31;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1331,7 +1276,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSub()
    * @generated
    */
-  int SUB = 33;
+  int SUB = 32;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1368,7 +1313,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMult()
    * @generated
    */
-  int MULT = 34;
+  int MULT = 33;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1405,7 +1350,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getDiv()
    * @generated
    */
-  int DIV = 35;
+  int DIV = 34;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1520,15 +1465,15 @@ public interface RPGPackage extends EPackage
   EAttribute getLoc_Name();
 
   /**
-   * Returns the meta object for the attribute '{@link mdsd.rPG.Loc#getOname <em>Oname</em>}'.
+   * Returns the meta object for the reference '{@link mdsd.rPG.Loc#getTeam <em>Team</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Oname</em>'.
-   * @see mdsd.rPG.Loc#getOname()
+   * @return the meta object for the reference '<em>Team</em>'.
+   * @see mdsd.rPG.Loc#getTeam()
    * @see #getLoc()
    * @generated
    */
-  EAttribute getLoc_Oname();
+  EReference getLoc_Team();
 
   /**
    * Returns the meta object for class '{@link mdsd.rPG.Relations <em>Relations</em>}'.
@@ -1702,17 +1647,6 @@ public interface RPGPackage extends EPackage
   EReference getMove_EType();
 
   /**
-   * Returns the meta object for the containment reference '{@link mdsd.rPG.Move#getPower <em>Power</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Power</em>'.
-   * @see mdsd.rPG.Move#getPower()
-   * @see #getMove()
-   * @generated
-   */
-  EReference getMove_Power();
-
-  /**
    * Returns the meta object for the containment reference list '{@link mdsd.rPG.Move#getAtt <em>Att</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1722,6 +1656,17 @@ public interface RPGPackage extends EPackage
    * @generated
    */
   EReference getMove_Att();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link mdsd.rPG.Move#getEffect <em>Effect</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Effect</em>'.
+   * @see mdsd.rPG.Move#getEffect()
+   * @see #getMove()
+   * @generated
+   */
+  EReference getMove_Effect();
 
   /**
    * Returns the meta object for class '{@link mdsd.rPG.EType <em>EType</em>}'.
@@ -1798,24 +1743,14 @@ public interface RPGPackage extends EPackage
   EReference getAttribute_AVal();
 
   /**
-   * Returns the meta object for class '{@link mdsd.rPG.Health <em>Health</em>}'.
+   * Returns the meta object for class '{@link mdsd.rPG.Effect <em>Effect</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Health</em>'.
-   * @see mdsd.rPG.Health
+   * @return the meta object for class '<em>Effect</em>'.
+   * @see mdsd.rPG.Effect
    * @generated
    */
-  EClass getHealth();
-
-  /**
-   * Returns the meta object for class '{@link mdsd.rPG.Power <em>Power</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Power</em>'.
-   * @see mdsd.rPG.Power
-   * @generated
-   */
-  EClass getPower();
+  EClass getEffect();
 
   /**
    * Returns the meta object for class '{@link mdsd.rPG.AttributeValues <em>Attribute Values</em>}'.
@@ -1914,70 +1849,26 @@ public interface RPGPackage extends EPackage
   EClass getRule();
 
   /**
-   * Returns the meta object for the reference '{@link mdsd.rPG.Rule#getAttribute <em>Attribute</em>}'.
+   * Returns the meta object for the containment reference '{@link mdsd.rPG.Rule#getOperator <em>Operator</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Attribute</em>'.
-   * @see mdsd.rPG.Rule#getAttribute()
+   * @return the meta object for the containment reference '<em>Operator</em>'.
+   * @see mdsd.rPG.Rule#getOperator()
    * @see #getRule()
    * @generated
    */
-  EReference getRule_Attribute();
+  EReference getRule_Operator();
 
   /**
-   * Returns the meta object for the attribute '{@link mdsd.rPG.Rule#getComp <em>Comp</em>}'.
+   * Returns the meta object for the containment reference '{@link mdsd.rPG.Rule#getChange <em>Change</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Comp</em>'.
-   * @see mdsd.rPG.Rule#getComp()
+   * @return the meta object for the containment reference '<em>Change</em>'.
+   * @see mdsd.rPG.Rule#getChange()
    * @see #getRule()
    * @generated
    */
-  EAttribute getRule_Comp();
-
-  /**
-   * Returns the meta object for the containment reference '{@link mdsd.rPG.Rule#getValue <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Value</em>'.
-   * @see mdsd.rPG.Rule#getValue()
-   * @see #getRule()
-   * @generated
-   */
-  EReference getRule_Value();
-
-  /**
-   * Returns the meta object for the reference '{@link mdsd.rPG.Rule#getAttribute2 <em>Attribute2</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Attribute2</em>'.
-   * @see mdsd.rPG.Rule#getAttribute2()
-   * @see #getRule()
-   * @generated
-   */
-  EReference getRule_Attribute2();
-
-  /**
-   * Returns the meta object for the containment reference '{@link mdsd.rPG.Rule#getSum <em>Sum</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Sum</em>'.
-   * @see mdsd.rPG.Rule#getSum()
-   * @see #getRule()
-   * @generated
-   */
-  EReference getRule_Sum();
-
-  /**
-   * Returns the meta object for the containment reference '{@link mdsd.rPG.Rule#getVal <em>Val</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Val</em>'.
-   * @see mdsd.rPG.Rule#getVal()
-   * @see #getRule()
-   * @generated
-   */
-  EReference getRule_Val();
+  EReference getRule_Change();
 
   /**
    * Returns the meta object for class '{@link mdsd.rPG.Entities <em>Entities</em>}'.
@@ -2031,28 +1922,6 @@ public interface RPGPackage extends EPackage
    * @generated
    */
   EReference getEntity_EType();
-
-  /**
-   * Returns the meta object for the containment reference '{@link mdsd.rPG.Entity#getHealth <em>Health</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Health</em>'.
-   * @see mdsd.rPG.Entity#getHealth()
-   * @see #getEntity()
-   * @generated
-   */
-  EReference getEntity_Health();
-
-  /**
-   * Returns the meta object for the containment reference '{@link mdsd.rPG.Entity#getPower <em>Power</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Power</em>'.
-   * @see mdsd.rPG.Entity#getPower()
-   * @see #getEntity()
-   * @generated
-   */
-  EReference getEntity_Power();
 
   /**
    * Returns the meta object for the containment reference list '{@link mdsd.rPG.Entity#getAtt <em>Att</em>}'.
@@ -2235,6 +2104,17 @@ public interface RPGPackage extends EPackage
   EClass getProposition();
 
   /**
+   * Returns the meta object for the reference '{@link mdsd.rPG.Proposition#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Type</em>'.
+   * @see mdsd.rPG.Proposition#getType()
+   * @see #getProposition()
+   * @generated
+   */
+  EReference getProposition_Type();
+
+  /**
    * Returns the meta object for class '{@link mdsd.rPG.NumberComparing <em>Number Comparing</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2308,37 +2188,15 @@ public interface RPGPackage extends EPackage
   EClass getAtomicNumber();
 
   /**
-   * Returns the meta object for the attribute '{@link mdsd.rPG.AtomicNumber#getValue <em>Value</em>}'.
+   * Returns the meta object for the reference '{@link mdsd.rPG.AtomicNumber#getAttribute <em>Attribute</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Value</em>'.
-   * @see mdsd.rPG.AtomicNumber#getValue()
+   * @return the meta object for the reference '<em>Attribute</em>'.
+   * @see mdsd.rPG.AtomicNumber#getAttribute()
    * @see #getAtomicNumber()
    * @generated
    */
-  EAttribute getAtomicNumber_Value();
-
-  /**
-   * Returns the meta object for the attribute '{@link mdsd.rPG.AtomicNumber#getValue2 <em>Value2</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Value2</em>'.
-   * @see mdsd.rPG.AtomicNumber#getValue2()
-   * @see #getAtomicNumber()
-   * @generated
-   */
-  EAttribute getAtomicNumber_Value2();
-
-  /**
-   * Returns the meta object for the attribute '{@link mdsd.rPG.AtomicNumber#getOp <em>Op</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Op</em>'.
-   * @see mdsd.rPG.AtomicNumber#getOp()
-   * @see #getAtomicNumber()
-   * @generated
-   */
-  EAttribute getAtomicNumber_Op();
+  EReference getAtomicNumber_Attribute();
 
   /**
    * Returns the meta object for class '{@link mdsd.rPG.or <em>or</em>}'.
@@ -2628,12 +2486,12 @@ public interface RPGPackage extends EPackage
     EAttribute LOC__NAME = eINSTANCE.getLoc_Name();
 
     /**
-     * The meta object literal for the '<em><b>Oname</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Team</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute LOC__ONAME = eINSTANCE.getLoc_Oname();
+    EReference LOC__TEAM = eINSTANCE.getLoc_Team();
 
     /**
      * The meta object literal for the '{@link mdsd.rPG.impl.RelationsImpl <em>Relations</em>}' class.
@@ -2774,20 +2632,20 @@ public interface RPGPackage extends EPackage
     EReference MOVE__ETYPE = eINSTANCE.getMove_EType();
 
     /**
-     * The meta object literal for the '<em><b>Power</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MOVE__POWER = eINSTANCE.getMove_Power();
-
-    /**
      * The meta object literal for the '<em><b>Att</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference MOVE__ATT = eINSTANCE.getMove_Att();
+
+    /**
+     * The meta object literal for the '<em><b>Effect</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MOVE__EFFECT = eINSTANCE.getMove_Effect();
 
     /**
      * The meta object literal for the '{@link mdsd.rPG.impl.ETypeImpl <em>EType</em>}' class.
@@ -2852,24 +2710,14 @@ public interface RPGPackage extends EPackage
     EReference ATTRIBUTE__AVAL = eINSTANCE.getAttribute_AVal();
 
     /**
-     * The meta object literal for the '{@link mdsd.rPG.impl.HealthImpl <em>Health</em>}' class.
+     * The meta object literal for the '{@link mdsd.rPG.impl.EffectImpl <em>Effect</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see mdsd.rPG.impl.HealthImpl
-     * @see mdsd.rPG.impl.RPGPackageImpl#getHealth()
+     * @see mdsd.rPG.impl.EffectImpl
+     * @see mdsd.rPG.impl.RPGPackageImpl#getEffect()
      * @generated
      */
-    EClass HEALTH = eINSTANCE.getHealth();
-
-    /**
-     * The meta object literal for the '{@link mdsd.rPG.impl.PowerImpl <em>Power</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see mdsd.rPG.impl.PowerImpl
-     * @see mdsd.rPG.impl.RPGPackageImpl#getPower()
-     * @generated
-     */
-    EClass POWER = eINSTANCE.getPower();
+    EClass EFFECT = eINSTANCE.getEffect();
 
     /**
      * The meta object literal for the '{@link mdsd.rPG.impl.AttributeValuesImpl <em>Attribute Values</em>}' class.
@@ -2950,52 +2798,20 @@ public interface RPGPackage extends EPackage
     EClass RULE = eINSTANCE.getRule();
 
     /**
-     * The meta object literal for the '<em><b>Attribute</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Operator</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference RULE__ATTRIBUTE = eINSTANCE.getRule_Attribute();
+    EReference RULE__OPERATOR = eINSTANCE.getRule_Operator();
 
     /**
-     * The meta object literal for the '<em><b>Comp</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Change</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute RULE__COMP = eINSTANCE.getRule_Comp();
-
-    /**
-     * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference RULE__VALUE = eINSTANCE.getRule_Value();
-
-    /**
-     * The meta object literal for the '<em><b>Attribute2</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference RULE__ATTRIBUTE2 = eINSTANCE.getRule_Attribute2();
-
-    /**
-     * The meta object literal for the '<em><b>Sum</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference RULE__SUM = eINSTANCE.getRule_Sum();
-
-    /**
-     * The meta object literal for the '<em><b>Val</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference RULE__VAL = eINSTANCE.getRule_Val();
+    EReference RULE__CHANGE = eINSTANCE.getRule_Change();
 
     /**
      * The meta object literal for the '{@link mdsd.rPG.impl.EntitiesImpl <em>Entities</em>}' class.
@@ -3040,22 +2856,6 @@ public interface RPGPackage extends EPackage
      * @generated
      */
     EReference ENTITY__ETYPE = eINSTANCE.getEntity_EType();
-
-    /**
-     * The meta object literal for the '<em><b>Health</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ENTITY__HEALTH = eINSTANCE.getEntity_Health();
-
-    /**
-     * The meta object literal for the '<em><b>Power</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ENTITY__POWER = eINSTANCE.getEntity_Power();
 
     /**
      * The meta object literal for the '<em><b>Att</b></em>' containment reference list feature.
@@ -3208,6 +3008,14 @@ public interface RPGPackage extends EPackage
     EClass PROPOSITION = eINSTANCE.getProposition();
 
     /**
+     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROPOSITION__TYPE = eINSTANCE.getProposition_Type();
+
+    /**
      * The meta object literal for the '{@link mdsd.rPG.impl.NumberComparingImpl <em>Number Comparing</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3272,28 +3080,12 @@ public interface RPGPackage extends EPackage
     EClass ATOMIC_NUMBER = eINSTANCE.getAtomicNumber();
 
     /**
-     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Attribute</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATOMIC_NUMBER__VALUE = eINSTANCE.getAtomicNumber_Value();
-
-    /**
-     * The meta object literal for the '<em><b>Value2</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ATOMIC_NUMBER__VALUE2 = eINSTANCE.getAtomicNumber_Value2();
-
-    /**
-     * The meta object literal for the '<em><b>Op</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ATOMIC_NUMBER__OP = eINSTANCE.getAtomicNumber_Op();
+    EReference ATOMIC_NUMBER__ATTRIBUTE = eINSTANCE.getAtomicNumber_Attribute();
 
     /**
      * The meta object literal for the '{@link mdsd.rPG.impl.orImpl <em>or</em>}' class.

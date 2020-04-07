@@ -11,6 +11,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected RPGGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_AtomicNumber_FloatParserRuleCall_0_1_or_INTTerminalRuleCall_1_1;
 	protected AbstractElementAlias match_Require_RequireKeyword_0_0_q;
 	protected AbstractElementAlias match_Statement_LeftParenthesisKeyword_1_0_a;
 	protected AbstractElementAlias match_Statement_LeftParenthesisKeyword_1_0_p;
@@ -27,6 +29,7 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (RPGGrammarAccess) access;
+		match_AtomicNumber_FloatParserRuleCall_0_1_or_INTTerminalRuleCall_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getAtomicNumberAccess().getFloatParserRuleCall_0_1()), new TokenAlias(false, false, grammarAccess.getAtomicNumberAccess().getINTTerminalRuleCall_1_1()));
 		match_Require_RequireKeyword_0_0_q = new TokenAlias(false, true, grammarAccess.getRequireAccess().getRequireKeyword_0_0());
 		match_Statement_LeftParenthesisKeyword_1_0_a = new TokenAlias(true, true, grammarAccess.getStatementAccess().getLeftParenthesisKeyword_1_0());
 		match_Statement_LeftParenthesisKeyword_1_0_p = new TokenAlias(true, false, grammarAccess.getStatementAccess().getLeftParenthesisKeyword_1_0());
@@ -34,9 +37,32 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (ruleCall.getRule() == grammarAccess.getFloatRule())
+			return getFloatToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getINTRule())
+			return getINTToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
+	/**
+	 * Float:
+	 * 	INT '.' INT
+	 * ;
+	 */
+	protected String getFloatToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return ".";
+	}
+	
+	/**
+	 * terminal INT returns ecore::EInt: ('0'..'9')+;
+	 */
+	protected String getINTToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "";
+	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
@@ -44,7 +70,9 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_Require_RequireKeyword_0_0_q.equals(syntax))
+			if (match_AtomicNumber_FloatParserRuleCall_0_1_or_INTTerminalRuleCall_1_1.equals(syntax))
+				emit_AtomicNumber_FloatParserRuleCall_0_1_or_INTTerminalRuleCall_1_1(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Require_RequireKeyword_0_0_q.equals(syntax))
 				emit_Require_RequireKeyword_0_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Statement_LeftParenthesisKeyword_1_0_a.equals(syntax))
 				emit_Statement_LeftParenthesisKeyword_1_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
@@ -56,13 +84,30 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	/**
 	 * Ambiguous syntax:
+	 *     Float | INT
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) '*' (rule start)
+	 *     (rule start) (ambiguity) '+' (rule start)
+	 *     (rule start) (ambiguity) '-' (rule start)
+	 *     (rule start) (ambiguity) '/' (rule start)
+	 *     (rule start) (ambiguity) (rule start)
+	 */
+	protected void emit_AtomicNumber_FloatParserRuleCall_0_1_or_INTTerminalRuleCall_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
 	 *     'require'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'teams' (ambiguity) '('* left=Sum
+	 *     (rule start) 'teams' (ambiguity) '('* type=[Type|ID]
 	 *     (rule start) 'teams' (ambiguity) '('* {and.left=}
 	 *     (rule start) 'teams' (ambiguity) '('* {or.left=}
 	 *     (rule start) (ambiguity) '('* left=Sum
+	 *     (rule start) (ambiguity) '('* type=[Type|ID]
 	 *     (rule start) (ambiguity) '('* {and.left=}
 	 *     (rule start) (ambiguity) '('* {or.left=}
 	 */
@@ -76,12 +121,15 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) 'require'? (ambiguity) left=Sum
+	 *     (rule start) 'require'? (ambiguity) type=[Type|ID]
 	 *     (rule start) 'require'? (ambiguity) {and.left=}
 	 *     (rule start) 'require'? (ambiguity) {or.left=}
 	 *     (rule start) 'teams' 'require'? (ambiguity) left=Sum
+	 *     (rule start) 'teams' 'require'? (ambiguity) type=[Type|ID]
 	 *     (rule start) 'teams' 'require'? (ambiguity) {and.left=}
 	 *     (rule start) 'teams' 'require'? (ambiguity) {or.left=}
 	 *     (rule start) (ambiguity) left=Sum
+	 *     (rule start) (ambiguity) type=[Type|ID]
 	 *     (rule start) (ambiguity) {and.left=}
 	 *     (rule start) (ambiguity) {or.left=}
 	 */

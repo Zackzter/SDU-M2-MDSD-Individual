@@ -161,17 +161,10 @@ public class RPGSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RPGPackage.HEALTH:
+      case RPGPackage.EFFECT:
       {
-        Health health = (Health)theEObject;
-        T result = caseHealth(health);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RPGPackage.POWER:
-      {
-        Power power = (Power)theEObject;
-        T result = casePower(power);
+        Effect effect = (Effect)theEObject;
+        T result = caseEffect(effect);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -193,6 +186,7 @@ public class RPGSwitch<T> extends Switch<T>
       {
         Rule rule = (Rule)theEObject;
         T result = caseRule(rule);
+        if (result == null) result = caseEffect(rule);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -296,8 +290,6 @@ public class RPGSwitch<T> extends Switch<T>
       {
         AtomicNumber atomicNumber = (AtomicNumber)theEObject;
         T result = caseAtomicNumber(atomicNumber);
-        if (result == null) result = caseHealth(atomicNumber);
-        if (result == null) result = casePower(atomicNumber);
         if (result == null) result = caseMultiply(atomicNumber);
         if (result == null) result = caseSum(atomicNumber);
         if (result == null) result = defaultCase(theEObject);
@@ -556,33 +548,17 @@ public class RPGSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Health</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Effect</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Health</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Effect</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseHealth(Health object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Power</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Power</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T casePower(Power object)
+  public T caseEffect(Effect object)
   {
     return null;
   }

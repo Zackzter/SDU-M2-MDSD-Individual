@@ -119,14 +119,15 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
 		private final Keyword cOpponentsKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cOnameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cOnameIDTerminalRuleCall_2_0 = (RuleCall)cOnameAssignment_2.eContents().get(0);
+		private final Assignment cTeamAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cTeamTeamCrossReference_2_0 = (CrossReference)cTeamAssignment_2.eContents().get(0);
+		private final RuleCall cTeamTeamIDTerminalRuleCall_2_0_1 = (RuleCall)cTeamTeamCrossReference_2_0.eContents().get(1);
 		
 		//Loc:
-		//	name=ID 'opponents' oname=ID;
+		//	name=ID 'opponents' team=[Team];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID 'opponents' oname=ID
+		//name=ID 'opponents' team=[Team]
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID
@@ -138,11 +139,14 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		//'opponents'
 		public Keyword getOpponentsKeyword_1() { return cOpponentsKeyword_1; }
 		
-		//oname=ID
-		public Assignment getOnameAssignment_2() { return cOnameAssignment_2; }
+		//team=[Team]
+		public Assignment getTeamAssignment_2() { return cTeamAssignment_2; }
+		
+		//[Team]
+		public CrossReference getTeamTeamCrossReference_2_0() { return cTeamTeamCrossReference_2_0; }
 		
 		//ID
-		public RuleCall getOnameIDTerminalRuleCall_2_0() { return cOnameIDTerminalRuleCall_2_0; }
+		public RuleCall getTeamTeamIDTerminalRuleCall_2_0_1() { return cTeamTeamIDTerminalRuleCall_2_0_1; }
 	}
 	public class RelationsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Relations");
@@ -176,7 +180,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cTExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cTExpressionTypeExpressionParserRuleCall_2_0 = (RuleCall)cTExpressionAssignment_2.eContents().get(0);
 		
-		////Simple implementation for now so it can work
 		//Type:
 		//	'type' name=ID tExpression=TypeExpression?;
 		@Override public ParserRule getRule() { return rule; }
@@ -325,16 +328,16 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Assignment cETypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cETypeETypeParserRuleCall_2_0 = (RuleCall)cETypeAssignment_2.eContents().get(0);
-		private final Assignment cPowerAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cPowerPowerParserRuleCall_3_0 = (RuleCall)cPowerAssignment_3.eContents().get(0);
-		private final Assignment cAttAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cAttAltAttributeParserRuleCall_4_0 = (RuleCall)cAttAssignment_4.eContents().get(0);
+		private final Assignment cAttAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cAttAltAttributeParserRuleCall_3_0 = (RuleCall)cAttAssignment_3.eContents().get(0);
+		private final Assignment cEffectAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cEffectEffectParserRuleCall_4_0 = (RuleCall)cEffectAssignment_4.eContents().get(0);
 		
 		//Move:
-		//	'move' name=ID eType=EType power=Power? att+=AltAttribute*;
+		//	'move' name=ID eType=EType att+=AltAttribute* effect+=Effect*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'move' name=ID eType=EType power=Power? att+=AltAttribute*
+		//'move' name=ID eType=EType att+=AltAttribute* effect+=Effect*
 		public Group getGroup() { return cGroup; }
 		
 		//'move'
@@ -352,17 +355,17 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		//EType
 		public RuleCall getETypeETypeParserRuleCall_2_0() { return cETypeETypeParserRuleCall_2_0; }
 		
-		//power=Power?
-		public Assignment getPowerAssignment_3() { return cPowerAssignment_3; }
-		
-		//Power
-		public RuleCall getPowerPowerParserRuleCall_3_0() { return cPowerPowerParserRuleCall_3_0; }
-		
 		//att+=AltAttribute*
-		public Assignment getAttAssignment_4() { return cAttAssignment_4; }
+		public Assignment getAttAssignment_3() { return cAttAssignment_3; }
 		
 		//AltAttribute
-		public RuleCall getAttAltAttributeParserRuleCall_4_0() { return cAttAltAttributeParserRuleCall_4_0; }
+		public RuleCall getAttAltAttributeParserRuleCall_3_0() { return cAttAltAttributeParserRuleCall_3_0; }
+		
+		//effect+=Effect*
+		public Assignment getEffectAssignment_4() { return cEffectAssignment_4; }
+		
+		//Effect
+		public RuleCall getEffectEffectParserRuleCall_4_0() { return cEffectEffectParserRuleCall_4_0; }
 	}
 	public class ETypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.EType");
@@ -449,43 +452,24 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		//AttributeValues
 		public RuleCall getAValAttributeValuesParserRuleCall_1_1_0() { return cAValAttributeValuesParserRuleCall_1_1_0; }
 	}
-	public class HealthElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Health");
+	public class EffectElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Effect");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cHealthKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cAtomicNumberParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Keyword cEffectKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cRuleParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
-		//Health:
-		//	'Health:' AtomicNumber;
+		//Effect:
+		//	'effect' Rule;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Health:' AtomicNumber
+		//'effect' Rule
 		public Group getGroup() { return cGroup; }
 		
-		//'Health:'
-		public Keyword getHealthKeyword_0() { return cHealthKeyword_0; }
+		//'effect'
+		public Keyword getEffectKeyword_0() { return cEffectKeyword_0; }
 		
-		//AtomicNumber
-		public RuleCall getAtomicNumberParserRuleCall_1() { return cAtomicNumberParserRuleCall_1; }
-	}
-	public class PowerElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Power");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cPowerKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cAtomicNumberParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		
-		//Power:
-		//	'Power:' AtomicNumber;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'Power:' AtomicNumber
-		public Group getGroup() { return cGroup; }
-		
-		//'Power:'
-		public Keyword getPowerKeyword_0() { return cPowerKeyword_0; }
-		
-		//AtomicNumber
-		public RuleCall getAtomicNumberParserRuleCall_1() { return cAtomicNumberParserRuleCall_1; }
+		//Rule
+		public RuleCall getRuleParserRuleCall_1() { return cRuleParserRuleCall_1; }
 	}
 	public class AttributeValuesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.AttributeValues");
@@ -549,113 +533,71 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	public class AltAttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.AltAttribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAttributeKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cAttriburteAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cAttriburteAttributeCrossReference_1_0 = (CrossReference)cAttriburteAssignment_1.eContents().get(0);
-		private final RuleCall cAttriburteAttributeIDTerminalRuleCall_1_0_1 = (RuleCall)cAttriburteAttributeCrossReference_1_0.eContents().get(1);
-		private final Assignment cAvAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cAvAttributeValuesParserRuleCall_2_0 = (RuleCall)cAvAssignment_2.eContents().get(0);
+		private final Assignment cAttriburteAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cAttriburteAttributeCrossReference_0_0 = (CrossReference)cAttriburteAssignment_0.eContents().get(0);
+		private final RuleCall cAttriburteAttributeIDTerminalRuleCall_0_0_1 = (RuleCall)cAttriburteAttributeCrossReference_0_0.eContents().get(1);
+		private final Assignment cAvAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cAvAttributeValuesParserRuleCall_1_0 = (RuleCall)cAvAssignment_1.eContents().get(0);
 		
+		////Gives warning with only name
 		//AltAttribute:
-		//	'attribute' attriburte+=[Attribute]+ av=AttributeValues?;
+		//	attriburte+=[Attribute]+ av=AttributeValues?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'attribute' attriburte+=[Attribute]+ av=AttributeValues?
+		//attriburte+=[Attribute]+ av=AttributeValues?
 		public Group getGroup() { return cGroup; }
 		
-		//'attribute'
-		public Keyword getAttributeKeyword_0() { return cAttributeKeyword_0; }
-		
 		//attriburte+=[Attribute]+
-		public Assignment getAttriburteAssignment_1() { return cAttriburteAssignment_1; }
+		public Assignment getAttriburteAssignment_0() { return cAttriburteAssignment_0; }
 		
 		//[Attribute]
-		public CrossReference getAttriburteAttributeCrossReference_1_0() { return cAttriburteAttributeCrossReference_1_0; }
+		public CrossReference getAttriburteAttributeCrossReference_0_0() { return cAttriburteAttributeCrossReference_0_0; }
 		
 		//ID
-		public RuleCall getAttriburteAttributeIDTerminalRuleCall_1_0_1() { return cAttriburteAttributeIDTerminalRuleCall_1_0_1; }
+		public RuleCall getAttriburteAttributeIDTerminalRuleCall_0_0_1() { return cAttriburteAttributeIDTerminalRuleCall_0_0_1; }
 		
 		//av=AttributeValues?
-		public Assignment getAvAssignment_2() { return cAvAssignment_2; }
+		public Assignment getAvAssignment_1() { return cAvAssignment_1; }
 		
 		//AttributeValues
-		public RuleCall getAvAttributeValuesParserRuleCall_2_0() { return cAvAttributeValuesParserRuleCall_2_0; }
+		public RuleCall getAvAttributeValuesParserRuleCall_1_0() { return cAvAttributeValuesParserRuleCall_1_0; }
 	}
 	public class RuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Rule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cIfKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cAttributeAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cAttributeAttributeCrossReference_1_0 = (CrossReference)cAttributeAssignment_1.eContents().get(0);
-		private final RuleCall cAttributeAttributeIDTerminalRuleCall_1_0_1 = (RuleCall)cAttributeAttributeCrossReference_1_0.eContents().get(1);
-		private final Assignment cCompAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cCompComparatorParserRuleCall_2_0 = (RuleCall)cCompAssignment_2.eContents().get(0);
-		private final Assignment cValueAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cValueAtomicNumberParserRuleCall_3_0 = (RuleCall)cValueAssignment_3.eContents().get(0);
-		private final Keyword cThenKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cAttribute2Assignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final CrossReference cAttribute2AttributeCrossReference_5_0 = (CrossReference)cAttribute2Assignment_5.eContents().get(0);
-		private final RuleCall cAttribute2AttributeIDTerminalRuleCall_5_0_1 = (RuleCall)cAttribute2AttributeCrossReference_5_0.eContents().get(1);
-		private final Assignment cSumAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cSumSumParserRuleCall_6_0 = (RuleCall)cSumAssignment_6.eContents().get(0);
-		private final Assignment cValAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cValAtomicNumberParserRuleCall_7_0 = (RuleCall)cValAssignment_7.eContents().get(0);
+		private final Assignment cOperatorAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cOperatorORconditionParserRuleCall_1_0 = (RuleCall)cOperatorAssignment_1.eContents().get(0);
+		private final Keyword cThenKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cChangeAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cChangeSumParserRuleCall_3_0 = (RuleCall)cChangeAssignment_3.eContents().get(0);
 		
 		////Sum cannot find the signs needed for the expression but want an AtomicNumber instead
 		//Rule:
-		//	'if' attribute=[Attribute] comp=Comparator value=AtomicNumber 'then' attribute2=[Attribute] sum=Sum val=AtomicNumber;
+		//	'if' operator=ORcondition 'then'
+		//	change=Sum;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'if' attribute=[Attribute] comp=Comparator value=AtomicNumber 'then' attribute2=[Attribute] sum=Sum val=AtomicNumber
+		//'if' operator=ORcondition 'then' change=Sum
 		public Group getGroup() { return cGroup; }
 		
 		//'if'
 		public Keyword getIfKeyword_0() { return cIfKeyword_0; }
 		
-		//attribute=[Attribute]
-		public Assignment getAttributeAssignment_1() { return cAttributeAssignment_1; }
+		//operator=ORcondition
+		public Assignment getOperatorAssignment_1() { return cOperatorAssignment_1; }
 		
-		//[Attribute]
-		public CrossReference getAttributeAttributeCrossReference_1_0() { return cAttributeAttributeCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getAttributeAttributeIDTerminalRuleCall_1_0_1() { return cAttributeAttributeIDTerminalRuleCall_1_0_1; }
-		
-		//comp=Comparator
-		public Assignment getCompAssignment_2() { return cCompAssignment_2; }
-		
-		//Comparator
-		public RuleCall getCompComparatorParserRuleCall_2_0() { return cCompComparatorParserRuleCall_2_0; }
-		
-		//value=AtomicNumber
-		public Assignment getValueAssignment_3() { return cValueAssignment_3; }
-		
-		//AtomicNumber
-		public RuleCall getValueAtomicNumberParserRuleCall_3_0() { return cValueAtomicNumberParserRuleCall_3_0; }
+		//ORcondition
+		public RuleCall getOperatorORconditionParserRuleCall_1_0() { return cOperatorORconditionParserRuleCall_1_0; }
 		
 		//'then'
-		public Keyword getThenKeyword_4() { return cThenKeyword_4; }
+		public Keyword getThenKeyword_2() { return cThenKeyword_2; }
 		
-		//attribute2=[Attribute]
-		public Assignment getAttribute2Assignment_5() { return cAttribute2Assignment_5; }
-		
-		//[Attribute]
-		public CrossReference getAttribute2AttributeCrossReference_5_0() { return cAttribute2AttributeCrossReference_5_0; }
-		
-		//ID
-		public RuleCall getAttribute2AttributeIDTerminalRuleCall_5_0_1() { return cAttribute2AttributeIDTerminalRuleCall_5_0_1; }
-		
-		//sum=Sum
-		public Assignment getSumAssignment_6() { return cSumAssignment_6; }
+		//change=Sum
+		public Assignment getChangeAssignment_3() { return cChangeAssignment_3; }
 		
 		//Sum
-		public RuleCall getSumSumParserRuleCall_6_0() { return cSumSumParserRuleCall_6_0; }
-		
-		//val=AtomicNumber
-		public Assignment getValAssignment_7() { return cValAssignment_7; }
-		
-		//AtomicNumber
-		public RuleCall getValAtomicNumberParserRuleCall_7_0() { return cValAtomicNumberParserRuleCall_7_0; }
+		public RuleCall getChangeSumParserRuleCall_3_0() { return cChangeSumParserRuleCall_3_0; }
 	}
 	public class EntitiesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Entities");
@@ -688,20 +630,16 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Assignment cETypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cETypeETypeParserRuleCall_2_0 = (RuleCall)cETypeAssignment_2.eContents().get(0);
-		private final Assignment cHealthAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cHealthHealthParserRuleCall_3_0 = (RuleCall)cHealthAssignment_3.eContents().get(0);
-		private final Assignment cPowerAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cPowerPowerParserRuleCall_4_0 = (RuleCall)cPowerAssignment_4.eContents().get(0);
-		private final Assignment cAttAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cAttAltAttributeParserRuleCall_5_0 = (RuleCall)cAttAssignment_5.eContents().get(0);
-		private final Assignment cEMovesAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cEMovesEntityMovesParserRuleCall_6_0 = (RuleCall)cEMovesAssignment_6.eContents().get(0);
+		private final Assignment cAttAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cAttAltAttributeParserRuleCall_3_0 = (RuleCall)cAttAssignment_3.eContents().get(0);
+		private final Assignment cEMovesAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cEMovesEntityMovesParserRuleCall_4_0 = (RuleCall)cEMovesAssignment_4.eContents().get(0);
 		
 		//Entity:
-		//	'entity' name=ID eType=EType health=Health power=Power att+=AltAttribute* eMoves+=EntityMoves*;
+		//	'entity' name=ID eType=EType att+=AltAttribute* eMoves+=EntityMoves*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'entity' name=ID eType=EType health=Health power=Power att+=AltAttribute* eMoves+=EntityMoves*
+		//'entity' name=ID eType=EType att+=AltAttribute* eMoves+=EntityMoves*
 		public Group getGroup() { return cGroup; }
 		
 		//'entity'
@@ -719,29 +657,17 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		//EType
 		public RuleCall getETypeETypeParserRuleCall_2_0() { return cETypeETypeParserRuleCall_2_0; }
 		
-		//health=Health
-		public Assignment getHealthAssignment_3() { return cHealthAssignment_3; }
-		
-		//Health
-		public RuleCall getHealthHealthParserRuleCall_3_0() { return cHealthHealthParserRuleCall_3_0; }
-		
-		//power=Power
-		public Assignment getPowerAssignment_4() { return cPowerAssignment_4; }
-		
-		//Power
-		public RuleCall getPowerPowerParserRuleCall_4_0() { return cPowerPowerParserRuleCall_4_0; }
-		
 		//att+=AltAttribute*
-		public Assignment getAttAssignment_5() { return cAttAssignment_5; }
+		public Assignment getAttAssignment_3() { return cAttAssignment_3; }
 		
 		//AltAttribute
-		public RuleCall getAttAltAttributeParserRuleCall_5_0() { return cAttAltAttributeParserRuleCall_5_0; }
+		public RuleCall getAttAltAttributeParserRuleCall_3_0() { return cAttAltAttributeParserRuleCall_3_0; }
 		
 		//eMoves+=EntityMoves*
-		public Assignment getEMovesAssignment_6() { return cEMovesAssignment_6; }
+		public Assignment getEMovesAssignment_4() { return cEMovesAssignment_4; }
 		
 		//EntityMoves
-		public RuleCall getEMovesEntityMovesParserRuleCall_6_0() { return cEMovesEntityMovesParserRuleCall_6_0; }
+		public RuleCall getEMovesEntityMovesParserRuleCall_4_0() { return cEMovesEntityMovesParserRuleCall_4_0; }
 	}
 	public class EntityMovesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.EntityMoves");
@@ -999,12 +925,15 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLeftParenthesisKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cORconditionParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final Assignment cTypeAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
+		private final CrossReference cTypeTypeCrossReference_2_0 = (CrossReference)cTypeAssignment_2.eContents().get(0);
+		private final RuleCall cTypeTypeIDTerminalRuleCall_2_0_1 = (RuleCall)cTypeTypeCrossReference_2_0.eContents().get(1);
 		
 		//Statement Proposition:
-		//	NumberComparing | '(' ORcondition ')';
+		//	NumberComparing | '(' ORcondition ')' | type=[Type];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//NumberComparing | '(' ORcondition ')'
+		//NumberComparing | '(' ORcondition ')' | type=[Type]
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//NumberComparing
@@ -1021,6 +950,15 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//')'
 		public Keyword getRightParenthesisKeyword_1_2() { return cRightParenthesisKeyword_1_2; }
+		
+		//type=[Type]
+		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
+		
+		//[Type]
+		public CrossReference getTypeTypeCrossReference_2_0() { return cTypeTypeCrossReference_2_0; }
+		
+		//ID
+		public RuleCall getTypeTypeIDTerminalRuleCall_2_0_1() { return cTypeTypeIDTerminalRuleCall_2_0_1; }
 	}
 	public class NumberComparingElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.NumberComparing");
@@ -1065,12 +1003,13 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEqualsSignEqualsSignKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		private final Keyword cGreaterThanSignEqualsSignKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		private final Keyword cGreaterThanSignKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cExclamationMarkEqualsSignKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		
 		//Comparator:
-		//	'<' | '<=' | '==' | '>=' | '>';
+		//	'<' | '<=' | '==' | '>=' | '>' | '!=';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'<' | '<=' | '==' | '>=' | '>'
+		//'<' | '<=' | '==' | '>=' | '>' | '!='
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'<'
@@ -1087,6 +1026,9 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//'>'
 		public Keyword getGreaterThanSignKeyword_4() { return cGreaterThanSignKeyword_4; }
+		
+		//'!='
+		public Keyword getExclamationMarkEqualsSignKeyword_5() { return cExclamationMarkEqualsSignKeyword_5; }
 	}
 	public class SumElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Sum");
@@ -1198,67 +1140,52 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		//AtomicNumber
 		public RuleCall getRightAtomicNumberParserRuleCall_1_1_0() { return cRightAtomicNumberParserRuleCall_1_1_0; }
 	}
-	public class CalcOpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.CalcOp");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cPlusSignKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cHyphenMinusKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cAsteriskKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cSolidusKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
-		
-		//CalcOp:
-		//	'+' | '-' | '*' | '/';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'+' | '-' | '*' | '/'
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//'+'
-		public Keyword getPlusSignKeyword_0() { return cPlusSignKeyword_0; }
-		
-		//'-'
-		public Keyword getHyphenMinusKeyword_1() { return cHyphenMinusKeyword_1; }
-		
-		//'*'
-		public Keyword getAsteriskKeyword_2() { return cAsteriskKeyword_2; }
-		
-		//'/'
-		public Keyword getSolidusKeyword_3() { return cSolidusKeyword_3; }
-	}
 	public class AtomicNumberElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.AtomicNumber");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Assignment cValueAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
-		private final RuleCall cValueFloatParserRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
-		private final Assignment cValue2Assignment_1 = (Assignment)cAlternatives.eContents().get(1);
-		private final RuleCall cValue2INTTerminalRuleCall_1_0 = (RuleCall)cValue2Assignment_1.eContents().get(0);
-		private final Assignment cOpAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
-		private final RuleCall cOpCalcOpParserRuleCall_2_0 = (RuleCall)cOpAssignment_2.eContents().get(0);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Action cAtomicNumberAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final RuleCall cFloatParserRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Action cAtomicNumberAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		private final Assignment cAttributeAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
+		private final CrossReference cAttributeAttributeCrossReference_2_0 = (CrossReference)cAttributeAssignment_2.eContents().get(0);
+		private final RuleCall cAttributeAttributeIDTerminalRuleCall_2_0_1 = (RuleCall)cAttributeAttributeCrossReference_2_0.eContents().get(1);
 		
 		//AtomicNumber:
-		//	value=Float | value2=INT | op=CalcOp;
+		//	{AtomicNumber} Float | {AtomicNumber} INT | attribute=[Attribute];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//value=Float | value2=INT | op=CalcOp
+		//{AtomicNumber} Float | {AtomicNumber} INT | attribute=[Attribute]
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//value=Float
-		public Assignment getValueAssignment_0() { return cValueAssignment_0; }
+		//{AtomicNumber} Float
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//{AtomicNumber}
+		public Action getAtomicNumberAction_0_0() { return cAtomicNumberAction_0_0; }
 		
 		//Float
-		public RuleCall getValueFloatParserRuleCall_0_0() { return cValueFloatParserRuleCall_0_0; }
+		public RuleCall getFloatParserRuleCall_0_1() { return cFloatParserRuleCall_0_1; }
 		
-		//value2=INT
-		public Assignment getValue2Assignment_1() { return cValue2Assignment_1; }
+		//{AtomicNumber} INT
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//{AtomicNumber}
+		public Action getAtomicNumberAction_1_0() { return cAtomicNumberAction_1_0; }
 		
 		//INT
-		public RuleCall getValue2INTTerminalRuleCall_1_0() { return cValue2INTTerminalRuleCall_1_0; }
+		public RuleCall getINTTerminalRuleCall_1_1() { return cINTTerminalRuleCall_1_1; }
 		
-		//op=CalcOp
-		public Assignment getOpAssignment_2() { return cOpAssignment_2; }
+		//attribute=[Attribute]
+		public Assignment getAttributeAssignment_2() { return cAttributeAssignment_2; }
 		
-		//CalcOp
-		public RuleCall getOpCalcOpParserRuleCall_2_0() { return cOpCalcOpParserRuleCall_2_0; }
+		//[Attribute]
+		public CrossReference getAttributeAttributeCrossReference_2_0() { return cAttributeAttributeCrossReference_2_0; }
+		
+		//ID
+		public RuleCall getAttributeAttributeIDTerminalRuleCall_2_0_1() { return cAttributeAttributeIDTerminalRuleCall_2_0_1; }
 	}
 	public class FloatElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Float");
@@ -1316,8 +1243,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	private final ETypeElements pEType;
 	private final AttributesElements pAttributes;
 	private final AttributeElements pAttribute;
-	private final HealthElements pHealth;
-	private final PowerElements pPower;
+	private final EffectElements pEffect;
 	private final AttributeValuesElements pAttributeValues;
 	private final AltAttributeElements pAltAttribute;
 	private final RuleElements pRule;
@@ -1336,7 +1262,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	private final ComparatorElements pComparator;
 	private final SumElements pSum;
 	private final MultiplyElements pMultiply;
-	private final CalcOpElements pCalcOp;
 	private final AtomicNumberElements pAtomicNumber;
 	private final FloatElements pFloat;
 	private final LegalTypeElements pLegalType;
@@ -1362,8 +1287,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		this.pEType = new ETypeElements();
 		this.pAttributes = new AttributesElements();
 		this.pAttribute = new AttributeElements();
-		this.pHealth = new HealthElements();
-		this.pPower = new PowerElements();
+		this.pEffect = new EffectElements();
 		this.pAttributeValues = new AttributeValuesElements();
 		this.pAltAttribute = new AltAttributeElements();
 		this.pRule = new RuleElements();
@@ -1382,7 +1306,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		this.pComparator = new ComparatorElements();
 		this.pSum = new SumElements();
 		this.pMultiply = new MultiplyElements();
-		this.pCalcOp = new CalcOpElements();
 		this.pAtomicNumber = new AtomicNumberElements();
 		this.pFloat = new FloatElements();
 		this.pLegalType = new LegalTypeElements();
@@ -1446,7 +1369,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Loc:
-	//	name=ID 'opponents' oname=ID;
+	//	name=ID 'opponents' team=[Team];
 	public LocElements getLocAccess() {
 		return pLoc;
 	}
@@ -1465,7 +1388,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		return getRelationsAccess().getRule();
 	}
 	
-	////Simple implementation for now so it can work
 	//Type:
 	//	'type' name=ID tExpression=TypeExpression?;
 	public TypeElements getTypeAccess() {
@@ -1497,7 +1419,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Move:
-	//	'move' name=ID eType=EType power=Power? att+=AltAttribute*;
+	//	'move' name=ID eType=EType att+=AltAttribute* effect+=Effect*;
 	public MoveElements getMoveAccess() {
 		return pMove;
 	}
@@ -1536,24 +1458,14 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		return getAttributeAccess().getRule();
 	}
 	
-	//Health:
-	//	'Health:' AtomicNumber;
-	public HealthElements getHealthAccess() {
-		return pHealth;
+	//Effect:
+	//	'effect' Rule;
+	public EffectElements getEffectAccess() {
+		return pEffect;
 	}
 	
-	public ParserRule getHealthRule() {
-		return getHealthAccess().getRule();
-	}
-	
-	//Power:
-	//	'Power:' AtomicNumber;
-	public PowerElements getPowerAccess() {
-		return pPower;
-	}
-	
-	public ParserRule getPowerRule() {
-		return getPowerAccess().getRule();
+	public ParserRule getEffectRule() {
+		return getEffectAccess().getRule();
 	}
 	
 	//AttributeValues:
@@ -1566,8 +1478,9 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		return getAttributeValuesAccess().getRule();
 	}
 	
+	////Gives warning with only name
 	//AltAttribute:
-	//	'attribute' attriburte+=[Attribute]+ av=AttributeValues?;
+	//	attriburte+=[Attribute]+ av=AttributeValues?;
 	public AltAttributeElements getAltAttributeAccess() {
 		return pAltAttribute;
 	}
@@ -1578,7 +1491,8 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	
 	////Sum cannot find the signs needed for the expression but want an AtomicNumber instead
 	//Rule:
-	//	'if' attribute=[Attribute] comp=Comparator value=AtomicNumber 'then' attribute2=[Attribute] sum=Sum val=AtomicNumber;
+	//	'if' operator=ORcondition 'then'
+	//	change=Sum;
 	public RuleElements getRuleAccess() {
 		return pRule;
 	}
@@ -1598,7 +1512,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Entity:
-	//	'entity' name=ID eType=EType health=Health power=Power att+=AltAttribute* eMoves+=EntityMoves*;
+	//	'entity' name=ID eType=EType att+=AltAttribute* eMoves+=EntityMoves*;
 	public EntityElements getEntityAccess() {
 		return pEntity;
 	}
@@ -1688,7 +1602,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Statement Proposition:
-	//	NumberComparing | '(' ORcondition ')';
+	//	NumberComparing | '(' ORcondition ')' | type=[Type];
 	public StatementElements getStatementAccess() {
 		return pStatement;
 	}
@@ -1708,7 +1622,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Comparator:
-	//	'<' | '<=' | '==' | '>=' | '>';
+	//	'<' | '<=' | '==' | '>=' | '>' | '!=';
 	public ComparatorElements getComparatorAccess() {
 		return pComparator;
 	}
@@ -1737,18 +1651,8 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		return getMultiplyAccess().getRule();
 	}
 	
-	//CalcOp:
-	//	'+' | '-' | '*' | '/';
-	public CalcOpElements getCalcOpAccess() {
-		return pCalcOp;
-	}
-	
-	public ParserRule getCalcOpRule() {
-		return getCalcOpAccess().getRule();
-	}
-	
 	//AtomicNumber:
-	//	value=Float | value2=INT | op=CalcOp;
+	//	{AtomicNumber} Float | {AtomicNumber} INT | attribute=[Attribute];
 	public AtomicNumberElements getAtomicNumberAccess() {
 		return pAtomicNumber;
 	}
