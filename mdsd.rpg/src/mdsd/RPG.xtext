@@ -58,12 +58,10 @@ AttributeValues:
 	'is' (lTypes=LegalType | value=AtomicNumber) | (rule=Rule|require=Require)
 ;
 
-//Gives warning with only name
 AltAttribute:
 	 'attribute' attribute=[Attribute] (av=AttributeValues)?
 ;
 
-//Sum cannot find the signs needed for the expression but want an AtomicNumber instead
 Rule:
 	'if' operator=ORcondition  'then' ( SelfTargeting? attritbuteToSet+=[Attribute]'='
 		change+=Sum+)*
