@@ -1,5 +1,8 @@
-game pokemon
-location Johto opponents Team2
+game pokemonz
+location Johtoz opponents Rival
+
+
+
 relations 
 	type fire
 		grass, bug < fire < water 
@@ -14,48 +17,57 @@ relations
 attributes
 	attribute pp is Integer  
 	attribute power is Integer
-	attribute hp is Float 
+	attribute current_hp is Float 
 	attribute speed is Integer
 	attribute max_hp is Integer
 
+death current_hp >= 0
+
 moves 
-	move Ember 
-		type fire
-		power is 45 
-		pp is 25
-		effect if hp > 0 then hp-power
-		effect if fire AND hp < max_hp then hp+power
-	move Water_Gun
-		type water 
-		power is 40
-		pp is 25
-		effect if hp > 0 then hp-power
-	move Razor_Leaf  
-		type grass 
-		pp is 25
-		power is 55
-		effect if hp > 0 then hp-power
+	move Ember type fire
+		attribute power is 45 
+		attribute pp is 25
+		
+		effect if current_hp > 0 AND self.pp > 0 
+		then current_hp = current_hp-power
+			 self.pp = self.pp - 1 
+		
+		effect if fire AND current_hp < max_hp 
+		then current_hp = current_hp + power
+	
+	move Water_Gun type water 
+		attribute power is 40
+		attribute pp is 25
+		
+		effect if current_hp > 0 AND self.pp > 0 
+		then current_hp = current_hp - power
+			 self.pp = self.pp - 1
+	
+	move Razor_Leaf	type grass 
+		attribute pp is 25
+		attribute power is 55
+		
+		effect if self.pp > 0 AND current_hp > 0 
+		then current_hp = current_hp - power
+			self.pp = self.pp - 1
  
 entities
-	entity Cyndaquil 
-		type fire 
-		hp is 10
+	entity Zyndaquil type fire 
+		attribute max_hp is 10
 		move Ember
 	
-	entity Totodile
-		type water
-		hp is 12
+	entity Zotodile	type water
+		attribute max_hp is 12
 		move Water_Gun
 	
-	entity Chikorita
-		type grass
-		hp is 8
+	entity Zhikorita type grass
+		attribute max_hp is 8
 		move Razor_Leaf
 	
 
 teams
 	battling_member_count 1 require 1 > 0
-	team Team1
-		members Cyndaquil
-	team Team2 
-		members Totodile Chikorita
+	team Zilver
+		members Zyndaquil
+	team Rival 
+		members Zotodile Zhikorita

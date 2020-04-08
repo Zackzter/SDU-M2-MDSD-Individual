@@ -161,6 +161,11 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createEntitiesAdapter();
       }
       @Override
+      public Adapter caseDeath(Death object)
+      {
+        return createDeathAdapter();
+      }
+      @Override
       public Adapter caseEntity(Entity object)
       {
         return createEntityAdapter();
@@ -523,6 +528,21 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEntitiesAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Death <em>Death</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.Death
+   * @generated
+   */
+  public Adapter createDeathAdapter()
   {
     return null;
   }

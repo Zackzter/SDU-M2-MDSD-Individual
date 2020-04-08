@@ -12,6 +12,7 @@ import mdsd.rPG.Attribute;
 import mdsd.rPG.AttributeValues;
 import mdsd.rPG.Attributes;
 import mdsd.rPG.BattleSize;
+import mdsd.rPG.Death;
 import mdsd.rPG.Div;
 import mdsd.rPG.EType;
 import mdsd.rPG.Entities;
@@ -81,6 +82,9 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RPGPackage.BATTLE_SIZE:
 				sequence_BattleSize(context, (BattleSize) semanticObject); 
+				return; 
+			case RPGPackage.DEATH:
+				sequence_Death(context, (Death) semanticObject); 
 				return; 
 			case RPGPackage.DIV:
 				sequence_Multiply(context, (Div) semanticObject); 
@@ -253,7 +257,7 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     AltAttribute returns AltAttribute
 	 *
 	 * Constraint:
-	 *     (attriburte+=[Attribute|ID]+ av=AttributeValues?)
+	 *     (attribute=[Attribute|ID] av=AttributeValues?)
 	 */
 	protected void sequence_AltAttribute(ISerializationContext context, AltAttribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -332,6 +336,19 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     (value=AtomicNumber req=Require?)
 	 */
 	protected void sequence_BattleSize(ISerializationContext context, BattleSize semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Declaration returns Death
+	 *     Death returns Death
+	 *
+	 * Constraint:
+	 *     con+=ORcondition+
+	 */
+	protected void sequence_Death(ISerializationContext context, Death semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -442,7 +459,7 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Move returns Move
 	 *
 	 * Constraint:
-	 *     (name=ID eType=EType att+=AltAttribute* effect+=Effect*)
+	 *     (name=ID eType=EType? att+=AltAttribute* effect+=Effect*)
 	 */
 	protected void sequence_Move(ISerializationContext context, Move semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -615,19 +632,10 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Rule returns Rule
 	 *
 	 * Constraint:
-	 *     (operator=ORcondition change=Sum)
+	 *     (operator=ORcondition (attritbuteToSet+=[Attribute|ID] change+=Sum+)*)
 	 */
 	protected void sequence_Rule(ISerializationContext context, Rule semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.RULE__OPERATOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.RULE__OPERATOR));
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.RULE__CHANGE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.RULE__CHANGE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getRuleAccess().getOperatorORconditionParserRuleCall_1_0(), semanticObject.getOperator());
-		feeder.accept(grammarAccess.getRuleAccess().getChangeSumParserRuleCall_3_0(), semanticObject.getChange());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

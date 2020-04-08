@@ -10,6 +10,7 @@ import mdsd.rPG.Attribute;
 import mdsd.rPG.AttributeValues;
 import mdsd.rPG.Attributes;
 import mdsd.rPG.BattleSize;
+import mdsd.rPG.Death;
 import mdsd.rPG.Declaration;
 import mdsd.rPG.Div;
 import mdsd.rPG.EType;
@@ -174,6 +175,13 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   private EClass entitiesEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass deathEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -821,7 +829,7 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EReference getAltAttribute_Attriburte()
+  public EReference getAltAttribute_Attribute()
   {
     return (EReference)altAttributeEClass.getEStructuralFeatures().get(0);
   }
@@ -865,9 +873,20 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EReference getRule_Change()
+  public EReference getRule_AttritbuteToSet()
   {
     return (EReference)ruleEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getRule_Change()
+  {
+    return (EReference)ruleEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -890,6 +909,28 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
   public EReference getEntities_Entity()
   {
     return (EReference)entitiesEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getDeath()
+  {
+    return deathEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getDeath_Con()
+  {
+    return (EReference)deathEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1495,15 +1536,19 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     createEReference(attributeValuesEClass, ATTRIBUTE_VALUES__REQUIRE);
 
     altAttributeEClass = createEClass(ALT_ATTRIBUTE);
-    createEReference(altAttributeEClass, ALT_ATTRIBUTE__ATTRIBURTE);
+    createEReference(altAttributeEClass, ALT_ATTRIBUTE__ATTRIBUTE);
     createEReference(altAttributeEClass, ALT_ATTRIBUTE__AV);
 
     ruleEClass = createEClass(RULE);
     createEReference(ruleEClass, RULE__OPERATOR);
+    createEReference(ruleEClass, RULE__ATTRITBUTE_TO_SET);
     createEReference(ruleEClass, RULE__CHANGE);
 
     entitiesEClass = createEClass(ENTITIES);
     createEReference(entitiesEClass, ENTITIES__ENTITY);
+
+    deathEClass = createEClass(DEATH);
+    createEReference(deathEClass, DEATH__CON);
 
     entityEClass = createEClass(ENTITY);
     createEAttribute(entityEClass, ENTITY__NAME);
@@ -1606,6 +1651,7 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     attributesEClass.getESuperTypes().add(this.getDeclaration());
     ruleEClass.getESuperTypes().add(this.getEffect());
     entitiesEClass.getESuperTypes().add(this.getDeclaration());
+    deathEClass.getESuperTypes().add(this.getDeclaration());
     teamsEClass.getESuperTypes().add(this.getDeclaration());
     requireEClass.getESuperTypes().add(this.getTeams());
     propositionEClass.getESuperTypes().add(this.getRequire());
@@ -1675,15 +1721,19 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     initEReference(getAttributeValues_Require(), this.getRequire(), null, "require", null, 0, 1, AttributeValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(altAttributeEClass, AltAttribute.class, "AltAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getAltAttribute_Attriburte(), this.getAttribute(), null, "attriburte", null, 0, -1, AltAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAltAttribute_Attribute(), this.getAttribute(), null, "attribute", null, 0, 1, AltAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAltAttribute_Av(), this.getAttributeValues(), null, "av", null, 0, 1, AltAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRule_Operator(), this.getProposition(), null, "operator", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getRule_Change(), this.getSum(), null, "change", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRule_AttritbuteToSet(), this.getAttribute(), null, "attritbuteToSet", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRule_Change(), this.getSum(), null, "change", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(entitiesEClass, Entities.class, "Entities", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEntities_Entity(), this.getEntity(), null, "entity", null, 0, -1, Entities.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(deathEClass, Death.class, "Death", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getDeath_Con(), this.getProposition(), null, "con", null, 0, -1, Death.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEntity_Name(), ecorePackage.getEString(), "name", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

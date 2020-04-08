@@ -9,71 +9,106 @@ relations
 		Viking < Archer < Priest
 	type Warrior
 		 Viking < Warrior < Archer
+	type Undead
 
 
 attributes
 	attribute power is Integer
-	attribute health is 500
+	attribute max_health is 500
 	attribute energy is Integer
+	attribute cost is Integer
 	attribute speed is Integer
 	attribute current_health is Integer
-	attribute health2 require speed > energy AND speed+3 >power
+	attribute current_energy is Integer
+	attribute anger is 1.2
+	
+death current_health >= 0 OR Undead
 
 moves 
 	move Axe_Throw
 		type Viking
-		power is 30 
-		energy is 100
-		effect if speed > 1 then speed*0.5 
+		attribute cost is 100
+		attribute power is 50
 		
+		effect if self.current_health >= max_health / 2 
+		then power = power * anger 
 		
+		effect if self.current_energy > cost AND speed > 1 
+		then speed = speed * 0.5
+			 current_health = current_health - power
+			 self.current_energy = self.current_energy - cost 
+			 
 	move Heal  
 		type Priest 
-		energy is 50 
-		power is 30 
-		effect if energy > 29 AND current_health != health then current_health+power 
+		attribute cost is 50 
+		attribute power is 30 
+	
+		effect if self.current_energy > cost AND current_health != max_health
+		then current_health = current_health + power
+			 self.current_energy = self.current_energy - cost
+	
+		effect if Undead 
+		then current_health = current_health - power
+	
 	move Arrow_Rain 
 		type Priest
-		power is 20
-		energy is 65
-		effect if health > 0 then health-power 
-	move Stab
+		attribute power is 20
+		attribute cost is 65
+	
+		effect if self.current_energy > cost 
+		then current_health = current_health-power
+		  	 self.current_energy = self.current_energy - cost
+	
+	move Slash
 		type Warrior
-		power is 10
-		energy is 5
-		effect if health > 0 then health-power
+		attribute power is 20
+		attribute cost is 10
+	
+		effect if self.current_energy > cost AND max_health > 0 
+		then current_health = current_health - power 
+			 self.current_energy = self.current_energy - cost
+	
+	move Stab 
+		attribute power is 10
+		attribute cost is 5
+	
+		effect if self.current_energy > cost AND max_health > 0
+		then self.current_health = self.current_health - power
+			 self.current_energy = self.current_energy - cost
  
-entities
+entities 
 	entity Bluetooth 
 		type Viking 
-		speed is 5 
-		energy is 250
+		attribute speed is 5 
+		attribute energy is 250
 		move Axe_Throw
+		move Stab
 	
 	entity Dio
 		type Priest
-		speed is 7
-		energy is 500
+		attribute speed is 7
+		attribute energy is 500
 		move Heal
+		move Stab
 	
 	entity Karl
 		type Archer
-		speed is 15
-		energy is 350
+		attribute speed is 15
+		attribute energy is 350
 		move Arrow_Rain
 	
 	entity Lewis
 		type Warrior
-		speed is 10
-		energy is 200
+		attribute speed is 10
+		attribute energy is 200
+		move Slash
 		move Stab
-		
 		
 	
 
 teams
 	battling_member_count 2 require 1 > 0
-	team Team1
+	team Northen_Squad
 		members Bluetooth Karl
 	team Crusaders 
 		members Dio Lewis

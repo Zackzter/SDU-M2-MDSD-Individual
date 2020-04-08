@@ -3,6 +3,9 @@
  */
 package mdsd.rPG.impl;
 
+import java.util.Collection;
+
+import mdsd.rPG.Attribute;
 import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Rule;
@@ -11,10 +14,16 @@ import mdsd.rPG.Sum;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,6 +34,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.impl.RuleImpl#getOperator <em>Operator</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.RuleImpl#getAttritbuteToSet <em>Attritbute To Set</em>}</li>
  *   <li>{@link mdsd.rPG.impl.RuleImpl#getChange <em>Change</em>}</li>
  * </ul>
  *
@@ -43,14 +53,24 @@ public class RuleImpl extends EffectImpl implements Rule
   protected Proposition operator;
 
   /**
-   * The cached value of the '{@link #getChange() <em>Change</em>}' containment reference.
+   * The cached value of the '{@link #getAttritbuteToSet() <em>Attritbute To Set</em>}' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAttritbuteToSet()
+   * @generated
+   * @ordered
+   */
+  protected EList<Attribute> attritbuteToSet;
+
+  /**
+   * The cached value of the '{@link #getChange() <em>Change</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getChange()
    * @generated
    * @ordered
    */
-  protected Sum change;
+  protected EList<Sum> change;
 
   /**
    * <!-- begin-user-doc -->
@@ -129,26 +149,13 @@ public class RuleImpl extends EffectImpl implements Rule
    * @generated
    */
   @Override
-  public Sum getChange()
+  public EList<Attribute> getAttritbuteToSet()
   {
-    return change;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetChange(Sum newChange, NotificationChain msgs)
-  {
-    Sum oldChange = change;
-    change = newChange;
-    if (eNotificationRequired())
+    if (attritbuteToSet == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__CHANGE, oldChange, newChange);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      attritbuteToSet = new EObjectResolvingEList<Attribute>(Attribute.class, this, RPGPackage.RULE__ATTRITBUTE_TO_SET);
     }
-    return msgs;
+    return attritbuteToSet;
   }
 
   /**
@@ -157,20 +164,13 @@ public class RuleImpl extends EffectImpl implements Rule
    * @generated
    */
   @Override
-  public void setChange(Sum newChange)
+  public EList<Sum> getChange()
   {
-    if (newChange != change)
+    if (change == null)
     {
-      NotificationChain msgs = null;
-      if (change != null)
-        msgs = ((InternalEObject)change).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__CHANGE, null, msgs);
-      if (newChange != null)
-        msgs = ((InternalEObject)newChange).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__CHANGE, null, msgs);
-      msgs = basicSetChange(newChange, msgs);
-      if (msgs != null) msgs.dispatch();
+      change = new EObjectContainmentEList<Sum>(Sum.class, this, RPGPackage.RULE__CHANGE);
     }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__CHANGE, newChange, newChange));
+    return change;
   }
 
   /**
@@ -186,7 +186,7 @@ public class RuleImpl extends EffectImpl implements Rule
       case RPGPackage.RULE__OPERATOR:
         return basicSetOperator(null, msgs);
       case RPGPackage.RULE__CHANGE:
-        return basicSetChange(null, msgs);
+        return ((InternalEList<?>)getChange()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -203,6 +203,8 @@ public class RuleImpl extends EffectImpl implements Rule
     {
       case RPGPackage.RULE__OPERATOR:
         return getOperator();
+      case RPGPackage.RULE__ATTRITBUTE_TO_SET:
+        return getAttritbuteToSet();
       case RPGPackage.RULE__CHANGE:
         return getChange();
     }
@@ -214,6 +216,7 @@ public class RuleImpl extends EffectImpl implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -222,8 +225,13 @@ public class RuleImpl extends EffectImpl implements Rule
       case RPGPackage.RULE__OPERATOR:
         setOperator((Proposition)newValue);
         return;
+      case RPGPackage.RULE__ATTRITBUTE_TO_SET:
+        getAttritbuteToSet().clear();
+        getAttritbuteToSet().addAll((Collection<? extends Attribute>)newValue);
+        return;
       case RPGPackage.RULE__CHANGE:
-        setChange((Sum)newValue);
+        getChange().clear();
+        getChange().addAll((Collection<? extends Sum>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -242,8 +250,11 @@ public class RuleImpl extends EffectImpl implements Rule
       case RPGPackage.RULE__OPERATOR:
         setOperator((Proposition)null);
         return;
+      case RPGPackage.RULE__ATTRITBUTE_TO_SET:
+        getAttritbuteToSet().clear();
+        return;
       case RPGPackage.RULE__CHANGE:
-        setChange((Sum)null);
+        getChange().clear();
         return;
     }
     super.eUnset(featureID);
@@ -261,8 +272,10 @@ public class RuleImpl extends EffectImpl implements Rule
     {
       case RPGPackage.RULE__OPERATOR:
         return operator != null;
+      case RPGPackage.RULE__ATTRITBUTE_TO_SET:
+        return attritbuteToSet != null && !attritbuteToSet.isEmpty();
       case RPGPackage.RULE__CHANGE:
-        return change != null;
+        return change != null && !change.isEmpty();
     }
     return super.eIsSet(featureID);
   }

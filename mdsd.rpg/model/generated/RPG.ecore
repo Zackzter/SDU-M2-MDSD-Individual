@@ -68,20 +68,25 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AltAttribute">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attriburte" unique="false"
-        upperBound="-1" eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="av" eType="#//AttributeValues"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="#//Effect">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operator" eType="#//Proposition"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="change" eType="#//Sum"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attritbuteToSet" unique="false"
+        upperBound="-1" eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="change" upperBound="-1"
+        eType="#//Sum" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entities" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="entity" upperBound="-1"
         eType="#//Entity" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Death" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="con" upperBound="-1" eType="#//Proposition"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entity">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

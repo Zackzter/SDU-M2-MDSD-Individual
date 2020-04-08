@@ -3,6 +3,7 @@
  */
 package mdsd.rPG;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,6 +15,7 @@ package mdsd.rPG;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.Rule#getOperator <em>Operator</em>}</li>
+ *   <li>{@link mdsd.rPG.Rule#getAttritbuteToSet <em>Attritbute To Set</em>}</li>
  *   <li>{@link mdsd.rPG.Rule#getChange <em>Change</em>}</li>
  * </ul>
  *
@@ -46,25 +48,27 @@ public interface Rule extends Effect
   void setOperator(Proposition value);
 
   /**
-   * Returns the value of the '<em><b>Change</b></em>' containment reference.
+   * Returns the value of the '<em><b>Attritbute To Set</b></em>' reference list.
+   * The list contents are of type {@link mdsd.rPG.Attribute}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Change</em>' containment reference.
-   * @see #setChange(Sum)
+   * @return the value of the '<em>Attritbute To Set</em>' reference list.
+   * @see mdsd.rPG.RPGPackage#getRule_AttritbuteToSet()
+   * @model
+   * @generated
+   */
+  EList<Attribute> getAttritbuteToSet();
+
+  /**
+   * Returns the value of the '<em><b>Change</b></em>' containment reference list.
+   * The list contents are of type {@link mdsd.rPG.Sum}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Change</em>' containment reference list.
    * @see mdsd.rPG.RPGPackage#getRule_Change()
    * @model containment="true"
    * @generated
    */
-  Sum getChange();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Rule#getChange <em>Change</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Change</em>' containment reference.
-   * @see #getChange()
-   * @generated
-   */
-  void setChange(Sum value);
+  EList<Sum> getChange();
 
 } // Rule

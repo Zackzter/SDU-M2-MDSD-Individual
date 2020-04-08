@@ -82,6 +82,7 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.ALT_ATTRIBUTE: return createAltAttribute();
       case RPGPackage.RULE: return createRule();
       case RPGPackage.ENTITIES: return createEntities();
+      case RPGPackage.DEATH: return createDeath();
       case RPGPackage.ENTITY: return createEntity();
       case RPGPackage.ENTITY_MOVES: return createEntityMoves();
       case RPGPackage.TEAMS: return createTeams();
@@ -307,6 +308,18 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     EntitiesImpl entities = new EntitiesImpl();
     return entities;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Death createDeath()
+  {
+    DeathImpl death = new DeathImpl();
+    return death;
   }
 
   /**

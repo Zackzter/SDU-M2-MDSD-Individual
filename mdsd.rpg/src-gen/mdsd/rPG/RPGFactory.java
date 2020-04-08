@@ -177,6 +177,15 @@ public interface RPGFactory extends EFactory
   Entities createEntities();
 
   /**
+   * Returns a new object of class '<em>Death</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Death</em>'.
+   * @generated
+   */
+  Death createDeath();
+
+  /**
    * Returns a new object of class '<em>Entity</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

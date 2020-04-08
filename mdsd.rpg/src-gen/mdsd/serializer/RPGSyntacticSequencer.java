@@ -22,7 +22,9 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected RPGGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_AtomicNumber_FloatParserRuleCall_0_1_or_INTTerminalRuleCall_1_1;
+	protected AbstractElementAlias match_AtomicNumber_SelfTargetingParserRuleCall_2_0_q;
 	protected AbstractElementAlias match_Require_RequireKeyword_0_0_q;
+	protected AbstractElementAlias match_Rule_SelfTargetingParserRuleCall_3_0_q;
 	protected AbstractElementAlias match_Statement_LeftParenthesisKeyword_1_0_a;
 	protected AbstractElementAlias match_Statement_LeftParenthesisKeyword_1_0_p;
 	
@@ -30,7 +32,9 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (RPGGrammarAccess) access;
 		match_AtomicNumber_FloatParserRuleCall_0_1_or_INTTerminalRuleCall_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getAtomicNumberAccess().getFloatParserRuleCall_0_1()), new TokenAlias(false, false, grammarAccess.getAtomicNumberAccess().getINTTerminalRuleCall_1_1()));
+		match_AtomicNumber_SelfTargetingParserRuleCall_2_0_q = new TokenAlias(false, true, grammarAccess.getAtomicNumberAccess().getSelfTargetingParserRuleCall_2_0());
 		match_Require_RequireKeyword_0_0_q = new TokenAlias(false, true, grammarAccess.getRequireAccess().getRequireKeyword_0_0());
+		match_Rule_SelfTargetingParserRuleCall_3_0_q = new TokenAlias(false, true, grammarAccess.getRuleAccess().getSelfTargetingParserRuleCall_3_0());
 		match_Statement_LeftParenthesisKeyword_1_0_a = new TokenAlias(true, true, grammarAccess.getStatementAccess().getLeftParenthesisKeyword_1_0());
 		match_Statement_LeftParenthesisKeyword_1_0_p = new TokenAlias(true, false, grammarAccess.getStatementAccess().getLeftParenthesisKeyword_1_0());
 	}
@@ -41,6 +45,8 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 			return getFloatToken(semanticObject, ruleCall, node);
 		else if (ruleCall.getRule() == grammarAccess.getINTRule())
 			return getINTToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getSelfTargetingRule())
+			return getSelfTargetingToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
@@ -64,6 +70,17 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 		return "";
 	}
 	
+	/**
+	 * SelfTargeting:
+	 * 	'self.'
+	 * ;
+	 */
+	protected String getSelfTargetingToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "self.";
+	}
+	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
 		if (transition.getAmbiguousSyntaxes().isEmpty()) return;
@@ -72,8 +89,12 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
 			if (match_AtomicNumber_FloatParserRuleCall_0_1_or_INTTerminalRuleCall_1_1.equals(syntax))
 				emit_AtomicNumber_FloatParserRuleCall_0_1_or_INTTerminalRuleCall_1_1(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_AtomicNumber_SelfTargetingParserRuleCall_2_0_q.equals(syntax))
+				emit_AtomicNumber_SelfTargetingParserRuleCall_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Require_RequireKeyword_0_0_q.equals(syntax))
 				emit_Require_RequireKeyword_0_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Rule_SelfTargetingParserRuleCall_3_0_q.equals(syntax))
+				emit_Rule_SelfTargetingParserRuleCall_3_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Statement_LeftParenthesisKeyword_1_0_a.equals(syntax))
 				emit_Statement_LeftParenthesisKeyword_1_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Statement_LeftParenthesisKeyword_1_0_p.equals(syntax))
@@ -99,6 +120,17 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Ambiguous syntax:
+	 *     SelfTargeting?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) attribute=[Attribute|ID]
+	 */
+	protected void emit_AtomicNumber_SelfTargetingParserRuleCall_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
 	 *     'require'?
 	 *
 	 * This ambiguous syntax occurs at:
@@ -112,6 +144,18 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) '('* {or.left=}
 	 */
 	protected void emit_Require_RequireKeyword_0_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     SelfTargeting?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     change+=Sum (ambiguity) attritbuteToSet+=[Attribute|ID]
+	 *     operator=ORcondition 'then' (ambiguity) attritbuteToSet+=[Attribute|ID]
+	 */
+	protected void emit_Rule_SelfTargetingParserRuleCall_3_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

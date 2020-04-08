@@ -6,7 +6,7 @@ SystemRPG:
 	'game' name=ID declarations+=Declaration*;
 	
 Declaration:
-	Locations | Relations | Moves | Entities | Teams | Attributes;
+	Locations | Relations | Moves | Entities | Teams | Attributes | Death;
 	
 Locations:
 	'location' loc+=Loc+
@@ -34,7 +34,7 @@ Moves:
 ;
 
 Move:
-	'move' name=ID eType=EType att+=AltAttribute* effect+=Effect*
+	'move' name=ID eType=EType? att+=AltAttribute* effect+=Effect*
 ;
 
 EType:
@@ -60,18 +60,22 @@ AttributeValues:
 
 //Gives warning with only name
 AltAttribute:
-	 attriburte+=[Attribute]+ (av=AttributeValues)?
+	 'attribute' attribute=[Attribute] (av=AttributeValues)?
 ;
 
 //Sum cannot find the signs needed for the expression but want an AtomicNumber instead
 Rule:
-	'if' operator=ORcondition  'then'
-		change=Sum 
+	'if' operator=ORcondition  'then' ( SelfTargeting? attritbuteToSet+=[Attribute]'='
+		change+=Sum+)*
 ;
 
 
 Entities:
 	'entities' entity+=Entity+
+;
+
+Death:
+	'death' con+=ORcondition+
 ;
 
 Entity:
@@ -134,7 +138,11 @@ Multiply:
 
 
 AtomicNumber:
-	{AtomicNumber} Float | {AtomicNumber} INT | attribute=[Attribute] 
+	{AtomicNumber} Float | {AtomicNumber} INT | SelfTargeting? attribute=[Attribute] 
+;
+
+SelfTargeting:
+	'self.'
 ;
 
 Float:

@@ -3,8 +3,6 @@
  */
 package mdsd.rPG;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -16,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.AltAttribute#getAttriburte <em>Attriburte</em>}</li>
+ *   <li>{@link mdsd.rPG.AltAttribute#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link mdsd.rPG.AltAttribute#getAv <em>Av</em>}</li>
  * </ul>
  *
@@ -27,16 +25,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface AltAttribute extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Attriburte</b></em>' reference list.
-   * The list contents are of type {@link mdsd.rPG.Attribute}.
+   * Returns the value of the '<em><b>Attribute</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Attriburte</em>' reference list.
-   * @see mdsd.rPG.RPGPackage#getAltAttribute_Attriburte()
+   * @return the value of the '<em>Attribute</em>' reference.
+   * @see #setAttribute(Attribute)
+   * @see mdsd.rPG.RPGPackage#getAltAttribute_Attribute()
    * @model
    * @generated
    */
-  EList<Attribute> getAttriburte();
+  Attribute getAttribute();
+
+  /**
+   * Sets the value of the '{@link mdsd.rPG.AltAttribute#getAttribute <em>Attribute</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Attribute</em>' reference.
+   * @see #getAttribute()
+   * @generated
+   */
+  void setAttribute(Attribute value);
 
   /**
    * Returns the value of the '<em><b>Av</b></em>' containment reference.

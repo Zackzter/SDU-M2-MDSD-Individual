@@ -3,8 +3,6 @@
  */
 package mdsd.rPG.impl;
 
-import java.util.Collection;
-
 import mdsd.rPG.AltAttribute;
 import mdsd.rPG.Attribute;
 import mdsd.rPG.AttributeValues;
@@ -13,15 +11,11 @@ import mdsd.rPG.RPGPackage;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +25,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.AltAttributeImpl#getAttriburte <em>Attriburte</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.AltAttributeImpl#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link mdsd.rPG.impl.AltAttributeImpl#getAv <em>Av</em>}</li>
  * </ul>
  *
@@ -40,14 +34,14 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 public class AltAttributeImpl extends MinimalEObjectImpl.Container implements AltAttribute
 {
   /**
-   * The cached value of the '{@link #getAttriburte() <em>Attriburte</em>}' reference list.
+   * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAttriburte()
+   * @see #getAttribute()
    * @generated
    * @ordered
    */
-  protected EList<Attribute> attriburte;
+  protected Attribute attribute;
 
   /**
    * The cached value of the '{@link #getAv() <em>Av</em>}' containment reference.
@@ -86,13 +80,43 @@ public class AltAttributeImpl extends MinimalEObjectImpl.Container implements Al
    * @generated
    */
   @Override
-  public EList<Attribute> getAttriburte()
+  public Attribute getAttribute()
   {
-    if (attriburte == null)
+    if (attribute != null && attribute.eIsProxy())
     {
-      attriburte = new EObjectResolvingEList<Attribute>(Attribute.class, this, RPGPackage.ALT_ATTRIBUTE__ATTRIBURTE);
+      InternalEObject oldAttribute = (InternalEObject)attribute;
+      attribute = (Attribute)eResolveProxy(oldAttribute);
+      if (attribute != oldAttribute)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RPGPackage.ALT_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
+      }
     }
-    return attriburte;
+    return attribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Attribute basicGetAttribute()
+  {
+    return attribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setAttribute(Attribute newAttribute)
+  {
+    Attribute oldAttribute = attribute;
+    attribute = newAttribute;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.ALT_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
   }
 
   /**
@@ -171,8 +195,9 @@ public class AltAttributeImpl extends MinimalEObjectImpl.Container implements Al
   {
     switch (featureID)
     {
-      case RPGPackage.ALT_ATTRIBUTE__ATTRIBURTE:
-        return getAttriburte();
+      case RPGPackage.ALT_ATTRIBUTE__ATTRIBUTE:
+        if (resolve) return getAttribute();
+        return basicGetAttribute();
       case RPGPackage.ALT_ATTRIBUTE__AV:
         return getAv();
     }
@@ -184,15 +209,13 @@ public class AltAttributeImpl extends MinimalEObjectImpl.Container implements Al
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case RPGPackage.ALT_ATTRIBUTE__ATTRIBURTE:
-        getAttriburte().clear();
-        getAttriburte().addAll((Collection<? extends Attribute>)newValue);
+      case RPGPackage.ALT_ATTRIBUTE__ATTRIBUTE:
+        setAttribute((Attribute)newValue);
         return;
       case RPGPackage.ALT_ATTRIBUTE__AV:
         setAv((AttributeValues)newValue);
@@ -211,8 +234,8 @@ public class AltAttributeImpl extends MinimalEObjectImpl.Container implements Al
   {
     switch (featureID)
     {
-      case RPGPackage.ALT_ATTRIBUTE__ATTRIBURTE:
-        getAttriburte().clear();
+      case RPGPackage.ALT_ATTRIBUTE__ATTRIBUTE:
+        setAttribute((Attribute)null);
         return;
       case RPGPackage.ALT_ATTRIBUTE__AV:
         setAv((AttributeValues)null);
@@ -231,8 +254,8 @@ public class AltAttributeImpl extends MinimalEObjectImpl.Container implements Al
   {
     switch (featureID)
     {
-      case RPGPackage.ALT_ATTRIBUTE__ATTRIBURTE:
-        return attriburte != null && !attriburte.isEmpty();
+      case RPGPackage.ALT_ATTRIBUTE__ATTRIBUTE:
+        return attribute != null;
       case RPGPackage.ALT_ATTRIBUTE__AV:
         return av != null;
     }
