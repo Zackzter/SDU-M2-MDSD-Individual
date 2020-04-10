@@ -187,6 +187,7 @@ public class RPGSwitch<T> extends Switch<T>
         Rule rule = (Rule)theEObject;
         T result = caseRule(rule);
         if (result == null) result = caseEffect(rule);
+        if (result == null) result = caseAttributeValues(rule);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -253,6 +254,7 @@ public class RPGSwitch<T> extends Switch<T>
       {
         Require require = (Require)theEObject;
         T result = caseRequire(require);
+        if (result == null) result = caseAttributeValues(require);
         if (result == null) result = caseTeams(require);
         if (result == null) result = caseDeclaration(require);
         if (result == null) result = defaultCase(theEObject);
@@ -262,7 +264,10 @@ public class RPGSwitch<T> extends Switch<T>
       {
         Proposition proposition = (Proposition)theEObject;
         T result = caseProposition(proposition);
+        if (result == null) result = caseRule(proposition);
         if (result == null) result = caseRequire(proposition);
+        if (result == null) result = caseEffect(proposition);
+        if (result == null) result = caseAttributeValues(proposition);
         if (result == null) result = caseTeams(proposition);
         if (result == null) result = caseDeclaration(proposition);
         if (result == null) result = defaultCase(theEObject);
@@ -273,7 +278,10 @@ public class RPGSwitch<T> extends Switch<T>
         NumberComparing numberComparing = (NumberComparing)theEObject;
         T result = caseNumberComparing(numberComparing);
         if (result == null) result = caseProposition(numberComparing);
+        if (result == null) result = caseRule(numberComparing);
         if (result == null) result = caseRequire(numberComparing);
+        if (result == null) result = caseEffect(numberComparing);
+        if (result == null) result = caseAttributeValues(numberComparing);
         if (result == null) result = caseTeams(numberComparing);
         if (result == null) result = caseDeclaration(numberComparing);
         if (result == null) result = defaultCase(theEObject);
@@ -298,6 +306,8 @@ public class RPGSwitch<T> extends Switch<T>
       {
         AtomicNumber atomicNumber = (AtomicNumber)theEObject;
         T result = caseAtomicNumber(atomicNumber);
+        if (result == null) result = caseAttributeValues(atomicNumber);
+        if (result == null) result = caseBattleSize(atomicNumber);
         if (result == null) result = caseMultiply(atomicNumber);
         if (result == null) result = caseSum(atomicNumber);
         if (result == null) result = defaultCase(theEObject);
@@ -308,7 +318,10 @@ public class RPGSwitch<T> extends Switch<T>
         or or = (or)theEObject;
         T result = caseor(or);
         if (result == null) result = caseProposition(or);
+        if (result == null) result = caseRule(or);
         if (result == null) result = caseRequire(or);
+        if (result == null) result = caseEffect(or);
+        if (result == null) result = caseAttributeValues(or);
         if (result == null) result = caseTeams(or);
         if (result == null) result = caseDeclaration(or);
         if (result == null) result = defaultCase(theEObject);
@@ -319,7 +332,10 @@ public class RPGSwitch<T> extends Switch<T>
         and and = (and)theEObject;
         T result = caseand(and);
         if (result == null) result = caseProposition(and);
+        if (result == null) result = caseRule(and);
         if (result == null) result = caseRequire(and);
+        if (result == null) result = caseEffect(and);
+        if (result == null) result = caseAttributeValues(and);
         if (result == null) result = caseTeams(and);
         if (result == null) result = caseDeclaration(and);
         if (result == null) result = defaultCase(theEObject);

@@ -24,6 +24,7 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_AtomicNumber_FloatParserRuleCall_0_1_or_INTTerminalRuleCall_1_1;
 	protected AbstractElementAlias match_AtomicNumber_SelfTargetingParserRuleCall_2_0_q;
 	protected AbstractElementAlias match_Require_RequireKeyword_0_0_q;
+	protected AbstractElementAlias match_Require_Rule___IfKeyword_0_or_RequireKeyword_0_0__q;
 	protected AbstractElementAlias match_Rule_SelfTargetingParserRuleCall_3_0_q;
 	protected AbstractElementAlias match_Statement_LeftParenthesisKeyword_1_0_a;
 	protected AbstractElementAlias match_Statement_LeftParenthesisKeyword_1_0_p;
@@ -34,6 +35,7 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_AtomicNumber_FloatParserRuleCall_0_1_or_INTTerminalRuleCall_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getAtomicNumberAccess().getFloatParserRuleCall_0_1()), new TokenAlias(false, false, grammarAccess.getAtomicNumberAccess().getINTTerminalRuleCall_1_1()));
 		match_AtomicNumber_SelfTargetingParserRuleCall_2_0_q = new TokenAlias(false, true, grammarAccess.getAtomicNumberAccess().getSelfTargetingParserRuleCall_2_0());
 		match_Require_RequireKeyword_0_0_q = new TokenAlias(false, true, grammarAccess.getRequireAccess().getRequireKeyword_0_0());
+		match_Require_Rule___IfKeyword_0_or_RequireKeyword_0_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getRequireAccess().getRequireKeyword_0_0()), new TokenAlias(false, false, grammarAccess.getRuleAccess().getIfKeyword_0()));
 		match_Rule_SelfTargetingParserRuleCall_3_0_q = new TokenAlias(false, true, grammarAccess.getRuleAccess().getSelfTargetingParserRuleCall_3_0());
 		match_Statement_LeftParenthesisKeyword_1_0_a = new TokenAlias(true, true, grammarAccess.getStatementAccess().getLeftParenthesisKeyword_1_0());
 		match_Statement_LeftParenthesisKeyword_1_0_p = new TokenAlias(true, false, grammarAccess.getStatementAccess().getLeftParenthesisKeyword_1_0());
@@ -93,6 +95,8 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_AtomicNumber_SelfTargetingParserRuleCall_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Require_RequireKeyword_0_0_q.equals(syntax))
 				emit_Require_RequireKeyword_0_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Require_Rule___IfKeyword_0_or_RequireKeyword_0_0__q.equals(syntax))
+				emit_Require_Rule___IfKeyword_0_or_RequireKeyword_0_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Rule_SelfTargetingParserRuleCall_3_0_q.equals(syntax))
 				emit_Rule_SelfTargetingParserRuleCall_3_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Statement_LeftParenthesisKeyword_1_0_a.equals(syntax))
@@ -108,6 +112,9 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     Float | INT
 	 *
 	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'battling_member_count' (ambiguity) (rule start)
+	 *     (rule start) 'battling_member_count' (ambiguity) req=Require
+	 *     (rule start) 'is' (ambiguity) (rule start)
 	 *     (rule start) (ambiguity) '*' (rule start)
 	 *     (rule start) (ambiguity) '+' (rule start)
 	 *     (rule start) (ambiguity) '-' (rule start)
@@ -123,6 +130,8 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     SelfTargeting?
 	 *
 	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'battling_member_count' (ambiguity) attribute=[Attribute|ID]
+	 *     (rule start) 'is' (ambiguity) attribute=[Attribute|ID]
 	 *     (rule start) (ambiguity) attribute=[Attribute|ID]
 	 */
 	protected void emit_AtomicNumber_SelfTargetingParserRuleCall_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -149,11 +158,28 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Ambiguous syntax:
+	 *     ('if' | 'require')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) '('* left=Sum
+	 *     (rule start) (ambiguity) '('* type=[Type|ID]
+	 *     (rule start) (ambiguity) '('* {and.left=}
+	 *     (rule start) (ambiguity) '('* {or.left=}
+	 */
+	protected void emit_Require_Rule___IfKeyword_0_or_RequireKeyword_0_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
 	 *     SelfTargeting?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     change+=Sum (ambiguity) attritbuteToSet+=[Attribute|ID]
-	 *     operator=ORcondition 'then' (ambiguity) attritbuteToSet+=[Attribute|ID]
+	 *     right=ANDcondition 'then' (ambiguity) attritbuteToSet+=[Attribute|ID]
+	 *     right=Statement 'then' (ambiguity) attritbuteToSet+=[Attribute|ID]
+	 *     right=Sum 'then' (ambiguity) attritbuteToSet+=[Attribute|ID]
+	 *     type=[Type|ID] 'then' (ambiguity) attritbuteToSet+=[Attribute|ID]
 	 */
 	protected void emit_Rule_SelfTargetingParserRuleCall_3_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -164,6 +190,14 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'effect' 'if' (ambiguity) left=Sum
+	 *     (rule start) 'effect' 'if' (ambiguity) type=[Type|ID]
+	 *     (rule start) 'effect' 'if' (ambiguity) {and.left=}
+	 *     (rule start) 'effect' 'if' (ambiguity) {or.left=}
+	 *     (rule start) 'if' (ambiguity) left=Sum
+	 *     (rule start) 'if' (ambiguity) type=[Type|ID]
+	 *     (rule start) 'if' (ambiguity) {and.left=}
+	 *     (rule start) 'if' (ambiguity) {or.left=}
 	 *     (rule start) 'require'? (ambiguity) left=Sum
 	 *     (rule start) 'require'? (ambiguity) type=[Type|ID]
 	 *     (rule start) 'require'? (ambiguity) {and.left=}
@@ -172,6 +206,10 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) 'teams' 'require'? (ambiguity) type=[Type|ID]
 	 *     (rule start) 'teams' 'require'? (ambiguity) {and.left=}
 	 *     (rule start) 'teams' 'require'? (ambiguity) {or.left=}
+	 *     (rule start) ('if' | 'require')? (ambiguity) left=Sum
+	 *     (rule start) ('if' | 'require')? (ambiguity) type=[Type|ID]
+	 *     (rule start) ('if' | 'require')? (ambiguity) {and.left=}
+	 *     (rule start) ('if' | 'require')? (ambiguity) {or.left=}
 	 *     (rule start) (ambiguity) left=Sum
 	 *     (rule start) (ambiguity) type=[Type|ID]
 	 *     (rule start) (ambiguity) {and.left=}

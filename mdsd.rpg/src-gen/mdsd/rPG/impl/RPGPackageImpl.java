@@ -785,39 +785,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EReference getAttributeValues_Value()
-  {
-    return (EReference)attributeValuesEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getAttributeValues_Rule()
-  {
-    return (EReference)attributeValuesEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getAttributeValues_Require()
-  {
-    return (EReference)attributeValuesEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getAltAttribute()
   {
     return altAttributeEClass;
@@ -854,39 +821,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
   public EClass getRule()
   {
     return ruleEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getRule_Operator()
-  {
-    return (EReference)ruleEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getRule_AttritbuteToSet()
-  {
-    return (EReference)ruleEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getRule_Change()
-  {
-    return (EReference)ruleEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1115,28 +1049,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EReference getBattleSize_Value()
-  {
-    return (EReference)battleSizeEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getBattleSize_Req()
-  {
-    return (EReference)battleSizeEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getRequire()
   {
     return requireEClass;
@@ -1159,9 +1071,31 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EReference getProposition_Type()
+  public EReference getProposition_AttritbuteToSet()
   {
     return (EReference)propositionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getProposition_Change()
+  {
+    return (EReference)propositionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getProposition_Type()
+  {
+    return (EReference)propositionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1247,9 +1181,20 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EReference getAtomicNumber_Attribute()
+  public EReference getAtomicNumber_Req()
   {
     return (EReference)atomicNumberEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getAtomicNumber_Attribute()
+  {
+    return (EReference)atomicNumberEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1531,18 +1476,12 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
 
     attributeValuesEClass = createEClass(ATTRIBUTE_VALUES);
     createEAttribute(attributeValuesEClass, ATTRIBUTE_VALUES__LTYPES);
-    createEReference(attributeValuesEClass, ATTRIBUTE_VALUES__VALUE);
-    createEReference(attributeValuesEClass, ATTRIBUTE_VALUES__RULE);
-    createEReference(attributeValuesEClass, ATTRIBUTE_VALUES__REQUIRE);
 
     altAttributeEClass = createEClass(ALT_ATTRIBUTE);
     createEReference(altAttributeEClass, ALT_ATTRIBUTE__ATTRIBUTE);
     createEReference(altAttributeEClass, ALT_ATTRIBUTE__AV);
 
     ruleEClass = createEClass(RULE);
-    createEReference(ruleEClass, RULE__OPERATOR);
-    createEReference(ruleEClass, RULE__ATTRITBUTE_TO_SET);
-    createEReference(ruleEClass, RULE__CHANGE);
 
     entitiesEClass = createEClass(ENTITIES);
     createEReference(entitiesEClass, ENTITIES__ENTITY);
@@ -1571,12 +1510,12 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     createEReference(membersEClass, MEMBERS__ENTITY);
 
     battleSizeEClass = createEClass(BATTLE_SIZE);
-    createEReference(battleSizeEClass, BATTLE_SIZE__VALUE);
-    createEReference(battleSizeEClass, BATTLE_SIZE__REQ);
 
     requireEClass = createEClass(REQUIRE);
 
     propositionEClass = createEClass(PROPOSITION);
+    createEReference(propositionEClass, PROPOSITION__ATTRITBUTE_TO_SET);
+    createEReference(propositionEClass, PROPOSITION__CHANGE);
     createEReference(propositionEClass, PROPOSITION__TYPE);
 
     numberComparingEClass = createEClass(NUMBER_COMPARING);
@@ -1589,6 +1528,7 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     multiplyEClass = createEClass(MULTIPLY);
 
     atomicNumberEClass = createEClass(ATOMIC_NUMBER);
+    createEReference(atomicNumberEClass, ATOMIC_NUMBER__REQ);
     createEReference(atomicNumberEClass, ATOMIC_NUMBER__ATTRIBUTE);
 
     orEClass = createEClass(OR);
@@ -1650,13 +1590,18 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     movesEClass.getESuperTypes().add(this.getDeclaration());
     attributesEClass.getESuperTypes().add(this.getDeclaration());
     ruleEClass.getESuperTypes().add(this.getEffect());
+    ruleEClass.getESuperTypes().add(this.getAttributeValues());
     entitiesEClass.getESuperTypes().add(this.getDeclaration());
     deathEClass.getESuperTypes().add(this.getDeclaration());
     teamsEClass.getESuperTypes().add(this.getDeclaration());
+    requireEClass.getESuperTypes().add(this.getAttributeValues());
     requireEClass.getESuperTypes().add(this.getTeams());
+    propositionEClass.getESuperTypes().add(this.getRule());
     propositionEClass.getESuperTypes().add(this.getRequire());
     numberComparingEClass.getESuperTypes().add(this.getProposition());
     multiplyEClass.getESuperTypes().add(this.getSum());
+    atomicNumberEClass.getESuperTypes().add(this.getAttributeValues());
+    atomicNumberEClass.getESuperTypes().add(this.getBattleSize());
     atomicNumberEClass.getESuperTypes().add(this.getMultiply());
     orEClass.getESuperTypes().add(this.getProposition());
     andEClass.getESuperTypes().add(this.getProposition());
@@ -1716,18 +1661,12 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
 
     initEClass(attributeValuesEClass, AttributeValues.class, "AttributeValues", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAttributeValues_LTypes(), ecorePackage.getEString(), "lTypes", null, 0, 1, AttributeValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAttributeValues_Value(), this.getAtomicNumber(), null, "value", null, 0, 1, AttributeValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAttributeValues_Rule(), this.getRule(), null, "rule", null, 0, 1, AttributeValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAttributeValues_Require(), this.getRequire(), null, "require", null, 0, 1, AttributeValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(altAttributeEClass, AltAttribute.class, "AltAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAltAttribute_Attribute(), this.getAttribute(), null, "attribute", null, 0, 1, AltAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAltAttribute_Av(), this.getAttributeValues(), null, "av", null, 0, 1, AltAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getRule_Operator(), this.getProposition(), null, "operator", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getRule_AttritbuteToSet(), this.getAttribute(), null, "attritbuteToSet", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getRule_Change(), this.getSum(), null, "change", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(entitiesEClass, Entities.class, "Entities", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEntities_Entity(), this.getEntity(), null, "entity", null, 0, -1, Entities.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1756,12 +1695,12 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     initEReference(getMembers_Entity(), this.getEntity(), null, "entity", null, 0, -1, Members.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(battleSizeEClass, BattleSize.class, "BattleSize", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getBattleSize_Value(), this.getAtomicNumber(), null, "value", null, 0, 1, BattleSize.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getBattleSize_Req(), this.getRequire(), null, "req", null, 0, 1, BattleSize.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(requireEClass, Require.class, "Require", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(propositionEClass, Proposition.class, "Proposition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getProposition_AttritbuteToSet(), this.getAttribute(), null, "attritbuteToSet", null, 0, -1, Proposition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProposition_Change(), this.getSum(), null, "change", null, 0, -1, Proposition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProposition_Type(), this.getType(), null, "type", null, 0, 1, Proposition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(numberComparingEClass, NumberComparing.class, "NumberComparing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1774,6 +1713,7 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     initEClass(multiplyEClass, Multiply.class, "Multiply", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(atomicNumberEClass, AtomicNumber.class, "AtomicNumber", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAtomicNumber_Req(), this.getRequire(), null, "req", null, 0, 1, AtomicNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAtomicNumber_Attribute(), this.getAttribute(), null, "attribute", null, 0, 1, AtomicNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(orEClass, or.class, "or", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

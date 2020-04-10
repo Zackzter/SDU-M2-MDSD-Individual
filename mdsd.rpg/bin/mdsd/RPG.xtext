@@ -55,16 +55,15 @@ Effect:
 ;
 
 AttributeValues:
-	'is' (lTypes=LegalType | value=AtomicNumber) | (rule=Rule|require=Require)
+	'is' (lTypes=LegalType | AtomicNumber) | ( Rule | Require)
 ;
 
 AltAttribute:
-	 'attribute' attribute=[Attribute] (av=AttributeValues)?
+	 'attribute' attribute=[Attribute] av=AttributeValues?
 ;
 
 Rule:
-	'if' operator=ORcondition  'then' ( SelfTargeting? attritbuteToSet+=[Attribute]'='
-		change+=Sum+)*
+	'if' ORcondition  'then' ( SelfTargeting? attritbuteToSet+=[Attribute]'=' change+=Sum+)*
 ;
 
 
@@ -97,7 +96,7 @@ Members:
 ;
 
 BattleSize:
-	'battling_member_count' value=AtomicNumber req=Require?
+	'battling_member_count' AtomicNumber req=Require?
 ;
 
 

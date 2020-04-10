@@ -10,13 +10,6 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Battle Size</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link mdsd.rPG.BattleSize#getValue <em>Value</em>}</li>
- *   <li>{@link mdsd.rPG.BattleSize#getReq <em>Req</em>}</li>
- * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getBattleSize()
  * @model
@@ -24,48 +17,4 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface BattleSize extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Value</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Value</em>' containment reference.
-   * @see #setValue(AtomicNumber)
-   * @see mdsd.rPG.RPGPackage#getBattleSize_Value()
-   * @model containment="true"
-   * @generated
-   */
-  AtomicNumber getValue();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.BattleSize#getValue <em>Value</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value</em>' containment reference.
-   * @see #getValue()
-   * @generated
-   */
-  void setValue(AtomicNumber value);
-
-  /**
-   * Returns the value of the '<em><b>Req</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Req</em>' containment reference.
-   * @see #setReq(Require)
-   * @see mdsd.rPG.RPGPackage#getBattleSize_Req()
-   * @model containment="true"
-   * @generated
-   */
-  Require getReq();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.BattleSize#getReq <em>Req</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Req</em>' containment reference.
-   * @see #getReq()
-   * @generated
-   */
-  void setReq(Require value);
-
 } // BattleSize

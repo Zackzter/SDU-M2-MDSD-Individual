@@ -856,68 +856,35 @@ ruleAttributeValues returns [EObject current=null]
 					)
 				)
 				    |
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getAttributeValuesAccess().getValueAtomicNumberParserRuleCall_0_1_1_0());
-						}
-						lv_value_2_0=ruleAtomicNumber
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getAttributeValuesRule());
-							}
-							set(
-								$current,
-								"value",
-								lv_value_2_0,
-								"mdsd.RPG.AtomicNumber");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
+				{
+					newCompositeNode(grammarAccess.getAttributeValuesAccess().getAtomicNumberParserRuleCall_0_1_1());
+				}
+				this_AtomicNumber_2=ruleAtomicNumber
+				{
+					$current = $this_AtomicNumber_2.current;
+					afterParserOrEnumRuleCall();
+				}
 			)
 		)
 		    |
 		(
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getAttributeValuesAccess().getRuleRuleParserRuleCall_1_0_0());
-					}
-					lv_rule_3_0=ruleRule
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getAttributeValuesRule());
-						}
-						set(
-							$current,
-							"rule",
-							lv_rule_3_0,
-							"mdsd.RPG.Rule");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
+			{
+				newCompositeNode(grammarAccess.getAttributeValuesAccess().getRuleParserRuleCall_1_0());
+			}
+			this_Rule_3=ruleRule
+			{
+				$current = $this_Rule_3.current;
+				afterParserOrEnumRuleCall();
+			}
 			    |
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getAttributeValuesAccess().getRequireRequireParserRuleCall_1_1_0());
-					}
-					lv_require_4_0=ruleRequire
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getAttributeValuesRule());
-						}
-						set(
-							$current,
-							"require",
-							lv_require_4_0,
-							"mdsd.RPG.Require");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
+			{
+				newCompositeNode(grammarAccess.getAttributeValuesAccess().getRequireParserRuleCall_1_1());
+			}
+			this_Require_4=ruleRequire
+			{
+				$current = $this_Require_4.current;
+				afterParserOrEnumRuleCall();
+			}
 		)
 	)
 ;
@@ -997,25 +964,14 @@ ruleRule returns [EObject current=null]
 		{
 			newLeafNode(otherlv_0, grammarAccess.getRuleAccess().getIfKeyword_0());
 		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getRuleAccess().getOperatorORconditionParserRuleCall_1_0());
-				}
-				lv_operator_1_0=ruleORcondition
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getRuleRule());
-					}
-					set(
-						$current,
-						"operator",
-						lv_operator_1_0,
-						"mdsd.RPG.ORcondition");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
+		{
+			newCompositeNode(grammarAccess.getRuleAccess().getORconditionParserRuleCall_1());
+		}
+		this_ORcondition_1=ruleORcondition
+		{
+			$current = $this_ORcondition_1.current;
+			afterParserOrEnumRuleCall();
+		}
 		otherlv_2='then'
 		{
 			newLeafNode(otherlv_2, grammarAccess.getRuleAccess().getThenKeyword_2());
@@ -1475,25 +1431,14 @@ ruleBattleSize returns [EObject current=null]
 		{
 			newLeafNode(otherlv_0, grammarAccess.getBattleSizeAccess().getBattling_member_countKeyword_0());
 		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getBattleSizeAccess().getValueAtomicNumberParserRuleCall_1_0());
-				}
-				lv_value_1_0=ruleAtomicNumber
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getBattleSizeRule());
-					}
-					set(
-						$current,
-						"value",
-						lv_value_1_0,
-						"mdsd.RPG.AtomicNumber");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
+		{
+			newCompositeNode(grammarAccess.getBattleSizeAccess().getAtomicNumberParserRuleCall_1());
+		}
+		this_AtomicNumber_1=ruleAtomicNumber
+		{
+			$current = $this_AtomicNumber_1.current;
+			afterParserOrEnumRuleCall();
+		}
 		(
 			(
 				{

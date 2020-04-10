@@ -9,6 +9,9 @@ import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import mdsd.rPG.SystemRPG
 import mdsd.rPG.Entity
+import mdsd.rPG.Type
+import mdsd.rPG.Move
+import mdsd.rPG.Attribute
 
 /**
  * Generates code from your model files on save.
@@ -26,6 +29,156 @@ class RPGGenerator extends AbstractGenerator {
 //				.filter(Greeting)
 //				.map[name]
 //				.join(', '))
+	}
+	
+
+	//	
+	def generateEntity(Entity entity){
+		'''import java.util.*;
+		public class Zyndaquil {
+			private Type type = new Type();
+			type.addType("Fire");
+			private Set<Attribute> attributes = new HashSet<>();
+			private Attribute maxHP;
+			maxHp = Attribute.createAttributeWithInt(AttributeEnum.MAX_HP, 10);
+			attributes.add(maxHP);
+			
+			private Move move = new Move();
+			
+			move.addMove("Ember");
+		}
+		
+		'''
+	}
+
+	def generateType(Type type){
+		'''
+		import java.util.*;
+		
+		public class Type{
+			
+			private Set<Sting> setOfTypes = new HashSet<>();
+			private String typeName;
+			
+			
+			public Type(String typeName){
+				this.typeName = typeName;
+				if(!typeName.isEmpty())){
+					addType(typeName);
+					}
+				}
+						
+			public void addType(String type){
+				setOfTypes.add(type);
+				}
+		}
+		
+		
+		'''
+	}
+	
+	def generateMove(Move move){
+		'''
+		import java.util.*;
+		
+		public class Move{
+			private Set<String> setOfMoves = new HashSet<>();
+			private String moveName;
+			private Type type;
+			private Set<Attribute> attributes = new HashSet<>();
+			
+			private Attribute attributePP, attributePower;
+			
+			public Move(String moveName, Type type, Set attributes){
+				this.moveName = moveName;
+				this.type = type;
+				this.attributes = attributes;
+				if(!moveName.isEmpty()){
+					 addMove(moveName);
+				}
+				if(type != null){
+					 type.setType("Fire");
+				}
+				
+				if(!attributes.isEmpty()) {
+					attributePP = Attribute.createAttributeWithInt(AttributeEnum.PP.toString(), 25)
+					attributePower = Attribute.createAttributeWithInt(AttributeEnum.POWER.toString(), 45)
+					attributes.add(attributePP); attributes.add(attributePower)
+					
+				}
+				
+				
+			}
+			
+			
+			public void addMove(String move){
+				setOfMoves.add(move);
+			}
+			
+		}
+		
+		
+		'''
+		
+	}
+	
+	def generateAttribute(Attribute attribute){
+		'''
+		import java.util.*;
+		
+		public class Attribute{
+			//private Map<String, ? extends number> mapOfAttributes = new HashMap<>();
+			
+			
+			private String pp = AttributeEnum.PP.toString());
+			private String power = AttributeEnum.POWER.toString();
+			private String current_hp = AttributeEnum.CURRENT_HP.toString();
+			private String speed = AttributeEnum.SPEED.toString();
+			private String max_hp = AttributeEnum.MAX_HP.toString();
+		
+		    private String attributeName;
+		    private <? extends Number> value;
+		
+		    public Attribute(String attribute){
+		        this.attributeName = attribute;
+		    }
+		
+		    public static Attribute createAttributeWithFloat(String attribute, float float){
+		      Attribute a = new Attribute(attribute);
+		      a.setValue(float);
+		      return a;
+		    }
+		
+		    public static Attribute createAttributeWithInt(String attribute, int i){
+		      Attribute a = new Attribute(attribute);
+		      a.setValue(i);
+		      return a; 
+		    }
+		
+		    public <T extends Number> void setValue(T number){
+		      value = number;
+		    }
+		}			
+			
+			
+		'''
+	}
+	
+	def attributeEnum(){
+		'''
+		enum AttributeEnum{
+		  PP, POWER, CURRENT_HP, SPEED, MAX_HP;
+		
+		  private int value;
+		
+		  int getValue{value};
+		  void setValue(int value) { this.value = value};
+		
+		  public Attribute(int value){
+		    this.value = value;
+		  }
+		}
+		'''
 	}
 	
 	

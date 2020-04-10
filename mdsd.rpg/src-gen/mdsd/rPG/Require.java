@@ -14,6 +14,6 @@ package mdsd.rPG;
  * @model
  * @generated
  */
-public interface Require extends Teams
+public interface Require extends AttributeValues, Teams
 {
 } // Require

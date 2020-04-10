@@ -13,6 +13,7 @@ package mdsd.rPG;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link mdsd.rPG.AtomicNumber#getReq <em>Req</em>}</li>
  *   <li>{@link mdsd.rPG.AtomicNumber#getAttribute <em>Attribute</em>}</li>
  * </ul>
  *
@@ -20,8 +21,30 @@ package mdsd.rPG;
  * @model
  * @generated
  */
-public interface AtomicNumber extends Multiply
+public interface AtomicNumber extends AttributeValues, BattleSize, Multiply
 {
+  /**
+   * Returns the value of the '<em><b>Req</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Req</em>' containment reference.
+   * @see #setReq(Require)
+   * @see mdsd.rPG.RPGPackage#getAtomicNumber_Req()
+   * @model containment="true"
+   * @generated
+   */
+  Require getReq();
+
+  /**
+   * Sets the value of the '{@link mdsd.rPG.AtomicNumber#getReq <em>Req</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Req</em>' containment reference.
+   * @see #getReq()
+   * @generated
+   */
+  void setReq(Require value);
+
   /**
    * Returns the value of the '<em><b>Attribute</b></em>' reference.
    * <!-- begin-user-doc -->

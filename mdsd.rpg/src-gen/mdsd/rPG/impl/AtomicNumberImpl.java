@@ -6,8 +6,10 @@ package mdsd.rPG.impl;
 import mdsd.rPG.AtomicNumber;
 import mdsd.rPG.Attribute;
 import mdsd.rPG.RPGPackage;
+import mdsd.rPG.Require;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -22,13 +24,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link mdsd.rPG.impl.AtomicNumberImpl#getReq <em>Req</em>}</li>
  *   <li>{@link mdsd.rPG.impl.AtomicNumberImpl#getAttribute <em>Attribute</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class AtomicNumberImpl extends MultiplyImpl implements AtomicNumber
+public class AtomicNumberImpl extends AttributeValuesImpl implements AtomicNumber
 {
+  /**
+   * The cached value of the '{@link #getReq() <em>Req</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getReq()
+   * @generated
+   * @ordered
+   */
+  protected Require req;
+
   /**
    * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
    * <!-- begin-user-doc -->
@@ -58,6 +71,56 @@ public class AtomicNumberImpl extends MultiplyImpl implements AtomicNumber
   protected EClass eStaticClass()
   {
     return RPGPackage.Literals.ATOMIC_NUMBER;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Require getReq()
+  {
+    return req;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetReq(Require newReq, NotificationChain msgs)
+  {
+    Require oldReq = req;
+    req = newReq;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.ATOMIC_NUMBER__REQ, oldReq, newReq);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setReq(Require newReq)
+  {
+    if (newReq != req)
+    {
+      NotificationChain msgs = null;
+      if (req != null)
+        msgs = ((InternalEObject)req).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.ATOMIC_NUMBER__REQ, null, msgs);
+      if (newReq != null)
+        msgs = ((InternalEObject)newReq).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.ATOMIC_NUMBER__REQ, null, msgs);
+      msgs = basicSetReq(newReq, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.ATOMIC_NUMBER__REQ, newReq, newReq));
   }
 
   /**
@@ -111,10 +174,28 @@ public class AtomicNumberImpl extends MultiplyImpl implements AtomicNumber
    * @generated
    */
   @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RPGPackage.ATOMIC_NUMBER__REQ:
+        return basicSetReq(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
+      case RPGPackage.ATOMIC_NUMBER__REQ:
+        return getReq();
       case RPGPackage.ATOMIC_NUMBER__ATTRIBUTE:
         if (resolve) return getAttribute();
         return basicGetAttribute();
@@ -132,6 +213,9 @@ public class AtomicNumberImpl extends MultiplyImpl implements AtomicNumber
   {
     switch (featureID)
     {
+      case RPGPackage.ATOMIC_NUMBER__REQ:
+        setReq((Require)newValue);
+        return;
       case RPGPackage.ATOMIC_NUMBER__ATTRIBUTE:
         setAttribute((Attribute)newValue);
         return;
@@ -149,6 +233,9 @@ public class AtomicNumberImpl extends MultiplyImpl implements AtomicNumber
   {
     switch (featureID)
     {
+      case RPGPackage.ATOMIC_NUMBER__REQ:
+        setReq((Require)null);
+        return;
       case RPGPackage.ATOMIC_NUMBER__ATTRIBUTE:
         setAttribute((Attribute)null);
         return;
@@ -166,6 +253,8 @@ public class AtomicNumberImpl extends MultiplyImpl implements AtomicNumber
   {
     switch (featureID)
     {
+      case RPGPackage.ATOMIC_NUMBER__REQ:
+        return req != null;
       case RPGPackage.ATOMIC_NUMBER__ATTRIBUTE:
         return attribute != null;
     }

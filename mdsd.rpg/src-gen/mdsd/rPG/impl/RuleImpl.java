@@ -3,27 +3,15 @@
  */
 package mdsd.rPG.impl;
 
-import java.util.Collection;
-
-import mdsd.rPG.Attribute;
-import mdsd.rPG.Proposition;
+import mdsd.rPG.AttributeValues;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Rule;
-import mdsd.rPG.Sum;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,9 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.RuleImpl#getOperator <em>Operator</em>}</li>
- *   <li>{@link mdsd.rPG.impl.RuleImpl#getAttritbuteToSet <em>Attritbute To Set</em>}</li>
- *   <li>{@link mdsd.rPG.impl.RuleImpl#getChange <em>Change</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.RuleImpl#getLTypes <em>LTypes</em>}</li>
  * </ul>
  *
  * @generated
@@ -43,34 +29,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class RuleImpl extends EffectImpl implements Rule
 {
   /**
-   * The cached value of the '{@link #getOperator() <em>Operator</em>}' containment reference.
+   * The default value of the '{@link #getLTypes() <em>LTypes</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getOperator()
+   * @see #getLTypes()
    * @generated
    * @ordered
    */
-  protected Proposition operator;
+  protected static final String LTYPES_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getAttritbuteToSet() <em>Attritbute To Set</em>}' reference list.
+   * The cached value of the '{@link #getLTypes() <em>LTypes</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAttritbuteToSet()
+   * @see #getLTypes()
    * @generated
    * @ordered
    */
-  protected EList<Attribute> attritbuteToSet;
-
-  /**
-   * The cached value of the '{@link #getChange() <em>Change</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getChange()
-   * @generated
-   * @ordered
-   */
-  protected EList<Sum> change;
+  protected String lTypes = LTYPES_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -99,9 +75,9 @@ public class RuleImpl extends EffectImpl implements Rule
    * @generated
    */
   @Override
-  public Proposition getOperator()
+  public String getLTypes()
   {
-    return operator;
+    return lTypes;
   }
 
   /**
@@ -109,86 +85,13 @@ public class RuleImpl extends EffectImpl implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetOperator(Proposition newOperator, NotificationChain msgs)
+  @Override
+  public void setLTypes(String newLTypes)
   {
-    Proposition oldOperator = operator;
-    operator = newOperator;
+    String oldLTypes = lTypes;
+    lTypes = newLTypes;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__OPERATOR, oldOperator, newOperator);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setOperator(Proposition newOperator)
-  {
-    if (newOperator != operator)
-    {
-      NotificationChain msgs = null;
-      if (operator != null)
-        msgs = ((InternalEObject)operator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__OPERATOR, null, msgs);
-      if (newOperator != null)
-        msgs = ((InternalEObject)newOperator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__OPERATOR, null, msgs);
-      msgs = basicSetOperator(newOperator, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__OPERATOR, newOperator, newOperator));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Attribute> getAttritbuteToSet()
-  {
-    if (attritbuteToSet == null)
-    {
-      attritbuteToSet = new EObjectResolvingEList<Attribute>(Attribute.class, this, RPGPackage.RULE__ATTRITBUTE_TO_SET);
-    }
-    return attritbuteToSet;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Sum> getChange()
-  {
-    if (change == null)
-    {
-      change = new EObjectContainmentEList<Sum>(Sum.class, this, RPGPackage.RULE__CHANGE);
-    }
-    return change;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case RPGPackage.RULE__OPERATOR:
-        return basicSetOperator(null, msgs);
-      case RPGPackage.RULE__CHANGE:
-        return ((InternalEList<?>)getChange()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__LTYPES, oldLTypes, lTypes));
   }
 
   /**
@@ -201,12 +104,8 @@ public class RuleImpl extends EffectImpl implements Rule
   {
     switch (featureID)
     {
-      case RPGPackage.RULE__OPERATOR:
-        return getOperator();
-      case RPGPackage.RULE__ATTRITBUTE_TO_SET:
-        return getAttritbuteToSet();
-      case RPGPackage.RULE__CHANGE:
-        return getChange();
+      case RPGPackage.RULE__LTYPES:
+        return getLTypes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -216,22 +115,13 @@ public class RuleImpl extends EffectImpl implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case RPGPackage.RULE__OPERATOR:
-        setOperator((Proposition)newValue);
-        return;
-      case RPGPackage.RULE__ATTRITBUTE_TO_SET:
-        getAttritbuteToSet().clear();
-        getAttritbuteToSet().addAll((Collection<? extends Attribute>)newValue);
-        return;
-      case RPGPackage.RULE__CHANGE:
-        getChange().clear();
-        getChange().addAll((Collection<? extends Sum>)newValue);
+      case RPGPackage.RULE__LTYPES:
+        setLTypes((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -247,14 +137,8 @@ public class RuleImpl extends EffectImpl implements Rule
   {
     switch (featureID)
     {
-      case RPGPackage.RULE__OPERATOR:
-        setOperator((Proposition)null);
-        return;
-      case RPGPackage.RULE__ATTRITBUTE_TO_SET:
-        getAttritbuteToSet().clear();
-        return;
-      case RPGPackage.RULE__CHANGE:
-        getChange().clear();
+      case RPGPackage.RULE__LTYPES:
+        setLTypes(LTYPES_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -270,14 +154,65 @@ public class RuleImpl extends EffectImpl implements Rule
   {
     switch (featureID)
     {
-      case RPGPackage.RULE__OPERATOR:
-        return operator != null;
-      case RPGPackage.RULE__ATTRITBUTE_TO_SET:
-        return attritbuteToSet != null && !attritbuteToSet.isEmpty();
-      case RPGPackage.RULE__CHANGE:
-        return change != null && !change.isEmpty();
+      case RPGPackage.RULE__LTYPES:
+        return LTYPES_EDEFAULT == null ? lTypes != null : !LTYPES_EDEFAULT.equals(lTypes);
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == AttributeValues.class)
+    {
+      switch (derivedFeatureID)
+      {
+        case RPGPackage.RULE__LTYPES: return RPGPackage.ATTRIBUTE_VALUES__LTYPES;
+        default: return -1;
+      }
+    }
+    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == AttributeValues.class)
+    {
+      switch (baseFeatureID)
+      {
+        case RPGPackage.ATTRIBUTE_VALUES__LTYPES: return RPGPackage.RULE__LTYPES;
+        default: return -1;
+      }
+    }
+    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (lTypes: ");
+    result.append(lTypes);
+    result.append(')');
+    return result.toString();
   }
 
 } //RuleImpl

@@ -3,72 +3,17 @@
  */
 package mdsd.rPG;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Rule</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link mdsd.rPG.Rule#getOperator <em>Operator</em>}</li>
- *   <li>{@link mdsd.rPG.Rule#getAttritbuteToSet <em>Attritbute To Set</em>}</li>
- *   <li>{@link mdsd.rPG.Rule#getChange <em>Change</em>}</li>
- * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getRule()
  * @model
  * @generated
  */
-public interface Rule extends Effect
+public interface Rule extends Effect, AttributeValues
 {
-  /**
-   * Returns the value of the '<em><b>Operator</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Operator</em>' containment reference.
-   * @see #setOperator(Proposition)
-   * @see mdsd.rPG.RPGPackage#getRule_Operator()
-   * @model containment="true"
-   * @generated
-   */
-  Proposition getOperator();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Rule#getOperator <em>Operator</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Operator</em>' containment reference.
-   * @see #getOperator()
-   * @generated
-   */
-  void setOperator(Proposition value);
-
-  /**
-   * Returns the value of the '<em><b>Attritbute To Set</b></em>' reference list.
-   * The list contents are of type {@link mdsd.rPG.Attribute}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Attritbute To Set</em>' reference list.
-   * @see mdsd.rPG.RPGPackage#getRule_AttritbuteToSet()
-   * @model
-   * @generated
-   */
-  EList<Attribute> getAttritbuteToSet();
-
-  /**
-   * Returns the value of the '<em><b>Change</b></em>' containment reference list.
-   * The list contents are of type {@link mdsd.rPG.Sum}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Change</em>' containment reference list.
-   * @see mdsd.rPG.RPGPackage#getRule_Change()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Sum> getChange();
-
 } // Rule
