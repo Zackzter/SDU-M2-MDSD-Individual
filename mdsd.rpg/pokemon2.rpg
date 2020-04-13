@@ -54,14 +54,17 @@ moves
 entities
 	entity Zyndaquil type fire 
 		attribute max_hp is 10
+        attribute current_hp is 10
 		move Ember
 	
 	entity Zotodile	type water
 		attribute max_hp is 12
+        attribute current_hp is 12
 		move Water_Gun
 	
 	entity Zhikorita type grass
 		attribute max_hp is 8
+        attribute current_hp is 8
 		move Razor_Leaf
 	
 

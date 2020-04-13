@@ -39,9 +39,26 @@ class RPGGenerator extends AbstractGenerator {
 			private Type type = new Type();
 			type.addType("Fire");
 			private Set<Attribute> attributes = new HashSet<>();
-			private Attribute maxHP;
-			maxHp = Attribute.createAttributeWithInt(AttributeEnum.MAX_HP, 10);
-			attributes.add(maxHP);
+			private Attribute maxHP = Attribute.createAttributeWithInt(AttributeEnum.MAX_HP, 10);
+			private Attribute currentHP = Attribute.createAttributeWithInt(AttributeEnum.CURRENT_HP, 10);
+			
+			attributes.add(maxHP);  attributes.add(currentHP);
+			
+			public Attribute getMaxHP(){
+				return maxHP;
+			}
+			
+			public Attribute getCurrentHP(){
+				return currentHP;
+			}
+			
+			public void setCurrentHP(int currentHP){
+				 this.currentHP.setValue(i);
+			}
+			
+			public HashSet<Attribute> getEntityAttributes(){
+				return attributes;
+			}
 			
 			private Move move = new Move();
 			
@@ -86,6 +103,13 @@ class RPGGenerator extends AbstractGenerator {
 			private String moveName;
 			private Type type;
 			private Set<Attribute> attributes = new HashSet<>();
+			private List<Effect> effects = new ArrayList<>();
+			
+			private Set<Attribute> entityAttributes = new HashSet<>();
+			
+			public class Effect{
+				
+			}
 			
 			private Attribute attributePP, attributePower;
 			
@@ -93,17 +117,23 @@ class RPGGenerator extends AbstractGenerator {
 				this.moveName = moveName;
 				this.type = type;
 				this.attributes = attributes;
+				
 				if(!moveName.isEmpty()){
 					 addMove(moveName);
 				}
+				
 				if(type != null){
 					 type.setType("Fire");
 				}
 				
 				if(!attributes.isEmpty()) {
-					attributePP = Attribute.createAttributeWithInt(AttributeEnum.PP.toString(), 25)
-					attributePower = Attribute.createAttributeWithInt(AttributeEnum.POWER.toString(), 45)
-					attributes.add(attributePP); attributes.add(attributePower)
+					int pp = 25;
+					int power = 45;
+					
+					attributePP = Attribute.createAttributeWithInt(AttributeEnum.PP.toString(), pp);
+					attributePower = Attribute.createAttributeWithInt(AttributeEnum.POWER.toString(), power);
+					attributes.add(attributePP); attributes.add(attributePower);
+					if()
 					
 				}
 				
