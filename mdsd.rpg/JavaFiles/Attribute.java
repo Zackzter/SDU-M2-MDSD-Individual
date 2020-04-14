@@ -4,11 +4,11 @@ import java.util.*;
 			//private Map<String, ? extends number> mapOfAttributes = new HashMap<>();
 			
 			
-			private String pp = AttributeEnum.PP.toString();
-			private String power = AttributeEnum.POWER.toString();
-			private String current_hp = AttributeEnum.CURRENT_HP.toString();
-			private String speed = AttributeEnum.SPEED.toString();
-			private String max_hp = AttributeEnum.MAX_HP.toString();
+			private String pp = AttributeEnum.pp.toString();
+			private String power = AttributeEnum.power.toString();
+			private String current_hp = AttributeEnum.current_hp.toString();
+			private String speed = AttributeEnum.speed.toString();
+			private String max_hp = AttributeEnum.max_hp.toString();
 		
             private String attributeName;
 
@@ -18,35 +18,36 @@ import java.util.*;
             private float floatValue;
             private static Attribute attribute;
 
-            private Attribute(){
+            private Attribute(){}
+
+                
+            public void setAttributeName(String name){
+                this.attributeName = name;
             }
 
-                public void setAttributeName(String name){
-                    this.attributeName = name;
+            public static Attribute getInstance(){
+                if (attribute == null) {
+                    attribute = new Attribute();
                 }
-                public static Attribute getInstance(){
-                    if (attribute == null) {
-                        attribute = new Attribute();
-                    }
-                    return attribute;
-                }
+                return attribute;
+            }
 
             public void addAttribute(String attribute){
                 attributes.add(attribute);
             }
 		
 		    public static Attribute createAttributeWithFloat(String attribute, float f){
-              Attribute a = new Attribute();
-              a.setAttributeName(attribute);
-		      a.setValue(f);
-		      return a;
+                Attribute a = new Attribute();
+                a.setAttributeName(attribute);
+		        a.setValue(f);
+		        return a;
 		    }
 		
 		    public static Attribute createAttributeWithInt(String attribute, int i){
-              Attribute a = new Attribute();
-              a.setAttributeName(attribute);
-		      a.setValue(i);
-		      return a; 
+                Attribute a = new Attribute();
+                a.setAttributeName(attribute);
+		        a.setValue(i);
+		        return a; 
 		    }
 		
 		    public void setValue(float f){
@@ -57,8 +58,32 @@ import java.util.*;
 		        intValue = i;
             }
 
+            public float getFloatValue(){
+		        return floatValue;
+            }
+            
+            public int getIntValue(){
+		        return intValue;
+            }
+
             public Set<String> getAttributes(){
                 return attributes;
+            }
+
+            public Set<Attribute> addExtendedAttribute(Map<String, Number> extendedAttributes, Set<Attribute> attributes){
+                Set<Attribute> attributess = new HashSet<>();
+                for(String attributeName : extendedAttributes.keySet()){
+                    if(getAttributes().contains(attributeName)){
+                        Number value = extendedAttributes.get(attributeName);
+                        if(value instanceof Integer){
+                            attributess.add(createAttributeWithInt(attributeName, value.intValue()));
+                        }
+                        else if (value instanceof Float){
+                            attributess.add(createAttributeWithFloat(attributeName, value.floatValue()));
+                        }
+                    }
+                }
+                return attributess;
             }
             
             
