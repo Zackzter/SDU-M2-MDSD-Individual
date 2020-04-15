@@ -1,15 +1,16 @@
 import java.util.*;
 import java.awt.event.*;
 
-public class Game implements KeyListener{    
+public class Game implements KeyListener{
     private Type type;
     private Set<Attribute> attributes;
     private Attribute attribute;
     private boolean gameFinished;
+    private List<Entity> eList;
     //private Move move;
 
     public Game(){
-
+      eList = new ArrayList<>();
     }
 
     public boolean isGameFinished(){
@@ -34,8 +35,7 @@ public class Game implements KeyListener{
 
 
 
-
-        List<AttributeData> attributeDataList = new ArrayList<>(); 
+        List<AttributeData> attributeDataList = new ArrayList<>();
         Set<Attribute> attributes = new HashSet<>();
         //(ember,(power, 45))
 
@@ -56,10 +56,10 @@ public class Game implements KeyListener{
             attributes.add(a);
         }
 
-        String moveType = "fire"; //might need to check if it exists? 
+        String moveType = "fire"; //might need to check if it exists?
         // createMove("ember", moveType, attributeAndValue);
         // createMove("watergun", moveType, attributeAndValue);
-         
+
         moves = null;
 
     }
@@ -90,7 +90,7 @@ public class Game implements KeyListener{
     public List<String> getTypes(){
         Type tempType = Type.getInstance();
         List<String> aString = new ArrayList<>();
-        
+
         aString.addAll(tempType.getTypes());
 
         tempType = null;
@@ -102,11 +102,24 @@ public class Game implements KeyListener{
         Attribute tempAttribute = Attribute.getInstance();
 
         List<AttributeData> aAttribute = new ArrayList<>();
-        
+
         aAttribute.addAll(tempAttribute.getAttributes());
 
         tempAttribute = null;
         return aAttribute;
+
+    }
+
+    public void addEntity(){
+      String[] hehe = {"fire", "water", "grass"};
+      int index = 0;
+      for (EntityEnum ee : EntityEnum.values() ) {
+        Entity e = new Entity();
+        e.setName(ee.toString());
+        e.setType(hehe[index]);
+        Attribute.getInstance().
+        index ++;
+      }
 
     }
 

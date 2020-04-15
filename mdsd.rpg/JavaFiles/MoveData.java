@@ -3,19 +3,19 @@ import java.util.*;
 public class MoveData{
 
     private String moveName;
-	private String type;
+	  private String type;
     private Set<AttributeData> moveAttributes;
 
     public MoveData(){
         this.moveAttributes = new HashSet<>();
     }
-   
+
     public MoveData(String moveName, String type, Set<AttributeData> moveAttributes) {
         this.moveName = moveName;
         this.type = type;
         this.moveAttributes = moveAttributes;
     }
-    
+
     public String getMoveName(){
         return this.moveName;
     }
