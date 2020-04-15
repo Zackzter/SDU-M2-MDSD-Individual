@@ -1,6 +1,7 @@
 import java.util.*;
+import java.awt.event.*;
 
-public class Game {    
+public class Game implements KeyListener{    
     private Type type;
     private Set<Attribute> attributes;
     private Attribute attribute;
@@ -106,6 +107,20 @@ public class Game {
 
         tempAttribute = null;
         return aAttribute;
+
+    }
+
+    public void keyPressed(KeyEvent e){
+        if (e.getKeyChar() == 'x') {
+            toggleGameFinished();
+        }
+    }
+
+    public void keyReleased(KeyEvent e){
+
+    }
+
+    public void keyTyped(KeyEvent e){
 
     }
 }
