@@ -1,3 +1,6 @@
+package mdsd.rpg.JavaFiles;
+
+
 import java.util.*;
 
 enum AttributeEnum{
