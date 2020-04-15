@@ -1,3 +1,6 @@
+package mdsd.rpg.JavaFiles;
+
+
 import java.util.*;
 		
 public class Type{
@@ -8,7 +11,7 @@ public class Type{
 			
 	private Type(){}
 
-	public static Type getInsantce(){
+	public static Type getInstance(){
 		if(type == null){
 			type = new Type();
 		}

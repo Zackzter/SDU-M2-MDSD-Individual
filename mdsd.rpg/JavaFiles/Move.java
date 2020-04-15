@@ -1,12 +1,12 @@
+package mdsd.rpg.JavaFiles;
+
+
 import java.util.*;
 		
 public class Move{			
-	private String moveName;
-	private String type;
-	private Set<Attribute> moveAttributes;
 
 	private static Move move;
-	private Set<Move> moves = new HashSet<>();
+	private Set<MoveData> moves = new HashSet<>();
 	
 	private Move(){}
 
@@ -17,13 +17,7 @@ public class Move{
 		return move;
 	}
 
-	public Move(String moveName, String type, Set<Attribute> moveAttributes){
-		this.moveName = moveName;
-		this.type = type;
-		this.moveAttributes = moveAttributes;
-	}
-
-	public void addMove(Move move){
+	public void addMove(MoveData move){
 		moves.add(move);
 	}
 
