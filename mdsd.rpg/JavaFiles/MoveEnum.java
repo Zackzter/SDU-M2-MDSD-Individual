@@ -1,5 +1,3 @@
-package mdsd.rpg.JavaFiles;
-
 enum MoveEnum{
     Ember("fire"), Water_gun("water"), Razor_leaf("grass");
 

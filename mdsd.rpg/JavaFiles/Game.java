@@ -1,5 +1,3 @@
-package mdsd.rpg.JavaFiles;
-
 import java.util.*;
 
 public class Game {    
@@ -17,7 +15,7 @@ public class Game {
         return gameFinished;
     }
 
-    public boolean toggleGameFinished(){
+    public void toggleGameFinished(){
         gameFinished = !gameFinished;
     }
 
@@ -42,11 +40,11 @@ public class Game {
 
         for(MoveEnum mE: MoveEnum.values()){
             MoveData tempMoveData = new MoveData();
-            tempMoveData.setMoveName(mE.value());
+            tempMoveData.setMoveName(mE.toString());
             tempMoveData.setType(mE.getType());
             tempMoveData.addAttribute(AttributeData.createAttributeWithStringAndDefaultValues("power"));
-            tempMoveData.addAttribute(AttributeData.createAttributeWithInt("pp", 25));
-            moves.add(tempMoveData);
+            tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt("pp", 25));
+            moves.addMove(tempMoveData);
         }
 
         attributeDataList.add(AttributeData.createAttributeWithStringAndDefaultValues("power"));
@@ -65,16 +63,16 @@ public class Game {
 
     }
 
-    public void createMove(String moveName, String moveType,
-     Map<String, Number> moveAttributes){
-        attribute = Attribute.getInstance();
-        moves = Move.getInstance();
+    // public void createMove(String moveName, String moveType,
+    //  Map<String, Number> moveAttributes){
+    //     attribute = Attribute.getInstance();
+    //     moves = Move.getInstance();
 
-        attributes = attribute.addExtendedAttribute(moveAttributes, attributes);
-        Move move = new MoveData(moveName, moveType, attributes);
-        moves.addMove(move);
-        System.out.println(moves.getMoves() + " all the moves now");
-    }
+    //     attributes = attribute.addExtendedAttribute(moveAttributes, attributes);
+    //     Move move = new MoveData(moveName, moveType, attributes);
+    //     moves.addMove(move);
+    //     System.out.println(moves.getMoves() + " all the moves now");
+    // }
 
     public void addMoveAttributes(){
 
@@ -83,7 +81,7 @@ public class Game {
     public void addAttributes(){
         attribute = Attribute.getInstance();
         for (AttributeEnum e : AttributeEnum.values()){
-            attribute.addAttribute(e.toString());
+            attribute.addAttribute(AttributeData.createAttributeWithStringAndDefaultValues(e.toString()));
         }
         System.out.println(attribute.getAttributes());
     }

@@ -1,6 +1,4 @@
-package mdsd.rpg.JavaFiles;
-
-
+import java.util.*;
 public class AttributeData {
 
     private int intValue;

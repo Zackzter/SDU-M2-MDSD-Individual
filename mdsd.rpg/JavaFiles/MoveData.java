@@ -1,6 +1,3 @@
-package mdsd.rpg.JavaFiles;
-
-
 import java.util.*;
 
 public class MoveData{

@@ -1,6 +1,3 @@
-package mdsd.rpg.JavaFiles;
-
-
 import java.util.*;
 		
 public class Move{			
@@ -21,7 +18,9 @@ public class Move{
 		moves.add(move);
 	}
 
-	public Set<Move> getMoves(){
+	public Set<MoveData> getMoves(){
 		return moves;
 	}
+
 }
+	
