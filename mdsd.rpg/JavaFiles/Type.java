@@ -1,19 +1,25 @@
 import java.util.*;
 		
-		public class Type{
+public class Type{
+		
+	private Set<String> types = new HashSet<>();
+	//private String typeName;
+	private static Type type;
 			
-			private Set<String> setOfTypes = new HashSet<>();
-			private String typeName;
-			
-			
-			public Type(String typeName){
-				this.typeName = typeName;
-				if(!typeName.isEmpty()){
-					addType(typeName);
-					}
-				}
-						
-			public void addType(String type){
-				setOfTypes.add(type);
-				}
+	private Type(){}
+
+	public static Type getInsantce(){
+		if(type == null){
+			type = new Type();
 		}
+		return type;
+	}
+					
+	public void addType(String type){
+		types.add(type);
+	}
+
+	public Set<String> getTypes(){
+		return types;
+	}
+}
