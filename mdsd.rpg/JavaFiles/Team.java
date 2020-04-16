@@ -31,4 +31,13 @@ public class Team {
         }
         return eList;
     }
+
+    public Map<String, List<Entity>> getTeams(){
+        return teams;
+    }
+
+    public List<Entity> getPlayerTeam(){
+        Map.Entry<String, List<Entity>> playerTeam = getTeams().entrySet().iterator().next();
+        return playerTeam.getValue();
+    }
 }

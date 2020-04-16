@@ -3,6 +3,7 @@ import java.util.*;
 public class Runner {
     public static void main(String[] args) {
         Game game = new Game();
+        List<Entity> battleEntities;
 
         while (!game.isGameFinished()) {
             if (game.getTypes().isEmpty() && game.getAttributes().isEmpty()) {
@@ -13,6 +14,12 @@ public class Runner {
                 game.addTeam();
                 game.addLocation();
             }
+            battleEntities = new ArrayList<>();
+            for(Entity entity : game.getTeam().getPlayerTeam()){
+                battleEntities.add(entity);
+                System.out.println("player team: " + battleEntities);
+            }
+
             System.out.println("You are in Johto what do you want to do?");
             System.out.println("Fight bitches or die trying?");
             Scanner s = new Scanner(System.in);
