@@ -3,6 +3,7 @@ import java.util.*;
 public class Location {
     private List<String> locations;
     private String currentLocation;
+    private String currentTeam;
 
     private Map<String, String> teams;
 
@@ -25,6 +26,18 @@ public class Location {
         return this.currentLocation;
     }
 
+    public String getCurrentTeam(){
+        return this.currentTeam;
+    }
+
+    public Map<String, String> getTeams(){
+        return this.teams;
+    }
+
+    public List<String> getLocations(){
+        return this.locations;
+    }
+
     public void setCurrentLocation(String currentLocation){
         this.currentLocation = currentLocation;
     }
@@ -38,4 +51,6 @@ public class Location {
             teams.put(location, team);
         }
     }
+
+
 }

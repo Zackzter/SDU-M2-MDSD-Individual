@@ -2,10 +2,11 @@ import java.util.*;
 
 public class Team {
     private Map<String, List<Entity>> teams;
+    private List<String> teamNames;
 
     public Team() {
         teams = new HashMap<>();
-
+        teamNames = new ArrayList<>(); 
     }
 
     public List<Entity> getTeamByName(String name) {
@@ -18,6 +19,7 @@ public class Team {
     public void addTeamMember(String team, Entity... entity) {
         if (!teams.containsKey(team)) {
             teams.put(team, entityAdder(entity));
+            teamNames.add(team);
         } else {
             teams.get(team).addAll(entityAdder(entity));
         }
@@ -37,7 +39,6 @@ public class Team {
     }
 
     public List<Entity> getPlayerTeam(){
-        Map.Entry<String, List<Entity>> playerTeam = getTeams().entrySet().iterator().next();
-        return playerTeam.getValue();
+        return teams.get(teamNames.get(0));
     }
 }

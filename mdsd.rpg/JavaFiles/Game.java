@@ -6,7 +6,7 @@ public class Game implements KeyListener{
     private List<Attribute> attributes;
     private Attribute attribute;
     private boolean gameFinished;
-    private List<Entity> eList;
+    private List<Entity> eList; 
     private Team team;
 
     public Game(){
@@ -60,15 +60,25 @@ public class Game implements KeyListener{
 
     public void addTeam() {
         Entity zyndaquil = new Entity();
+        Entity zotodile = new Entity();
 
         zyndaquil.setName("zyndaquil");
         zyndaquil.setType("fire");
         zyndaquil.addMoveData(Move.getInstance().getMove("Ember"));
 
+        zotodile.setName("zotodile");
+        zotodile.setType("water");
+        zotodile.addMoveData(Move.getInstance().getMove("Water_gun"));
+
         getAttributes().forEach(element -> zyndaquil.addAttribute(element));
+        getAttributes().forEach(element -> zotodile.addAttribute(element));
+
 
         team.addTeamMember("Zilver", zyndaquil);
         team.addTeamMember("Rival", zyndaquil);
+        team.addTeamMember("Rival", zotodile);
+        team.addTeamMember("Red", zotodile);
+        team.addTeamMember("Red", zotodile);
     }
 
     public void addLocation(){
@@ -76,7 +86,14 @@ public class Game implements KeyListener{
         tempLoc.addLocation("Johto");
         tempLoc.addTeamToLocation("Johto", "Rival");
 
+        tempLoc.addLocation("Kanto");
+        tempLoc.addTeamToLocation("Kanto", "Red");
     }
+
+    public Location getLocation(){
+        return Location.getInstance();
+    }
+
     public List<String> getTypes(){
         Type tempType = Type.getInstance();
         List<String> aString = new ArrayList<>();
