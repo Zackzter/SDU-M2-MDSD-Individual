@@ -3,14 +3,14 @@ import java.util.*;
 public class MoveData{
 
     private String moveName;
-	  private String type;
-    private Set<AttributeData> moveAttributes;
+	private String type;
+    private List<AttributeData> moveAttributes;
 
     public MoveData(){
-        this.moveAttributes = new HashSet<>();
+        this.moveAttributes = new ArrayList<>();
     }
 
-    public MoveData(String moveName, String type, Set<AttributeData> moveAttributes) {
+    public MoveData(String moveName, String type, List<AttributeData> moveAttributes) {
         this.moveName = moveName;
         this.type = type;
         this.moveAttributes = moveAttributes;
@@ -32,11 +32,11 @@ public class MoveData{
         this.type = type;
     }
 
-    public Set<AttributeData> getMoveAttributes() {
+    public List<AttributeData> getMoveAttributes() {
         return this.moveAttributes;
     }
 
-    public void setMoveAttributes(Set<AttributeData> moveAttributes) {
+    public void setMoveAttributes(List<AttributeData> moveAttributes) {
         this.moveAttributes = moveAttributes;
     }
 
@@ -62,11 +62,7 @@ public class MoveData{
 
     @Override
     public String toString() {
-        return "{" +
-            " moveName='" + getMoveName() + "'" +
-            ", type='" + getType() + "'" +
-            ", moveAttributes='" + getMoveAttributes() + "'" +
-            "}";
+        return getMoveName() + " " + "type=" + getType();
     }
 
 }

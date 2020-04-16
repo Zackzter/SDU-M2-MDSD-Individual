@@ -3,7 +3,7 @@ import java.util.*;
 public class Move{			
 
 	private static Move move;
-	private Set<MoveData> moves = new HashSet<>();
+	private List<MoveData> moves = new ArrayList<>();
 	
 	private Move(){}
 
@@ -18,7 +18,18 @@ public class Move{
 		moves.add(move);
 	}
 
-	public Set<MoveData> getMoves(){
+	public MoveData getMove(String move){
+		MoveData mD = null;
+
+		for (MoveData moveData : moves) {
+			if(moveData.getMoveName().equals(move)){
+				mD = moveData;
+			}
+		}
+		return mD;
+	}
+
+	public List<MoveData> getMoves(){
 		return moves;
 	}
 

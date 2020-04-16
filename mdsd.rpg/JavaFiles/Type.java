@@ -2,7 +2,7 @@ import java.util.*;
 		
 public class Type{
 		
-	private Set<String> types = new HashSet<>();
+	private List<String> types = new ArrayList<>();
 	//private String typeName;
 	private static Type type;
 			
@@ -19,7 +19,7 @@ public class Type{
 		types.add(type);
 	}
 
-	public Set<String> getTypes(){
+	public List<String> getTypes(){
 		return types;
 	}
 }

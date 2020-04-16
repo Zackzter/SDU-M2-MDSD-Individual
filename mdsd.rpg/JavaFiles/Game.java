@@ -3,16 +3,15 @@ import java.awt.event.*;
 
 public class Game implements KeyListener{
     private Type type;
-    private Set<Attribute> attributes;
+    private List<Attribute> attributes;
     private Attribute attribute;
     private boolean gameFinished;
     private List<Entity> eList;
     private Team team;
-    //private Move move;
 
     public Game(){
       eList = new ArrayList<>();
-      attributes = new HashSet<>();
+      attributes = new ArrayList<>();
       team = new Team();
     }
 
@@ -47,6 +46,10 @@ public class Game implements KeyListener{
         moves = null;
     }
 
+    public Move getMove(){
+        return Move.getInstance();
+    }
+
     public void addAttributes(){
         attribute = Attribute.getInstance();
         for (AttributeEnum e : AttributeEnum.values()){
@@ -60,6 +63,7 @@ public class Game implements KeyListener{
 
         zyndaquil.setName("zyndaquil");
         zyndaquil.setType("fire");
+        zyndaquil.addMoveData(Move.getInstance().getMove("Ember"));
 
         getAttributes().forEach(element -> zyndaquil.addAttribute(element));
 
