@@ -7,10 +7,13 @@ public class Game implements KeyListener{
     private Attribute attribute;
     private boolean gameFinished;
     private List<Entity> eList;
+    private Team team;
     //private Move move;
 
     public Game(){
       eList = new ArrayList<>();
+      attributes = new HashSet<>();
+      team = new Team();
     }
 
     public boolean isGameFinished(){
@@ -30,14 +33,8 @@ public class Game implements KeyListener{
         type = null;
     }
 
-    public void addMoves(Attribute... attribute){
+    public void addMoves(){
         Move moves = Move.getInstance();
-
-
-
-        List<AttributeData> attributeDataList = new ArrayList<>();
-        Set<Attribute> attributes = new HashSet<>();
-        //(ember,(power, 45))
 
         for(MoveEnum mE: MoveEnum.values()){
             MoveData tempMoveData = new MoveData();
@@ -47,36 +44,7 @@ public class Game implements KeyListener{
             tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt("pp", 25));
             moves.addMove(tempMoveData);
         }
-
-        attributeDataList.add(AttributeData.createAttributeWithStringAndDefaultValues("power"));
-        //insert for loop here....next step : (
-        //attributeAndValue.put("power", 45);
-        //attributeAndValue.put("pp", 25);
-        for (Attribute a : attribute){
-            attributes.add(a);
-        }
-
-        String moveType = "fire"; //might need to check if it exists?
-        // createMove("ember", moveType, attributeAndValue);
-        // createMove("watergun", moveType, attributeAndValue);
-
         moves = null;
-
-    }
-
-    // public void createMove(String moveName, String moveType,
-    //  Map<String, Number> moveAttributes){
-    //     attribute = Attribute.getInstance();
-    //     moves = Move.getInstance();
-
-    //     attributes = attribute.addExtendedAttribute(moveAttributes, attributes);
-    //     Move move = new MoveData(moveName, moveType, attributes);
-    //     moves.addMove(move);
-    //     System.out.println(moves.getMoves() + " all the moves now");
-    // }
-
-    public void addMoveAttributes(){
-
     }
 
     public void addAttributes(){
@@ -87,6 +55,24 @@ public class Game implements KeyListener{
         System.out.println(attribute.getAttributes());
     }
 
+    public void addTeam() {
+        Entity zyndaquil = new Entity();
+
+        zyndaquil.setName("zyndaquil");
+        zyndaquil.setType("fire");
+
+        getAttributes().forEach(element -> zyndaquil.addAttribute(element));
+
+        team.addTeamMember("Zilver", zyndaquil);
+        team.addTeamMember("Rival", zyndaquil);
+    }
+
+    public void addLocation(){
+        Location tempLoc = Location.getInstance();
+        tempLoc.addLocation("Johto");
+        tempLoc.addTeamToLocation("Johto", "Rival");
+
+    }
     public List<String> getTypes(){
         Type tempType = Type.getInstance();
         List<String> aString = new ArrayList<>();
@@ -111,28 +97,47 @@ public class Game implements KeyListener{
     }
 
     public void addEntity(){
-      String[] hehe = {"fire", "water", "grass"};
+      String[] types = {"fire", "water", "grass"};
       int index = 0;
       for (EntityEnum ee : EntityEnum.values() ) {
         Entity e = new Entity();
         e.setName(ee.toString());
-        e.setType(hehe[index]);
-        Attribute.getInstance().
-        index ++;
+        e.setType(types[index]);
+        Attribute.getInstance().getAttributes().forEach(element -> e.addAttribute(element));
+        Move.getInstance().getMoves().forEach(element -> e.addMoveData(element)); 
+        eList.add(e);
+        if(index<2){
+            index++;
+        } else {
+            index = 0;
+        }
       }
-
     }
 
+    public List<Entity> getEList(){
+        return eList;
+    }
+
+    /**
+     * @return the team
+     */
+    public Team getTeam() {
+        return team;
+    }
+
+    @Override
     public void keyPressed(KeyEvent e){
         if (e.getKeyChar() == 'x') {
             toggleGameFinished();
         }
     }
 
+    @Override
     public void keyReleased(KeyEvent e){
 
     }
 
+    @Override
     public void keyTyped(KeyEvent e){
 
     }

@@ -21,7 +21,7 @@ public class AttributeData {
         a.setIntValue(45);
         Attribute ab = Attribute.getInstance();
         ab.addAttribute(a);
-        a = null;
+        ab = null;
         return a;
     }
     
@@ -31,7 +31,7 @@ public class AttributeData {
         a.setFloatValue(f);
         Attribute ab = Attribute.getInstance();
         ab.addAttribute(a);
-        a = null;
+        ab = null;
         return a;
     }
 
@@ -41,7 +41,7 @@ public class AttributeData {
         a.setIntValue(i);
         Attribute ab = Attribute.getInstance();
         ab.addAttribute(a);
-        a = null;
+        ab = null;
         return a;
     }
 

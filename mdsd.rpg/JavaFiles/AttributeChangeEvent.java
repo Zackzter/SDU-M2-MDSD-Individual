@@ -1,17 +1,17 @@
 public class AttributeChangeEvent{
-  private Attribute previousState;
-  private Attribute targetState;
+  private AttributeData previousState;
+  private AttributeData targetState;
 
-  public AttributeChangeEvent(Attribute previousState, Attribute targetState){
+  public AttributeChangeEvent(AttributeData previousState, AttributeData targetState){
     this.previousState = previousState;
     this.targetState = targetState;
   }
 
-  public Attribute getTargetState(){
+  public AttributeData getTargetState(){
     return this.targetState;
   }
 
-  public Attribute getPreviousState(){
+  public AttributeData getPreviousState(){
     return this.previousState;
   }
 
