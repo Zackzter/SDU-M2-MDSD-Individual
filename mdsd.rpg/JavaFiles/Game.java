@@ -7,12 +7,17 @@ public class Game implements KeyListener{
     private Attribute attribute;
     private boolean gameFinished;
     private List<Entity> eList; 
+    private List<Entity> battleEntities;
     private Team team;
+
+    private String currentLocation;
+    private String currentTeam;
 
     public Game(){
       eList = new ArrayList<>();
       attributes = new ArrayList<>();
       team = new Team();
+      battleEntities = new ArrayList<>();
     }
 
     public boolean isGameFinished(){
@@ -66,17 +71,21 @@ public class Game implements KeyListener{
         zyndaquil.setType("fire");
         zyndaquil.addMoveData(Move.getInstance().getMove("Ember"));
 
+
         zotodile.setName("zotodile");
         zotodile.setType("water");
         zotodile.addMoveData(Move.getInstance().getMove("Water_gun"));
+        zotodile.addMoveData(Move.getInstance().getMove("Razor_leaf"));
+
 
         getAttributes().forEach(element -> zyndaquil.addAttribute(element));
         getAttributes().forEach(element -> zotodile.addAttribute(element));
 
 
         team.addTeamMember("Zilver", zyndaquil);
-        team.addTeamMember("Rival", zyndaquil);
+        team.addTeamMember("Zilver", zotodile);
         team.addTeamMember("Rival", zotodile);
+        team.addTeamMember("Rival", zyndaquil);
         team.addTeamMember("Red", zotodile);
         team.addTeamMember("Red", zotodile);
     }
@@ -139,11 +148,31 @@ public class Game implements KeyListener{
         return eList;
     }
 
+    public List<Entity> getBattleEntities(){
+        return this.battleEntities;
+    }
+
     /**
      * @return the team
      */
     public Team getTeam() {
         return team;
+    }
+
+    public String getCurrentLocation(){
+        return this.currentLocation;
+    }
+
+    public void setCurrentLocation(String currentLocation) {
+        this.currentLocation = currentLocation;
+    }
+
+    public String getCurrentTeam(){
+        return this.currentTeam;
+    }
+
+    public void setCurrentTeam(String currentTeam) {
+        this.currentTeam = currentTeam;
     }
 
     @Override

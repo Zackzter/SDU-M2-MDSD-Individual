@@ -63,6 +63,15 @@ public class Entity implements Killable{
     public List<MoveData> getMoveData(){
       return moves;
     }
+
+    public List<String> getMoveNameList(){
+      List<String> moveNames = new ArrayList<>();
+      for (MoveData moveData : getMoveData()) {
+          moveNames.add(moveData.getMoveName());
+      }
+      return moveNames;
+    }
+    
     public void addMoveData(MoveData moveData){
       moves.add(moveData);
     }

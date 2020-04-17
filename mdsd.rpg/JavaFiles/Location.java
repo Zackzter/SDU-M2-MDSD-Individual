@@ -38,6 +38,10 @@ public class Location {
         return this.locations;
     }
 
+    public void setLocations(List<String> locations){
+        this.locations = locations;
+    }
+
     public void setCurrentLocation(String currentLocation){
         this.currentLocation = currentLocation;
     }

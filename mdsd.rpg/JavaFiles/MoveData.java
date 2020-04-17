@@ -62,7 +62,7 @@ public class MoveData{
 
     @Override
     public String toString() {
-        return getMoveName() + " " + "type=" + getType();
+        return getMoveName();
     }
 
 }

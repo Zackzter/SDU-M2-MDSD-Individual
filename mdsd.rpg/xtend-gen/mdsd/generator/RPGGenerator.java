@@ -3,12 +3,9 @@
  */
 package mdsd.generator;
 
-import com.google.common.collect.Iterators;
-import java.util.Iterator;
 import mdsd.rPG.Attribute;
 import mdsd.rPG.Entity;
 import mdsd.rPG.Move;
-import mdsd.rPG.SystemRPG;
 import mdsd.rPG.Type;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -25,8 +22,6 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 public class RPGGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
-    final SystemRPG game = Iterators.<SystemRPG>filter(resource.getAllContents(), SystemRPG.class).next();
-    final Iterator<Entity> entity = Iterators.<Entity>filter(resource.getAllContents(), Entity.class);
   }
   
   public CharSequence generateEntity(final Entity entity) {

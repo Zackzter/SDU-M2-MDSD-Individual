@@ -41,4 +41,23 @@ public class Team {
     public List<Entity> getPlayerTeam(){
         return teams.get(teamNames.get(0));
     }
+
+    public boolean checkPlayerEntities(){
+        int playerTeamSize = getPlayerTeam().size();
+        int deadEntities = 0;
+        for (Entity entity : getPlayerTeam()) {
+            if(entity.getEntityState() == EntityState.DEAD) break;
+            deadEntities++;
+            if(deadEntities == playerTeamSize) return true;
+        }
+        return false;
+    }
+
+    public int playerEntitiesAlive(){
+        int alive = 0;
+        for (Entity entity : getPlayerTeam()) {
+            if(entity.getEntityState() != EntityState.DEAD) alive++;
+        }
+        return alive;
+    }
 }

@@ -17,11 +17,11 @@ relations
 attributes
 	attribute pp is Integer  
 	attribute power is Integer
-	attribute current_hp is Float 
+	attribute current_hp is Integer 
 	attribute speed is Integer
 	attribute max_hp is Integer
 
-death current_hp >= 0
+death current_hp <= 0
 
 moves 
 	move Ember type fire
