@@ -11,3 +11,4 @@
 /mdsd.rpg/xtend-gen/mdsd/generator/.RPGGenerator.xtendbin
 *.class
 *.class
+/mdsd.rpg/bin/*
