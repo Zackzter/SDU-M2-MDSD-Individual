@@ -46,7 +46,7 @@ Attributes:
 ;
 
 Attribute:
-	'attribute' (name=ID aVal=AttributeValues)
+	'attribute' name=ID aVal=AttributeValues
 ;
 
 
@@ -55,7 +55,7 @@ Effect:
 ;
 
 AttributeValues:
-	'is' (lTypes=LegalType | AtomicNumber) | ( Rule | Require)
+	'is' (lTypes=LegalType | an=AtomicNumber) | ( Rule | Require)
 ;
 
 AltAttribute:
@@ -63,7 +63,7 @@ AltAttribute:
 ;
 
 Rule:
-	'if' ORcondition  'then' ( SelfTargeting? attritbuteToSet+=[Attribute]'=' change+=Sum+)*
+	'if' ORcondition  'then' ( Self? attritbuteToSet+=[Attribute]'=' change+=Sum+)*
 ;
 
 
@@ -72,7 +72,7 @@ Entities:
 ;
 
 Death:
-	'death' con+=ORcondition+
+	'death' req=Require
 ;
 
 Entity:
@@ -101,15 +101,15 @@ BattleSize:
 
 
 Require:
-	'require' ORcondition | ORcondition
+	'require' log=ORcondition
 ;
 
 ORcondition returns Proposition:
-	ANDcondition ('OR' {or.left=current} right=ANDcondition)*
+	ANDcondition ('OR' {Or.left=current} right=ANDcondition)*
 ;
 
 ANDcondition returns Proposition:
-	Statement ('AND'{and.left=current} right=Statement)*
+	Statement ('AND'{And.left=current} right=Statement)*
 	
 ;
 
@@ -122,7 +122,7 @@ NumberComparing:
 ;
 
 Comparator:
-	'<' | '<=' | '==' | '>=' | '>' | '!='
+	{Smaller}'<' | {SmallerEq}'<=' | {Eq} '==' | {BiggerEq}'>=' | {Bigger}'>' | {NEq}'!='
 ;
 
 Sum:
@@ -135,15 +135,27 @@ Multiply:
 
 
 AtomicNumber:
-	{AtomicNumber} Float | {AtomicNumber} INT | SelfTargeting? attribute=[Attribute] 
+	FloatNum | IntNum | Self? NameAttribute
+;
+
+NameAttribute:
+	attribute=[Attribute] 
 ;
 
 SelfTargeting:
+	self='self.'
+;
+
+Self:
 	'self.'
 ;
 
-Float:
-	INT '.' INT
+IntNum:
+	value=INT
+;
+
+FloatNum:
+	i=INT '.' decimal=INT
 ;
 
 LegalType:

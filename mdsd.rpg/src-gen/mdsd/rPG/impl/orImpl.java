@@ -3,9 +3,9 @@
  */
 package mdsd.rPG.impl;
 
+import mdsd.rPG.Or;
 import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
-import mdsd.rPG.or;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -17,19 +17,19 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>or</b></em>'.
+ * An implementation of the model object '<em><b>Or</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.orImpl#getLeft <em>Left</em>}</li>
- *   <li>{@link mdsd.rPG.impl.orImpl#getRight <em>Right</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.OrImpl#getLeft <em>Left</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.OrImpl#getRight <em>Right</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class orImpl extends PropositionImpl implements or
+public class OrImpl extends PropositionImpl implements Or
 {
   /**
    * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
@@ -56,7 +56,7 @@ public class orImpl extends PropositionImpl implements or
    * <!-- end-user-doc -->
    * @generated
    */
-  protected orImpl()
+  protected OrImpl()
   {
     super();
   }
@@ -266,4 +266,4 @@ public class orImpl extends PropositionImpl implements or
     return super.eIsSet(featureID);
   }
 
-} //orImpl
+} //OrImpl

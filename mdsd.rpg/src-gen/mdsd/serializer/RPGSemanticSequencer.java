@@ -7,34 +7,44 @@ import com.google.inject.Inject;
 import java.util.Set;
 import mdsd.rPG.Add;
 import mdsd.rPG.AltAttribute;
-import mdsd.rPG.AtomicNumber;
+import mdsd.rPG.And;
 import mdsd.rPG.Attribute;
 import mdsd.rPG.AttributeValues;
 import mdsd.rPG.Attributes;
+import mdsd.rPG.Bigger;
+import mdsd.rPG.BiggerEq;
 import mdsd.rPG.Death;
 import mdsd.rPG.Div;
 import mdsd.rPG.EType;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
 import mdsd.rPG.EntityMoves;
+import mdsd.rPG.Eq;
+import mdsd.rPG.FloatNum;
+import mdsd.rPG.IntNum;
 import mdsd.rPG.Loc;
 import mdsd.rPG.Locations;
 import mdsd.rPG.Members;
 import mdsd.rPG.Move;
 import mdsd.rPG.Moves;
 import mdsd.rPG.Mult;
+import mdsd.rPG.NEq;
+import mdsd.rPG.NameAttribute;
 import mdsd.rPG.NumberComparing;
+import mdsd.rPG.Or;
 import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Relations;
+import mdsd.rPG.Require;
+import mdsd.rPG.SelfTargeting;
+import mdsd.rPG.Smaller;
+import mdsd.rPG.SmallerEq;
 import mdsd.rPG.Sub;
 import mdsd.rPG.SystemRPG;
 import mdsd.rPG.Team;
 import mdsd.rPG.Teams;
 import mdsd.rPG.Type;
 import mdsd.rPG.TypeExpression;
-import mdsd.rPG.and;
-import mdsd.rPG.or;
 import mdsd.services.RPGGrammarAccess;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -66,20 +76,19 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RPGPackage.ALT_ATTRIBUTE:
 				sequence_AltAttribute(context, (AltAttribute) semanticObject); 
 				return; 
-			case RPGPackage.ATOMIC_NUMBER:
-				if (rule == grammarAccess.getAttributeValuesRule()
-						|| rule == grammarAccess.getSumRule()
-						|| action == grammarAccess.getSumAccess().getAddLeftAction_1_0_0_1()
-						|| action == grammarAccess.getSumAccess().getSubLeftAction_1_0_1_1()
-						|| rule == grammarAccess.getMultiplyRule()
-						|| action == grammarAccess.getMultiplyAccess().getMultLeftAction_1_0_0_1()
-						|| action == grammarAccess.getMultiplyAccess().getDivLeftAction_1_0_1_1()
-						|| rule == grammarAccess.getAtomicNumberRule()) {
-					sequence_AtomicNumber(context, (AtomicNumber) semanticObject); 
+			case RPGPackage.AND:
+				if (rule == grammarAccess.getORconditionRule()
+						|| action == grammarAccess.getORconditionAccess().getOrLeftAction_1_1()
+						|| rule == grammarAccess.getANDconditionRule()
+						|| action == grammarAccess.getANDconditionAccess().getAndLeftAction_1_1()
+						|| rule == grammarAccess.getStatementRule()) {
+					sequence_ANDcondition(context, (And) semanticObject); 
 					return; 
 				}
-				else if (rule == grammarAccess.getBattleSizeRule()) {
-					sequence_AtomicNumber_BattleSize(context, (AtomicNumber) semanticObject); 
+				else if (rule == grammarAccess.getEffectRule()
+						|| rule == grammarAccess.getAttributeValuesRule()
+						|| rule == grammarAccess.getRuleRule()) {
+					sequence_ANDcondition_Rule(context, (And) semanticObject); 
 					return; 
 				}
 				else break;
@@ -91,6 +100,12 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RPGPackage.ATTRIBUTES:
 				sequence_Attributes(context, (Attributes) semanticObject); 
+				return; 
+			case RPGPackage.BIGGER:
+				sequence_Comparator(context, (Bigger) semanticObject); 
+				return; 
+			case RPGPackage.BIGGER_EQ:
+				sequence_Comparator(context, (BiggerEq) semanticObject); 
 				return; 
 			case RPGPackage.DEATH:
 				sequence_Death(context, (Death) semanticObject); 
@@ -110,6 +125,43 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RPGPackage.ENTITY_MOVES:
 				sequence_EntityMoves(context, (EntityMoves) semanticObject); 
 				return; 
+			case RPGPackage.EQ:
+				sequence_Comparator(context, (Eq) semanticObject); 
+				return; 
+			case RPGPackage.FLOAT_NUM:
+				if (rule == grammarAccess.getBattleSizeRule()) {
+					sequence_BattleSize_FloatNum(context, (FloatNum) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getSumRule()
+						|| action == grammarAccess.getSumAccess().getAddLeftAction_1_0_0_1()
+						|| action == grammarAccess.getSumAccess().getSubLeftAction_1_0_1_1()
+						|| rule == grammarAccess.getMultiplyRule()
+						|| action == grammarAccess.getMultiplyAccess().getMultLeftAction_1_0_0_1()
+						|| action == grammarAccess.getMultiplyAccess().getDivLeftAction_1_0_1_1()
+						|| rule == grammarAccess.getAtomicNumberRule()
+						|| rule == grammarAccess.getFloatNumRule()) {
+					sequence_FloatNum(context, (FloatNum) semanticObject); 
+					return; 
+				}
+				else break;
+			case RPGPackage.INT_NUM:
+				if (rule == grammarAccess.getBattleSizeRule()) {
+					sequence_BattleSize_IntNum(context, (IntNum) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getSumRule()
+						|| action == grammarAccess.getSumAccess().getAddLeftAction_1_0_0_1()
+						|| action == grammarAccess.getSumAccess().getSubLeftAction_1_0_1_1()
+						|| rule == grammarAccess.getMultiplyRule()
+						|| action == grammarAccess.getMultiplyAccess().getMultLeftAction_1_0_0_1()
+						|| action == grammarAccess.getMultiplyAccess().getDivLeftAction_1_0_1_1()
+						|| rule == grammarAccess.getAtomicNumberRule()
+						|| rule == grammarAccess.getIntNumRule()) {
+					sequence_IntNum(context, (IntNum) semanticObject); 
+					return; 
+				}
+				else break;
 			case RPGPackage.LOC:
 				sequence_Loc(context, (Loc) semanticObject); 
 				return; 
@@ -128,9 +180,28 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RPGPackage.MULT:
 				sequence_Multiply(context, (Mult) semanticObject); 
 				return; 
+			case RPGPackage.NEQ:
+				sequence_Comparator(context, (NEq) semanticObject); 
+				return; 
+			case RPGPackage.NAME_ATTRIBUTE:
+				if (rule == grammarAccess.getBattleSizeRule()) {
+					sequence_BattleSize_NameAttribute(context, (NameAttribute) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getSumRule()
+						|| action == grammarAccess.getSumAccess().getAddLeftAction_1_0_0_1()
+						|| action == grammarAccess.getSumAccess().getSubLeftAction_1_0_1_1()
+						|| rule == grammarAccess.getMultiplyRule()
+						|| action == grammarAccess.getMultiplyAccess().getMultLeftAction_1_0_0_1()
+						|| action == grammarAccess.getMultiplyAccess().getDivLeftAction_1_0_1_1()
+						|| rule == grammarAccess.getAtomicNumberRule()
+						|| rule == grammarAccess.getNameAttributeRule()) {
+					sequence_NameAttribute(context, (NameAttribute) semanticObject); 
+					return; 
+				}
+				else break;
 			case RPGPackage.NUMBER_COMPARING:
-				if (rule == grammarAccess.getRequireRule()
-						|| rule == grammarAccess.getORconditionRule()
+				if (rule == grammarAccess.getORconditionRule()
 						|| action == grammarAccess.getORconditionAccess().getOrLeftAction_1_1()
 						|| rule == grammarAccess.getANDconditionRule()
 						|| action == grammarAccess.getANDconditionAccess().getAndLeftAction_1_1()
@@ -145,9 +216,20 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 					sequence_NumberComparing_Rule(context, (NumberComparing) semanticObject); 
 					return; 
 				}
-				else if (rule == grammarAccess.getDeclarationRule()
-						|| rule == grammarAccess.getTeamsRule()) {
-					sequence_NumberComparing_Teams(context, (NumberComparing) semanticObject); 
+				else break;
+			case RPGPackage.OR:
+				if (rule == grammarAccess.getORconditionRule()
+						|| action == grammarAccess.getORconditionAccess().getOrLeftAction_1_1()
+						|| rule == grammarAccess.getANDconditionRule()
+						|| action == grammarAccess.getANDconditionAccess().getAndLeftAction_1_1()
+						|| rule == grammarAccess.getStatementRule()) {
+					sequence_ORcondition(context, (Or) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getEffectRule()
+						|| rule == grammarAccess.getAttributeValuesRule()
+						|| rule == grammarAccess.getRuleRule()) {
+					sequence_ORcondition_Rule(context, (Or) semanticObject); 
 					return; 
 				}
 				else break;
@@ -158,8 +240,7 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 					sequence_Rule_Statement(context, (Proposition) semanticObject); 
 					return; 
 				}
-				else if (rule == grammarAccess.getRequireRule()
-						|| rule == grammarAccess.getORconditionRule()
+				else if (rule == grammarAccess.getORconditionRule()
 						|| action == grammarAccess.getORconditionAccess().getOrLeftAction_1_1()
 						|| rule == grammarAccess.getANDconditionRule()
 						|| action == grammarAccess.getANDconditionAccess().getAndLeftAction_1_1()
@@ -167,14 +248,30 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 					sequence_Statement(context, (Proposition) semanticObject); 
 					return; 
 				}
-				else if (rule == grammarAccess.getDeclarationRule()
-						|| rule == grammarAccess.getTeamsRule()) {
-					sequence_Statement_Teams(context, (Proposition) semanticObject); 
-					return; 
-				}
 				else break;
 			case RPGPackage.RELATIONS:
 				sequence_Relations(context, (Relations) semanticObject); 
+				return; 
+			case RPGPackage.REQUIRE:
+				if (rule == grammarAccess.getAttributeValuesRule()
+						|| rule == grammarAccess.getRequireRule()) {
+					sequence_Require(context, (Require) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getDeclarationRule()
+						|| rule == grammarAccess.getTeamsRule()) {
+					sequence_Require_Teams(context, (Require) semanticObject); 
+					return; 
+				}
+				else break;
+			case RPGPackage.SELF_TARGETING:
+				sequence_SelfTargeting(context, (SelfTargeting) semanticObject); 
+				return; 
+			case RPGPackage.SMALLER:
+				sequence_Comparator(context, (Smaller) semanticObject); 
+				return; 
+			case RPGPackage.SMALLER_EQ:
+				sequence_Comparator(context, (SmallerEq) semanticObject); 
 				return; 
 			case RPGPackage.SUB:
 				sequence_Sum(context, (Sub) semanticObject); 
@@ -194,50 +291,6 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RPGPackage.TYPE_EXPRESSION:
 				sequence_TypeExpression(context, (TypeExpression) semanticObject); 
 				return; 
-			case RPGPackage.AND:
-				if (rule == grammarAccess.getEffectRule()
-						|| rule == grammarAccess.getAttributeValuesRule()
-						|| rule == grammarAccess.getRuleRule()) {
-					sequence_ANDcondition_Rule(context, (and) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getDeclarationRule()
-						|| rule == grammarAccess.getTeamsRule()) {
-					sequence_ANDcondition_Teams(context, (and) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getRequireRule()
-						|| rule == grammarAccess.getORconditionRule()
-						|| action == grammarAccess.getORconditionAccess().getOrLeftAction_1_1()
-						|| rule == grammarAccess.getANDconditionRule()
-						|| action == grammarAccess.getANDconditionAccess().getAndLeftAction_1_1()
-						|| rule == grammarAccess.getStatementRule()) {
-					sequence_ANDcondition(context, (and) semanticObject); 
-					return; 
-				}
-				else break;
-			case RPGPackage.OR:
-				if (rule == grammarAccess.getEffectRule()
-						|| rule == grammarAccess.getAttributeValuesRule()
-						|| rule == grammarAccess.getRuleRule()) {
-					sequence_ORcondition_Rule(context, (or) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getDeclarationRule()
-						|| rule == grammarAccess.getTeamsRule()) {
-					sequence_ORcondition_Teams(context, (or) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getRequireRule()
-						|| rule == grammarAccess.getORconditionRule()
-						|| action == grammarAccess.getORconditionAccess().getOrLeftAction_1_1()
-						|| rule == grammarAccess.getANDconditionRule()
-						|| action == grammarAccess.getANDconditionAccess().getAndLeftAction_1_1()
-						|| rule == grammarAccess.getStatementRule()) {
-					sequence_ORcondition(context, (or) semanticObject); 
-					return; 
-				}
-				else break;
 			}
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
@@ -245,44 +298,16 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     Effect returns and
-	 *     AttributeValues returns and
-	 *     Rule returns and
+	 *     ORcondition returns And
+	 *     ORcondition.Or_1_1 returns And
+	 *     ANDcondition returns And
+	 *     ANDcondition.And_1_1 returns And
+	 *     Statement returns And
 	 *
 	 * Constraint:
-	 *     (left=ANDcondition_and_1_1 right=Statement (attritbuteToSet+=[Attribute|ID] change+=Sum+)*)
+	 *     (left=ANDcondition_And_1_1 right=Statement)
 	 */
-	protected void sequence_ANDcondition_Rule(ISerializationContext context, and semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Declaration returns and
-	 *     Teams returns and
-	 *
-	 * Constraint:
-	 *     (left=ANDcondition_and_1_1 right=Statement bs=BattleSize team+=Team+)
-	 */
-	protected void sequence_ANDcondition_Teams(ISerializationContext context, and semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Require returns and
-	 *     ORcondition returns and
-	 *     ORcondition.or_1_1 returns and
-	 *     ANDcondition returns and
-	 *     ANDcondition.and_1_1 returns and
-	 *     Statement returns and
-	 *
-	 * Constraint:
-	 *     (left=ANDcondition_and_1_1 right=Statement)
-	 */
-	protected void sequence_ANDcondition(ISerializationContext context, and semanticObject) {
+	protected void sequence_ANDcondition(ISerializationContext context, And semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.AND__LEFT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.AND__LEFT));
@@ -293,6 +318,20 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		feeder.accept(grammarAccess.getANDconditionAccess().getAndLeftAction_1_1(), semanticObject.getLeft());
 		feeder.accept(grammarAccess.getANDconditionAccess().getRightStatementParserRuleCall_1_2_0(), semanticObject.getRight());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Effect returns And
+	 *     AttributeValues returns And
+	 *     Rule returns And
+	 *
+	 * Constraint:
+	 *     (left=ANDcondition_And_1_1 right=Statement (attritbuteToSet+=[Attribute|ID] change+=Sum+)*)
+	 */
+	protected void sequence_ANDcondition_Rule(ISerializationContext context, And semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -310,50 +349,13 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     AttributeValues returns AtomicNumber
-	 *     Sum returns AtomicNumber
-	 *     Sum.Add_1_0_0_1 returns AtomicNumber
-	 *     Sum.Sub_1_0_1_1 returns AtomicNumber
-	 *     Multiply returns AtomicNumber
-	 *     Multiply.Mult_1_0_0_1 returns AtomicNumber
-	 *     Multiply.Div_1_0_1_1 returns AtomicNumber
-	 *     AtomicNumber returns AtomicNumber
-	 *
-	 * Constraint:
-	 *     attribute=[Attribute|ID]?
-	 */
-	protected void sequence_AtomicNumber(ISerializationContext context, AtomicNumber semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     BattleSize returns AtomicNumber
-	 *
-	 * Constraint:
-	 *     (attribute=[Attribute|ID]? req=Require?)
-	 */
-	protected void sequence_AtomicNumber_BattleSize(ISerializationContext context, AtomicNumber semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     AttributeValues returns AttributeValues
 	 *
 	 * Constraint:
-	 *     lTypes=LegalType
+	 *     (lTypes=LegalType | an=AtomicNumber)
 	 */
 	protected void sequence_AttributeValues(ISerializationContext context, AttributeValues semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.ATTRIBUTE_VALUES__LTYPES) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.ATTRIBUTE_VALUES__LTYPES));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAttributeValuesAccess().getLTypesLegalTypeParserRuleCall_0_1_0_0(), semanticObject.getLTypes());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -372,8 +374,8 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.ATTRIBUTE__AVAL));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getAttributeAccess().getAValAttributeValuesParserRuleCall_1_1_0(), semanticObject.getAVal());
+		feeder.accept(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getAttributeAccess().getAValAttributeValuesParserRuleCall_2_0(), semanticObject.getAVal());
 		feeder.finish();
 	}
 	
@@ -393,14 +395,128 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     BattleSize returns FloatNum
+	 *
+	 * Constraint:
+	 *     (i=INT decimal=INT req=Require?)
+	 */
+	protected void sequence_BattleSize_FloatNum(ISerializationContext context, FloatNum semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     BattleSize returns IntNum
+	 *
+	 * Constraint:
+	 *     (value=INT req=Require?)
+	 */
+	protected void sequence_BattleSize_IntNum(ISerializationContext context, IntNum semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     BattleSize returns NameAttribute
+	 *
+	 * Constraint:
+	 *     (attribute=[Attribute|ID] req=Require?)
+	 */
+	protected void sequence_BattleSize_NameAttribute(ISerializationContext context, NameAttribute semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Comparator returns Bigger
+	 *
+	 * Constraint:
+	 *     {Bigger}
+	 */
+	protected void sequence_Comparator(ISerializationContext context, Bigger semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Comparator returns BiggerEq
+	 *
+	 * Constraint:
+	 *     {BiggerEq}
+	 */
+	protected void sequence_Comparator(ISerializationContext context, BiggerEq semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Comparator returns Eq
+	 *
+	 * Constraint:
+	 *     {Eq}
+	 */
+	protected void sequence_Comparator(ISerializationContext context, Eq semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Comparator returns NEq
+	 *
+	 * Constraint:
+	 *     {NEq}
+	 */
+	protected void sequence_Comparator(ISerializationContext context, NEq semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Comparator returns Smaller
+	 *
+	 * Constraint:
+	 *     {Smaller}
+	 */
+	protected void sequence_Comparator(ISerializationContext context, Smaller semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Comparator returns SmallerEq
+	 *
+	 * Constraint:
+	 *     {SmallerEq}
+	 */
+	protected void sequence_Comparator(ISerializationContext context, SmallerEq semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Declaration returns Death
 	 *     Death returns Death
 	 *
 	 * Constraint:
-	 *     con+=ORcondition+
+	 *     req=Require
 	 */
 	protected void sequence_Death(ISerializationContext context, Death semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.DEATH__REQ) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.DEATH__REQ));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getDeathAccess().getReqRequireParserRuleCall_1_0(), semanticObject.getReq());
+		feeder.finish();
 	}
 	
 	
@@ -456,6 +572,59 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Sum returns FloatNum
+	 *     Sum.Add_1_0_0_1 returns FloatNum
+	 *     Sum.Sub_1_0_1_1 returns FloatNum
+	 *     Multiply returns FloatNum
+	 *     Multiply.Mult_1_0_0_1 returns FloatNum
+	 *     Multiply.Div_1_0_1_1 returns FloatNum
+	 *     AtomicNumber returns FloatNum
+	 *     FloatNum returns FloatNum
+	 *
+	 * Constraint:
+	 *     (i=INT decimal=INT)
+	 */
+	protected void sequence_FloatNum(ISerializationContext context, FloatNum semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.FLOAT_NUM__I) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.FLOAT_NUM__I));
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.FLOAT_NUM__DECIMAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.FLOAT_NUM__DECIMAL));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getFloatNumAccess().getIINTTerminalRuleCall_0_0(), semanticObject.getI());
+		feeder.accept(grammarAccess.getFloatNumAccess().getDecimalINTTerminalRuleCall_2_0(), semanticObject.getDecimal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Sum returns IntNum
+	 *     Sum.Add_1_0_0_1 returns IntNum
+	 *     Sum.Sub_1_0_1_1 returns IntNum
+	 *     Multiply returns IntNum
+	 *     Multiply.Mult_1_0_0_1 returns IntNum
+	 *     Multiply.Div_1_0_1_1 returns IntNum
+	 *     AtomicNumber returns IntNum
+	 *     IntNum returns IntNum
+	 *
+	 * Constraint:
+	 *     value=INT
+	 */
+	protected void sequence_IntNum(ISerializationContext context, IntNum semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.INT_NUM__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.INT_NUM__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getIntNumAccess().getValueINTTerminalRuleCall_0(), semanticObject.getValue());
+		feeder.finish();
 	}
 	
 	
@@ -584,11 +753,35 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     Require returns NumberComparing
+	 *     Sum returns NameAttribute
+	 *     Sum.Add_1_0_0_1 returns NameAttribute
+	 *     Sum.Sub_1_0_1_1 returns NameAttribute
+	 *     Multiply returns NameAttribute
+	 *     Multiply.Mult_1_0_0_1 returns NameAttribute
+	 *     Multiply.Div_1_0_1_1 returns NameAttribute
+	 *     AtomicNumber returns NameAttribute
+	 *     NameAttribute returns NameAttribute
+	 *
+	 * Constraint:
+	 *     attribute=[Attribute|ID]
+	 */
+	protected void sequence_NameAttribute(ISerializationContext context, NameAttribute semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.NAME_ATTRIBUTE__ATTRIBUTE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.NAME_ATTRIBUTE__ATTRIBUTE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getNameAttributeAccess().getAttributeAttributeIDTerminalRuleCall_0_1(), semanticObject.eGet(RPGPackage.Literals.NAME_ATTRIBUTE__ATTRIBUTE, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     ORcondition returns NumberComparing
-	 *     ORcondition.or_1_1 returns NumberComparing
+	 *     ORcondition.Or_1_1 returns NumberComparing
 	 *     ANDcondition returns NumberComparing
-	 *     ANDcondition.and_1_1 returns NumberComparing
+	 *     ANDcondition.And_1_1 returns NumberComparing
 	 *     Statement returns NumberComparing
 	 *     NumberComparing returns NumberComparing
 	 *
@@ -628,57 +821,16 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     Declaration returns NumberComparing
-	 *     Teams returns NumberComparing
+	 *     ORcondition returns Or
+	 *     ORcondition.Or_1_1 returns Or
+	 *     ANDcondition returns Or
+	 *     ANDcondition.And_1_1 returns Or
+	 *     Statement returns Or
 	 *
 	 * Constraint:
-	 *     (left=Sum comp=Comparator right=Sum bs=BattleSize team+=Team+)
+	 *     (left=ORcondition_Or_1_1 right=ANDcondition)
 	 */
-	protected void sequence_NumberComparing_Teams(ISerializationContext context, NumberComparing semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Effect returns or
-	 *     AttributeValues returns or
-	 *     Rule returns or
-	 *
-	 * Constraint:
-	 *     (left=ORcondition_or_1_1 right=ANDcondition (attritbuteToSet+=[Attribute|ID] change+=Sum+)*)
-	 */
-	protected void sequence_ORcondition_Rule(ISerializationContext context, or semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Declaration returns or
-	 *     Teams returns or
-	 *
-	 * Constraint:
-	 *     (left=ORcondition_or_1_1 right=ANDcondition bs=BattleSize team+=Team+)
-	 */
-	protected void sequence_ORcondition_Teams(ISerializationContext context, or semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Require returns or
-	 *     ORcondition returns or
-	 *     ORcondition.or_1_1 returns or
-	 *     ANDcondition returns or
-	 *     ANDcondition.and_1_1 returns or
-	 *     Statement returns or
-	 *
-	 * Constraint:
-	 *     (left=ORcondition_or_1_1 right=ANDcondition)
-	 */
-	protected void sequence_ORcondition(ISerializationContext context, or semanticObject) {
+	protected void sequence_ORcondition(ISerializationContext context, Or semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.OR__LEFT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.OR__LEFT));
@@ -694,6 +846,20 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     Effect returns Or
+	 *     AttributeValues returns Or
+	 *     Rule returns Or
+	 *
+	 * Constraint:
+	 *     (left=ORcondition_Or_1_1 right=ANDcondition (attritbuteToSet+=[Attribute|ID] change+=Sum+)*)
+	 */
+	protected void sequence_ORcondition_Rule(ISerializationContext context, Or semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Declaration returns Relations
 	 *     Relations returns Relations
 	 *
@@ -701,6 +867,38 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     type+=Type+
 	 */
 	protected void sequence_Relations(ISerializationContext context, Relations semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     AttributeValues returns Require
+	 *     Require returns Require
+	 *
+	 * Constraint:
+	 *     log=ORcondition
+	 */
+	protected void sequence_Require(ISerializationContext context, Require semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.REQUIRE__LOG) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.REQUIRE__LOG));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRequireAccess().getLogORconditionParserRuleCall_1_0(), semanticObject.getLog());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Declaration returns Require
+	 *     Teams returns Require
+	 *
+	 * Constraint:
+	 *     (log=ORcondition bs=BattleSize team+=Team+)
+	 */
+	protected void sequence_Require_Teams(ISerializationContext context, Require semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -721,11 +919,28 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     Require returns Proposition
+	 *     SelfTargeting returns SelfTargeting
+	 *
+	 * Constraint:
+	 *     self='self.'
+	 */
+	protected void sequence_SelfTargeting(ISerializationContext context, SelfTargeting semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.SELF_TARGETING__SELF) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.SELF_TARGETING__SELF));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getSelfTargetingAccess().getSelfSelfKeyword_0(), semanticObject.getSelf());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     ORcondition returns Proposition
-	 *     ORcondition.or_1_1 returns Proposition
+	 *     ORcondition.Or_1_1 returns Proposition
 	 *     ANDcondition returns Proposition
-	 *     ANDcondition.and_1_1 returns Proposition
+	 *     ANDcondition.And_1_1 returns Proposition
 	 *     Statement returns Proposition
 	 *
 	 * Constraint:
@@ -739,19 +954,6 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getStatementAccess().getTypeTypeIDTerminalRuleCall_2_0_1(), semanticObject.eGet(RPGPackage.Literals.PROPOSITION__TYPE, false));
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Declaration returns Proposition
-	 *     Teams returns Proposition
-	 *
-	 * Constraint:
-	 *     (type=[Type|ID] bs=BattleSize team+=Team+)
-	 */
-	protected void sequence_Statement_Teams(ISerializationContext context, Proposition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

@@ -267,6 +267,15 @@ public interface RPGFactory extends EFactory
   NumberComparing createNumberComparing();
 
   /**
+   * Returns a new object of class '<em>Comparator</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Comparator</em>'.
+   * @generated
+   */
+  Comparator createComparator();
+
+  /**
    * Returns a new object of class '<em>Sum</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -294,22 +303,112 @@ public interface RPGFactory extends EFactory
   AtomicNumber createAtomicNumber();
 
   /**
-   * Returns a new object of class '<em>or</em>'.
+   * Returns a new object of class '<em>Name Attribute</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>or</em>'.
+   * @return a new object of class '<em>Name Attribute</em>'.
    * @generated
    */
-  or createor();
+  NameAttribute createNameAttribute();
 
   /**
-   * Returns a new object of class '<em>and</em>'.
+   * Returns a new object of class '<em>Self Targeting</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>and</em>'.
+   * @return a new object of class '<em>Self Targeting</em>'.
    * @generated
    */
-  and createand();
+  SelfTargeting createSelfTargeting();
+
+  /**
+   * Returns a new object of class '<em>Int Num</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Int Num</em>'.
+   * @generated
+   */
+  IntNum createIntNum();
+
+  /**
+   * Returns a new object of class '<em>Float Num</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Float Num</em>'.
+   * @generated
+   */
+  FloatNum createFloatNum();
+
+  /**
+   * Returns a new object of class '<em>Or</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Or</em>'.
+   * @generated
+   */
+  Or createOr();
+
+  /**
+   * Returns a new object of class '<em>And</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>And</em>'.
+   * @generated
+   */
+  And createAnd();
+
+  /**
+   * Returns a new object of class '<em>Smaller</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Smaller</em>'.
+   * @generated
+   */
+  Smaller createSmaller();
+
+  /**
+   * Returns a new object of class '<em>Smaller Eq</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Smaller Eq</em>'.
+   * @generated
+   */
+  SmallerEq createSmallerEq();
+
+  /**
+   * Returns a new object of class '<em>Eq</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Eq</em>'.
+   * @generated
+   */
+  Eq createEq();
+
+  /**
+   * Returns a new object of class '<em>Bigger Eq</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bigger Eq</em>'.
+   * @generated
+   */
+  BiggerEq createBiggerEq();
+
+  /**
+   * Returns a new object of class '<em>Bigger</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bigger</em>'.
+   * @generated
+   */
+  Bigger createBigger();
+
+  /**
+   * Returns a new object of class '<em>NEq</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>NEq</em>'.
+   * @generated
+   */
+  NEq createNEq();
 
   /**
    * Returns a new object of class '<em>Add</em>'.

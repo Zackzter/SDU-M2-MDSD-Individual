@@ -3,10 +3,32 @@
  */
 package mdsd.generator;
 
-import mdsd.rPG.Attribute;
-import mdsd.rPG.Entity;
-import mdsd.rPG.Move;
-import mdsd.rPG.Type;
+import com.google.common.collect.Iterators;
+import java.util.Arrays;
+import mdsd.rPG.Add;
+import mdsd.rPG.And;
+import mdsd.rPG.Bigger;
+import mdsd.rPG.BiggerEq;
+import mdsd.rPG.Comparator;
+import mdsd.rPG.Death;
+import mdsd.rPG.Declaration;
+import mdsd.rPG.Div;
+import mdsd.rPG.Eq;
+import mdsd.rPG.FloatNum;
+import mdsd.rPG.IntNum;
+import mdsd.rPG.Mult;
+import mdsd.rPG.NEq;
+import mdsd.rPG.NameAttribute;
+import mdsd.rPG.NumberComparing;
+import mdsd.rPG.Or;
+import mdsd.rPG.Proposition;
+import mdsd.rPG.Require;
+import mdsd.rPG.Smaller;
+import mdsd.rPG.SmallerEq;
+import mdsd.rPG.Sub;
+import mdsd.rPG.Sum;
+import mdsd.rPG.SystemRPG;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
@@ -22,416 +44,204 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 public class RPGGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    final SystemRPG game = Iterators.<SystemRPG>filter(resource.getAllContents(), SystemRPG.class).next();
+    this.ds(game);
   }
   
-  public CharSequence generateEntity(final Entity entity) {
+  public void ds(final SystemRPG system) {
+    EList<Declaration> _declarations = system.getDeclarations();
+    for (final Declaration d : _declarations) {
+      boolean _matched = false;
+      if (d instanceof Death) {
+        _matched=true;
+        this.deaths(((Death)d));
+      }
+      if (!_matched) {
+        System.out.println("");
+      }
+    }
+  }
+  
+  public void deaths(final Death death) {
+    this.re(death.getReq());
+  }
+  
+  public void re(final Require req) {
+    System.out.println(this.logic(req.getLog()));
+  }
+  
+  protected CharSequence _logic(final Or x) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.util.*;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("public class Zyndaquil {");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("private Type type = new Type();");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("type.addType(\"Fire\");");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("private Set<Attribute> attributes = new HashSet<>();");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("private Attribute maxHP = Attribute.createAttributeWithInt(AttributeEnum.MAX_HP, 10);");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("private Attribute currentHP = Attribute.createAttributeWithInt(AttributeEnum.CURRENT_HP, 10);");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("attributes.add(maxHP);  attributes.add(currentHP);");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("public Attribute getMaxHP(){");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("return maxHP;");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("public Attribute getCurrentHP(){");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("return currentHP;");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("public void setCurrentHP(int currentHP){");
-    _builder.newLine();
-    _builder.append("\t\t\t\t ");
-    _builder.append("this.currentHP.setValue(i);");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("public HashSet<Attribute> getEntityAttributes(){");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("return attributes;");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("private Move move = new Move();");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("move.addMove(\"Ember\");");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.newLine();
+    _builder.append("(");
+    CharSequence _logic = this.logic(x.getLeft());
+    _builder.append(_logic);
+    _builder.append("||");
+    CharSequence _logic_1 = this.logic(x.getRight());
+    _builder.append(_logic_1);
+    _builder.append(")");
     return _builder;
   }
   
-  public CharSequence generateType(final Type type) {
+  protected CharSequence _logic(final And x) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.util.*;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("public class Type{");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private Set<Sting> setOfTypes = new HashSet<>();");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private String typeName;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public Type(String typeName){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("this.typeName = typeName;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("if(!typeName.isEmpty())){");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("addType(typeName);");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public void addType(String type){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("setOfTypes.add(type);");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
+    _builder.append("(");
+    CharSequence _logic = this.logic(x.getLeft());
+    _builder.append(_logic);
+    _builder.append("&&");
+    CharSequence _logic_1 = this.logic(x.getRight());
+    _builder.append(_logic_1);
+    _builder.append(")");
     return _builder;
   }
   
-  public CharSequence generateMove(final Move move) {
+  protected CharSequence _logic(final NumberComparing x) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.util.*;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("public class Move{");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private Set<String> setOfMoves = new HashSet<>();");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private String moveName;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private Type type;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private Set<Attribute> attributes = new HashSet<>();");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private List<Effect> effects = new ArrayList<>();");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private Set<Attribute> entityAttributes = new HashSet<>();");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public class Effect{");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private Attribute attributePP, attributePower;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public Move(String moveName, Type type, Set attributes){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("this.moveName = moveName;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("this.type = type;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("this.attributes = attributes;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("if(!moveName.isEmpty()){");
-    _builder.newLine();
-    _builder.append("\t\t\t ");
-    _builder.append("addMove(moveName);");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("if(type != null){");
-    _builder.newLine();
-    _builder.append("\t\t\t ");
-    _builder.append("type.setType(\"Fire\");");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("if(!attributes.isEmpty()) {");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("int pp = 25;");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("int power = 45;");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("attributePP = Attribute.createAttributeWithInt(AttributeEnum.PP.toString(), pp);");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("attributePower = Attribute.createAttributeWithInt(AttributeEnum.POWER.toString(), power);");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("attributes.add(attributePP); attributes.add(attributePower);");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("if()");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public void addMove(String move){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("setOfMoves.add(move);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
+    _builder.append("(");
+    CharSequence _exp = this.exp(x.getLeft());
+    _builder.append(_exp);
+    String _generateComp = this.generateComp(x.getComp());
+    _builder.append(_generateComp);
+    CharSequence _exp_1 = this.exp(x.getRight());
+    _builder.append(_exp_1);
+    _builder.append(")");
     return _builder;
   }
   
-  public CharSequence generateAttribute(final Attribute attribute) {
+  public String generateComp(final Comparator op) {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (op instanceof Eq) {
+      _matched=true;
+      _switchResult = "==";
+    }
+    if (!_matched) {
+      if (op instanceof Smaller) {
+        _matched=true;
+        _switchResult = "<";
+      }
+    }
+    if (!_matched) {
+      if (op instanceof Bigger) {
+        _matched=true;
+        _switchResult = ">";
+      }
+    }
+    if (!_matched) {
+      if (op instanceof SmallerEq) {
+        _matched=true;
+        _switchResult = "<=";
+      }
+    }
+    if (!_matched) {
+      if (op instanceof BiggerEq) {
+        _matched=true;
+        _switchResult = ">=";
+      }
+    }
+    if (!_matched) {
+      if (op instanceof NEq) {
+        _matched=true;
+        _switchResult = "!=";
+      }
+    }
+    return _switchResult;
+  }
+  
+  protected CharSequence _exp(final Add x) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.util.*;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("public class Attribute{");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("//private Map<String, ? extends number> mapOfAttributes = new HashMap<>();");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private String pp = AttributeEnum.PP.toString());");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private String power = AttributeEnum.POWER.toString();");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private String current_hp = AttributeEnum.CURRENT_HP.toString();");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private String speed = AttributeEnum.SPEED.toString();");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private String max_hp = AttributeEnum.MAX_HP.toString();");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("private String attributeName;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("private <? extends Number> value;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public Attribute(String attribute){");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("this.attributeName = attribute;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public static Attribute createAttributeWithFloat(String attribute, float float){");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("Attribute a = new Attribute(attribute);");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("a.setValue(float);");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("return a;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public static Attribute createAttributeWithInt(String attribute, int i){");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("Attribute a = new Attribute(attribute);");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("a.setValue(i);");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("return a; ");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public <T extends Number> void setValue(T number){");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("value = number;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}\t\t\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
+    _builder.append("(");
+    CharSequence _exp = this.exp(x.getLeft());
+    _builder.append(_exp);
+    _builder.append("+");
+    CharSequence _exp_1 = this.exp(x.getRight());
+    _builder.append(_exp_1);
+    _builder.append(")");
     return _builder;
   }
   
-  public CharSequence attributeEnum() {
+  protected CharSequence _exp(final Sub x) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("enum AttributeEnum{");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("PP, POWER, CURRENT_HP, SPEED, MAX_HP;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("private int value;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("int getValue{value};");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("void setValue(int value) { this.value = value};");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("public Attribute(int value){");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("this.value = value;");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
+    _builder.append("(");
+    CharSequence _exp = this.exp(x.getLeft());
+    _builder.append(_exp);
+    _builder.append("-");
+    CharSequence _exp_1 = this.exp(x.getRight());
+    _builder.append(_exp_1);
+    _builder.append(")");
     return _builder;
+  }
+  
+  protected CharSequence _exp(final Mult x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _exp = this.exp(x.getLeft());
+    _builder.append(_exp);
+    _builder.append("*");
+    CharSequence _exp_1 = this.exp(x.getRight());
+    _builder.append(_exp_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _exp(final Div x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _exp = this.exp(x.getLeft());
+    _builder.append(_exp);
+    _builder.append("/");
+    CharSequence _exp_1 = this.exp(x.getRight());
+    _builder.append(_exp_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _exp(final IntNum x) {
+    return Integer.toString(x.getValue());
+  }
+  
+  protected CharSequence _exp(final FloatNum x) {
+    String _string = Integer.toString(x.getI());
+    String _plus = (_string + ".");
+    String _string_1 = Integer.toString(x.getDecimal());
+    return (_plus + _string_1);
+  }
+  
+  protected CharSequence _exp(final NameAttribute x) {
+    String _name = x.getAttribute().getName();
+    return ("_" + _name);
+  }
+  
+  public CharSequence logic(final Proposition x) {
+    if (x instanceof And) {
+      return _logic((And)x);
+    } else if (x instanceof NumberComparing) {
+      return _logic((NumberComparing)x);
+    } else if (x instanceof Or) {
+      return _logic((Or)x);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(x).toString());
+    }
+  }
+  
+  public CharSequence exp(final Sum x) {
+    if (x instanceof FloatNum) {
+      return _exp((FloatNum)x);
+    } else if (x instanceof IntNum) {
+      return _exp((IntNum)x);
+    } else if (x instanceof NameAttribute) {
+      return _exp((NameAttribute)x);
+    } else if (x instanceof Div) {
+      return _exp((Div)x);
+    } else if (x instanceof Mult) {
+      return _exp((Mult)x);
+    } else if (x instanceof Add) {
+      return _exp((Add)x);
+    } else if (x instanceof Sub) {
+      return _exp((Sub)x);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(x).toString());
+    }
   }
 }

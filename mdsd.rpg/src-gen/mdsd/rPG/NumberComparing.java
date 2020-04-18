@@ -47,26 +47,26 @@ public interface NumberComparing extends Proposition
   void setLeft(Sum value);
 
   /**
-   * Returns the value of the '<em><b>Comp</b></em>' attribute.
+   * Returns the value of the '<em><b>Comp</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Comp</em>' attribute.
-   * @see #setComp(String)
+   * @return the value of the '<em>Comp</em>' containment reference.
+   * @see #setComp(Comparator)
    * @see mdsd.rPG.RPGPackage#getNumberComparing_Comp()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getComp();
+  Comparator getComp();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.NumberComparing#getComp <em>Comp</em>}' attribute.
+   * Sets the value of the '{@link mdsd.rPG.NumberComparing#getComp <em>Comp</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Comp</em>' attribute.
+   * @param value the new value of the '<em>Comp</em>' containment reference.
    * @see #getComp()
    * @generated
    */
-  void setComp(String value);
+  void setComp(Comparator value);
 
   /**
    * Returns the value of the '<em><b>Right</b></em>' containment reference.

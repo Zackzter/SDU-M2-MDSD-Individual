@@ -3,21 +3,17 @@
  */
 package mdsd.rPG.impl;
 
-import java.util.Collection;
-
 import mdsd.rPG.Death;
-import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
+import mdsd.rPG.Require;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +23,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.DeathImpl#getCon <em>Con</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.DeathImpl#getReq <em>Req</em>}</li>
  * </ul>
  *
  * @generated
@@ -35,14 +31,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class DeathImpl extends DeclarationImpl implements Death
 {
   /**
-   * The cached value of the '{@link #getCon() <em>Con</em>}' containment reference list.
+   * The cached value of the '{@link #getReq() <em>Req</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCon()
+   * @see #getReq()
    * @generated
    * @ordered
    */
-  protected EList<Proposition> con;
+  protected Require req;
 
   /**
    * <!-- begin-user-doc -->
@@ -71,13 +67,48 @@ public class DeathImpl extends DeclarationImpl implements Death
    * @generated
    */
   @Override
-  public EList<Proposition> getCon()
+  public Require getReq()
   {
-    if (con == null)
+    return req;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetReq(Require newReq, NotificationChain msgs)
+  {
+    Require oldReq = req;
+    req = newReq;
+    if (eNotificationRequired())
     {
-      con = new EObjectContainmentEList<Proposition>(Proposition.class, this, RPGPackage.DEATH__CON);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.DEATH__REQ, oldReq, newReq);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return con;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setReq(Require newReq)
+  {
+    if (newReq != req)
+    {
+      NotificationChain msgs = null;
+      if (req != null)
+        msgs = ((InternalEObject)req).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.DEATH__REQ, null, msgs);
+      if (newReq != null)
+        msgs = ((InternalEObject)newReq).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.DEATH__REQ, null, msgs);
+      msgs = basicSetReq(newReq, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.DEATH__REQ, newReq, newReq));
   }
 
   /**
@@ -90,8 +121,8 @@ public class DeathImpl extends DeclarationImpl implements Death
   {
     switch (featureID)
     {
-      case RPGPackage.DEATH__CON:
-        return ((InternalEList<?>)getCon()).basicRemove(otherEnd, msgs);
+      case RPGPackage.DEATH__REQ:
+        return basicSetReq(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -106,8 +137,8 @@ public class DeathImpl extends DeclarationImpl implements Death
   {
     switch (featureID)
     {
-      case RPGPackage.DEATH__CON:
-        return getCon();
+      case RPGPackage.DEATH__REQ:
+        return getReq();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -117,15 +148,13 @@ public class DeathImpl extends DeclarationImpl implements Death
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case RPGPackage.DEATH__CON:
-        getCon().clear();
-        getCon().addAll((Collection<? extends Proposition>)newValue);
+      case RPGPackage.DEATH__REQ:
+        setReq((Require)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,8 +170,8 @@ public class DeathImpl extends DeclarationImpl implements Death
   {
     switch (featureID)
     {
-      case RPGPackage.DEATH__CON:
-        getCon().clear();
+      case RPGPackage.DEATH__REQ:
+        setReq((Require)null);
         return;
     }
     super.eUnset(featureID);
@@ -158,8 +187,8 @@ public class DeathImpl extends DeclarationImpl implements Death
   {
     switch (featureID)
     {
-      case RPGPackage.DEATH__CON:
-        return con != null && !con.isEmpty();
+      case RPGPackage.DEATH__REQ:
+        return req != null;
     }
     return super.eIsSet(featureID);
   }

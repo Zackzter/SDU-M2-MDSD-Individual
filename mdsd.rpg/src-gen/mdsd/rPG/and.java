@@ -6,22 +6,22 @@ package mdsd.rPG;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>and</b></em>'.
+ * A representation of the model object '<em><b>And</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.and#getLeft <em>Left</em>}</li>
- *   <li>{@link mdsd.rPG.and#getRight <em>Right</em>}</li>
+ *   <li>{@link mdsd.rPG.And#getLeft <em>Left</em>}</li>
+ *   <li>{@link mdsd.rPG.And#getRight <em>Right</em>}</li>
  * </ul>
  *
- * @see mdsd.rPG.RPGPackage#getand()
+ * @see mdsd.rPG.RPGPackage#getAnd()
  * @model
  * @generated
  */
-public interface and extends Proposition
+public interface And extends Proposition
 {
   /**
    * Returns the value of the '<em><b>Left</b></em>' containment reference.
@@ -29,14 +29,14 @@ public interface and extends Proposition
    * <!-- end-user-doc -->
    * @return the value of the '<em>Left</em>' containment reference.
    * @see #setLeft(Proposition)
-   * @see mdsd.rPG.RPGPackage#getand_Left()
+   * @see mdsd.rPG.RPGPackage#getAnd_Left()
    * @model containment="true"
    * @generated
    */
   Proposition getLeft();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.and#getLeft <em>Left</em>}' containment reference.
+   * Sets the value of the '{@link mdsd.rPG.And#getLeft <em>Left</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Left</em>' containment reference.
@@ -51,14 +51,14 @@ public interface and extends Proposition
    * <!-- end-user-doc -->
    * @return the value of the '<em>Right</em>' containment reference.
    * @see #setRight(Proposition)
-   * @see mdsd.rPG.RPGPackage#getand_Right()
+   * @see mdsd.rPG.RPGPackage#getAnd_Right()
    * @model containment="true"
    * @generated
    */
   Proposition getRight();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.and#getRight <em>Right</em>}' containment reference.
+   * Sets the value of the '{@link mdsd.rPG.And#getRight <em>Right</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Right</em>' containment reference.
@@ -67,4 +67,4 @@ public interface and extends Proposition
    */
   void setRight(Proposition value);
 
-} // and
+} // And

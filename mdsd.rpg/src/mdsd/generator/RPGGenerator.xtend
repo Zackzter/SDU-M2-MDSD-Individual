@@ -7,11 +7,37 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
-//import mdsd.rPG.SystemRPG
+import mdsd.rPG.SystemRPG
 import mdsd.rPG.Entity
 import mdsd.rPG.Type
 import mdsd.rPG.Move
+import mdsd.rPG.Moves
 import mdsd.rPG.Attribute
+import mdsd.rPG.Locations
+import mdsd.rPG.Death
+import mdsd.rPG.NumberComparing
+import mdsd.rPG.AtomicNumber
+import mdsd.rPG.Require
+import mdsd.rPG.Or
+import mdsd.rPG.And
+import mdsd.rPG.Add
+import mdsd.rPG.Sub
+import mdsd.rPG.Mult
+import mdsd.rPG.Div
+import mdsd.rPG.Comparator
+import mdsd.rPG.Eq
+import mdsd.rPG.Smaller
+import mdsd.rPG.SmallerEq
+import mdsd.rPG.NEq
+import mdsd.rPG.Bigger
+import mdsd.rPG.BiggerEq
+import mdsd.rPG.IntNum
+import mdsd.rPG.NameAttribute
+import mdsd.rPG.FloatNum
+
+
+
+
 
 /**
  * Generates code from your model files on save.
@@ -21,8 +47,9 @@ import mdsd.rPG.Attribute
 class RPGGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-		//val game = resource.allContents.filter(SystemRPG).next
+		val game = resource.allContents.filter(SystemRPG).next
 		//val entity = resource.allContents.filter(Entity)
+		game.ds
 		
 //		fsa.generateFile('greetings.txt', 'People to greet: ' + 
 //			resource.allContents
@@ -30,187 +57,67 @@ class RPGGenerator extends AbstractGenerator {
 //				.map[name]
 //				.join(', '))
 	}
-	
 
-	//	
-	def generateEntity(Entity entity){
-		'''import java.util.*;
-		public class Zyndaquil {
-			private Type type = new Type();
-			type.addType("Fire");
-			private Set<Attribute> attributes = new HashSet<>();
-			private Attribute maxHP = Attribute.createAttributeWithInt(AttributeEnum.MAX_HP, 10);
-			private Attribute currentHP = Attribute.createAttributeWithInt(AttributeEnum.CURRENT_HP, 10);
-			
-			attributes.add(maxHP);  attributes.add(currentHP);
-			
-			public Attribute getMaxHP(){
-				return maxHP;
+	def ds(SystemRPG system){
+		for(d : system.declarations){
+			switch d{
+				Death: d.deaths
+				default: System.out.println("")
 			}
-			
-			public Attribute getCurrentHP(){
-				return currentHP;
-			}
-			
-			public void setCurrentHP(int currentHP){
-				 this.currentHP.setValue(i);
-			}
-			
-			public HashSet<Attribute> getEntityAttributes(){
-				return attributes;
-			}
-			
-			private Move move = new Move();
-			
-			move.addMove("Ember");
 		}
-		
-		'''
 	}
+	
+	def deaths (Death death){
+		death.req.re
 
-	def generateType(Type type){
-		'''
-		import java.util.*;
-		
-		public class Type{
-			
-			private Set<Sting> setOfTypes = new HashSet<>();
-			private String typeName;
-			
-			
-			public Type(String typeName){
-				this.typeName = typeName;
-				if(!typeName.isEmpty())){
-					addType(typeName);
-					}
-				}
-						
-			public void addType(String type){
-				setOfTypes.add(type);
-				}
-		}
-		
-		
-		'''
 	}
 	
-	def generateMove(Move move){
-		'''
-		import java.util.*;
-		
-		public class Move{
-			private Set<String> setOfMoves = new HashSet<>();
-			private String moveName;
-			private Type type;
-			private Set<Attribute> attributes = new HashSet<>();
-			private List<Effect> effects = new ArrayList<>();
-			
-			private Set<Attribute> entityAttributes = new HashSet<>();
-			
-			public class Effect{
-				
-			}
-			
-			private Attribute attributePP, attributePower;
-			
-			public Move(String moveName, Type type, Set attributes){
-				this.moveName = moveName;
-				this.type = type;
-				this.attributes = attributes;
-				
-				if(!moveName.isEmpty()){
-					 addMove(moveName);
-				}
-				
-				if(type != null){
-					 type.setType("Fire");
-				}
-				
-				if(!attributes.isEmpty()) {
-					int pp = 25;
-					int power = 45;
-					
-					attributePP = Attribute.createAttributeWithInt(AttributeEnum.PP.toString(), pp);
-					attributePower = Attribute.createAttributeWithInt(AttributeEnum.POWER.toString(), power);
-					attributes.add(attributePP); attributes.add(attributePower);
-					if()
-					
-				}
-				
-				
-			}
-			
-			
-			public void addMove(String move){
-				setOfMoves.add(move);
-			}
-			
-		}
-		
-		
-		'''
-		
+	
+	def re(Require req){
+		System.out.println(req.log.logic)
 	}
 	
-	def generateAttribute(Attribute attribute){
-		'''
-		import java.util.*;
-		
-		public class Attribute{
-			//private Map<String, ? extends number> mapOfAttributes = new HashMap<>();
-			
-			
-			private String pp = AttributeEnum.PP.toString());
-			private String power = AttributeEnum.POWER.toString();
-			private String current_hp = AttributeEnum.CURRENT_HP.toString();
-			private String speed = AttributeEnum.SPEED.toString();
-			private String max_hp = AttributeEnum.MAX_HP.toString();
-		
-		    private String attributeName;
-		    private <? extends Number> value;
-		
-		    public Attribute(String attribute){
-		        this.attributeName = attribute;
-		    }
-		
-		    public static Attribute createAttributeWithFloat(String attribute, float float){
-		      Attribute a = new Attribute(attribute);
-		      a.setValue(float);
-		      return a;
-		    }
-		
-		    public static Attribute createAttributeWithInt(String attribute, int i){
-		      Attribute a = new Attribute(attribute);
-		      a.setValue(i);
-		      return a; 
-		    }
-		
-		    public <T extends Number> void setValue(T number){
-		      value = number;
-		    }
-		}			
-			
-			
-		'''
+	def dispatch CharSequence logic(Or x){
+		'''(«x.left.logic»||«x.right.logic»)'''
 	}
 	
-	def attributeEnum(){
-		'''
-		enum AttributeEnum{
-		  PP, POWER, CURRENT_HP, SPEED, MAX_HP;
-		
-		  private int value;
-		
-		  int getValue{value};
-		  void setValue(int value) { this.value = value};
-		
-		  public Attribute(int value){
-		    this.value = value;
-		  }
-		}
-		'''
+	def dispatch CharSequence logic(And x){
+		'''(«x.left.logic»&&«x.right.logic»)'''
 	}
+	
+	def dispatch CharSequence logic(NumberComparing x){
+		'''(«x.left.exp»«x.comp.generateComp»«x.right.exp»)'''
+	}
+	
+	def generateComp(Comparator op) {
+		switch op { Eq: '==' Smaller: '<' Bigger: '>' SmallerEq: '<=' BiggerEq: '>=' NEq: '!=' }
+	}
+	
+	def dispatch CharSequence exp(Add x){
+		'''(«x.left.exp»+«x.right.exp»)'''
+	}
+	def dispatch CharSequence exp(Sub x){
+		'''(«x.left.exp»-«x.right.exp»)'''
+	}
+	def dispatch CharSequence exp(Mult x){
+		'''(«x.left.exp»*«x.right.exp»)'''
+	}
+	def dispatch CharSequence exp(Div x){
+		'''(«x.left.exp»/«x.right.exp»)'''
+	}
+	def dispatch CharSequence exp(IntNum x){
+		Integer.toString(x.value)
+	}
+	def dispatch CharSequence exp(FloatNum x){
+		Integer.toString(x.i) + '.' + Integer.toString(x.decimal)
+	}
+	
+	
+	def dispatch CharSequence exp(NameAttribute x){
+		{"_"+x.attribute.name}
+	}
+}
 	
 	
 	 
-}
+

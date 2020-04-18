@@ -265,11 +265,8 @@ public class RPGSwitch<T> extends Switch<T>
         Proposition proposition = (Proposition)theEObject;
         T result = caseProposition(proposition);
         if (result == null) result = caseRule(proposition);
-        if (result == null) result = caseRequire(proposition);
         if (result == null) result = caseEffect(proposition);
         if (result == null) result = caseAttributeValues(proposition);
-        if (result == null) result = caseTeams(proposition);
-        if (result == null) result = caseDeclaration(proposition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -279,11 +276,15 @@ public class RPGSwitch<T> extends Switch<T>
         T result = caseNumberComparing(numberComparing);
         if (result == null) result = caseProposition(numberComparing);
         if (result == null) result = caseRule(numberComparing);
-        if (result == null) result = caseRequire(numberComparing);
         if (result == null) result = caseEffect(numberComparing);
         if (result == null) result = caseAttributeValues(numberComparing);
-        if (result == null) result = caseTeams(numberComparing);
-        if (result == null) result = caseDeclaration(numberComparing);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.COMPARATOR:
+      {
+        Comparator comparator = (Comparator)theEObject;
+        T result = caseComparator(comparator);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -306,38 +307,119 @@ public class RPGSwitch<T> extends Switch<T>
       {
         AtomicNumber atomicNumber = (AtomicNumber)theEObject;
         T result = caseAtomicNumber(atomicNumber);
-        if (result == null) result = caseAttributeValues(atomicNumber);
         if (result == null) result = caseBattleSize(atomicNumber);
         if (result == null) result = caseMultiply(atomicNumber);
         if (result == null) result = caseSum(atomicNumber);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RPGPackage.NAME_ATTRIBUTE:
+      {
+        NameAttribute nameAttribute = (NameAttribute)theEObject;
+        T result = caseNameAttribute(nameAttribute);
+        if (result == null) result = caseAtomicNumber(nameAttribute);
+        if (result == null) result = caseBattleSize(nameAttribute);
+        if (result == null) result = caseMultiply(nameAttribute);
+        if (result == null) result = caseSum(nameAttribute);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.SELF_TARGETING:
+      {
+        SelfTargeting selfTargeting = (SelfTargeting)theEObject;
+        T result = caseSelfTargeting(selfTargeting);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.INT_NUM:
+      {
+        IntNum intNum = (IntNum)theEObject;
+        T result = caseIntNum(intNum);
+        if (result == null) result = caseAtomicNumber(intNum);
+        if (result == null) result = caseBattleSize(intNum);
+        if (result == null) result = caseMultiply(intNum);
+        if (result == null) result = caseSum(intNum);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.FLOAT_NUM:
+      {
+        FloatNum floatNum = (FloatNum)theEObject;
+        T result = caseFloatNum(floatNum);
+        if (result == null) result = caseAtomicNumber(floatNum);
+        if (result == null) result = caseBattleSize(floatNum);
+        if (result == null) result = caseMultiply(floatNum);
+        if (result == null) result = caseSum(floatNum);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RPGPackage.OR:
       {
-        or or = (or)theEObject;
-        T result = caseor(or);
+        Or or = (Or)theEObject;
+        T result = caseOr(or);
         if (result == null) result = caseProposition(or);
         if (result == null) result = caseRule(or);
-        if (result == null) result = caseRequire(or);
         if (result == null) result = caseEffect(or);
         if (result == null) result = caseAttributeValues(or);
-        if (result == null) result = caseTeams(or);
-        if (result == null) result = caseDeclaration(or);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
       case RPGPackage.AND:
       {
-        and and = (and)theEObject;
-        T result = caseand(and);
+        And and = (And)theEObject;
+        T result = caseAnd(and);
         if (result == null) result = caseProposition(and);
         if (result == null) result = caseRule(and);
-        if (result == null) result = caseRequire(and);
         if (result == null) result = caseEffect(and);
         if (result == null) result = caseAttributeValues(and);
-        if (result == null) result = caseTeams(and);
-        if (result == null) result = caseDeclaration(and);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.SMALLER:
+      {
+        Smaller smaller = (Smaller)theEObject;
+        T result = caseSmaller(smaller);
+        if (result == null) result = caseComparator(smaller);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.SMALLER_EQ:
+      {
+        SmallerEq smallerEq = (SmallerEq)theEObject;
+        T result = caseSmallerEq(smallerEq);
+        if (result == null) result = caseComparator(smallerEq);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.EQ:
+      {
+        Eq eq = (Eq)theEObject;
+        T result = caseEq(eq);
+        if (result == null) result = caseComparator(eq);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.BIGGER_EQ:
+      {
+        BiggerEq biggerEq = (BiggerEq)theEObject;
+        T result = caseBiggerEq(biggerEq);
+        if (result == null) result = caseComparator(biggerEq);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.BIGGER:
+      {
+        Bigger bigger = (Bigger)theEObject;
+        T result = caseBigger(bigger);
+        if (result == null) result = caseComparator(bigger);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.NEQ:
+      {
+        NEq nEq = (NEq)theEObject;
+        T result = caseNEq(nEq);
+        if (result == null) result = caseComparator(nEq);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -812,6 +894,22 @@ public class RPGSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Comparator</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Comparator</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseComparator(Comparator object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Sum</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -860,33 +958,193 @@ public class RPGSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>or</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Name Attribute</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>or</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Name Attribute</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseor(or object)
+  public T caseNameAttribute(NameAttribute object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>and</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Self Targeting</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>and</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Self Targeting</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseand(and object)
+  public T caseSelfTargeting(SelfTargeting object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Int Num</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Int Num</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIntNum(IntNum object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Float Num</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Float Num</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFloatNum(FloatNum object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Or</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Or</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOr(Or object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>And</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>And</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAnd(And object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Smaller</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Smaller</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSmaller(Smaller object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Smaller Eq</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Smaller Eq</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSmallerEq(SmallerEq object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Eq</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Eq</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEq(Eq object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bigger Eq</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bigger Eq</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBiggerEq(BiggerEq object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bigger</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bigger</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBigger(Bigger object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>NEq</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>NEq</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNEq(NEq object)
   {
     return null;
   }

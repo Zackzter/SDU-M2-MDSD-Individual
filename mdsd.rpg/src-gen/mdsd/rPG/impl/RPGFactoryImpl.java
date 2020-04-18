@@ -92,11 +92,22 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.REQUIRE: return createRequire();
       case RPGPackage.PROPOSITION: return createProposition();
       case RPGPackage.NUMBER_COMPARING: return createNumberComparing();
+      case RPGPackage.COMPARATOR: return createComparator();
       case RPGPackage.SUM: return createSum();
       case RPGPackage.MULTIPLY: return createMultiply();
       case RPGPackage.ATOMIC_NUMBER: return createAtomicNumber();
-      case RPGPackage.OR: return createor();
-      case RPGPackage.AND: return createand();
+      case RPGPackage.NAME_ATTRIBUTE: return createNameAttribute();
+      case RPGPackage.SELF_TARGETING: return createSelfTargeting();
+      case RPGPackage.INT_NUM: return createIntNum();
+      case RPGPackage.FLOAT_NUM: return createFloatNum();
+      case RPGPackage.OR: return createOr();
+      case RPGPackage.AND: return createAnd();
+      case RPGPackage.SMALLER: return createSmaller();
+      case RPGPackage.SMALLER_EQ: return createSmallerEq();
+      case RPGPackage.EQ: return createEq();
+      case RPGPackage.BIGGER_EQ: return createBiggerEq();
+      case RPGPackage.BIGGER: return createBigger();
+      case RPGPackage.NEQ: return createNEq();
       case RPGPackage.ADD: return createAdd();
       case RPGPackage.SUB: return createSub();
       case RPGPackage.MULT: return createMult();
@@ -436,6 +447,18 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
+  public Comparator createComparator()
+  {
+    ComparatorImpl comparator = new ComparatorImpl();
+    return comparator;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Sum createSum()
   {
     SumImpl sum = new SumImpl();
@@ -472,9 +495,57 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
-  public or createor()
+  public NameAttribute createNameAttribute()
   {
-    orImpl or = new orImpl();
+    NameAttributeImpl nameAttribute = new NameAttributeImpl();
+    return nameAttribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SelfTargeting createSelfTargeting()
+  {
+    SelfTargetingImpl selfTargeting = new SelfTargetingImpl();
+    return selfTargeting;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public IntNum createIntNum()
+  {
+    IntNumImpl intNum = new IntNumImpl();
+    return intNum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public FloatNum createFloatNum()
+  {
+    FloatNumImpl floatNum = new FloatNumImpl();
+    return floatNum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Or createOr()
+  {
+    OrImpl or = new OrImpl();
     return or;
   }
 
@@ -484,10 +555,82 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
-  public and createand()
+  public And createAnd()
   {
-    andImpl and = new andImpl();
+    AndImpl and = new AndImpl();
     return and;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Smaller createSmaller()
+  {
+    SmallerImpl smaller = new SmallerImpl();
+    return smaller;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SmallerEq createSmallerEq()
+  {
+    SmallerEqImpl smallerEq = new SmallerEqImpl();
+    return smallerEq;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Eq createEq()
+  {
+    EqImpl eq = new EqImpl();
+    return eq;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public BiggerEq createBiggerEq()
+  {
+    BiggerEqImpl biggerEq = new BiggerEqImpl();
+    return biggerEq;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Bigger createBigger()
+  {
+    BiggerImpl bigger = new BiggerImpl();
+    return bigger;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NEq createNEq()
+  {
+    NEqImpl nEq = new NEqImpl();
+    return nEq;
   }
 
   /**

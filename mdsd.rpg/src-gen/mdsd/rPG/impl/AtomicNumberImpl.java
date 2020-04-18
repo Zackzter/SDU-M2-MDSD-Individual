@@ -4,7 +4,6 @@
 package mdsd.rPG.impl;
 
 import mdsd.rPG.AtomicNumber;
-import mdsd.rPG.Attribute;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Require;
 
@@ -25,12 +24,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.impl.AtomicNumberImpl#getReq <em>Req</em>}</li>
- *   <li>{@link mdsd.rPG.impl.AtomicNumberImpl#getAttribute <em>Attribute</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class AtomicNumberImpl extends AttributeValuesImpl implements AtomicNumber
+public class AtomicNumberImpl extends BattleSizeImpl implements AtomicNumber
 {
   /**
    * The cached value of the '{@link #getReq() <em>Req</em>}' containment reference.
@@ -41,16 +39,6 @@ public class AtomicNumberImpl extends AttributeValuesImpl implements AtomicNumbe
    * @ordered
    */
   protected Require req;
-
-  /**
-   * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAttribute()
-   * @generated
-   * @ordered
-   */
-  protected Attribute attribute;
 
   /**
    * <!-- begin-user-doc -->
@@ -129,51 +117,6 @@ public class AtomicNumberImpl extends AttributeValuesImpl implements AtomicNumbe
    * @generated
    */
   @Override
-  public Attribute getAttribute()
-  {
-    if (attribute != null && attribute.eIsProxy())
-    {
-      InternalEObject oldAttribute = (InternalEObject)attribute;
-      attribute = (Attribute)eResolveProxy(oldAttribute);
-      if (attribute != oldAttribute)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RPGPackage.ATOMIC_NUMBER__ATTRIBUTE, oldAttribute, attribute));
-      }
-    }
-    return attribute;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Attribute basicGetAttribute()
-  {
-    return attribute;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setAttribute(Attribute newAttribute)
-  {
-    Attribute oldAttribute = attribute;
-    attribute = newAttribute;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.ATOMIC_NUMBER__ATTRIBUTE, oldAttribute, attribute));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -196,9 +139,6 @@ public class AtomicNumberImpl extends AttributeValuesImpl implements AtomicNumbe
     {
       case RPGPackage.ATOMIC_NUMBER__REQ:
         return getReq();
-      case RPGPackage.ATOMIC_NUMBER__ATTRIBUTE:
-        if (resolve) return getAttribute();
-        return basicGetAttribute();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -215,9 +155,6 @@ public class AtomicNumberImpl extends AttributeValuesImpl implements AtomicNumbe
     {
       case RPGPackage.ATOMIC_NUMBER__REQ:
         setReq((Require)newValue);
-        return;
-      case RPGPackage.ATOMIC_NUMBER__ATTRIBUTE:
-        setAttribute((Attribute)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -236,9 +173,6 @@ public class AtomicNumberImpl extends AttributeValuesImpl implements AtomicNumbe
       case RPGPackage.ATOMIC_NUMBER__REQ:
         setReq((Require)null);
         return;
-      case RPGPackage.ATOMIC_NUMBER__ATTRIBUTE:
-        setAttribute((Attribute)null);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -255,8 +189,6 @@ public class AtomicNumberImpl extends AttributeValuesImpl implements AtomicNumbe
     {
       case RPGPackage.ATOMIC_NUMBER__REQ:
         return req != null;
-      case RPGPackage.ATOMIC_NUMBER__ATTRIBUTE:
-        return attribute != null;
     }
     return super.eIsSet(featureID);
   }

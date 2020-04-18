@@ -3,6 +3,7 @@
  */
 package mdsd.rPG.impl;
 
+import mdsd.rPG.Comparator;
 import mdsd.rPG.NumberComparing;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Sum;
@@ -43,24 +44,14 @@ public class NumberComparingImpl extends PropositionImpl implements NumberCompar
   protected Sum left;
 
   /**
-   * The default value of the '{@link #getComp() <em>Comp</em>}' attribute.
+   * The cached value of the '{@link #getComp() <em>Comp</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getComp()
    * @generated
    * @ordered
    */
-  protected static final String COMP_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getComp() <em>Comp</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getComp()
-   * @generated
-   * @ordered
-   */
-  protected String comp = COMP_EDEFAULT;
+  protected Comparator comp;
 
   /**
    * The cached value of the '{@link #getRight() <em>Right</em>}' containment reference.
@@ -149,7 +140,7 @@ public class NumberComparingImpl extends PropositionImpl implements NumberCompar
    * @generated
    */
   @Override
-  public String getComp()
+  public Comparator getComp()
   {
     return comp;
   }
@@ -159,13 +150,38 @@ public class NumberComparingImpl extends PropositionImpl implements NumberCompar
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setComp(String newComp)
+  public NotificationChain basicSetComp(Comparator newComp, NotificationChain msgs)
   {
-    String oldComp = comp;
+    Comparator oldComp = comp;
     comp = newComp;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.NUMBER_COMPARING__COMP, oldComp, comp));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.NUMBER_COMPARING__COMP, oldComp, newComp);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setComp(Comparator newComp)
+  {
+    if (newComp != comp)
+    {
+      NotificationChain msgs = null;
+      if (comp != null)
+        msgs = ((InternalEObject)comp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.NUMBER_COMPARING__COMP, null, msgs);
+      if (newComp != null)
+        msgs = ((InternalEObject)newComp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.NUMBER_COMPARING__COMP, null, msgs);
+      msgs = basicSetComp(newComp, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.NUMBER_COMPARING__COMP, newComp, newComp));
   }
 
   /**
@@ -230,6 +246,8 @@ public class NumberComparingImpl extends PropositionImpl implements NumberCompar
     {
       case RPGPackage.NUMBER_COMPARING__LEFT:
         return basicSetLeft(null, msgs);
+      case RPGPackage.NUMBER_COMPARING__COMP:
+        return basicSetComp(null, msgs);
       case RPGPackage.NUMBER_COMPARING__RIGHT:
         return basicSetRight(null, msgs);
     }
@@ -270,7 +288,7 @@ public class NumberComparingImpl extends PropositionImpl implements NumberCompar
         setLeft((Sum)newValue);
         return;
       case RPGPackage.NUMBER_COMPARING__COMP:
-        setComp((String)newValue);
+        setComp((Comparator)newValue);
         return;
       case RPGPackage.NUMBER_COMPARING__RIGHT:
         setRight((Sum)newValue);
@@ -293,7 +311,7 @@ public class NumberComparingImpl extends PropositionImpl implements NumberCompar
         setLeft((Sum)null);
         return;
       case RPGPackage.NUMBER_COMPARING__COMP:
-        setComp(COMP_EDEFAULT);
+        setComp((Comparator)null);
         return;
       case RPGPackage.NUMBER_COMPARING__RIGHT:
         setRight((Sum)null);
@@ -315,28 +333,11 @@ public class NumberComparingImpl extends PropositionImpl implements NumberCompar
       case RPGPackage.NUMBER_COMPARING__LEFT:
         return left != null;
       case RPGPackage.NUMBER_COMPARING__COMP:
-        return COMP_EDEFAULT == null ? comp != null : !COMP_EDEFAULT.equals(comp);
+        return comp != null;
       case RPGPackage.NUMBER_COMPARING__RIGHT:
         return right != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (comp: ");
-    result.append(comp);
-    result.append(')');
-    return result.toString();
   }
 
 } //NumberComparingImpl

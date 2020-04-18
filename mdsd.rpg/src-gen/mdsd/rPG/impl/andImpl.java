@@ -3,9 +3,9 @@
  */
 package mdsd.rPG.impl;
 
+import mdsd.rPG.And;
 import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
-import mdsd.rPG.and;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -17,19 +17,19 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>and</b></em>'.
+ * An implementation of the model object '<em><b>And</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.andImpl#getLeft <em>Left</em>}</li>
- *   <li>{@link mdsd.rPG.impl.andImpl#getRight <em>Right</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.AndImpl#getLeft <em>Left</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.AndImpl#getRight <em>Right</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class andImpl extends PropositionImpl implements and
+public class AndImpl extends PropositionImpl implements And
 {
   /**
    * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
@@ -56,7 +56,7 @@ public class andImpl extends PropositionImpl implements and
    * <!-- end-user-doc -->
    * @generated
    */
-  protected andImpl()
+  protected AndImpl()
   {
     super();
   }
@@ -266,4 +266,4 @@ public class andImpl extends PropositionImpl implements and
     return super.eIsSet(featureID);
   }
 
-} //andImpl
+} //AndImpl

@@ -3,13 +3,16 @@
  */
 package mdsd.rPG.impl;
 
+import mdsd.rPG.AtomicNumber;
 import mdsd.rPG.AttributeValues;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Rule;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -22,6 +25,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.impl.RuleImpl#getLTypes <em>LTypes</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.RuleImpl#getAn <em>An</em>}</li>
  * </ul>
  *
  * @generated
@@ -47,6 +51,16 @@ public class RuleImpl extends EffectImpl implements Rule
    * @ordered
    */
   protected String lTypes = LTYPES_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getAn() <em>An</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAn()
+   * @generated
+   * @ordered
+   */
+  protected AtomicNumber an;
 
   /**
    * <!-- begin-user-doc -->
@@ -100,12 +114,80 @@ public class RuleImpl extends EffectImpl implements Rule
    * @generated
    */
   @Override
+  public AtomicNumber getAn()
+  {
+    return an;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetAn(AtomicNumber newAn, NotificationChain msgs)
+  {
+    AtomicNumber oldAn = an;
+    an = newAn;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__AN, oldAn, newAn);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setAn(AtomicNumber newAn)
+  {
+    if (newAn != an)
+    {
+      NotificationChain msgs = null;
+      if (an != null)
+        msgs = ((InternalEObject)an).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__AN, null, msgs);
+      if (newAn != null)
+        msgs = ((InternalEObject)newAn).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__AN, null, msgs);
+      msgs = basicSetAn(newAn, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__AN, newAn, newAn));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RPGPackage.RULE__AN:
+        return basicSetAn(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
       case RPGPackage.RULE__LTYPES:
         return getLTypes();
+      case RPGPackage.RULE__AN:
+        return getAn();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -122,6 +204,9 @@ public class RuleImpl extends EffectImpl implements Rule
     {
       case RPGPackage.RULE__LTYPES:
         setLTypes((String)newValue);
+        return;
+      case RPGPackage.RULE__AN:
+        setAn((AtomicNumber)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -140,6 +225,9 @@ public class RuleImpl extends EffectImpl implements Rule
       case RPGPackage.RULE__LTYPES:
         setLTypes(LTYPES_EDEFAULT);
         return;
+      case RPGPackage.RULE__AN:
+        setAn((AtomicNumber)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -156,6 +244,8 @@ public class RuleImpl extends EffectImpl implements Rule
     {
       case RPGPackage.RULE__LTYPES:
         return LTYPES_EDEFAULT == null ? lTypes != null : !LTYPES_EDEFAULT.equals(lTypes);
+      case RPGPackage.RULE__AN:
+        return an != null;
     }
     return super.eIsSet(featureID);
   }
@@ -173,6 +263,7 @@ public class RuleImpl extends EffectImpl implements Rule
       switch (derivedFeatureID)
       {
         case RPGPackage.RULE__LTYPES: return RPGPackage.ATTRIBUTE_VALUES__LTYPES;
+        case RPGPackage.RULE__AN: return RPGPackage.ATTRIBUTE_VALUES__AN;
         default: return -1;
       }
     }
@@ -192,6 +283,7 @@ public class RuleImpl extends EffectImpl implements Rule
       switch (baseFeatureID)
       {
         case RPGPackage.ATTRIBUTE_VALUES__LTYPES: return RPGPackage.RULE__LTYPES;
+        case RPGPackage.ATTRIBUTE_VALUES__AN: return RPGPackage.RULE__AN;
         default: return -1;
       }
     }

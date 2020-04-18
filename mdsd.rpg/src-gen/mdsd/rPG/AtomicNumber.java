@@ -14,14 +14,13 @@ package mdsd.rPG;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.AtomicNumber#getReq <em>Req</em>}</li>
- *   <li>{@link mdsd.rPG.AtomicNumber#getAttribute <em>Attribute</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getAtomicNumber()
  * @model
  * @generated
  */
-public interface AtomicNumber extends AttributeValues, BattleSize, Multiply
+public interface AtomicNumber extends BattleSize, Multiply
 {
   /**
    * Returns the value of the '<em><b>Req</b></em>' containment reference.
@@ -44,27 +43,5 @@ public interface AtomicNumber extends AttributeValues, BattleSize, Multiply
    * @generated
    */
   void setReq(Require value);
-
-  /**
-   * Returns the value of the '<em><b>Attribute</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Attribute</em>' reference.
-   * @see #setAttribute(Attribute)
-   * @see mdsd.rPG.RPGPackage#getAtomicNumber_Attribute()
-   * @model
-   * @generated
-   */
-  Attribute getAttribute();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.AtomicNumber#getAttribute <em>Attribute</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Attribute</em>' reference.
-   * @see #getAttribute()
-   * @generated
-   */
-  void setAttribute(Attribute value);
 
 } // AtomicNumber

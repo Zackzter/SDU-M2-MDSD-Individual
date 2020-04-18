@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Proposition extends Rule, Require
+public interface Proposition extends Rule
 {
   /**
    * Returns the value of the '<em><b>Attritbute To Set</b></em>' reference list.
