@@ -11,7 +11,6 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
@@ -21,37 +20,33 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected RPGGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_AtomicAttribute_SelfTargetingParserRuleCall_1_0_q;
-	protected AbstractElementAlias match_Require_RequireKeyword_0_0_q;
-	protected AbstractElementAlias match_Require_Rule___IfKeyword_0_or_RequireKeyword_0_0__q;
-	protected AbstractElementAlias match_Rule_SelfTargetingParserRuleCall_3_0_q;
+	protected AbstractElementAlias match_AtomicNumber_SelfParserRuleCall_2_0_q;
+	protected AbstractElementAlias match_Rule_SelfParserRuleCall_3_0_q;
 	protected AbstractElementAlias match_Statement_LeftParenthesisKeyword_1_0_a;
 	protected AbstractElementAlias match_Statement_LeftParenthesisKeyword_1_0_p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (RPGGrammarAccess) access;
-		match_AtomicAttribute_SelfTargetingParserRuleCall_1_0_q = new TokenAlias(false, true, grammarAccess.getAtomicAttributeAccess().getSelfTargetingParserRuleCall_1_0());
-		match_Require_RequireKeyword_0_0_q = new TokenAlias(false, true, grammarAccess.getRequireAccess().getRequireKeyword_0_0());
-		match_Require_Rule___IfKeyword_0_or_RequireKeyword_0_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getRequireAccess().getRequireKeyword_0_0()), new TokenAlias(false, false, grammarAccess.getRuleAccess().getIfKeyword_0()));
-		match_Rule_SelfTargetingParserRuleCall_3_0_q = new TokenAlias(false, true, grammarAccess.getRuleAccess().getSelfTargetingParserRuleCall_3_0());
+		match_AtomicNumber_SelfParserRuleCall_2_0_q = new TokenAlias(false, true, grammarAccess.getAtomicNumberAccess().getSelfParserRuleCall_2_0());
+		match_Rule_SelfParserRuleCall_3_0_q = new TokenAlias(false, true, grammarAccess.getRuleAccess().getSelfParserRuleCall_3_0());
 		match_Statement_LeftParenthesisKeyword_1_0_a = new TokenAlias(true, true, grammarAccess.getStatementAccess().getLeftParenthesisKeyword_1_0());
 		match_Statement_LeftParenthesisKeyword_1_0_p = new TokenAlias(true, false, grammarAccess.getStatementAccess().getLeftParenthesisKeyword_1_0());
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getSelfTargetingRule())
-			return getSelfTargetingToken(semanticObject, ruleCall, node);
+		if (ruleCall.getRule() == grammarAccess.getSelfRule())
+			return getSelfToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
 	/**
-	 * SelfTargeting:
+	 * Self:
 	 * 	'self.'
 	 * ;
 	 */
-	protected String getSelfTargetingToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+	protected String getSelfToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "self.";
@@ -63,14 +58,10 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_AtomicAttribute_SelfTargetingParserRuleCall_1_0_q.equals(syntax))
-				emit_AtomicAttribute_SelfTargetingParserRuleCall_1_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Require_RequireKeyword_0_0_q.equals(syntax))
-				emit_Require_RequireKeyword_0_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Require_Rule___IfKeyword_0_or_RequireKeyword_0_0__q.equals(syntax))
-				emit_Require_Rule___IfKeyword_0_or_RequireKeyword_0_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Rule_SelfTargetingParserRuleCall_3_0_q.equals(syntax))
-				emit_Rule_SelfTargetingParserRuleCall_3_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_AtomicNumber_SelfParserRuleCall_2_0_q.equals(syntax))
+				emit_AtomicNumber_SelfParserRuleCall_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Rule_SelfParserRuleCall_3_0_q.equals(syntax))
+				emit_Rule_SelfParserRuleCall_3_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Statement_LeftParenthesisKeyword_1_0_a.equals(syntax))
 				emit_Statement_LeftParenthesisKeyword_1_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Statement_LeftParenthesisKeyword_1_0_p.equals(syntax))
@@ -81,50 +72,19 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	/**
 	 * Ambiguous syntax:
-	 *     SelfTargeting?
+	 *     Self?
 	 *
 	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'battling_member_count' (ambiguity) attribute=[Attribute|ID]
 	 *     (rule start) (ambiguity) attribute=[Attribute|ID]
 	 */
-	protected void emit_AtomicAttribute_SelfTargetingParserRuleCall_1_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_AtomicNumber_SelfParserRuleCall_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * Ambiguous syntax:
-	 *     'require'?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) 'teams' (ambiguity) '('* left=Sum
-	 *     (rule start) 'teams' (ambiguity) '('* type=[Type|ID]
-	 *     (rule start) 'teams' (ambiguity) '('* {And.left=}
-	 *     (rule start) 'teams' (ambiguity) '('* {Or.left=}
-	 *     (rule start) (ambiguity) '('* left=Sum
-	 *     (rule start) (ambiguity) '('* type=[Type|ID]
-	 *     (rule start) (ambiguity) '('* {And.left=}
-	 *     (rule start) (ambiguity) '('* {Or.left=}
-	 */
-	protected void emit_Require_RequireKeyword_0_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Ambiguous syntax:
-	 *     ('if' | 'require')?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) '('* left=Sum
-	 *     (rule start) (ambiguity) '('* type=[Type|ID]
-	 *     (rule start) (ambiguity) '('* {And.left=}
-	 *     (rule start) (ambiguity) '('* {Or.left=}
-	 */
-	protected void emit_Require_Rule___IfKeyword_0_or_RequireKeyword_0_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Ambiguous syntax:
-	 *     SelfTargeting?
+	 *     Self?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     change+=Sum (ambiguity) attritbuteToSet+=[Attribute|ID]
@@ -133,7 +93,7 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     right=Sum 'then' (ambiguity) attritbuteToSet+=[Attribute|ID]
 	 *     type=[Type|ID] 'then' (ambiguity) attritbuteToSet+=[Attribute|ID]
 	 */
-	protected void emit_Rule_SelfTargetingParserRuleCall_3_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Rule_SelfParserRuleCall_3_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -150,18 +110,6 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) 'if' (ambiguity) type=[Type|ID]
 	 *     (rule start) 'if' (ambiguity) {And.left=}
 	 *     (rule start) 'if' (ambiguity) {Or.left=}
-	 *     (rule start) 'require'? (ambiguity) left=Sum
-	 *     (rule start) 'require'? (ambiguity) type=[Type|ID]
-	 *     (rule start) 'require'? (ambiguity) {And.left=}
-	 *     (rule start) 'require'? (ambiguity) {Or.left=}
-	 *     (rule start) 'teams' 'require'? (ambiguity) left=Sum
-	 *     (rule start) 'teams' 'require'? (ambiguity) type=[Type|ID]
-	 *     (rule start) 'teams' 'require'? (ambiguity) {And.left=}
-	 *     (rule start) 'teams' 'require'? (ambiguity) {Or.left=}
-	 *     (rule start) ('if' | 'require')? (ambiguity) left=Sum
-	 *     (rule start) ('if' | 'require')? (ambiguity) type=[Type|ID]
-	 *     (rule start) ('if' | 'require')? (ambiguity) {And.left=}
-	 *     (rule start) ('if' | 'require')? (ambiguity) {Or.left=}
 	 *     (rule start) (ambiguity) left=Sum
 	 *     (rule start) (ambiguity) type=[Type|ID]
 	 *     (rule start) (ambiguity) {And.left=}

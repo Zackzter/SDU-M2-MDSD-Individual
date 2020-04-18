@@ -14,15 +14,13 @@ package mdsd.rPG;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.AtomicNumber#getReq <em>Req</em>}</li>
- *   <li>{@link mdsd.rPG.AtomicNumber#getFloat2 <em>Float2</em>}</li>
- *   <li>{@link mdsd.rPG.AtomicNumber#getInt2 <em>Int2</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getAtomicNumber()
  * @model
  * @generated
  */
-public interface AtomicNumber extends AttributeValues, BattleSize, AtomicAttribute
+public interface AtomicNumber extends BattleSize, Multiply
 {
   /**
    * Returns the value of the '<em><b>Req</b></em>' containment reference.
@@ -45,49 +43,5 @@ public interface AtomicNumber extends AttributeValues, BattleSize, AtomicAttribu
    * @generated
    */
   void setReq(Require value);
-
-  /**
-   * Returns the value of the '<em><b>Float2</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Float2</em>' attribute.
-   * @see #setFloat2(String)
-   * @see mdsd.rPG.RPGPackage#getAtomicNumber_Float2()
-   * @model
-   * @generated
-   */
-  String getFloat2();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.AtomicNumber#getFloat2 <em>Float2</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Float2</em>' attribute.
-   * @see #getFloat2()
-   * @generated
-   */
-  void setFloat2(String value);
-
-  /**
-   * Returns the value of the '<em><b>Int2</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Int2</em>' attribute.
-   * @see #setInt2(int)
-   * @see mdsd.rPG.RPGPackage#getAtomicNumber_Int2()
-   * @model
-   * @generated
-   */
-  int getInt2();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.AtomicNumber#getInt2 <em>Int2</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Int2</em>' attribute.
-   * @see #getInt2()
-   * @generated
-   */
-  void setInt2(int value);
 
 } // AtomicNumber

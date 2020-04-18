@@ -61,6 +61,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Effect"/>
   <eClassifiers xsi:type="ecore:EClass" name="AttributeValues">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lTypes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="an" eType="#//AtomicNumber"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AltAttribute">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
@@ -73,7 +75,7 @@
         eType="#//Entity" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Death" eSuperTypes="#//Declaration">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="con" upperBound="-1" eType="#//Proposition"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="req" eType="#//Require"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entity">
@@ -105,32 +107,81 @@
         upperBound="-1" eType="#//Entity"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BattleSize"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Require" eSuperTypes="#//AttributeValues #//Teams"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Proposition" eSuperTypes="#//Rule #//Require">
+  <eClassifiers xsi:type="ecore:EClass" name="Require" eSuperTypes="#//AttributeValues #//Teams">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="log" eType="#//Proposition"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Proposition" eSuperTypes="#//Rule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attritbuteToSet" unique="false"
         upperBound="-1" eType="#//Attribute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="change" upperBound="-1"
-        eType="#//Proposition" containment="true"/>
+        eType="#//Sum" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NumberComparing" eSuperTypes="#//Proposition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Sum" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comp" eType="#//Comparator"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Sum" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Comparator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Sum"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Multiply" eSuperTypes="#//Sum"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicNumber" eSuperTypes="#//BattleSize #//Multiply">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="req" eType="#//Require"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NameAttribute" eSuperTypes="#//AtomicNumber">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SelfTargeting">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="self" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntNum" eSuperTypes="#//AtomicNumber">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FloatNum" eSuperTypes="#//AtomicNumber">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="decimal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//Proposition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Proposition"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Proposition"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AtomicAttribute" eSuperTypes="#//Proposition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AtomicNumber" eSuperTypes="#//AttributeValues #//BattleSize #//AtomicAttribute">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="req" eType="#//Require"
+  <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//Proposition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Proposition"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="float2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Proposition"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//Proposition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//Proposition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="#//Proposition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Sub" eSuperTypes="#//Proposition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Mult" eSuperTypes="#//Proposition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Div" eSuperTypes="#//Proposition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Smaller" eSuperTypes="#//Comparator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SmallerEq" eSuperTypes="#//Comparator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Eq" eSuperTypes="#//Comparator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BiggerEq" eSuperTypes="#//Comparator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Bigger" eSuperTypes="#//Comparator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NEq" eSuperTypes="#//Comparator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="#//Sum">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Sum" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Multiply"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sub" eSuperTypes="#//Sum">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Sum" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Multiply"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mult" eSuperTypes="#//Multiply">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Multiply"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//AtomicNumber"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Div" eSuperTypes="#//Multiply">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Multiply"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//AtomicNumber"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

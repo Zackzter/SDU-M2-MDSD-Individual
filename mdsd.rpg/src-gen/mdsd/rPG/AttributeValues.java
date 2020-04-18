@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.AttributeValues#getLTypes <em>LTypes</em>}</li>
+ *   <li>{@link mdsd.rPG.AttributeValues#getAn <em>An</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getAttributeValues()
@@ -44,5 +45,27 @@ public interface AttributeValues extends EObject
    * @generated
    */
   void setLTypes(String value);
+
+  /**
+   * Returns the value of the '<em><b>An</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>An</em>' containment reference.
+   * @see #setAn(AtomicNumber)
+   * @see mdsd.rPG.RPGPackage#getAttributeValues_An()
+   * @model containment="true"
+   * @generated
+   */
+  AtomicNumber getAn();
+
+  /**
+   * Sets the value of the '{@link mdsd.rPG.AttributeValues#getAn <em>An</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>An</em>' containment reference.
+   * @see #getAn()
+   * @generated
+   */
+  void setAn(AtomicNumber value);
 
 } // AttributeValues

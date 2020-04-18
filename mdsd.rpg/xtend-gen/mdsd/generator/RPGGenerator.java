@@ -1324,7 +1324,7 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("public interface Killable {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("// ost2");
+    _builder.append("// ost3");
     _builder.newLine();
     _builder.append("\t");
     CharSequence _re = this.re(death.getReq());

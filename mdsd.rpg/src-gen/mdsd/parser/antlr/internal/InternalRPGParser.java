@@ -2218,14 +2218,14 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAttributeValues"
-    // InternalRPG.g:823:1: ruleAttributeValues returns [EObject current=null] : ( (otherlv_0= 'is' ( ( (lv_lTypes_1_0= ruleLegalType ) ) | this_AtomicNumber_2= ruleAtomicNumber ) ) | (this_Rule_3= ruleRule | this_Require_4= ruleRequire ) ) ;
+    // InternalRPG.g:823:1: ruleAttributeValues returns [EObject current=null] : ( (otherlv_0= 'is' ( ( (lv_lTypes_1_0= ruleLegalType ) ) | ( (lv_an_2_0= ruleAtomicNumber ) ) ) ) | (this_Rule_3= ruleRule | this_Require_4= ruleRequire ) ) ;
     public final EObject ruleAttributeValues() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         AntlrDatatypeRuleToken lv_lTypes_1_0 = null;
 
-        EObject this_AtomicNumber_2 = null;
+        EObject lv_an_2_0 = null;
 
         EObject this_Rule_3 = null;
 
@@ -2236,17 +2236,17 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:829:2: ( ( (otherlv_0= 'is' ( ( (lv_lTypes_1_0= ruleLegalType ) ) | this_AtomicNumber_2= ruleAtomicNumber ) ) | (this_Rule_3= ruleRule | this_Require_4= ruleRequire ) ) )
-            // InternalRPG.g:830:2: ( (otherlv_0= 'is' ( ( (lv_lTypes_1_0= ruleLegalType ) ) | this_AtomicNumber_2= ruleAtomicNumber ) ) | (this_Rule_3= ruleRule | this_Require_4= ruleRequire ) )
+            // InternalRPG.g:829:2: ( ( (otherlv_0= 'is' ( ( (lv_lTypes_1_0= ruleLegalType ) ) | ( (lv_an_2_0= ruleAtomicNumber ) ) ) ) | (this_Rule_3= ruleRule | this_Require_4= ruleRequire ) ) )
+            // InternalRPG.g:830:2: ( (otherlv_0= 'is' ( ( (lv_lTypes_1_0= ruleLegalType ) ) | ( (lv_an_2_0= ruleAtomicNumber ) ) ) ) | (this_Rule_3= ruleRule | this_Require_4= ruleRequire ) )
             {
-            // InternalRPG.g:830:2: ( (otherlv_0= 'is' ( ( (lv_lTypes_1_0= ruleLegalType ) ) | this_AtomicNumber_2= ruleAtomicNumber ) ) | (this_Rule_3= ruleRule | this_Require_4= ruleRequire ) )
+            // InternalRPG.g:830:2: ( (otherlv_0= 'is' ( ( (lv_lTypes_1_0= ruleLegalType ) ) | ( (lv_an_2_0= ruleAtomicNumber ) ) ) ) | (this_Rule_3= ruleRule | this_Require_4= ruleRequire ) )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
             if ( (LA15_0==23) ) {
                 alt15=1;
             }
-            else if ( ((LA15_0>=RULE_ID && LA15_0<=RULE_INT)||LA15_0==24||LA15_0==34||LA15_0==37||LA15_0==48) ) {
+            else if ( (LA15_0==24||LA15_0==34) ) {
                 alt15=2;
             }
             else {
@@ -2257,23 +2257,23 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalRPG.g:831:3: (otherlv_0= 'is' ( ( (lv_lTypes_1_0= ruleLegalType ) ) | this_AtomicNumber_2= ruleAtomicNumber ) )
+                    // InternalRPG.g:831:3: (otherlv_0= 'is' ( ( (lv_lTypes_1_0= ruleLegalType ) ) | ( (lv_an_2_0= ruleAtomicNumber ) ) ) )
                     {
-                    // InternalRPG.g:831:3: (otherlv_0= 'is' ( ( (lv_lTypes_1_0= ruleLegalType ) ) | this_AtomicNumber_2= ruleAtomicNumber ) )
-                    // InternalRPG.g:832:4: otherlv_0= 'is' ( ( (lv_lTypes_1_0= ruleLegalType ) ) | this_AtomicNumber_2= ruleAtomicNumber )
+                    // InternalRPG.g:831:3: (otherlv_0= 'is' ( ( (lv_lTypes_1_0= ruleLegalType ) ) | ( (lv_an_2_0= ruleAtomicNumber ) ) ) )
+                    // InternalRPG.g:832:4: otherlv_0= 'is' ( ( (lv_lTypes_1_0= ruleLegalType ) ) | ( (lv_an_2_0= ruleAtomicNumber ) ) )
                     {
                     otherlv_0=(Token)match(input,23,FOLLOW_21); 
 
                     				newLeafNode(otherlv_0, grammarAccess.getAttributeValuesAccess().getIsKeyword_0_0());
                     			
-                    // InternalRPG.g:836:4: ( ( (lv_lTypes_1_0= ruleLegalType ) ) | this_AtomicNumber_2= ruleAtomicNumber )
+                    // InternalRPG.g:836:4: ( ( (lv_lTypes_1_0= ruleLegalType ) ) | ( (lv_an_2_0= ruleAtomicNumber ) ) )
                     int alt13=2;
                     int LA13_0 = input.LA(1);
 
                     if ( ((LA13_0>=50 && LA13_0<=51)) ) {
                         alt13=1;
                     }
-                    else if ( (LA13_0==RULE_INT) ) {
+                    else if ( ((LA13_0>=RULE_ID && LA13_0<=RULE_INT)||LA13_0==48) ) {
                         alt13=2;
                     }
                     else {
@@ -2321,20 +2321,39 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalRPG.g:857:5: this_AtomicNumber_2= ruleAtomicNumber
+                            // InternalRPG.g:857:5: ( (lv_an_2_0= ruleAtomicNumber ) )
+                            {
+                            // InternalRPG.g:857:5: ( (lv_an_2_0= ruleAtomicNumber ) )
+                            // InternalRPG.g:858:6: (lv_an_2_0= ruleAtomicNumber )
+                            {
+                            // InternalRPG.g:858:6: (lv_an_2_0= ruleAtomicNumber )
+                            // InternalRPG.g:859:7: lv_an_2_0= ruleAtomicNumber
                             {
 
-                            					newCompositeNode(grammarAccess.getAttributeValuesAccess().getAtomicNumberParserRuleCall_0_1_1());
-                            				
+                            							newCompositeNode(grammarAccess.getAttributeValuesAccess().getAnAtomicNumberParserRuleCall_0_1_1_0());
+                            						
                             pushFollow(FOLLOW_2);
-                            this_AtomicNumber_2=ruleAtomicNumber();
+                            lv_an_2_0=ruleAtomicNumber();
 
                             state._fsp--;
 
 
-                            					current = this_AtomicNumber_2;
-                            					afterParserOrEnumRuleCall();
-                            				
+                            							if (current==null) {
+                            								current = createModelElementForParent(grammarAccess.getAttributeValuesRule());
+                            							}
+                            							set(
+                            								current,
+                            								"an",
+                            								lv_an_2_0,
+                            								"mdsd.RPG.AtomicNumber");
+                            							afterParserOrEnumRuleCall();
+                            						
+
+                            }
+
+
+                            }
+
 
                             }
                             break;
@@ -2348,16 +2367,16 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalRPG.g:868:3: (this_Rule_3= ruleRule | this_Require_4= ruleRequire )
+                    // InternalRPG.g:879:3: (this_Rule_3= ruleRule | this_Require_4= ruleRequire )
                     {
-                    // InternalRPG.g:868:3: (this_Rule_3= ruleRule | this_Require_4= ruleRequire )
+                    // InternalRPG.g:879:3: (this_Rule_3= ruleRule | this_Require_4= ruleRequire )
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
                     if ( (LA14_0==24) ) {
                         alt14=1;
                     }
-                    else if ( ((LA14_0>=RULE_ID && LA14_0<=RULE_INT)||LA14_0==34||LA14_0==37||LA14_0==48) ) {
+                    else if ( (LA14_0==34) ) {
                         alt14=2;
                     }
                     else {
@@ -2368,7 +2387,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt14) {
                         case 1 :
-                            // InternalRPG.g:869:4: this_Rule_3= ruleRule
+                            // InternalRPG.g:880:4: this_Rule_3= ruleRule
                             {
 
                             				newCompositeNode(grammarAccess.getAttributeValuesAccess().getRuleParserRuleCall_1_0());
@@ -2386,7 +2405,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalRPG.g:878:4: this_Require_4= ruleRequire
+                            // InternalRPG.g:889:4: this_Require_4= ruleRequire
                             {
 
                             				newCompositeNode(grammarAccess.getAttributeValuesAccess().getRequireParserRuleCall_1_1());
@@ -2432,7 +2451,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAltAttribute"
-    // InternalRPG.g:891:1: entryRuleAltAttribute returns [EObject current=null] : iv_ruleAltAttribute= ruleAltAttribute EOF ;
+    // InternalRPG.g:902:1: entryRuleAltAttribute returns [EObject current=null] : iv_ruleAltAttribute= ruleAltAttribute EOF ;
     public final EObject entryRuleAltAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -2440,8 +2459,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:891:53: (iv_ruleAltAttribute= ruleAltAttribute EOF )
-            // InternalRPG.g:892:2: iv_ruleAltAttribute= ruleAltAttribute EOF
+            // InternalRPG.g:902:53: (iv_ruleAltAttribute= ruleAltAttribute EOF )
+            // InternalRPG.g:903:2: iv_ruleAltAttribute= ruleAltAttribute EOF
             {
              newCompositeNode(grammarAccess.getAltAttributeRule()); 
             pushFollow(FOLLOW_1);
@@ -2468,7 +2487,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAltAttribute"
-    // InternalRPG.g:898:1: ruleAltAttribute returns [EObject current=null] : (otherlv_0= 'attribute' ( (otherlv_1= RULE_ID ) ) ( (lv_av_2_0= ruleAttributeValues ) )? ) ;
+    // InternalRPG.g:909:1: ruleAltAttribute returns [EObject current=null] : (otherlv_0= 'attribute' ( (otherlv_1= RULE_ID ) ) ( (lv_av_2_0= ruleAttributeValues ) )? ) ;
     public final EObject ruleAltAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -2481,21 +2500,21 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:904:2: ( (otherlv_0= 'attribute' ( (otherlv_1= RULE_ID ) ) ( (lv_av_2_0= ruleAttributeValues ) )? ) )
-            // InternalRPG.g:905:2: (otherlv_0= 'attribute' ( (otherlv_1= RULE_ID ) ) ( (lv_av_2_0= ruleAttributeValues ) )? )
+            // InternalRPG.g:915:2: ( (otherlv_0= 'attribute' ( (otherlv_1= RULE_ID ) ) ( (lv_av_2_0= ruleAttributeValues ) )? ) )
+            // InternalRPG.g:916:2: (otherlv_0= 'attribute' ( (otherlv_1= RULE_ID ) ) ( (lv_av_2_0= ruleAttributeValues ) )? )
             {
-            // InternalRPG.g:905:2: (otherlv_0= 'attribute' ( (otherlv_1= RULE_ID ) ) ( (lv_av_2_0= ruleAttributeValues ) )? )
-            // InternalRPG.g:906:3: otherlv_0= 'attribute' ( (otherlv_1= RULE_ID ) ) ( (lv_av_2_0= ruleAttributeValues ) )?
+            // InternalRPG.g:916:2: (otherlv_0= 'attribute' ( (otherlv_1= RULE_ID ) ) ( (lv_av_2_0= ruleAttributeValues ) )? )
+            // InternalRPG.g:917:3: otherlv_0= 'attribute' ( (otherlv_1= RULE_ID ) ) ( (lv_av_2_0= ruleAttributeValues ) )?
             {
             otherlv_0=(Token)match(input,21,FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getAltAttributeAccess().getAttributeKeyword_0());
             		
-            // InternalRPG.g:910:3: ( (otherlv_1= RULE_ID ) )
-            // InternalRPG.g:911:4: (otherlv_1= RULE_ID )
+            // InternalRPG.g:921:3: ( (otherlv_1= RULE_ID ) )
+            // InternalRPG.g:922:4: (otherlv_1= RULE_ID )
             {
-            // InternalRPG.g:911:4: (otherlv_1= RULE_ID )
-            // InternalRPG.g:912:5: otherlv_1= RULE_ID
+            // InternalRPG.g:922:4: (otherlv_1= RULE_ID )
+            // InternalRPG.g:923:5: otherlv_1= RULE_ID
             {
 
             					if (current==null) {
@@ -2512,19 +2531,19 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRPG.g:923:3: ( (lv_av_2_0= ruleAttributeValues ) )?
+            // InternalRPG.g:934:3: ( (lv_av_2_0= ruleAttributeValues ) )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
-            if ( ((LA16_0>=RULE_ID && LA16_0<=RULE_INT)||(LA16_0>=23 && LA16_0<=24)||LA16_0==34||LA16_0==37||LA16_0==48) ) {
+            if ( ((LA16_0>=23 && LA16_0<=24)||LA16_0==34) ) {
                 alt16=1;
             }
             switch (alt16) {
                 case 1 :
-                    // InternalRPG.g:924:4: (lv_av_2_0= ruleAttributeValues )
+                    // InternalRPG.g:935:4: (lv_av_2_0= ruleAttributeValues )
                     {
-                    // InternalRPG.g:924:4: (lv_av_2_0= ruleAttributeValues )
-                    // InternalRPG.g:925:5: lv_av_2_0= ruleAttributeValues
+                    // InternalRPG.g:935:4: (lv_av_2_0= ruleAttributeValues )
+                    // InternalRPG.g:936:5: lv_av_2_0= ruleAttributeValues
                     {
 
                     					newCompositeNode(grammarAccess.getAltAttributeAccess().getAvAttributeValuesParserRuleCall_2_0());
@@ -2577,7 +2596,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRule"
-    // InternalRPG.g:946:1: entryRuleRule returns [EObject current=null] : iv_ruleRule= ruleRule EOF ;
+    // InternalRPG.g:957:1: entryRuleRule returns [EObject current=null] : iv_ruleRule= ruleRule EOF ;
     public final EObject entryRuleRule() throws RecognitionException {
         EObject current = null;
 
@@ -2585,8 +2604,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:946:45: (iv_ruleRule= ruleRule EOF )
-            // InternalRPG.g:947:2: iv_ruleRule= ruleRule EOF
+            // InternalRPG.g:957:45: (iv_ruleRule= ruleRule EOF )
+            // InternalRPG.g:958:2: iv_ruleRule= ruleRule EOF
             {
              newCompositeNode(grammarAccess.getRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2613,7 +2632,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRule"
-    // InternalRPG.g:953:1: ruleRule returns [EObject current=null] : (otherlv_0= 'if' this_ORcondition_1= ruleORcondition otherlv_2= 'then' ( ( ruleSelfTargeting )? ( (otherlv_4= RULE_ID ) ) otherlv_5= '=' ( (lv_change_6_0= ruleSum ) )+ )* ) ;
+    // InternalRPG.g:964:1: ruleRule returns [EObject current=null] : (otherlv_0= 'if' this_ORcondition_1= ruleORcondition otherlv_2= 'then' ( ( ruleSelf )? ( (otherlv_4= RULE_ID ) ) otherlv_5= '=' ( (lv_change_6_0= ruleSum ) )+ )* ) ;
     public final EObject ruleRule() throws RecognitionException {
         EObject current = null;
 
@@ -2630,20 +2649,20 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:959:2: ( (otherlv_0= 'if' this_ORcondition_1= ruleORcondition otherlv_2= 'then' ( ( ruleSelfTargeting )? ( (otherlv_4= RULE_ID ) ) otherlv_5= '=' ( (lv_change_6_0= ruleSum ) )+ )* ) )
-            // InternalRPG.g:960:2: (otherlv_0= 'if' this_ORcondition_1= ruleORcondition otherlv_2= 'then' ( ( ruleSelfTargeting )? ( (otherlv_4= RULE_ID ) ) otherlv_5= '=' ( (lv_change_6_0= ruleSum ) )+ )* )
+            // InternalRPG.g:970:2: ( (otherlv_0= 'if' this_ORcondition_1= ruleORcondition otherlv_2= 'then' ( ( ruleSelf )? ( (otherlv_4= RULE_ID ) ) otherlv_5= '=' ( (lv_change_6_0= ruleSum ) )+ )* ) )
+            // InternalRPG.g:971:2: (otherlv_0= 'if' this_ORcondition_1= ruleORcondition otherlv_2= 'then' ( ( ruleSelf )? ( (otherlv_4= RULE_ID ) ) otherlv_5= '=' ( (lv_change_6_0= ruleSum ) )+ )* )
             {
-            // InternalRPG.g:960:2: (otherlv_0= 'if' this_ORcondition_1= ruleORcondition otherlv_2= 'then' ( ( ruleSelfTargeting )? ( (otherlv_4= RULE_ID ) ) otherlv_5= '=' ( (lv_change_6_0= ruleSum ) )+ )* )
-            // InternalRPG.g:961:3: otherlv_0= 'if' this_ORcondition_1= ruleORcondition otherlv_2= 'then' ( ( ruleSelfTargeting )? ( (otherlv_4= RULE_ID ) ) otherlv_5= '=' ( (lv_change_6_0= ruleSum ) )+ )*
+            // InternalRPG.g:971:2: (otherlv_0= 'if' this_ORcondition_1= ruleORcondition otherlv_2= 'then' ( ( ruleSelf )? ( (otherlv_4= RULE_ID ) ) otherlv_5= '=' ( (lv_change_6_0= ruleSum ) )+ )* )
+            // InternalRPG.g:972:3: otherlv_0= 'if' this_ORcondition_1= ruleORcondition otherlv_2= 'then' ( ( ruleSelf )? ( (otherlv_4= RULE_ID ) ) otherlv_5= '=' ( (lv_change_6_0= ruleSum ) )+ )*
             {
-            otherlv_0=(Token)match(input,24,FOLLOW_19); 
+            otherlv_0=(Token)match(input,24,FOLLOW_23); 
 
             			newLeafNode(otherlv_0, grammarAccess.getRuleAccess().getIfKeyword_0());
             		
 
             			newCompositeNode(grammarAccess.getRuleAccess().getORconditionParserRuleCall_1());
             		
-            pushFollow(FOLLOW_23);
+            pushFollow(FOLLOW_24);
             this_ORcondition_1=ruleORcondition();
 
             state._fsp--;
@@ -2652,11 +2671,11 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             			current = this_ORcondition_1;
             			afterParserOrEnumRuleCall();
             		
-            otherlv_2=(Token)match(input,25,FOLLOW_24); 
+            otherlv_2=(Token)match(input,25,FOLLOW_25); 
 
             			newLeafNode(otherlv_2, grammarAccess.getRuleAccess().getThenKeyword_2());
             		
-            // InternalRPG.g:977:3: ( ( ruleSelfTargeting )? ( (otherlv_4= RULE_ID ) ) otherlv_5= '=' ( (lv_change_6_0= ruleSum ) )+ )*
+            // InternalRPG.g:988:3: ( ( ruleSelf )? ( (otherlv_4= RULE_ID ) ) otherlv_5= '=' ( (lv_change_6_0= ruleSum ) )+ )*
             loop19:
             do {
                 int alt19=2;
@@ -2669,9 +2688,9 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
                 switch (alt19) {
             	case 1 :
-            	    // InternalRPG.g:978:4: ( ruleSelfTargeting )? ( (otherlv_4= RULE_ID ) ) otherlv_5= '=' ( (lv_change_6_0= ruleSum ) )+
+            	    // InternalRPG.g:989:4: ( ruleSelf )? ( (otherlv_4= RULE_ID ) ) otherlv_5= '=' ( (lv_change_6_0= ruleSum ) )+
             	    {
-            	    // InternalRPG.g:978:4: ( ruleSelfTargeting )?
+            	    // InternalRPG.g:989:4: ( ruleSelf )?
             	    int alt17=2;
             	    int LA17_0 = input.LA(1);
 
@@ -2680,13 +2699,13 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             	    }
             	    switch (alt17) {
             	        case 1 :
-            	            // InternalRPG.g:979:5: ruleSelfTargeting
+            	            // InternalRPG.g:990:5: ruleSelf
             	            {
 
-            	            					newCompositeNode(grammarAccess.getRuleAccess().getSelfTargetingParserRuleCall_3_0());
+            	            					newCompositeNode(grammarAccess.getRuleAccess().getSelfParserRuleCall_3_0());
             	            				
             	            pushFollow(FOLLOW_3);
-            	            ruleSelfTargeting();
+            	            ruleSelf();
 
             	            state._fsp--;
 
@@ -2699,18 +2718,18 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // InternalRPG.g:987:4: ( (otherlv_4= RULE_ID ) )
-            	    // InternalRPG.g:988:5: (otherlv_4= RULE_ID )
+            	    // InternalRPG.g:998:4: ( (otherlv_4= RULE_ID ) )
+            	    // InternalRPG.g:999:5: (otherlv_4= RULE_ID )
             	    {
-            	    // InternalRPG.g:988:5: (otherlv_4= RULE_ID )
-            	    // InternalRPG.g:989:6: otherlv_4= RULE_ID
+            	    // InternalRPG.g:999:5: (otherlv_4= RULE_ID )
+            	    // InternalRPG.g:1000:6: otherlv_4= RULE_ID
             	    {
 
             	    						if (current==null) {
             	    							current = createModelElement(grammarAccess.getRuleRule());
             	    						}
             	    					
-            	    otherlv_4=(Token)match(input,RULE_ID,FOLLOW_25); 
+            	    otherlv_4=(Token)match(input,RULE_ID,FOLLOW_26); 
 
             	    						newLeafNode(otherlv_4, grammarAccess.getRuleAccess().getAttritbuteToSetAttributeCrossReference_3_1_0());
             	    					
@@ -2720,11 +2739,11 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    otherlv_5=(Token)match(input,26,FOLLOW_26); 
+            	    otherlv_5=(Token)match(input,26,FOLLOW_21); 
 
             	    				newLeafNode(otherlv_5, grammarAccess.getRuleAccess().getEqualsSignKeyword_3_2());
             	    			
-            	    // InternalRPG.g:1004:4: ( (lv_change_6_0= ruleSum ) )+
+            	    // InternalRPG.g:1015:4: ( (lv_change_6_0= ruleSum ) )+
             	    int cnt18=0;
             	    loop18:
             	    do {
@@ -2768,10 +2787,10 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
             	        switch (alt18) {
             	    	case 1 :
-            	    	    // InternalRPG.g:1005:5: (lv_change_6_0= ruleSum )
+            	    	    // InternalRPG.g:1016:5: (lv_change_6_0= ruleSum )
             	    	    {
-            	    	    // InternalRPG.g:1005:5: (lv_change_6_0= ruleSum )
-            	    	    // InternalRPG.g:1006:6: lv_change_6_0= ruleSum
+            	    	    // InternalRPG.g:1016:5: (lv_change_6_0= ruleSum )
+            	    	    // InternalRPG.g:1017:6: lv_change_6_0= ruleSum
             	    	    {
 
             	    	    						newCompositeNode(grammarAccess.getRuleAccess().getChangeSumParserRuleCall_3_3_0());
@@ -2840,7 +2859,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEntities"
-    // InternalRPG.g:1028:1: entryRuleEntities returns [EObject current=null] : iv_ruleEntities= ruleEntities EOF ;
+    // InternalRPG.g:1039:1: entryRuleEntities returns [EObject current=null] : iv_ruleEntities= ruleEntities EOF ;
     public final EObject entryRuleEntities() throws RecognitionException {
         EObject current = null;
 
@@ -2848,8 +2867,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:1028:49: (iv_ruleEntities= ruleEntities EOF )
-            // InternalRPG.g:1029:2: iv_ruleEntities= ruleEntities EOF
+            // InternalRPG.g:1039:49: (iv_ruleEntities= ruleEntities EOF )
+            // InternalRPG.g:1040:2: iv_ruleEntities= ruleEntities EOF
             {
              newCompositeNode(grammarAccess.getEntitiesRule()); 
             pushFollow(FOLLOW_1);
@@ -2876,7 +2895,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEntities"
-    // InternalRPG.g:1035:1: ruleEntities returns [EObject current=null] : (otherlv_0= 'entities' ( (lv_entity_1_0= ruleEntity ) )+ ) ;
+    // InternalRPG.g:1046:1: ruleEntities returns [EObject current=null] : (otherlv_0= 'entities' ( (lv_entity_1_0= ruleEntity ) )+ ) ;
     public final EObject ruleEntities() throws RecognitionException {
         EObject current = null;
 
@@ -2888,17 +2907,17 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:1041:2: ( (otherlv_0= 'entities' ( (lv_entity_1_0= ruleEntity ) )+ ) )
-            // InternalRPG.g:1042:2: (otherlv_0= 'entities' ( (lv_entity_1_0= ruleEntity ) )+ )
+            // InternalRPG.g:1052:2: ( (otherlv_0= 'entities' ( (lv_entity_1_0= ruleEntity ) )+ ) )
+            // InternalRPG.g:1053:2: (otherlv_0= 'entities' ( (lv_entity_1_0= ruleEntity ) )+ )
             {
-            // InternalRPG.g:1042:2: (otherlv_0= 'entities' ( (lv_entity_1_0= ruleEntity ) )+ )
-            // InternalRPG.g:1043:3: otherlv_0= 'entities' ( (lv_entity_1_0= ruleEntity ) )+
+            // InternalRPG.g:1053:2: (otherlv_0= 'entities' ( (lv_entity_1_0= ruleEntity ) )+ )
+            // InternalRPG.g:1054:3: otherlv_0= 'entities' ( (lv_entity_1_0= ruleEntity ) )+
             {
             otherlv_0=(Token)match(input,27,FOLLOW_28); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEntitiesAccess().getEntitiesKeyword_0());
             		
-            // InternalRPG.g:1047:3: ( (lv_entity_1_0= ruleEntity ) )+
+            // InternalRPG.g:1058:3: ( (lv_entity_1_0= ruleEntity ) )+
             int cnt20=0;
             loop20:
             do {
@@ -2912,10 +2931,10 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
                 switch (alt20) {
             	case 1 :
-            	    // InternalRPG.g:1048:4: (lv_entity_1_0= ruleEntity )
+            	    // InternalRPG.g:1059:4: (lv_entity_1_0= ruleEntity )
             	    {
-            	    // InternalRPG.g:1048:4: (lv_entity_1_0= ruleEntity )
-            	    // InternalRPG.g:1049:5: lv_entity_1_0= ruleEntity
+            	    // InternalRPG.g:1059:4: (lv_entity_1_0= ruleEntity )
+            	    // InternalRPG.g:1060:5: lv_entity_1_0= ruleEntity
             	    {
 
             	    					newCompositeNode(grammarAccess.getEntitiesAccess().getEntityEntityParserRuleCall_1_0());
@@ -2975,7 +2994,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDeath"
-    // InternalRPG.g:1070:1: entryRuleDeath returns [EObject current=null] : iv_ruleDeath= ruleDeath EOF ;
+    // InternalRPG.g:1081:1: entryRuleDeath returns [EObject current=null] : iv_ruleDeath= ruleDeath EOF ;
     public final EObject entryRuleDeath() throws RecognitionException {
         EObject current = null;
 
@@ -2983,8 +3002,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:1070:46: (iv_ruleDeath= ruleDeath EOF )
-            // InternalRPG.g:1071:2: iv_ruleDeath= ruleDeath EOF
+            // InternalRPG.g:1081:46: (iv_ruleDeath= ruleDeath EOF )
+            // InternalRPG.g:1082:2: iv_ruleDeath= ruleDeath EOF
             {
              newCompositeNode(grammarAccess.getDeathRule()); 
             pushFollow(FOLLOW_1);
@@ -3011,81 +3030,58 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDeath"
-    // InternalRPG.g:1077:1: ruleDeath returns [EObject current=null] : (otherlv_0= 'death' ( (lv_con_1_0= ruleORcondition ) )+ ) ;
+    // InternalRPG.g:1088:1: ruleDeath returns [EObject current=null] : (otherlv_0= 'death' ( (lv_req_1_0= ruleRequire ) ) ) ;
     public final EObject ruleDeath() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
-        EObject lv_con_1_0 = null;
+        EObject lv_req_1_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalRPG.g:1083:2: ( (otherlv_0= 'death' ( (lv_con_1_0= ruleORcondition ) )+ ) )
-            // InternalRPG.g:1084:2: (otherlv_0= 'death' ( (lv_con_1_0= ruleORcondition ) )+ )
+            // InternalRPG.g:1094:2: ( (otherlv_0= 'death' ( (lv_req_1_0= ruleRequire ) ) ) )
+            // InternalRPG.g:1095:2: (otherlv_0= 'death' ( (lv_req_1_0= ruleRequire ) ) )
             {
-            // InternalRPG.g:1084:2: (otherlv_0= 'death' ( (lv_con_1_0= ruleORcondition ) )+ )
-            // InternalRPG.g:1085:3: otherlv_0= 'death' ( (lv_con_1_0= ruleORcondition ) )+
+            // InternalRPG.g:1095:2: (otherlv_0= 'death' ( (lv_req_1_0= ruleRequire ) ) )
+            // InternalRPG.g:1096:3: otherlv_0= 'death' ( (lv_req_1_0= ruleRequire ) )
             {
             otherlv_0=(Token)match(input,28,FOLLOW_19); 
 
             			newLeafNode(otherlv_0, grammarAccess.getDeathAccess().getDeathKeyword_0());
             		
-            // InternalRPG.g:1089:3: ( (lv_con_1_0= ruleORcondition ) )+
-            int cnt21=0;
-            loop21:
-            do {
-                int alt21=2;
-                int LA21_0 = input.LA(1);
+            // InternalRPG.g:1100:3: ( (lv_req_1_0= ruleRequire ) )
+            // InternalRPG.g:1101:4: (lv_req_1_0= ruleRequire )
+            {
+            // InternalRPG.g:1101:4: (lv_req_1_0= ruleRequire )
+            // InternalRPG.g:1102:5: lv_req_1_0= ruleRequire
+            {
 
-                if ( ((LA21_0>=RULE_ID && LA21_0<=RULE_INT)||LA21_0==37||LA21_0==48) ) {
-                    alt21=1;
-                }
+            					newCompositeNode(grammarAccess.getDeathAccess().getReqRequireParserRuleCall_1_0());
+            				
+            pushFollow(FOLLOW_2);
+            lv_req_1_0=ruleRequire();
 
-
-                switch (alt21) {
-            	case 1 :
-            	    // InternalRPG.g:1090:4: (lv_con_1_0= ruleORcondition )
-            	    {
-            	    // InternalRPG.g:1090:4: (lv_con_1_0= ruleORcondition )
-            	    // InternalRPG.g:1091:5: lv_con_1_0= ruleORcondition
-            	    {
-
-            	    					newCompositeNode(grammarAccess.getDeathAccess().getConORconditionParserRuleCall_1_0());
-            	    				
-            	    pushFollow(FOLLOW_22);
-            	    lv_con_1_0=ruleORcondition();
-
-            	    state._fsp--;
+            state._fsp--;
 
 
-            	    					if (current==null) {
-            	    						current = createModelElementForParent(grammarAccess.getDeathRule());
-            	    					}
-            	    					add(
-            	    						current,
-            	    						"con",
-            	    						lv_con_1_0,
-            	    						"mdsd.RPG.ORcondition");
-            	    					afterParserOrEnumRuleCall();
-            	    				
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getDeathRule());
+            					}
+            					set(
+            						current,
+            						"req",
+            						lv_req_1_0,
+            						"mdsd.RPG.Require");
+            					afterParserOrEnumRuleCall();
+            				
 
-            	    }
+            }
 
 
-            	    }
-            	    break;
-
-            	default :
-            	    if ( cnt21 >= 1 ) break loop21;
-                        EarlyExitException eee =
-                            new EarlyExitException(21, input);
-                        throw eee;
-                }
-                cnt21++;
-            } while (true);
+            }
 
 
             }
@@ -3110,7 +3106,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEntity"
-    // InternalRPG.g:1112:1: entryRuleEntity returns [EObject current=null] : iv_ruleEntity= ruleEntity EOF ;
+    // InternalRPG.g:1123:1: entryRuleEntity returns [EObject current=null] : iv_ruleEntity= ruleEntity EOF ;
     public final EObject entryRuleEntity() throws RecognitionException {
         EObject current = null;
 
@@ -3118,8 +3114,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:1112:47: (iv_ruleEntity= ruleEntity EOF )
-            // InternalRPG.g:1113:2: iv_ruleEntity= ruleEntity EOF
+            // InternalRPG.g:1123:47: (iv_ruleEntity= ruleEntity EOF )
+            // InternalRPG.g:1124:2: iv_ruleEntity= ruleEntity EOF
             {
              newCompositeNode(grammarAccess.getEntityRule()); 
             pushFollow(FOLLOW_1);
@@ -3146,7 +3142,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEntity"
-    // InternalRPG.g:1119:1: ruleEntity returns [EObject current=null] : (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) ( (lv_eType_2_0= ruleEType ) ) ( (lv_att_3_0= ruleAltAttribute ) )* ( (lv_eMoves_4_0= ruleEntityMoves ) )* ) ;
+    // InternalRPG.g:1130:1: ruleEntity returns [EObject current=null] : (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) ( (lv_eType_2_0= ruleEType ) ) ( (lv_att_3_0= ruleAltAttribute ) )* ( (lv_eMoves_4_0= ruleEntityMoves ) )* ) ;
     public final EObject ruleEntity() throws RecognitionException {
         EObject current = null;
 
@@ -3163,21 +3159,21 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:1125:2: ( (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) ( (lv_eType_2_0= ruleEType ) ) ( (lv_att_3_0= ruleAltAttribute ) )* ( (lv_eMoves_4_0= ruleEntityMoves ) )* ) )
-            // InternalRPG.g:1126:2: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) ( (lv_eType_2_0= ruleEType ) ) ( (lv_att_3_0= ruleAltAttribute ) )* ( (lv_eMoves_4_0= ruleEntityMoves ) )* )
+            // InternalRPG.g:1136:2: ( (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) ( (lv_eType_2_0= ruleEType ) ) ( (lv_att_3_0= ruleAltAttribute ) )* ( (lv_eMoves_4_0= ruleEntityMoves ) )* ) )
+            // InternalRPG.g:1137:2: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) ( (lv_eType_2_0= ruleEType ) ) ( (lv_att_3_0= ruleAltAttribute ) )* ( (lv_eMoves_4_0= ruleEntityMoves ) )* )
             {
-            // InternalRPG.g:1126:2: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) ( (lv_eType_2_0= ruleEType ) ) ( (lv_att_3_0= ruleAltAttribute ) )* ( (lv_eMoves_4_0= ruleEntityMoves ) )* )
-            // InternalRPG.g:1127:3: otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) ( (lv_eType_2_0= ruleEType ) ) ( (lv_att_3_0= ruleAltAttribute ) )* ( (lv_eMoves_4_0= ruleEntityMoves ) )*
+            // InternalRPG.g:1137:2: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) ( (lv_eType_2_0= ruleEType ) ) ( (lv_att_3_0= ruleAltAttribute ) )* ( (lv_eMoves_4_0= ruleEntityMoves ) )* )
+            // InternalRPG.g:1138:3: otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) ( (lv_eType_2_0= ruleEType ) ) ( (lv_att_3_0= ruleAltAttribute ) )* ( (lv_eMoves_4_0= ruleEntityMoves ) )*
             {
             otherlv_0=(Token)match(input,29,FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEntityAccess().getEntityKeyword_0());
             		
-            // InternalRPG.g:1131:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalRPG.g:1132:4: (lv_name_1_0= RULE_ID )
+            // InternalRPG.g:1142:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalRPG.g:1143:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalRPG.g:1132:4: (lv_name_1_0= RULE_ID )
-            // InternalRPG.g:1133:5: lv_name_1_0= RULE_ID
+            // InternalRPG.g:1143:4: (lv_name_1_0= RULE_ID )
+            // InternalRPG.g:1144:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_7); 
 
@@ -3199,11 +3195,11 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRPG.g:1149:3: ( (lv_eType_2_0= ruleEType ) )
-            // InternalRPG.g:1150:4: (lv_eType_2_0= ruleEType )
+            // InternalRPG.g:1160:3: ( (lv_eType_2_0= ruleEType ) )
+            // InternalRPG.g:1161:4: (lv_eType_2_0= ruleEType )
             {
-            // InternalRPG.g:1150:4: (lv_eType_2_0= ruleEType )
-            // InternalRPG.g:1151:5: lv_eType_2_0= ruleEType
+            // InternalRPG.g:1161:4: (lv_eType_2_0= ruleEType )
+            // InternalRPG.g:1162:5: lv_eType_2_0= ruleEType
             {
 
             					newCompositeNode(grammarAccess.getEntityAccess().getETypeETypeParserRuleCall_2_0());
@@ -3230,23 +3226,23 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRPG.g:1168:3: ( (lv_att_3_0= ruleAltAttribute ) )*
-            loop22:
+            // InternalRPG.g:1179:3: ( (lv_att_3_0= ruleAltAttribute ) )*
+            loop21:
             do {
-                int alt22=2;
-                int LA22_0 = input.LA(1);
+                int alt21=2;
+                int LA21_0 = input.LA(1);
 
-                if ( (LA22_0==21) ) {
-                    alt22=1;
+                if ( (LA21_0==21) ) {
+                    alt21=1;
                 }
 
 
-                switch (alt22) {
+                switch (alt21) {
             	case 1 :
-            	    // InternalRPG.g:1169:4: (lv_att_3_0= ruleAltAttribute )
+            	    // InternalRPG.g:1180:4: (lv_att_3_0= ruleAltAttribute )
             	    {
-            	    // InternalRPG.g:1169:4: (lv_att_3_0= ruleAltAttribute )
-            	    // InternalRPG.g:1170:5: lv_att_3_0= ruleAltAttribute
+            	    // InternalRPG.g:1180:4: (lv_att_3_0= ruleAltAttribute )
+            	    // InternalRPG.g:1181:5: lv_att_3_0= ruleAltAttribute
             	    {
 
             	    					newCompositeNode(grammarAccess.getEntityAccess().getAttAltAttributeParserRuleCall_3_0());
@@ -3275,27 +3271,27 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop22;
+            	    break loop21;
                 }
             } while (true);
 
-            // InternalRPG.g:1187:3: ( (lv_eMoves_4_0= ruleEntityMoves ) )*
-            loop23:
+            // InternalRPG.g:1198:3: ( (lv_eMoves_4_0= ruleEntityMoves ) )*
+            loop22:
             do {
-                int alt23=2;
-                int LA23_0 = input.LA(1);
+                int alt22=2;
+                int LA22_0 = input.LA(1);
 
-                if ( (LA23_0==19) ) {
-                    alt23=1;
+                if ( (LA22_0==19) ) {
+                    alt22=1;
                 }
 
 
-                switch (alt23) {
+                switch (alt22) {
             	case 1 :
-            	    // InternalRPG.g:1188:4: (lv_eMoves_4_0= ruleEntityMoves )
+            	    // InternalRPG.g:1199:4: (lv_eMoves_4_0= ruleEntityMoves )
             	    {
-            	    // InternalRPG.g:1188:4: (lv_eMoves_4_0= ruleEntityMoves )
-            	    // InternalRPG.g:1189:5: lv_eMoves_4_0= ruleEntityMoves
+            	    // InternalRPG.g:1199:4: (lv_eMoves_4_0= ruleEntityMoves )
+            	    // InternalRPG.g:1200:5: lv_eMoves_4_0= ruleEntityMoves
             	    {
 
             	    					newCompositeNode(grammarAccess.getEntityAccess().getEMovesEntityMovesParserRuleCall_4_0());
@@ -3324,7 +3320,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop23;
+            	    break loop22;
                 }
             } while (true);
 
@@ -3351,7 +3347,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEntityMoves"
-    // InternalRPG.g:1210:1: entryRuleEntityMoves returns [EObject current=null] : iv_ruleEntityMoves= ruleEntityMoves EOF ;
+    // InternalRPG.g:1221:1: entryRuleEntityMoves returns [EObject current=null] : iv_ruleEntityMoves= ruleEntityMoves EOF ;
     public final EObject entryRuleEntityMoves() throws RecognitionException {
         EObject current = null;
 
@@ -3359,8 +3355,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:1210:52: (iv_ruleEntityMoves= ruleEntityMoves EOF )
-            // InternalRPG.g:1211:2: iv_ruleEntityMoves= ruleEntityMoves EOF
+            // InternalRPG.g:1221:52: (iv_ruleEntityMoves= ruleEntityMoves EOF )
+            // InternalRPG.g:1222:2: iv_ruleEntityMoves= ruleEntityMoves EOF
             {
              newCompositeNode(grammarAccess.getEntityMovesRule()); 
             pushFollow(FOLLOW_1);
@@ -3387,7 +3383,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEntityMoves"
-    // InternalRPG.g:1217:1: ruleEntityMoves returns [EObject current=null] : (otherlv_0= 'move' ( (otherlv_1= RULE_ID ) )+ ) ;
+    // InternalRPG.g:1228:1: ruleEntityMoves returns [EObject current=null] : (otherlv_0= 'move' ( (otherlv_1= RULE_ID ) )+ ) ;
     public final EObject ruleEntityMoves() throws RecognitionException {
         EObject current = null;
 
@@ -3398,34 +3394,34 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:1223:2: ( (otherlv_0= 'move' ( (otherlv_1= RULE_ID ) )+ ) )
-            // InternalRPG.g:1224:2: (otherlv_0= 'move' ( (otherlv_1= RULE_ID ) )+ )
+            // InternalRPG.g:1234:2: ( (otherlv_0= 'move' ( (otherlv_1= RULE_ID ) )+ ) )
+            // InternalRPG.g:1235:2: (otherlv_0= 'move' ( (otherlv_1= RULE_ID ) )+ )
             {
-            // InternalRPG.g:1224:2: (otherlv_0= 'move' ( (otherlv_1= RULE_ID ) )+ )
-            // InternalRPG.g:1225:3: otherlv_0= 'move' ( (otherlv_1= RULE_ID ) )+
+            // InternalRPG.g:1235:2: (otherlv_0= 'move' ( (otherlv_1= RULE_ID ) )+ )
+            // InternalRPG.g:1236:3: otherlv_0= 'move' ( (otherlv_1= RULE_ID ) )+
             {
             otherlv_0=(Token)match(input,19,FOLLOW_3); 
 
             			newLeafNode(otherlv_0, grammarAccess.getEntityMovesAccess().getMoveKeyword_0());
             		
-            // InternalRPG.g:1229:3: ( (otherlv_1= RULE_ID ) )+
-            int cnt24=0;
-            loop24:
+            // InternalRPG.g:1240:3: ( (otherlv_1= RULE_ID ) )+
+            int cnt23=0;
+            loop23:
             do {
-                int alt24=2;
-                int LA24_0 = input.LA(1);
+                int alt23=2;
+                int LA23_0 = input.LA(1);
 
-                if ( (LA24_0==RULE_ID) ) {
-                    alt24=1;
+                if ( (LA23_0==RULE_ID) ) {
+                    alt23=1;
                 }
 
 
-                switch (alt24) {
+                switch (alt23) {
             	case 1 :
-            	    // InternalRPG.g:1230:4: (otherlv_1= RULE_ID )
+            	    // InternalRPG.g:1241:4: (otherlv_1= RULE_ID )
             	    {
-            	    // InternalRPG.g:1230:4: (otherlv_1= RULE_ID )
-            	    // InternalRPG.g:1231:5: otherlv_1= RULE_ID
+            	    // InternalRPG.g:1241:4: (otherlv_1= RULE_ID )
+            	    // InternalRPG.g:1242:5: otherlv_1= RULE_ID
             	    {
 
             	    					if (current==null) {
@@ -3444,12 +3440,12 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt24 >= 1 ) break loop24;
+            	    if ( cnt23 >= 1 ) break loop23;
                         EarlyExitException eee =
-                            new EarlyExitException(24, input);
+                            new EarlyExitException(23, input);
                         throw eee;
                 }
-                cnt24++;
+                cnt23++;
             } while (true);
 
 
@@ -3475,7 +3471,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTeams"
-    // InternalRPG.g:1246:1: entryRuleTeams returns [EObject current=null] : iv_ruleTeams= ruleTeams EOF ;
+    // InternalRPG.g:1257:1: entryRuleTeams returns [EObject current=null] : iv_ruleTeams= ruleTeams EOF ;
     public final EObject entryRuleTeams() throws RecognitionException {
         EObject current = null;
 
@@ -3483,8 +3479,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:1246:46: (iv_ruleTeams= ruleTeams EOF )
-            // InternalRPG.g:1247:2: iv_ruleTeams= ruleTeams EOF
+            // InternalRPG.g:1257:46: (iv_ruleTeams= ruleTeams EOF )
+            // InternalRPG.g:1258:2: iv_ruleTeams= ruleTeams EOF
             {
              newCompositeNode(grammarAccess.getTeamsRule()); 
             pushFollow(FOLLOW_1);
@@ -3511,7 +3507,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTeams"
-    // InternalRPG.g:1253:1: ruleTeams returns [EObject current=null] : (otherlv_0= 'teams' (this_Require_1= ruleRequire )? ( (lv_bs_2_0= ruleBattleSize ) ) ( (lv_team_3_0= ruleTeam ) )+ ) ;
+    // InternalRPG.g:1264:1: ruleTeams returns [EObject current=null] : (otherlv_0= 'teams' (this_Require_1= ruleRequire )? ( (lv_bs_2_0= ruleBattleSize ) ) ( (lv_team_3_0= ruleTeam ) )+ ) ;
     public final EObject ruleTeams() throws RecognitionException {
         EObject current = null;
 
@@ -3527,26 +3523,26 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:1259:2: ( (otherlv_0= 'teams' (this_Require_1= ruleRequire )? ( (lv_bs_2_0= ruleBattleSize ) ) ( (lv_team_3_0= ruleTeam ) )+ ) )
-            // InternalRPG.g:1260:2: (otherlv_0= 'teams' (this_Require_1= ruleRequire )? ( (lv_bs_2_0= ruleBattleSize ) ) ( (lv_team_3_0= ruleTeam ) )+ )
+            // InternalRPG.g:1270:2: ( (otherlv_0= 'teams' (this_Require_1= ruleRequire )? ( (lv_bs_2_0= ruleBattleSize ) ) ( (lv_team_3_0= ruleTeam ) )+ ) )
+            // InternalRPG.g:1271:2: (otherlv_0= 'teams' (this_Require_1= ruleRequire )? ( (lv_bs_2_0= ruleBattleSize ) ) ( (lv_team_3_0= ruleTeam ) )+ )
             {
-            // InternalRPG.g:1260:2: (otherlv_0= 'teams' (this_Require_1= ruleRequire )? ( (lv_bs_2_0= ruleBattleSize ) ) ( (lv_team_3_0= ruleTeam ) )+ )
-            // InternalRPG.g:1261:3: otherlv_0= 'teams' (this_Require_1= ruleRequire )? ( (lv_bs_2_0= ruleBattleSize ) ) ( (lv_team_3_0= ruleTeam ) )+
+            // InternalRPG.g:1271:2: (otherlv_0= 'teams' (this_Require_1= ruleRequire )? ( (lv_bs_2_0= ruleBattleSize ) ) ( (lv_team_3_0= ruleTeam ) )+ )
+            // InternalRPG.g:1272:3: otherlv_0= 'teams' (this_Require_1= ruleRequire )? ( (lv_bs_2_0= ruleBattleSize ) ) ( (lv_team_3_0= ruleTeam ) )+
             {
             otherlv_0=(Token)match(input,30,FOLLOW_31); 
 
             			newLeafNode(otherlv_0, grammarAccess.getTeamsAccess().getTeamsKeyword_0());
             		
-            // InternalRPG.g:1265:3: (this_Require_1= ruleRequire )?
-            int alt25=2;
-            int LA25_0 = input.LA(1);
+            // InternalRPG.g:1276:3: (this_Require_1= ruleRequire )?
+            int alt24=2;
+            int LA24_0 = input.LA(1);
 
-            if ( ((LA25_0>=RULE_ID && LA25_0<=RULE_INT)||LA25_0==34||LA25_0==37||LA25_0==48) ) {
-                alt25=1;
+            if ( (LA24_0==34) ) {
+                alt24=1;
             }
-            switch (alt25) {
+            switch (alt24) {
                 case 1 :
-                    // InternalRPG.g:1266:4: this_Require_1= ruleRequire
+                    // InternalRPG.g:1277:4: this_Require_1= ruleRequire
                     {
 
                     				newCompositeNode(grammarAccess.getTeamsAccess().getRequireParserRuleCall_1());
@@ -3566,11 +3562,11 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRPG.g:1275:3: ( (lv_bs_2_0= ruleBattleSize ) )
-            // InternalRPG.g:1276:4: (lv_bs_2_0= ruleBattleSize )
+            // InternalRPG.g:1286:3: ( (lv_bs_2_0= ruleBattleSize ) )
+            // InternalRPG.g:1287:4: (lv_bs_2_0= ruleBattleSize )
             {
-            // InternalRPG.g:1276:4: (lv_bs_2_0= ruleBattleSize )
-            // InternalRPG.g:1277:5: lv_bs_2_0= ruleBattleSize
+            // InternalRPG.g:1287:4: (lv_bs_2_0= ruleBattleSize )
+            // InternalRPG.g:1288:5: lv_bs_2_0= ruleBattleSize
             {
 
             					newCompositeNode(grammarAccess.getTeamsAccess().getBsBattleSizeParserRuleCall_2_0());
@@ -3597,24 +3593,24 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRPG.g:1294:3: ( (lv_team_3_0= ruleTeam ) )+
-            int cnt26=0;
-            loop26:
+            // InternalRPG.g:1305:3: ( (lv_team_3_0= ruleTeam ) )+
+            int cnt25=0;
+            loop25:
             do {
-                int alt26=2;
-                int LA26_0 = input.LA(1);
+                int alt25=2;
+                int LA25_0 = input.LA(1);
 
-                if ( (LA26_0==31) ) {
-                    alt26=1;
+                if ( (LA25_0==31) ) {
+                    alt25=1;
                 }
 
 
-                switch (alt26) {
+                switch (alt25) {
             	case 1 :
-            	    // InternalRPG.g:1295:4: (lv_team_3_0= ruleTeam )
+            	    // InternalRPG.g:1306:4: (lv_team_3_0= ruleTeam )
             	    {
-            	    // InternalRPG.g:1295:4: (lv_team_3_0= ruleTeam )
-            	    // InternalRPG.g:1296:5: lv_team_3_0= ruleTeam
+            	    // InternalRPG.g:1306:4: (lv_team_3_0= ruleTeam )
+            	    // InternalRPG.g:1307:5: lv_team_3_0= ruleTeam
             	    {
 
             	    					newCompositeNode(grammarAccess.getTeamsAccess().getTeamTeamParserRuleCall_3_0());
@@ -3633,6 +3629,168 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             	    						"team",
             	    						lv_team_3_0,
             	    						"mdsd.RPG.Team");
+            	    					afterParserOrEnumRuleCall();
+            	    				
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt25 >= 1 ) break loop25;
+                        EarlyExitException eee =
+                            new EarlyExitException(25, input);
+                        throw eee;
+                }
+                cnt25++;
+            } while (true);
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleTeams"
+
+
+    // $ANTLR start "entryRuleTeam"
+    // InternalRPG.g:1328:1: entryRuleTeam returns [EObject current=null] : iv_ruleTeam= ruleTeam EOF ;
+    public final EObject entryRuleTeam() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleTeam = null;
+
+
+        try {
+            // InternalRPG.g:1328:45: (iv_ruleTeam= ruleTeam EOF )
+            // InternalRPG.g:1329:2: iv_ruleTeam= ruleTeam EOF
+            {
+             newCompositeNode(grammarAccess.getTeamRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleTeam=ruleTeam();
+
+            state._fsp--;
+
+             current =iv_ruleTeam; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleTeam"
+
+
+    // $ANTLR start "ruleTeam"
+    // InternalRPG.g:1335:1: ruleTeam returns [EObject current=null] : (otherlv_0= 'team' ( (lv_name_1_0= RULE_ID ) ) ( (lv_members_2_0= ruleMembers ) )+ ) ;
+    public final EObject ruleTeam() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token lv_name_1_0=null;
+        EObject lv_members_2_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRPG.g:1341:2: ( (otherlv_0= 'team' ( (lv_name_1_0= RULE_ID ) ) ( (lv_members_2_0= ruleMembers ) )+ ) )
+            // InternalRPG.g:1342:2: (otherlv_0= 'team' ( (lv_name_1_0= RULE_ID ) ) ( (lv_members_2_0= ruleMembers ) )+ )
+            {
+            // InternalRPG.g:1342:2: (otherlv_0= 'team' ( (lv_name_1_0= RULE_ID ) ) ( (lv_members_2_0= ruleMembers ) )+ )
+            // InternalRPG.g:1343:3: otherlv_0= 'team' ( (lv_name_1_0= RULE_ID ) ) ( (lv_members_2_0= ruleMembers ) )+
+            {
+            otherlv_0=(Token)match(input,31,FOLLOW_3); 
+
+            			newLeafNode(otherlv_0, grammarAccess.getTeamAccess().getTeamKeyword_0());
+            		
+            // InternalRPG.g:1347:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalRPG.g:1348:4: (lv_name_1_0= RULE_ID )
+            {
+            // InternalRPG.g:1348:4: (lv_name_1_0= RULE_ID )
+            // InternalRPG.g:1349:5: lv_name_1_0= RULE_ID
+            {
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_34); 
+
+            					newLeafNode(lv_name_1_0, grammarAccess.getTeamAccess().getNameIDTerminalRuleCall_1_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTeamRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
+
+            }
+
+
+            }
+
+            // InternalRPG.g:1365:3: ( (lv_members_2_0= ruleMembers ) )+
+            int cnt26=0;
+            loop26:
+            do {
+                int alt26=2;
+                int LA26_0 = input.LA(1);
+
+                if ( (LA26_0==32) ) {
+                    alt26=1;
+                }
+
+
+                switch (alt26) {
+            	case 1 :
+            	    // InternalRPG.g:1366:4: (lv_members_2_0= ruleMembers )
+            	    {
+            	    // InternalRPG.g:1366:4: (lv_members_2_0= ruleMembers )
+            	    // InternalRPG.g:1367:5: lv_members_2_0= ruleMembers
+            	    {
+
+            	    					newCompositeNode(grammarAccess.getTeamAccess().getMembersMembersParserRuleCall_2_0());
+            	    				
+            	    pushFollow(FOLLOW_35);
+            	    lv_members_2_0=ruleMembers();
+
+            	    state._fsp--;
+
+
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getTeamRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"members",
+            	    						lv_members_2_0,
+            	    						"mdsd.RPG.Members");
             	    					afterParserOrEnumRuleCall();
             	    				
 
@@ -3670,28 +3828,28 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleTeams"
+    // $ANTLR end "ruleTeam"
 
 
-    // $ANTLR start "entryRuleTeam"
-    // InternalRPG.g:1317:1: entryRuleTeam returns [EObject current=null] : iv_ruleTeam= ruleTeam EOF ;
-    public final EObject entryRuleTeam() throws RecognitionException {
+    // $ANTLR start "entryRuleMembers"
+    // InternalRPG.g:1388:1: entryRuleMembers returns [EObject current=null] : iv_ruleMembers= ruleMembers EOF ;
+    public final EObject entryRuleMembers() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleTeam = null;
+        EObject iv_ruleMembers = null;
 
 
         try {
-            // InternalRPG.g:1317:45: (iv_ruleTeam= ruleTeam EOF )
-            // InternalRPG.g:1318:2: iv_ruleTeam= ruleTeam EOF
+            // InternalRPG.g:1388:48: (iv_ruleMembers= ruleMembers EOF )
+            // InternalRPG.g:1389:2: iv_ruleMembers= ruleMembers EOF
             {
-             newCompositeNode(grammarAccess.getTeamRule()); 
+             newCompositeNode(grammarAccess.getMembersRule()); 
             pushFollow(FOLLOW_1);
-            iv_ruleTeam=ruleTeam();
+            iv_ruleMembers=ruleMembers();
 
             state._fsp--;
 
-             current =iv_ruleTeam; 
+             current =iv_ruleMembers; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -3706,96 +3864,58 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleTeam"
+    // $ANTLR end "entryRuleMembers"
 
 
-    // $ANTLR start "ruleTeam"
-    // InternalRPG.g:1324:1: ruleTeam returns [EObject current=null] : (otherlv_0= 'team' ( (lv_name_1_0= RULE_ID ) ) ( (lv_members_2_0= ruleMembers ) )+ ) ;
-    public final EObject ruleTeam() throws RecognitionException {
+    // $ANTLR start "ruleMembers"
+    // InternalRPG.g:1395:1: ruleMembers returns [EObject current=null] : (otherlv_0= 'members' ( (otherlv_1= RULE_ID ) )+ ) ;
+    public final EObject ruleMembers() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
-        Token lv_name_1_0=null;
-        EObject lv_members_2_0 = null;
-
+        Token otherlv_1=null;
 
 
         	enterRule();
 
         try {
-            // InternalRPG.g:1330:2: ( (otherlv_0= 'team' ( (lv_name_1_0= RULE_ID ) ) ( (lv_members_2_0= ruleMembers ) )+ ) )
-            // InternalRPG.g:1331:2: (otherlv_0= 'team' ( (lv_name_1_0= RULE_ID ) ) ( (lv_members_2_0= ruleMembers ) )+ )
+            // InternalRPG.g:1401:2: ( (otherlv_0= 'members' ( (otherlv_1= RULE_ID ) )+ ) )
+            // InternalRPG.g:1402:2: (otherlv_0= 'members' ( (otherlv_1= RULE_ID ) )+ )
             {
-            // InternalRPG.g:1331:2: (otherlv_0= 'team' ( (lv_name_1_0= RULE_ID ) ) ( (lv_members_2_0= ruleMembers ) )+ )
-            // InternalRPG.g:1332:3: otherlv_0= 'team' ( (lv_name_1_0= RULE_ID ) ) ( (lv_members_2_0= ruleMembers ) )+
+            // InternalRPG.g:1402:2: (otherlv_0= 'members' ( (otherlv_1= RULE_ID ) )+ )
+            // InternalRPG.g:1403:3: otherlv_0= 'members' ( (otherlv_1= RULE_ID ) )+
             {
-            otherlv_0=(Token)match(input,31,FOLLOW_3); 
+            otherlv_0=(Token)match(input,32,FOLLOW_3); 
 
-            			newLeafNode(otherlv_0, grammarAccess.getTeamAccess().getTeamKeyword_0());
+            			newLeafNode(otherlv_0, grammarAccess.getMembersAccess().getMembersKeyword_0());
             		
-            // InternalRPG.g:1336:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalRPG.g:1337:4: (lv_name_1_0= RULE_ID )
-            {
-            // InternalRPG.g:1337:4: (lv_name_1_0= RULE_ID )
-            // InternalRPG.g:1338:5: lv_name_1_0= RULE_ID
-            {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_34); 
-
-            					newLeafNode(lv_name_1_0, grammarAccess.getTeamAccess().getNameIDTerminalRuleCall_1_0());
-            				
-
-            					if (current==null) {
-            						current = createModelElement(grammarAccess.getTeamRule());
-            					}
-            					setWithLastConsumed(
-            						current,
-            						"name",
-            						lv_name_1_0,
-            						"org.eclipse.xtext.common.Terminals.ID");
-            				
-
-            }
-
-
-            }
-
-            // InternalRPG.g:1354:3: ( (lv_members_2_0= ruleMembers ) )+
+            // InternalRPG.g:1407:3: ( (otherlv_1= RULE_ID ) )+
             int cnt27=0;
             loop27:
             do {
                 int alt27=2;
                 int LA27_0 = input.LA(1);
 
-                if ( (LA27_0==32) ) {
+                if ( (LA27_0==RULE_ID) ) {
                     alt27=1;
                 }
 
 
                 switch (alt27) {
             	case 1 :
-            	    // InternalRPG.g:1355:4: (lv_members_2_0= ruleMembers )
+            	    // InternalRPG.g:1408:4: (otherlv_1= RULE_ID )
             	    {
-            	    // InternalRPG.g:1355:4: (lv_members_2_0= ruleMembers )
-            	    // InternalRPG.g:1356:5: lv_members_2_0= ruleMembers
+            	    // InternalRPG.g:1408:4: (otherlv_1= RULE_ID )
+            	    // InternalRPG.g:1409:5: otherlv_1= RULE_ID
             	    {
-
-            	    					newCompositeNode(grammarAccess.getTeamAccess().getMembersMembersParserRuleCall_2_0());
-            	    				
-            	    pushFollow(FOLLOW_35);
-            	    lv_members_2_0=ruleMembers();
-
-            	    state._fsp--;
-
 
             	    					if (current==null) {
-            	    						current = createModelElementForParent(grammarAccess.getTeamRule());
+            	    						current = createModelElement(grammarAccess.getMembersRule());
             	    					}
-            	    					add(
-            	    						current,
-            	    						"members",
-            	    						lv_members_2_0,
-            	    						"mdsd.RPG.Members");
-            	    					afterParserOrEnumRuleCall();
+            	    				
+            	    otherlv_1=(Token)match(input,RULE_ID,FOLLOW_5); 
+
+            	    					newLeafNode(otherlv_1, grammarAccess.getMembersAccess().getEntityEntityCrossReference_1_0());
             	    				
 
             	    }
@@ -3832,135 +3952,11 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleTeam"
-
-
-    // $ANTLR start "entryRuleMembers"
-    // InternalRPG.g:1377:1: entryRuleMembers returns [EObject current=null] : iv_ruleMembers= ruleMembers EOF ;
-    public final EObject entryRuleMembers() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleMembers = null;
-
-
-        try {
-            // InternalRPG.g:1377:48: (iv_ruleMembers= ruleMembers EOF )
-            // InternalRPG.g:1378:2: iv_ruleMembers= ruleMembers EOF
-            {
-             newCompositeNode(grammarAccess.getMembersRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleMembers=ruleMembers();
-
-            state._fsp--;
-
-             current =iv_ruleMembers; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleMembers"
-
-
-    // $ANTLR start "ruleMembers"
-    // InternalRPG.g:1384:1: ruleMembers returns [EObject current=null] : (otherlv_0= 'members' ( (otherlv_1= RULE_ID ) )+ ) ;
-    public final EObject ruleMembers() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_0=null;
-        Token otherlv_1=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalRPG.g:1390:2: ( (otherlv_0= 'members' ( (otherlv_1= RULE_ID ) )+ ) )
-            // InternalRPG.g:1391:2: (otherlv_0= 'members' ( (otherlv_1= RULE_ID ) )+ )
-            {
-            // InternalRPG.g:1391:2: (otherlv_0= 'members' ( (otherlv_1= RULE_ID ) )+ )
-            // InternalRPG.g:1392:3: otherlv_0= 'members' ( (otherlv_1= RULE_ID ) )+
-            {
-            otherlv_0=(Token)match(input,32,FOLLOW_3); 
-
-            			newLeafNode(otherlv_0, grammarAccess.getMembersAccess().getMembersKeyword_0());
-            		
-            // InternalRPG.g:1396:3: ( (otherlv_1= RULE_ID ) )+
-            int cnt28=0;
-            loop28:
-            do {
-                int alt28=2;
-                int LA28_0 = input.LA(1);
-
-                if ( (LA28_0==RULE_ID) ) {
-                    alt28=1;
-                }
-
-
-                switch (alt28) {
-            	case 1 :
-            	    // InternalRPG.g:1397:4: (otherlv_1= RULE_ID )
-            	    {
-            	    // InternalRPG.g:1397:4: (otherlv_1= RULE_ID )
-            	    // InternalRPG.g:1398:5: otherlv_1= RULE_ID
-            	    {
-
-            	    					if (current==null) {
-            	    						current = createModelElement(grammarAccess.getMembersRule());
-            	    					}
-            	    				
-            	    otherlv_1=(Token)match(input,RULE_ID,FOLLOW_5); 
-
-            	    					newLeafNode(otherlv_1, grammarAccess.getMembersAccess().getEntityEntityCrossReference_1_0());
-            	    				
-
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    if ( cnt28 >= 1 ) break loop28;
-                        EarlyExitException eee =
-                            new EarlyExitException(28, input);
-                        throw eee;
-                }
-                cnt28++;
-            } while (true);
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
     // $ANTLR end "ruleMembers"
 
 
     // $ANTLR start "entryRuleBattleSize"
-    // InternalRPG.g:1413:1: entryRuleBattleSize returns [EObject current=null] : iv_ruleBattleSize= ruleBattleSize EOF ;
+    // InternalRPG.g:1424:1: entryRuleBattleSize returns [EObject current=null] : iv_ruleBattleSize= ruleBattleSize EOF ;
     public final EObject entryRuleBattleSize() throws RecognitionException {
         EObject current = null;
 
@@ -3968,8 +3964,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:1413:51: (iv_ruleBattleSize= ruleBattleSize EOF )
-            // InternalRPG.g:1414:2: iv_ruleBattleSize= ruleBattleSize EOF
+            // InternalRPG.g:1424:51: (iv_ruleBattleSize= ruleBattleSize EOF )
+            // InternalRPG.g:1425:2: iv_ruleBattleSize= ruleBattleSize EOF
             {
              newCompositeNode(grammarAccess.getBattleSizeRule()); 
             pushFollow(FOLLOW_1);
@@ -3996,7 +3992,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBattleSize"
-    // InternalRPG.g:1420:1: ruleBattleSize returns [EObject current=null] : (otherlv_0= 'battling_member_count' this_AtomicNumber_1= ruleAtomicNumber ( (lv_req_2_0= ruleRequire ) )? ) ;
+    // InternalRPG.g:1431:1: ruleBattleSize returns [EObject current=null] : (otherlv_0= 'battling_member_count' this_AtomicNumber_1= ruleAtomicNumber ( (lv_req_2_0= ruleRequire ) )? ) ;
     public final EObject ruleBattleSize() throws RecognitionException {
         EObject current = null;
 
@@ -4010,13 +4006,13 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:1426:2: ( (otherlv_0= 'battling_member_count' this_AtomicNumber_1= ruleAtomicNumber ( (lv_req_2_0= ruleRequire ) )? ) )
-            // InternalRPG.g:1427:2: (otherlv_0= 'battling_member_count' this_AtomicNumber_1= ruleAtomicNumber ( (lv_req_2_0= ruleRequire ) )? )
+            // InternalRPG.g:1437:2: ( (otherlv_0= 'battling_member_count' this_AtomicNumber_1= ruleAtomicNumber ( (lv_req_2_0= ruleRequire ) )? ) )
+            // InternalRPG.g:1438:2: (otherlv_0= 'battling_member_count' this_AtomicNumber_1= ruleAtomicNumber ( (lv_req_2_0= ruleRequire ) )? )
             {
-            // InternalRPG.g:1427:2: (otherlv_0= 'battling_member_count' this_AtomicNumber_1= ruleAtomicNumber ( (lv_req_2_0= ruleRequire ) )? )
-            // InternalRPG.g:1428:3: otherlv_0= 'battling_member_count' this_AtomicNumber_1= ruleAtomicNumber ( (lv_req_2_0= ruleRequire ) )?
+            // InternalRPG.g:1438:2: (otherlv_0= 'battling_member_count' this_AtomicNumber_1= ruleAtomicNumber ( (lv_req_2_0= ruleRequire ) )? )
+            // InternalRPG.g:1439:3: otherlv_0= 'battling_member_count' this_AtomicNumber_1= ruleAtomicNumber ( (lv_req_2_0= ruleRequire ) )?
             {
-            otherlv_0=(Token)match(input,33,FOLLOW_36); 
+            otherlv_0=(Token)match(input,33,FOLLOW_21); 
 
             			newLeafNode(otherlv_0, grammarAccess.getBattleSizeAccess().getBattling_member_countKeyword_0());
             		
@@ -4032,19 +4028,19 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             			current = this_AtomicNumber_1;
             			afterParserOrEnumRuleCall();
             		
-            // InternalRPG.g:1440:3: ( (lv_req_2_0= ruleRequire ) )?
-            int alt29=2;
-            int LA29_0 = input.LA(1);
+            // InternalRPG.g:1451:3: ( (lv_req_2_0= ruleRequire ) )?
+            int alt28=2;
+            int LA28_0 = input.LA(1);
 
-            if ( ((LA29_0>=RULE_ID && LA29_0<=RULE_INT)||LA29_0==34||LA29_0==37||LA29_0==48) ) {
-                alt29=1;
+            if ( (LA28_0==34) ) {
+                alt28=1;
             }
-            switch (alt29) {
+            switch (alt28) {
                 case 1 :
-                    // InternalRPG.g:1441:4: (lv_req_2_0= ruleRequire )
+                    // InternalRPG.g:1452:4: (lv_req_2_0= ruleRequire )
                     {
-                    // InternalRPG.g:1441:4: (lv_req_2_0= ruleRequire )
-                    // InternalRPG.g:1442:5: lv_req_2_0= ruleRequire
+                    // InternalRPG.g:1452:4: (lv_req_2_0= ruleRequire )
+                    // InternalRPG.g:1453:5: lv_req_2_0= ruleRequire
                     {
 
                     					newCompositeNode(grammarAccess.getBattleSizeAccess().getReqRequireParserRuleCall_2_0());
@@ -4097,7 +4093,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRequire"
-    // InternalRPG.g:1463:1: entryRuleRequire returns [EObject current=null] : iv_ruleRequire= ruleRequire EOF ;
+    // InternalRPG.g:1474:1: entryRuleRequire returns [EObject current=null] : iv_ruleRequire= ruleRequire EOF ;
     public final EObject entryRuleRequire() throws RecognitionException {
         EObject current = null;
 
@@ -4105,8 +4101,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:1463:48: (iv_ruleRequire= ruleRequire EOF )
-            // InternalRPG.g:1464:2: iv_ruleRequire= ruleRequire EOF
+            // InternalRPG.g:1474:48: (iv_ruleRequire= ruleRequire EOF )
+            // InternalRPG.g:1475:2: iv_ruleRequire= ruleRequire EOF
             {
              newCompositeNode(grammarAccess.getRequireRule()); 
             pushFollow(FOLLOW_1);
@@ -4133,86 +4129,59 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRequire"
-    // InternalRPG.g:1470:1: ruleRequire returns [EObject current=null] : ( (otherlv_0= 'require' this_ORcondition_1= ruleORcondition ) | this_ORcondition_2= ruleORcondition ) ;
+    // InternalRPG.g:1481:1: ruleRequire returns [EObject current=null] : (otherlv_0= 'require' ( (lv_log_1_0= ruleORcondition ) ) ) ;
     public final EObject ruleRequire() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
-        EObject this_ORcondition_1 = null;
-
-        EObject this_ORcondition_2 = null;
+        EObject lv_log_1_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalRPG.g:1476:2: ( ( (otherlv_0= 'require' this_ORcondition_1= ruleORcondition ) | this_ORcondition_2= ruleORcondition ) )
-            // InternalRPG.g:1477:2: ( (otherlv_0= 'require' this_ORcondition_1= ruleORcondition ) | this_ORcondition_2= ruleORcondition )
+            // InternalRPG.g:1487:2: ( (otherlv_0= 'require' ( (lv_log_1_0= ruleORcondition ) ) ) )
+            // InternalRPG.g:1488:2: (otherlv_0= 'require' ( (lv_log_1_0= ruleORcondition ) ) )
             {
-            // InternalRPG.g:1477:2: ( (otherlv_0= 'require' this_ORcondition_1= ruleORcondition ) | this_ORcondition_2= ruleORcondition )
-            int alt30=2;
-            int LA30_0 = input.LA(1);
+            // InternalRPG.g:1488:2: (otherlv_0= 'require' ( (lv_log_1_0= ruleORcondition ) ) )
+            // InternalRPG.g:1489:3: otherlv_0= 'require' ( (lv_log_1_0= ruleORcondition ) )
+            {
+            otherlv_0=(Token)match(input,34,FOLLOW_23); 
 
-            if ( (LA30_0==34) ) {
-                alt30=1;
+            			newLeafNode(otherlv_0, grammarAccess.getRequireAccess().getRequireKeyword_0());
+            		
+            // InternalRPG.g:1493:3: ( (lv_log_1_0= ruleORcondition ) )
+            // InternalRPG.g:1494:4: (lv_log_1_0= ruleORcondition )
+            {
+            // InternalRPG.g:1494:4: (lv_log_1_0= ruleORcondition )
+            // InternalRPG.g:1495:5: lv_log_1_0= ruleORcondition
+            {
+
+            					newCompositeNode(grammarAccess.getRequireAccess().getLogORconditionParserRuleCall_1_0());
+            				
+            pushFollow(FOLLOW_2);
+            lv_log_1_0=ruleORcondition();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getRequireRule());
+            					}
+            					set(
+            						current,
+            						"log",
+            						lv_log_1_0,
+            						"mdsd.RPG.ORcondition");
+            					afterParserOrEnumRuleCall();
+            				
+
             }
-            else if ( ((LA30_0>=RULE_ID && LA30_0<=RULE_INT)||LA30_0==37||LA30_0==48) ) {
-                alt30=2;
+
+
             }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 30, 0, input);
 
-                throw nvae;
-            }
-            switch (alt30) {
-                case 1 :
-                    // InternalRPG.g:1478:3: (otherlv_0= 'require' this_ORcondition_1= ruleORcondition )
-                    {
-                    // InternalRPG.g:1478:3: (otherlv_0= 'require' this_ORcondition_1= ruleORcondition )
-                    // InternalRPG.g:1479:4: otherlv_0= 'require' this_ORcondition_1= ruleORcondition
-                    {
-                    otherlv_0=(Token)match(input,34,FOLLOW_19); 
-
-                    				newLeafNode(otherlv_0, grammarAccess.getRequireAccess().getRequireKeyword_0_0());
-                    			
-
-                    				newCompositeNode(grammarAccess.getRequireAccess().getORconditionParserRuleCall_0_1());
-                    			
-                    pushFollow(FOLLOW_2);
-                    this_ORcondition_1=ruleORcondition();
-
-                    state._fsp--;
-
-
-                    				current = this_ORcondition_1;
-                    				afterParserOrEnumRuleCall();
-                    			
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // InternalRPG.g:1493:3: this_ORcondition_2= ruleORcondition
-                    {
-
-                    			newCompositeNode(grammarAccess.getRequireAccess().getORconditionParserRuleCall_1());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_ORcondition_2=ruleORcondition();
-
-                    state._fsp--;
-
-
-                    			current = this_ORcondition_2;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
 
             }
 
@@ -4236,7 +4205,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleORcondition"
-    // InternalRPG.g:1505:1: entryRuleORcondition returns [EObject current=null] : iv_ruleORcondition= ruleORcondition EOF ;
+    // InternalRPG.g:1516:1: entryRuleORcondition returns [EObject current=null] : iv_ruleORcondition= ruleORcondition EOF ;
     public final EObject entryRuleORcondition() throws RecognitionException {
         EObject current = null;
 
@@ -4244,8 +4213,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:1505:52: (iv_ruleORcondition= ruleORcondition EOF )
-            // InternalRPG.g:1506:2: iv_ruleORcondition= ruleORcondition EOF
+            // InternalRPG.g:1516:52: (iv_ruleORcondition= ruleORcondition EOF )
+            // InternalRPG.g:1517:2: iv_ruleORcondition= ruleORcondition EOF
             {
              newCompositeNode(grammarAccess.getORconditionRule()); 
             pushFollow(FOLLOW_1);
@@ -4272,7 +4241,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleORcondition"
-    // InternalRPG.g:1512:1: ruleORcondition returns [EObject current=null] : (this_ANDcondition_0= ruleANDcondition (otherlv_1= 'OR' () ( (lv_right_3_0= ruleANDcondition ) ) )* ) ;
+    // InternalRPG.g:1523:1: ruleORcondition returns [EObject current=null] : (this_ANDcondition_0= ruleANDcondition (otherlv_1= 'OR' () ( (lv_right_3_0= ruleANDcondition ) ) )* ) ;
     public final EObject ruleORcondition() throws RecognitionException {
         EObject current = null;
 
@@ -4286,16 +4255,16 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:1518:2: ( (this_ANDcondition_0= ruleANDcondition (otherlv_1= 'OR' () ( (lv_right_3_0= ruleANDcondition ) ) )* ) )
-            // InternalRPG.g:1519:2: (this_ANDcondition_0= ruleANDcondition (otherlv_1= 'OR' () ( (lv_right_3_0= ruleANDcondition ) ) )* )
+            // InternalRPG.g:1529:2: ( (this_ANDcondition_0= ruleANDcondition (otherlv_1= 'OR' () ( (lv_right_3_0= ruleANDcondition ) ) )* ) )
+            // InternalRPG.g:1530:2: (this_ANDcondition_0= ruleANDcondition (otherlv_1= 'OR' () ( (lv_right_3_0= ruleANDcondition ) ) )* )
             {
-            // InternalRPG.g:1519:2: (this_ANDcondition_0= ruleANDcondition (otherlv_1= 'OR' () ( (lv_right_3_0= ruleANDcondition ) ) )* )
-            // InternalRPG.g:1520:3: this_ANDcondition_0= ruleANDcondition (otherlv_1= 'OR' () ( (lv_right_3_0= ruleANDcondition ) ) )*
+            // InternalRPG.g:1530:2: (this_ANDcondition_0= ruleANDcondition (otherlv_1= 'OR' () ( (lv_right_3_0= ruleANDcondition ) ) )* )
+            // InternalRPG.g:1531:3: this_ANDcondition_0= ruleANDcondition (otherlv_1= 'OR' () ( (lv_right_3_0= ruleANDcondition ) ) )*
             {
 
             			newCompositeNode(grammarAccess.getORconditionAccess().getANDconditionParserRuleCall_0());
             		
-            pushFollow(FOLLOW_37);
+            pushFollow(FOLLOW_36);
             this_ANDcondition_0=ruleANDcondition();
 
             state._fsp--;
@@ -4304,27 +4273,27 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             			current = this_ANDcondition_0;
             			afterParserOrEnumRuleCall();
             		
-            // InternalRPG.g:1528:3: (otherlv_1= 'OR' () ( (lv_right_3_0= ruleANDcondition ) ) )*
-            loop31:
+            // InternalRPG.g:1539:3: (otherlv_1= 'OR' () ( (lv_right_3_0= ruleANDcondition ) ) )*
+            loop29:
             do {
-                int alt31=2;
-                int LA31_0 = input.LA(1);
+                int alt29=2;
+                int LA29_0 = input.LA(1);
 
-                if ( (LA31_0==35) ) {
-                    alt31=1;
+                if ( (LA29_0==35) ) {
+                    alt29=1;
                 }
 
 
-                switch (alt31) {
+                switch (alt29) {
             	case 1 :
-            	    // InternalRPG.g:1529:4: otherlv_1= 'OR' () ( (lv_right_3_0= ruleANDcondition ) )
+            	    // InternalRPG.g:1540:4: otherlv_1= 'OR' () ( (lv_right_3_0= ruleANDcondition ) )
             	    {
-            	    otherlv_1=(Token)match(input,35,FOLLOW_19); 
+            	    otherlv_1=(Token)match(input,35,FOLLOW_23); 
 
             	    				newLeafNode(otherlv_1, grammarAccess.getORconditionAccess().getORKeyword_1_0());
             	    			
-            	    // InternalRPG.g:1533:4: ()
-            	    // InternalRPG.g:1534:5: 
+            	    // InternalRPG.g:1544:4: ()
+            	    // InternalRPG.g:1545:5: 
             	    {
 
             	    					current = forceCreateModelElementAndSet(
@@ -4334,16 +4303,16 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // InternalRPG.g:1540:4: ( (lv_right_3_0= ruleANDcondition ) )
-            	    // InternalRPG.g:1541:5: (lv_right_3_0= ruleANDcondition )
+            	    // InternalRPG.g:1551:4: ( (lv_right_3_0= ruleANDcondition ) )
+            	    // InternalRPG.g:1552:5: (lv_right_3_0= ruleANDcondition )
             	    {
-            	    // InternalRPG.g:1541:5: (lv_right_3_0= ruleANDcondition )
-            	    // InternalRPG.g:1542:6: lv_right_3_0= ruleANDcondition
+            	    // InternalRPG.g:1552:5: (lv_right_3_0= ruleANDcondition )
+            	    // InternalRPG.g:1553:6: lv_right_3_0= ruleANDcondition
             	    {
 
             	    						newCompositeNode(grammarAccess.getORconditionAccess().getRightANDconditionParserRuleCall_1_2_0());
             	    					
-            	    pushFollow(FOLLOW_37);
+            	    pushFollow(FOLLOW_36);
             	    lv_right_3_0=ruleANDcondition();
 
             	    state._fsp--;
@@ -4370,7 +4339,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop31;
+            	    break loop29;
                 }
             } while (true);
 
@@ -4397,7 +4366,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleANDcondition"
-    // InternalRPG.g:1564:1: entryRuleANDcondition returns [EObject current=null] : iv_ruleANDcondition= ruleANDcondition EOF ;
+    // InternalRPG.g:1575:1: entryRuleANDcondition returns [EObject current=null] : iv_ruleANDcondition= ruleANDcondition EOF ;
     public final EObject entryRuleANDcondition() throws RecognitionException {
         EObject current = null;
 
@@ -4405,8 +4374,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:1564:53: (iv_ruleANDcondition= ruleANDcondition EOF )
-            // InternalRPG.g:1565:2: iv_ruleANDcondition= ruleANDcondition EOF
+            // InternalRPG.g:1575:53: (iv_ruleANDcondition= ruleANDcondition EOF )
+            // InternalRPG.g:1576:2: iv_ruleANDcondition= ruleANDcondition EOF
             {
              newCompositeNode(grammarAccess.getANDconditionRule()); 
             pushFollow(FOLLOW_1);
@@ -4433,7 +4402,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleANDcondition"
-    // InternalRPG.g:1571:1: ruleANDcondition returns [EObject current=null] : (this_Statement_0= ruleStatement (otherlv_1= 'AND' () ( (lv_right_3_0= ruleStatement ) ) )* ) ;
+    // InternalRPG.g:1582:1: ruleANDcondition returns [EObject current=null] : (this_Statement_0= ruleStatement (otherlv_1= 'AND' () ( (lv_right_3_0= ruleStatement ) ) )* ) ;
     public final EObject ruleANDcondition() throws RecognitionException {
         EObject current = null;
 
@@ -4447,16 +4416,16 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:1577:2: ( (this_Statement_0= ruleStatement (otherlv_1= 'AND' () ( (lv_right_3_0= ruleStatement ) ) )* ) )
-            // InternalRPG.g:1578:2: (this_Statement_0= ruleStatement (otherlv_1= 'AND' () ( (lv_right_3_0= ruleStatement ) ) )* )
+            // InternalRPG.g:1588:2: ( (this_Statement_0= ruleStatement (otherlv_1= 'AND' () ( (lv_right_3_0= ruleStatement ) ) )* ) )
+            // InternalRPG.g:1589:2: (this_Statement_0= ruleStatement (otherlv_1= 'AND' () ( (lv_right_3_0= ruleStatement ) ) )* )
             {
-            // InternalRPG.g:1578:2: (this_Statement_0= ruleStatement (otherlv_1= 'AND' () ( (lv_right_3_0= ruleStatement ) ) )* )
-            // InternalRPG.g:1579:3: this_Statement_0= ruleStatement (otherlv_1= 'AND' () ( (lv_right_3_0= ruleStatement ) ) )*
+            // InternalRPG.g:1589:2: (this_Statement_0= ruleStatement (otherlv_1= 'AND' () ( (lv_right_3_0= ruleStatement ) ) )* )
+            // InternalRPG.g:1590:3: this_Statement_0= ruleStatement (otherlv_1= 'AND' () ( (lv_right_3_0= ruleStatement ) ) )*
             {
 
             			newCompositeNode(grammarAccess.getANDconditionAccess().getStatementParserRuleCall_0());
             		
-            pushFollow(FOLLOW_38);
+            pushFollow(FOLLOW_37);
             this_Statement_0=ruleStatement();
 
             state._fsp--;
@@ -4465,27 +4434,27 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             			current = this_Statement_0;
             			afterParserOrEnumRuleCall();
             		
-            // InternalRPG.g:1587:3: (otherlv_1= 'AND' () ( (lv_right_3_0= ruleStatement ) ) )*
-            loop32:
+            // InternalRPG.g:1598:3: (otherlv_1= 'AND' () ( (lv_right_3_0= ruleStatement ) ) )*
+            loop30:
             do {
-                int alt32=2;
-                int LA32_0 = input.LA(1);
+                int alt30=2;
+                int LA30_0 = input.LA(1);
 
-                if ( (LA32_0==36) ) {
-                    alt32=1;
+                if ( (LA30_0==36) ) {
+                    alt30=1;
                 }
 
 
-                switch (alt32) {
+                switch (alt30) {
             	case 1 :
-            	    // InternalRPG.g:1588:4: otherlv_1= 'AND' () ( (lv_right_3_0= ruleStatement ) )
+            	    // InternalRPG.g:1599:4: otherlv_1= 'AND' () ( (lv_right_3_0= ruleStatement ) )
             	    {
-            	    otherlv_1=(Token)match(input,36,FOLLOW_19); 
+            	    otherlv_1=(Token)match(input,36,FOLLOW_23); 
 
             	    				newLeafNode(otherlv_1, grammarAccess.getANDconditionAccess().getANDKeyword_1_0());
             	    			
-            	    // InternalRPG.g:1592:4: ()
-            	    // InternalRPG.g:1593:5: 
+            	    // InternalRPG.g:1603:4: ()
+            	    // InternalRPG.g:1604:5: 
             	    {
 
             	    					current = forceCreateModelElementAndSet(
@@ -4495,16 +4464,16 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // InternalRPG.g:1599:4: ( (lv_right_3_0= ruleStatement ) )
-            	    // InternalRPG.g:1600:5: (lv_right_3_0= ruleStatement )
+            	    // InternalRPG.g:1610:4: ( (lv_right_3_0= ruleStatement ) )
+            	    // InternalRPG.g:1611:5: (lv_right_3_0= ruleStatement )
             	    {
-            	    // InternalRPG.g:1600:5: (lv_right_3_0= ruleStatement )
-            	    // InternalRPG.g:1601:6: lv_right_3_0= ruleStatement
+            	    // InternalRPG.g:1611:5: (lv_right_3_0= ruleStatement )
+            	    // InternalRPG.g:1612:6: lv_right_3_0= ruleStatement
             	    {
 
             	    						newCompositeNode(grammarAccess.getANDconditionAccess().getRightStatementParserRuleCall_1_2_0());
             	    					
-            	    pushFollow(FOLLOW_38);
+            	    pushFollow(FOLLOW_37);
             	    lv_right_3_0=ruleStatement();
 
             	    state._fsp--;
@@ -4531,7 +4500,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop32;
+            	    break loop30;
                 }
             } while (true);
 
@@ -4558,7 +4527,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStatement"
-    // InternalRPG.g:1623:1: entryRuleStatement returns [EObject current=null] : iv_ruleStatement= ruleStatement EOF ;
+    // InternalRPG.g:1634:1: entryRuleStatement returns [EObject current=null] : iv_ruleStatement= ruleStatement EOF ;
     public final EObject entryRuleStatement() throws RecognitionException {
         EObject current = null;
 
@@ -4566,8 +4535,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:1623:50: (iv_ruleStatement= ruleStatement EOF )
-            // InternalRPG.g:1624:2: iv_ruleStatement= ruleStatement EOF
+            // InternalRPG.g:1634:50: (iv_ruleStatement= ruleStatement EOF )
+            // InternalRPG.g:1635:2: iv_ruleStatement= ruleStatement EOF
             {
              newCompositeNode(grammarAccess.getStatementRule()); 
             pushFollow(FOLLOW_1);
@@ -4594,7 +4563,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStatement"
-    // InternalRPG.g:1630:1: ruleStatement returns [EObject current=null] : (this_NumberComparing_0= ruleNumberComparing | (otherlv_1= '(' this_ORcondition_2= ruleORcondition otherlv_3= ')' ) | ( (otherlv_4= RULE_ID ) ) ) ;
+    // InternalRPG.g:1641:1: ruleStatement returns [EObject current=null] : (this_NumberComparing_0= ruleNumberComparing | (otherlv_1= '(' this_ORcondition_2= ruleORcondition otherlv_3= ')' ) | ( (otherlv_4= RULE_ID ) ) ) ;
     public final EObject ruleStatement() throws RecognitionException {
         EObject current = null;
 
@@ -4610,31 +4579,31 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:1636:2: ( (this_NumberComparing_0= ruleNumberComparing | (otherlv_1= '(' this_ORcondition_2= ruleORcondition otherlv_3= ')' ) | ( (otherlv_4= RULE_ID ) ) ) )
-            // InternalRPG.g:1637:2: (this_NumberComparing_0= ruleNumberComparing | (otherlv_1= '(' this_ORcondition_2= ruleORcondition otherlv_3= ')' ) | ( (otherlv_4= RULE_ID ) ) )
+            // InternalRPG.g:1647:2: ( (this_NumberComparing_0= ruleNumberComparing | (otherlv_1= '(' this_ORcondition_2= ruleORcondition otherlv_3= ')' ) | ( (otherlv_4= RULE_ID ) ) ) )
+            // InternalRPG.g:1648:2: (this_NumberComparing_0= ruleNumberComparing | (otherlv_1= '(' this_ORcondition_2= ruleORcondition otherlv_3= ')' ) | ( (otherlv_4= RULE_ID ) ) )
             {
-            // InternalRPG.g:1637:2: (this_NumberComparing_0= ruleNumberComparing | (otherlv_1= '(' this_ORcondition_2= ruleORcondition otherlv_3= ')' ) | ( (otherlv_4= RULE_ID ) ) )
-            int alt33=3;
+            // InternalRPG.g:1648:2: (this_NumberComparing_0= ruleNumberComparing | (otherlv_1= '(' this_ORcondition_2= ruleORcondition otherlv_3= ')' ) | ( (otherlv_4= RULE_ID ) ) )
+            int alt31=3;
             switch ( input.LA(1) ) {
             case RULE_INT:
             case 48:
                 {
-                alt33=1;
+                alt31=1;
                 }
                 break;
             case RULE_ID:
                 {
-                int LA33_2 = input.LA(2);
+                int LA31_2 = input.LA(2);
 
-                if ( (LA33_2==EOF||(LA33_2>=RULE_ID && LA33_2<=RULE_INT)||LA33_2==12||LA33_2==14||(LA33_2>=18 && LA33_2<=22)||LA33_2==25||(LA33_2>=27 && LA33_2<=31)||LA33_2==33||(LA33_2>=35 && LA33_2<=38)||LA33_2==48) ) {
-                    alt33=3;
+                if ( (LA31_2==EOF||LA31_2==12||LA31_2==14||(LA31_2>=18 && LA31_2<=22)||LA31_2==25||(LA31_2>=27 && LA31_2<=31)||LA31_2==33||(LA31_2>=35 && LA31_2<=36)||LA31_2==38) ) {
+                    alt31=3;
                 }
-                else if ( (LA33_2==17||(LA33_2>=39 && LA33_2<=47)) ) {
-                    alt33=1;
+                else if ( (LA31_2==17||(LA31_2>=39 && LA31_2<=47)) ) {
+                    alt31=1;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 33, 2, input);
+                        new NoViableAltException("", 31, 2, input);
 
                     throw nvae;
                 }
@@ -4642,19 +4611,19 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
                 break;
             case 37:
                 {
-                alt33=2;
+                alt31=2;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 33, 0, input);
+                    new NoViableAltException("", 31, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt33) {
+            switch (alt31) {
                 case 1 :
-                    // InternalRPG.g:1638:3: this_NumberComparing_0= ruleNumberComparing
+                    // InternalRPG.g:1649:3: this_NumberComparing_0= ruleNumberComparing
                     {
 
                     			newCompositeNode(grammarAccess.getStatementAccess().getNumberComparingParserRuleCall_0());
@@ -4672,19 +4641,19 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalRPG.g:1647:3: (otherlv_1= '(' this_ORcondition_2= ruleORcondition otherlv_3= ')' )
+                    // InternalRPG.g:1658:3: (otherlv_1= '(' this_ORcondition_2= ruleORcondition otherlv_3= ')' )
                     {
-                    // InternalRPG.g:1647:3: (otherlv_1= '(' this_ORcondition_2= ruleORcondition otherlv_3= ')' )
-                    // InternalRPG.g:1648:4: otherlv_1= '(' this_ORcondition_2= ruleORcondition otherlv_3= ')'
+                    // InternalRPG.g:1658:3: (otherlv_1= '(' this_ORcondition_2= ruleORcondition otherlv_3= ')' )
+                    // InternalRPG.g:1659:4: otherlv_1= '(' this_ORcondition_2= ruleORcondition otherlv_3= ')'
                     {
-                    otherlv_1=(Token)match(input,37,FOLLOW_19); 
+                    otherlv_1=(Token)match(input,37,FOLLOW_23); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getStatementAccess().getLeftParenthesisKeyword_1_0());
                     			
 
                     				newCompositeNode(grammarAccess.getStatementAccess().getORconditionParserRuleCall_1_1());
                     			
-                    pushFollow(FOLLOW_39);
+                    pushFollow(FOLLOW_38);
                     this_ORcondition_2=ruleORcondition();
 
                     state._fsp--;
@@ -4704,13 +4673,13 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalRPG.g:1666:3: ( (otherlv_4= RULE_ID ) )
+                    // InternalRPG.g:1677:3: ( (otherlv_4= RULE_ID ) )
                     {
-                    // InternalRPG.g:1666:3: ( (otherlv_4= RULE_ID ) )
-                    // InternalRPG.g:1667:4: (otherlv_4= RULE_ID )
+                    // InternalRPG.g:1677:3: ( (otherlv_4= RULE_ID ) )
+                    // InternalRPG.g:1678:4: (otherlv_4= RULE_ID )
                     {
-                    // InternalRPG.g:1667:4: (otherlv_4= RULE_ID )
-                    // InternalRPG.g:1668:5: otherlv_4= RULE_ID
+                    // InternalRPG.g:1678:4: (otherlv_4= RULE_ID )
+                    // InternalRPG.g:1679:5: otherlv_4= RULE_ID
                     {
 
                     					if (current==null) {
@@ -4753,7 +4722,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleNumberComparing"
-    // InternalRPG.g:1683:1: entryRuleNumberComparing returns [EObject current=null] : iv_ruleNumberComparing= ruleNumberComparing EOF ;
+    // InternalRPG.g:1694:1: entryRuleNumberComparing returns [EObject current=null] : iv_ruleNumberComparing= ruleNumberComparing EOF ;
     public final EObject entryRuleNumberComparing() throws RecognitionException {
         EObject current = null;
 
@@ -4761,8 +4730,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:1683:56: (iv_ruleNumberComparing= ruleNumberComparing EOF )
-            // InternalRPG.g:1684:2: iv_ruleNumberComparing= ruleNumberComparing EOF
+            // InternalRPG.g:1694:56: (iv_ruleNumberComparing= ruleNumberComparing EOF )
+            // InternalRPG.g:1695:2: iv_ruleNumberComparing= ruleNumberComparing EOF
             {
              newCompositeNode(grammarAccess.getNumberComparingRule()); 
             pushFollow(FOLLOW_1);
@@ -4789,13 +4758,13 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNumberComparing"
-    // InternalRPG.g:1690:1: ruleNumberComparing returns [EObject current=null] : ( ( (lv_left_0_0= ruleSum ) ) ( (lv_comp_1_0= ruleComparator ) ) ( (lv_right_2_0= ruleSum ) ) ) ;
+    // InternalRPG.g:1701:1: ruleNumberComparing returns [EObject current=null] : ( ( (lv_left_0_0= ruleSum ) ) ( (lv_comp_1_0= ruleComparator ) ) ( (lv_right_2_0= ruleSum ) ) ) ;
     public final EObject ruleNumberComparing() throws RecognitionException {
         EObject current = null;
 
         EObject lv_left_0_0 = null;
 
-        AntlrDatatypeRuleToken lv_comp_1_0 = null;
+        EObject lv_comp_1_0 = null;
 
         EObject lv_right_2_0 = null;
 
@@ -4804,22 +4773,22 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:1696:2: ( ( ( (lv_left_0_0= ruleSum ) ) ( (lv_comp_1_0= ruleComparator ) ) ( (lv_right_2_0= ruleSum ) ) ) )
-            // InternalRPG.g:1697:2: ( ( (lv_left_0_0= ruleSum ) ) ( (lv_comp_1_0= ruleComparator ) ) ( (lv_right_2_0= ruleSum ) ) )
+            // InternalRPG.g:1707:2: ( ( ( (lv_left_0_0= ruleSum ) ) ( (lv_comp_1_0= ruleComparator ) ) ( (lv_right_2_0= ruleSum ) ) ) )
+            // InternalRPG.g:1708:2: ( ( (lv_left_0_0= ruleSum ) ) ( (lv_comp_1_0= ruleComparator ) ) ( (lv_right_2_0= ruleSum ) ) )
             {
-            // InternalRPG.g:1697:2: ( ( (lv_left_0_0= ruleSum ) ) ( (lv_comp_1_0= ruleComparator ) ) ( (lv_right_2_0= ruleSum ) ) )
-            // InternalRPG.g:1698:3: ( (lv_left_0_0= ruleSum ) ) ( (lv_comp_1_0= ruleComparator ) ) ( (lv_right_2_0= ruleSum ) )
+            // InternalRPG.g:1708:2: ( ( (lv_left_0_0= ruleSum ) ) ( (lv_comp_1_0= ruleComparator ) ) ( (lv_right_2_0= ruleSum ) ) )
+            // InternalRPG.g:1709:3: ( (lv_left_0_0= ruleSum ) ) ( (lv_comp_1_0= ruleComparator ) ) ( (lv_right_2_0= ruleSum ) )
             {
-            // InternalRPG.g:1698:3: ( (lv_left_0_0= ruleSum ) )
-            // InternalRPG.g:1699:4: (lv_left_0_0= ruleSum )
+            // InternalRPG.g:1709:3: ( (lv_left_0_0= ruleSum ) )
+            // InternalRPG.g:1710:4: (lv_left_0_0= ruleSum )
             {
-            // InternalRPG.g:1699:4: (lv_left_0_0= ruleSum )
-            // InternalRPG.g:1700:5: lv_left_0_0= ruleSum
+            // InternalRPG.g:1710:4: (lv_left_0_0= ruleSum )
+            // InternalRPG.g:1711:5: lv_left_0_0= ruleSum
             {
 
             					newCompositeNode(grammarAccess.getNumberComparingAccess().getLeftSumParserRuleCall_0_0());
             				
-            pushFollow(FOLLOW_40);
+            pushFollow(FOLLOW_39);
             lv_left_0_0=ruleSum();
 
             state._fsp--;
@@ -4841,16 +4810,16 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRPG.g:1717:3: ( (lv_comp_1_0= ruleComparator ) )
-            // InternalRPG.g:1718:4: (lv_comp_1_0= ruleComparator )
+            // InternalRPG.g:1728:3: ( (lv_comp_1_0= ruleComparator ) )
+            // InternalRPG.g:1729:4: (lv_comp_1_0= ruleComparator )
             {
-            // InternalRPG.g:1718:4: (lv_comp_1_0= ruleComparator )
-            // InternalRPG.g:1719:5: lv_comp_1_0= ruleComparator
+            // InternalRPG.g:1729:4: (lv_comp_1_0= ruleComparator )
+            // InternalRPG.g:1730:5: lv_comp_1_0= ruleComparator
             {
 
             					newCompositeNode(grammarAccess.getNumberComparingAccess().getCompComparatorParserRuleCall_1_0());
             				
-            pushFollow(FOLLOW_26);
+            pushFollow(FOLLOW_21);
             lv_comp_1_0=ruleComparator();
 
             state._fsp--;
@@ -4872,11 +4841,11 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalRPG.g:1736:3: ( (lv_right_2_0= ruleSum ) )
-            // InternalRPG.g:1737:4: (lv_right_2_0= ruleSum )
+            // InternalRPG.g:1747:3: ( (lv_right_2_0= ruleSum ) )
+            // InternalRPG.g:1748:4: (lv_right_2_0= ruleSum )
             {
-            // InternalRPG.g:1737:4: (lv_right_2_0= ruleSum )
-            // InternalRPG.g:1738:5: lv_right_2_0= ruleSum
+            // InternalRPG.g:1748:4: (lv_right_2_0= ruleSum )
+            // InternalRPG.g:1749:5: lv_right_2_0= ruleSum
             {
 
             					newCompositeNode(grammarAccess.getNumberComparingAccess().getRightSumParserRuleCall_2_0());
@@ -4926,16 +4895,16 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleComparator"
-    // InternalRPG.g:1759:1: entryRuleComparator returns [String current=null] : iv_ruleComparator= ruleComparator EOF ;
-    public final String entryRuleComparator() throws RecognitionException {
-        String current = null;
+    // InternalRPG.g:1770:1: entryRuleComparator returns [EObject current=null] : iv_ruleComparator= ruleComparator EOF ;
+    public final EObject entryRuleComparator() throws RecognitionException {
+        EObject current = null;
 
-        AntlrDatatypeRuleToken iv_ruleComparator = null;
+        EObject iv_ruleComparator = null;
 
 
         try {
-            // InternalRPG.g:1759:50: (iv_ruleComparator= ruleComparator EOF )
-            // InternalRPG.g:1760:2: iv_ruleComparator= ruleComparator EOF
+            // InternalRPG.g:1770:51: (iv_ruleComparator= ruleComparator EOF )
+            // InternalRPG.g:1771:2: iv_ruleComparator= ruleComparator EOF
             {
              newCompositeNode(grammarAccess.getComparatorRule()); 
             pushFollow(FOLLOW_1);
@@ -4943,7 +4912,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
             state._fsp--;
 
-             current =iv_ruleComparator.getText(); 
+             current =iv_ruleComparator; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -4962,123 +4931,224 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleComparator"
-    // InternalRPG.g:1766:1: ruleComparator returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '<' | kw= '<=' | kw= '==' | kw= '>=' | kw= '>' | kw= '!=' ) ;
-    public final AntlrDatatypeRuleToken ruleComparator() throws RecognitionException {
-        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+    // InternalRPG.g:1777:1: ruleComparator returns [EObject current=null] : ( ( () otherlv_1= '<' ) | ( () otherlv_3= '<=' ) | ( () otherlv_5= '==' ) | ( () otherlv_7= '>=' ) | ( () otherlv_9= '>' ) | ( () otherlv_11= '!=' ) ) ;
+    public final EObject ruleComparator() throws RecognitionException {
+        EObject current = null;
 
-        Token kw=null;
+        Token otherlv_1=null;
+        Token otherlv_3=null;
+        Token otherlv_5=null;
+        Token otherlv_7=null;
+        Token otherlv_9=null;
+        Token otherlv_11=null;
 
 
         	enterRule();
 
         try {
-            // InternalRPG.g:1772:2: ( (kw= '<' | kw= '<=' | kw= '==' | kw= '>=' | kw= '>' | kw= '!=' ) )
-            // InternalRPG.g:1773:2: (kw= '<' | kw= '<=' | kw= '==' | kw= '>=' | kw= '>' | kw= '!=' )
+            // InternalRPG.g:1783:2: ( ( ( () otherlv_1= '<' ) | ( () otherlv_3= '<=' ) | ( () otherlv_5= '==' ) | ( () otherlv_7= '>=' ) | ( () otherlv_9= '>' ) | ( () otherlv_11= '!=' ) ) )
+            // InternalRPG.g:1784:2: ( ( () otherlv_1= '<' ) | ( () otherlv_3= '<=' ) | ( () otherlv_5= '==' ) | ( () otherlv_7= '>=' ) | ( () otherlv_9= '>' ) | ( () otherlv_11= '!=' ) )
             {
-            // InternalRPG.g:1773:2: (kw= '<' | kw= '<=' | kw= '==' | kw= '>=' | kw= '>' | kw= '!=' )
-            int alt34=6;
+            // InternalRPG.g:1784:2: ( ( () otherlv_1= '<' ) | ( () otherlv_3= '<=' ) | ( () otherlv_5= '==' ) | ( () otherlv_7= '>=' ) | ( () otherlv_9= '>' ) | ( () otherlv_11= '!=' ) )
+            int alt32=6;
             switch ( input.LA(1) ) {
             case 17:
                 {
-                alt34=1;
+                alt32=1;
                 }
                 break;
             case 39:
                 {
-                alt34=2;
+                alt32=2;
                 }
                 break;
             case 40:
                 {
-                alt34=3;
+                alt32=3;
                 }
                 break;
             case 41:
                 {
-                alt34=4;
+                alt32=4;
                 }
                 break;
             case 42:
                 {
-                alt34=5;
+                alt32=5;
                 }
                 break;
             case 43:
                 {
-                alt34=6;
+                alt32=6;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 34, 0, input);
+                    new NoViableAltException("", 32, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt34) {
+            switch (alt32) {
                 case 1 :
-                    // InternalRPG.g:1774:3: kw= '<'
+                    // InternalRPG.g:1785:3: ( () otherlv_1= '<' )
                     {
-                    kw=(Token)match(input,17,FOLLOW_2); 
+                    // InternalRPG.g:1785:3: ( () otherlv_1= '<' )
+                    // InternalRPG.g:1786:4: () otherlv_1= '<'
+                    {
+                    // InternalRPG.g:1786:4: ()
+                    // InternalRPG.g:1787:5: 
+                    {
 
-                    			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getComparatorAccess().getLessThanSignKeyword_0());
-                    		
+                    					current = forceCreateModelElement(
+                    						grammarAccess.getComparatorAccess().getSmallerAction_0_0(),
+                    						current);
+                    				
+
+                    }
+
+                    otherlv_1=(Token)match(input,17,FOLLOW_2); 
+
+                    				newLeafNode(otherlv_1, grammarAccess.getComparatorAccess().getLessThanSignKeyword_0_1());
+                    			
+
+                    }
+
 
                     }
                     break;
                 case 2 :
-                    // InternalRPG.g:1780:3: kw= '<='
+                    // InternalRPG.g:1799:3: ( () otherlv_3= '<=' )
                     {
-                    kw=(Token)match(input,39,FOLLOW_2); 
+                    // InternalRPG.g:1799:3: ( () otherlv_3= '<=' )
+                    // InternalRPG.g:1800:4: () otherlv_3= '<='
+                    {
+                    // InternalRPG.g:1800:4: ()
+                    // InternalRPG.g:1801:5: 
+                    {
 
-                    			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getComparatorAccess().getLessThanSignEqualsSignKeyword_1());
-                    		
+                    					current = forceCreateModelElement(
+                    						grammarAccess.getComparatorAccess().getSmallerEqAction_1_0(),
+                    						current);
+                    				
+
+                    }
+
+                    otherlv_3=(Token)match(input,39,FOLLOW_2); 
+
+                    				newLeafNode(otherlv_3, grammarAccess.getComparatorAccess().getLessThanSignEqualsSignKeyword_1_1());
+                    			
+
+                    }
+
 
                     }
                     break;
                 case 3 :
-                    // InternalRPG.g:1786:3: kw= '=='
+                    // InternalRPG.g:1813:3: ( () otherlv_5= '==' )
                     {
-                    kw=(Token)match(input,40,FOLLOW_2); 
+                    // InternalRPG.g:1813:3: ( () otherlv_5= '==' )
+                    // InternalRPG.g:1814:4: () otherlv_5= '=='
+                    {
+                    // InternalRPG.g:1814:4: ()
+                    // InternalRPG.g:1815:5: 
+                    {
 
-                    			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getComparatorAccess().getEqualsSignEqualsSignKeyword_2());
-                    		
+                    					current = forceCreateModelElement(
+                    						grammarAccess.getComparatorAccess().getEqAction_2_0(),
+                    						current);
+                    				
+
+                    }
+
+                    otherlv_5=(Token)match(input,40,FOLLOW_2); 
+
+                    				newLeafNode(otherlv_5, grammarAccess.getComparatorAccess().getEqualsSignEqualsSignKeyword_2_1());
+                    			
+
+                    }
+
 
                     }
                     break;
                 case 4 :
-                    // InternalRPG.g:1792:3: kw= '>='
+                    // InternalRPG.g:1827:3: ( () otherlv_7= '>=' )
                     {
-                    kw=(Token)match(input,41,FOLLOW_2); 
+                    // InternalRPG.g:1827:3: ( () otherlv_7= '>=' )
+                    // InternalRPG.g:1828:4: () otherlv_7= '>='
+                    {
+                    // InternalRPG.g:1828:4: ()
+                    // InternalRPG.g:1829:5: 
+                    {
 
-                    			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getComparatorAccess().getGreaterThanSignEqualsSignKeyword_3());
-                    		
+                    					current = forceCreateModelElement(
+                    						grammarAccess.getComparatorAccess().getBiggerEqAction_3_0(),
+                    						current);
+                    				
+
+                    }
+
+                    otherlv_7=(Token)match(input,41,FOLLOW_2); 
+
+                    				newLeafNode(otherlv_7, grammarAccess.getComparatorAccess().getGreaterThanSignEqualsSignKeyword_3_1());
+                    			
+
+                    }
+
 
                     }
                     break;
                 case 5 :
-                    // InternalRPG.g:1798:3: kw= '>'
+                    // InternalRPG.g:1841:3: ( () otherlv_9= '>' )
                     {
-                    kw=(Token)match(input,42,FOLLOW_2); 
+                    // InternalRPG.g:1841:3: ( () otherlv_9= '>' )
+                    // InternalRPG.g:1842:4: () otherlv_9= '>'
+                    {
+                    // InternalRPG.g:1842:4: ()
+                    // InternalRPG.g:1843:5: 
+                    {
 
-                    			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getComparatorAccess().getGreaterThanSignKeyword_4());
-                    		
+                    					current = forceCreateModelElement(
+                    						grammarAccess.getComparatorAccess().getBiggerAction_4_0(),
+                    						current);
+                    				
+
+                    }
+
+                    otherlv_9=(Token)match(input,42,FOLLOW_2); 
+
+                    				newLeafNode(otherlv_9, grammarAccess.getComparatorAccess().getGreaterThanSignKeyword_4_1());
+                    			
+
+                    }
+
 
                     }
                     break;
                 case 6 :
-                    // InternalRPG.g:1804:3: kw= '!='
+                    // InternalRPG.g:1855:3: ( () otherlv_11= '!=' )
                     {
-                    kw=(Token)match(input,43,FOLLOW_2); 
+                    // InternalRPG.g:1855:3: ( () otherlv_11= '!=' )
+                    // InternalRPG.g:1856:4: () otherlv_11= '!='
+                    {
+                    // InternalRPG.g:1856:4: ()
+                    // InternalRPG.g:1857:5: 
+                    {
 
-                    			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getComparatorAccess().getExclamationMarkEqualsSignKeyword_5());
-                    		
+                    					current = forceCreateModelElement(
+                    						grammarAccess.getComparatorAccess().getNEqAction_5_0(),
+                    						current);
+                    				
+
+                    }
+
+                    otherlv_11=(Token)match(input,43,FOLLOW_2); 
+
+                    				newLeafNode(otherlv_11, grammarAccess.getComparatorAccess().getExclamationMarkEqualsSignKeyword_5_1());
+                    			
+
+                    }
+
 
                     }
                     break;
@@ -5105,7 +5175,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSum"
-    // InternalRPG.g:1813:1: entryRuleSum returns [EObject current=null] : iv_ruleSum= ruleSum EOF ;
+    // InternalRPG.g:1872:1: entryRuleSum returns [EObject current=null] : iv_ruleSum= ruleSum EOF ;
     public final EObject entryRuleSum() throws RecognitionException {
         EObject current = null;
 
@@ -5113,8 +5183,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:1813:44: (iv_ruleSum= ruleSum EOF )
-            // InternalRPG.g:1814:2: iv_ruleSum= ruleSum EOF
+            // InternalRPG.g:1872:44: (iv_ruleSum= ruleSum EOF )
+            // InternalRPG.g:1873:2: iv_ruleSum= ruleSum EOF
             {
              newCompositeNode(grammarAccess.getSumRule()); 
             pushFollow(FOLLOW_1);
@@ -5141,7 +5211,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSum"
-    // InternalRPG.g:1820:1: ruleSum returns [EObject current=null] : (this_Multiply_0= ruleMultiply ( ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) ) ( (lv_right_5_0= ruleMultiply ) ) )* ) ;
+    // InternalRPG.g:1879:1: ruleSum returns [EObject current=null] : (this_Multiply_0= ruleMultiply ( ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) ) ( (lv_right_5_0= ruleMultiply ) ) )* ) ;
     public final EObject ruleSum() throws RecognitionException {
         EObject current = null;
 
@@ -5156,16 +5226,16 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:1826:2: ( (this_Multiply_0= ruleMultiply ( ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) ) ( (lv_right_5_0= ruleMultiply ) ) )* ) )
-            // InternalRPG.g:1827:2: (this_Multiply_0= ruleMultiply ( ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) ) ( (lv_right_5_0= ruleMultiply ) ) )* )
+            // InternalRPG.g:1885:2: ( (this_Multiply_0= ruleMultiply ( ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) ) ( (lv_right_5_0= ruleMultiply ) ) )* ) )
+            // InternalRPG.g:1886:2: (this_Multiply_0= ruleMultiply ( ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) ) ( (lv_right_5_0= ruleMultiply ) ) )* )
             {
-            // InternalRPG.g:1827:2: (this_Multiply_0= ruleMultiply ( ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) ) ( (lv_right_5_0= ruleMultiply ) ) )* )
-            // InternalRPG.g:1828:3: this_Multiply_0= ruleMultiply ( ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) ) ( (lv_right_5_0= ruleMultiply ) ) )*
+            // InternalRPG.g:1886:2: (this_Multiply_0= ruleMultiply ( ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) ) ( (lv_right_5_0= ruleMultiply ) ) )* )
+            // InternalRPG.g:1887:3: this_Multiply_0= ruleMultiply ( ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) ) ( (lv_right_5_0= ruleMultiply ) ) )*
             {
 
             			newCompositeNode(grammarAccess.getSumAccess().getMultiplyParserRuleCall_0());
             		
-            pushFollow(FOLLOW_41);
+            pushFollow(FOLLOW_40);
             this_Multiply_0=ruleMultiply();
 
             state._fsp--;
@@ -5174,50 +5244,50 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             			current = this_Multiply_0;
             			afterParserOrEnumRuleCall();
             		
-            // InternalRPG.g:1836:3: ( ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) ) ( (lv_right_5_0= ruleMultiply ) ) )*
-            loop36:
+            // InternalRPG.g:1895:3: ( ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) ) ( (lv_right_5_0= ruleMultiply ) ) )*
+            loop34:
             do {
-                int alt36=2;
-                int LA36_0 = input.LA(1);
+                int alt34=2;
+                int LA34_0 = input.LA(1);
 
-                if ( ((LA36_0>=44 && LA36_0<=45)) ) {
-                    alt36=1;
+                if ( ((LA34_0>=44 && LA34_0<=45)) ) {
+                    alt34=1;
                 }
 
 
-                switch (alt36) {
+                switch (alt34) {
             	case 1 :
-            	    // InternalRPG.g:1837:4: ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) ) ( (lv_right_5_0= ruleMultiply ) )
+            	    // InternalRPG.g:1896:4: ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) ) ( (lv_right_5_0= ruleMultiply ) )
             	    {
-            	    // InternalRPG.g:1837:4: ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) )
-            	    int alt35=2;
-            	    int LA35_0 = input.LA(1);
+            	    // InternalRPG.g:1896:4: ( (otherlv_1= '+' () ) | (otherlv_3= '-' () ) )
+            	    int alt33=2;
+            	    int LA33_0 = input.LA(1);
 
-            	    if ( (LA35_0==44) ) {
-            	        alt35=1;
+            	    if ( (LA33_0==44) ) {
+            	        alt33=1;
             	    }
-            	    else if ( (LA35_0==45) ) {
-            	        alt35=2;
+            	    else if ( (LA33_0==45) ) {
+            	        alt33=2;
             	    }
             	    else {
             	        NoViableAltException nvae =
-            	            new NoViableAltException("", 35, 0, input);
+            	            new NoViableAltException("", 33, 0, input);
 
             	        throw nvae;
             	    }
-            	    switch (alt35) {
+            	    switch (alt33) {
             	        case 1 :
-            	            // InternalRPG.g:1838:5: (otherlv_1= '+' () )
+            	            // InternalRPG.g:1897:5: (otherlv_1= '+' () )
             	            {
-            	            // InternalRPG.g:1838:5: (otherlv_1= '+' () )
-            	            // InternalRPG.g:1839:6: otherlv_1= '+' ()
+            	            // InternalRPG.g:1897:5: (otherlv_1= '+' () )
+            	            // InternalRPG.g:1898:6: otherlv_1= '+' ()
             	            {
-            	            otherlv_1=(Token)match(input,44,FOLLOW_26); 
+            	            otherlv_1=(Token)match(input,44,FOLLOW_21); 
 
             	            						newLeafNode(otherlv_1, grammarAccess.getSumAccess().getPlusSignKeyword_1_0_0_0());
             	            					
-            	            // InternalRPG.g:1843:6: ()
-            	            // InternalRPG.g:1844:7: 
+            	            // InternalRPG.g:1902:6: ()
+            	            // InternalRPG.g:1903:7: 
             	            {
 
             	            							current = forceCreateModelElementAndSet(
@@ -5234,17 +5304,17 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             	            }
             	            break;
             	        case 2 :
-            	            // InternalRPG.g:1852:5: (otherlv_3= '-' () )
+            	            // InternalRPG.g:1911:5: (otherlv_3= '-' () )
             	            {
-            	            // InternalRPG.g:1852:5: (otherlv_3= '-' () )
-            	            // InternalRPG.g:1853:6: otherlv_3= '-' ()
+            	            // InternalRPG.g:1911:5: (otherlv_3= '-' () )
+            	            // InternalRPG.g:1912:6: otherlv_3= '-' ()
             	            {
-            	            otherlv_3=(Token)match(input,45,FOLLOW_26); 
+            	            otherlv_3=(Token)match(input,45,FOLLOW_21); 
 
             	            						newLeafNode(otherlv_3, grammarAccess.getSumAccess().getHyphenMinusKeyword_1_0_1_0());
             	            					
-            	            // InternalRPG.g:1857:6: ()
-            	            // InternalRPG.g:1858:7: 
+            	            // InternalRPG.g:1916:6: ()
+            	            // InternalRPG.g:1917:7: 
             	            {
 
             	            							current = forceCreateModelElementAndSet(
@@ -5263,16 +5333,16 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // InternalRPG.g:1866:4: ( (lv_right_5_0= ruleMultiply ) )
-            	    // InternalRPG.g:1867:5: (lv_right_5_0= ruleMultiply )
+            	    // InternalRPG.g:1925:4: ( (lv_right_5_0= ruleMultiply ) )
+            	    // InternalRPG.g:1926:5: (lv_right_5_0= ruleMultiply )
             	    {
-            	    // InternalRPG.g:1867:5: (lv_right_5_0= ruleMultiply )
-            	    // InternalRPG.g:1868:6: lv_right_5_0= ruleMultiply
+            	    // InternalRPG.g:1926:5: (lv_right_5_0= ruleMultiply )
+            	    // InternalRPG.g:1927:6: lv_right_5_0= ruleMultiply
             	    {
 
             	    						newCompositeNode(grammarAccess.getSumAccess().getRightMultiplyParserRuleCall_1_1_0());
             	    					
-            	    pushFollow(FOLLOW_41);
+            	    pushFollow(FOLLOW_40);
             	    lv_right_5_0=ruleMultiply();
 
             	    state._fsp--;
@@ -5286,6 +5356,227 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
             	    							"right",
             	    							lv_right_5_0,
             	    							"mdsd.RPG.Multiply");
+            	    						afterParserOrEnumRuleCall();
+            	    					
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop34;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleSum"
+
+
+    // $ANTLR start "entryRuleMultiply"
+    // InternalRPG.g:1949:1: entryRuleMultiply returns [EObject current=null] : iv_ruleMultiply= ruleMultiply EOF ;
+    public final EObject entryRuleMultiply() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleMultiply = null;
+
+
+        try {
+            // InternalRPG.g:1949:49: (iv_ruleMultiply= ruleMultiply EOF )
+            // InternalRPG.g:1950:2: iv_ruleMultiply= ruleMultiply EOF
+            {
+             newCompositeNode(grammarAccess.getMultiplyRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleMultiply=ruleMultiply();
+
+            state._fsp--;
+
+             current =iv_ruleMultiply; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleMultiply"
+
+
+    // $ANTLR start "ruleMultiply"
+    // InternalRPG.g:1956:1: ruleMultiply returns [EObject current=null] : (this_AtomicNumber_0= ruleAtomicNumber ( ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) ) ( (lv_right_5_0= ruleAtomicNumber ) ) )* ) ;
+    public final EObject ruleMultiply() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        Token otherlv_3=null;
+        EObject this_AtomicNumber_0 = null;
+
+        EObject lv_right_5_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalRPG.g:1962:2: ( (this_AtomicNumber_0= ruleAtomicNumber ( ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) ) ( (lv_right_5_0= ruleAtomicNumber ) ) )* ) )
+            // InternalRPG.g:1963:2: (this_AtomicNumber_0= ruleAtomicNumber ( ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) ) ( (lv_right_5_0= ruleAtomicNumber ) ) )* )
+            {
+            // InternalRPG.g:1963:2: (this_AtomicNumber_0= ruleAtomicNumber ( ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) ) ( (lv_right_5_0= ruleAtomicNumber ) ) )* )
+            // InternalRPG.g:1964:3: this_AtomicNumber_0= ruleAtomicNumber ( ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) ) ( (lv_right_5_0= ruleAtomicNumber ) ) )*
+            {
+
+            			newCompositeNode(grammarAccess.getMultiplyAccess().getAtomicNumberParserRuleCall_0());
+            		
+            pushFollow(FOLLOW_41);
+            this_AtomicNumber_0=ruleAtomicNumber();
+
+            state._fsp--;
+
+
+            			current = this_AtomicNumber_0;
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalRPG.g:1972:3: ( ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) ) ( (lv_right_5_0= ruleAtomicNumber ) ) )*
+            loop36:
+            do {
+                int alt36=2;
+                int LA36_0 = input.LA(1);
+
+                if ( ((LA36_0>=46 && LA36_0<=47)) ) {
+                    alt36=1;
+                }
+
+
+                switch (alt36) {
+            	case 1 :
+            	    // InternalRPG.g:1973:4: ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) ) ( (lv_right_5_0= ruleAtomicNumber ) )
+            	    {
+            	    // InternalRPG.g:1973:4: ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) )
+            	    int alt35=2;
+            	    int LA35_0 = input.LA(1);
+
+            	    if ( (LA35_0==46) ) {
+            	        alt35=1;
+            	    }
+            	    else if ( (LA35_0==47) ) {
+            	        alt35=2;
+            	    }
+            	    else {
+            	        NoViableAltException nvae =
+            	            new NoViableAltException("", 35, 0, input);
+
+            	        throw nvae;
+            	    }
+            	    switch (alt35) {
+            	        case 1 :
+            	            // InternalRPG.g:1974:5: (otherlv_1= '*' () )
+            	            {
+            	            // InternalRPG.g:1974:5: (otherlv_1= '*' () )
+            	            // InternalRPG.g:1975:6: otherlv_1= '*' ()
+            	            {
+            	            otherlv_1=(Token)match(input,46,FOLLOW_21); 
+
+            	            						newLeafNode(otherlv_1, grammarAccess.getMultiplyAccess().getAsteriskKeyword_1_0_0_0());
+            	            					
+            	            // InternalRPG.g:1979:6: ()
+            	            // InternalRPG.g:1980:7: 
+            	            {
+
+            	            							current = forceCreateModelElementAndSet(
+            	            								grammarAccess.getMultiplyAccess().getMultLeftAction_1_0_0_1(),
+            	            								current);
+            	            						
+
+            	            }
+
+
+            	            }
+
+
+            	            }
+            	            break;
+            	        case 2 :
+            	            // InternalRPG.g:1988:5: (otherlv_3= '/' () )
+            	            {
+            	            // InternalRPG.g:1988:5: (otherlv_3= '/' () )
+            	            // InternalRPG.g:1989:6: otherlv_3= '/' ()
+            	            {
+            	            otherlv_3=(Token)match(input,47,FOLLOW_21); 
+
+            	            						newLeafNode(otherlv_3, grammarAccess.getMultiplyAccess().getSolidusKeyword_1_0_1_0());
+            	            					
+            	            // InternalRPG.g:1993:6: ()
+            	            // InternalRPG.g:1994:7: 
+            	            {
+
+            	            							current = forceCreateModelElementAndSet(
+            	            								grammarAccess.getMultiplyAccess().getDivLeftAction_1_0_1_1(),
+            	            								current);
+            	            						
+
+            	            }
+
+
+            	            }
+
+
+            	            }
+            	            break;
+
+            	    }
+
+            	    // InternalRPG.g:2002:4: ( (lv_right_5_0= ruleAtomicNumber ) )
+            	    // InternalRPG.g:2003:5: (lv_right_5_0= ruleAtomicNumber )
+            	    {
+            	    // InternalRPG.g:2003:5: (lv_right_5_0= ruleAtomicNumber )
+            	    // InternalRPG.g:2004:6: lv_right_5_0= ruleAtomicNumber
+            	    {
+
+            	    						newCompositeNode(grammarAccess.getMultiplyAccess().getRightAtomicNumberParserRuleCall_1_1_0());
+            	    					
+            	    pushFollow(FOLLOW_41);
+            	    lv_right_5_0=ruleAtomicNumber();
+
+            	    state._fsp--;
+
+
+            	    						if (current==null) {
+            	    							current = createModelElementForParent(grammarAccess.getMultiplyRule());
+            	    						}
+            	    						set(
+            	    							current,
+            	    							"right",
+            	    							lv_right_5_0,
+            	    							"mdsd.RPG.AtomicNumber");
             	    						afterParserOrEnumRuleCall();
             	    					
 
@@ -5322,402 +5613,11 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleSum"
-
-
-    // $ANTLR start "entryRuleMultiply"
-    // InternalRPG.g:1890:1: entryRuleMultiply returns [EObject current=null] : iv_ruleMultiply= ruleMultiply EOF ;
-    public final EObject entryRuleMultiply() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleMultiply = null;
-
-
-        try {
-            // InternalRPG.g:1890:49: (iv_ruleMultiply= ruleMultiply EOF )
-            // InternalRPG.g:1891:2: iv_ruleMultiply= ruleMultiply EOF
-            {
-             newCompositeNode(grammarAccess.getMultiplyRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleMultiply=ruleMultiply();
-
-            state._fsp--;
-
-             current =iv_ruleMultiply; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleMultiply"
-
-
-    // $ANTLR start "ruleMultiply"
-    // InternalRPG.g:1897:1: ruleMultiply returns [EObject current=null] : (this_AtomicAttribute_0= ruleAtomicAttribute ( ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) ) ( (lv_right_5_0= ruleAtomicAttribute ) ) )* ) ;
-    public final EObject ruleMultiply() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-        Token otherlv_3=null;
-        EObject this_AtomicAttribute_0 = null;
-
-        EObject lv_right_5_0 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalRPG.g:1903:2: ( (this_AtomicAttribute_0= ruleAtomicAttribute ( ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) ) ( (lv_right_5_0= ruleAtomicAttribute ) ) )* ) )
-            // InternalRPG.g:1904:2: (this_AtomicAttribute_0= ruleAtomicAttribute ( ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) ) ( (lv_right_5_0= ruleAtomicAttribute ) ) )* )
-            {
-            // InternalRPG.g:1904:2: (this_AtomicAttribute_0= ruleAtomicAttribute ( ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) ) ( (lv_right_5_0= ruleAtomicAttribute ) ) )* )
-            // InternalRPG.g:1905:3: this_AtomicAttribute_0= ruleAtomicAttribute ( ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) ) ( (lv_right_5_0= ruleAtomicAttribute ) ) )*
-            {
-
-            			newCompositeNode(grammarAccess.getMultiplyAccess().getAtomicAttributeParserRuleCall_0());
-            		
-            pushFollow(FOLLOW_42);
-            this_AtomicAttribute_0=ruleAtomicAttribute();
-
-            state._fsp--;
-
-
-            			current = this_AtomicAttribute_0;
-            			afterParserOrEnumRuleCall();
-            		
-            // InternalRPG.g:1913:3: ( ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) ) ( (lv_right_5_0= ruleAtomicAttribute ) ) )*
-            loop38:
-            do {
-                int alt38=2;
-                int LA38_0 = input.LA(1);
-
-                if ( ((LA38_0>=46 && LA38_0<=47)) ) {
-                    alt38=1;
-                }
-
-
-                switch (alt38) {
-            	case 1 :
-            	    // InternalRPG.g:1914:4: ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) ) ( (lv_right_5_0= ruleAtomicAttribute ) )
-            	    {
-            	    // InternalRPG.g:1914:4: ( (otherlv_1= '*' () ) | (otherlv_3= '/' () ) )
-            	    int alt37=2;
-            	    int LA37_0 = input.LA(1);
-
-            	    if ( (LA37_0==46) ) {
-            	        alt37=1;
-            	    }
-            	    else if ( (LA37_0==47) ) {
-            	        alt37=2;
-            	    }
-            	    else {
-            	        NoViableAltException nvae =
-            	            new NoViableAltException("", 37, 0, input);
-
-            	        throw nvae;
-            	    }
-            	    switch (alt37) {
-            	        case 1 :
-            	            // InternalRPG.g:1915:5: (otherlv_1= '*' () )
-            	            {
-            	            // InternalRPG.g:1915:5: (otherlv_1= '*' () )
-            	            // InternalRPG.g:1916:6: otherlv_1= '*' ()
-            	            {
-            	            otherlv_1=(Token)match(input,46,FOLLOW_26); 
-
-            	            						newLeafNode(otherlv_1, grammarAccess.getMultiplyAccess().getAsteriskKeyword_1_0_0_0());
-            	            					
-            	            // InternalRPG.g:1920:6: ()
-            	            // InternalRPG.g:1921:7: 
-            	            {
-
-            	            							current = forceCreateModelElementAndSet(
-            	            								grammarAccess.getMultiplyAccess().getMultLeftAction_1_0_0_1(),
-            	            								current);
-            	            						
-
-            	            }
-
-
-            	            }
-
-
-            	            }
-            	            break;
-            	        case 2 :
-            	            // InternalRPG.g:1929:5: (otherlv_3= '/' () )
-            	            {
-            	            // InternalRPG.g:1929:5: (otherlv_3= '/' () )
-            	            // InternalRPG.g:1930:6: otherlv_3= '/' ()
-            	            {
-            	            otherlv_3=(Token)match(input,47,FOLLOW_26); 
-
-            	            						newLeafNode(otherlv_3, grammarAccess.getMultiplyAccess().getSolidusKeyword_1_0_1_0());
-            	            					
-            	            // InternalRPG.g:1934:6: ()
-            	            // InternalRPG.g:1935:7: 
-            	            {
-
-            	            							current = forceCreateModelElementAndSet(
-            	            								grammarAccess.getMultiplyAccess().getDivLeftAction_1_0_1_1(),
-            	            								current);
-            	            						
-
-            	            }
-
-
-            	            }
-
-
-            	            }
-            	            break;
-
-            	    }
-
-            	    // InternalRPG.g:1943:4: ( (lv_right_5_0= ruleAtomicAttribute ) )
-            	    // InternalRPG.g:1944:5: (lv_right_5_0= ruleAtomicAttribute )
-            	    {
-            	    // InternalRPG.g:1944:5: (lv_right_5_0= ruleAtomicAttribute )
-            	    // InternalRPG.g:1945:6: lv_right_5_0= ruleAtomicAttribute
-            	    {
-
-            	    						newCompositeNode(grammarAccess.getMultiplyAccess().getRightAtomicAttributeParserRuleCall_1_1_0());
-            	    					
-            	    pushFollow(FOLLOW_42);
-            	    lv_right_5_0=ruleAtomicAttribute();
-
-            	    state._fsp--;
-
-
-            	    						if (current==null) {
-            	    							current = createModelElementForParent(grammarAccess.getMultiplyRule());
-            	    						}
-            	    						set(
-            	    							current,
-            	    							"right",
-            	    							lv_right_5_0,
-            	    							"mdsd.RPG.AtomicAttribute");
-            	    						afterParserOrEnumRuleCall();
-            	    					
-
-            	    }
-
-
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop38;
-                }
-            } while (true);
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
     // $ANTLR end "ruleMultiply"
 
 
-    // $ANTLR start "entryRuleAtomicAttribute"
-    // InternalRPG.g:1967:1: entryRuleAtomicAttribute returns [EObject current=null] : iv_ruleAtomicAttribute= ruleAtomicAttribute EOF ;
-    public final EObject entryRuleAtomicAttribute() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleAtomicAttribute = null;
-
-
-        try {
-            // InternalRPG.g:1967:56: (iv_ruleAtomicAttribute= ruleAtomicAttribute EOF )
-            // InternalRPG.g:1968:2: iv_ruleAtomicAttribute= ruleAtomicAttribute EOF
-            {
-             newCompositeNode(grammarAccess.getAtomicAttributeRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleAtomicAttribute=ruleAtomicAttribute();
-
-            state._fsp--;
-
-             current =iv_ruleAtomicAttribute; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleAtomicAttribute"
-
-
-    // $ANTLR start "ruleAtomicAttribute"
-    // InternalRPG.g:1974:1: ruleAtomicAttribute returns [EObject current=null] : (this_AtomicNumber_0= ruleAtomicNumber | ( ( ruleSelfTargeting )? ( (otherlv_2= RULE_ID ) ) ) ) ;
-    public final EObject ruleAtomicAttribute() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_2=null;
-        EObject this_AtomicNumber_0 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalRPG.g:1980:2: ( (this_AtomicNumber_0= ruleAtomicNumber | ( ( ruleSelfTargeting )? ( (otherlv_2= RULE_ID ) ) ) ) )
-            // InternalRPG.g:1981:2: (this_AtomicNumber_0= ruleAtomicNumber | ( ( ruleSelfTargeting )? ( (otherlv_2= RULE_ID ) ) ) )
-            {
-            // InternalRPG.g:1981:2: (this_AtomicNumber_0= ruleAtomicNumber | ( ( ruleSelfTargeting )? ( (otherlv_2= RULE_ID ) ) ) )
-            int alt40=2;
-            int LA40_0 = input.LA(1);
-
-            if ( (LA40_0==RULE_INT) ) {
-                alt40=1;
-            }
-            else if ( (LA40_0==RULE_ID||LA40_0==48) ) {
-                alt40=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 40, 0, input);
-
-                throw nvae;
-            }
-            switch (alt40) {
-                case 1 :
-                    // InternalRPG.g:1982:3: this_AtomicNumber_0= ruleAtomicNumber
-                    {
-
-                    			newCompositeNode(grammarAccess.getAtomicAttributeAccess().getAtomicNumberParserRuleCall_0());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_AtomicNumber_0=ruleAtomicNumber();
-
-                    state._fsp--;
-
-
-                    			current = this_AtomicNumber_0;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 2 :
-                    // InternalRPG.g:1991:3: ( ( ruleSelfTargeting )? ( (otherlv_2= RULE_ID ) ) )
-                    {
-                    // InternalRPG.g:1991:3: ( ( ruleSelfTargeting )? ( (otherlv_2= RULE_ID ) ) )
-                    // InternalRPG.g:1992:4: ( ruleSelfTargeting )? ( (otherlv_2= RULE_ID ) )
-                    {
-                    // InternalRPG.g:1992:4: ( ruleSelfTargeting )?
-                    int alt39=2;
-                    int LA39_0 = input.LA(1);
-
-                    if ( (LA39_0==48) ) {
-                        alt39=1;
-                    }
-                    switch (alt39) {
-                        case 1 :
-                            // InternalRPG.g:1993:5: ruleSelfTargeting
-                            {
-
-                            					newCompositeNode(grammarAccess.getAtomicAttributeAccess().getSelfTargetingParserRuleCall_1_0());
-                            				
-                            pushFollow(FOLLOW_3);
-                            ruleSelfTargeting();
-
-                            state._fsp--;
-
-
-                            					afterParserOrEnumRuleCall();
-                            				
-
-                            }
-                            break;
-
-                    }
-
-                    // InternalRPG.g:2001:4: ( (otherlv_2= RULE_ID ) )
-                    // InternalRPG.g:2002:5: (otherlv_2= RULE_ID )
-                    {
-                    // InternalRPG.g:2002:5: (otherlv_2= RULE_ID )
-                    // InternalRPG.g:2003:6: otherlv_2= RULE_ID
-                    {
-
-                    						if (current==null) {
-                    							current = createModelElement(grammarAccess.getAtomicAttributeRule());
-                    						}
-                    					
-                    otherlv_2=(Token)match(input,RULE_ID,FOLLOW_2); 
-
-                    						newLeafNode(otherlv_2, grammarAccess.getAtomicAttributeAccess().getAttributeAttributeCrossReference_1_1_0());
-                    					
-
-                    }
-
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleAtomicAttribute"
-
-
     // $ANTLR start "entryRuleAtomicNumber"
-    // InternalRPG.g:2019:1: entryRuleAtomicNumber returns [EObject current=null] : iv_ruleAtomicNumber= ruleAtomicNumber EOF ;
+    // InternalRPG.g:2026:1: entryRuleAtomicNumber returns [EObject current=null] : iv_ruleAtomicNumber= ruleAtomicNumber EOF ;
     public final EObject entryRuleAtomicNumber() throws RecognitionException {
         EObject current = null;
 
@@ -5725,8 +5625,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:2019:53: (iv_ruleAtomicNumber= ruleAtomicNumber EOF )
-            // InternalRPG.g:2020:2: iv_ruleAtomicNumber= ruleAtomicNumber EOF
+            // InternalRPG.g:2026:53: (iv_ruleAtomicNumber= ruleAtomicNumber EOF )
+            // InternalRPG.g:2027:2: iv_ruleAtomicNumber= ruleAtomicNumber EOF
             {
              newCompositeNode(grammarAccess.getAtomicNumberRule()); 
             pushFollow(FOLLOW_1);
@@ -5753,111 +5653,136 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAtomicNumber"
-    // InternalRPG.g:2026:1: ruleAtomicNumber returns [EObject current=null] : ( ( (lv_float2_0_0= ruleFloat ) ) | ( (lv_int2_1_0= RULE_INT ) ) ) ;
+    // InternalRPG.g:2033:1: ruleAtomicNumber returns [EObject current=null] : (this_FloatNum_0= ruleFloatNum | this_IntNum_1= ruleIntNum | ( ( ruleSelf )? this_NameAttribute_3= ruleNameAttribute ) ) ;
     public final EObject ruleAtomicNumber() throws RecognitionException {
         EObject current = null;
 
-        Token lv_int2_1_0=null;
-        AntlrDatatypeRuleToken lv_float2_0_0 = null;
+        EObject this_FloatNum_0 = null;
+
+        EObject this_IntNum_1 = null;
+
+        EObject this_NameAttribute_3 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalRPG.g:2032:2: ( ( ( (lv_float2_0_0= ruleFloat ) ) | ( (lv_int2_1_0= RULE_INT ) ) ) )
-            // InternalRPG.g:2033:2: ( ( (lv_float2_0_0= ruleFloat ) ) | ( (lv_int2_1_0= RULE_INT ) ) )
+            // InternalRPG.g:2039:2: ( (this_FloatNum_0= ruleFloatNum | this_IntNum_1= ruleIntNum | ( ( ruleSelf )? this_NameAttribute_3= ruleNameAttribute ) ) )
+            // InternalRPG.g:2040:2: (this_FloatNum_0= ruleFloatNum | this_IntNum_1= ruleIntNum | ( ( ruleSelf )? this_NameAttribute_3= ruleNameAttribute ) )
             {
-            // InternalRPG.g:2033:2: ( ( (lv_float2_0_0= ruleFloat ) ) | ( (lv_int2_1_0= RULE_INT ) ) )
-            int alt41=2;
-            int LA41_0 = input.LA(1);
+            // InternalRPG.g:2040:2: (this_FloatNum_0= ruleFloatNum | this_IntNum_1= ruleIntNum | ( ( ruleSelf )? this_NameAttribute_3= ruleNameAttribute ) )
+            int alt38=3;
+            int LA38_0 = input.LA(1);
 
-            if ( (LA41_0==RULE_INT) ) {
-                int LA41_1 = input.LA(2);
+            if ( (LA38_0==RULE_INT) ) {
+                int LA38_1 = input.LA(2);
 
-                if ( (LA41_1==EOF||(LA41_1>=RULE_ID && LA41_1<=RULE_INT)||LA41_1==12||LA41_1==14||(LA41_1>=17 && LA41_1<=22)||LA41_1==25||(LA41_1>=27 && LA41_1<=31)||(LA41_1>=33 && LA41_1<=48)) ) {
-                    alt41=2;
+                if ( (LA38_1==49) ) {
+                    alt38=1;
                 }
-                else if ( (LA41_1==49) ) {
-                    alt41=1;
+                else if ( (LA38_1==EOF||(LA38_1>=RULE_ID && LA38_1<=RULE_INT)||LA38_1==12||LA38_1==14||(LA38_1>=17 && LA38_1<=22)||LA38_1==25||(LA38_1>=27 && LA38_1<=31)||(LA38_1>=33 && LA38_1<=36)||(LA38_1>=38 && LA38_1<=48)) ) {
+                    alt38=2;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 41, 1, input);
+                        new NoViableAltException("", 38, 1, input);
 
                     throw nvae;
                 }
             }
+            else if ( (LA38_0==RULE_ID||LA38_0==48) ) {
+                alt38=3;
+            }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 41, 0, input);
+                    new NoViableAltException("", 38, 0, input);
 
                 throw nvae;
             }
-            switch (alt41) {
+            switch (alt38) {
                 case 1 :
-                    // InternalRPG.g:2034:3: ( (lv_float2_0_0= ruleFloat ) )
-                    {
-                    // InternalRPG.g:2034:3: ( (lv_float2_0_0= ruleFloat ) )
-                    // InternalRPG.g:2035:4: (lv_float2_0_0= ruleFloat )
-                    {
-                    // InternalRPG.g:2035:4: (lv_float2_0_0= ruleFloat )
-                    // InternalRPG.g:2036:5: lv_float2_0_0= ruleFloat
+                    // InternalRPG.g:2041:3: this_FloatNum_0= ruleFloatNum
                     {
 
-                    					newCompositeNode(grammarAccess.getAtomicNumberAccess().getFloat2FloatParserRuleCall_0_0());
-                    				
+                    			newCompositeNode(grammarAccess.getAtomicNumberAccess().getFloatNumParserRuleCall_0());
+                    		
                     pushFollow(FOLLOW_2);
-                    lv_float2_0_0=ruleFloat();
+                    this_FloatNum_0=ruleFloatNum();
 
                     state._fsp--;
 
 
-                    					if (current==null) {
-                    						current = createModelElementForParent(grammarAccess.getAtomicNumberRule());
-                    					}
-                    					set(
-                    						current,
-                    						"float2",
-                    						lv_float2_0_0,
-                    						"mdsd.RPG.Float");
-                    					afterParserOrEnumRuleCall();
-                    				
-
-                    }
-
-
-                    }
-
+                    			current = this_FloatNum_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalRPG.g:2054:3: ( (lv_int2_1_0= RULE_INT ) )
+                    // InternalRPG.g:2050:3: this_IntNum_1= ruleIntNum
                     {
-                    // InternalRPG.g:2054:3: ( (lv_int2_1_0= RULE_INT ) )
-                    // InternalRPG.g:2055:4: (lv_int2_1_0= RULE_INT )
-                    {
-                    // InternalRPG.g:2055:4: (lv_int2_1_0= RULE_INT )
-                    // InternalRPG.g:2056:5: lv_int2_1_0= RULE_INT
-                    {
-                    lv_int2_1_0=(Token)match(input,RULE_INT,FOLLOW_2); 
 
-                    					newLeafNode(lv_int2_1_0, grammarAccess.getAtomicNumberAccess().getInt2INTTerminalRuleCall_1_0());
-                    				
+                    			newCompositeNode(grammarAccess.getAtomicNumberAccess().getIntNumParserRuleCall_1());
+                    		
+                    pushFollow(FOLLOW_2);
+                    this_IntNum_1=ruleIntNum();
 
-                    					if (current==null) {
-                    						current = createModelElement(grammarAccess.getAtomicNumberRule());
-                    					}
-                    					setWithLastConsumed(
-                    						current,
-                    						"int2",
-                    						lv_int2_1_0,
-                    						"org.eclipse.xtext.common.Terminals.INT");
-                    				
+                    state._fsp--;
+
+
+                    			current = this_IntNum_1;
+                    			afterParserOrEnumRuleCall();
+                    		
+
+                    }
+                    break;
+                case 3 :
+                    // InternalRPG.g:2059:3: ( ( ruleSelf )? this_NameAttribute_3= ruleNameAttribute )
+                    {
+                    // InternalRPG.g:2059:3: ( ( ruleSelf )? this_NameAttribute_3= ruleNameAttribute )
+                    // InternalRPG.g:2060:4: ( ruleSelf )? this_NameAttribute_3= ruleNameAttribute
+                    {
+                    // InternalRPG.g:2060:4: ( ruleSelf )?
+                    int alt37=2;
+                    int LA37_0 = input.LA(1);
+
+                    if ( (LA37_0==48) ) {
+                        alt37=1;
+                    }
+                    switch (alt37) {
+                        case 1 :
+                            // InternalRPG.g:2061:5: ruleSelf
+                            {
+
+                            					newCompositeNode(grammarAccess.getAtomicNumberAccess().getSelfParserRuleCall_2_0());
+                            				
+                            pushFollow(FOLLOW_21);
+                            ruleSelf();
+
+                            state._fsp--;
+
+
+                            					afterParserOrEnumRuleCall();
+                            				
+
+                            }
+                            break;
 
                     }
 
+
+                    				newCompositeNode(grammarAccess.getAtomicNumberAccess().getNameAttributeParserRuleCall_2_1());
+                    			
+                    pushFollow(FOLLOW_2);
+                    this_NameAttribute_3=ruleNameAttribute();
+
+                    state._fsp--;
+
+
+                    				current = this_NameAttribute_3;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
 
@@ -5886,25 +5811,25 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleAtomicNumber"
 
 
-    // $ANTLR start "entryRuleSelfTargeting"
-    // InternalRPG.g:2076:1: entryRuleSelfTargeting returns [String current=null] : iv_ruleSelfTargeting= ruleSelfTargeting EOF ;
-    public final String entryRuleSelfTargeting() throws RecognitionException {
-        String current = null;
+    // $ANTLR start "entryRuleNameAttribute"
+    // InternalRPG.g:2082:1: entryRuleNameAttribute returns [EObject current=null] : iv_ruleNameAttribute= ruleNameAttribute EOF ;
+    public final EObject entryRuleNameAttribute() throws RecognitionException {
+        EObject current = null;
 
-        AntlrDatatypeRuleToken iv_ruleSelfTargeting = null;
+        EObject iv_ruleNameAttribute = null;
 
 
         try {
-            // InternalRPG.g:2076:53: (iv_ruleSelfTargeting= ruleSelfTargeting EOF )
-            // InternalRPG.g:2077:2: iv_ruleSelfTargeting= ruleSelfTargeting EOF
+            // InternalRPG.g:2082:54: (iv_ruleNameAttribute= ruleNameAttribute EOF )
+            // InternalRPG.g:2083:2: iv_ruleNameAttribute= ruleNameAttribute EOF
             {
-             newCompositeNode(grammarAccess.getSelfTargetingRule()); 
+             newCompositeNode(grammarAccess.getNameAttributeRule()); 
             pushFollow(FOLLOW_1);
-            iv_ruleSelfTargeting=ruleSelfTargeting();
+            iv_ruleNameAttribute=ruleNameAttribute();
 
             state._fsp--;
 
-             current =iv_ruleSelfTargeting.getText(); 
+             current =iv_ruleNameAttribute; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -5919,12 +5844,102 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleSelfTargeting"
+    // $ANTLR end "entryRuleNameAttribute"
 
 
-    // $ANTLR start "ruleSelfTargeting"
-    // InternalRPG.g:2083:1: ruleSelfTargeting returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'self.' ;
-    public final AntlrDatatypeRuleToken ruleSelfTargeting() throws RecognitionException {
+    // $ANTLR start "ruleNameAttribute"
+    // InternalRPG.g:2089:1: ruleNameAttribute returns [EObject current=null] : ( (otherlv_0= RULE_ID ) ) ;
+    public final EObject ruleNameAttribute() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalRPG.g:2095:2: ( ( (otherlv_0= RULE_ID ) ) )
+            // InternalRPG.g:2096:2: ( (otherlv_0= RULE_ID ) )
+            {
+            // InternalRPG.g:2096:2: ( (otherlv_0= RULE_ID ) )
+            // InternalRPG.g:2097:3: (otherlv_0= RULE_ID )
+            {
+            // InternalRPG.g:2097:3: (otherlv_0= RULE_ID )
+            // InternalRPG.g:2098:4: otherlv_0= RULE_ID
+            {
+
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getNameAttributeRule());
+            				}
+            			
+            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_2); 
+
+            				newLeafNode(otherlv_0, grammarAccess.getNameAttributeAccess().getAttributeAttributeCrossReference_0());
+            			
+
+            }
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleNameAttribute"
+
+
+    // $ANTLR start "entryRuleSelf"
+    // InternalRPG.g:2112:1: entryRuleSelf returns [String current=null] : iv_ruleSelf= ruleSelf EOF ;
+    public final String entryRuleSelf() throws RecognitionException {
+        String current = null;
+
+        AntlrDatatypeRuleToken iv_ruleSelf = null;
+
+
+        try {
+            // InternalRPG.g:2112:44: (iv_ruleSelf= ruleSelf EOF )
+            // InternalRPG.g:2113:2: iv_ruleSelf= ruleSelf EOF
+            {
+             newCompositeNode(grammarAccess.getSelfRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleSelf=ruleSelf();
+
+            state._fsp--;
+
+             current =iv_ruleSelf.getText(); 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleSelf"
+
+
+    // $ANTLR start "ruleSelf"
+    // InternalRPG.g:2119:1: ruleSelf returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'self.' ;
+    public final AntlrDatatypeRuleToken ruleSelf() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token kw=null;
@@ -5933,13 +5948,13 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:2089:2: (kw= 'self.' )
-            // InternalRPG.g:2090:2: kw= 'self.'
+            // InternalRPG.g:2125:2: (kw= 'self.' )
+            // InternalRPG.g:2126:2: kw= 'self.'
             {
             kw=(Token)match(input,48,FOLLOW_2); 
 
             		current.merge(kw);
-            		newLeafNode(kw, grammarAccess.getSelfTargetingAccess().getSelfKeyword());
+            		newLeafNode(kw, grammarAccess.getSelfAccess().getSelfKeyword());
             	
 
             }
@@ -5957,28 +5972,28 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleSelfTargeting"
+    // $ANTLR end "ruleSelf"
 
 
-    // $ANTLR start "entryRuleFloat"
-    // InternalRPG.g:2098:1: entryRuleFloat returns [String current=null] : iv_ruleFloat= ruleFloat EOF ;
-    public final String entryRuleFloat() throws RecognitionException {
-        String current = null;
+    // $ANTLR start "entryRuleIntNum"
+    // InternalRPG.g:2134:1: entryRuleIntNum returns [EObject current=null] : iv_ruleIntNum= ruleIntNum EOF ;
+    public final EObject entryRuleIntNum() throws RecognitionException {
+        EObject current = null;
 
-        AntlrDatatypeRuleToken iv_ruleFloat = null;
+        EObject iv_ruleIntNum = null;
 
 
         try {
-            // InternalRPG.g:2098:45: (iv_ruleFloat= ruleFloat EOF )
-            // InternalRPG.g:2099:2: iv_ruleFloat= ruleFloat EOF
+            // InternalRPG.g:2134:47: (iv_ruleIntNum= ruleIntNum EOF )
+            // InternalRPG.g:2135:2: iv_ruleIntNum= ruleIntNum EOF
             {
-             newCompositeNode(grammarAccess.getFloatRule()); 
+             newCompositeNode(grammarAccess.getIntNumRule()); 
             pushFollow(FOLLOW_1);
-            iv_ruleFloat=ruleFloat();
+            iv_ruleIntNum=ruleIntNum();
 
             state._fsp--;
 
-             current =iv_ruleFloat.getText(); 
+             current =iv_ruleIntNum; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -5993,47 +6008,46 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleFloat"
+    // $ANTLR end "entryRuleIntNum"
 
 
-    // $ANTLR start "ruleFloat"
-    // InternalRPG.g:2105:1: ruleFloat returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT ) ;
-    public final AntlrDatatypeRuleToken ruleFloat() throws RecognitionException {
-        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+    // $ANTLR start "ruleIntNum"
+    // InternalRPG.g:2141:1: ruleIntNum returns [EObject current=null] : ( (lv_value_0_0= RULE_INT ) ) ;
+    public final EObject ruleIntNum() throws RecognitionException {
+        EObject current = null;
 
-        Token this_INT_0=null;
-        Token kw=null;
-        Token this_INT_2=null;
+        Token lv_value_0_0=null;
 
 
         	enterRule();
 
         try {
-            // InternalRPG.g:2111:2: ( (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT ) )
-            // InternalRPG.g:2112:2: (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT )
+            // InternalRPG.g:2147:2: ( ( (lv_value_0_0= RULE_INT ) ) )
+            // InternalRPG.g:2148:2: ( (lv_value_0_0= RULE_INT ) )
             {
-            // InternalRPG.g:2112:2: (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT )
-            // InternalRPG.g:2113:3: this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT
+            // InternalRPG.g:2148:2: ( (lv_value_0_0= RULE_INT ) )
+            // InternalRPG.g:2149:3: (lv_value_0_0= RULE_INT )
             {
-            this_INT_0=(Token)match(input,RULE_INT,FOLLOW_43); 
+            // InternalRPG.g:2149:3: (lv_value_0_0= RULE_INT )
+            // InternalRPG.g:2150:4: lv_value_0_0= RULE_INT
+            {
+            lv_value_0_0=(Token)match(input,RULE_INT,FOLLOW_2); 
 
-            			current.merge(this_INT_0);
-            		
+            				newLeafNode(lv_value_0_0, grammarAccess.getIntNumAccess().getValueINTTerminalRuleCall_0());
+            			
 
-            			newLeafNode(this_INT_0, grammarAccess.getFloatAccess().getINTTerminalRuleCall_0());
-            		
-            kw=(Token)match(input,49,FOLLOW_36); 
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getIntNumRule());
+            				}
+            				setWithLastConsumed(
+            					current,
+            					"value",
+            					lv_value_0_0,
+            					"org.eclipse.xtext.common.Terminals.INT");
+            			
 
-            			current.merge(kw);
-            			newLeafNode(kw, grammarAccess.getFloatAccess().getFullStopKeyword_1());
-            		
-            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_2); 
+            }
 
-            			current.merge(this_INT_2);
-            		
-
-            			newLeafNode(this_INT_2, grammarAccess.getFloatAccess().getINTTerminalRuleCall_2());
-            		
 
             }
 
@@ -6053,11 +6067,144 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleFloat"
+    // $ANTLR end "ruleIntNum"
+
+
+    // $ANTLR start "entryRuleFloatNum"
+    // InternalRPG.g:2169:1: entryRuleFloatNum returns [EObject current=null] : iv_ruleFloatNum= ruleFloatNum EOF ;
+    public final EObject entryRuleFloatNum() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleFloatNum = null;
+
+
+        try {
+            // InternalRPG.g:2169:49: (iv_ruleFloatNum= ruleFloatNum EOF )
+            // InternalRPG.g:2170:2: iv_ruleFloatNum= ruleFloatNum EOF
+            {
+             newCompositeNode(grammarAccess.getFloatNumRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleFloatNum=ruleFloatNum();
+
+            state._fsp--;
+
+             current =iv_ruleFloatNum; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleFloatNum"
+
+
+    // $ANTLR start "ruleFloatNum"
+    // InternalRPG.g:2176:1: ruleFloatNum returns [EObject current=null] : ( ( (lv_i_0_0= RULE_INT ) ) otherlv_1= '.' ( (lv_decimal_2_0= RULE_INT ) ) ) ;
+    public final EObject ruleFloatNum() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_i_0_0=null;
+        Token otherlv_1=null;
+        Token lv_decimal_2_0=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalRPG.g:2182:2: ( ( ( (lv_i_0_0= RULE_INT ) ) otherlv_1= '.' ( (lv_decimal_2_0= RULE_INT ) ) ) )
+            // InternalRPG.g:2183:2: ( ( (lv_i_0_0= RULE_INT ) ) otherlv_1= '.' ( (lv_decimal_2_0= RULE_INT ) ) )
+            {
+            // InternalRPG.g:2183:2: ( ( (lv_i_0_0= RULE_INT ) ) otherlv_1= '.' ( (lv_decimal_2_0= RULE_INT ) ) )
+            // InternalRPG.g:2184:3: ( (lv_i_0_0= RULE_INT ) ) otherlv_1= '.' ( (lv_decimal_2_0= RULE_INT ) )
+            {
+            // InternalRPG.g:2184:3: ( (lv_i_0_0= RULE_INT ) )
+            // InternalRPG.g:2185:4: (lv_i_0_0= RULE_INT )
+            {
+            // InternalRPG.g:2185:4: (lv_i_0_0= RULE_INT )
+            // InternalRPG.g:2186:5: lv_i_0_0= RULE_INT
+            {
+            lv_i_0_0=(Token)match(input,RULE_INT,FOLLOW_42); 
+
+            					newLeafNode(lv_i_0_0, grammarAccess.getFloatNumAccess().getIINTTerminalRuleCall_0_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getFloatNumRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"i",
+            						lv_i_0_0,
+            						"org.eclipse.xtext.common.Terminals.INT");
+            				
+
+            }
+
+
+            }
+
+            otherlv_1=(Token)match(input,49,FOLLOW_43); 
+
+            			newLeafNode(otherlv_1, grammarAccess.getFloatNumAccess().getFullStopKeyword_1());
+            		
+            // InternalRPG.g:2206:3: ( (lv_decimal_2_0= RULE_INT ) )
+            // InternalRPG.g:2207:4: (lv_decimal_2_0= RULE_INT )
+            {
+            // InternalRPG.g:2207:4: (lv_decimal_2_0= RULE_INT )
+            // InternalRPG.g:2208:5: lv_decimal_2_0= RULE_INT
+            {
+            lv_decimal_2_0=(Token)match(input,RULE_INT,FOLLOW_2); 
+
+            					newLeafNode(lv_decimal_2_0, grammarAccess.getFloatNumAccess().getDecimalINTTerminalRuleCall_2_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getFloatNumRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"decimal",
+            						lv_decimal_2_0,
+            						"org.eclipse.xtext.common.Terminals.INT");
+            				
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleFloatNum"
 
 
     // $ANTLR start "entryRuleLegalType"
-    // InternalRPG.g:2136:1: entryRuleLegalType returns [String current=null] : iv_ruleLegalType= ruleLegalType EOF ;
+    // InternalRPG.g:2228:1: entryRuleLegalType returns [String current=null] : iv_ruleLegalType= ruleLegalType EOF ;
     public final String entryRuleLegalType() throws RecognitionException {
         String current = null;
 
@@ -6065,8 +6212,8 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalRPG.g:2136:49: (iv_ruleLegalType= ruleLegalType EOF )
-            // InternalRPG.g:2137:2: iv_ruleLegalType= ruleLegalType EOF
+            // InternalRPG.g:2228:49: (iv_ruleLegalType= ruleLegalType EOF )
+            // InternalRPG.g:2229:2: iv_ruleLegalType= ruleLegalType EOF
             {
              newCompositeNode(grammarAccess.getLegalTypeRule()); 
             pushFollow(FOLLOW_1);
@@ -6093,7 +6240,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLegalType"
-    // InternalRPG.g:2143:1: ruleLegalType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'Float' | kw= 'Integer' ) ;
+    // InternalRPG.g:2235:1: ruleLegalType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'Float' | kw= 'Integer' ) ;
     public final AntlrDatatypeRuleToken ruleLegalType() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -6103,28 +6250,28 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:2149:2: ( (kw= 'Float' | kw= 'Integer' ) )
-            // InternalRPG.g:2150:2: (kw= 'Float' | kw= 'Integer' )
+            // InternalRPG.g:2241:2: ( (kw= 'Float' | kw= 'Integer' ) )
+            // InternalRPG.g:2242:2: (kw= 'Float' | kw= 'Integer' )
             {
-            // InternalRPG.g:2150:2: (kw= 'Float' | kw= 'Integer' )
-            int alt42=2;
-            int LA42_0 = input.LA(1);
+            // InternalRPG.g:2242:2: (kw= 'Float' | kw= 'Integer' )
+            int alt39=2;
+            int LA39_0 = input.LA(1);
 
-            if ( (LA42_0==50) ) {
-                alt42=1;
+            if ( (LA39_0==50) ) {
+                alt39=1;
             }
-            else if ( (LA42_0==51) ) {
-                alt42=2;
+            else if ( (LA39_0==51) ) {
+                alt39=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 42, 0, input);
+                    new NoViableAltException("", 39, 0, input);
 
                 throw nvae;
             }
-            switch (alt42) {
+            switch (alt39) {
                 case 1 :
-                    // InternalRPG.g:2151:3: kw= 'Float'
+                    // InternalRPG.g:2243:3: kw= 'Float'
                     {
                     kw=(Token)match(input,50,FOLLOW_2); 
 
@@ -6135,7 +6282,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalRPG.g:2157:3: kw= 'Integer'
+                    // InternalRPG.g:2249:3: kw= 'Integer'
                     {
                     kw=(Token)match(input,51,FOLLOW_2); 
 
@@ -6189,30 +6336,30 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000400002L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000200000L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000200002L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0001002401800030L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000401800000L});
     public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x000C000000000020L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0001002401800032L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0001000000000012L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0001000000000030L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0001000000000032L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x000D000000000030L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000401800002L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x000D002000000030L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0001000000000012L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x000D000000000032L});
     public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000020000000L});
     public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000020000002L});
     public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000280002L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0001002601800030L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000601800000L});
     public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000080000000L});
     public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000080000002L});
     public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000100000000L});
     public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000100000002L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000800000002L});
-    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000001000000002L});
-    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000004000000000L});
-    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x00000F8000020000L});
-    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000300000000002L});
-    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000C00000000002L});
-    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000800000002L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000001000000002L});
+    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x00000F8000020000L});
+    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000300000000002L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000C00000000002L});
+    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000000000000020L});
 
 }

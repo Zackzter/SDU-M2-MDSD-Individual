@@ -6,21 +6,21 @@ package mdsd.rPG;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Atomic Attribute</b></em>'.
+ * A representation of the model object '<em><b>Name Attribute</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.AtomicAttribute#getAttribute <em>Attribute</em>}</li>
+ *   <li>{@link mdsd.rPG.NameAttribute#getAttribute <em>Attribute</em>}</li>
  * </ul>
  *
- * @see mdsd.rPG.RPGPackage#getAtomicAttribute()
+ * @see mdsd.rPG.RPGPackage#getNameAttribute()
  * @model
  * @generated
  */
-public interface AtomicAttribute extends Proposition
+public interface NameAttribute extends AtomicNumber
 {
   /**
    * Returns the value of the '<em><b>Attribute</b></em>' reference.
@@ -28,14 +28,14 @@ public interface AtomicAttribute extends Proposition
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attribute</em>' reference.
    * @see #setAttribute(Attribute)
-   * @see mdsd.rPG.RPGPackage#getAtomicAttribute_Attribute()
+   * @see mdsd.rPG.RPGPackage#getNameAttribute_Attribute()
    * @model
    * @generated
    */
   Attribute getAttribute();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.AtomicAttribute#getAttribute <em>Attribute</em>}' reference.
+   * Sets the value of the '{@link mdsd.rPG.NameAttribute#getAttribute <em>Attribute</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Attribute</em>' reference.
@@ -44,4 +44,4 @@ public interface AtomicAttribute extends Proposition
    */
   void setAttribute(Attribute value);
 
-} // AtomicAttribute
+} // NameAttribute

@@ -3,8 +3,8 @@
  */
 package mdsd.rPG.impl;
 
-import mdsd.rPG.AtomicAttribute;
 import mdsd.rPG.Attribute;
+import mdsd.rPG.NameAttribute;
 import mdsd.rPG.RPGPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -16,18 +16,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Atomic Attribute</b></em>'.
+ * An implementation of the model object '<em><b>Name Attribute</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.AtomicAttributeImpl#getAttribute <em>Attribute</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.NameAttributeImpl#getAttribute <em>Attribute</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class AtomicAttributeImpl extends PropositionImpl implements AtomicAttribute
+public class NameAttributeImpl extends AtomicNumberImpl implements NameAttribute
 {
   /**
    * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
@@ -44,7 +44,7 @@ public class AtomicAttributeImpl extends PropositionImpl implements AtomicAttrib
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AtomicAttributeImpl()
+  protected NameAttributeImpl()
   {
     super();
   }
@@ -57,7 +57,7 @@ public class AtomicAttributeImpl extends PropositionImpl implements AtomicAttrib
   @Override
   protected EClass eStaticClass()
   {
-    return RPGPackage.Literals.ATOMIC_ATTRIBUTE;
+    return RPGPackage.Literals.NAME_ATTRIBUTE;
   }
 
   /**
@@ -75,7 +75,7 @@ public class AtomicAttributeImpl extends PropositionImpl implements AtomicAttrib
       if (attribute != oldAttribute)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RPGPackage.ATOMIC_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RPGPackage.NAME_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
       }
     }
     return attribute;
@@ -102,7 +102,7 @@ public class AtomicAttributeImpl extends PropositionImpl implements AtomicAttrib
     Attribute oldAttribute = attribute;
     attribute = newAttribute;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.ATOMIC_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.NAME_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
   }
 
   /**
@@ -115,7 +115,7 @@ public class AtomicAttributeImpl extends PropositionImpl implements AtomicAttrib
   {
     switch (featureID)
     {
-      case RPGPackage.ATOMIC_ATTRIBUTE__ATTRIBUTE:
+      case RPGPackage.NAME_ATTRIBUTE__ATTRIBUTE:
         if (resolve) return getAttribute();
         return basicGetAttribute();
     }
@@ -132,7 +132,7 @@ public class AtomicAttributeImpl extends PropositionImpl implements AtomicAttrib
   {
     switch (featureID)
     {
-      case RPGPackage.ATOMIC_ATTRIBUTE__ATTRIBUTE:
+      case RPGPackage.NAME_ATTRIBUTE__ATTRIBUTE:
         setAttribute((Attribute)newValue);
         return;
     }
@@ -149,7 +149,7 @@ public class AtomicAttributeImpl extends PropositionImpl implements AtomicAttrib
   {
     switch (featureID)
     {
-      case RPGPackage.ATOMIC_ATTRIBUTE__ATTRIBUTE:
+      case RPGPackage.NAME_ATTRIBUTE__ATTRIBUTE:
         setAttribute((Attribute)null);
         return;
     }
@@ -166,10 +166,10 @@ public class AtomicAttributeImpl extends PropositionImpl implements AtomicAttrib
   {
     switch (featureID)
     {
-      case RPGPackage.ATOMIC_ATTRIBUTE__ATTRIBUTE:
+      case RPGPackage.NAME_ATTRIBUTE__ATTRIBUTE:
         return attribute != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //AtomicAttributeImpl
+} //NameAttributeImpl

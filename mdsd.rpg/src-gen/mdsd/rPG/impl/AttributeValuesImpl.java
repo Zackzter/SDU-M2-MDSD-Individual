@@ -3,12 +3,15 @@
  */
 package mdsd.rPG.impl;
 
+import mdsd.rPG.AtomicNumber;
 import mdsd.rPG.AttributeValues;
 import mdsd.rPG.RPGPackage;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -22,6 +25,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.impl.AttributeValuesImpl#getLTypes <em>LTypes</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.AttributeValuesImpl#getAn <em>An</em>}</li>
  * </ul>
  *
  * @generated
@@ -47,6 +51,16 @@ public class AttributeValuesImpl extends MinimalEObjectImpl.Container implements
    * @ordered
    */
   protected String lTypes = LTYPES_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getAn() <em>An</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAn()
+   * @generated
+   * @ordered
+   */
+  protected AtomicNumber an;
 
   /**
    * <!-- begin-user-doc -->
@@ -100,12 +114,80 @@ public class AttributeValuesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
+  public AtomicNumber getAn()
+  {
+    return an;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetAn(AtomicNumber newAn, NotificationChain msgs)
+  {
+    AtomicNumber oldAn = an;
+    an = newAn;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.ATTRIBUTE_VALUES__AN, oldAn, newAn);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setAn(AtomicNumber newAn)
+  {
+    if (newAn != an)
+    {
+      NotificationChain msgs = null;
+      if (an != null)
+        msgs = ((InternalEObject)an).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.ATTRIBUTE_VALUES__AN, null, msgs);
+      if (newAn != null)
+        msgs = ((InternalEObject)newAn).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.ATTRIBUTE_VALUES__AN, null, msgs);
+      msgs = basicSetAn(newAn, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.ATTRIBUTE_VALUES__AN, newAn, newAn));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RPGPackage.ATTRIBUTE_VALUES__AN:
+        return basicSetAn(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
       case RPGPackage.ATTRIBUTE_VALUES__LTYPES:
         return getLTypes();
+      case RPGPackage.ATTRIBUTE_VALUES__AN:
+        return getAn();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -122,6 +204,9 @@ public class AttributeValuesImpl extends MinimalEObjectImpl.Container implements
     {
       case RPGPackage.ATTRIBUTE_VALUES__LTYPES:
         setLTypes((String)newValue);
+        return;
+      case RPGPackage.ATTRIBUTE_VALUES__AN:
+        setAn((AtomicNumber)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -140,6 +225,9 @@ public class AttributeValuesImpl extends MinimalEObjectImpl.Container implements
       case RPGPackage.ATTRIBUTE_VALUES__LTYPES:
         setLTypes(LTYPES_EDEFAULT);
         return;
+      case RPGPackage.ATTRIBUTE_VALUES__AN:
+        setAn((AtomicNumber)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -156,6 +244,8 @@ public class AttributeValuesImpl extends MinimalEObjectImpl.Container implements
     {
       case RPGPackage.ATTRIBUTE_VALUES__LTYPES:
         return LTYPES_EDEFAULT == null ? lTypes != null : !LTYPES_EDEFAULT.equals(lTypes);
+      case RPGPackage.ATTRIBUTE_VALUES__AN:
+        return an != null;
     }
     return super.eIsSet(featureID);
   }

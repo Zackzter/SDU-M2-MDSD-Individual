@@ -206,14 +206,49 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createPropositionAdapter();
       }
       @Override
-      public Adapter caseAtomicAttribute(AtomicAttribute object)
+      public Adapter caseNumberComparing(NumberComparing object)
       {
-        return createAtomicAttributeAdapter();
+        return createNumberComparingAdapter();
+      }
+      @Override
+      public Adapter caseComparator(Comparator object)
+      {
+        return createComparatorAdapter();
+      }
+      @Override
+      public Adapter caseSum(Sum object)
+      {
+        return createSumAdapter();
+      }
+      @Override
+      public Adapter caseMultiply(Multiply object)
+      {
+        return createMultiplyAdapter();
       }
       @Override
       public Adapter caseAtomicNumber(AtomicNumber object)
       {
         return createAtomicNumberAdapter();
+      }
+      @Override
+      public Adapter caseNameAttribute(NameAttribute object)
+      {
+        return createNameAttributeAdapter();
+      }
+      @Override
+      public Adapter caseSelfTargeting(SelfTargeting object)
+      {
+        return createSelfTargetingAdapter();
+      }
+      @Override
+      public Adapter caseIntNum(IntNum object)
+      {
+        return createIntNumAdapter();
+      }
+      @Override
+      public Adapter caseFloatNum(FloatNum object)
+      {
+        return createFloatNumAdapter();
       }
       @Override
       public Adapter caseOr(Or object)
@@ -224,6 +259,36 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
       public Adapter caseAnd(And object)
       {
         return createAndAdapter();
+      }
+      @Override
+      public Adapter caseSmaller(Smaller object)
+      {
+        return createSmallerAdapter();
+      }
+      @Override
+      public Adapter caseSmallerEq(SmallerEq object)
+      {
+        return createSmallerEqAdapter();
+      }
+      @Override
+      public Adapter caseEq(Eq object)
+      {
+        return createEqAdapter();
+      }
+      @Override
+      public Adapter caseBiggerEq(BiggerEq object)
+      {
+        return createBiggerEqAdapter();
+      }
+      @Override
+      public Adapter caseBigger(Bigger object)
+      {
+        return createBiggerAdapter();
+      }
+      @Override
+      public Adapter caseNEq(NEq object)
+      {
+        return createNEqAdapter();
       }
       @Override
       public Adapter caseAdd(Add object)
@@ -658,16 +723,61 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.AtomicAttribute <em>Atomic Attribute</em>}'.
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.NumberComparing <em>Number Comparing</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see mdsd.rPG.AtomicAttribute
+   * @see mdsd.rPG.NumberComparing
    * @generated
    */
-  public Adapter createAtomicAttributeAdapter()
+  public Adapter createNumberComparingAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Comparator <em>Comparator</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.Comparator
+   * @generated
+   */
+  public Adapter createComparatorAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Sum <em>Sum</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.Sum
+   * @generated
+   */
+  public Adapter createSumAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Multiply <em>Multiply</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.Multiply
+   * @generated
+   */
+  public Adapter createMultiplyAdapter()
   {
     return null;
   }
@@ -683,6 +793,66 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAtomicNumberAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.NameAttribute <em>Name Attribute</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.NameAttribute
+   * @generated
+   */
+  public Adapter createNameAttributeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.SelfTargeting <em>Self Targeting</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.SelfTargeting
+   * @generated
+   */
+  public Adapter createSelfTargetingAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.IntNum <em>Int Num</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.IntNum
+   * @generated
+   */
+  public Adapter createIntNumAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.FloatNum <em>Float Num</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.FloatNum
+   * @generated
+   */
+  public Adapter createFloatNumAdapter()
   {
     return null;
   }
@@ -713,6 +883,96 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAndAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Smaller <em>Smaller</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.Smaller
+   * @generated
+   */
+  public Adapter createSmallerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.SmallerEq <em>Smaller Eq</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.SmallerEq
+   * @generated
+   */
+  public Adapter createSmallerEqAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Eq <em>Eq</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.Eq
+   * @generated
+   */
+  public Adapter createEqAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.BiggerEq <em>Bigger Eq</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.BiggerEq
+   * @generated
+   */
+  public Adapter createBiggerEqAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Bigger <em>Bigger</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.Bigger
+   * @generated
+   */
+  public Adapter createBiggerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.NEq <em>NEq</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.NEq
+   * @generated
+   */
+  public Adapter createNEqAdapter()
   {
     return null;
   }

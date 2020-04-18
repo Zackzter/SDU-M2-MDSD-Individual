@@ -7,28 +7,38 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import mdsd.rPG.SystemRPG
 import mdsd.rPG.Entity
 import mdsd.rPG.Type
 import mdsd.rPG.Move
-import mdsd.rPG.Attribute
-import mdsd.rPG.SystemRPG
-import mdsd.rPG.Declaration
-import mdsd.rPG.Locations
-import mdsd.rPG.Relations
 import mdsd.rPG.Moves
-import mdsd.rPG.Entities
-import mdsd.rPG.Teams
-import mdsd.rPG.Attributes
+import mdsd.rPG.Attribute
+import mdsd.rPG.Locations
 import mdsd.rPG.Death
-import mdsd.rPG.Proposition
+import mdsd.rPG.AtomicNumber
+import mdsd.rPG.Require
+import mdsd.rPG.Or
+import mdsd.rPG.And
 import mdsd.rPG.Add
 import mdsd.rPG.Sub
 import mdsd.rPG.Mult
 import mdsd.rPG.Div
-import mdsd.rPG.AtomicNumber
-import mdsd.rPG.Or
-import mdsd.rPG.And
-import mdsd.rPG.AtomicAttribute
+import mdsd.rPG.Comparator
+import mdsd.rPG.Eq
+import mdsd.rPG.Smaller
+import mdsd.rPG.SmallerEq
+import mdsd.rPG.NEq
+import mdsd.rPG.Bigger
+import mdsd.rPG.BiggerEq
+import mdsd.rPG.IntNum
+import mdsd.rPG.NameAttribute
+import mdsd.rPG.FloatNum
+import mdsd.rPG.Attributes
+import mdsd.rPG.Entities
+import mdsd.rPG.Declaration
+import mdsd.rPG.Relations
+import mdsd.rPG.Teams
+import mdsd.rPG.NumberComparing
 
 /**
  * Generates code from your model files on save.
@@ -601,38 +611,56 @@ class RPGGenerator extends AbstractGenerator {
 	def CharSequence generateKillable(Death death){
 		'''
 		public interface Killable {
-			// ost2
+			// ost3
+			«death.req.re»
 			
-			«death.con.size()»
-			«FOR p : death.con»
-			«p.comp»
-			«displayExp(p.getLeft)»
-			«displayExp(p.getRight)»
-			«ENDFOR»
-			
-		    void checkIfDead(HP hp){
-		    	«death.con»
-		    }
 		}
 		'''
 	}
 	
-	
-	def String displayExp(Proposition exp) {
-		
-		"("+switch exp {
-			Add: exp.left.displayExp+"+"+exp.right.displayExp
-			Sub: exp.left.displayExp+"-"+exp.right.displayExp
-			Mult: exp.left.displayExp+"*"+exp.right.displayExp
-			Div: exp.left.displayExp+"/"+exp.right.displayExp
-			Or: "dkjpoakda"
-			And: "kdpoakadp"
-			AtomicNumber : exp.int2
-			AtomicAttribute : exp.attribute.name
-			default: throw new Error("Invalid expression")
-		}+")"
+	def CharSequence re(Require req){
+		req.log.logic
 	}
 	
+	def dispatch CharSequence logic(Or x){
+		'''(«x.left.logic»||«x.right.logic»)'''
+	}
+	
+	def dispatch CharSequence logic(And x){
+		'''(«x.left.logic»&&«x.right.logic»)'''
+	}
+	
+	def dispatch CharSequence logic(NumberComparing x){
+		'''(«x.left.exp»«x.comp.generateComp»«x.right.exp»)'''
+	}
+	
+	def generateComp(Comparator op) {
+		switch op { Eq: '==' Smaller: '<' Bigger: '>' SmallerEq: '<=' BiggerEq: '>=' NEq: '!=' }
+	}
+	
+	def dispatch CharSequence exp(Add x){
+		'''(«x.left.exp»+«x.right.exp»)'''
+	}
+	def dispatch CharSequence exp(Sub x){
+		'''(«x.left.exp»-«x.right.exp»)'''
+	}
+	def dispatch CharSequence exp(Mult x){
+		'''(«x.left.exp»*«x.right.exp»)'''
+	}
+	def dispatch CharSequence exp(Div x){
+		'''(«x.left.exp»/«x.right.exp»)'''
+	}
+	def dispatch CharSequence exp(IntNum x){
+		Integer.toString(x.value)
+	}
+	def dispatch CharSequence exp(FloatNum x){
+		Integer.toString(x.i) + '.' + Integer.toString(x.decimal)
+	}
+	
+	
+	def dispatch CharSequence exp(NameAttribute x){
+		{"_"+x.attribute.name}
+	}
 	
 	def CharSequence generateLocation(Locations locations){
 		

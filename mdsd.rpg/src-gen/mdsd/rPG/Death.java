@@ -3,7 +3,6 @@
  */
 package mdsd.rPG;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.Death#getCon <em>Con</em>}</li>
+ *   <li>{@link mdsd.rPG.Death#getReq <em>Req</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getDeath()
@@ -24,15 +23,25 @@ import org.eclipse.emf.common.util.EList;
 public interface Death extends Declaration
 {
   /**
-   * Returns the value of the '<em><b>Con</b></em>' containment reference list.
-   * The list contents are of type {@link mdsd.rPG.Proposition}.
+   * Returns the value of the '<em><b>Req</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Con</em>' containment reference list.
-   * @see mdsd.rPG.RPGPackage#getDeath_Con()
+   * @return the value of the '<em>Req</em>' containment reference.
+   * @see #setReq(Require)
+   * @see mdsd.rPG.RPGPackage#getDeath_Req()
    * @model containment="true"
    * @generated
    */
-  EList<Proposition> getCon();
+  Require getReq();
+
+  /**
+   * Sets the value of the '{@link mdsd.rPG.Death#getReq <em>Req</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Req</em>' containment reference.
+   * @see #getReq()
+   * @generated
+   */
+  void setReq(Require value);
 
 } // Death

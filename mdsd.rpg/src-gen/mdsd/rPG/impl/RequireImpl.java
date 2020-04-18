@@ -7,6 +7,7 @@ import java.util.Collection;
 
 import mdsd.rPG.BattleSize;
 import mdsd.rPG.Declaration;
+import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Require;
 import mdsd.rPG.Team;
@@ -35,6 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link mdsd.rPG.impl.RequireImpl#getBs <em>Bs</em>}</li>
  *   <li>{@link mdsd.rPG.impl.RequireImpl#getTeam <em>Team</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.RequireImpl#getLog <em>Log</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,6 +62,16 @@ public class RequireImpl extends AttributeValuesImpl implements Require
    * @ordered
    */
   protected EList<Team> team;
+
+  /**
+   * The cached value of the '{@link #getLog() <em>Log</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getLog()
+   * @generated
+   * @ordered
+   */
+  protected Proposition log;
 
   /**
    * <!-- begin-user-doc -->
@@ -153,6 +165,56 @@ public class RequireImpl extends AttributeValuesImpl implements Require
    * @generated
    */
   @Override
+  public Proposition getLog()
+  {
+    return log;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetLog(Proposition newLog, NotificationChain msgs)
+  {
+    Proposition oldLog = log;
+    log = newLog;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.REQUIRE__LOG, oldLog, newLog);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setLog(Proposition newLog)
+  {
+    if (newLog != log)
+    {
+      NotificationChain msgs = null;
+      if (log != null)
+        msgs = ((InternalEObject)log).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.REQUIRE__LOG, null, msgs);
+      if (newLog != null)
+        msgs = ((InternalEObject)newLog).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.REQUIRE__LOG, null, msgs);
+      msgs = basicSetLog(newLog, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.REQUIRE__LOG, newLog, newLog));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -161,6 +223,8 @@ public class RequireImpl extends AttributeValuesImpl implements Require
         return basicSetBs(null, msgs);
       case RPGPackage.REQUIRE__TEAM:
         return ((InternalEList<?>)getTeam()).basicRemove(otherEnd, msgs);
+      case RPGPackage.REQUIRE__LOG:
+        return basicSetLog(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -179,6 +243,8 @@ public class RequireImpl extends AttributeValuesImpl implements Require
         return getBs();
       case RPGPackage.REQUIRE__TEAM:
         return getTeam();
+      case RPGPackage.REQUIRE__LOG:
+        return getLog();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -201,6 +267,9 @@ public class RequireImpl extends AttributeValuesImpl implements Require
         getTeam().clear();
         getTeam().addAll((Collection<? extends Team>)newValue);
         return;
+      case RPGPackage.REQUIRE__LOG:
+        setLog((Proposition)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -221,6 +290,9 @@ public class RequireImpl extends AttributeValuesImpl implements Require
       case RPGPackage.REQUIRE__TEAM:
         getTeam().clear();
         return;
+      case RPGPackage.REQUIRE__LOG:
+        setLog((Proposition)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -239,6 +311,8 @@ public class RequireImpl extends AttributeValuesImpl implements Require
         return bs != null;
       case RPGPackage.REQUIRE__TEAM:
         return team != null && !team.isEmpty();
+      case RPGPackage.REQUIRE__LOG:
+        return log != null;
     }
     return super.eIsSet(featureID);
   }

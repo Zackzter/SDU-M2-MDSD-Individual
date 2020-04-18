@@ -17,16 +17,13 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link mdsd.rPG.Proposition#getAttritbuteToSet <em>Attritbute To Set</em>}</li>
  *   <li>{@link mdsd.rPG.Proposition#getChange <em>Change</em>}</li>
  *   <li>{@link mdsd.rPG.Proposition#getType <em>Type</em>}</li>
- *   <li>{@link mdsd.rPG.Proposition#getLeft <em>Left</em>}</li>
- *   <li>{@link mdsd.rPG.Proposition#getComp <em>Comp</em>}</li>
- *   <li>{@link mdsd.rPG.Proposition#getRight <em>Right</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getProposition()
  * @model
  * @generated
  */
-public interface Proposition extends Rule, Require
+public interface Proposition extends Rule
 {
   /**
    * Returns the value of the '<em><b>Attritbute To Set</b></em>' reference list.
@@ -42,7 +39,7 @@ public interface Proposition extends Rule, Require
 
   /**
    * Returns the value of the '<em><b>Change</b></em>' containment reference list.
-   * The list contents are of type {@link mdsd.rPG.Proposition}.
+   * The list contents are of type {@link mdsd.rPG.Sum}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Change</em>' containment reference list.
@@ -50,7 +47,7 @@ public interface Proposition extends Rule, Require
    * @model containment="true"
    * @generated
    */
-  EList<Proposition> getChange();
+  EList<Sum> getChange();
 
   /**
    * Returns the value of the '<em><b>Type</b></em>' reference.
@@ -73,71 +70,5 @@ public interface Proposition extends Rule, Require
    * @generated
    */
   void setType(Type value);
-
-  /**
-   * Returns the value of the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Left</em>' containment reference.
-   * @see #setLeft(Proposition)
-   * @see mdsd.rPG.RPGPackage#getProposition_Left()
-   * @model containment="true"
-   * @generated
-   */
-  Proposition getLeft();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Proposition#getLeft <em>Left</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Left</em>' containment reference.
-   * @see #getLeft()
-   * @generated
-   */
-  void setLeft(Proposition value);
-
-  /**
-   * Returns the value of the '<em><b>Comp</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Comp</em>' attribute.
-   * @see #setComp(String)
-   * @see mdsd.rPG.RPGPackage#getProposition_Comp()
-   * @model
-   * @generated
-   */
-  String getComp();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Proposition#getComp <em>Comp</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Comp</em>' attribute.
-   * @see #getComp()
-   * @generated
-   */
-  void setComp(String value);
-
-  /**
-   * Returns the value of the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Right</em>' containment reference.
-   * @see #setRight(Proposition)
-   * @see mdsd.rPG.RPGPackage#getProposition_Right()
-   * @model containment="true"
-   * @generated
-   */
-  Proposition getRight();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Proposition#getRight <em>Right</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Right</em>' containment reference.
-   * @see #getRight()
-   * @generated
-   */
-  void setRight(Proposition value);
 
 } // Proposition
