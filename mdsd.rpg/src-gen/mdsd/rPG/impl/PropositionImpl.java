@@ -11,7 +11,6 @@ import mdsd.rPG.Declaration;
 import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Require;
-import mdsd.rPG.Sum;
 import mdsd.rPG.Team;
 import mdsd.rPG.Teams;
 import mdsd.rPG.Type;
@@ -43,6 +42,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link mdsd.rPG.impl.PropositionImpl#getAttritbuteToSet <em>Attritbute To Set</em>}</li>
  *   <li>{@link mdsd.rPG.impl.PropositionImpl#getChange <em>Change</em>}</li>
  *   <li>{@link mdsd.rPG.impl.PropositionImpl#getType <em>Type</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.PropositionImpl#getLeft <em>Left</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.PropositionImpl#getComp <em>Comp</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.PropositionImpl#getRight <em>Right</em>}</li>
  * </ul>
  *
  * @generated
@@ -87,7 +89,7 @@ public class PropositionImpl extends RuleImpl implements Proposition
    * @generated
    * @ordered
    */
-  protected EList<Sum> change;
+  protected EList<Proposition> change;
 
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' reference.
@@ -98,6 +100,46 @@ public class PropositionImpl extends RuleImpl implements Proposition
    * @ordered
    */
   protected Type type;
+
+  /**
+   * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getLeft()
+   * @generated
+   * @ordered
+   */
+  protected Proposition left;
+
+  /**
+   * The default value of the '{@link #getComp() <em>Comp</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getComp()
+   * @generated
+   * @ordered
+   */
+  protected static final String COMP_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getComp() <em>Comp</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getComp()
+   * @generated
+   * @ordered
+   */
+  protected String comp = COMP_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getRight() <em>Right</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRight()
+   * @generated
+   * @ordered
+   */
+  protected Proposition right;
 
   /**
    * <!-- begin-user-doc -->
@@ -206,11 +248,11 @@ public class PropositionImpl extends RuleImpl implements Proposition
    * @generated
    */
   @Override
-  public EList<Sum> getChange()
+  public EList<Proposition> getChange()
   {
     if (change == null)
     {
-      change = new EObjectContainmentEList<Sum>(Sum.class, this, RPGPackage.PROPOSITION__CHANGE);
+      change = new EObjectContainmentEList<Proposition>(Proposition.class, this, RPGPackage.PROPOSITION__CHANGE);
     }
     return change;
   }
@@ -266,6 +308,131 @@ public class PropositionImpl extends RuleImpl implements Proposition
    * @generated
    */
   @Override
+  public Proposition getLeft()
+  {
+    return left;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetLeft(Proposition newLeft, NotificationChain msgs)
+  {
+    Proposition oldLeft = left;
+    left = newLeft;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.PROPOSITION__LEFT, oldLeft, newLeft);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setLeft(Proposition newLeft)
+  {
+    if (newLeft != left)
+    {
+      NotificationChain msgs = null;
+      if (left != null)
+        msgs = ((InternalEObject)left).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.PROPOSITION__LEFT, null, msgs);
+      if (newLeft != null)
+        msgs = ((InternalEObject)newLeft).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.PROPOSITION__LEFT, null, msgs);
+      msgs = basicSetLeft(newLeft, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.PROPOSITION__LEFT, newLeft, newLeft));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getComp()
+  {
+    return comp;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setComp(String newComp)
+  {
+    String oldComp = comp;
+    comp = newComp;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.PROPOSITION__COMP, oldComp, comp));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Proposition getRight()
+  {
+    return right;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetRight(Proposition newRight, NotificationChain msgs)
+  {
+    Proposition oldRight = right;
+    right = newRight;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.PROPOSITION__RIGHT, oldRight, newRight);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setRight(Proposition newRight)
+  {
+    if (newRight != right)
+    {
+      NotificationChain msgs = null;
+      if (right != null)
+        msgs = ((InternalEObject)right).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.PROPOSITION__RIGHT, null, msgs);
+      if (newRight != null)
+        msgs = ((InternalEObject)newRight).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.PROPOSITION__RIGHT, null, msgs);
+      msgs = basicSetRight(newRight, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.PROPOSITION__RIGHT, newRight, newRight));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -276,6 +443,10 @@ public class PropositionImpl extends RuleImpl implements Proposition
         return ((InternalEList<?>)getTeam()).basicRemove(otherEnd, msgs);
       case RPGPackage.PROPOSITION__CHANGE:
         return ((InternalEList<?>)getChange()).basicRemove(otherEnd, msgs);
+      case RPGPackage.PROPOSITION__LEFT:
+        return basicSetLeft(null, msgs);
+      case RPGPackage.PROPOSITION__RIGHT:
+        return basicSetRight(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -301,6 +472,12 @@ public class PropositionImpl extends RuleImpl implements Proposition
       case RPGPackage.PROPOSITION__TYPE:
         if (resolve) return getType();
         return basicGetType();
+      case RPGPackage.PROPOSITION__LEFT:
+        return getLeft();
+      case RPGPackage.PROPOSITION__COMP:
+        return getComp();
+      case RPGPackage.PROPOSITION__RIGHT:
+        return getRight();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -329,10 +506,19 @@ public class PropositionImpl extends RuleImpl implements Proposition
         return;
       case RPGPackage.PROPOSITION__CHANGE:
         getChange().clear();
-        getChange().addAll((Collection<? extends Sum>)newValue);
+        getChange().addAll((Collection<? extends Proposition>)newValue);
         return;
       case RPGPackage.PROPOSITION__TYPE:
         setType((Type)newValue);
+        return;
+      case RPGPackage.PROPOSITION__LEFT:
+        setLeft((Proposition)newValue);
+        return;
+      case RPGPackage.PROPOSITION__COMP:
+        setComp((String)newValue);
+        return;
+      case RPGPackage.PROPOSITION__RIGHT:
+        setRight((Proposition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -363,6 +549,15 @@ public class PropositionImpl extends RuleImpl implements Proposition
       case RPGPackage.PROPOSITION__TYPE:
         setType((Type)null);
         return;
+      case RPGPackage.PROPOSITION__LEFT:
+        setLeft((Proposition)null);
+        return;
+      case RPGPackage.PROPOSITION__COMP:
+        setComp(COMP_EDEFAULT);
+        return;
+      case RPGPackage.PROPOSITION__RIGHT:
+        setRight((Proposition)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -387,6 +582,12 @@ public class PropositionImpl extends RuleImpl implements Proposition
         return change != null && !change.isEmpty();
       case RPGPackage.PROPOSITION__TYPE:
         return type != null;
+      case RPGPackage.PROPOSITION__LEFT:
+        return left != null;
+      case RPGPackage.PROPOSITION__COMP:
+        return COMP_EDEFAULT == null ? comp != null : !COMP_EDEFAULT.equals(comp);
+      case RPGPackage.PROPOSITION__RIGHT:
+        return right != null;
     }
     return super.eIsSet(featureID);
   }
@@ -457,6 +658,23 @@ public class PropositionImpl extends RuleImpl implements Proposition
       }
     }
     return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (comp: ");
+    result.append(comp);
+    result.append(')');
+    return result.toString();
   }
 
 } //PropositionImpl

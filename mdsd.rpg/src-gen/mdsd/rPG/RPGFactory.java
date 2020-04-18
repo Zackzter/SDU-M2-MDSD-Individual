@@ -258,31 +258,13 @@ public interface RPGFactory extends EFactory
   Proposition createProposition();
 
   /**
-   * Returns a new object of class '<em>Number Comparing</em>'.
+   * Returns a new object of class '<em>Atomic Attribute</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Number Comparing</em>'.
+   * @return a new object of class '<em>Atomic Attribute</em>'.
    * @generated
    */
-  NumberComparing createNumberComparing();
-
-  /**
-   * Returns a new object of class '<em>Sum</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Sum</em>'.
-   * @generated
-   */
-  Sum createSum();
-
-  /**
-   * Returns a new object of class '<em>Multiply</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Multiply</em>'.
-   * @generated
-   */
-  Multiply createMultiply();
+  AtomicAttribute createAtomicAttribute();
 
   /**
    * Returns a new object of class '<em>Atomic Number</em>'.
@@ -294,22 +276,22 @@ public interface RPGFactory extends EFactory
   AtomicNumber createAtomicNumber();
 
   /**
-   * Returns a new object of class '<em>or</em>'.
+   * Returns a new object of class '<em>Or</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>or</em>'.
+   * @return a new object of class '<em>Or</em>'.
    * @generated
    */
-  or createor();
+  Or createOr();
 
   /**
-   * Returns a new object of class '<em>and</em>'.
+   * Returns a new object of class '<em>And</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>and</em>'.
+   * @return a new object of class '<em>And</em>'.
    * @generated
    */
-  and createand();
+  And createAnd();
 
   /**
    * Returns a new object of class '<em>Add</em>'.

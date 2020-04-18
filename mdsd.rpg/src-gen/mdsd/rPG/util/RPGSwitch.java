@@ -273,32 +273,17 @@ public class RPGSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RPGPackage.NUMBER_COMPARING:
+      case RPGPackage.ATOMIC_ATTRIBUTE:
       {
-        NumberComparing numberComparing = (NumberComparing)theEObject;
-        T result = caseNumberComparing(numberComparing);
-        if (result == null) result = caseProposition(numberComparing);
-        if (result == null) result = caseRule(numberComparing);
-        if (result == null) result = caseRequire(numberComparing);
-        if (result == null) result = caseEffect(numberComparing);
-        if (result == null) result = caseAttributeValues(numberComparing);
-        if (result == null) result = caseTeams(numberComparing);
-        if (result == null) result = caseDeclaration(numberComparing);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RPGPackage.SUM:
-      {
-        Sum sum = (Sum)theEObject;
-        T result = caseSum(sum);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RPGPackage.MULTIPLY:
-      {
-        Multiply multiply = (Multiply)theEObject;
-        T result = caseMultiply(multiply);
-        if (result == null) result = caseSum(multiply);
+        AtomicAttribute atomicAttribute = (AtomicAttribute)theEObject;
+        T result = caseAtomicAttribute(atomicAttribute);
+        if (result == null) result = caseProposition(atomicAttribute);
+        if (result == null) result = caseRule(atomicAttribute);
+        if (result == null) result = caseRequire(atomicAttribute);
+        if (result == null) result = caseEffect(atomicAttribute);
+        if (result == null) result = caseAttributeValues(atomicAttribute);
+        if (result == null) result = caseTeams(atomicAttribute);
+        if (result == null) result = caseDeclaration(atomicAttribute);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -306,17 +291,22 @@ public class RPGSwitch<T> extends Switch<T>
       {
         AtomicNumber atomicNumber = (AtomicNumber)theEObject;
         T result = caseAtomicNumber(atomicNumber);
-        if (result == null) result = caseAttributeValues(atomicNumber);
         if (result == null) result = caseBattleSize(atomicNumber);
-        if (result == null) result = caseMultiply(atomicNumber);
-        if (result == null) result = caseSum(atomicNumber);
+        if (result == null) result = caseAtomicAttribute(atomicNumber);
+        if (result == null) result = caseProposition(atomicNumber);
+        if (result == null) result = caseRule(atomicNumber);
+        if (result == null) result = caseRequire(atomicNumber);
+        if (result == null) result = caseAttributeValues(atomicNumber);
+        if (result == null) result = caseEffect(atomicNumber);
+        if (result == null) result = caseTeams(atomicNumber);
+        if (result == null) result = caseDeclaration(atomicNumber);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
       case RPGPackage.OR:
       {
-        or or = (or)theEObject;
-        T result = caseor(or);
+        Or or = (Or)theEObject;
+        T result = caseOr(or);
         if (result == null) result = caseProposition(or);
         if (result == null) result = caseRule(or);
         if (result == null) result = caseRequire(or);
@@ -329,8 +319,8 @@ public class RPGSwitch<T> extends Switch<T>
       }
       case RPGPackage.AND:
       {
-        and and = (and)theEObject;
-        T result = caseand(and);
+        And and = (And)theEObject;
+        T result = caseAnd(and);
         if (result == null) result = caseProposition(and);
         if (result == null) result = caseRule(and);
         if (result == null) result = caseRequire(and);
@@ -345,7 +335,13 @@ public class RPGSwitch<T> extends Switch<T>
       {
         Add add = (Add)theEObject;
         T result = caseAdd(add);
-        if (result == null) result = caseSum(add);
+        if (result == null) result = caseProposition(add);
+        if (result == null) result = caseRule(add);
+        if (result == null) result = caseRequire(add);
+        if (result == null) result = caseEffect(add);
+        if (result == null) result = caseAttributeValues(add);
+        if (result == null) result = caseTeams(add);
+        if (result == null) result = caseDeclaration(add);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -353,7 +349,13 @@ public class RPGSwitch<T> extends Switch<T>
       {
         Sub sub = (Sub)theEObject;
         T result = caseSub(sub);
-        if (result == null) result = caseSum(sub);
+        if (result == null) result = caseProposition(sub);
+        if (result == null) result = caseRule(sub);
+        if (result == null) result = caseRequire(sub);
+        if (result == null) result = caseEffect(sub);
+        if (result == null) result = caseAttributeValues(sub);
+        if (result == null) result = caseTeams(sub);
+        if (result == null) result = caseDeclaration(sub);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -361,8 +363,13 @@ public class RPGSwitch<T> extends Switch<T>
       {
         Mult mult = (Mult)theEObject;
         T result = caseMult(mult);
-        if (result == null) result = caseMultiply(mult);
-        if (result == null) result = caseSum(mult);
+        if (result == null) result = caseProposition(mult);
+        if (result == null) result = caseRule(mult);
+        if (result == null) result = caseRequire(mult);
+        if (result == null) result = caseEffect(mult);
+        if (result == null) result = caseAttributeValues(mult);
+        if (result == null) result = caseTeams(mult);
+        if (result == null) result = caseDeclaration(mult);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -370,8 +377,13 @@ public class RPGSwitch<T> extends Switch<T>
       {
         Div div = (Div)theEObject;
         T result = caseDiv(div);
-        if (result == null) result = caseMultiply(div);
-        if (result == null) result = caseSum(div);
+        if (result == null) result = caseProposition(div);
+        if (result == null) result = caseRule(div);
+        if (result == null) result = caseRequire(div);
+        if (result == null) result = caseEffect(div);
+        if (result == null) result = caseAttributeValues(div);
+        if (result == null) result = caseTeams(div);
+        if (result == null) result = caseDeclaration(div);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -796,49 +808,17 @@ public class RPGSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Number Comparing</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Atomic Attribute</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Number Comparing</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Atomic Attribute</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseNumberComparing(NumberComparing object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Sum</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Sum</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSum(Sum object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Multiply</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Multiply</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseMultiply(Multiply object)
+  public T caseAtomicAttribute(AtomicAttribute object)
   {
     return null;
   }
@@ -860,33 +840,33 @@ public class RPGSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>or</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Or</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>or</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Or</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseor(or object)
+  public T caseOr(Or object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>and</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>And</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>and</em>'.
+   * @return the result of interpreting the object as an instance of '<em>And</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseand(and object)
+  public T caseAnd(And object)
   {
     return null;
   }

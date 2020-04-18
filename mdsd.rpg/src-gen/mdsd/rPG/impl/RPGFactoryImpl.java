@@ -91,12 +91,10 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.BATTLE_SIZE: return createBattleSize();
       case RPGPackage.REQUIRE: return createRequire();
       case RPGPackage.PROPOSITION: return createProposition();
-      case RPGPackage.NUMBER_COMPARING: return createNumberComparing();
-      case RPGPackage.SUM: return createSum();
-      case RPGPackage.MULTIPLY: return createMultiply();
+      case RPGPackage.ATOMIC_ATTRIBUTE: return createAtomicAttribute();
       case RPGPackage.ATOMIC_NUMBER: return createAtomicNumber();
-      case RPGPackage.OR: return createor();
-      case RPGPackage.AND: return createand();
+      case RPGPackage.OR: return createOr();
+      case RPGPackage.AND: return createAnd();
       case RPGPackage.ADD: return createAdd();
       case RPGPackage.SUB: return createSub();
       case RPGPackage.MULT: return createMult();
@@ -424,34 +422,10 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
-  public NumberComparing createNumberComparing()
+  public AtomicAttribute createAtomicAttribute()
   {
-    NumberComparingImpl numberComparing = new NumberComparingImpl();
-    return numberComparing;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Sum createSum()
-  {
-    SumImpl sum = new SumImpl();
-    return sum;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Multiply createMultiply()
-  {
-    MultiplyImpl multiply = new MultiplyImpl();
-    return multiply;
+    AtomicAttributeImpl atomicAttribute = new AtomicAttributeImpl();
+    return atomicAttribute;
   }
 
   /**
@@ -472,9 +446,9 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
-  public or createor()
+  public Or createOr()
   {
-    orImpl or = new orImpl();
+    OrImpl or = new OrImpl();
     return or;
   }
 
@@ -484,9 +458,9 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
-  public and createand()
+  public And createAnd()
   {
-    andImpl and = new andImpl();
+    AndImpl and = new AndImpl();
     return and;
   }
 

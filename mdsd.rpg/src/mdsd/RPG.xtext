@@ -46,7 +46,7 @@ Attributes:
 ;
 
 Attribute:
-	'attribute' (name=ID aVal=AttributeValues)
+	'attribute' name=ID aVal=AttributeValues
 ;
 
 
@@ -105,11 +105,11 @@ Require:
 ;
 
 ORcondition returns Proposition:
-	ANDcondition ('OR' {or.left=current} right=ANDcondition)*
+	ANDcondition ('OR' {Or.left=current} right=ANDcondition)*
 ;
 
 ANDcondition returns Proposition:
-	Statement ('AND'{and.left=current} right=Statement)*
+	Statement ('AND'{And.left=current} right=Statement)*
 	
 ;
 
@@ -117,7 +117,7 @@ Statement returns Proposition:
 	NumberComparing | '(' ORcondition ')' | type=[Type]
 ;
 
-NumberComparing:
+NumberComparing returns Proposition:
 	left=Sum comp=Comparator right=Sum
 ;
 
@@ -125,17 +125,20 @@ Comparator:
 	'<' | '<=' | '==' | '>=' | '>' | '!='
 ;
 
-Sum:
+Sum returns Proposition:
 	Multiply (('+' {Add.left=current} | '-' {Sub.left=current}) right=Multiply)*
 ;
 
-Multiply:
-	AtomicNumber (('*' {Mult.left=current} | '/' {Div.left=current}) right=AtomicNumber)*
+Multiply returns Proposition:
+	AtomicAttribute (('*' {Mult.left=current} | '/' {Div.left=current}) right=AtomicAttribute)*
 ;
 
+AtomicAttribute:
+	AtomicNumber | SelfTargeting? attribute=[Attribute] 
+;
 
 AtomicNumber:
-	{AtomicNumber} Float | {AtomicNumber} INT | SelfTargeting? attribute=[Attribute] 
+	float2=Float | int2=INT
 ;
 
 SelfTargeting:

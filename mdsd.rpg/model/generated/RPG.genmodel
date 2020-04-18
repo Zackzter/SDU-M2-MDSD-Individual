@@ -92,41 +92,23 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//Proposition/attritbuteToSet"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Proposition/change"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//Proposition/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Proposition/left"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RPG.ecore#//Proposition/comp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Proposition/right"/>
     </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//NumberComparing">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//NumberComparing/left"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RPG.ecore#//NumberComparing/comp"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//NumberComparing/right"/>
+    <genClasses ecoreClass="RPG.ecore#//AtomicAttribute">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//AtomicAttribute/attribute"/>
     </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//Sum"/>
-    <genClasses ecoreClass="RPG.ecore#//Multiply"/>
     <genClasses ecoreClass="RPG.ecore#//AtomicNumber">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//AtomicNumber/req"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//AtomicNumber/attribute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RPG.ecore#//AtomicNumber/float2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RPG.ecore#//AtomicNumber/int2"/>
     </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//or">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//or/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//or/right"/>
-    </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//and">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//and/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//and/right"/>
-    </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//Add">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Add/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Add/right"/>
-    </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//Sub">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Sub/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Sub/right"/>
-    </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//Mult">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Mult/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Mult/right"/>
-    </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//Div">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Div/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Div/right"/>
-    </genClasses>
+    <genClasses ecoreClass="RPG.ecore#//Or"/>
+    <genClasses ecoreClass="RPG.ecore#//And"/>
+    <genClasses ecoreClass="RPG.ecore#//Add"/>
+    <genClasses ecoreClass="RPG.ecore#//Sub"/>
+    <genClasses ecoreClass="RPG.ecore#//Mult"/>
+    <genClasses ecoreClass="RPG.ecore#//Div"/>
   </genPackages>
 </genmodel:GenModel>

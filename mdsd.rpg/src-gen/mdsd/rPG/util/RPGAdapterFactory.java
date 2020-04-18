@@ -206,19 +206,9 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createPropositionAdapter();
       }
       @Override
-      public Adapter caseNumberComparing(NumberComparing object)
+      public Adapter caseAtomicAttribute(AtomicAttribute object)
       {
-        return createNumberComparingAdapter();
-      }
-      @Override
-      public Adapter caseSum(Sum object)
-      {
-        return createSumAdapter();
-      }
-      @Override
-      public Adapter caseMultiply(Multiply object)
-      {
-        return createMultiplyAdapter();
+        return createAtomicAttributeAdapter();
       }
       @Override
       public Adapter caseAtomicNumber(AtomicNumber object)
@@ -226,14 +216,14 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createAtomicNumberAdapter();
       }
       @Override
-      public Adapter caseor(or object)
+      public Adapter caseOr(Or object)
       {
-        return createorAdapter();
+        return createOrAdapter();
       }
       @Override
-      public Adapter caseand(and object)
+      public Adapter caseAnd(And object)
       {
-        return createandAdapter();
+        return createAndAdapter();
       }
       @Override
       public Adapter caseAdd(Add object)
@@ -668,46 +658,16 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.NumberComparing <em>Number Comparing</em>}'.
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.AtomicAttribute <em>Atomic Attribute</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see mdsd.rPG.NumberComparing
+   * @see mdsd.rPG.AtomicAttribute
    * @generated
    */
-  public Adapter createNumberComparingAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.Sum <em>Sum</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see mdsd.rPG.Sum
-   * @generated
-   */
-  public Adapter createSumAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.Multiply <em>Multiply</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see mdsd.rPG.Multiply
-   * @generated
-   */
-  public Adapter createMultiplyAdapter()
+  public Adapter createAtomicAttributeAdapter()
   {
     return null;
   }
@@ -728,31 +688,31 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.or <em>or</em>}'.
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Or <em>Or</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see mdsd.rPG.or
+   * @see mdsd.rPG.Or
    * @generated
    */
-  public Adapter createorAdapter()
+  public Adapter createOrAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.and <em>and</em>}'.
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.And <em>And</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see mdsd.rPG.and
+   * @see mdsd.rPG.And
    * @generated
    */
-  public Adapter createandAdapter()
+  public Adapter createAndAdapter()
   {
     return null;
   }

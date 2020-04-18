@@ -743,41 +743,39 @@ ruleAttribute returns [EObject current=null]
 		}
 		(
 			(
-				(
-					lv_name_1_0=RULE_ID
-					{
-						newLeafNode(lv_name_1_0, grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0_0());
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getAttributeRule());
 					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getAttributeRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"name",
-							lv_name_1_0,
-							"org.eclipse.xtext.common.Terminals.ID");
-					}
-				)
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
 			)
+		)
+		(
 			(
-				(
-					{
-						newCompositeNode(grammarAccess.getAttributeAccess().getAValAttributeValuesParserRuleCall_1_1_0());
+				{
+					newCompositeNode(grammarAccess.getAttributeAccess().getAValAttributeValuesParserRuleCall_2_0());
+				}
+				lv_aVal_2_0=ruleAttributeValues
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getAttributeRule());
 					}
-					lv_aVal_2_0=ruleAttributeValues
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getAttributeRule());
-						}
-						set(
-							$current,
-							"aVal",
-							lv_aVal_2_0,
-							"mdsd.RPG.AttributeValues");
-						afterParserOrEnumRuleCall();
-					}
-				)
+					set(
+						$current,
+						"aVal",
+						lv_aVal_2_0,
+						"mdsd.RPG.AttributeValues");
+					afterParserOrEnumRuleCall();
+				}
 			)
 		)
 	)
@@ -1905,11 +1903,11 @@ ruleMultiply returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getMultiplyAccess().getAtomicNumberParserRuleCall_0());
+			newCompositeNode(grammarAccess.getMultiplyAccess().getAtomicAttributeParserRuleCall_0());
 		}
-		this_AtomicNumber_0=ruleAtomicNumber
+		this_AtomicAttribute_0=ruleAtomicAttribute
 		{
-			$current = $this_AtomicNumber_0.current;
+			$current = $this_AtomicAttribute_0.current;
 			afterParserOrEnumRuleCall();
 		}
 		(
@@ -1945,9 +1943,9 @@ ruleMultiply returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getMultiplyAccess().getRightAtomicNumberParserRuleCall_1_1_0());
+						newCompositeNode(grammarAccess.getMultiplyAccess().getRightAtomicAttributeParserRuleCall_1_1_0());
 					}
-					lv_right_5_0=ruleAtomicNumber
+					lv_right_5_0=ruleAtomicAttribute
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getMultiplyRule());
@@ -1956,12 +1954,64 @@ ruleMultiply returns [EObject current=null]
 							$current,
 							"right",
 							lv_right_5_0,
-							"mdsd.RPG.AtomicNumber");
+							"mdsd.RPG.AtomicAttribute");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 		)*
+	)
+;
+
+// Entry rule entryRuleAtomicAttribute
+entryRuleAtomicAttribute returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getAtomicAttributeRule()); }
+	iv_ruleAtomicAttribute=ruleAtomicAttribute
+	{ $current=$iv_ruleAtomicAttribute.current; }
+	EOF;
+
+// Rule AtomicAttribute
+ruleAtomicAttribute returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getAtomicAttributeAccess().getAtomicNumberParserRuleCall_0());
+		}
+		this_AtomicNumber_0=ruleAtomicNumber
+		{
+			$current = $this_AtomicNumber_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getAtomicAttributeAccess().getSelfTargetingParserRuleCall_1_0());
+				}
+				ruleSelfTargeting
+				{
+					afterParserOrEnumRuleCall();
+				}
+			)?
+			(
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getAtomicAttributeRule());
+						}
+					}
+					otherlv_2=RULE_ID
+					{
+						newLeafNode(otherlv_2, grammarAccess.getAtomicAttributeAccess().getAttributeAttributeCrossReference_1_1_0());
+					}
+				)
+			)
+		)
 	)
 ;
 
@@ -1984,56 +2034,39 @@ ruleAtomicNumber returns [EObject current=null]
 		(
 			(
 				{
-					$current = forceCreateModelElement(
-						grammarAccess.getAtomicNumberAccess().getAtomicNumberAction_0_0(),
-						$current);
+					newCompositeNode(grammarAccess.getAtomicNumberAccess().getFloat2FloatParserRuleCall_0_0());
 				}
-			)
-			{
-				newCompositeNode(grammarAccess.getAtomicNumberAccess().getFloatParserRuleCall_0_1());
-			}
-			ruleFloat
-			{
-				afterParserOrEnumRuleCall();
-			}
-		)
-		    |
-		(
-			(
+				lv_float2_0_0=ruleFloat
 				{
-					$current = forceCreateModelElement(
-						grammarAccess.getAtomicNumberAccess().getAtomicNumberAction_1_0(),
-						$current);
-				}
-			)
-			this_INT_3=RULE_INT
-			{
-				newLeafNode(this_INT_3, grammarAccess.getAtomicNumberAccess().getINTTerminalRuleCall_1_1());
-			}
-		)
-		    |
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getAtomicNumberAccess().getSelfTargetingParserRuleCall_2_0());
-				}
-				ruleSelfTargeting
-				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getAtomicNumberRule());
+					}
+					set(
+						$current,
+						"float2",
+						lv_float2_0_0,
+						"mdsd.RPG.Float");
 					afterParserOrEnumRuleCall();
 				}
-			)?
+			)
+		)
+		    |
+		(
 			(
-				(
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getAtomicNumberRule());
-						}
+				lv_int2_1_0=RULE_INT
+				{
+					newLeafNode(lv_int2_1_0, grammarAccess.getAtomicNumberAccess().getInt2INTTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getAtomicNumberRule());
 					}
-					otherlv_5=RULE_ID
-					{
-						newLeafNode(otherlv_5, grammarAccess.getAtomicNumberAccess().getAttributeAttributeCrossReference_2_1_0());
-					}
-				)
+					setWithLastConsumed(
+						$current,
+						"int2",
+						lv_int2_1_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
 			)
 		)
 	)
