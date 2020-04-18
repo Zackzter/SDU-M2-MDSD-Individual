@@ -4,22 +4,34 @@
 package mdsd.generator;
 
 import com.google.common.collect.Iterators;
+import java.util.Arrays;
 import mdsd.rPG.Add;
 import mdsd.rPG.And;
-import mdsd.rPG.AtomicAttribute;
-import mdsd.rPG.AtomicNumber;
 import mdsd.rPG.Attributes;
+import mdsd.rPG.Bigger;
+import mdsd.rPG.BiggerEq;
+import mdsd.rPG.Comparator;
 import mdsd.rPG.Death;
 import mdsd.rPG.Declaration;
 import mdsd.rPG.Div;
 import mdsd.rPG.Entities;
+import mdsd.rPG.Eq;
+import mdsd.rPG.FloatNum;
+import mdsd.rPG.IntNum;
 import mdsd.rPG.Locations;
 import mdsd.rPG.Moves;
 import mdsd.rPG.Mult;
+import mdsd.rPG.NEq;
+import mdsd.rPG.NameAttribute;
+import mdsd.rPG.NumberComparing;
 import mdsd.rPG.Or;
 import mdsd.rPG.Proposition;
 import mdsd.rPG.Relations;
+import mdsd.rPG.Require;
+import mdsd.rPG.Smaller;
+import mdsd.rPG.SmallerEq;
 import mdsd.rPG.Sub;
+import mdsd.rPG.Sum;
 import mdsd.rPG.SystemRPG;
 import mdsd.rPG.Teams;
 import org.eclipse.emf.common.util.EList;
@@ -1315,111 +1327,159 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("// ost2");
     _builder.newLine();
     _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    int _size = death.getCon().size();
-    _builder.append(_size, "\t");
+    CharSequence _re = this.re(death.getReq());
+    _builder.append(_re, "\t");
     _builder.newLineIfNotEmpty();
-    {
-      EList<Proposition> _con = death.getCon();
-      for(final Proposition p : _con) {
-        _builder.append("\t");
-        String _comp = p.getComp();
-        _builder.append(_comp, "\t");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        String _displayExp = this.displayExp(p.getLeft());
-        _builder.append(_displayExp, "\t");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        String _displayExp_1 = this.displayExp(p.getRight());
-        _builder.append(_displayExp_1, "\t");
-        _builder.newLineIfNotEmpty();
-      }
-    }
     _builder.append("\t");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("void checkIfDead(HP hp){");
-    _builder.newLine();
-    _builder.append("    \t");
-    EList<Proposition> _con_1 = death.getCon();
-    _builder.append(_con_1, "    \t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("    ");
-    _builder.append("}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     return _builder;
   }
   
-  public String displayExp(final Proposition exp) {
-    Object _switchResult = null;
+  public CharSequence re(final Require req) {
+    return this.logic(req.getLog());
+  }
+  
+  protected CharSequence _logic(final Or x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _logic = this.logic(x.getLeft());
+    _builder.append(_logic);
+    _builder.append("||");
+    CharSequence _logic_1 = this.logic(x.getRight());
+    _builder.append(_logic_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _logic(final And x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _logic = this.logic(x.getLeft());
+    _builder.append(_logic);
+    _builder.append("&&");
+    CharSequence _logic_1 = this.logic(x.getRight());
+    _builder.append(_logic_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _logic(final NumberComparing x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _exp = this.exp(x.getLeft());
+    _builder.append(_exp);
+    String _generateComp = this.generateComp(x.getComp());
+    _builder.append(_generateComp);
+    CharSequence _exp_1 = this.exp(x.getRight());
+    _builder.append(_exp_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  public String generateComp(final Comparator op) {
+    String _switchResult = null;
     boolean _matched = false;
-    if (exp instanceof Add) {
+    if (op instanceof Eq) {
       _matched=true;
-      String _displayExp = this.displayExp(((Add)exp).getLeft());
-      String _plus = (_displayExp + "+");
-      String _displayExp_1 = this.displayExp(((Add)exp).getRight());
-      _switchResult = (_plus + _displayExp_1);
+      _switchResult = "==";
     }
     if (!_matched) {
-      if (exp instanceof Sub) {
+      if (op instanceof Smaller) {
         _matched=true;
-        String _displayExp = this.displayExp(((Sub)exp).getLeft());
-        String _plus = (_displayExp + "-");
-        String _displayExp_1 = this.displayExp(((Sub)exp).getRight());
-        _switchResult = (_plus + _displayExp_1);
+        _switchResult = "<";
       }
     }
     if (!_matched) {
-      if (exp instanceof Mult) {
+      if (op instanceof Bigger) {
         _matched=true;
-        String _displayExp = this.displayExp(((Mult)exp).getLeft());
-        String _plus = (_displayExp + "*");
-        String _displayExp_1 = this.displayExp(((Mult)exp).getRight());
-        _switchResult = (_plus + _displayExp_1);
+        _switchResult = ">";
       }
     }
     if (!_matched) {
-      if (exp instanceof Div) {
+      if (op instanceof SmallerEq) {
         _matched=true;
-        String _displayExp = this.displayExp(((Div)exp).getLeft());
-        String _plus = (_displayExp + "/");
-        String _displayExp_1 = this.displayExp(((Div)exp).getRight());
-        _switchResult = (_plus + _displayExp_1);
+        _switchResult = "<=";
       }
     }
     if (!_matched) {
-      if (exp instanceof Or) {
+      if (op instanceof BiggerEq) {
         _matched=true;
-        _switchResult = "dkjpoakda";
+        _switchResult = ">=";
       }
     }
     if (!_matched) {
-      if (exp instanceof And) {
+      if (op instanceof NEq) {
         _matched=true;
-        _switchResult = "kdpoakadp";
+        _switchResult = "!=";
       }
     }
-    if (!_matched) {
-      if (exp instanceof AtomicNumber) {
-        _matched=true;
-        _switchResult = Integer.valueOf(((AtomicNumber)exp).getInt2());
-      }
-    }
-    if (!_matched) {
-      if (exp instanceof AtomicAttribute) {
-        _matched=true;
-        _switchResult = ((AtomicAttribute)exp).getAttribute().getName();
-      }
-    }
-    if (!_matched) {
-      throw new Error("Invalid expression");
-    }
-    String _plus = ("(" + _switchResult);
-    return (_plus + ")");
+    return _switchResult;
+  }
+  
+  protected CharSequence _exp(final Add x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _exp = this.exp(x.getLeft());
+    _builder.append(_exp);
+    _builder.append("+");
+    CharSequence _exp_1 = this.exp(x.getRight());
+    _builder.append(_exp_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _exp(final Sub x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _exp = this.exp(x.getLeft());
+    _builder.append(_exp);
+    _builder.append("-");
+    CharSequence _exp_1 = this.exp(x.getRight());
+    _builder.append(_exp_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _exp(final Mult x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _exp = this.exp(x.getLeft());
+    _builder.append(_exp);
+    _builder.append("*");
+    CharSequence _exp_1 = this.exp(x.getRight());
+    _builder.append(_exp_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _exp(final Div x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _exp = this.exp(x.getLeft());
+    _builder.append(_exp);
+    _builder.append("/");
+    CharSequence _exp_1 = this.exp(x.getRight());
+    _builder.append(_exp_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _exp(final IntNum x) {
+    return Integer.toString(x.getValue());
+  }
+  
+  protected CharSequence _exp(final FloatNum x) {
+    String _string = Integer.toString(x.getI());
+    String _plus = (_string + ".");
+    String _string_1 = Integer.toString(x.getDecimal());
+    return (_plus + _string_1);
+  }
+  
+  protected CharSequence _exp(final NameAttribute x) {
+    String _name = x.getAttribute().getName();
+    return ("_" + _name);
   }
   
   public CharSequence generateLocation(final Locations locations) {
@@ -2132,5 +2192,39 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     return _builder;
+  }
+  
+  public CharSequence logic(final Proposition x) {
+    if (x instanceof And) {
+      return _logic((And)x);
+    } else if (x instanceof NumberComparing) {
+      return _logic((NumberComparing)x);
+    } else if (x instanceof Or) {
+      return _logic((Or)x);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(x).toString());
+    }
+  }
+  
+  public CharSequence exp(final Sum x) {
+    if (x instanceof FloatNum) {
+      return _exp((FloatNum)x);
+    } else if (x instanceof IntNum) {
+      return _exp((IntNum)x);
+    } else if (x instanceof NameAttribute) {
+      return _exp((NameAttribute)x);
+    } else if (x instanceof Div) {
+      return _exp((Div)x);
+    } else if (x instanceof Mult) {
+      return _exp((Mult)x);
+    } else if (x instanceof Add) {
+      return _exp((Add)x);
+    } else if (x instanceof Sub) {
+      return _exp((Sub)x);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(x).toString());
+    }
   }
 }
