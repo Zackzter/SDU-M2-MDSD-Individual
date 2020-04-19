@@ -299,18 +299,10 @@ class RPGGenerator extends AbstractGenerator {
     	«FOR move: moves.move»
     		«FOR effect: move.effect»
     			«FOR c: effect.rule.carl»
-    				«c»
-    				«IF c.attribute instanceof NameAttribute»
-    					«c.attribute.attribute.name»
-    				«ELSEIF c.change instanceof Sum»
-    					«c.change.exp + 'wa'» 
-    				«ELSEIF c.zelf instanceof SelfTargeting»
-    					'self.'
-    				«ELSEIF c.equal instanceof Set»
-    					'='
-    				«ELSE»
-    					'fuck_me'
-    				«ENDIF»    				
+    				«c.attribute.attribute.name»=«c.change.exp»
+    				«IF c.zelf !== null»
+    					hihi
+    				«ENDIF»
     			«ENDFOR»
 				«IF effect.rule.or instanceof Proposition»
     				«effect.rule.or.logic»
@@ -319,23 +311,6 @@ class RPGGenerator extends AbstractGenerator {
     		«ENDFOR»
     	«ENDFOR»
     '''
-    }
- 
-    
-    def dispatch CharSequence effectS(NameAttribute attribute){
-    	'''«attribute.attribute.name»'''
-    }
-    
-    def dispatch CharSequence effectS(Sum sum){
-    	'''«sum.exp»'''
-    }
-    
-    def dispatch CharSequence effectS(SelfTargeting selff){
-    	'''«selff»'''
-    }
-    
-    def dispatch CharSequence effectS(Set eq){
-    	'''='''
     }
 	
 	def generateEntities(IFileSystemAccess2 fsa, Entities entities){
@@ -681,15 +656,15 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	
 	def dispatch CharSequence logic(Or x){
-		'''(«x.left.logic»||«x.right.logic»)'''
+		'''«x.left.logic»||«x.right.logic»'''
 	}
 	
 	def dispatch CharSequence logic(And x){
-		'''(«x.left.logic»&&«x.right.logic»)'''
+		'''«x.left.logic»&&«x.right.logic»'''
 	}
 	
 	def dispatch CharSequence logic(NumberComparing x){
-		'''(«x.left.exp»«x.comp.generateComp»«x.right.exp»)'''
+		'''«x.left.exp»«x.comp.generateComp»«x.right.exp»'''
 	}
 	
 	def generateComp(Comparator op) {
@@ -697,16 +672,16 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	
 	def dispatch CharSequence exp(Add x){
-		'''(«x.left.exp»+«x.right.exp»)'''
+		'''«x.left.exp»+«x.right.exp»'''
 	}
 	def dispatch CharSequence exp(Sub x){
-		'''(«x.left.exp»-«x.right.exp»)'''
+		'''«x.left.exp»-«x.right.exp»'''
 	}
 	def dispatch CharSequence exp(Mult x){
-		'''(«x.left.exp»*«x.right.exp»)'''
+		'''«x.left.exp»*«x.right.exp»'''
 	}
 	def dispatch CharSequence exp(Div x){
-		'''(«x.left.exp»/«x.right.exp»)'''
+		'''«x.left.exp»/«x.right.exp»'''
 	}
 	def dispatch CharSequence exp(IntNum x){
 		Integer.toString(x.value)
@@ -715,7 +690,7 @@ class RPGGenerator extends AbstractGenerator {
 		Integer.toString(x.i) + '.' + Integer.toString(x.decimal)
 	}
 	def dispatch CharSequence exp(NameAttribute x){
-		{"_"+x.attribute.name}
+		{x.attribute.name}
 	}
 	
 	def CharSequence generateLocation(Locations locations){

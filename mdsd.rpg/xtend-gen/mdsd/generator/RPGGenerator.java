@@ -34,7 +34,6 @@ import mdsd.rPG.Proposition;
 import mdsd.rPG.Relations;
 import mdsd.rPG.Require;
 import mdsd.rPG.SelfTargeting;
-import mdsd.rPG.Set;
 import mdsd.rPG.Smaller;
 import mdsd.rPG.SmallerEq;
 import mdsd.rPG.Sub;
@@ -43,7 +42,6 @@ import mdsd.rPG.SystemRPG;
 import mdsd.rPG.Teams;
 import mdsd.rPG.Type;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
@@ -559,43 +557,19 @@ public class RPGGenerator extends AbstractGenerator {
               EList<Carl> _carl = effect.getRule().getCarl();
               for(final Carl c : _carl) {
                 _builder.append("    \t\t\t");
-                _builder.append(c, "    \t\t\t");
+                String _name = c.getAttribute().getAttribute().getName();
+                _builder.append(_name, "    \t\t\t");
+                _builder.append("=");
+                CharSequence _exp = this.exp(c.getChange());
+                _builder.append(_exp, "    \t\t\t");
                 _builder.newLineIfNotEmpty();
                 {
-                  NameAttribute _attribute = c.getAttribute();
-                  if ((_attribute instanceof NameAttribute)) {
+                  SelfTargeting _zelf = c.getZelf();
+                  boolean _tripleNotEquals = (_zelf != null);
+                  if (_tripleNotEquals) {
                     _builder.append("    \t\t\t");
-                    String _name = c.getAttribute().getAttribute().getName();
-                    _builder.append(_name, "    \t\t\t");
-                    _builder.newLineIfNotEmpty();
-                  } else {
-                    Sum _change = c.getChange();
-                    if ((_change instanceof Sum)) {
-                      _builder.append("    \t\t\t");
-                      CharSequence _exp = this.exp(c.getChange());
-                      String _plus = (_exp + "wa");
-                      _builder.append(_plus, "    \t\t\t");
-                      _builder.append(" ");
-                      _builder.newLineIfNotEmpty();
-                    } else {
-                      SelfTargeting _zelf = c.getZelf();
-                      if ((_zelf instanceof SelfTargeting)) {
-                        _builder.append("    \t\t\t");
-                        _builder.append("\'self.\'");
-                        _builder.newLine();
-                      } else {
-                        Set _equal = c.getEqual();
-                        if ((_equal instanceof Set)) {
-                          _builder.append("    \t\t\t");
-                          _builder.append("\'=\'");
-                          _builder.newLine();
-                        } else {
-                          _builder.append("    \t\t\t");
-                          _builder.append("\'fuck_me\'");
-                          _builder.newLine();
-                        }
-                      }
-                    }
+                    _builder.append("hihi");
+                    _builder.newLine();
                   }
                 }
               }
@@ -616,32 +590,6 @@ public class RPGGenerator extends AbstractGenerator {
         }
       }
     }
-    return _builder;
-  }
-  
-  protected CharSequence _effectS(final NameAttribute attribute) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _name = attribute.getAttribute().getName();
-    _builder.append(_name);
-    return _builder;
-  }
-  
-  protected CharSequence _effectS(final Sum sum) {
-    StringConcatenation _builder = new StringConcatenation();
-    CharSequence _exp = this.exp(sum);
-    _builder.append(_exp);
-    return _builder;
-  }
-  
-  protected CharSequence _effectS(final SelfTargeting selff) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append(selff);
-    return _builder;
-  }
-  
-  protected CharSequence _effectS(final Set eq) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("=");
     return _builder;
   }
   
@@ -1470,38 +1418,32 @@ public class RPGGenerator extends AbstractGenerator {
   
   protected CharSequence _logic(final Or x) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
     CharSequence _logic = this.logic(x.getLeft());
     _builder.append(_logic);
     _builder.append("||");
     CharSequence _logic_1 = this.logic(x.getRight());
     _builder.append(_logic_1);
-    _builder.append(")");
     return _builder;
   }
   
   protected CharSequence _logic(final And x) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
     CharSequence _logic = this.logic(x.getLeft());
     _builder.append(_logic);
     _builder.append("&&");
     CharSequence _logic_1 = this.logic(x.getRight());
     _builder.append(_logic_1);
-    _builder.append(")");
     return _builder;
   }
   
   protected CharSequence _logic(final NumberComparing x) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
     CharSequence _exp = this.exp(x.getLeft());
     _builder.append(_exp);
     String _generateComp = this.generateComp(x.getComp());
     _builder.append(_generateComp);
     CharSequence _exp_1 = this.exp(x.getRight());
     _builder.append(_exp_1);
-    _builder.append(")");
     return _builder;
   }
   
@@ -1547,49 +1489,41 @@ public class RPGGenerator extends AbstractGenerator {
   
   protected CharSequence _exp(final Add x) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
     CharSequence _exp = this.exp(x.getLeft());
     _builder.append(_exp);
     _builder.append("+");
     CharSequence _exp_1 = this.exp(x.getRight());
     _builder.append(_exp_1);
-    _builder.append(")");
     return _builder;
   }
   
   protected CharSequence _exp(final Sub x) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
     CharSequence _exp = this.exp(x.getLeft());
     _builder.append(_exp);
     _builder.append("-");
     CharSequence _exp_1 = this.exp(x.getRight());
     _builder.append(_exp_1);
-    _builder.append(")");
     return _builder;
   }
   
   protected CharSequence _exp(final Mult x) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
     CharSequence _exp = this.exp(x.getLeft());
     _builder.append(_exp);
     _builder.append("*");
     CharSequence _exp_1 = this.exp(x.getRight());
     _builder.append(_exp_1);
-    _builder.append(")");
     return _builder;
   }
   
   protected CharSequence _exp(final Div x) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
     CharSequence _exp = this.exp(x.getLeft());
     _builder.append(_exp);
     _builder.append("/");
     CharSequence _exp_1 = this.exp(x.getRight());
     _builder.append(_exp_1);
-    _builder.append(")");
     return _builder;
   }
   
@@ -1605,8 +1539,7 @@ public class RPGGenerator extends AbstractGenerator {
   }
   
   protected CharSequence _exp(final NameAttribute x) {
-    String _name = x.getAttribute().getName();
-    return ("_" + _name);
+    return x.getAttribute().getName();
   }
   
   public CharSequence generateLocation(final Locations locations) {
@@ -2357,21 +2290,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     return _builder;
-  }
-  
-  public CharSequence effectS(final EObject attribute) {
-    if (attribute instanceof NameAttribute) {
-      return _effectS((NameAttribute)attribute);
-    } else if (attribute instanceof SelfTargeting) {
-      return _effectS((SelfTargeting)attribute);
-    } else if (attribute instanceof Set) {
-      return _effectS((Set)attribute);
-    } else if (attribute instanceof Sum) {
-      return _effectS((Sum)attribute);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(attribute).toString());
-    }
   }
   
   public CharSequence logic(final Proposition x) {
