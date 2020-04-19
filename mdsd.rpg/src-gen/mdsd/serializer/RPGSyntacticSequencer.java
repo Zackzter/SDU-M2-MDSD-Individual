@@ -20,35 +20,21 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected RPGGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_AtomicNumber_SelfParserRuleCall_2_0_q;
 	protected AbstractElementAlias match_Statement_LeftParenthesisKeyword_1_0_a;
 	protected AbstractElementAlias match_Statement_LeftParenthesisKeyword_1_0_p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (RPGGrammarAccess) access;
-		match_AtomicNumber_SelfParserRuleCall_2_0_q = new TokenAlias(false, true, grammarAccess.getAtomicNumberAccess().getSelfParserRuleCall_2_0());
 		match_Statement_LeftParenthesisKeyword_1_0_a = new TokenAlias(true, true, grammarAccess.getStatementAccess().getLeftParenthesisKeyword_1_0());
 		match_Statement_LeftParenthesisKeyword_1_0_p = new TokenAlias(true, false, grammarAccess.getStatementAccess().getLeftParenthesisKeyword_1_0());
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getSelfRule())
-			return getSelfToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
-	/**
-	 * Self:
-	 * 	'self.'
-	 * ;
-	 */
-	protected String getSelfToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "self.";
-	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
@@ -56,9 +42,7 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_AtomicNumber_SelfParserRuleCall_2_0_q.equals(syntax))
-				emit_AtomicNumber_SelfParserRuleCall_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Statement_LeftParenthesisKeyword_1_0_a.equals(syntax))
+			if (match_Statement_LeftParenthesisKeyword_1_0_a.equals(syntax))
 				emit_Statement_LeftParenthesisKeyword_1_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Statement_LeftParenthesisKeyword_1_0_p.equals(syntax))
 				emit_Statement_LeftParenthesisKeyword_1_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
@@ -66,18 +50,6 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 		}
 	}
 
-	/**
-	 * Ambiguous syntax:
-	 *     Self?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) 'battling_member_count' (ambiguity) attribute=[Attribute|ID]
-	 *     (rule start) (ambiguity) attribute=[Attribute|ID]
-	 */
-	protected void emit_AtomicNumber_SelfParserRuleCall_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
 	/**
 	 * Ambiguous syntax:
 	 *     '('*

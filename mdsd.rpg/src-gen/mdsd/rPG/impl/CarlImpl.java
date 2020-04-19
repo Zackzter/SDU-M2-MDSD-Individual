@@ -6,7 +6,6 @@ package mdsd.rPG.impl;
 import mdsd.rPG.Carl;
 import mdsd.rPG.NameAttribute;
 import mdsd.rPG.RPGPackage;
-import mdsd.rPG.Set;
 import mdsd.rPG.Sum;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -27,7 +26,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.impl.CarlImpl#getAttribute <em>Attribute</em>}</li>
- *   <li>{@link mdsd.rPG.impl.CarlImpl#getEqual <em>Equal</em>}</li>
  *   <li>{@link mdsd.rPG.impl.CarlImpl#getChange <em>Change</em>}</li>
  * </ul>
  *
@@ -44,16 +42,6 @@ public class CarlImpl extends MinimalEObjectImpl.Container implements Carl
    * @ordered
    */
   protected NameAttribute attribute;
-
-  /**
-   * The cached value of the '{@link #getEqual() <em>Equal</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEqual()
-   * @generated
-   * @ordered
-   */
-  protected Set equal;
 
   /**
    * The cached value of the '{@link #getChange() <em>Change</em>}' containment reference.
@@ -142,56 +130,6 @@ public class CarlImpl extends MinimalEObjectImpl.Container implements Carl
    * @generated
    */
   @Override
-  public Set getEqual()
-  {
-    return equal;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetEqual(Set newEqual, NotificationChain msgs)
-  {
-    Set oldEqual = equal;
-    equal = newEqual;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.CARL__EQUAL, oldEqual, newEqual);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setEqual(Set newEqual)
-  {
-    if (newEqual != equal)
-    {
-      NotificationChain msgs = null;
-      if (equal != null)
-        msgs = ((InternalEObject)equal).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.CARL__EQUAL, null, msgs);
-      if (newEqual != null)
-        msgs = ((InternalEObject)newEqual).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.CARL__EQUAL, null, msgs);
-      msgs = basicSetEqual(newEqual, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.CARL__EQUAL, newEqual, newEqual));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Sum getChange()
   {
     return change;
@@ -248,8 +186,6 @@ public class CarlImpl extends MinimalEObjectImpl.Container implements Carl
     {
       case RPGPackage.CARL__ATTRIBUTE:
         return basicSetAttribute(null, msgs);
-      case RPGPackage.CARL__EQUAL:
-        return basicSetEqual(null, msgs);
       case RPGPackage.CARL__CHANGE:
         return basicSetChange(null, msgs);
     }
@@ -268,8 +204,6 @@ public class CarlImpl extends MinimalEObjectImpl.Container implements Carl
     {
       case RPGPackage.CARL__ATTRIBUTE:
         return getAttribute();
-      case RPGPackage.CARL__EQUAL:
-        return getEqual();
       case RPGPackage.CARL__CHANGE:
         return getChange();
     }
@@ -288,9 +222,6 @@ public class CarlImpl extends MinimalEObjectImpl.Container implements Carl
     {
       case RPGPackage.CARL__ATTRIBUTE:
         setAttribute((NameAttribute)newValue);
-        return;
-      case RPGPackage.CARL__EQUAL:
-        setEqual((Set)newValue);
         return;
       case RPGPackage.CARL__CHANGE:
         setChange((Sum)newValue);
@@ -312,9 +243,6 @@ public class CarlImpl extends MinimalEObjectImpl.Container implements Carl
       case RPGPackage.CARL__ATTRIBUTE:
         setAttribute((NameAttribute)null);
         return;
-      case RPGPackage.CARL__EQUAL:
-        setEqual((Set)null);
-        return;
       case RPGPackage.CARL__CHANGE:
         setChange((Sum)null);
         return;
@@ -334,8 +262,6 @@ public class CarlImpl extends MinimalEObjectImpl.Container implements Carl
     {
       case RPGPackage.CARL__ATTRIBUTE:
         return attribute != null;
-      case RPGPackage.CARL__EQUAL:
-        return equal != null;
       case RPGPackage.CARL__CHANGE:
         return change != null;
     }

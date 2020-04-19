@@ -11,16 +11,21 @@ Declaration:
 ;
 
 EntityAttributes:
-	'entity_attributes' attribute+=Attribute+
+	'entity_attribute' attribute+=Attribute+
 ;
 
 MoveAttributes:
-	'move_attributes' attribute+=Attribute+
+	'move_attribute' attribute+=Attribute+
 ;
 
 Attributes:
 	'attributes' attribute+=Attribute+
 ;
+
+Attribute:
+	'attribute' name=ID aVal=AttributeValues
+;
+
 	
 Locations:
 	'location' loc+=Loc+
@@ -51,19 +56,13 @@ Move:
 	'move' name=ID eType=EType? att+=AltAttribute* effect+=Effect*
 ;
 
+
 EType:
 	'type' type=[Type]
 ;
 
-
-
-Attribute:
-	'attribute' name=ID aVal=AttributeValues
-;
-
-
 Effect:
-	'effect'  rule=Rule 
+	'effect' rule=Rule 
 ;
 
 AttributeValues:
@@ -78,8 +77,9 @@ Rule:
 	'if' or=ORcondition  'then' carl=Carl
 ;
 
+
 Carl:
-	attribute=NameAttribute equal=Set change=Sum
+		attribute=NameAttribute '=' change=Sum
 ;
 
 Set:
@@ -97,6 +97,8 @@ Death:
 Entity:
 	'entity' name=ID eType=EType  att+=AltAttribute* eMoves=EntityMoves
 ;
+
+
 
 EntityMoves:
 	'move' move+=[Move]+
@@ -154,11 +156,11 @@ Multiply:
 
 
 AtomicNumber:
-	FloatNum | IntNum | Self? NameAttribute
+	FloatNum | IntNum |  NameAttribute
 ;
 
 NameAttribute:
-	attribute=[Attribute] 
+	attribute=[Attribute]
 ;
 
 SelfTargeting:

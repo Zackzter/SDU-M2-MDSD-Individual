@@ -391,20 +391,17 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Carl returns Carl
 	 *
 	 * Constraint:
-	 *     (attribute=NameAttribute equal=Set change=Sum)
+	 *     (attribute=NameAttribute change=Sum)
 	 */
 	protected void sequence_Carl(ISerializationContext context, Carl semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.CARL__ATTRIBUTE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.CARL__ATTRIBUTE));
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.CARL__EQUAL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.CARL__EQUAL));
 			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.CARL__CHANGE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.CARL__CHANGE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCarlAccess().getAttributeNameAttributeParserRuleCall_0_0(), semanticObject.getAttribute());
-		feeder.accept(grammarAccess.getCarlAccess().getEqualSetParserRuleCall_1_0(), semanticObject.getEqual());
 		feeder.accept(grammarAccess.getCarlAccess().getChangeSumParserRuleCall_2_0(), semanticObject.getChange());
 		feeder.finish();
 	}

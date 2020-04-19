@@ -69,6 +69,15 @@ public interface RPGFactory extends EFactory
   Attributes createAttributes();
 
   /**
+   * Returns a new object of class '<em>Attribute</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Attribute</em>'.
+   * @generated
+   */
+  Attribute createAttribute();
+
+  /**
    * Returns a new object of class '<em>Locations</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -139,15 +148,6 @@ public interface RPGFactory extends EFactory
    * @generated
    */
   EType createEType();
-
-  /**
-   * Returns a new object of class '<em>Attribute</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Attribute</em>'.
-   * @generated
-   */
-  Attribute createAttribute();
 
   /**
    * Returns a new object of class '<em>Effect</em>'.

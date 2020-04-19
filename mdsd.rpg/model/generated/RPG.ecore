@@ -19,6 +19,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
         eType="#//Attribute" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aVal" eType="#//AttributeValues"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Locations" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="loc" upperBound="-1" eType="#//Loc"
         containment="true"/>
@@ -61,11 +66,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="EType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="aVal" eType="#//AttributeValues"
-        containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Effect">
     <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="#//Rule" containment="true"/>
   </eClassifiers>
@@ -87,7 +87,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Carl">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//NameAttribute"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="equal" eType="#//Set" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="change" eType="#//Sum"
         containment="true"/>
   </eClassifiers>
