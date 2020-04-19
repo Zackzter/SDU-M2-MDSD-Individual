@@ -156,6 +156,16 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createRuleAdapter();
       }
       @Override
+      public Adapter caseCarl(Carl object)
+      {
+        return createCarlAdapter();
+      }
+      @Override
+      public Adapter caseSet(Set object)
+      {
+        return createSetAdapter();
+      }
+      @Override
       public Adapter caseEntities(Entities object)
       {
         return createEntitiesAdapter();
@@ -249,6 +259,11 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
       public Adapter caseFloatNum(FloatNum object)
       {
         return createFloatNumAdapter();
+      }
+      @Override
+      public Adapter caseEqual(Equal object)
+      {
+        return createEqualAdapter();
       }
       @Override
       public Adapter caseOr(Or object)
@@ -573,6 +588,36 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Carl <em>Carl</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.Carl
+   * @generated
+   */
+  public Adapter createCarlAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Set <em>Set</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.Set
+   * @generated
+   */
+  public Adapter createSetAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link mdsd.rPG.Entities <em>Entities</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -853,6 +898,21 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createFloatNumAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Equal <em>Equal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.Equal
+   * @generated
+   */
+  public Adapter createEqualAdapter()
   {
     return null;
   }

@@ -41,6 +41,9 @@ import mdsd.rPG.Teams
 import mdsd.rPG.NumberComparing
 import mdsd.rPG.Team
 import mdsd.rPG.Members
+import java.util.ArrayList
+import mdsd.rPG.Effect
+import java.util.List
 
 /**
  * Generates code from your model files on save.
@@ -81,6 +84,7 @@ class RPGGenerator extends AbstractGenerator {
 				Moves:
 					if(!movesbool){
 						gamefile += generateMoves(fsa, d)
+						d.test
 						movesbool = true
 					}
 				Entities:
@@ -283,6 +287,60 @@ class RPGGenerator extends AbstractGenerator {
         «ENDFOR»
         }
         '''
+    }
+	
+    def CharSequence generateEffect(Moves moves){
+    '''
+        «FOR move: moves.move»
+            «FOR effect: move.effect»
+                «effect.rule.carl»
+                «effect.rule.carl.attribute.attribute.name»=«effect.rule.carl.change.exp»
+            «ENDFOR»
+        «ENDFOR»
+    '''
+    }
+    
+    def test(Moves moves){
+        var list = new ArrayList<Object>()
+        for(Move move : moves.move){
+            for(Effect effects : move.effect){
+                effects.rule.carl.change.exp2(list)
+            }
+        }
+        for(Object o : list)
+            System.out.println(o.toString())
+    }
+    
+    def dispatch exp2(Add x, List<Object> list){
+        x.left.exp2(list)
+        list.add('+')
+        x.right.exp2(list)
+    }
+    def dispatch exp2(Sub x, List<Object> list){
+        x.left.exp2(list)        
+        list.add('-')
+        x.right.exp2(list)
+    }
+    def dispatch exp2(Mult x, List<Object> list){
+        x.left.exp2(list)        
+        list.add('*')
+        x.right.exp2(list)
+    }
+    def dispatch exp2(Div x, List<Object> list){
+        x.left.exp2(list)
+        list.add('/')
+        x.right.exp2(list)
+    }
+    def dispatch exp2(IntNum x, List<Object> list){
+        list.add(x.value)
+    }
+    
+    def dispatch exp2(FloatNum x, List<Object> list){
+        list.add(x.decimal)
+    }
+    
+    def dispatch exp2(NameAttribute x, List<Object> list){
+        list.add(x.attribute.AVal)
     }
 	
 	def CharSequence generateEntities(IFileSystemAccess2 fsa, Entities entities){

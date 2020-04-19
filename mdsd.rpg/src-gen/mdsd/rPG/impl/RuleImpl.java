@@ -3,8 +3,8 @@
  */
 package mdsd.rPG.impl;
 
-import mdsd.rPG.AtomicNumber;
-import mdsd.rPG.AttributeValues;
+import mdsd.rPG.Carl;
+import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Rule;
 
@@ -24,43 +24,33 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.RuleImpl#getLTypes <em>LTypes</em>}</li>
- *   <li>{@link mdsd.rPG.impl.RuleImpl#getAn <em>An</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.RuleImpl#getOr <em>Or</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.RuleImpl#getCarl <em>Carl</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class RuleImpl extends EffectImpl implements Rule
+public class RuleImpl extends AttributeValuesImpl implements Rule
 {
   /**
-   * The default value of the '{@link #getLTypes() <em>LTypes</em>}' attribute.
+   * The cached value of the '{@link #getOr() <em>Or</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLTypes()
+   * @see #getOr()
    * @generated
    * @ordered
    */
-  protected static final String LTYPES_EDEFAULT = null;
+  protected Proposition or;
 
   /**
-   * The cached value of the '{@link #getLTypes() <em>LTypes</em>}' attribute.
+   * The cached value of the '{@link #getCarl() <em>Carl</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLTypes()
+   * @see #getCarl()
    * @generated
    * @ordered
    */
-  protected String lTypes = LTYPES_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getAn() <em>An</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAn()
-   * @generated
-   * @ordered
-   */
-  protected AtomicNumber an;
+  protected Carl carl;
 
   /**
    * <!-- begin-user-doc -->
@@ -89,9 +79,9 @@ public class RuleImpl extends EffectImpl implements Rule
    * @generated
    */
   @Override
-  public String getLTypes()
+  public Proposition getOr()
   {
-    return lTypes;
+    return or;
   }
 
   /**
@@ -99,38 +89,13 @@ public class RuleImpl extends EffectImpl implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setLTypes(String newLTypes)
+  public NotificationChain basicSetOr(Proposition newOr, NotificationChain msgs)
   {
-    String oldLTypes = lTypes;
-    lTypes = newLTypes;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__LTYPES, oldLTypes, lTypes));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public AtomicNumber getAn()
-  {
-    return an;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetAn(AtomicNumber newAn, NotificationChain msgs)
-  {
-    AtomicNumber oldAn = an;
-    an = newAn;
+    Proposition oldOr = or;
+    or = newOr;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__AN, oldAn, newAn);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__OR, oldOr, newOr);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -142,20 +107,70 @@ public class RuleImpl extends EffectImpl implements Rule
    * @generated
    */
   @Override
-  public void setAn(AtomicNumber newAn)
+  public void setOr(Proposition newOr)
   {
-    if (newAn != an)
+    if (newOr != or)
     {
       NotificationChain msgs = null;
-      if (an != null)
-        msgs = ((InternalEObject)an).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__AN, null, msgs);
-      if (newAn != null)
-        msgs = ((InternalEObject)newAn).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__AN, null, msgs);
-      msgs = basicSetAn(newAn, msgs);
+      if (or != null)
+        msgs = ((InternalEObject)or).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__OR, null, msgs);
+      if (newOr != null)
+        msgs = ((InternalEObject)newOr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__OR, null, msgs);
+      msgs = basicSetOr(newOr, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__AN, newAn, newAn));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__OR, newOr, newOr));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Carl getCarl()
+  {
+    return carl;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetCarl(Carl newCarl, NotificationChain msgs)
+  {
+    Carl oldCarl = carl;
+    carl = newCarl;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__CARL, oldCarl, newCarl);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setCarl(Carl newCarl)
+  {
+    if (newCarl != carl)
+    {
+      NotificationChain msgs = null;
+      if (carl != null)
+        msgs = ((InternalEObject)carl).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__CARL, null, msgs);
+      if (newCarl != null)
+        msgs = ((InternalEObject)newCarl).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__CARL, null, msgs);
+      msgs = basicSetCarl(newCarl, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__CARL, newCarl, newCarl));
   }
 
   /**
@@ -168,8 +183,10 @@ public class RuleImpl extends EffectImpl implements Rule
   {
     switch (featureID)
     {
-      case RPGPackage.RULE__AN:
-        return basicSetAn(null, msgs);
+      case RPGPackage.RULE__OR:
+        return basicSetOr(null, msgs);
+      case RPGPackage.RULE__CARL:
+        return basicSetCarl(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -184,10 +201,10 @@ public class RuleImpl extends EffectImpl implements Rule
   {
     switch (featureID)
     {
-      case RPGPackage.RULE__LTYPES:
-        return getLTypes();
-      case RPGPackage.RULE__AN:
-        return getAn();
+      case RPGPackage.RULE__OR:
+        return getOr();
+      case RPGPackage.RULE__CARL:
+        return getCarl();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -202,11 +219,11 @@ public class RuleImpl extends EffectImpl implements Rule
   {
     switch (featureID)
     {
-      case RPGPackage.RULE__LTYPES:
-        setLTypes((String)newValue);
+      case RPGPackage.RULE__OR:
+        setOr((Proposition)newValue);
         return;
-      case RPGPackage.RULE__AN:
-        setAn((AtomicNumber)newValue);
+      case RPGPackage.RULE__CARL:
+        setCarl((Carl)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -222,11 +239,11 @@ public class RuleImpl extends EffectImpl implements Rule
   {
     switch (featureID)
     {
-      case RPGPackage.RULE__LTYPES:
-        setLTypes(LTYPES_EDEFAULT);
+      case RPGPackage.RULE__OR:
+        setOr((Proposition)null);
         return;
-      case RPGPackage.RULE__AN:
-        setAn((AtomicNumber)null);
+      case RPGPackage.RULE__CARL:
+        setCarl((Carl)null);
         return;
     }
     super.eUnset(featureID);
@@ -242,69 +259,12 @@ public class RuleImpl extends EffectImpl implements Rule
   {
     switch (featureID)
     {
-      case RPGPackage.RULE__LTYPES:
-        return LTYPES_EDEFAULT == null ? lTypes != null : !LTYPES_EDEFAULT.equals(lTypes);
-      case RPGPackage.RULE__AN:
-        return an != null;
+      case RPGPackage.RULE__OR:
+        return or != null;
+      case RPGPackage.RULE__CARL:
+        return carl != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == AttributeValues.class)
-    {
-      switch (derivedFeatureID)
-      {
-        case RPGPackage.RULE__LTYPES: return RPGPackage.ATTRIBUTE_VALUES__LTYPES;
-        case RPGPackage.RULE__AN: return RPGPackage.ATTRIBUTE_VALUES__AN;
-        default: return -1;
-      }
-    }
-    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == AttributeValues.class)
-    {
-      switch (baseFeatureID)
-      {
-        case RPGPackage.ATTRIBUTE_VALUES__LTYPES: return RPGPackage.RULE__LTYPES;
-        case RPGPackage.ATTRIBUTE_VALUES__AN: return RPGPackage.RULE__AN;
-        default: return -1;
-      }
-    }
-    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (lTypes: ");
-    result.append(lTypes);
-    result.append(')');
-    return result.toString();
   }
 
 } //RuleImpl

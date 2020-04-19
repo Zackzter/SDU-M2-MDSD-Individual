@@ -53,7 +53,7 @@ Attribute:
 
 
 Effect:
-	'effect'  Rule 
+	'effect'  rule=Rule 
 ;
 
 AttributeValues:
@@ -65,7 +65,15 @@ AltAttribute:
 ;
 
 Rule:
-	'if' ORcondition  'then' ( Self? attritbuteToSet+=[Attribute]'=' change+=Sum+)*
+	'if' or=ORcondition  'then' carl=Carl
+;
+
+Carl:
+	attribute=NameAttribute equal=Set change=Sum
+;
+
+Set:
+	{Equal} '='
 ;
 
 Entities:

@@ -4,7 +4,9 @@
 package mdsd.generator;
 
 import com.google.common.collect.Iterators;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import mdsd.rPG.Add;
 import mdsd.rPG.AltAttribute;
 import mdsd.rPG.And;
@@ -13,10 +15,12 @@ import mdsd.rPG.Attribute;
 import mdsd.rPG.Attributes;
 import mdsd.rPG.Bigger;
 import mdsd.rPG.BiggerEq;
+import mdsd.rPG.Carl;
 import mdsd.rPG.Comparator;
 import mdsd.rPG.Death;
 import mdsd.rPG.Declaration;
 import mdsd.rPG.Div;
+import mdsd.rPG.Effect;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
 import mdsd.rPG.Eq;
@@ -98,6 +102,7 @@ public class RPGGenerator extends AbstractGenerator {
             String _gamefile = gamefile;
             CharSequence _generateMoves = this.generateMoves(fsa, ((Moves)d));
             gamefile = (_gamefile + _generateMoves);
+            this.test(((Moves)d));
             movesbool = true;
           }
         }
@@ -541,6 +546,96 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     return _builder;
+  }
+  
+  public CharSequence generateEffect(final Moves moves) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EList<Move> _move = moves.getMove();
+      for(final Move move : _move) {
+        {
+          EList<Effect> _effect = move.getEffect();
+          for(final Effect effect : _effect) {
+            Carl _carl = effect.getRule().getCarl();
+            _builder.append(_carl);
+            _builder.newLineIfNotEmpty();
+            String _name = effect.getRule().getCarl().getAttribute().getAttribute().getName();
+            _builder.append(_name);
+            _builder.append("=");
+            CharSequence _exp = this.exp(effect.getRule().getCarl().getChange());
+            _builder.append(_exp);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    return _builder;
+  }
+  
+  public void test(final Moves moves) {
+    ArrayList<Object> list = new ArrayList<Object>();
+    EList<Move> _move = moves.getMove();
+    for (final Move move : _move) {
+      EList<Effect> _effect = move.getEffect();
+      for (final Effect effects : _effect) {
+        this.exp2(effects.getRule().getCarl().getChange(), list);
+      }
+    }
+    for (final Object o : list) {
+      System.out.println(o.toString());
+    }
+  }
+  
+  protected Object _exp2(final Add x, final List<Object> list) {
+    Object _xblockexpression = null;
+    {
+      this.exp2(x.getLeft(), list);
+      list.add("+");
+      _xblockexpression = this.exp2(x.getRight(), list);
+    }
+    return _xblockexpression;
+  }
+  
+  protected Object _exp2(final Sub x, final List<Object> list) {
+    Object _xblockexpression = null;
+    {
+      this.exp2(x.getLeft(), list);
+      list.add("-");
+      _xblockexpression = this.exp2(x.getRight(), list);
+    }
+    return _xblockexpression;
+  }
+  
+  protected Object _exp2(final Mult x, final List<Object> list) {
+    Object _xblockexpression = null;
+    {
+      this.exp2(x.getLeft(), list);
+      list.add("*");
+      _xblockexpression = this.exp2(x.getRight(), list);
+    }
+    return _xblockexpression;
+  }
+  
+  protected Object _exp2(final Div x, final List<Object> list) {
+    Object _xblockexpression = null;
+    {
+      this.exp2(x.getLeft(), list);
+      list.add("/");
+      _xblockexpression = this.exp2(x.getRight(), list);
+    }
+    return _xblockexpression;
+  }
+  
+  protected Object _exp2(final IntNum x, final List<Object> list) {
+    return Boolean.valueOf(list.add(Integer.valueOf(x.getValue())));
+  }
+  
+  protected Object _exp2(final FloatNum x, final List<Object> list) {
+    return Boolean.valueOf(list.add(Integer.valueOf(x.getDecimal())));
+  }
+  
+  protected Object _exp2(final NameAttribute x, final List<Object> list) {
+    return Boolean.valueOf(list.add(x.getAttribute().getAVal()));
   }
   
   public CharSequence generateEntities(final IFileSystemAccess2 fsa, final Entities entities) {
@@ -2501,6 +2596,27 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     return _builder;
+  }
+  
+  public Object exp2(final Sum x, final List<Object> list) {
+    if (x instanceof FloatNum) {
+      return _exp2((FloatNum)x, list);
+    } else if (x instanceof IntNum) {
+      return _exp2((IntNum)x, list);
+    } else if (x instanceof NameAttribute) {
+      return _exp2((NameAttribute)x, list);
+    } else if (x instanceof Div) {
+      return _exp2((Div)x, list);
+    } else if (x instanceof Mult) {
+      return _exp2((Mult)x, list);
+    } else if (x instanceof Add) {
+      return _exp2((Add)x, list);
+    } else if (x instanceof Sub) {
+      return _exp2((Sub)x, list);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(x, list).toString());
+    }
   }
   
   public CharSequence logic(final Proposition x) {

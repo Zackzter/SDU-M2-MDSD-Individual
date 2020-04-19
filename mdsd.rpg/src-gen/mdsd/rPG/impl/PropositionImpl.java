@@ -3,27 +3,17 @@
  */
 package mdsd.rPG.impl;
 
-import java.util.Collection;
-
-import mdsd.rPG.Attribute;
 import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
-import mdsd.rPG.Sum;
 import mdsd.rPG.Type;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,35 +23,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.PropositionImpl#getAttritbuteToSet <em>Attritbute To Set</em>}</li>
- *   <li>{@link mdsd.rPG.impl.PropositionImpl#getChange <em>Change</em>}</li>
  *   <li>{@link mdsd.rPG.impl.PropositionImpl#getType <em>Type</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class PropositionImpl extends RuleImpl implements Proposition
+public class PropositionImpl extends MinimalEObjectImpl.Container implements Proposition
 {
-  /**
-   * The cached value of the '{@link #getAttritbuteToSet() <em>Attritbute To Set</em>}' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAttritbuteToSet()
-   * @generated
-   * @ordered
-   */
-  protected EList<Attribute> attritbuteToSet;
-
-  /**
-   * The cached value of the '{@link #getChange() <em>Change</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getChange()
-   * @generated
-   * @ordered
-   */
-  protected EList<Sum> change;
-
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' reference.
    * <!-- begin-user-doc -->
@@ -91,36 +59,6 @@ public class PropositionImpl extends RuleImpl implements Proposition
   protected EClass eStaticClass()
   {
     return RPGPackage.Literals.PROPOSITION;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Attribute> getAttritbuteToSet()
-  {
-    if (attritbuteToSet == null)
-    {
-      attritbuteToSet = new EObjectResolvingEList<Attribute>(Attribute.class, this, RPGPackage.PROPOSITION__ATTRITBUTE_TO_SET);
-    }
-    return attritbuteToSet;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Sum> getChange()
-  {
-    if (change == null)
-    {
-      change = new EObjectContainmentEList<Sum>(Sum.class, this, RPGPackage.PROPOSITION__CHANGE);
-    }
-    return change;
   }
 
   /**
@@ -174,30 +112,10 @@ public class PropositionImpl extends RuleImpl implements Proposition
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case RPGPackage.PROPOSITION__CHANGE:
-        return ((InternalEList<?>)getChange()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
-      case RPGPackage.PROPOSITION__ATTRITBUTE_TO_SET:
-        return getAttritbuteToSet();
-      case RPGPackage.PROPOSITION__CHANGE:
-        return getChange();
       case RPGPackage.PROPOSITION__TYPE:
         if (resolve) return getType();
         return basicGetType();
@@ -210,20 +128,11 @@ public class PropositionImpl extends RuleImpl implements Proposition
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case RPGPackage.PROPOSITION__ATTRITBUTE_TO_SET:
-        getAttritbuteToSet().clear();
-        getAttritbuteToSet().addAll((Collection<? extends Attribute>)newValue);
-        return;
-      case RPGPackage.PROPOSITION__CHANGE:
-        getChange().clear();
-        getChange().addAll((Collection<? extends Sum>)newValue);
-        return;
       case RPGPackage.PROPOSITION__TYPE:
         setType((Type)newValue);
         return;
@@ -241,12 +150,6 @@ public class PropositionImpl extends RuleImpl implements Proposition
   {
     switch (featureID)
     {
-      case RPGPackage.PROPOSITION__ATTRITBUTE_TO_SET:
-        getAttritbuteToSet().clear();
-        return;
-      case RPGPackage.PROPOSITION__CHANGE:
-        getChange().clear();
-        return;
       case RPGPackage.PROPOSITION__TYPE:
         setType((Type)null);
         return;
@@ -264,10 +167,6 @@ public class PropositionImpl extends RuleImpl implements Proposition
   {
     switch (featureID)
     {
-      case RPGPackage.PROPOSITION__ATTRITBUTE_TO_SET:
-        return attritbuteToSet != null && !attritbuteToSet.isEmpty();
-      case RPGPackage.PROPOSITION__CHANGE:
-        return change != null && !change.isEmpty();
       case RPGPackage.PROPOSITION__TYPE:
         return type != null;
     }

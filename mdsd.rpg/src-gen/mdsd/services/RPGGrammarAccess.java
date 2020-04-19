@@ -456,20 +456,24 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Effect");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cEffectKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cRuleParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Assignment cRuleAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cRuleRuleParserRuleCall_1_0 = (RuleCall)cRuleAssignment_1.eContents().get(0);
 		
 		//Effect:
-		//	'effect' Rule;
+		//	'effect' rule=Rule;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'effect' Rule
+		//'effect' rule=Rule
 		public Group getGroup() { return cGroup; }
 		
 		//'effect'
 		public Keyword getEffectKeyword_0() { return cEffectKeyword_0; }
 		
+		//rule=Rule
+		public Assignment getRuleAssignment_1() { return cRuleAssignment_1; }
+		
 		//Rule
-		public RuleCall getRuleParserRuleCall_1() { return cRuleParserRuleCall_1; }
+		public RuleCall getRuleRuleParserRuleCall_1_0() { return cRuleRuleParserRuleCall_1_0; }
 	}
 	public class AttributeValuesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.AttributeValues");
@@ -561,56 +565,90 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Rule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cIfKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cORconditionParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Assignment cOrAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cOrORconditionParserRuleCall_1_0 = (RuleCall)cOrAssignment_1.eContents().get(0);
 		private final Keyword cThenKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final RuleCall cSelfParserRuleCall_3_0 = (RuleCall)cGroup_3.eContents().get(0);
-		private final Assignment cAttritbuteToSetAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final CrossReference cAttritbuteToSetAttributeCrossReference_3_1_0 = (CrossReference)cAttritbuteToSetAssignment_3_1.eContents().get(0);
-		private final RuleCall cAttritbuteToSetAttributeIDTerminalRuleCall_3_1_0_1 = (RuleCall)cAttritbuteToSetAttributeCrossReference_3_1_0.eContents().get(1);
-		private final Keyword cEqualsSignKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
-		private final Assignment cChangeAssignment_3_3 = (Assignment)cGroup_3.eContents().get(3);
-		private final RuleCall cChangeSumParserRuleCall_3_3_0 = (RuleCall)cChangeAssignment_3_3.eContents().get(0);
+		private final Assignment cCarlAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cCarlCarlParserRuleCall_3_0 = (RuleCall)cCarlAssignment_3.eContents().get(0);
 		
 		//Rule:
-		//	'if' ORcondition 'then' (Self? attritbuteToSet+=[Attribute] '=' change+=Sum+)*;
+		//	'if' or=ORcondition 'then' carl=Carl;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'if' ORcondition 'then' (Self? attritbuteToSet+=[Attribute] '=' change+=Sum+)*
+		//'if' or=ORcondition 'then' carl=Carl
 		public Group getGroup() { return cGroup; }
 		
 		//'if'
 		public Keyword getIfKeyword_0() { return cIfKeyword_0; }
 		
+		//or=ORcondition
+		public Assignment getOrAssignment_1() { return cOrAssignment_1; }
+		
 		//ORcondition
-		public RuleCall getORconditionParserRuleCall_1() { return cORconditionParserRuleCall_1; }
+		public RuleCall getOrORconditionParserRuleCall_1_0() { return cOrORconditionParserRuleCall_1_0; }
 		
 		//'then'
 		public Keyword getThenKeyword_2() { return cThenKeyword_2; }
 		
-		//(Self? attritbuteToSet+=[Attribute] '=' change+=Sum+)*
-		public Group getGroup_3() { return cGroup_3; }
+		//carl=Carl
+		public Assignment getCarlAssignment_3() { return cCarlAssignment_3; }
 		
-		//Self?
-		public RuleCall getSelfParserRuleCall_3_0() { return cSelfParserRuleCall_3_0; }
+		//Carl
+		public RuleCall getCarlCarlParserRuleCall_3_0() { return cCarlCarlParserRuleCall_3_0; }
+	}
+	public class CarlElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Carl");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cAttributeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cAttributeNameAttributeParserRuleCall_0_0 = (RuleCall)cAttributeAssignment_0.eContents().get(0);
+		private final Assignment cEqualAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cEqualSetParserRuleCall_1_0 = (RuleCall)cEqualAssignment_1.eContents().get(0);
+		private final Assignment cChangeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cChangeSumParserRuleCall_2_0 = (RuleCall)cChangeAssignment_2.eContents().get(0);
 		
-		//attritbuteToSet+=[Attribute]
-		public Assignment getAttritbuteToSetAssignment_3_1() { return cAttritbuteToSetAssignment_3_1; }
+		//Carl:
+		//	attribute=NameAttribute equal=Set change=Sum;
+		@Override public ParserRule getRule() { return rule; }
 		
-		//[Attribute]
-		public CrossReference getAttritbuteToSetAttributeCrossReference_3_1_0() { return cAttritbuteToSetAttributeCrossReference_3_1_0; }
+		//attribute=NameAttribute equal=Set change=Sum
+		public Group getGroup() { return cGroup; }
 		
-		//ID
-		public RuleCall getAttritbuteToSetAttributeIDTerminalRuleCall_3_1_0_1() { return cAttritbuteToSetAttributeIDTerminalRuleCall_3_1_0_1; }
+		//attribute=NameAttribute
+		public Assignment getAttributeAssignment_0() { return cAttributeAssignment_0; }
 		
-		//'='
-		public Keyword getEqualsSignKeyword_3_2() { return cEqualsSignKeyword_3_2; }
+		//NameAttribute
+		public RuleCall getAttributeNameAttributeParserRuleCall_0_0() { return cAttributeNameAttributeParserRuleCall_0_0; }
 		
-		//change+=Sum+
-		public Assignment getChangeAssignment_3_3() { return cChangeAssignment_3_3; }
+		//equal=Set
+		public Assignment getEqualAssignment_1() { return cEqualAssignment_1; }
+		
+		//Set
+		public RuleCall getEqualSetParserRuleCall_1_0() { return cEqualSetParserRuleCall_1_0; }
+		
+		//change=Sum
+		public Assignment getChangeAssignment_2() { return cChangeAssignment_2; }
 		
 		//Sum
-		public RuleCall getChangeSumParserRuleCall_3_3_0() { return cChangeSumParserRuleCall_3_3_0; }
+		public RuleCall getChangeSumParserRuleCall_2_0() { return cChangeSumParserRuleCall_2_0; }
+	}
+	public class SetElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Set");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cEqualAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//Set:
+		//	{Equal} '=';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{Equal} '='
+		public Group getGroup() { return cGroup; }
+		
+		//{Equal}
+		public Action getEqualAction_0() { return cEqualAction_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
 	}
 	public class EntitiesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Entities");
@@ -1375,6 +1413,8 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	private final AttributeValuesElements pAttributeValues;
 	private final AltAttributeElements pAltAttribute;
 	private final RuleElements pRule;
+	private final CarlElements pCarl;
+	private final SetElements pSet;
 	private final EntitiesElements pEntities;
 	private final DeathElements pDeath;
 	private final EntityElements pEntity;
@@ -1424,6 +1464,8 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		this.pAttributeValues = new AttributeValuesElements();
 		this.pAltAttribute = new AltAttributeElements();
 		this.pRule = new RuleElements();
+		this.pCarl = new CarlElements();
+		this.pSet = new SetElements();
 		this.pEntities = new EntitiesElements();
 		this.pDeath = new DeathElements();
 		this.pEntity = new EntityElements();
@@ -1597,7 +1639,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Effect:
-	//	'effect' Rule;
+	//	'effect' rule=Rule;
 	public EffectElements getEffectAccess() {
 		return pEffect;
 	}
@@ -1627,13 +1669,33 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Rule:
-	//	'if' ORcondition 'then' (Self? attritbuteToSet+=[Attribute] '=' change+=Sum+)*;
+	//	'if' or=ORcondition 'then' carl=Carl;
 	public RuleElements getRuleAccess() {
 		return pRule;
 	}
 	
 	public ParserRule getRuleRule() {
 		return getRuleAccess().getRule();
+	}
+	
+	//Carl:
+	//	attribute=NameAttribute equal=Set change=Sum;
+	public CarlElements getCarlAccess() {
+		return pCarl;
+	}
+	
+	public ParserRule getCarlRule() {
+		return getCarlAccess().getRule();
+	}
+	
+	//Set:
+	//	{Equal} '=';
+	public SetElements getSetAccess() {
+		return pSet;
+	}
+	
+	public ParserRule getSetRule() {
+		return getSetAccess().getRule();
 	}
 	
 	//Entities:

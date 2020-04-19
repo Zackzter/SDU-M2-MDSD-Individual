@@ -10,6 +10,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Effect</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link mdsd.rPG.Effect#getRule <em>Rule</em>}</li>
+ * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getEffect()
  * @model
@@ -17,4 +23,26 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Effect extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Rule</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Rule</em>' containment reference.
+   * @see #setRule(Rule)
+   * @see mdsd.rPG.RPGPackage#getEffect_Rule()
+   * @model containment="true"
+   * @generated
+   */
+  Rule getRule();
+
+  /**
+   * Sets the value of the '{@link mdsd.rPG.Effect#getRule <em>Rule</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Rule</em>' containment reference.
+   * @see #getRule()
+   * @generated
+   */
+  void setRule(Rule value);
+
 } // Effect
