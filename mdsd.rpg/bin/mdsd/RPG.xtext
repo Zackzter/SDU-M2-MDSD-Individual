@@ -3,10 +3,12 @@ grammar mdsd.RPG with org.eclipse.xtext.common.Terminals
 generate rPG "http://www.RPG.mdsd"
 
 SystemRPG:
-	'game' name=ID declarations+=Declaration*;
+	'game' name=ID declarations+=Declaration*
+;
 	
 Declaration:
-	Locations | Relations | Moves | Entities | Teams | Attributes | Death;
+	Locations | Relations | Moves | Entities | Teams | Attributes | Death
+;
 	
 Locations:
 	'location' loc+=Loc+
@@ -65,7 +67,6 @@ AltAttribute:
 Rule:
 	'if' ORcondition  'then' ( Self? attritbuteToSet+=[Attribute]'=' change+=Sum+)*
 ;
-
 
 Entities:
 	'entities' entity+=Entity+

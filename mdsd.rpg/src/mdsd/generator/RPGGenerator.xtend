@@ -65,19 +65,6 @@ class RPGGenerator extends AbstractGenerator {
 		val classFileName = thing.getName() + ".java"
 		fsa.generateFile(classFileName, thing.generateGamePOG)
 		for (Declaration d : thing.getDeclarations()){
-			/*
-			if(d instanceof Locations){
-				if(!locationbool){
-					fsa.generateFile("Location.java" , d.generateLocation)
-					locationbool = true
-				}
-			} else if(d instanceof Relations){
-				if(!relationbool){
-					//fsa.generateFile("Relations.java" , d.generateRelation)
-					//locationbool = true
-				}
-			} else if(d instanceof)
-			*/
 			switch(d){
 				Locations:
 					if(!locationbool){
@@ -86,18 +73,17 @@ class RPGGenerator extends AbstractGenerator {
 					}
 				Relations:
 					if(!relationbool){
-						//fsa.generateFile("Relations.java" , d.generateRelation)
-						//relationbool = true
-						
-					}
+                        fsa.generateFile("TypeEnum.java", d.generateTypeEnum)
+                        relationbool = true
+                    }
 				Moves:
 					if(!movesbool){
-						fsa.generateFile("Move.java" , d.generateMove)
+						generateMoves(fsa, d)
 						movesbool = true
 					}
 				Entities:
 					if(!entitiesbool){
-						fsa.generateFile("Entity.java" , d.generateEntity)
+						generateEntities(fsa, d)
 						entitiesbool = true
 					}
 				Teams:
@@ -107,14 +93,21 @@ class RPGGenerator extends AbstractGenerator {
 					}
 				Attributes:
 					if(!attributesbool){
-						fsa.generateFile("Attribute.java" , d.generateAttribute)
-						attributesbool = true
-					}
+                        fsa.generateFile("Attribute.java" , d.generateAttribute)
+                        fsa.generateFile("AttributeEnum.java", d.generateAttributeEnum)
+                        attributesbool = true
+                    }
 				Death:
-					if(!deathbool){
-						fsa.generateFile("Death.java" , d.generateKillable)
-						deathbool = true
+					System.out.println("Do this")
+					/* 
+					'''
+					public class DeathCondition {
+					// ost3
+					«d.req.re»
+			
 					}
+					'''
+					*/
 				default:
 					System.out.println("reported")
 			}
@@ -282,19 +275,27 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 	
-	def generateAttributeEnum(){
-		'''
-		enum AttributeEnum{
-			pp, power, current_hp, speed, max_hp;
-		}
-		'''
+	def generateAttributeEnum(Attributes attributes){
+        '''
+        public enum AttributeEnum{
+        «FOR attribute: attributes.attribute »
+            «attribute.name»,
+        «ENDFOR»
+        }
+        '''
+    }
+	
+	def generateEntities(IFileSystemAccess2 fsa, Entities entities){
+		fsa.generateFile("Entity.java", generateEntity)
+		fsa.generateFile("EntityEnum.java", entities.generateEntityEnum)
+		fsa.generateFile("EntityState.java", generateEntityState)
 	}
 	
-	def CharSequence generateEntity(Entities entity){
+	def CharSequence generateEntity(){
 		'''
 		import java.util.*;
 		import java.util.concurrent.*;
-		public class Entity implements Killable{
+		public class Entity{
 		    private String name;
 		    private String type;
 		    private EntityState state;
@@ -377,7 +378,6 @@ class RPGGenerator extends AbstractGenerator {
 		      }
 		    }
 		
-		    @Override
 		    public void die(){
 		      state = EntityState.DEAD;
 		      System.out.println("[" + this.toString() + "] " +  "Ufff I died");
@@ -392,18 +392,29 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 	
-	def generateEntityEnum(){
+	def CharSequence generateEntityEnum(Entities entities){
+		var entityEnum = ""
+		var i = 1
+		for(entity : entities.entity){
+			entityEnum += entity.name
+			if(i < entities.entity.size){
+				entityEnum += ", "
+				i++
+			} else {
+				entityEnum += ";"
+			}
+		}
 		'''
 		enum EntityEnum{
-		  Zyndaquil, Zotodile, Zhikorita;
+			«entityEnum»
 		}
 		'''
 	}
 	
-	def generateEntityState(){
+	def CharSequence generateEntityState(){
 		'''
 		public enum EntityState {
-		    DEAD, ALIVE, LIMBO
+		    DEAD, ALIVE
 		}
 		'''
 	}
@@ -609,13 +620,7 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	
 	def CharSequence generateKillable(Death death){
-		'''
-		public interface Killable {
-			// ost3
-			«death.req.re»
-			
-		}
-		'''
+		
 	}
 	
 	def CharSequence re(Require req){
@@ -656,8 +661,6 @@ class RPGGenerator extends AbstractGenerator {
 	def dispatch CharSequence exp(FloatNum x){
 		Integer.toString(x.i) + '.' + Integer.toString(x.decimal)
 	}
-	
-	
 	def dispatch CharSequence exp(NameAttribute x){
 		{"_"+x.attribute.name}
 	}
@@ -728,7 +731,13 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 	
-	def CharSequence generateMove(Moves move){
+	def generateMoves(IFileSystemAccess2 fsa, Moves moves){
+		fsa.generateFile("Move.java", generateEntity)
+		fsa.generateFile("MoveEnum.java", moves.generateMoveEnum)
+		fsa.generateFile("EntityState.java", generateEntityState)
+	}
+	
+	def CharSequence generateMove(){
 		'''
 		import java.util.*;
 				
@@ -844,11 +853,25 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 
-	def generateMoveEnum(){
+	def generateMoveEnum(Moves moves){
+		var moveEnums = ""
+		var i = 1
+		for(move : moves.move){
+			var name = move.name
+			var type = move.getEType().type.name
+			moveEnums += name
+			moveEnums += "(" + '"' + type + '"' + ')'
+			if(i < moves.move.size){
+				moveEnums += ", "
+				i++
+			} else {
+				moveEnums += ";"
+			}
+		}
+		
 		'''
 		enum MoveEnum{
-		    Ember("fire"), Water_gun("water"), Razor_leaf("grass");
-		
+		    «moveEnums»
 		    private String type;
 		
 		    private MoveEnum(String type){
@@ -960,13 +983,15 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 
-	def generateTypeEnum(){
-		'''
-		enum TypeEnum {
-		    fire, water, grass
-		}
-		'''
-	}
+	def generateTypeEnum(Relations relation){
+        '''
+        public enum TypeEnum{
+        «FOR type: relation.type »
+            «type.name»,
+        «ENDFOR»
+        }
+        '''
+    }
 	
 	
 }

@@ -7,6 +7,7 @@ import com.google.common.collect.Iterators;
 import java.util.Arrays;
 import mdsd.rPG.Add;
 import mdsd.rPG.And;
+import mdsd.rPG.Attribute;
 import mdsd.rPG.Attributes;
 import mdsd.rPG.Bigger;
 import mdsd.rPG.BiggerEq;
@@ -15,10 +16,12 @@ import mdsd.rPG.Death;
 import mdsd.rPG.Declaration;
 import mdsd.rPG.Div;
 import mdsd.rPG.Entities;
+import mdsd.rPG.Entity;
 import mdsd.rPG.Eq;
 import mdsd.rPG.FloatNum;
 import mdsd.rPG.IntNum;
 import mdsd.rPG.Locations;
+import mdsd.rPG.Move;
 import mdsd.rPG.Moves;
 import mdsd.rPG.Mult;
 import mdsd.rPG.NEq;
@@ -34,6 +37,7 @@ import mdsd.rPG.Sub;
 import mdsd.rPG.Sum;
 import mdsd.rPG.SystemRPG;
 import mdsd.rPG.Teams;
+import mdsd.rPG.Type;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -81,6 +85,8 @@ public class RPGGenerator extends AbstractGenerator {
           if (d instanceof Relations) {
             _matched=true;
             if ((!relationbool)) {
+              fsa.generateFile("TypeEnum.java", this.generateTypeEnum(((Relations)d)));
+              relationbool = true;
             }
           }
         }
@@ -88,7 +94,7 @@ public class RPGGenerator extends AbstractGenerator {
           if (d instanceof Moves) {
             _matched=true;
             if ((!movesbool)) {
-              fsa.generateFile("Move.java", this.generateMove(((Moves)d)));
+              this.generateMoves(fsa, ((Moves)d));
               movesbool = true;
             }
           }
@@ -97,7 +103,7 @@ public class RPGGenerator extends AbstractGenerator {
           if (d instanceof Entities) {
             _matched=true;
             if ((!entitiesbool)) {
-              fsa.generateFile("Entity.java", this.generateEntity(((Entities)d)));
+              this.generateEntities(fsa, ((Entities)d));
               entitiesbool = true;
             }
           }
@@ -116,6 +122,7 @@ public class RPGGenerator extends AbstractGenerator {
             _matched=true;
             if ((!attributesbool)) {
               fsa.generateFile("Attribute.java", this.generateAttribute(((Attributes)d)));
+              fsa.generateFile("AttributeEnum.java", this.generateAttributeEnum(((Attributes)d)));
               attributesbool = true;
             }
           }
@@ -123,10 +130,7 @@ public class RPGGenerator extends AbstractGenerator {
         if (!_matched) {
           if (d instanceof Death) {
             _matched=true;
-            if ((!deathbool)) {
-              fsa.generateFile("Death.java", this.generateKillable(((Death)d)));
-              deathbool = true;
-            }
+            System.out.println("Do this");
           }
         }
         if (!_matched) {
@@ -519,25 +523,37 @@ public class RPGGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence generateAttributeEnum() {
+  public CharSequence generateAttributeEnum(final Attributes attributes) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("enum AttributeEnum{");
+    _builder.append("public enum AttributeEnum{");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("pp, power, current_hp, speed, max_hp;");
-    _builder.newLine();
+    {
+      EList<Attribute> _attribute = attributes.getAttribute();
+      for(final Attribute attribute : _attribute) {
+        String _name = attribute.getName();
+        _builder.append(_name);
+        _builder.append(",");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("}");
     _builder.newLine();
     return _builder;
   }
   
-  public CharSequence generateEntity(final Entities entity) {
+  public void generateEntities(final IFileSystemAccess2 fsa, final Entities entities) {
+    fsa.generateFile("Entity.java", this.generateEntity());
+    fsa.generateFile("EntityEnum.java", this.generateEntityEnum(entities));
+    fsa.generateFile("EntityState.java", this.generateEntityState());
+  }
+  
+  public CharSequence generateEntity() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*;");
     _builder.newLine();
     _builder.append("import java.util.concurrent.*;");
     _builder.newLine();
-    _builder.append("public class Entity implements Killable{");
+    _builder.append("public class Entity{");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("private String name;");
@@ -763,9 +779,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("@Override");
-    _builder.newLine();
-    _builder.append("    ");
     _builder.append("public void die(){");
     _builder.newLine();
     _builder.append("      ");
@@ -797,16 +810,40 @@ public class RPGGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence generateEntityEnum() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("enum EntityEnum{");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("Zyndaquil, Zotodile, Zhikorita;");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
+  public CharSequence generateEntityEnum(final Entities entities) {
+    CharSequence _xblockexpression = null;
+    {
+      String entityEnum = "";
+      int i = 1;
+      EList<Entity> _entity = entities.getEntity();
+      for (final Entity entity : _entity) {
+        {
+          String _entityEnum = entityEnum;
+          String _name = entity.getName();
+          entityEnum = (_entityEnum + _name);
+          int _size = entities.getEntity().size();
+          boolean _lessThan = (i < _size);
+          if (_lessThan) {
+            String _entityEnum_1 = entityEnum;
+            entityEnum = (_entityEnum_1 + ", ");
+            i++;
+          } else {
+            String _entityEnum_2 = entityEnum;
+            entityEnum = (_entityEnum_2 + ";");
+          }
+        }
+      }
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("enum EntityEnum{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append(entityEnum, "\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("}");
+      _builder.newLine();
+      _xblockexpression = _builder;
+    }
+    return _xblockexpression;
   }
   
   public CharSequence generateEntityState() {
@@ -814,7 +851,7 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("public enum EntityState {");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("DEAD, ALIVE, LIMBO");
+    _builder.append("DEAD, ALIVE");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -1320,21 +1357,7 @@ public class RPGGenerator extends AbstractGenerator {
   }
   
   public CharSequence generateKillable(final Death death) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("public interface Killable {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("// ost3");
-    _builder.newLine();
-    _builder.append("\t");
-    CharSequence _re = this.re(death.getReq());
-    _builder.append(_re, "\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
+    return null;
   }
   
   public CharSequence re(final Require req) {
@@ -1632,7 +1655,13 @@ public class RPGGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence generateMove(final Moves move) {
+  public void generateMoves(final IFileSystemAccess2 fsa, final Moves moves) {
+    fsa.generateFile("Move.java", this.generateEntity());
+    fsa.generateFile("MoveEnum.java", this.generateMoveEnum(moves));
+    fsa.generateFile("EntityState.java", this.generateEntityState());
+  }
+  
+  public CharSequence generateMove() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*;");
     _builder.newLine();
@@ -1904,40 +1933,66 @@ public class RPGGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence generateMoveEnum() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("enum MoveEnum{");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("Ember(\"fire\"), Water_gun(\"water\"), Razor_leaf(\"grass\");");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("private String type;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("private MoveEnum(String type){");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("this.type = type;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public String getType(){");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("return this.type;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
+  public CharSequence generateMoveEnum(final Moves moves) {
+    CharSequence _xblockexpression = null;
+    {
+      String moveEnums = "";
+      int i = 1;
+      EList<Move> _move = moves.getMove();
+      for (final Move move : _move) {
+        {
+          String name = move.getName();
+          String type = move.getEType().getType().getName();
+          String _moveEnums = moveEnums;
+          moveEnums = (_moveEnums + name);
+          String _moveEnums_1 = moveEnums;
+          moveEnums = (_moveEnums_1 + (((("(" + "\"") + type) + "\"") + ")"));
+          int _size = moves.getMove().size();
+          boolean _lessThan = (i < _size);
+          if (_lessThan) {
+            String _moveEnums_2 = moveEnums;
+            moveEnums = (_moveEnums_2 + ", ");
+            i++;
+          } else {
+            String _moveEnums_3 = moveEnums;
+            moveEnums = (_moveEnums_3 + ";");
+          }
+        }
+      }
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("enum MoveEnum{");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append(moveEnums, "    ");
+      _builder.newLineIfNotEmpty();
+      _builder.append("    ");
+      _builder.append("private String type;");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("private MoveEnum(String type){");
+      _builder.newLine();
+      _builder.append("        ");
+      _builder.append("this.type = type;");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("public String getType(){");
+      _builder.newLine();
+      _builder.append("        ");
+      _builder.append("return this.type;");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _xblockexpression = _builder;
+    }
+    return _xblockexpression;
   }
   
   public CharSequence generateTeam(final Teams team) {
@@ -2182,13 +2237,19 @@ public class RPGGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence generateTypeEnum() {
+  public CharSequence generateTypeEnum(final Relations relation) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("enum TypeEnum {");
+    _builder.append("public enum TypeEnum{");
     _builder.newLine();
-    _builder.append("    ");
-    _builder.append("fire, water, grass");
-    _builder.newLine();
+    {
+      EList<Type> _type = relation.getType();
+      for(final Type type : _type) {
+        String _name = type.getName();
+        _builder.append(_name);
+        _builder.append(",");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("}");
     _builder.newLine();
     return _builder;
