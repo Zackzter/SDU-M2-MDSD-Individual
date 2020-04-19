@@ -18,6 +18,10 @@ import mdsd.rPG.Death
 import mdsd.rPG.AtomicNumber
 import mdsd.rPG.Require
 import mdsd.rPG.Or
+import mdsd.rPG.Equal
+import mdsd.rPG.Set
+import mdsd.rPG.SelfTargeting
+import mdsd.rPG.Sum
 import mdsd.rPG.And
 import mdsd.rPG.Add
 import mdsd.rPG.Sub
@@ -39,6 +43,9 @@ import mdsd.rPG.Declaration
 import mdsd.rPG.Relations
 import mdsd.rPG.Teams
 import mdsd.rPG.NumberComparing
+import mdsd.rPG.Proposition
+import java.util.List
+import mdsd.rPG.AltAttribute
 
 /**
  * Generates code from your model files on save.
@@ -79,6 +86,7 @@ class RPGGenerator extends AbstractGenerator {
 				Moves:
 					if(!movesbool){
 						generateMoves(fsa, d)
+						fsa.generateFile("Effect.java", d.generateEffect)
 						movesbool = true
 					}
 				Entities:
@@ -98,7 +106,8 @@ class RPGGenerator extends AbstractGenerator {
                         attributesbool = true
                     }
 				Death:
-					System.out.println("Do this")
+					//System.out.println("Do this")
+					System.out.println(d.req.re)
 					/* 
 					'''
 					public class DeathCondition {
@@ -283,6 +292,50 @@ class RPGGenerator extends AbstractGenerator {
         «ENDFOR»
         }
         '''
+    }
+    
+    def CharSequence generateEffect(Moves moves){
+    '''
+    	«FOR move: moves.move»
+    		«FOR effect: move.effect»
+    			«FOR c: effect.rule.carl»
+    				«c»
+    				«IF c.attribute instanceof NameAttribute»
+    					«c.attribute.attribute.name»
+    				«ELSEIF c.change instanceof Sum»
+    					«c.change.exp + 'wa'» 
+    				«ELSEIF c.zelf instanceof SelfTargeting»
+    					'self.'
+    				«ELSEIF c.equal instanceof Set»
+    					'='
+    				«ELSE»
+    					'fuck_me'
+    				«ENDIF»    				
+    			«ENDFOR»
+				«IF effect.rule.or instanceof Proposition»
+    				«effect.rule.or.logic»
+    			«ELSE» oof
+    			«ENDIF»
+    		«ENDFOR»
+    	«ENDFOR»
+    '''
+    }
+ 
+    
+    def dispatch CharSequence effectS(NameAttribute attribute){
+    	'''«attribute.attribute.name»'''
+    }
+    
+    def dispatch CharSequence effectS(Sum sum){
+    	'''«sum.exp»'''
+    }
+    
+    def dispatch CharSequence effectS(SelfTargeting selff){
+    	'''«selff»'''
+    }
+    
+    def dispatch CharSequence effectS(Set eq){
+    	'''='''
     }
 	
 	def generateEntities(IFileSystemAccess2 fsa, Entities entities){

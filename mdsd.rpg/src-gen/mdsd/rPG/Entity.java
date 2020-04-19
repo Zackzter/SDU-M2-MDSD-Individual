@@ -85,15 +85,25 @@ public interface Entity extends EObject
   EList<AltAttribute> getAtt();
 
   /**
-   * Returns the value of the '<em><b>EMoves</b></em>' containment reference list.
-   * The list contents are of type {@link mdsd.rPG.EntityMoves}.
+   * Returns the value of the '<em><b>EMoves</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>EMoves</em>' containment reference list.
+   * @return the value of the '<em>EMoves</em>' containment reference.
+   * @see #setEMoves(EntityMoves)
    * @see mdsd.rPG.RPGPackage#getEntity_EMoves()
    * @model containment="true"
    * @generated
    */
-  EList<EntityMoves> getEMoves();
+  EntityMoves getEMoves();
+
+  /**
+   * Sets the value of the '{@link mdsd.rPG.Entity#getEMoves <em>EMoves</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>EMoves</em>' containment reference.
+   * @see #getEMoves()
+   * @generated
+   */
+  void setEMoves(EntityMoves value);
 
 } // Entity

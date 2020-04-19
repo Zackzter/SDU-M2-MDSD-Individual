@@ -186,8 +186,21 @@ public class RPGSwitch<T> extends Switch<T>
       {
         Rule rule = (Rule)theEObject;
         T result = caseRule(rule);
-        if (result == null) result = caseEffect(rule);
         if (result == null) result = caseAttributeValues(rule);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.CARL:
+      {
+        Carl carl = (Carl)theEObject;
+        T result = caseCarl(carl);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.SET:
+      {
+        Set set = (Set)theEObject;
+        T result = caseSet(set);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -264,9 +277,6 @@ public class RPGSwitch<T> extends Switch<T>
       {
         Proposition proposition = (Proposition)theEObject;
         T result = caseProposition(proposition);
-        if (result == null) result = caseRule(proposition);
-        if (result == null) result = caseEffect(proposition);
-        if (result == null) result = caseAttributeValues(proposition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -275,9 +285,6 @@ public class RPGSwitch<T> extends Switch<T>
         NumberComparing numberComparing = (NumberComparing)theEObject;
         T result = caseNumberComparing(numberComparing);
         if (result == null) result = caseProposition(numberComparing);
-        if (result == null) result = caseRule(numberComparing);
-        if (result == null) result = caseEffect(numberComparing);
-        if (result == null) result = caseAttributeValues(numberComparing);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -353,14 +360,19 @@ public class RPGSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RPGPackage.EQUAL:
+      {
+        Equal equal = (Equal)theEObject;
+        T result = caseEqual(equal);
+        if (result == null) result = caseSet(equal);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RPGPackage.OR:
       {
         Or or = (Or)theEObject;
         T result = caseOr(or);
         if (result == null) result = caseProposition(or);
-        if (result == null) result = caseRule(or);
-        if (result == null) result = caseEffect(or);
-        if (result == null) result = caseAttributeValues(or);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -369,9 +381,6 @@ public class RPGSwitch<T> extends Switch<T>
         And and = (And)theEObject;
         T result = caseAnd(and);
         if (result == null) result = caseProposition(and);
-        if (result == null) result = caseRule(and);
-        if (result == null) result = caseEffect(and);
-        if (result == null) result = caseAttributeValues(and);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -718,6 +727,38 @@ public class RPGSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Carl</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Carl</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCarl(Carl object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Set</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Set</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSet(Set object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Entities</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1017,6 +1058,22 @@ public class RPGSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseFloatNum(FloatNum object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Equal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Equal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEqual(Equal object)
   {
     return null;
   }

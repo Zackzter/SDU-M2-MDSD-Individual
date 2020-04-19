@@ -11,10 +11,12 @@ import mdsd.rPG.Attribute;
 import mdsd.rPG.Attributes;
 import mdsd.rPG.Bigger;
 import mdsd.rPG.BiggerEq;
+import mdsd.rPG.Carl;
 import mdsd.rPG.Comparator;
 import mdsd.rPG.Death;
 import mdsd.rPG.Declaration;
 import mdsd.rPG.Div;
+import mdsd.rPG.Effect;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
 import mdsd.rPG.Eq;
@@ -31,6 +33,8 @@ import mdsd.rPG.Or;
 import mdsd.rPG.Proposition;
 import mdsd.rPG.Relations;
 import mdsd.rPG.Require;
+import mdsd.rPG.SelfTargeting;
+import mdsd.rPG.Set;
 import mdsd.rPG.Smaller;
 import mdsd.rPG.SmallerEq;
 import mdsd.rPG.Sub;
@@ -39,6 +43,7 @@ import mdsd.rPG.SystemRPG;
 import mdsd.rPG.Teams;
 import mdsd.rPG.Type;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
@@ -95,6 +100,7 @@ public class RPGGenerator extends AbstractGenerator {
             _matched=true;
             if ((!movesbool)) {
               this.generateMoves(fsa, ((Moves)d));
+              fsa.generateFile("Effect.java", this.generateEffect(((Moves)d)));
               movesbool = true;
             }
           }
@@ -130,7 +136,7 @@ public class RPGGenerator extends AbstractGenerator {
         if (!_matched) {
           if (d instanceof Death) {
             _matched=true;
-            System.out.println("Do this");
+            System.out.println(this.re(((Death)d).getReq()));
           }
         }
         if (!_matched) {
@@ -538,6 +544,104 @@ public class RPGGenerator extends AbstractGenerator {
     }
     _builder.append("}");
     _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence generateEffect(final Moves moves) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EList<Move> _move = moves.getMove();
+      for(final Move move : _move) {
+        {
+          EList<Effect> _effect = move.getEffect();
+          for(final Effect effect : _effect) {
+            {
+              EList<Carl> _carl = effect.getRule().getCarl();
+              for(final Carl c : _carl) {
+                _builder.append("    \t\t\t");
+                _builder.append(c, "    \t\t\t");
+                _builder.newLineIfNotEmpty();
+                {
+                  NameAttribute _attribute = c.getAttribute();
+                  if ((_attribute instanceof NameAttribute)) {
+                    _builder.append("    \t\t\t");
+                    String _name = c.getAttribute().getAttribute().getName();
+                    _builder.append(_name, "    \t\t\t");
+                    _builder.newLineIfNotEmpty();
+                  } else {
+                    Sum _change = c.getChange();
+                    if ((_change instanceof Sum)) {
+                      _builder.append("    \t\t\t");
+                      CharSequence _exp = this.exp(c.getChange());
+                      String _plus = (_exp + "wa");
+                      _builder.append(_plus, "    \t\t\t");
+                      _builder.append(" ");
+                      _builder.newLineIfNotEmpty();
+                    } else {
+                      SelfTargeting _zelf = c.getZelf();
+                      if ((_zelf instanceof SelfTargeting)) {
+                        _builder.append("    \t\t\t");
+                        _builder.append("\'self.\'");
+                        _builder.newLine();
+                      } else {
+                        Set _equal = c.getEqual();
+                        if ((_equal instanceof Set)) {
+                          _builder.append("    \t\t\t");
+                          _builder.append("\'=\'");
+                          _builder.newLine();
+                        } else {
+                          _builder.append("    \t\t\t");
+                          _builder.append("\'fuck_me\'");
+                          _builder.newLine();
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            {
+              Proposition _or = effect.getRule().getOr();
+              if ((_or instanceof Proposition)) {
+                CharSequence _logic = this.logic(effect.getRule().getOr());
+                _builder.append(_logic);
+                _builder.newLineIfNotEmpty();
+                _builder.append("    \t\t\t");
+              } else {
+                _builder.append(" oof");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
+      }
+    }
+    return _builder;
+  }
+  
+  protected CharSequence _effectS(final NameAttribute attribute) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _name = attribute.getAttribute().getName();
+    _builder.append(_name);
+    return _builder;
+  }
+  
+  protected CharSequence _effectS(final Sum sum) {
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _exp = this.exp(sum);
+    _builder.append(_exp);
+    return _builder;
+  }
+  
+  protected CharSequence _effectS(final SelfTargeting selff) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(selff);
+    return _builder;
+  }
+  
+  protected CharSequence _effectS(final Set eq) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("=");
     return _builder;
   }
   
@@ -2253,6 +2357,21 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     return _builder;
+  }
+  
+  public CharSequence effectS(final EObject attribute) {
+    if (attribute instanceof NameAttribute) {
+      return _effectS((NameAttribute)attribute);
+    } else if (attribute instanceof SelfTargeting) {
+      return _effectS((SelfTargeting)attribute);
+    } else if (attribute instanceof Set) {
+      return _effectS((Set)attribute);
+    } else if (attribute instanceof Sum) {
+      return _effectS((Sum)attribute);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(attribute).toString());
+    }
   }
   
   public CharSequence logic(final Proposition x) {

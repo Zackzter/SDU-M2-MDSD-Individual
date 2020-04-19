@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.SelfTargeting#getSelf <em>Self</em>}</li>
+ *   <li>{@link mdsd.rPG.SelfTargeting#getZelf <em>Zelf</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getSelfTargeting()
@@ -24,25 +24,25 @@ import org.eclipse.emf.ecore.EObject;
 public interface SelfTargeting extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Self</b></em>' attribute.
+   * Returns the value of the '<em><b>Zelf</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Self</em>' attribute.
-   * @see #setSelf(String)
-   * @see mdsd.rPG.RPGPackage#getSelfTargeting_Self()
+   * @return the value of the '<em>Zelf</em>' attribute.
+   * @see #setZelf(String)
+   * @see mdsd.rPG.RPGPackage#getSelfTargeting_Zelf()
    * @model
    * @generated
    */
-  String getSelf();
+  String getZelf();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.SelfTargeting#getSelf <em>Self</em>}' attribute.
+   * Sets the value of the '{@link mdsd.rPG.SelfTargeting#getZelf <em>Zelf</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Self</em>' attribute.
-   * @see #getSelf()
+   * @param value the new value of the '<em>Zelf</em>' attribute.
+   * @see #getZelf()
    * @generated
    */
-  void setSelf(String value);
+  void setZelf(String value);
 
 } // SelfTargeting

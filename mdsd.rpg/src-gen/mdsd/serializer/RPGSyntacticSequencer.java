@@ -21,7 +21,6 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected RPGGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_AtomicNumber_SelfParserRuleCall_2_0_q;
-	protected AbstractElementAlias match_Rule_SelfParserRuleCall_3_0_q;
 	protected AbstractElementAlias match_Statement_LeftParenthesisKeyword_1_0_a;
 	protected AbstractElementAlias match_Statement_LeftParenthesisKeyword_1_0_p;
 	
@@ -29,7 +28,6 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (RPGGrammarAccess) access;
 		match_AtomicNumber_SelfParserRuleCall_2_0_q = new TokenAlias(false, true, grammarAccess.getAtomicNumberAccess().getSelfParserRuleCall_2_0());
-		match_Rule_SelfParserRuleCall_3_0_q = new TokenAlias(false, true, grammarAccess.getRuleAccess().getSelfParserRuleCall_3_0());
 		match_Statement_LeftParenthesisKeyword_1_0_a = new TokenAlias(true, true, grammarAccess.getStatementAccess().getLeftParenthesisKeyword_1_0());
 		match_Statement_LeftParenthesisKeyword_1_0_p = new TokenAlias(true, false, grammarAccess.getStatementAccess().getLeftParenthesisKeyword_1_0());
 	}
@@ -43,13 +41,13 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Self:
-	 * 	'self.'
+	 * 	'zelf.'
 	 * ;
 	 */
 	protected String getSelfToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
-		return "self.";
+		return "zelf.";
 	}
 	
 	@Override
@@ -60,8 +58,6 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
 			if (match_AtomicNumber_SelfParserRuleCall_2_0_q.equals(syntax))
 				emit_AtomicNumber_SelfParserRuleCall_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Rule_SelfParserRuleCall_3_0_q.equals(syntax))
-				emit_Rule_SelfParserRuleCall_3_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Statement_LeftParenthesisKeyword_1_0_a.equals(syntax))
 				emit_Statement_LeftParenthesisKeyword_1_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Statement_LeftParenthesisKeyword_1_0_p.equals(syntax))
@@ -84,32 +80,9 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Ambiguous syntax:
-	 *     Self?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     change+=Sum (ambiguity) attritbuteToSet+=[Attribute|ID]
-	 *     right=ANDcondition 'then' (ambiguity) attritbuteToSet+=[Attribute|ID]
-	 *     right=Statement 'then' (ambiguity) attritbuteToSet+=[Attribute|ID]
-	 *     right=Sum 'then' (ambiguity) attritbuteToSet+=[Attribute|ID]
-	 *     type=[Type|ID] 'then' (ambiguity) attritbuteToSet+=[Attribute|ID]
-	 */
-	protected void emit_Rule_SelfParserRuleCall_3_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Ambiguous syntax:
 	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) 'effect' 'if' (ambiguity) left=Sum
-	 *     (rule start) 'effect' 'if' (ambiguity) type=[Type|ID]
-	 *     (rule start) 'effect' 'if' (ambiguity) {And.left=}
-	 *     (rule start) 'effect' 'if' (ambiguity) {Or.left=}
-	 *     (rule start) 'if' (ambiguity) left=Sum
-	 *     (rule start) 'if' (ambiguity) type=[Type|ID]
-	 *     (rule start) 'if' (ambiguity) {And.left=}
-	 *     (rule start) 'if' (ambiguity) {Or.left=}
 	 *     (rule start) (ambiguity) left=Sum
 	 *     (rule start) (ambiguity) type=[Type|ID]
 	 *     (rule start) (ambiguity) {And.left=}

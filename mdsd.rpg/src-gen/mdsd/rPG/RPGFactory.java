@@ -168,6 +168,24 @@ public interface RPGFactory extends EFactory
   Rule createRule();
 
   /**
+   * Returns a new object of class '<em>Carl</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Carl</em>'.
+   * @generated
+   */
+  Carl createCarl();
+
+  /**
+   * Returns a new object of class '<em>Set</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Set</em>'.
+   * @generated
+   */
+  Set createSet();
+
+  /**
    * Returns a new object of class '<em>Entities</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -337,6 +355,15 @@ public interface RPGFactory extends EFactory
    * @generated
    */
   FloatNum createFloatNum();
+
+  /**
+   * Returns a new object of class '<em>Equal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Equal</em>'.
+   * @generated
+   */
+  Equal createEqual();
 
   /**
    * Returns a new object of class '<em>Or</em>'.

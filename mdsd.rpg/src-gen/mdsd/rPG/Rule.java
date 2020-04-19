@@ -3,17 +3,59 @@
  */
 package mdsd.rPG;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Rule</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link mdsd.rPG.Rule#getOr <em>Or</em>}</li>
+ *   <li>{@link mdsd.rPG.Rule#getCarl <em>Carl</em>}</li>
+ * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getRule()
  * @model
  * @generated
  */
-public interface Rule extends Effect, AttributeValues
+public interface Rule extends AttributeValues
 {
+  /**
+   * Returns the value of the '<em><b>Or</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Or</em>' containment reference.
+   * @see #setOr(Proposition)
+   * @see mdsd.rPG.RPGPackage#getRule_Or()
+   * @model containment="true"
+   * @generated
+   */
+  Proposition getOr();
+
+  /**
+   * Sets the value of the '{@link mdsd.rPG.Rule#getOr <em>Or</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Or</em>' containment reference.
+   * @see #getOr()
+   * @generated
+   */
+  void setOr(Proposition value);
+
+  /**
+   * Returns the value of the '<em><b>Carl</b></em>' containment reference list.
+   * The list contents are of type {@link mdsd.rPG.Carl}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Carl</em>' containment reference list.
+   * @see mdsd.rPG.RPGPackage#getRule_Carl()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Carl> getCarl();
+
 } // Rule

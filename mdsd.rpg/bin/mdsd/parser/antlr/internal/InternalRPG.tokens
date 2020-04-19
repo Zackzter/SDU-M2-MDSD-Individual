@@ -34,11 +34,11 @@
 'opponents'=13
 'relations'=14
 'require'=34
-'self.'=48
 'team'=31
 'teams'=30
 'then'=25
 'type'=15
+'zelf.'=48
 RULE_ANY_OTHER=10
 RULE_ID=4
 RULE_INT=5

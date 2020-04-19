@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.SelfTargetingImpl#getSelf <em>Self</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.SelfTargetingImpl#getZelf <em>Zelf</em>}</li>
  * </ul>
  *
  * @generated
@@ -29,24 +29,24 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements SelfTargeting
 {
   /**
-   * The default value of the '{@link #getSelf() <em>Self</em>}' attribute.
+   * The default value of the '{@link #getZelf() <em>Zelf</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSelf()
+   * @see #getZelf()
    * @generated
    * @ordered
    */
-  protected static final String SELF_EDEFAULT = null;
+  protected static final String ZELF_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getSelf() <em>Self</em>}' attribute.
+   * The cached value of the '{@link #getZelf() <em>Zelf</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSelf()
+   * @see #getZelf()
    * @generated
    * @ordered
    */
-  protected String self = SELF_EDEFAULT;
+  protected String zelf = ZELF_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,9 +75,9 @@ public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements S
    * @generated
    */
   @Override
-  public String getSelf()
+  public String getZelf()
   {
-    return self;
+    return zelf;
   }
 
   /**
@@ -86,12 +86,12 @@ public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements S
    * @generated
    */
   @Override
-  public void setSelf(String newSelf)
+  public void setZelf(String newZelf)
   {
-    String oldSelf = self;
-    self = newSelf;
+    String oldZelf = zelf;
+    zelf = newZelf;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.SELF_TARGETING__SELF, oldSelf, self));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.SELF_TARGETING__ZELF, oldZelf, zelf));
   }
 
   /**
@@ -104,8 +104,8 @@ public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements S
   {
     switch (featureID)
     {
-      case RPGPackage.SELF_TARGETING__SELF:
-        return getSelf();
+      case RPGPackage.SELF_TARGETING__ZELF:
+        return getZelf();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -120,8 +120,8 @@ public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements S
   {
     switch (featureID)
     {
-      case RPGPackage.SELF_TARGETING__SELF:
-        setSelf((String)newValue);
+      case RPGPackage.SELF_TARGETING__ZELF:
+        setZelf((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +137,8 @@ public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements S
   {
     switch (featureID)
     {
-      case RPGPackage.SELF_TARGETING__SELF:
-        setSelf(SELF_EDEFAULT);
+      case RPGPackage.SELF_TARGETING__ZELF:
+        setZelf(ZELF_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -154,8 +154,8 @@ public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements S
   {
     switch (featureID)
     {
-      case RPGPackage.SELF_TARGETING__SELF:
-        return SELF_EDEFAULT == null ? self != null : !SELF_EDEFAULT.equals(self);
+      case RPGPackage.SELF_TARGETING__ZELF:
+        return ZELF_EDEFAULT == null ? zelf != null : !ZELF_EDEFAULT.equals(zelf);
     }
     return super.eIsSet(featureID);
   }
@@ -171,8 +171,8 @@ public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements S
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (self: ");
-    result.append(self);
+    result.append(" (zelf: ");
+    result.append(zelf);
     result.append(')');
     return result.toString();
   }

@@ -81,6 +81,8 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.ATTRIBUTE_VALUES: return createAttributeValues();
       case RPGPackage.ALT_ATTRIBUTE: return createAltAttribute();
       case RPGPackage.RULE: return createRule();
+      case RPGPackage.CARL: return createCarl();
+      case RPGPackage.SET: return createSet();
       case RPGPackage.ENTITIES: return createEntities();
       case RPGPackage.DEATH: return createDeath();
       case RPGPackage.ENTITY: return createEntity();
@@ -100,6 +102,7 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.SELF_TARGETING: return createSelfTargeting();
       case RPGPackage.INT_NUM: return createIntNum();
       case RPGPackage.FLOAT_NUM: return createFloatNum();
+      case RPGPackage.EQUAL: return createEqual();
       case RPGPackage.OR: return createOr();
       case RPGPackage.AND: return createAnd();
       case RPGPackage.SMALLER: return createSmaller();
@@ -307,6 +310,30 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     RuleImpl rule = new RuleImpl();
     return rule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Carl createCarl()
+  {
+    CarlImpl carl = new CarlImpl();
+    return carl;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Set createSet()
+  {
+    SetImpl set = new SetImpl();
+    return set;
   }
 
   /**
@@ -535,6 +562,18 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     FloatNumImpl floatNum = new FloatNumImpl();
     return floatNum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Equal createEqual()
+  {
+    EqualImpl equal = new EqualImpl();
+    return equal;
   }
 
   /**

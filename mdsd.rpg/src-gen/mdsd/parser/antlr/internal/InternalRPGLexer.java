@@ -847,10 +847,10 @@ public class InternalRPGLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRPG.g:48:7: ( 'self.' )
-            // InternalRPG.g:48:9: 'self.'
+            // InternalRPG.g:48:7: ( 'zelf.' )
+            // InternalRPG.g:48:9: 'zelf.'
             {
-            match("self."); 
+            match("zelf."); 
 
 
             }
@@ -930,10 +930,10 @@ public class InternalRPGLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRPG.g:2257:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalRPG.g:2257:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalRPG.g:2407:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalRPG.g:2407:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalRPG.g:2257:11: ( '^' )?
+            // InternalRPG.g:2407:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -942,7 +942,7 @@ public class InternalRPGLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalRPG.g:2257:11: '^'
+                    // InternalRPG.g:2407:11: '^'
                     {
                     match('^'); 
 
@@ -960,7 +960,7 @@ public class InternalRPGLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalRPG.g:2257:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalRPG.g:2407:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -1009,10 +1009,10 @@ public class InternalRPGLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRPG.g:2259:10: ( ( '0' .. '9' )+ )
-            // InternalRPG.g:2259:12: ( '0' .. '9' )+
+            // InternalRPG.g:2409:10: ( ( '0' .. '9' )+ )
+            // InternalRPG.g:2409:12: ( '0' .. '9' )+
             {
-            // InternalRPG.g:2259:12: ( '0' .. '9' )+
+            // InternalRPG.g:2409:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -1026,7 +1026,7 @@ public class InternalRPGLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalRPG.g:2259:13: '0' .. '9'
+            	    // InternalRPG.g:2409:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1058,10 +1058,10 @@ public class InternalRPGLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRPG.g:2261:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalRPG.g:2261:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalRPG.g:2411:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalRPG.g:2411:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalRPG.g:2261:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalRPG.g:2411:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1079,10 +1079,10 @@ public class InternalRPGLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalRPG.g:2261:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalRPG.g:2411:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalRPG.g:2261:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalRPG.g:2411:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -1098,7 +1098,7 @@ public class InternalRPGLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalRPG.g:2261:21: '\\\\' .
+                    	    // InternalRPG.g:2411:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1106,7 +1106,7 @@ public class InternalRPGLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalRPG.g:2261:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalRPG.g:2411:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1131,10 +1131,10 @@ public class InternalRPGLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalRPG.g:2261:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalRPG.g:2411:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalRPG.g:2261:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalRPG.g:2411:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -1150,7 +1150,7 @@ public class InternalRPGLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalRPG.g:2261:54: '\\\\' .
+                    	    // InternalRPG.g:2411:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1158,7 +1158,7 @@ public class InternalRPGLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalRPG.g:2261:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalRPG.g:2411:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1201,12 +1201,12 @@ public class InternalRPGLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRPG.g:2263:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalRPG.g:2263:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalRPG.g:2413:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalRPG.g:2413:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalRPG.g:2263:24: ( options {greedy=false; } : . )*
+            // InternalRPG.g:2413:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -1231,7 +1231,7 @@ public class InternalRPGLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalRPG.g:2263:52: .
+            	    // InternalRPG.g:2413:52: .
             	    {
             	    matchAny(); 
 
@@ -1261,12 +1261,12 @@ public class InternalRPGLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRPG.g:2265:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalRPG.g:2265:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalRPG.g:2415:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalRPG.g:2415:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalRPG.g:2265:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalRPG.g:2415:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1279,7 +1279,7 @@ public class InternalRPGLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalRPG.g:2265:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalRPG.g:2415:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1299,7 +1299,7 @@ public class InternalRPGLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalRPG.g:2265:40: ( ( '\\r' )? '\\n' )?
+            // InternalRPG.g:2415:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1308,9 +1308,9 @@ public class InternalRPGLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalRPG.g:2265:41: ( '\\r' )? '\\n'
+                    // InternalRPG.g:2415:41: ( '\\r' )? '\\n'
                     {
-                    // InternalRPG.g:2265:41: ( '\\r' )?
+                    // InternalRPG.g:2415:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1319,7 +1319,7 @@ public class InternalRPGLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalRPG.g:2265:41: '\\r'
+                            // InternalRPG.g:2415:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1351,10 +1351,10 @@ public class InternalRPGLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRPG.g:2267:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalRPG.g:2267:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalRPG.g:2417:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalRPG.g:2417:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalRPG.g:2267:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalRPG.g:2417:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1408,8 +1408,8 @@ public class InternalRPGLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalRPG.g:2269:16: ( . )
-            // InternalRPG.g:2269:18: .
+            // InternalRPG.g:2419:16: ( . )
+            // InternalRPG.g:2419:18: .
             {
             matchAny(); 
 
@@ -1784,7 +1784,7 @@ public class InternalRPGLexer extends Lexer {
     static final String DFA12_specialS =
         "\1\2\37\uffff\1\1\1\0\u00a4\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\43\2\42\2\43\1\42\22\43\1\42\1\24\1\40\4\43\1\41\1\21\1\22\1\27\1\25\1\6\1\26\1\32\1\30\12\37\2\43\1\7\1\14\1\23\2\43\1\20\4\36\1\33\2\36\1\34\5\36\1\17\13\36\3\43\1\35\1\36\1\43\1\11\1\16\1\36\1\15\1\12\1\36\1\1\1\36\1\13\2\36\1\2\1\10\1\36\1\3\2\36\1\4\1\31\1\5\6\36\uff85\43",
+            "\11\43\2\42\2\43\1\42\22\43\1\42\1\24\1\40\4\43\1\41\1\21\1\22\1\27\1\25\1\6\1\26\1\32\1\30\12\37\2\43\1\7\1\14\1\23\2\43\1\20\4\36\1\33\2\36\1\34\5\36\1\17\13\36\3\43\1\35\1\36\1\43\1\11\1\16\1\36\1\15\1\12\1\36\1\1\1\36\1\13\2\36\1\2\1\10\1\36\1\3\2\36\1\4\1\36\1\5\5\36\1\31\uff85\43",
             "\1\44",
             "\1\46",
             "\1\47",
@@ -2092,7 +2092,7 @@ public class InternalRPGLexer extends Lexer {
 
                         else if ( (LA12_0=='/') ) {s = 24;}
 
-                        else if ( (LA12_0=='s') ) {s = 25;}
+                        else if ( (LA12_0=='z') ) {s = 25;}
 
                         else if ( (LA12_0=='.') ) {s = 26;}
 
@@ -2102,7 +2102,7 @@ public class InternalRPGLexer extends Lexer {
 
                         else if ( (LA12_0=='^') ) {s = 29;}
 
-                        else if ( ((LA12_0>='B' && LA12_0<='E')||(LA12_0>='G' && LA12_0<='H')||(LA12_0>='J' && LA12_0<='N')||(LA12_0>='P' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='c'||LA12_0=='f'||LA12_0=='h'||(LA12_0>='j' && LA12_0<='k')||LA12_0=='n'||(LA12_0>='p' && LA12_0<='q')||(LA12_0>='u' && LA12_0<='z')) ) {s = 30;}
+                        else if ( ((LA12_0>='B' && LA12_0<='E')||(LA12_0>='G' && LA12_0<='H')||(LA12_0>='J' && LA12_0<='N')||(LA12_0>='P' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='c'||LA12_0=='f'||LA12_0=='h'||(LA12_0>='j' && LA12_0<='k')||LA12_0=='n'||(LA12_0>='p' && LA12_0<='q')||LA12_0=='s'||(LA12_0>='u' && LA12_0<='y')) ) {s = 30;}
 
                         else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 31;}
 
