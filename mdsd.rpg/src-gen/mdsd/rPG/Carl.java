@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.Carl#getAttribute <em>Attribute</em>}</li>
- *   <li>{@link mdsd.rPG.Carl#getEqual <em>Equal</em>}</li>
  *   <li>{@link mdsd.rPG.Carl#getChange <em>Change</em>}</li>
  * </ul>
  *
@@ -46,28 +45,6 @@ public interface Carl extends EObject
    * @generated
    */
   void setAttribute(NameAttribute value);
-
-  /**
-   * Returns the value of the '<em><b>Equal</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Equal</em>' containment reference.
-   * @see #setEqual(Set)
-   * @see mdsd.rPG.RPGPackage#getCarl_Equal()
-   * @model containment="true"
-   * @generated
-   */
-  Set getEqual();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Carl#getEqual <em>Equal</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Equal</em>' containment reference.
-   * @see #getEqual()
-   * @generated
-   */
-  void setEqual(Set value);
 
   /**
    * Returns the value of the '<em><b>Change</b></em>' containment reference.

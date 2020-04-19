@@ -70,6 +70,7 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.ENTITY_ATTRIBUTES: return createEntityAttributes();
       case RPGPackage.MOVE_ATTRIBUTES: return createMoveAttributes();
       case RPGPackage.ATTRIBUTES: return createAttributes();
+      case RPGPackage.ATTRIBUTE: return createAttribute();
       case RPGPackage.LOCATIONS: return createLocations();
       case RPGPackage.LOC: return createLoc();
       case RPGPackage.RELATIONS: return createRelations();
@@ -78,7 +79,6 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.MOVES: return createMoves();
       case RPGPackage.MOVE: return createMove();
       case RPGPackage.ETYPE: return createEType();
-      case RPGPackage.ATTRIBUTE: return createAttribute();
       case RPGPackage.EFFECT: return createEffect();
       case RPGPackage.ATTRIBUTE_VALUES: return createAttributeValues();
       case RPGPackage.ALT_ATTRIBUTE: return createAltAttribute();
@@ -188,6 +188,18 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
+  public Attribute createAttribute()
+  {
+    AttributeImpl attribute = new AttributeImpl();
+    return attribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Locations createLocations()
   {
     LocationsImpl locations = new LocationsImpl();
@@ -276,18 +288,6 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     ETypeImpl eType = new ETypeImpl();
     return eType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Attribute createAttribute()
-  {
-    AttributeImpl attribute = new AttributeImpl();
-    return attribute;
   }
 
   /**
