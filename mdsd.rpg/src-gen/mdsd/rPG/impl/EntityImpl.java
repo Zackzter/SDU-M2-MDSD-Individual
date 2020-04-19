@@ -84,14 +84,14 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
   protected EList<AltAttribute> att;
 
   /**
-   * The cached value of the '{@link #getEMoves() <em>EMoves</em>}' containment reference list.
+   * The cached value of the '{@link #getEMoves() <em>EMoves</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getEMoves()
    * @generated
    * @ordered
    */
-  protected EList<EntityMoves> eMoves;
+  protected EntityMoves eMoves;
 
   /**
    * <!-- begin-user-doc -->
@@ -210,13 +210,48 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
    * @generated
    */
   @Override
-  public EList<EntityMoves> getEMoves()
+  public EntityMoves getEMoves()
   {
-    if (eMoves == null)
-    {
-      eMoves = new EObjectContainmentEList<EntityMoves>(EntityMoves.class, this, RPGPackage.ENTITY__EMOVES);
-    }
     return eMoves;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetEMoves(EntityMoves newEMoves, NotificationChain msgs)
+  {
+    EntityMoves oldEMoves = eMoves;
+    eMoves = newEMoves;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.ENTITY__EMOVES, oldEMoves, newEMoves);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setEMoves(EntityMoves newEMoves)
+  {
+    if (newEMoves != eMoves)
+    {
+      NotificationChain msgs = null;
+      if (eMoves != null)
+        msgs = ((InternalEObject)eMoves).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.ENTITY__EMOVES, null, msgs);
+      if (newEMoves != null)
+        msgs = ((InternalEObject)newEMoves).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.ENTITY__EMOVES, null, msgs);
+      msgs = basicSetEMoves(newEMoves, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.ENTITY__EMOVES, newEMoves, newEMoves));
   }
 
   /**
@@ -234,7 +269,7 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
       case RPGPackage.ENTITY__ATT:
         return ((InternalEList<?>)getAtt()).basicRemove(otherEnd, msgs);
       case RPGPackage.ENTITY__EMOVES:
-        return ((InternalEList<?>)getEMoves()).basicRemove(otherEnd, msgs);
+        return basicSetEMoves(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -283,8 +318,7 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
         getAtt().addAll((Collection<? extends AltAttribute>)newValue);
         return;
       case RPGPackage.ENTITY__EMOVES:
-        getEMoves().clear();
-        getEMoves().addAll((Collection<? extends EntityMoves>)newValue);
+        setEMoves((EntityMoves)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -310,7 +344,7 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
         getAtt().clear();
         return;
       case RPGPackage.ENTITY__EMOVES:
-        getEMoves().clear();
+        setEMoves((EntityMoves)null);
         return;
     }
     super.eUnset(featureID);
@@ -333,7 +367,7 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
       case RPGPackage.ENTITY__ATT:
         return att != null && !att.isEmpty();
       case RPGPackage.ENTITY__EMOVES:
-        return eMoves != null && !eMoves.isEmpty();
+        return eMoves != null;
     }
     return super.eIsSet(featureID);
   }

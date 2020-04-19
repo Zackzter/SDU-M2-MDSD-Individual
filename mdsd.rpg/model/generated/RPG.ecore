@@ -84,8 +84,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="att" upperBound="-1" eType="#//AltAttribute"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eMoves" upperBound="-1"
-        eType="#//EntityMoves" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eMoves" eType="#//EntityMoves"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EntityMoves">
     <eStructuralFeatures xsi:type="ecore:EReference" name="move" unique="false" upperBound="-1"
@@ -99,8 +99,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Team">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
-        eType="#//Members" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" eType="#//Members"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Members">
     <eStructuralFeatures xsi:type="ecore:EReference" name="entity" unique="false"

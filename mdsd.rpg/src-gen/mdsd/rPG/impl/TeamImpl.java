@@ -3,8 +3,6 @@
  */
 package mdsd.rPG.impl;
 
-import java.util.Collection;
-
 import mdsd.rPG.Members;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Team;
@@ -12,16 +10,11 @@ import mdsd.rPG.Team;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,14 +53,14 @@ public class TeamImpl extends MinimalEObjectImpl.Container implements Team
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
+   * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getMembers()
    * @generated
    * @ordered
    */
-  protected EList<Members> members;
+  protected Members members;
 
   /**
    * <!-- begin-user-doc -->
@@ -121,13 +114,48 @@ public class TeamImpl extends MinimalEObjectImpl.Container implements Team
    * @generated
    */
   @Override
-  public EList<Members> getMembers()
+  public Members getMembers()
   {
-    if (members == null)
-    {
-      members = new EObjectContainmentEList<Members>(Members.class, this, RPGPackage.TEAM__MEMBERS);
-    }
     return members;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetMembers(Members newMembers, NotificationChain msgs)
+  {
+    Members oldMembers = members;
+    members = newMembers;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.TEAM__MEMBERS, oldMembers, newMembers);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setMembers(Members newMembers)
+  {
+    if (newMembers != members)
+    {
+      NotificationChain msgs = null;
+      if (members != null)
+        msgs = ((InternalEObject)members).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.TEAM__MEMBERS, null, msgs);
+      if (newMembers != null)
+        msgs = ((InternalEObject)newMembers).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.TEAM__MEMBERS, null, msgs);
+      msgs = basicSetMembers(newMembers, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.TEAM__MEMBERS, newMembers, newMembers));
   }
 
   /**
@@ -141,7 +169,7 @@ public class TeamImpl extends MinimalEObjectImpl.Container implements Team
     switch (featureID)
     {
       case RPGPackage.TEAM__MEMBERS:
-        return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
+        return basicSetMembers(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -169,7 +197,6 @@ public class TeamImpl extends MinimalEObjectImpl.Container implements Team
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -179,8 +206,7 @@ public class TeamImpl extends MinimalEObjectImpl.Container implements Team
         setName((String)newValue);
         return;
       case RPGPackage.TEAM__MEMBERS:
-        getMembers().clear();
-        getMembers().addAll((Collection<? extends Members>)newValue);
+        setMembers((Members)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -200,7 +226,7 @@ public class TeamImpl extends MinimalEObjectImpl.Container implements Team
         setName(NAME_EDEFAULT);
         return;
       case RPGPackage.TEAM__MEMBERS:
-        getMembers().clear();
+        setMembers((Members)null);
         return;
     }
     super.eUnset(featureID);
@@ -219,7 +245,7 @@ public class TeamImpl extends MinimalEObjectImpl.Container implements Team
       case RPGPackage.TEAM__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case RPGPackage.TEAM__MEMBERS:
-        return members != null && !members.isEmpty();
+        return members != null;
     }
     return super.eIsSet(featureID);
   }

@@ -1205,7 +1205,7 @@ ruleEntity returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getEntityRule());
 					}
-					add(
+					set(
 						$current,
 						"eMoves",
 						lv_eMoves_4_0,
@@ -1213,7 +1213,7 @@ ruleEntity returns [EObject current=null]
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)*
+		)
 	)
 ;
 
@@ -1372,7 +1372,7 @@ ruleTeam returns [EObject current=null]
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTeamRule());
 					}
-					add(
+					set(
 						$current,
 						"members",
 						lv_members_2_0,
@@ -1380,7 +1380,7 @@ ruleTeam returns [EObject current=null]
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)+
+		)
 	)
 ;
 

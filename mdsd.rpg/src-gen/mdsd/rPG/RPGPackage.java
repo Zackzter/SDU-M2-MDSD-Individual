@@ -707,7 +707,7 @@ public interface RPGPackage extends EPackage
   int ENTITY__ATT = 2;
 
   /**
-   * The feature id for the '<em><b>EMoves</b></em>' containment reference list.
+   * The feature id for the '<em><b>EMoves</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -809,7 +809,7 @@ public interface RPGPackage extends EPackage
   int TEAM__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
+   * The feature id for the '<em><b>Members</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2284,10 +2284,10 @@ public interface RPGPackage extends EPackage
   EReference getEntity_Att();
 
   /**
-   * Returns the meta object for the containment reference list '{@link mdsd.rPG.Entity#getEMoves <em>EMoves</em>}'.
+   * Returns the meta object for the containment reference '{@link mdsd.rPG.Entity#getEMoves <em>EMoves</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>EMoves</em>'.
+   * @return the meta object for the containment reference '<em>EMoves</em>'.
    * @see mdsd.rPG.Entity#getEMoves()
    * @see #getEntity()
    * @generated
@@ -2369,10 +2369,10 @@ public interface RPGPackage extends EPackage
   EAttribute getTeam_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link mdsd.rPG.Team#getMembers <em>Members</em>}'.
+   * Returns the meta object for the containment reference '{@link mdsd.rPG.Team#getMembers <em>Members</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Members</em>'.
+   * @return the meta object for the containment reference '<em>Members</em>'.
    * @see mdsd.rPG.Team#getMembers()
    * @see #getTeam()
    * @generated
@@ -3377,7 +3377,7 @@ public interface RPGPackage extends EPackage
     EReference ENTITY__ATT = eINSTANCE.getEntity_Att();
 
     /**
-     * The meta object literal for the '<em><b>EMoves</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>EMoves</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -3447,7 +3447,7 @@ public interface RPGPackage extends EPackage
     EAttribute TEAM__NAME = eINSTANCE.getTeam_Name();
 
     /**
-     * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Members</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated

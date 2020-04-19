@@ -6,7 +6,9 @@ package mdsd.generator;
 import com.google.common.collect.Iterators;
 import java.util.Arrays;
 import mdsd.rPG.Add;
+import mdsd.rPG.AltAttribute;
 import mdsd.rPG.And;
+import mdsd.rPG.AtomicNumber;
 import mdsd.rPG.Attribute;
 import mdsd.rPG.Attributes;
 import mdsd.rPG.Bigger;
@@ -36,6 +38,7 @@ import mdsd.rPG.SmallerEq;
 import mdsd.rPG.Sub;
 import mdsd.rPG.Sum;
 import mdsd.rPG.SystemRPG;
+import mdsd.rPG.Team;
 import mdsd.rPG.Teams;
 import mdsd.rPG.Type;
 import org.eclipse.emf.common.util.EList;
@@ -58,91 +61,90 @@ public class RPGGenerator extends AbstractGenerator {
     this.god(mathLul, fsa);
   }
   
-  public CharSequence god(final SystemRPG thing, final IFileSystemAccess2 fsa) {
-    CharSequence _xblockexpression = null;
-    {
-      boolean locationbool = false;
-      boolean relationbool = false;
-      boolean movesbool = false;
-      boolean entitiesbool = false;
-      boolean teamsbool = false;
-      boolean attributesbool = false;
-      boolean deathbool = false;
-      String _name = thing.getName();
-      final String classFileName = (_name + ".java");
-      fsa.generateFile(classFileName, this.generateGamePOG(thing));
-      EList<Declaration> _declarations = thing.getDeclarations();
-      for (final Declaration d : _declarations) {
-        boolean _matched = false;
-        if (d instanceof Locations) {
-          _matched=true;
-          if ((!locationbool)) {
-            fsa.generateFile("Location.java", this.generateLocation(((Locations)d)));
-            locationbool = true;
-          }
-        }
-        if (!_matched) {
-          if (d instanceof Relations) {
-            _matched=true;
-            if ((!relationbool)) {
-              fsa.generateFile("TypeEnum.java", this.generateTypeEnum(((Relations)d)));
-              relationbool = true;
-            }
-          }
-        }
-        if (!_matched) {
-          if (d instanceof Moves) {
-            _matched=true;
-            if ((!movesbool)) {
-              this.generateMoves(fsa, ((Moves)d));
-              movesbool = true;
-            }
-          }
-        }
-        if (!_matched) {
-          if (d instanceof Entities) {
-            _matched=true;
-            if ((!entitiesbool)) {
-              this.generateEntities(fsa, ((Entities)d));
-              entitiesbool = true;
-            }
-          }
-        }
-        if (!_matched) {
-          if (d instanceof Teams) {
-            _matched=true;
-            if ((!teamsbool)) {
-              fsa.generateFile("Team.java", this.generateTeam(((Teams)d)));
-              teamsbool = true;
-            }
-          }
-        }
-        if (!_matched) {
-          if (d instanceof Attributes) {
-            _matched=true;
-            if ((!attributesbool)) {
-              fsa.generateFile("Attribute.java", this.generateAttribute(((Attributes)d)));
-              fsa.generateFile("AttributeEnum.java", this.generateAttributeEnum(((Attributes)d)));
-              attributesbool = true;
-            }
-          }
-        }
-        if (!_matched) {
-          if (d instanceof Death) {
-            _matched=true;
-            System.out.println("Do this");
-          }
-        }
-        if (!_matched) {
-          System.out.println("reported");
+  public void god(final SystemRPG thing, final IFileSystemAccess2 fsa) {
+    String gamefile = "";
+    boolean locationbool = false;
+    boolean relationbool = false;
+    boolean movesbool = false;
+    boolean entitiesbool = false;
+    boolean teamsbool = false;
+    boolean attributesbool = false;
+    boolean deathbool = false;
+    String _name = thing.getName();
+    final String classFileName = (_name + ".java");
+    EList<Declaration> _declarations = thing.getDeclarations();
+    for (final Declaration d : _declarations) {
+      boolean _matched = false;
+      if (d instanceof Locations) {
+        _matched=true;
+        if ((!locationbool)) {
+          fsa.generateFile("Location.java", this.generateLocation(((Locations)d)));
+          locationbool = true;
         }
       }
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("//oof  Relations | Moves | Entities | Teams | Attributes | Death;");
-      _builder.newLine();
-      _xblockexpression = _builder;
+      if (!_matched) {
+        if (d instanceof Relations) {
+          _matched=true;
+          if ((!relationbool)) {
+            fsa.generateFile("TypeEnum.java", this.generateTypeEnum(((Relations)d)));
+            relationbool = true;
+          }
+        }
+      }
+      if (!_matched) {
+        if (d instanceof Moves) {
+          _matched=true;
+          if ((!movesbool)) {
+            String _gamefile = gamefile;
+            CharSequence _generateMoves = this.generateMoves(fsa, ((Moves)d));
+            gamefile = (_gamefile + _generateMoves);
+            movesbool = true;
+          }
+        }
+      }
+      if (!_matched) {
+        if (d instanceof Entities) {
+          _matched=true;
+          if ((!entitiesbool)) {
+            String _gamefile = gamefile;
+            CharSequence _generateEntities = this.generateEntities(fsa, ((Entities)d));
+            gamefile = (_gamefile + _generateEntities);
+            entitiesbool = true;
+          }
+        }
+      }
+      if (!_matched) {
+        if (d instanceof Teams) {
+          _matched=true;
+          if ((!teamsbool)) {
+            String _gamefile = gamefile;
+            CharSequence _generateTeams = this.generateTeams(fsa, ((Teams)d));
+            gamefile = (_gamefile + _generateTeams);
+            teamsbool = true;
+          }
+        }
+      }
+      if (!_matched) {
+        if (d instanceof Attributes) {
+          _matched=true;
+          if ((!attributesbool)) {
+            fsa.generateFile("Attribute.java", this.generateAttribute(((Attributes)d)));
+            fsa.generateFile("AttributeEnum.java", this.generateAttributeEnum(((Attributes)d)));
+            attributesbool = true;
+          }
+        }
+      }
+      if (!_matched) {
+        if (d instanceof Death) {
+          _matched=true;
+          System.out.println("Do this");
+        }
+      }
+      if (!_matched) {
+        System.out.println("reported");
+      }
     }
-    return _xblockexpression;
+    fsa.generateFile(classFileName, gamefile);
   }
   
   public CharSequence generateAttribute(final Attributes attribute) {
@@ -541,10 +543,112 @@ public class RPGGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public void generateEntities(final IFileSystemAccess2 fsa, final Entities entities) {
-    fsa.generateFile("Entity.java", this.generateEntity());
-    fsa.generateFile("EntityEnum.java", this.generateEntityEnum(entities));
-    fsa.generateFile("EntityState.java", this.generateEntityState());
+  public CharSequence generateEntities(final IFileSystemAccess2 fsa, final Entities entities) {
+    CharSequence _xblockexpression = null;
+    {
+      fsa.generateFile("Entity.java", this.generateEntity());
+      fsa.generateFile("EntityEnum.java", this.generateEntityEnum(entities));
+      fsa.generateFile("EntityState.java", this.generateEntityState());
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("private List<Entity> entities;");
+      _builder.newLine();
+      _builder.append("private List<Entity> battleEntities;");
+      _builder.newLine();
+      _builder.append("private Attribute attribute;");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("private void createEntities(){");
+      _builder.newLine();
+      {
+        EList<Entity> _entity = entities.getEntity();
+        for(final Entity entity : _entity) {
+          _builder.append("\t");
+          _builder.append("Entity ");
+          String _lowerCase = entity.getName().toLowerCase();
+          _builder.append(_lowerCase, "\t");
+          _builder.append(" = new Entity();");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          String _lowerCase_1 = entity.getName().toLowerCase();
+          _builder.append(_lowerCase_1, "\t");
+          _builder.append(".setName(\"");
+          String _name = entity.getName();
+          _builder.append(_name, "\t");
+          _builder.append("\");");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          String _lowerCase_2 = entity.getName().toLowerCase();
+          _builder.append(_lowerCase_2, "\t");
+          _builder.append(".setType(");
+          String _name_1 = entity.getEType().getType().getName();
+          _builder.append(_name_1, "\t");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
+          {
+            EList<Move> _move = entity.getEMoves().getMove();
+            for(final Move move : _move) {
+              _builder.append("\t");
+              String _lowerCase_3 = entity.getName().toLowerCase();
+              _builder.append(_lowerCase_3, "\t");
+              _builder.append(".addMoveData(Move.getInstance().getMove(\"");
+              String _name_2 = move.getName();
+              _builder.append(_name_2, "\t");
+              _builder.append("\"));");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          {
+            EList<AltAttribute> _att = entity.getAtt();
+            for(final AltAttribute att : _att) {
+              {
+                Number _numberFromAtomicDab = this.getNumberFromAtomicDab(att.getAv().getAn());
+                if ((_numberFromAtomicDab instanceof Integer)) {
+                  _builder.append("\t");
+                  String _lowerCase_4 = entity.getName().toLowerCase();
+                  _builder.append(_lowerCase_4, "\t");
+                  _builder.append(".addAttribute(AttributeData.createAttributeDataWithInt(\"");
+                  String _name_3 = att.getAttribute().getName();
+                  _builder.append(_name_3, "\t");
+                  _builder.append("\", ");
+                  Number _numberFromAtomicDab_1 = this.getNumberFromAtomicDab(att.getAv().getAn());
+                  _builder.append(_numberFromAtomicDab_1, "\t");
+                  _builder.append("));");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  Number _numberFromAtomicDab_2 = this.getNumberFromAtomicDab(att.getAv().getAn());
+                  if ((_numberFromAtomicDab_2 instanceof Float)) {
+                    _builder.append("\t");
+                    String _lowerCase_5 = entity.getName().toLowerCase();
+                    _builder.append(_lowerCase_5, "\t");
+                    _builder.append(".addAttribute(AttributeData.createAttributeDataWithFloat(\"");
+                    String _name_4 = att.getAttribute().getName();
+                    _builder.append(_name_4, "\t");
+                    _builder.append("\", ");
+                    Number _numberFromAtomicDab_3 = this.getNumberFromAtomicDab(att.getAv().getAn());
+                    _builder.append(_numberFromAtomicDab_3, "\t");
+                    _builder.append("));");
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+              }
+            }
+          }
+          _builder.append("\t");
+          _builder.append("entities.add(");
+          String _lowerCase_6 = entity.getName().toLowerCase();
+          _builder.append(_lowerCase_6, "\t");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _xblockexpression = _builder;
+    }
+    return _xblockexpression;
   }
   
   public CharSequence generateEntity() {
@@ -1505,6 +1609,22 @@ public class RPGGenerator extends AbstractGenerator {
     return ("_" + _name);
   }
   
+  protected Number _getNumberFromAtomicDab(final IntNum x) {
+    return Integer.valueOf(x.getValue());
+  }
+  
+  protected Number _getNumberFromAtomicDab(final FloatNum x) {
+    Float _xblockexpression = null;
+    {
+      int _i = x.getI();
+      String _plus = (Integer.valueOf(_i) + ".");
+      int _decimal = x.getDecimal();
+      final String floatstring = (_plus + Integer.valueOf(_decimal));
+      _xblockexpression = Float.valueOf(floatstring);
+    }
+    return _xblockexpression;
+  }
+  
   public CharSequence generateLocation(final Locations locations) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*;");
@@ -1655,10 +1775,62 @@ public class RPGGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public void generateMoves(final IFileSystemAccess2 fsa, final Moves moves) {
-    fsa.generateFile("Move.java", this.generateEntity());
-    fsa.generateFile("MoveEnum.java", this.generateMoveEnum(moves));
-    fsa.generateFile("EntityState.java", this.generateEntityState());
+  public CharSequence generateMoves(final IFileSystemAccess2 fsa, final Moves moves) {
+    CharSequence _xblockexpression = null;
+    {
+      fsa.generateFile("Move.java", this.generateEntity());
+      fsa.generateFile("MoveEnum.java", this.generateMoveEnum(moves));
+      fsa.generateFile("EntityState.java", this.generateEntityState());
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.newLine();
+      _builder.append("private Move moves = Move.getInstance()");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("private void addMoves(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("MoveData tempMoveData;");
+      _builder.newLine();
+      {
+        EList<Move> _move = moves.getMove();
+        for(final Move move : _move) {
+          _builder.append("\t");
+          _builder.append("tempMoveData = new MoveData();");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("tempMoveData.setMoveName(\"");
+          String _name = move.getName();
+          _builder.append(_name, "\t");
+          _builder.append("\");");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("tempMoveData.setType(\"");
+          String _name_1 = move.getEType().getType().getName();
+          _builder.append(_name_1, "\t");
+          _builder.append("\");");
+          _builder.newLineIfNotEmpty();
+          {
+            EList<AltAttribute> _att = move.getAtt();
+            for(final AltAttribute att : _att) {
+              _builder.append("\t");
+              _builder.append("tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt(\"");
+              String _name_2 = att.getAttribute().getName();
+              _builder.append(_name_2, "\t");
+              _builder.append("\", ");
+              Number _numberFromAtomicDab = this.getNumberFromAtomicDab(att.getAv().getAn());
+              _builder.append(_numberFromAtomicDab, "\t");
+              _builder.append("));");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _xblockexpression = _builder;
+    }
+    return _xblockexpression;
   }
   
   public CharSequence generateMove() {
@@ -1995,7 +2167,83 @@ public class RPGGenerator extends AbstractGenerator {
     return _xblockexpression;
   }
   
-  public CharSequence generateTeam(final Teams team) {
+  public CharSequence generateTeams(final IFileSystemAccess2 fsa, final Teams teams) {
+    CharSequence _xblockexpression = null;
+    {
+      fsa.generateFile("Team.java", this.generateTeam());
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.newLine();
+      _builder.append("private Team team = new Team();");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("private void createTeams(){");
+      _builder.newLine();
+      {
+        EList<Team> _team = teams.getTeam();
+        for(final Team team : _team) {
+          _builder.append("\t");
+          String _addTeamMemberString = this.addTeamMemberString(team);
+          _builder.append(_addTeamMemberString, "\t");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("team.addTeamMember(\"Zilver\", zyndaquil);");
+      _builder.newLine();
+      _builder.append("team.addTeamMember(\"Zilver\", zotodile);");
+      _builder.newLine();
+      _builder.append("team.addTeamMember(\"Rival\", zotodile);");
+      _builder.newLine();
+      _builder.append("team.addTeamMember(\"Rival\", zyndaquil);");
+      _builder.newLine();
+      _builder.append("team.addTeamMember(\"Red\", zotodile);");
+      _builder.newLine();
+      _builder.append("team.addTeamMember(\"Red\", zotodile);");
+      _builder.newLine();
+      _builder.newLine();
+      _xblockexpression = _builder;
+    }
+    return _xblockexpression;
+  }
+  
+  public String addTeamMemberString(final Team team) {
+    String _xblockexpression = null;
+    {
+      String _name = team.getName();
+      String _plus = (("team.addTeamMember(" + "\"") + _name);
+      String _plus_1 = (_plus + "\"");
+      String createTeamString = (_plus_1 + ", ");
+      int i = 1;
+      EList<Entity> _entity = team.getMembers().getEntity();
+      for (final Entity e : _entity) {
+        {
+          String _createTeamString = createTeamString;
+          String _name_1 = e.getName();
+          String _plus_2 = (("entities.getByNameFixThis(" + "\"") + _name_1);
+          String _plus_3 = (_plus_2 + "\"");
+          String _plus_4 = (_plus_3 + ")");
+          createTeamString = (_createTeamString + _plus_4);
+          int _size = team.getMembers().getEntity().size();
+          boolean _greaterThan = (_size > i);
+          if (_greaterThan) {
+            i++;
+            String _createTeamString_1 = createTeamString;
+            createTeamString = (_createTeamString_1 + ", ");
+          } else {
+            String _createTeamString_2 = createTeamString;
+            createTeamString = (_createTeamString_2 + ");");
+          }
+        }
+      }
+      _xblockexpression = createTeamString;
+    }
+    return _xblockexpression;
+  }
+  
+  public CharSequence generateTeam() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*;");
     _builder.newLine();
@@ -2283,6 +2531,17 @@ public class RPGGenerator extends AbstractGenerator {
       return _exp((Add)x);
     } else if (x instanceof Sub) {
       return _exp((Sub)x);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(x).toString());
+    }
+  }
+  
+  public Number getNumberFromAtomicDab(final AtomicNumber x) {
+    if (x instanceof FloatNum) {
+      return _getNumberFromAtomicDab((FloatNum)x);
+    } else if (x instanceof IntNum) {
+      return _getNumberFromAtomicDab((IntNum)x);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(x).toString());

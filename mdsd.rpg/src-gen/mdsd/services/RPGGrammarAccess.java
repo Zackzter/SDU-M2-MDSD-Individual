@@ -672,10 +672,10 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cEMovesEntityMovesParserRuleCall_4_0 = (RuleCall)cEMovesAssignment_4.eContents().get(0);
 		
 		//Entity:
-		//	'entity' name=ID eType=EType att+=AltAttribute* eMoves+=EntityMoves*;
+		//	'entity' name=ID eType=EType att+=AltAttribute* eMoves=EntityMoves;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'entity' name=ID eType=EType att+=AltAttribute* eMoves+=EntityMoves*
+		//'entity' name=ID eType=EType att+=AltAttribute* eMoves=EntityMoves
 		public Group getGroup() { return cGroup; }
 		
 		//'entity'
@@ -699,7 +699,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		//AltAttribute
 		public RuleCall getAttAltAttributeParserRuleCall_3_0() { return cAttAltAttributeParserRuleCall_3_0; }
 		
-		//eMoves+=EntityMoves*
+		//eMoves=EntityMoves
 		public Assignment getEMovesAssignment_4() { return cEMovesAssignment_4; }
 		
 		//EntityMoves
@@ -777,10 +777,10 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cMembersMembersParserRuleCall_2_0 = (RuleCall)cMembersAssignment_2.eContents().get(0);
 		
 		//Team:
-		//	'team' name=ID members+=Members+;
+		//	'team' name=ID members=Members;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'team' name=ID members+=Members+
+		//'team' name=ID members=Members
 		public Group getGroup() { return cGroup; }
 		
 		//'team'
@@ -792,7 +792,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//members+=Members+
+		//members=Members
 		public Assignment getMembersAssignment_2() { return cMembersAssignment_2; }
 		
 		//Members
@@ -1657,7 +1657,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Entity:
-	//	'entity' name=ID eType=EType att+=AltAttribute* eMoves+=EntityMoves*;
+	//	'entity' name=ID eType=EType att+=AltAttribute* eMoves=EntityMoves;
 	public EntityElements getEntityAccess() {
 		return pEntity;
 	}
@@ -1687,7 +1687,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Team:
-	//	'team' name=ID members+=Members+;
+	//	'team' name=ID members=Members;
 	public TeamElements getTeamAccess() {
 		return pTeam;
 	}

@@ -568,7 +568,7 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Entity returns Entity
 	 *
 	 * Constraint:
-	 *     (name=ID eType=EType att+=AltAttribute* eMoves+=EntityMoves*)
+	 *     (name=ID eType=EType att+=AltAttribute* eMoves=EntityMoves)
 	 */
 	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1020,10 +1020,19 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Team returns Team
 	 *
 	 * Constraint:
-	 *     (name=ID members+=Members+)
+	 *     (name=ID members=Members)
 	 */
 	protected void sequence_Team(ISerializationContext context, Team semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.TEAM__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.TEAM__NAME));
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.TEAM__MEMBERS) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.TEAM__MEMBERS));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTeamAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getTeamAccess().getMembersMembersParserRuleCall_2_0(), semanticObject.getMembers());
+		feeder.finish();
 	}
 	
 	

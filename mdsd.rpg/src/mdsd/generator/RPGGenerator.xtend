@@ -39,6 +39,8 @@ import mdsd.rPG.Declaration
 import mdsd.rPG.Relations
 import mdsd.rPG.Teams
 import mdsd.rPG.NumberComparing
+import mdsd.rPG.Team
+import mdsd.rPG.Members
 
 /**
  * Generates code from your model files on save.
@@ -55,6 +57,7 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	
 	def god(SystemRPG thing, IFileSystemAccess2 fsa){
+		var gamefile = ""
 		var locationbool = false
 		var relationbool = false
 		var movesbool = false
@@ -63,7 +66,6 @@ class RPGGenerator extends AbstractGenerator {
 		var attributesbool = false
 		var deathbool = false
 		val classFileName = thing.getName() + ".java"
-		fsa.generateFile(classFileName, thing.generateGamePOG)
 		for (Declaration d : thing.getDeclarations()){
 			switch(d){
 				Locations:
@@ -78,17 +80,17 @@ class RPGGenerator extends AbstractGenerator {
                     }
 				Moves:
 					if(!movesbool){
-						generateMoves(fsa, d)
+						gamefile += generateMoves(fsa, d)
 						movesbool = true
 					}
 				Entities:
 					if(!entitiesbool){
-						generateEntities(fsa, d)
+						gamefile += generateEntities(fsa, d)
 						entitiesbool = true
 					}
 				Teams:
 					if(!teamsbool){
-						fsa.generateFile("Team.java" , d.generateTeam)
+						gamefile += generateTeams(fsa, d)
 						teamsbool = true
 					}
 				Attributes:
@@ -113,9 +115,7 @@ class RPGGenerator extends AbstractGenerator {
 			}
 
 		}
-		'''
-		//oof  Relations | Moves | Entities | Teams | Attributes | Death;
-		'''
+		fsa.generateFile(classFileName, gamefile)
 		
 	}
 	
@@ -285,10 +285,37 @@ class RPGGenerator extends AbstractGenerator {
         '''
     }
 	
-	def generateEntities(IFileSystemAccess2 fsa, Entities entities){
+	def CharSequence generateEntities(IFileSystemAccess2 fsa, Entities entities){
 		fsa.generateFile("Entity.java", generateEntity)
 		fsa.generateFile("EntityEnum.java", entities.generateEntityEnum)
 		fsa.generateFile("EntityState.java", generateEntityState)
+		
+		'''
+		private List<Entity> entities;
+		private List<Entity> battleEntities;
+		private Attribute attribute;
+		
+		private void createEntities(){
+			«FOR entity : entities.entity»
+			Entity «entity.name.toLowerCase» = new Entity();
+			«entity.name.toLowerCase».setName("«entity.name»");
+			«entity.name.toLowerCase».setType(«entity.EType.type.name»);
+			«FOR move : entity.EMoves.move»
+			«entity.name.toLowerCase».addMoveData(Move.getInstance().getMove("«move.name»"));
+			«ENDFOR»
+			«FOR att : entity.att»
+			«IF getNumberFromAtomicDab(att.av.an) instanceof Integer»
+			«entity.name.toLowerCase».addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+			«ELSEIF getNumberFromAtomicDab(att.av.an) instanceof Float»
+			«entity.name.toLowerCase».addAttribute(AttributeData.createAttributeDataWithFloat("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+			«ENDIF»
+			«ENDFOR»
+			entities.add(«entity.name.toLowerCase»);
+			«ENDFOR»
+			
+		}
+		
+		'''
 	}
 	
 	def CharSequence generateEntity(){
@@ -634,15 +661,12 @@ class RPGGenerator extends AbstractGenerator {
 	def dispatch CharSequence logic(And x){
 		'''(«x.left.logic»&&«x.right.logic»)'''
 	}
-	
 	def dispatch CharSequence logic(NumberComparing x){
 		'''(«x.left.exp»«x.comp.generateComp»«x.right.exp»)'''
 	}
-	
 	def generateComp(Comparator op) {
 		switch op { Eq: '==' Smaller: '<' Bigger: '>' SmallerEq: '<=' BiggerEq: '>=' NEq: '!=' }
 	}
-	
 	def dispatch CharSequence exp(Add x){
 		'''(«x.left.exp»+«x.right.exp»)'''
 	}
@@ -663,6 +687,13 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	def dispatch CharSequence exp(NameAttribute x){
 		{"_"+x.attribute.name}
+	}
+	def dispatch Number getNumberFromAtomicDab(IntNum x){
+		x.value
+	}
+	def dispatch Number getNumberFromAtomicDab(FloatNum x){
+		val floatstring = x.i + "." + x.decimal
+		Float.valueOf(floatstring)
 	}
 	
 	def CharSequence generateLocation(Locations locations){
@@ -731,10 +762,31 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 	
-	def generateMoves(IFileSystemAccess2 fsa, Moves moves){
+	def CharSequence generateMoves(IFileSystemAccess2 fsa, Moves moves){
 		fsa.generateFile("Move.java", generateEntity)
 		fsa.generateFile("MoveEnum.java", moves.generateMoveEnum)
 		fsa.generateFile("EntityState.java", generateEntityState)
+		
+		
+		
+		'''
+		
+		private Move moves = Move.getInstance()
+		
+		private void addMoves(){
+			MoveData tempMoveData;
+			«FOR move : moves.move»
+			tempMoveData = new MoveData();
+			tempMoveData.setMoveName("«move.name»");
+			tempMoveData.setType("«move.EType.type.name»");
+			«FOR att : move.att»
+			tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+			«ENDFOR»
+			«ENDFOR»
+		}
+		
+		'''
+		
 	}
 	
 	def CharSequence generateMove(){
@@ -885,7 +937,47 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 	
-	def CharSequence generateTeam(Teams team){
+	def CharSequence generateTeams(IFileSystemAccess2 fsa, Teams teams){
+		fsa.generateFile("Team.java", generateTeam())
+		
+		
+		'''
+		
+		private Team team = new Team();
+		
+		private void createTeams(){
+			«FOR team : teams.team»
+			«addTeamMemberString(team)»
+			«ENDFOR»
+		}
+		
+		
+		team.addTeamMember("Zilver", zyndaquil);
+		team.addTeamMember("Zilver", zotodile);
+		team.addTeamMember("Rival", zotodile);
+		team.addTeamMember("Rival", zyndaquil);
+		team.addTeamMember("Red", zotodile);
+		team.addTeamMember("Red", zotodile);
+		
+		'''
+	}
+	
+	def String addTeamMemberString(Team team){
+		var createTeamString = "team.addTeamMember(" + '"' + team.name + '"' + ", "
+		var i = 1
+		for(Entity e : team.members.entity){
+			createTeamString += "entities.getByNameFixThis(" + '"'+ e.name + '"' + ")"
+			if(team.members.entity.size() > i){
+				i++
+				createTeamString += ", "
+			} else {
+				createTeamString += ");"
+			}
+		}
+		createTeamString
+	}
+	
+	def CharSequence generateTeam(){
 		'''
 		import java.util.*;
 		
