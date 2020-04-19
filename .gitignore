@@ -10,4 +10,6 @@ mdsd.rpg/src-gen/*
 mdsd.rpg/xtend-gen/*
 mdsd.rpg/bin/*
 mdsd.rpg/xtend-gen/*
+mdsd.rpg/model/*
+
 *.class
