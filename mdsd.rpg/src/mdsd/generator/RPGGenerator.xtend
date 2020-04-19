@@ -901,7 +901,11 @@ class RPGGenerator extends AbstractGenerator {
 			tempMoveData.setMoveName("«move.name»");
 			tempMoveData.setType("«move.EType.type.name»");
 				«FOR att : move.att»
-			tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«IF getNumberFromAtomicDab(att.av.an) instanceof Integer»
+				tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«ELSEIF getNumberFromAtomicDab(att.av.an) instanceof Float»
+				tempMoveData.addAttribute(AttributeData.createAttributeDataWithFloat("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«ENDIF»
 				«ENDFOR»
 			«ENDFOR»
 		}
@@ -1072,13 +1076,14 @@ class RPGGenerator extends AbstractGenerator {
 			«ENDFOR»
 		}
 		
-		
-		team.addTeamMember("Zilver", zyndaquil);
-		team.addTeamMember("Zilver", zotodile);
-		team.addTeamMember("Rival", zotodile);
-		team.addTeamMember("Rival", zyndaquil);
-		team.addTeamMember("Red", zotodile);
-		team.addTeamMember("Red", zotodile);
+		private Entity findEntityByName(String name){
+			for(Entity e : entities){
+				if(e.toString().equals(name){
+					return e;
+				}
+			}
+			return null;
+		}
 		
 		'''
 	}
@@ -1087,7 +1092,7 @@ class RPGGenerator extends AbstractGenerator {
 		var createTeamString = "team.addTeamMember(" + '"' + team.name + '"' + ", "
 		var i = 1
 		for(Entity e : team.members.entity){
-			createTeamString += "entities.getByNameFixThis(" + '"'+ e.name + '"' + ")"
+			createTeamString += "findEntityByName(" + '"'+ e.name + '"' + ")"
 			if(team.members.entity.size() > i){
 				i++
 				createTeamString += ", "

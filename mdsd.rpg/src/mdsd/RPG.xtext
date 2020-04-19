@@ -95,7 +95,7 @@ Death:
 ;
 
 Entity:
-	'entity' name=ID eType=EType  att+=AltAttribute* eMoves=EntityMoves
+	'entity' name=ID eType=EType att+=AltAttribute* eMoves=EntityMoves
 ;
 
 EntityMoves:

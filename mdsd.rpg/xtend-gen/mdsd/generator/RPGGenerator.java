@@ -2041,14 +2041,35 @@ public class RPGGenerator extends AbstractGenerator {
           {
             EList<AltAttribute> _att = move.getAtt();
             for(final AltAttribute att : _att) {
-              _builder.append("tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt(\"");
-              String _name_2 = att.getAttribute().getName();
-              _builder.append(_name_2);
-              _builder.append("\", ");
-              Number _numberFromAtomicDab = this.getNumberFromAtomicDab(att.getAv().getAn());
-              _builder.append(_numberFromAtomicDab);
-              _builder.append("));");
-              _builder.newLineIfNotEmpty();
+              {
+                Number _numberFromAtomicDab = this.getNumberFromAtomicDab(att.getAv().getAn());
+                if ((_numberFromAtomicDab instanceof Integer)) {
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt(\"");
+                  String _name_2 = att.getAttribute().getName();
+                  _builder.append(_name_2, "\t\t");
+                  _builder.append("\", ");
+                  Number _numberFromAtomicDab_1 = this.getNumberFromAtomicDab(att.getAv().getAn());
+                  _builder.append(_numberFromAtomicDab_1, "\t\t");
+                  _builder.append("));");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  Number _numberFromAtomicDab_2 = this.getNumberFromAtomicDab(att.getAv().getAn());
+                  if ((_numberFromAtomicDab_2 instanceof Float)) {
+                    _builder.append("\t");
+                    _builder.append("\t");
+                    _builder.append("tempMoveData.addAttribute(AttributeData.createAttributeDataWithFloat(\"");
+                    String _name_3 = att.getAttribute().getName();
+                    _builder.append(_name_3, "\t\t");
+                    _builder.append("\", ");
+                    Number _numberFromAtomicDab_3 = this.getNumberFromAtomicDab(att.getAv().getAn());
+                    _builder.append(_numberFromAtomicDab_3, "\t\t");
+                    _builder.append("));");
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
+              }
             }
           }
         }
@@ -2418,18 +2439,27 @@ public class RPGGenerator extends AbstractGenerator {
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
+      _builder.append("private Entity findEntityByName(String name){");
       _builder.newLine();
-      _builder.append("team.addTeamMember(\"Zilver\", zyndaquil);");
+      _builder.append("\t");
+      _builder.append("for(Entity e : entities){");
       _builder.newLine();
-      _builder.append("team.addTeamMember(\"Zilver\", zotodile);");
+      _builder.append("\t\t");
+      _builder.append("if(e.toString().equals(name){");
       _builder.newLine();
-      _builder.append("team.addTeamMember(\"Rival\", zotodile);");
+      _builder.append("\t\t\t");
+      _builder.append("return e;");
       _builder.newLine();
-      _builder.append("team.addTeamMember(\"Rival\", zyndaquil);");
+      _builder.append("\t\t");
+      _builder.append("}");
       _builder.newLine();
-      _builder.append("team.addTeamMember(\"Red\", zotodile);");
+      _builder.append("\t");
+      _builder.append("}");
       _builder.newLine();
-      _builder.append("team.addTeamMember(\"Red\", zotodile);");
+      _builder.append("\t");
+      _builder.append("return null;");
+      _builder.newLine();
+      _builder.append("}");
       _builder.newLine();
       _builder.newLine();
       _xblockexpression = _builder;
@@ -2450,7 +2480,7 @@ public class RPGGenerator extends AbstractGenerator {
         {
           String _createTeamString = createTeamString;
           String _name_1 = e.getName();
-          String _plus_2 = (("entities.getByNameFixThis(" + "\"") + _name_1);
+          String _plus_2 = (("findEntityByName(" + "\"") + _name_1);
           String _plus_3 = (_plus_2 + "\"");
           String _plus_4 = (_plus_3 + ")");
           createTeamString = (_createTeamString + _plus_4);
