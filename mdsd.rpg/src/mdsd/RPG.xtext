@@ -7,7 +7,19 @@ SystemRPG:
 ;
 	
 Declaration:
-	Locations | Relations | Moves | Entities | Teams | Attributes | Death
+	Locations | Relations | Moves | Entities | Teams | Death | Attributes // MoveAttributes | EntityAttributes | 
+;
+
+EntityAttributes:
+	'entity_attributes' attribute+=Attribute+
+;
+
+MoveAttributes:
+	'move_attributes' attribute+=Attribute+
+;
+
+Attributes:
+	'attributes' attribute+=Attribute+
 ;
 	
 Locations:
@@ -43,9 +55,7 @@ EType:
 	'type' type=[Type]
 ;
 
-Attributes:
-	'attributes' attribute+=Attribute+
-;
+
 
 Attribute:
 	'attribute' name=ID aVal=AttributeValues

@@ -67,6 +67,9 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
     {
       case RPGPackage.SYSTEM_RPG: return createSystemRPG();
       case RPGPackage.DECLARATION: return createDeclaration();
+      case RPGPackage.ENTITY_ATTRIBUTES: return createEntityAttributes();
+      case RPGPackage.MOVE_ATTRIBUTES: return createMoveAttributes();
+      case RPGPackage.ATTRIBUTES: return createAttributes();
       case RPGPackage.LOCATIONS: return createLocations();
       case RPGPackage.LOC: return createLoc();
       case RPGPackage.RELATIONS: return createRelations();
@@ -75,7 +78,6 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.MOVES: return createMoves();
       case RPGPackage.MOVE: return createMove();
       case RPGPackage.ETYPE: return createEType();
-      case RPGPackage.ATTRIBUTES: return createAttributes();
       case RPGPackage.ATTRIBUTE: return createAttribute();
       case RPGPackage.EFFECT: return createEffect();
       case RPGPackage.ATTRIBUTE_VALUES: return createAttributeValues();
@@ -142,6 +144,42 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     DeclarationImpl declaration = new DeclarationImpl();
     return declaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EntityAttributes createEntityAttributes()
+  {
+    EntityAttributesImpl entityAttributes = new EntityAttributesImpl();
+    return entityAttributes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public MoveAttributes createMoveAttributes()
+  {
+    MoveAttributesImpl moveAttributes = new MoveAttributesImpl();
+    return moveAttributes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Attributes createAttributes()
+  {
+    AttributesImpl attributes = new AttributesImpl();
+    return attributes;
   }
 
   /**
@@ -238,18 +276,6 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     ETypeImpl eType = new ETypeImpl();
     return eType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Attributes createAttributes()
-  {
-    AttributesImpl attributes = new AttributesImpl();
-    return attributes;
   }
 
   /**

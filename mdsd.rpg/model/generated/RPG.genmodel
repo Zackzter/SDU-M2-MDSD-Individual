@@ -11,6 +11,15 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//SystemRPG/declarations"/>
     </genClasses>
     <genClasses ecoreClass="RPG.ecore#//Declaration"/>
+    <genClasses ecoreClass="RPG.ecore#//EntityAttributes">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//EntityAttributes/attribute"/>
+    </genClasses>
+    <genClasses ecoreClass="RPG.ecore#//MoveAttributes">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//MoveAttributes/attribute"/>
+    </genClasses>
+    <genClasses ecoreClass="RPG.ecore#//Attributes">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Attributes/attribute"/>
+    </genClasses>
     <genClasses ecoreClass="RPG.ecore#//Locations">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Locations/loc"/>
     </genClasses>
@@ -43,9 +52,6 @@
     </genClasses>
     <genClasses ecoreClass="RPG.ecore#//EType">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//EType/type"/>
-    </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//Attributes">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Attributes/attribute"/>
     </genClasses>
     <genClasses ecoreClass="RPG.ecore#//Attribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RPG.ecore#//Attribute/name"/>

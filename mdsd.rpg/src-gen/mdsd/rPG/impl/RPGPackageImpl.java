@@ -22,6 +22,7 @@ import mdsd.rPG.EType;
 import mdsd.rPG.Effect;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
+import mdsd.rPG.EntityAttributes;
 import mdsd.rPG.EntityMoves;
 import mdsd.rPG.Eq;
 import mdsd.rPG.Equal;
@@ -31,6 +32,7 @@ import mdsd.rPG.Loc;
 import mdsd.rPG.Locations;
 import mdsd.rPG.Members;
 import mdsd.rPG.Move;
+import mdsd.rPG.MoveAttributes;
 import mdsd.rPG.Moves;
 import mdsd.rPG.Mult;
 import mdsd.rPG.Multiply;
@@ -90,6 +92,27 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass entityAttributesEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass moveAttributesEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass attributesEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass locationsEClass = null;
 
   /**
@@ -140,13 +163,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   private EClass eTypeEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass attributesEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -534,6 +550,72 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
+  public EClass getEntityAttributes()
+  {
+    return entityAttributesEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEntityAttributes_Attribute()
+  {
+    return (EReference)entityAttributesEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getMoveAttributes()
+  {
+    return moveAttributesEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMoveAttributes_Attribute()
+  {
+    return (EReference)moveAttributesEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getAttributes()
+  {
+    return attributesEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getAttributes_Attribute()
+  {
+    return (EReference)attributesEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getLocations()
   {
     return locationsEClass;
@@ -801,28 +883,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
   public EReference getEType_Type()
   {
     return (EReference)eTypeEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getAttributes()
-  {
-    return attributesEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getAttributes_Attribute()
-  {
-    return (EReference)attributesEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1808,6 +1868,15 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
 
     declarationEClass = createEClass(DECLARATION);
 
+    entityAttributesEClass = createEClass(ENTITY_ATTRIBUTES);
+    createEReference(entityAttributesEClass, ENTITY_ATTRIBUTES__ATTRIBUTE);
+
+    moveAttributesEClass = createEClass(MOVE_ATTRIBUTES);
+    createEReference(moveAttributesEClass, MOVE_ATTRIBUTES__ATTRIBUTE);
+
+    attributesEClass = createEClass(ATTRIBUTES);
+    createEReference(attributesEClass, ATTRIBUTES__ATTRIBUTE);
+
     locationsEClass = createEClass(LOCATIONS);
     createEReference(locationsEClass, LOCATIONS__LOC);
 
@@ -1840,9 +1909,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
 
     eTypeEClass = createEClass(ETYPE);
     createEReference(eTypeEClass, ETYPE__TYPE);
-
-    attributesEClass = createEClass(ATTRIBUTES);
-    createEReference(attributesEClass, ATTRIBUTES__ATTRIBUTE);
 
     attributeEClass = createEClass(ATTRIBUTE);
     createEAttribute(attributeEClass, ATTRIBUTE__NAME);
@@ -1999,10 +2065,10 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    attributesEClass.getESuperTypes().add(this.getDeclaration());
     locationsEClass.getESuperTypes().add(this.getDeclaration());
     relationsEClass.getESuperTypes().add(this.getDeclaration());
     movesEClass.getESuperTypes().add(this.getDeclaration());
-    attributesEClass.getESuperTypes().add(this.getDeclaration());
     ruleEClass.getESuperTypes().add(this.getAttributeValues());
     entitiesEClass.getESuperTypes().add(this.getDeclaration());
     deathEClass.getESuperTypes().add(this.getDeclaration());
@@ -2037,6 +2103,15 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
 
     initEClass(declarationEClass, Declaration.class, "Declaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(entityAttributesEClass, EntityAttributes.class, "EntityAttributes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEntityAttributes_Attribute(), this.getAttribute(), null, "attribute", null, 0, -1, EntityAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(moveAttributesEClass, MoveAttributes.class, "MoveAttributes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMoveAttributes_Attribute(), this.getAttribute(), null, "attribute", null, 0, -1, MoveAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(attributesEClass, Attributes.class, "Attributes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAttributes_Attribute(), this.getAttribute(), null, "attribute", null, 0, -1, Attributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(locationsEClass, Locations.class, "Locations", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLocations_Loc(), this.getLoc(), null, "loc", null, 0, -1, Locations.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2069,9 +2144,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
 
     initEClass(eTypeEClass, EType.class, "EType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEType_Type(), this.getType(), null, "type", null, 0, 1, EType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(attributesEClass, Attributes.class, "Attributes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getAttributes_Attribute(), this.getAttribute(), null, "attribute", null, 0, -1, Attributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

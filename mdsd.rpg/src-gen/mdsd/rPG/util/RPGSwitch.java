@@ -87,6 +87,28 @@ public class RPGSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RPGPackage.ENTITY_ATTRIBUTES:
+      {
+        EntityAttributes entityAttributes = (EntityAttributes)theEObject;
+        T result = caseEntityAttributes(entityAttributes);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.MOVE_ATTRIBUTES:
+      {
+        MoveAttributes moveAttributes = (MoveAttributes)theEObject;
+        T result = caseMoveAttributes(moveAttributes);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.ATTRIBUTES:
+      {
+        Attributes attributes = (Attributes)theEObject;
+        T result = caseAttributes(attributes);
+        if (result == null) result = caseDeclaration(attributes);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RPGPackage.LOCATIONS:
       {
         Locations locations = (Locations)theEObject;
@@ -143,14 +165,6 @@ public class RPGSwitch<T> extends Switch<T>
       {
         EType eType = (EType)theEObject;
         T result = caseEType(eType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RPGPackage.ATTRIBUTES:
-      {
-        Attributes attributes = (Attributes)theEObject;
-        T result = caseAttributes(attributes);
-        if (result == null) result = caseDeclaration(attributes);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -503,6 +517,54 @@ public class RPGSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Entity Attributes</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Entity Attributes</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEntityAttributes(EntityAttributes object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Move Attributes</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Move Attributes</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMoveAttributes(MoveAttributes object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Attributes</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Attributes</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAttributes(Attributes object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Locations</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -626,22 +688,6 @@ public class RPGSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEType(EType object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Attributes</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Attributes</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAttributes(Attributes object)
   {
     return null;
   }

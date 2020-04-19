@@ -44,6 +44,8 @@ import mdsd.rPG.Members
 import java.util.ArrayList
 import mdsd.rPG.Effect
 import java.util.List
+import mdsd.rPG.MoveAttributes
+import mdsd.rPG.EntityAttributes
 
 /**
  * Generates code from your model files on save.
@@ -152,6 +154,67 @@ class RPGGenerator extends AbstractGenerator {
 		    }
 		}
 		'''
+	}
+	
+	def CharSequence generateMoveAttribute(MoveAttributes attribute){
+	'''
+	import java.util.*;
+	
+	public class MoveAttributes {
+	    private List<AttributeData> moveattributes = new ArrayList<>();
+	
+	    private static MoveAttributes attribute;
+	
+	    private MoveAttributes() {
+	
+	    }
+	
+	    public static MoveAttributes getInstance() {
+	        if (attribute == null) {
+	            attribute = new MoveAttributes();
+	        }
+	        return attribute;
+	    }
+	
+	    public void addAttribute(AttributeData attribute) {
+	        moveattributes.add(attribute);
+	    }
+	    
+	    public List<AttributeData> getAttributes() {
+	        return moveattributes;
+	    }
+	}
+	'''
+	}
+	
+	def CharSequence generateEntityAttribute(EntityAttributes attribute){
+	'''
+	import java.util.*;
+
+	public class EntityAttributes {
+	private List<AttributeData> entityattributes = new ArrayList<>();
+	private static EntityAttributes attribute;
+
+		private EntityAttributes() {
+		
+		}
+
+	    public static EntityAttributes getInstance() {
+	        if (attribute == null) {
+	            attribute = new EntityAttributes();
+	        }
+	        return attribute;
+	    }
+	
+	    public void addAttribute(AttributeData attribute) {
+	        entityattributes.add(attribute);
+	    }
+	    
+	    public List<AttributeData> getAttributes() {
+	        return entityattributes;
+	    }
+	}
+	'''
 	}
 	
 	def generateAttributeChangeEvent(){
@@ -837,9 +900,9 @@ class RPGGenerator extends AbstractGenerator {
 			tempMoveData = new MoveData();
 			tempMoveData.setMoveName("«move.name»");
 			tempMoveData.setType("«move.EType.type.name»");
-			«FOR att : move.att»
+				«FOR att : move.att»
 			tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
-			«ENDFOR»
+				«ENDFOR»
 			«ENDFOR»
 		}
 		

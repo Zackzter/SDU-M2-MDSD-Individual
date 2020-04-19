@@ -20,6 +20,7 @@ import mdsd.rPG.EType;
 import mdsd.rPG.Effect;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
+import mdsd.rPG.EntityAttributes;
 import mdsd.rPG.EntityMoves;
 import mdsd.rPG.Eq;
 import mdsd.rPG.Equal;
@@ -29,6 +30,7 @@ import mdsd.rPG.Loc;
 import mdsd.rPG.Locations;
 import mdsd.rPG.Members;
 import mdsd.rPG.Move;
+import mdsd.rPG.MoveAttributes;
 import mdsd.rPG.Moves;
 import mdsd.rPG.Mult;
 import mdsd.rPG.NEq;
@@ -119,6 +121,9 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RPGPackage.ENTITY:
 				sequence_Entity(context, (Entity) semanticObject); 
 				return; 
+			case RPGPackage.ENTITY_ATTRIBUTES:
+				sequence_EntityAttributes(context, (EntityAttributes) semanticObject); 
+				return; 
 			case RPGPackage.ENTITY_MOVES:
 				sequence_EntityMoves(context, (EntityMoves) semanticObject); 
 				return; 
@@ -173,6 +178,9 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RPGPackage.MOVE:
 				sequence_Move(context, (Move) semanticObject); 
+				return; 
+			case RPGPackage.MOVE_ATTRIBUTES:
+				sequence_MoveAttributes(context, (MoveAttributes) semanticObject); 
 				return; 
 			case RPGPackage.MOVES:
 				sequence_Moves(context, (Moves) semanticObject); 
@@ -544,6 +552,18 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EntityAttributes returns EntityAttributes
+	 *
+	 * Constraint:
+	 *     attribute+=Attribute+
+	 */
+	protected void sequence_EntityAttributes(ISerializationContext context, EntityAttributes semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EntityMoves returns EntityMoves
 	 *
 	 * Constraint:
@@ -661,6 +681,18 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     entity+=[Entity|ID]+
 	 */
 	protected void sequence_Members(ISerializationContext context, Members semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     MoveAttributes returns MoveAttributes
+	 *
+	 * Constraint:
+	 *     attribute+=Attribute+
+	 */
+	protected void sequence_MoveAttributes(ISerializationContext context, MoveAttributes semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

@@ -86,6 +86,21 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createDeclarationAdapter();
       }
       @Override
+      public Adapter caseEntityAttributes(EntityAttributes object)
+      {
+        return createEntityAttributesAdapter();
+      }
+      @Override
+      public Adapter caseMoveAttributes(MoveAttributes object)
+      {
+        return createMoveAttributesAdapter();
+      }
+      @Override
+      public Adapter caseAttributes(Attributes object)
+      {
+        return createAttributesAdapter();
+      }
+      @Override
       public Adapter caseLocations(Locations object)
       {
         return createLocationsAdapter();
@@ -124,11 +139,6 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEType(EType object)
       {
         return createETypeAdapter();
-      }
-      @Override
-      public Adapter caseAttributes(Attributes object)
-      {
-        return createAttributesAdapter();
       }
       @Override
       public Adapter caseAttribute(Attribute object)
@@ -378,6 +388,51 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.EntityAttributes <em>Entity Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.EntityAttributes
+   * @generated
+   */
+  public Adapter createEntityAttributesAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.MoveAttributes <em>Move Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.MoveAttributes
+   * @generated
+   */
+  public Adapter createMoveAttributesAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Attributes <em>Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.Attributes
+   * @generated
+   */
+  public Adapter createAttributesAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link mdsd.rPG.Locations <em>Locations</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -493,21 +548,6 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createETypeAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.Attributes <em>Attributes</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see mdsd.rPG.Attributes
-   * @generated
-   */
-  public Adapter createAttributesAdapter()
   {
     return null;
   }

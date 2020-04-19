@@ -182,22 +182,64 @@ ruleDeclaration returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getDeclarationAccess().getAttributesParserRuleCall_5());
+			newCompositeNode(grammarAccess.getDeclarationAccess().getDeathParserRuleCall_5());
 		}
-		this_Attributes_5=ruleAttributes
+		this_Death_5=ruleDeath
 		{
-			$current = $this_Attributes_5.current;
+			$current = $this_Death_5.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getDeclarationAccess().getDeathParserRuleCall_6());
+			newCompositeNode(grammarAccess.getDeclarationAccess().getAttributesParserRuleCall_6());
 		}
-		this_Death_6=ruleDeath
+		this_Attributes_6=ruleAttributes
 		{
-			$current = $this_Death_6.current;
+			$current = $this_Attributes_6.current;
 			afterParserOrEnumRuleCall();
 		}
+	)
+;
+
+// Entry rule entryRuleAttributes
+entryRuleAttributes returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getAttributesRule()); }
+	iv_ruleAttributes=ruleAttributes
+	{ $current=$iv_ruleAttributes.current; }
+	EOF;
+
+// Rule Attributes
+ruleAttributes returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='attributes'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getAttributesAccess().getAttributesKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getAttributesAccess().getAttributeAttributeParserRuleCall_1_0());
+				}
+				lv_attribute_1_0=ruleAttribute
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getAttributesRule());
+					}
+					add(
+						$current,
+						"attribute",
+						lv_attribute_1_0,
+						"mdsd.RPG.Attribute");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)+
 	)
 ;
 
@@ -676,48 +718,6 @@ ruleEType returns [EObject current=null]
 				}
 			)
 		)
-	)
-;
-
-// Entry rule entryRuleAttributes
-entryRuleAttributes returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getAttributesRule()); }
-	iv_ruleAttributes=ruleAttributes
-	{ $current=$iv_ruleAttributes.current; }
-	EOF;
-
-// Rule Attributes
-ruleAttributes returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='attributes'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getAttributesAccess().getAttributesKeyword_0());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getAttributesAccess().getAttributeAttributeParserRuleCall_1_0());
-				}
-				lv_attribute_1_0=ruleAttribute
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getAttributesRule());
-					}
-					add(
-						$current,
-						"attribute",
-						lv_attribute_1_0,
-						"mdsd.RPG.Attribute");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)+
 	)
 ;
 

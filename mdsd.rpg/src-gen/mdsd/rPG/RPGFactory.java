@@ -42,6 +42,33 @@ public interface RPGFactory extends EFactory
   Declaration createDeclaration();
 
   /**
+   * Returns a new object of class '<em>Entity Attributes</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Entity Attributes</em>'.
+   * @generated
+   */
+  EntityAttributes createEntityAttributes();
+
+  /**
+   * Returns a new object of class '<em>Move Attributes</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Move Attributes</em>'.
+   * @generated
+   */
+  MoveAttributes createMoveAttributes();
+
+  /**
+   * Returns a new object of class '<em>Attributes</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Attributes</em>'.
+   * @generated
+   */
+  Attributes createAttributes();
+
+  /**
    * Returns a new object of class '<em>Locations</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -112,15 +139,6 @@ public interface RPGFactory extends EFactory
    * @generated
    */
   EType createEType();
-
-  /**
-   * Returns a new object of class '<em>Attributes</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Attributes</em>'.
-   * @generated
-   */
-  Attributes createAttributes();
 
   /**
    * Returns a new object of class '<em>Attribute</em>'.

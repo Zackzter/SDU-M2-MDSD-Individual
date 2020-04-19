@@ -63,14 +63,15 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cMovesParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cEntitiesParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cTeamsParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall cAttributesParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
-		private final RuleCall cDeathParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cDeathParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cAttributesParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		
 		//Declaration:
-		//	Locations | Relations | Moves | Entities | Teams | Attributes | Death;
+		//	Locations | Relations | Moves | Entities | Teams | Death | Attributes // MoveAttributes | EntityAttributes | 
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Locations | Relations | Moves | Entities | Teams | Attributes | Death
+		//Locations | Relations | Moves | Entities | Teams | Death | Attributes
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Locations
@@ -88,11 +89,80 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		//Teams
 		public RuleCall getTeamsParserRuleCall_4() { return cTeamsParserRuleCall_4; }
 		
-		//Attributes
-		public RuleCall getAttributesParserRuleCall_5() { return cAttributesParserRuleCall_5; }
-		
 		//Death
-		public RuleCall getDeathParserRuleCall_6() { return cDeathParserRuleCall_6; }
+		public RuleCall getDeathParserRuleCall_5() { return cDeathParserRuleCall_5; }
+		
+		//Attributes
+		public RuleCall getAttributesParserRuleCall_6() { return cAttributesParserRuleCall_6; }
+	}
+	public class EntityAttributesElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.EntityAttributes");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cEntity_attributesKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cAttributeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cAttributeAttributeParserRuleCall_1_0 = (RuleCall)cAttributeAssignment_1.eContents().get(0);
+		
+		//EntityAttributes:
+		//	'entity_attributes' attribute+=Attribute+;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'entity_attributes' attribute+=Attribute+
+		public Group getGroup() { return cGroup; }
+		
+		//'entity_attributes'
+		public Keyword getEntity_attributesKeyword_0() { return cEntity_attributesKeyword_0; }
+		
+		//attribute+=Attribute+
+		public Assignment getAttributeAssignment_1() { return cAttributeAssignment_1; }
+		
+		//Attribute
+		public RuleCall getAttributeAttributeParserRuleCall_1_0() { return cAttributeAttributeParserRuleCall_1_0; }
+	}
+	public class MoveAttributesElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.MoveAttributes");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cMove_attributesKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cAttributeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cAttributeAttributeParserRuleCall_1_0 = (RuleCall)cAttributeAssignment_1.eContents().get(0);
+		
+		//MoveAttributes:
+		//	'move_attributes' attribute+=Attribute+;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'move_attributes' attribute+=Attribute+
+		public Group getGroup() { return cGroup; }
+		
+		//'move_attributes'
+		public Keyword getMove_attributesKeyword_0() { return cMove_attributesKeyword_0; }
+		
+		//attribute+=Attribute+
+		public Assignment getAttributeAssignment_1() { return cAttributeAssignment_1; }
+		
+		//Attribute
+		public RuleCall getAttributeAttributeParserRuleCall_1_0() { return cAttributeAttributeParserRuleCall_1_0; }
+	}
+	public class AttributesElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Attributes");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cAttributesKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cAttributeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cAttributeAttributeParserRuleCall_1_0 = (RuleCall)cAttributeAssignment_1.eContents().get(0);
+		
+		//Attributes:
+		//	'attributes' attribute+=Attribute+;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'attributes' attribute+=Attribute+
+		public Group getGroup() { return cGroup; }
+		
+		//'attributes'
+		public Keyword getAttributesKeyword_0() { return cAttributesKeyword_0; }
+		
+		//attribute+=Attribute+
+		public Assignment getAttributeAssignment_1() { return cAttributeAssignment_1; }
+		
+		//Attribute
+		public RuleCall getAttributeAttributeParserRuleCall_1_0() { return cAttributeAttributeParserRuleCall_1_0; }
 	}
 	public class LocationsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Locations");
@@ -397,29 +467,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ID
 		public RuleCall getTypeTypeIDTerminalRuleCall_1_0_1() { return cTypeTypeIDTerminalRuleCall_1_0_1; }
-	}
-	public class AttributesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Attributes");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAttributesKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cAttributeAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cAttributeAttributeParserRuleCall_1_0 = (RuleCall)cAttributeAssignment_1.eContents().get(0);
-		
-		//Attributes:
-		//	'attributes' attribute+=Attribute+;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'attributes' attribute+=Attribute+
-		public Group getGroup() { return cGroup; }
-		
-		//'attributes'
-		public Keyword getAttributesKeyword_0() { return cAttributesKeyword_0; }
-		
-		//attribute+=Attribute+
-		public Assignment getAttributeAssignment_1() { return cAttributeAssignment_1; }
-		
-		//Attribute
-		public RuleCall getAttributeAttributeParserRuleCall_1_0() { return cAttributeAttributeParserRuleCall_1_0; }
 	}
 	public class AttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Attribute");
@@ -1399,6 +1446,9 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private final SystemRPGElements pSystemRPG;
 	private final DeclarationElements pDeclaration;
+	private final EntityAttributesElements pEntityAttributes;
+	private final MoveAttributesElements pMoveAttributes;
+	private final AttributesElements pAttributes;
 	private final LocationsElements pLocations;
 	private final LocElements pLoc;
 	private final RelationsElements pRelations;
@@ -1407,7 +1457,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	private final MovesElements pMoves;
 	private final MoveElements pMove;
 	private final ETypeElements pEType;
-	private final AttributesElements pAttributes;
 	private final AttributeElements pAttribute;
 	private final EffectElements pEffect;
 	private final AttributeValuesElements pAttributeValues;
@@ -1450,6 +1499,9 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		this.gaTerminals = gaTerminals;
 		this.pSystemRPG = new SystemRPGElements();
 		this.pDeclaration = new DeclarationElements();
+		this.pEntityAttributes = new EntityAttributesElements();
+		this.pMoveAttributes = new MoveAttributesElements();
+		this.pAttributes = new AttributesElements();
 		this.pLocations = new LocationsElements();
 		this.pLoc = new LocElements();
 		this.pRelations = new RelationsElements();
@@ -1458,7 +1510,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		this.pMoves = new MovesElements();
 		this.pMove = new MoveElements();
 		this.pEType = new ETypeElements();
-		this.pAttributes = new AttributesElements();
 		this.pAttribute = new AttributeElements();
 		this.pEffect = new EffectElements();
 		this.pAttributeValues = new AttributeValuesElements();
@@ -1529,13 +1580,44 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Declaration:
-	//	Locations | Relations | Moves | Entities | Teams | Attributes | Death;
+	//	Locations | Relations | Moves | Entities | Teams | Death | Attributes // MoveAttributes | EntityAttributes | 
+	//;
 	public DeclarationElements getDeclarationAccess() {
 		return pDeclaration;
 	}
 	
 	public ParserRule getDeclarationRule() {
 		return getDeclarationAccess().getRule();
+	}
+	
+	//EntityAttributes:
+	//	'entity_attributes' attribute+=Attribute+;
+	public EntityAttributesElements getEntityAttributesAccess() {
+		return pEntityAttributes;
+	}
+	
+	public ParserRule getEntityAttributesRule() {
+		return getEntityAttributesAccess().getRule();
+	}
+	
+	//MoveAttributes:
+	//	'move_attributes' attribute+=Attribute+;
+	public MoveAttributesElements getMoveAttributesAccess() {
+		return pMoveAttributes;
+	}
+	
+	public ParserRule getMoveAttributesRule() {
+		return getMoveAttributesAccess().getRule();
+	}
+	
+	//Attributes:
+	//	'attributes' attribute+=Attribute+;
+	public AttributesElements getAttributesAccess() {
+		return pAttributes;
+	}
+	
+	public ParserRule getAttributesRule() {
+		return getAttributesAccess().getRule();
 	}
 	
 	//Locations:
@@ -1616,16 +1698,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getETypeRule() {
 		return getETypeAccess().getRule();
-	}
-	
-	//Attributes:
-	//	'attributes' attribute+=Attribute+;
-	public AttributesElements getAttributesAccess() {
-		return pAttributes;
-	}
-	
-	public ParserRule getAttributesRule() {
-		return getAttributesAccess().getRule();
 	}
 	
 	//Attribute:
