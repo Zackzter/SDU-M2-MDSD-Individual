@@ -1,14 +1,13 @@
 # Ignore everything in repository root 
 /*
 
-# Files to not ignore
-!/.gitignore
-
 # Folder to not ignore
 !/mdsd.rpg/
 
-/mdsd.rpg/bin/mdsd/generator/.RPGGenerator.xtendbin
-/mdsd.rpg/xtend-gen/mdsd/generator/.RPGGenerator.xtendbin
+
+mdsd.rpg/generated/
+mdsd.rpg/src-gen/
+mdsd.rpg/xtend-gen/
+mdsd.rpg/bin
+mdsd.rpg/xtend-gen/
 *.class
-*.class
-/mdsd.rpg/bin/*
