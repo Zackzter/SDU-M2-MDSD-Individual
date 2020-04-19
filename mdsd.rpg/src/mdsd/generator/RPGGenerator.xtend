@@ -62,7 +62,6 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	
 	def god(SystemRPG thing, IFileSystemAccess2 fsa){
-		var gamefile = ""
 		var locationbool = false
 		var relationbool = false
 		var movesbool = false
@@ -70,7 +69,7 @@ class RPGGenerator extends AbstractGenerator {
 		var teamsbool = false
 		var attributesbool = false
 		var deathbool = false
-		val classFileName = thing.getName() + ".java"
+		val classFileName = thing.getName() 
 		for (Declaration d : thing.getDeclarations()){
 			switch(d){
 				Locations:
@@ -85,18 +84,18 @@ class RPGGenerator extends AbstractGenerator {
                     }
 				Moves:
 					if(!movesbool){
-						gamefile += generateMoves(fsa, d)
+						generateMoves(fsa, d)
 						d.test
 						movesbool = true
 					}
 				Entities:
 					if(!entitiesbool){
-						gamefile += generateEntities(fsa, d)
+						generateEntities(fsa, d)
 						entitiesbool = true
 					}
 				Teams:
 					if(!teamsbool){
-						gamefile += generateTeams(fsa, d)
+						generateTeams(fsa, d)
 						teamsbool = true
 					}
 				Attributes:
@@ -121,8 +120,57 @@ class RPGGenerator extends AbstractGenerator {
 			}
 
 		}
-		fsa.generateFile(classFileName, gamefile)
+		fsa.generateFile(classFileName + ".java", generateGamePOG2(classFileName))
 		
+	}
+	
+	def CharSequence generateGamePOG2(String classFileName){
+		'''
+		import java.util.*;
+		import java.awt.event.*;
+		
+		public class «classFileName» implements KeyListener{
+			private Type type;
+			private List<Attribute> attributes;
+		    private Attribute attribute;
+		    private boolean gameFinished;
+		    private List<Entity> eList; 
+		    private List<Entity> entities;
+		    private List<Entity> battleEntities;
+		    private Team team;
+		    private Move move;
+		    private MoveInit moveInit;
+		    private EntityInit entityInit;
+		    private TeamInit teamInit;
+		    
+		    private String currentLocation;
+		    private String currentTeam;
+		    
+		    public Game(){
+		    	eList = new ArrayList<>();
+		    	entities = new ArrayList<>();
+		     	attributes = new ArrayList<>();
+		      	team = new Team();
+		    	battleEntities = new ArrayList<>();
+		    	move = Move.getInstance();
+		    	moveInit = new MoveInit();
+		    	entityInit = new EntityInit();
+		    	teamInit = new TeamInit();
+		   	}
+		   	
+		   	public void run(){
+		   		initialize();
+		   	}
+		   	
+		   	private void initialize(){
+		   		moveInit.addMoves(move);
+		   		entityInit.createEntities(entities);
+		   		teamInit.createTeams(team);
+		   	}
+		}
+		
+		
+		'''
 	}
 	
 	def CharSequence generateAttribute(Attributes attribute){
@@ -397,7 +445,6 @@ class RPGGenerator extends AbstractGenerator {
     def dispatch exp2(IntNum x, List<Object> list){
         list.add(x.value)
     }
-    
     def dispatch exp2(FloatNum x, List<Object> list){
         list.add(x.decimal)
     }
@@ -406,37 +453,13 @@ class RPGGenerator extends AbstractGenerator {
         list.add(x.attribute.AVal)
     }
 	
-	def CharSequence generateEntities(IFileSystemAccess2 fsa, Entities entities){
+	def generateEntities(IFileSystemAccess2 fsa, Entities entities){
 		fsa.generateFile("Entity.java", generateEntity)
 		fsa.generateFile("EntityEnum.java", entities.generateEntityEnum)
 		fsa.generateFile("EntityState.java", generateEntityState)
+		fsa.generateFile("EntityInit.java", entities.generateEntityInit)
 		
-		'''
-		private List<Entity> entities;
-		private List<Entity> battleEntities;
-		private Attribute attribute;
 		
-		private void createEntities(){
-			«FOR entity : entities.entity»
-			Entity «entity.name.toLowerCase» = new Entity();
-			«entity.name.toLowerCase».setName("«entity.name»");
-			«entity.name.toLowerCase».setType(«entity.EType.type.name»);
-			«FOR move : entity.EMoves.move»
-			«entity.name.toLowerCase».addMoveData(Move.getInstance().getMove("«move.name»"));
-			«ENDFOR»
-			«FOR att : entity.att»
-			«IF getNumberFromAtomicDab(att.av.an) instanceof Integer»
-			«entity.name.toLowerCase».addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
-			«ELSEIF getNumberFromAtomicDab(att.av.an) instanceof Float»
-			«entity.name.toLowerCase».addAttribute(AttributeData.createAttributeDataWithFloat("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
-			«ENDIF»
-			«ENDFOR»
-			entities.add(«entity.name.toLowerCase»);
-			«ENDFOR»
-			
-		}
-		
-		'''
 	}
 	
 	def CharSequence generateEntity(){
@@ -564,6 +587,35 @@ class RPGGenerator extends AbstractGenerator {
 		public enum EntityState {
 		    DEAD, ALIVE
 		}
+		'''
+	}
+	
+	def CharSequence generateEntityInit(Entities entities){
+		'''
+		import java.util.*;
+		
+		public class EntityInit(){
+			private void createEntities(List<Entities> entities){
+				«FOR entity : entities.entity»
+				Entity «entity.name.toLowerCase» = new Entity();
+				«entity.name.toLowerCase».setName("«entity.name»");
+				«entity.name.toLowerCase».setType(«entity.EType.type.name»);
+				«FOR move : entity.EMoves.move»
+				«entity.name.toLowerCase».addMoveData(Move.getInstance().getMove("«move.name»"));
+				«ENDFOR»
+				«FOR att : entity.att»
+				«IF getNumberFromAtomicDab(att.av.an) instanceof Integer»
+				«entity.name.toLowerCase».addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«ELSEIF getNumberFromAtomicDab(att.av.an) instanceof Float»
+				«entity.name.toLowerCase».addAttribute(AttributeData.createAttributeDataWithFloat("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«ENDIF»
+				«ENDFOR»
+				entities.add(«entity.name.toLowerCase»);
+				«ENDFOR»
+				
+			}
+		}
+		
 		'''
 	}
 	
@@ -883,35 +935,11 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 	
-	def CharSequence generateMoves(IFileSystemAccess2 fsa, Moves moves){
+	def generateMoves(IFileSystemAccess2 fsa, Moves moves){
 		fsa.generateFile("Move.java", generateEntity)
 		fsa.generateFile("MoveEnum.java", moves.generateMoveEnum)
 		fsa.generateFile("EntityState.java", generateEntityState)
-		
-		
-		
-		'''
-		
-		private Move moves = Move.getInstance()
-		
-		private void addMoves(){
-			MoveData tempMoveData;
-			«FOR move : moves.move»
-			tempMoveData = new MoveData();
-			tempMoveData.setMoveName("«move.name»");
-			tempMoveData.setType("«move.EType.type.name»");
-				«FOR att : move.att»
-				«IF getNumberFromAtomicDab(att.av.an) instanceof Integer»
-				tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
-				«ELSEIF getNumberFromAtomicDab(att.av.an) instanceof Float»
-				tempMoveData.addAttribute(AttributeData.createAttributeDataWithFloat("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
-				«ENDIF»
-				«ENDFOR»
-			«ENDFOR»
-		}
-		
-		'''
-		
+		fsa.generateFile("MoveInit.java", moves.generateMoveInit)
 	}
 	
 	def CharSequence generateMove(){
@@ -1030,7 +1058,7 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 
-	def generateMoveEnum(Moves moves){
+	def CharSequence generateMoveEnum(Moves moves){
 		var moveEnums = ""
 		var i = 1
 		for(move : moves.move){
@@ -1062,37 +1090,41 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 	
-	def CharSequence generateTeams(IFileSystemAccess2 fsa, Teams teams){
-		fsa.generateFile("Team.java", generateTeam())
-		
-		
+	def CharSequence generateMoveInit(Moves moves){
 		'''
+		import java.util.*;
 		
-		private Team team = new Team();
-		
-		private void createTeams(){
-			«FOR team : teams.team»
-			«addTeamMemberString(team)»
-			«ENDFOR»
-		}
-		
-		private Entity findEntityByName(String name){
-			for(Entity e : entities){
-				if(e.toString().equals(name){
-					return e;
-				}
+		public class MoveInit(){
+			private void addMoves(Move moves){ //private Move moves = Move.getInstance()
+				MoveData tempMoveData;
+				«FOR move : moves.move»
+				tempMoveData = new MoveData();
+				tempMoveData.setMoveName("«move.name»");
+				tempMoveData.setType("«move.EType.type.name»");
+				«FOR att : move.att»
+				«IF getNumberFromAtomicDab(att.av.an) instanceof Integer»
+				tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«ELSEIF getNumberFromAtomicDab(att.av.an) instanceof Float»
+				tempMoveData.addAttribute(AttributeData.createAttributeDataWithFloat("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«ENDIF»
+				moves.addMove(tempMoveData);
+				«ENDFOR»
+				«ENDFOR»
 			}
-			return null;
 		}
-		
 		'''
+	}
+	
+	def generateTeams(IFileSystemAccess2 fsa, Teams teams){
+		fsa.generateFile("Team.java", generateTeam())
+		fsa.generateFile("TeamInit.java", generateTeamInit(teams))
 	}
 	
 	def String addTeamMemberString(Team team){
 		var createTeamString = "team.addTeamMember(" + '"' + team.name + '"' + ", "
 		var i = 1
 		for(Entity e : team.members.entity){
-			createTeamString += "findEntityByName(" + '"'+ e.name + '"' + ")"
+			createTeamString += "findEntityByName(" + '"'+ e.name + '"' + ", entities" + ")"
 			if(team.members.entity.size() > i){
 				i++
 				createTeamString += ", "
@@ -1168,6 +1200,33 @@ class RPGGenerator extends AbstractGenerator {
 		        return alive;
 		    }
 		}
+		'''
+	}
+	
+	def CharSequence generateTeamInit(Teams teams){
+		'''
+		import java.util.*;
+		
+		public class TeamInit{
+			private void createTeams(Team team, Entities entities){
+				«FOR team : teams.team»
+				«addTeamMemberString(team)»
+				«ENDFOR»
+			}
+			
+			private Entity findEntityByName(String name, Entities entities){
+				for(Entity e : entities){
+					if(e.toString().equals(name){
+						return e;
+					}
+				}
+				return null;
+			}
+		}
+		
+		
+		
+		
 		'''
 	}
 	
