@@ -73,13 +73,13 @@ class RPGGenerator extends AbstractGenerator {
 		for (Declaration d : thing.getDeclarations()){
 			switch(d){
 				Locations:
-					if(!locationbool){
+					if(!locationbool){ // should be done
 						fsa.generateFile("Location.java" , d.generateLocation)
 						locationbool = true
 					}
 				Relations:
-					if(!relationbool){
-                        fsa.generateFile("TypeEnum.java", d.generateTypeEnum)
+					if(!relationbool){ // should be done
+                        generateTypes(fsa, d)
                         relationbool = true
                     }
 				Moves:
@@ -89,32 +89,26 @@ class RPGGenerator extends AbstractGenerator {
 						movesbool = true
 					}
 				Entities:
-					if(!entitiesbool){
+					if(!entitiesbool){ // should be done
 						generateEntities(fsa, d)
 						entitiesbool = true
 					}
 				Teams:
-					if(!teamsbool){
+					if(!teamsbool){ // should be done
 						generateTeams(fsa, d)
 						teamsbool = true
 					}
-				Attributes:
+				Attributes: // should be done
 					if(!attributesbool){
-                        fsa.generateFile("Attribute.java" , d.generateAttribute)
-                        fsa.generateFile("AttributeEnum.java", d.generateAttributeEnum)
+						generateAttributes(fsa, d)
                         attributesbool = true
                     }
-				Death:
-					System.out.println("Do this")
-					/* 
-					'''
-					public class DeathCondition {
-					// ost3
-					«d.req.re»
-			
+				Death: // should be done
+					if(!deathbool){
+						fsa.generateFile("DeathChecker.java", d.generateDeathChecker)
+						deathbool = true
 					}
-					'''
-					*/
+					
 				default:
 					System.out.println("reported")
 			}
@@ -124,17 +118,33 @@ class RPGGenerator extends AbstractGenerator {
 		
 	}
 	
+	def generateLocations(Locations locations){
+		
+	}
+	
+	def CharSequence generateDeathChecker(Death death){
+		'''
+		import java.util.*;
+		public class DeathChecker {
+			public boolean check(Entity entity){
+				HashMap<String, Number> eData = new HashMap<>();
+				for(AttributeData aData : entity.getAttributes()){
+					eData.put(aData.getAttributeName(), aData.getNumber());
+				}
+				return («death.req.new_re»);
+			}
+		}
+		'''
+	}
+	
 	def CharSequence generateGamePOG2(String classFileName){
 		'''
 		import java.util.*;
 		import java.awt.event.*;
 		
-		public class «classFileName» implements KeyListener{
+		public class «classFileName»{
 			private Type type;
-			private List<Attribute> attributes;
-		    private Attribute attribute;
 		    private boolean gameFinished;
-		    private List<Entity> eList; 
 		    private List<Entity> entities;
 		    private List<Entity> battleEntities;
 		    private Team team;
@@ -142,20 +152,20 @@ class RPGGenerator extends AbstractGenerator {
 		    private MoveInit moveInit;
 		    private EntityInit entityInit;
 		    private TeamInit teamInit;
+		    private TypeRelationsInit tRI;
 		    
 		    private String currentLocation;
 		    private String currentTeam;
 		    
-		    public Game(){
-		    	eList = new ArrayList<>();
+		    public «classFileName»(){
 		    	entities = new ArrayList<>();
-		     	attributes = new ArrayList<>();
 		      	team = new Team();
 		    	battleEntities = new ArrayList<>();
 		    	move = Move.getInstance();
 		    	moveInit = new MoveInit();
 		    	entityInit = new EntityInit();
 		    	teamInit = new TeamInit();
+		        tRI = new TypeRelationsInit();
 		   	}
 		   	
 		   	public void run(){
@@ -165,7 +175,8 @@ class RPGGenerator extends AbstractGenerator {
 		   	private void initialize(){
 		   		moveInit.addMoves(move);
 		   		entityInit.createEntities(entities);
-		   		teamInit.createTeams(team);
+		   		teamInit.createTeams(team, entities);
+		   		tRI.createRelations(type);
 		   	}
 		}
 		
@@ -173,7 +184,13 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 	
-	def CharSequence generateAttribute(Attributes attribute){
+	def generateAttributes(IFileSystemAccess2 fsa, Attributes attributes){
+		//fsa.generateFile("Attribute.java" , generateAttribute)
+        fsa.generateFile("AttributeEnum.java", attributes.generateAttributeEnum)
+        fsa.generateFile("AttributeData.java", generateAttributeData)
+	}
+	
+	def CharSequence generateAttribute(){
 		'''
 		import java.util.*;
 		
@@ -203,7 +220,7 @@ class RPGGenerator extends AbstractGenerator {
 		}
 		'''
 	}
-	
+
 	def CharSequence generateMoveAttribute(MoveAttributes attribute){
 	'''
 	import java.util.*;
@@ -288,69 +305,28 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 	
-	def generateAttributeData(){
+	def CharSequence generateAttributeData(){
 		'''
 		import java.util.*;
 		public class AttributeData {
 		
-		    private int intValue;
-		    private float floatValue;
+		    private Number number;
 		    private String attributeName;
 		
 		    public AttributeData() {
 		    }
 		
-		    public AttributeData(int intValue, float floatValue, String attributeName) {
-		        this.intValue = intValue;
-		        this.floatValue = floatValue;
+		    public AttributeData(String attributeName, Number number) {
+		        this.number = number;
 		        this.attributeName = attributeName;
 		    }
 		
-		    public static AttributeData createAttributeWithStringAndDefaultValues(String s){
-		        AttributeData a = new AttributeData();
-		        a.setAttributeName(s);
-		        a.setFloatValue(45.0f);
-		        a.setIntValue(45);
-		        Attribute ab = Attribute.getInstance();
-		        ab.addAttribute(a);
-		        ab = null;
-		        return a;
-		    }
-		    
-		    public static AttributeData createAttributeDataWithFloat(String attributeData, float f) {
-		        AttributeData a = new AttributeData();
-		        a.setAttributeName(attributeData);
-		        a.setFloatValue(f);
-		        Attribute ab = Attribute.getInstance();
-		        ab.addAttribute(a);
-		        ab = null;
-		        return a;
+		    public Number getNumber() {
+		        return this.number;
 		    }
 		
-		    public static AttributeData createAttributeDataWithInt(String attributeData, int i) {
-		        AttributeData a = new AttributeData();
-		        a.setAttributeName(attributeData);
-		        a.setIntValue(i);
-		        Attribute ab = Attribute.getInstance();
-		        ab.addAttribute(a);
-		        ab = null;
-		        return a;
-		    }
-		
-		    public int getIntValue() {
-		        return this.intValue;
-		    }
-		
-		    public void setIntValue(int intValue) {
-		        this.intValue = intValue;
-		    }
-		
-		    public float getFloatValue() {
-		        return this.floatValue;
-		    }
-		
-		    public void setFloatValue(float floatValue) {
-		        this.floatValue = floatValue;
+		    public void setNumber(Number number){
+		        this.number = number;
 		    }
 		
 		    public String getAttributeName() {
@@ -360,32 +336,6 @@ class RPGGenerator extends AbstractGenerator {
 		    public void setAttributeName(String attributeName) {
 		        this.attributeName = attributeName;
 		    }
-		
-		    @Override
-		    public boolean equals(Object o) {
-		        if (o == this)
-		            return true;
-		        if (!(o instanceof AttributeData)) {
-		            return false;
-		        }
-		        AttributeData attributeData = (AttributeData) o;
-		        return intValue == attributeData.intValue && floatValue == attributeData.floatValue && Objects.equals(attributeName, attributeData.attributeName);
-		    }
-		
-		    @Override
-		    public int hashCode() {
-		        return Objects.hash(intValue, floatValue, attributeName);
-		    }
-		
-		    @Override
-		    public String toString() {
-		        return "{" +
-		            " intValue='" + getIntValue() + "'" +
-		            ", floatValue='" + getFloatValue() + "'" +
-		            ", attributeName='" + getAttributeName() + "'" +
-		            "}";
-		    }
-		
 		}
 		'''
 	}
@@ -448,36 +398,30 @@ class RPGGenerator extends AbstractGenerator {
     def dispatch exp2(FloatNum x, List<Object> list){
         list.add(x.decimal)
     }
-    
     def dispatch exp2(NameAttribute x, List<Object> list){
         list.add(x.attribute.AVal)
     }
-	
+
 	def generateEntities(IFileSystemAccess2 fsa, Entities entities){
 		fsa.generateFile("Entity.java", generateEntity)
 		fsa.generateFile("EntityEnum.java", entities.generateEntityEnum)
 		fsa.generateFile("EntityState.java", generateEntityState)
 		fsa.generateFile("EntityInit.java", entities.generateEntityInit)
-		
-		
 	}
 	
 	def CharSequence generateEntity(){
 		'''
 		import java.util.*;
-		import java.util.concurrent.*;
 		public class Entity{
 		    private String name;
 		    private String type;
 		    private EntityState state;
 		    private List<AttributeData> attribute;
-		    private List<AttributeData> changingAttributes;
 		    private List<MoveData> moves;
 		
 		    public Entity(){
 		      attribute = new ArrayList<>();
 		      moves = new ArrayList<>();
-		      changingAttributes = new CopyOnWriteArrayList<>();
 		    }
 		
 		    public Entity(Entity e){
@@ -487,8 +431,6 @@ class RPGGenerator extends AbstractGenerator {
 		      this.state = e.getEntityState();
 		      if(!e.getAttributes().isEmpty())
 		        this.attribute.addAll(e.getAttributes());
-		      if(!e.getChangingAttributes().isEmpty())
-		        this.changingAttributes.addAll(e.getChangingAttributes());
 		      if(!e.getMoveData().isEmpty())
 		        this.moves.addAll(e.getMoveData());
 		    }
@@ -509,10 +451,6 @@ class RPGGenerator extends AbstractGenerator {
 		      return attribute;
 		    }
 		
-		    public List<AttributeData> getChangingAttributes(){
-		      return changingAttributes;
-		    }
-		
 		    public EntityState getEntityState(){
 		      return state;
 		    }
@@ -523,7 +461,6 @@ class RPGGenerator extends AbstractGenerator {
 		
 		    public void addAttribute(AttributeData attribute){
 		      this.attribute.add(attribute);
-		      this.changingAttributes.add(attribute);
 		    }
 		
 		    public List<MoveData> getMoveData(){
@@ -540,24 +477,6 @@ class RPGGenerator extends AbstractGenerator {
 		    
 		    public void addMoveData(MoveData moveData){
 		      moves.add(moveData);
-		    }
-		
-		    public void requestChange(AttributeChangeEvent attribute){
-		      if(changingAttributes.contains(attribute.getPreviousState())){
-		        changingAttributes.remove(attribute.getPreviousState());
-		        changingAttributes.add(attribute.getTargetState());
-		      }
-		    }
-		
-		    public void die(){
-		      state = EntityState.DEAD;
-		      System.out.println("[" + this.toString() + "] " +  "Ufff I died");
-		    }
-		
-		    @Override
-		    public String toString() {
-		      
-		      return this.name;
 		    }
 		}
 		'''
@@ -591,23 +510,27 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	
 	def CharSequence generateEntityInit(Entities entities){
+		/*«IF getNumberFromAtomicDab(att.av.an) instanceof Integer»
+				«entity.name.toLowerCase».addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«ELSEIF getNumberFromAtomicDab(att.av.an) instanceof Float»
+				«entity.name.toLowerCase».addAttribute(AttributeData.createAttributeDataWithFloat("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«ENDIF» */
+		
 		'''
 		import java.util.*;
 		
-		public class EntityInit(){
-			private void createEntities(List<Entities> entities){
+		public class EntityInit{
+			public void createEntities(List<Entity> entities){
 				«FOR entity : entities.entity»
 				Entity «entity.name.toLowerCase» = new Entity();
 				«entity.name.toLowerCase».setName("«entity.name»");
-				«entity.name.toLowerCase».setType(«entity.EType.type.name»);
+				«entity.name.toLowerCase».setType("«entity.EType.type.name»");
 				«FOR move : entity.EMoves.move»
 				«entity.name.toLowerCase».addMoveData(Move.getInstance().getMove("«move.name»"));
 				«ENDFOR»
 				«FOR att : entity.att»
-				«IF getNumberFromAtomicDab(att.av.an) instanceof Integer»
-				«entity.name.toLowerCase».addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
-				«ELSEIF getNumberFromAtomicDab(att.av.an) instanceof Float»
-				«entity.name.toLowerCase».addAttribute(AttributeData.createAttributeDataWithFloat("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«IF getNumberFromAtomicDab(att.av.an) instanceof Number»
+				«entity.name.toLowerCase».addAttribute(new AttributeData("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
 				«ENDIF»
 				«ENDFOR»
 				entities.add(«entity.name.toLowerCase»);
@@ -827,10 +750,13 @@ class RPGGenerator extends AbstractGenerator {
 		req.log.logic
 	}
 	
+	def CharSequence new_re(Require req){
+		req.log.new_logic
+	}
+	
 	def dispatch CharSequence logic(Or x){
 		'''(«x.left.logic»||«x.right.logic»)'''
 	}
-	
 	def dispatch CharSequence logic(And x){
 		'''(«x.left.logic»&&«x.right.logic»)'''
 	}
@@ -861,6 +787,48 @@ class RPGGenerator extends AbstractGenerator {
 	def dispatch CharSequence exp(NameAttribute x){
 		{"_"+x.attribute.name}
 	}
+	
+	def dispatch CharSequence new_logic(Or x){
+		'''(«x.left.new_logic»||«x.right.new_logic»)'''
+	}
+	def dispatch CharSequence new_logic(And x){
+		'''(«x.left.new_logic»&&«x.right.new_logic»)'''
+	}
+	def dispatch CharSequence new_logic(NumberComparing x){
+		'''(«x.left.new_exp»«x.comp.generateComp»«x.right.new_exp»)'''
+	}
+	def dispatch CharSequence new_exp(Add x){
+		'''(«x.left.new_exp»+«x.right.new_exp»)'''
+	}
+	def dispatch CharSequence new_exp(Sub x){
+		'''(«x.left.new_exp»-«x.right.new_exp»)'''
+	}
+	def dispatch CharSequence new_exp(Mult x){
+		'''(«x.left.new_exp»*«x.right.new_exp»)'''
+	}
+	def dispatch CharSequence new_exp(Div x){
+		'''(«x.left.new_exp»/«x.right.new_exp»)'''
+	}
+	def dispatch CharSequence new_exp(IntNum x){
+		Integer.toString(x.value)
+	}
+	def dispatch CharSequence new_exp(FloatNum x){
+		Integer.toString(x.i) + '.' + Integer.toString(x.decimal)
+	}
+	def dispatch CharSequence new_exp(NameAttribute x){
+		if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Integer")){
+			"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
+		}else if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Float")){ 
+			"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
+		}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof IntNum){
+			"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
+		}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof FloatNum){
+			"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
+		} else {
+			"Shit son" 
+		}
+	}
+
 	def dispatch Number getNumberFromAtomicDab(IntNum x){
 		x.value
 	}
@@ -936,7 +904,7 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	
 	def generateMoves(IFileSystemAccess2 fsa, Moves moves){
-		fsa.generateFile("Move.java", generateEntity)
+		fsa.generateFile("Move.java", generateMove)
 		fsa.generateFile("MoveEnum.java", moves.generateMoveEnum)
 		fsa.generateFile("EntityState.java", generateEntityState)
 		fsa.generateFile("MoveInit.java", moves.generateMoveInit)
@@ -1091,22 +1059,31 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	
 	def CharSequence generateMoveInit(Moves moves){
+		/*
+		 * 
+		 * «IF getNumberFromAtomicDab(att.av.an) instanceof Integer»
+				tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«ELSEIF getNumberFromAtomicDab(att.av.an) instanceof Float»
+				tempMoveData.addAttribute(AttributeData.createAttributeDataWithFloat("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«ENDIF»
+		 */
+		
+		
 		'''
 		import java.util.*;
 		
-		public class MoveInit(){
-			private void addMoves(Move moves){ //private Move moves = Move.getInstance()
+		public class MoveInit{
+			public void addMoves(Move moves){ //private Move moves = Move.getInstance()
 				MoveData tempMoveData;
 				«FOR move : moves.move»
 				tempMoveData = new MoveData();
 				tempMoveData.setMoveName("«move.name»");
 				tempMoveData.setType("«move.EType.type.name»");
 				«FOR att : move.att»
-				«IF getNumberFromAtomicDab(att.av.an) instanceof Integer»
-				tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
-				«ELSEIF getNumberFromAtomicDab(att.av.an) instanceof Float»
-				tempMoveData.addAttribute(AttributeData.createAttributeDataWithFloat("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«IF getNumberFromAtomicDab(att.av.an) instanceof Number»
+				tempMoveData.addAttribute(new AttributeData("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
 				«ENDIF»
+				
 				moves.addMove(tempMoveData);
 				«ENDFOR»
 				«ENDFOR»
@@ -1208,15 +1185,15 @@ class RPGGenerator extends AbstractGenerator {
 		import java.util.*;
 		
 		public class TeamInit{
-			private void createTeams(Team team, Entities entities){
+			public void createTeams(Team team, List<Entity> entities){
 				«FOR team : teams.team»
 				«addTeamMemberString(team)»
 				«ENDFOR»
 			}
 			
-			private Entity findEntityByName(String name, Entities entities){
+			private Entity findEntityByName(String name, List<Entity> entities){
 				for(Entity e : entities){
-					if(e.toString().equals(name){
+					if(e.toString().equals(name)){
 						return e;
 					}
 				}
@@ -1230,14 +1207,83 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 	
-	def generateType(){
+	def generateTypes(IFileSystemAccess2 fsa, Relations relations){
+		fsa.generateFile("Type.java", generateType)
+		fsa.generateFile("TypeEnum.java", relations.generateTypeEnum)
+		fsa.generateFile("TypeRelation.java", generateTypeRelation)
+		fsa.generateFile("TypeRelationsInit.java", relations.generateTypeInit)
+	}
+	
+	def CharSequence generateTypeRelation(){
+		'''
+		import java.util.ArrayList;
+				
+				public class TypeRelation {
+				
+				    private ArrayList<String> weakAgainst;
+				    private ArrayList<String> strongAgainst;
+				
+				    public TypeRelation(){
+				        weakAgainst = new ArrayList<>();
+				        strongAgainst = new ArrayList<>();
+				    }
+				
+				    public void addStrongAgainst(String strong){
+				        strongAgainst.add(strong);
+				    }
+				
+				    public void addWeakAgainst(String weak){
+				        strongAgainst.add(weak);
+				    }
+				
+				    public ArrayList<String> getWeakAgainst(){
+				        return weakAgainst;
+				    }
+				
+				    public ArrayList<String> getStrongAgainst(){
+				        return strongAgainst;
+				    }
+				
+				}
+		'''
+	}
+	
+	def CharSequence generateTypeInit(Relations relations){
+		
+		'''
+		import java.util.*;
+				
+		public class TypeRelationsInit{
+			public void createRelations(Type type){
+				TypeRelation tr;
+				String currentType;
+				«FOR t : relations.type»
+				tr = new TypeRelation();
+				currentType = "«t.name»";
+				tr.addStrongAgainst("«t.TExpression.strong.name»");
+				«FOR better : t.TExpression.strong2»
+				tr.addStrongAgainst("«better.name»");
+				«ENDFOR»
+				tr.addWeakAgainst("«t.TExpression.weak.name»");
+				«FOR worse : t.TExpression.weak2»
+				tr.addWeakAgainst("«worse.name»");
+				«ENDFOR»
+				type.addTypeRelation(currentType, tr);
+				«ENDFOR»
+			}
+		}
+		'''
+	}
+	
+	def CharSequence generateType(){
 		'''
 		import java.util.*;
 				
 		public class Type{
 				
 			private List<String> types = new ArrayList<>();
-			//private String typeName;
+			private HashMap<String, TypeRelation> typeRelations = new HashMap<>();
+		
 			private static Type type;
 					
 			private Type(){}
@@ -1256,19 +1302,26 @@ class RPGGenerator extends AbstractGenerator {
 			public List<String> getTypes(){
 				return types;
 			}
+		
+			public void addTypeRelation(String typeString, TypeRelation tr){
+				typeRelations.put(typeString, tr);
+			}
+		
+			public HashMap<String, TypeRelation> getTypeRelations(){
+				return typeRelations;
+			}
 		}
 		'''
 	}
 
-	def generateTypeEnum(Relations relation){
+	def generateTypeEnum(Relations relations){
         '''
         public enum TypeEnum{
-        «FOR type: relation.type »
+        «FOR type: relations.type »
             «type.name»,
         «ENDFOR»
         }
         '''
     }
-	
 	
 }

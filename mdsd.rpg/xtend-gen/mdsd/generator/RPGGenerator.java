@@ -90,7 +90,7 @@ public class RPGGenerator extends AbstractGenerator {
         if (d instanceof Relations) {
           _matched=true;
           if ((!relationbool)) {
-            fsa.generateFile("TypeEnum.java", this.generateTypeEnum(((Relations)d)));
+            this.generateTypes(fsa, ((Relations)d));
             relationbool = true;
           }
         }
@@ -127,8 +127,7 @@ public class RPGGenerator extends AbstractGenerator {
         if (d instanceof Attributes) {
           _matched=true;
           if ((!attributesbool)) {
-            fsa.generateFile("Attribute.java", this.generateAttribute(((Attributes)d)));
-            fsa.generateFile("AttributeEnum.java", this.generateAttributeEnum(((Attributes)d)));
+            this.generateAttributes(fsa, ((Attributes)d));
             attributesbool = true;
           }
         }
@@ -136,7 +135,10 @@ public class RPGGenerator extends AbstractGenerator {
       if (!_matched) {
         if (d instanceof Death) {
           _matched=true;
-          System.out.println("Do this");
+          if ((!deathbool)) {
+            fsa.generateFile("DeathChecker.java", this.generateDeathChecker(((Death)d)));
+            deathbool = true;
+          }
         }
       }
       if (!_matched) {
@@ -144,6 +146,45 @@ public class RPGGenerator extends AbstractGenerator {
       }
     }
     fsa.generateFile((classFileName + ".java"), this.generateGamePOG2(classFileName));
+  }
+  
+  public Object generateLocations(final Locations locations) {
+    return null;
+  }
+  
+  public CharSequence generateDeathChecker(final Death death) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*;");
+    _builder.newLine();
+    _builder.append("public class DeathChecker {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public boolean check(Entity entity){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("HashMap<String, Number> eData = new HashMap<>();");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(AttributeData aData : entity.getAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("eData.put(aData.getAttributeName(), aData.getNumber());");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return (");
+    CharSequence _new_re = this.new_re(death.getReq());
+    _builder.append(_new_re, "\t\t");
+    _builder.append(");");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
   }
   
   public CharSequence generateGamePOG2(final String classFileName) {
@@ -155,22 +196,13 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("public class ");
     _builder.append(classFileName);
-    _builder.append(" implements KeyListener{");
+    _builder.append("{");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("private Type type;");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private List<Attribute> attributes;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("private Attribute attribute;");
-    _builder.newLine();
     _builder.append("    ");
     _builder.append("private boolean gameFinished;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("private List<Entity> eList; ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("private List<Entity> entities;");
@@ -194,6 +226,9 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("private TeamInit teamInit;");
     _builder.newLine();
     _builder.append("    ");
+    _builder.append("private TypeRelationsInit tRI;");
+    _builder.newLine();
+    _builder.append("    ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("private String currentLocation;");
@@ -204,16 +239,12 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("    ");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("public Game(){");
-    _builder.newLine();
-    _builder.append("    \t");
-    _builder.append("eList = new ArrayList<>();");
-    _builder.newLine();
+    _builder.append("public ");
+    _builder.append(classFileName, "    ");
+    _builder.append("(){");
+    _builder.newLineIfNotEmpty();
     _builder.append("    \t");
     _builder.append("entities = new ArrayList<>();");
-    _builder.newLine();
-    _builder.append("     \t");
-    _builder.append("attributes = new ArrayList<>();");
     _builder.newLine();
     _builder.append("      \t");
     _builder.append("team = new Team();");
@@ -232,6 +263,9 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("    \t");
     _builder.append("teamInit = new TeamInit();");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("tRI = new TypeRelationsInit();");
     _builder.newLine();
     _builder.append("   \t");
     _builder.append("}");
@@ -259,7 +293,10 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("entityInit.createEntities(entities);");
     _builder.newLine();
     _builder.append("   \t\t");
-    _builder.append("teamInit.createTeams(team);");
+    _builder.append("teamInit.createTeams(team, entities);");
+    _builder.newLine();
+    _builder.append("   \t\t");
+    _builder.append("tRI.createRelations(type);");
     _builder.newLine();
     _builder.append("   \t");
     _builder.append("}");
@@ -271,7 +308,12 @@ public class RPGGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence generateAttribute(final Attributes attribute) {
+  public void generateAttributes(final IFileSystemAccess2 fsa, final Attributes attributes) {
+    fsa.generateFile("AttributeEnum.java", this.generateAttributeEnum(attributes));
+    fsa.generateFile("AttributeData.java", this.generateAttributeData());
+  }
+  
+  public CharSequence generateAttribute() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*;");
     _builder.newLine();
@@ -527,10 +569,7 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("private int intValue;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("private float floatValue;");
+    _builder.append("private Number number;");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("private String attributeName;");
@@ -544,13 +583,10 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("public AttributeData(int intValue, float floatValue, String attributeName) {");
+    _builder.append("public AttributeData(String attributeName, Number number) {");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("this.intValue = intValue;");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("this.floatValue = floatValue;");
+    _builder.append("this.number = number;");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("this.attributeName = attributeName;");
@@ -560,128 +596,20 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("public static AttributeData createAttributeWithStringAndDefaultValues(String s){");
+    _builder.append("public Number getNumber() {");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("AttributeData a = new AttributeData();");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("a.setAttributeName(s);");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("a.setFloatValue(45.0f);");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("a.setIntValue(45);");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("Attribute ab = Attribute.getInstance();");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("ab.addAttribute(a);");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("ab = null;");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("return a;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public static AttributeData createAttributeDataWithFloat(String attributeData, float f) {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("AttributeData a = new AttributeData();");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("a.setAttributeName(attributeData);");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("a.setFloatValue(f);");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("Attribute ab = Attribute.getInstance();");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("ab.addAttribute(a);");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("ab = null;");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("return a;");
+    _builder.append("return this.number;");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("public static AttributeData createAttributeDataWithInt(String attributeData, int i) {");
+    _builder.append("public void setNumber(Number number){");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("AttributeData a = new AttributeData();");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("a.setAttributeName(attributeData);");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("a.setIntValue(i);");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("Attribute ab = Attribute.getInstance();");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("ab.addAttribute(a);");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("ab = null;");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("return a;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public int getIntValue() {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("return this.intValue;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public void setIntValue(int intValue) {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("this.intValue = intValue;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public float getFloatValue() {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("return this.floatValue;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public void setFloatValue(float floatValue) {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("this.floatValue = floatValue;");
+    _builder.append("this.number = number;");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
@@ -705,76 +633,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("@Override");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public boolean equals(Object o) {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("if (o == this)");
-    _builder.newLine();
-    _builder.append("            ");
-    _builder.append("return true;");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("if (!(o instanceof AttributeData)) {");
-    _builder.newLine();
-    _builder.append("            ");
-    _builder.append("return false;");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("AttributeData attributeData = (AttributeData) o;");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("return intValue == attributeData.intValue && floatValue == attributeData.floatValue && Objects.equals(attributeName, attributeData.attributeName);");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("@Override");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public int hashCode() {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("return Objects.hash(intValue, floatValue, attributeName);");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("@Override");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public String toString() {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("return \"{\" +");
-    _builder.newLine();
-    _builder.append("            ");
-    _builder.append("\" intValue=\'\" + getIntValue() + \"\'\" +");
-    _builder.newLine();
-    _builder.append("            ");
-    _builder.append("\", floatValue=\'\" + getFloatValue() + \"\'\" +");
-    _builder.newLine();
-    _builder.append("            ");
-    _builder.append("\", attributeName=\'\" + getAttributeName() + \"\'\" +");
-    _builder.newLine();
-    _builder.append("            ");
-    _builder.append("\"}\";");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -900,8 +758,6 @@ public class RPGGenerator extends AbstractGenerator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*;");
     _builder.newLine();
-    _builder.append("import java.util.concurrent.*;");
-    _builder.newLine();
     _builder.append("public class Entity{");
     _builder.newLine();
     _builder.append("    ");
@@ -917,9 +773,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("private List<AttributeData> attribute;");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("private List<AttributeData> changingAttributes;");
-    _builder.newLine();
-    _builder.append("    ");
     _builder.append("private List<MoveData> moves;");
     _builder.newLine();
     _builder.newLine();
@@ -931,9 +784,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("moves = new ArrayList<>();");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("changingAttributes = new CopyOnWriteArrayList<>();");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
@@ -959,12 +809,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("this.attribute.addAll(e.getAttributes());");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("if(!e.getChangingAttributes().isEmpty())");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("this.changingAttributes.addAll(e.getChangingAttributes());");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("if(!e.getMoveData().isEmpty())");
@@ -1023,16 +867,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("public List<AttributeData> getChangingAttributes(){");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("return changingAttributes;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
     _builder.append("public EntityState getEntityState(){");
     _builder.newLine();
     _builder.append("      ");
@@ -1057,9 +891,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("this.attribute.add(attribute);");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("this.changingAttributes.add(attribute);");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
@@ -1103,53 +934,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("moves.add(moveData);");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public void requestChange(AttributeChangeEvent attribute){");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("if(changingAttributes.contains(attribute.getPreviousState())){");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("changingAttributes.remove(attribute.getPreviousState());");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("changingAttributes.add(attribute.getTargetState());");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public void die(){");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("state = EntityState.DEAD;");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("System.out.println(\"[\" + this.toString() + \"] \" +  \"Ufff I died\");");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("@Override");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public String toString() {");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("return this.name;");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
@@ -1212,10 +996,10 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("import java.util.*;");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("public class EntityInit(){");
+    _builder.append("public class EntityInit{");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("private void createEntities(List<Entities> entities){");
+    _builder.append("public void createEntities(List<Entity> entities){");
     _builder.newLine();
     {
       EList<Entity> _entity = entities.getEntity();
@@ -1237,10 +1021,10 @@ public class RPGGenerator extends AbstractGenerator {
         _builder.append("\t\t");
         String _lowerCase_2 = entity.getName().toLowerCase();
         _builder.append(_lowerCase_2, "\t\t");
-        _builder.append(".setType(");
+        _builder.append(".setType(\"");
         String _name_1 = entity.getEType().getType().getName();
         _builder.append(_name_1, "\t\t");
-        _builder.append(");");
+        _builder.append("\");");
         _builder.newLineIfNotEmpty();
         {
           EList<Move> _move = entity.getEMoves().getMove();
@@ -1260,11 +1044,11 @@ public class RPGGenerator extends AbstractGenerator {
           for(final AltAttribute att : _att) {
             {
               Number _numberFromAtomicDab = this.getNumberFromAtomicDab(att.getAv().getAn());
-              if ((_numberFromAtomicDab instanceof Integer)) {
+              if ((_numberFromAtomicDab instanceof Number)) {
                 _builder.append("\t\t");
                 String _lowerCase_4 = entity.getName().toLowerCase();
                 _builder.append(_lowerCase_4, "\t\t");
-                _builder.append(".addAttribute(AttributeData.createAttributeDataWithInt(\"");
+                _builder.append(".addAttribute(new AttributeData(\"");
                 String _name_3 = att.getAttribute().getName();
                 _builder.append(_name_3, "\t\t");
                 _builder.append("\", ");
@@ -1272,29 +1056,14 @@ public class RPGGenerator extends AbstractGenerator {
                 _builder.append(_numberFromAtomicDab_1, "\t\t");
                 _builder.append("));");
                 _builder.newLineIfNotEmpty();
-              } else {
-                Number _numberFromAtomicDab_2 = this.getNumberFromAtomicDab(att.getAv().getAn());
-                if ((_numberFromAtomicDab_2 instanceof Float)) {
-                  _builder.append("\t\t");
-                  String _lowerCase_5 = entity.getName().toLowerCase();
-                  _builder.append(_lowerCase_5, "\t\t");
-                  _builder.append(".addAttribute(AttributeData.createAttributeDataWithFloat(\"");
-                  String _name_4 = att.getAttribute().getName();
-                  _builder.append(_name_4, "\t\t");
-                  _builder.append("\", ");
-                  Number _numberFromAtomicDab_3 = this.getNumberFromAtomicDab(att.getAv().getAn());
-                  _builder.append(_numberFromAtomicDab_3, "\t\t");
-                  _builder.append("));");
-                  _builder.newLineIfNotEmpty();
-                }
               }
             }
           }
         }
         _builder.append("\t\t");
         _builder.append("entities.add(");
-        String _lowerCase_6 = entity.getName().toLowerCase();
-        _builder.append(_lowerCase_6, "\t\t");
+        String _lowerCase_5 = entity.getName().toLowerCase();
+        _builder.append(_lowerCase_5, "\t\t");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
       }
@@ -1816,6 +1585,10 @@ public class RPGGenerator extends AbstractGenerator {
     return this.logic(req.getLog());
   }
   
+  public CharSequence new_re(final Require req) {
+    return this.new_logic(req.getLog());
+  }
+  
   protected CharSequence _logic(final Or x) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("(");
@@ -1955,6 +1728,142 @@ public class RPGGenerator extends AbstractGenerator {
   protected CharSequence _exp(final NameAttribute x) {
     String _name = x.getAttribute().getName();
     return ("_" + _name);
+  }
+  
+  protected CharSequence _new_logic(final Or x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _new_logic = this.new_logic(x.getLeft());
+    _builder.append(_new_logic);
+    _builder.append("||");
+    CharSequence _new_logic_1 = this.new_logic(x.getRight());
+    _builder.append(_new_logic_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _new_logic(final And x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _new_logic = this.new_logic(x.getLeft());
+    _builder.append(_new_logic);
+    _builder.append("&&");
+    CharSequence _new_logic_1 = this.new_logic(x.getRight());
+    _builder.append(_new_logic_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _new_logic(final NumberComparing x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _new_exp = this.new_exp(x.getLeft());
+    _builder.append(_new_exp);
+    String _generateComp = this.generateComp(x.getComp());
+    _builder.append(_generateComp);
+    CharSequence _new_exp_1 = this.new_exp(x.getRight());
+    _builder.append(_new_exp_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _new_exp(final Add x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _new_exp = this.new_exp(x.getLeft());
+    _builder.append(_new_exp);
+    _builder.append("+");
+    CharSequence _new_exp_1 = this.new_exp(x.getRight());
+    _builder.append(_new_exp_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _new_exp(final Sub x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _new_exp = this.new_exp(x.getLeft());
+    _builder.append(_new_exp);
+    _builder.append("-");
+    CharSequence _new_exp_1 = this.new_exp(x.getRight());
+    _builder.append(_new_exp_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _new_exp(final Mult x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _new_exp = this.new_exp(x.getLeft());
+    _builder.append(_new_exp);
+    _builder.append("*");
+    CharSequence _new_exp_1 = this.new_exp(x.getRight());
+    _builder.append(_new_exp_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _new_exp(final Div x) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    CharSequence _new_exp = this.new_exp(x.getLeft());
+    _builder.append(_new_exp);
+    _builder.append("/");
+    CharSequence _new_exp_1 = this.new_exp(x.getRight());
+    _builder.append(_new_exp_1);
+    _builder.append(")");
+    return _builder;
+  }
+  
+  protected CharSequence _new_exp(final IntNum x) {
+    return Integer.toString(x.getValue());
+  }
+  
+  protected CharSequence _new_exp(final FloatNum x) {
+    String _string = Integer.toString(x.getI());
+    String _plus = (_string + ".");
+    String _string_1 = Integer.toString(x.getDecimal());
+    return (_plus + _string_1);
+  }
+  
+  protected CharSequence _new_exp(final NameAttribute x) {
+    String _xifexpression = null;
+    if (((x.getAttribute().getAVal().getLTypes() != null) && x.getAttribute().getAVal().getLTypes().equals("Integer"))) {
+      String _name = x.getAttribute().getName();
+      String _plus = (("eData.get(" + "\"") + _name);
+      String _plus_1 = (_plus + "\"");
+      _xifexpression = (_plus_1 + ").intValue()");
+    } else {
+      String _xifexpression_1 = null;
+      if (((x.getAttribute().getAVal().getLTypes() != null) && x.getAttribute().getAVal().getLTypes().equals("Float"))) {
+        String _name_1 = x.getAttribute().getName();
+        String _plus_2 = (("eData.get(" + "\"") + _name_1);
+        String _plus_3 = (_plus_2 + "\"");
+        _xifexpression_1 = (_plus_3 + ").floatValue()");
+      } else {
+        String _xifexpression_2 = null;
+        if (((x.getAttribute().getAVal().getAn() != null) && (x.getAttribute().getAVal().getAn() instanceof IntNum))) {
+          String _name_2 = x.getAttribute().getName();
+          String _plus_4 = (("eData.get(" + "\"") + _name_2);
+          String _plus_5 = (_plus_4 + "\"");
+          _xifexpression_2 = (_plus_5 + ").intValue()");
+        } else {
+          String _xifexpression_3 = null;
+          if (((x.getAttribute().getAVal().getAn() != null) && (x.getAttribute().getAVal().getAn() instanceof FloatNum))) {
+            String _name_3 = x.getAttribute().getName();
+            String _plus_6 = (("eData.get(" + "\"") + _name_3);
+            String _plus_7 = (_plus_6 + "\"");
+            _xifexpression_3 = (_plus_7 + ").floatValue()");
+          } else {
+            _xifexpression_3 = "Shit son";
+          }
+          _xifexpression_2 = _xifexpression_3;
+        }
+        _xifexpression_1 = _xifexpression_2;
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
   }
   
   protected Number _getNumberFromAtomicDab(final IntNum x) {
@@ -2124,7 +2033,7 @@ public class RPGGenerator extends AbstractGenerator {
   }
   
   public void generateMoves(final IFileSystemAccess2 fsa, final Moves moves) {
-    fsa.generateFile("Move.java", this.generateEntity());
+    fsa.generateFile("Move.java", this.generateMove());
     fsa.generateFile("MoveEnum.java", this.generateMoveEnum(moves));
     fsa.generateFile("EntityState.java", this.generateEntityState());
     fsa.generateFile("MoveInit.java", this.generateMoveInit(moves));
@@ -2469,10 +2378,10 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("import java.util.*;");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("public class MoveInit(){");
+    _builder.append("public class MoveInit{");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("private void addMoves(Move moves){ //private Move moves = Move.getInstance()");
+    _builder.append("public void addMoves(Move moves){ //private Move moves = Move.getInstance()");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("MoveData tempMoveData;");
@@ -2500,9 +2409,9 @@ public class RPGGenerator extends AbstractGenerator {
           for(final AltAttribute att : _att) {
             {
               Number _numberFromAtomicDab = this.getNumberFromAtomicDab(att.getAv().getAn());
-              if ((_numberFromAtomicDab instanceof Integer)) {
+              if ((_numberFromAtomicDab instanceof Number)) {
                 _builder.append("\t\t");
-                _builder.append("tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt(\"");
+                _builder.append("tempMoveData.addAttribute(new AttributeData(\"");
                 String _name_2 = att.getAttribute().getName();
                 _builder.append(_name_2, "\t\t");
                 _builder.append("\", ");
@@ -2510,21 +2419,10 @@ public class RPGGenerator extends AbstractGenerator {
                 _builder.append(_numberFromAtomicDab_1, "\t\t");
                 _builder.append("));");
                 _builder.newLineIfNotEmpty();
-              } else {
-                Number _numberFromAtomicDab_2 = this.getNumberFromAtomicDab(att.getAv().getAn());
-                if ((_numberFromAtomicDab_2 instanceof Float)) {
-                  _builder.append("\t\t");
-                  _builder.append("tempMoveData.addAttribute(AttributeData.createAttributeDataWithFloat(\"");
-                  String _name_3 = att.getAttribute().getName();
-                  _builder.append(_name_3, "\t\t");
-                  _builder.append("\", ");
-                  Number _numberFromAtomicDab_3 = this.getNumberFromAtomicDab(att.getAv().getAn());
-                  _builder.append(_numberFromAtomicDab_3, "\t\t");
-                  _builder.append("));");
-                  _builder.newLineIfNotEmpty();
-                }
               }
             }
+            _builder.append("\t\t");
+            _builder.newLine();
             _builder.append("\t\t");
             _builder.append("moves.addMove(tempMoveData);");
             _builder.newLine();
@@ -2761,7 +2659,7 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("public class TeamInit{");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("private void createTeams(Team team, Entities entities){");
+    _builder.append("public void createTeams(Team team, List<Entity> entities){");
     _builder.newLine();
     {
       EList<Team> _team = teams.getTeam();
@@ -2778,13 +2676,13 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("private Entity findEntityByName(String name, Entities entities){");
+    _builder.append("private Entity findEntityByName(String name, List<Entity> entities){");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("for(Entity e : entities){");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("if(e.toString().equals(name){");
+    _builder.append("if(e.toString().equals(name)){");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("return e;");
@@ -2810,6 +2708,172 @@ public class RPGGenerator extends AbstractGenerator {
     return _builder;
   }
   
+  public void generateTypes(final IFileSystemAccess2 fsa, final Relations relations) {
+    fsa.generateFile("Type.java", this.generateType());
+    fsa.generateFile("TypeEnum.java", this.generateTypeEnum(relations));
+    fsa.generateFile("TypeRelation.java", this.generateTypeRelation());
+    fsa.generateFile("TypeRelationsInit.java", this.generateTypeInit(relations));
+  }
+  
+  public CharSequence generateTypeRelation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.ArrayList;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("public class TypeRelation {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("private ArrayList<String> weakAgainst;");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("private ArrayList<String> strongAgainst;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("public TypeRelation(){");
+    _builder.newLine();
+    _builder.append("\t\t        ");
+    _builder.append("weakAgainst = new ArrayList<>();");
+    _builder.newLine();
+    _builder.append("\t\t        ");
+    _builder.append("strongAgainst = new ArrayList<>();");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("public void addStrongAgainst(String strong){");
+    _builder.newLine();
+    _builder.append("\t\t        ");
+    _builder.append("strongAgainst.add(strong);");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("public void addWeakAgainst(String weak){");
+    _builder.newLine();
+    _builder.append("\t\t        ");
+    _builder.append("strongAgainst.add(weak);");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("public ArrayList<String> getWeakAgainst(){");
+    _builder.newLine();
+    _builder.append("\t\t        ");
+    _builder.append("return weakAgainst;");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("public ArrayList<String> getStrongAgainst(){");
+    _builder.newLine();
+    _builder.append("\t\t        ");
+    _builder.append("return strongAgainst;");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence generateTypeInit(final Relations relations) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("public class TypeRelationsInit{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void createRelations(Type type){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("TypeRelation tr;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("String currentType;");
+    _builder.newLine();
+    {
+      EList<Type> _type = relations.getType();
+      for(final Type t : _type) {
+        _builder.append("\t\t");
+        _builder.append("tr = new TypeRelation();");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("currentType = \"");
+        String _name = t.getName();
+        _builder.append(_name, "\t\t");
+        _builder.append("\";");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("tr.addStrongAgainst(\"");
+        String _name_1 = t.getTExpression().getStrong().getName();
+        _builder.append(_name_1, "\t\t");
+        _builder.append("\");");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<Type> _strong2 = t.getTExpression().getStrong2();
+          for(final Type better : _strong2) {
+            _builder.append("\t\t");
+            _builder.append("tr.addStrongAgainst(\"");
+            String _name_2 = better.getName();
+            _builder.append(_name_2, "\t\t");
+            _builder.append("\");");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t\t");
+        _builder.append("tr.addWeakAgainst(\"");
+        String _name_3 = t.getTExpression().getWeak().getName();
+        _builder.append(_name_3, "\t\t");
+        _builder.append("\");");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<Type> _weak2 = t.getTExpression().getWeak2();
+          for(final Type worse : _weak2) {
+            _builder.append("\t\t");
+            _builder.append("tr.addWeakAgainst(\"");
+            String _name_4 = worse.getName();
+            _builder.append(_name_4, "\t\t");
+            _builder.append("\");");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t\t");
+        _builder.append("type.addTypeRelation(currentType, tr);");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence generateType() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*;");
@@ -2824,7 +2888,8 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("private List<String> types = new ArrayList<>();");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("//private String typeName;");
+    _builder.append("private HashMap<String, TypeRelation> typeRelations = new HashMap<>();");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("private static Type type;");
@@ -2874,17 +2939,37 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void addTypeRelation(String typeString, TypeRelation tr){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("typeRelations.put(typeString, tr);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public HashMap<String, TypeRelation> getTypeRelations(){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return typeRelations;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     return _builder;
   }
   
-  public CharSequence generateTypeEnum(final Relations relation) {
+  public CharSequence generateTypeEnum(final Relations relations) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public enum TypeEnum{");
     _builder.newLine();
     {
-      EList<Type> _type = relation.getType();
+      EList<Type> _type = relations.getType();
       for(final Type type : _type) {
         String _name = type.getName();
         _builder.append(_name);
@@ -2946,6 +3031,40 @@ public class RPGGenerator extends AbstractGenerator {
       return _exp((Add)x);
     } else if (x instanceof Sub) {
       return _exp((Sub)x);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(x).toString());
+    }
+  }
+  
+  public CharSequence new_logic(final Proposition x) {
+    if (x instanceof And) {
+      return _new_logic((And)x);
+    } else if (x instanceof NumberComparing) {
+      return _new_logic((NumberComparing)x);
+    } else if (x instanceof Or) {
+      return _new_logic((Or)x);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(x).toString());
+    }
+  }
+  
+  public CharSequence new_exp(final Sum x) {
+    if (x instanceof FloatNum) {
+      return _new_exp((FloatNum)x);
+    } else if (x instanceof IntNum) {
+      return _new_exp((IntNum)x);
+    } else if (x instanceof NameAttribute) {
+      return _new_exp((NameAttribute)x);
+    } else if (x instanceof Div) {
+      return _new_exp((Div)x);
+    } else if (x instanceof Mult) {
+      return _new_exp((Mult)x);
+    } else if (x instanceof Add) {
+      return _new_exp((Add)x);
+    } else if (x instanceof Sub) {
+      return _new_exp((Sub)x);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(x).toString());

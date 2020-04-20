@@ -1,19 +1,34 @@
 import java.util.*;
 public class AttributeData {
 
-    private int intValue;
-    private float floatValue;
+    private Number number;
     private String attributeName;
 
     public AttributeData() {
     }
 
-    public AttributeData(int intValue, float floatValue, String attributeName) {
-        this.intValue = intValue;
-        this.floatValue = floatValue;
+    public AttributeData(Number number, String attributeName) {
+        this.number = number;
         this.attributeName = attributeName;
     }
 
+    public Number getNumber() {
+        return this.number;
+    }
+
+    public void setNumber(Number number){
+        this.number = number;
+    }
+
+    public String getAttributeName() {
+        return this.attributeName;
+    }
+
+    public void setAttributeName(String attributeName) {
+        this.attributeName = attributeName;
+    }
+
+    /*
     public static AttributeData createAttributeWithStringAndDefaultValues(String s){
         AttributeData a = new AttributeData();
         a.setAttributeName(s);
@@ -93,5 +108,6 @@ public class AttributeData {
             ", attributeName='" + getAttributeName() + "'" +
             "}";
     }
+ */
 
 }

@@ -3,7 +3,6 @@ import java.awt.event.*;
 
 public class Game implements KeyListener{
     private Type type;
-    private List<Attribute> attributes;
     private Attribute attribute;
     private boolean gameFinished;
     private List<Entity> eList; 
@@ -15,7 +14,6 @@ public class Game implements KeyListener{
 
     public Game(){
       eList = new ArrayList<>();
-      attributes = new ArrayList<>();
       team = new Team();
       battleEntities = new ArrayList<>();
     }

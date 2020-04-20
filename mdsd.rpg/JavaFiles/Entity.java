@@ -1,17 +1,14 @@
 import java.util.*;
-import java.util.concurrent.*;
-public class Entity implements Killable{
+public class Entity{
     private String name;
     private String type;
     private EntityState state;
     private List<AttributeData> attribute;
-    private List<AttributeData> changingAttributes;
     private List<MoveData> moves;
 
     public Entity(){
       attribute = new ArrayList<>();
       moves = new ArrayList<>();
-      changingAttributes = new CopyOnWriteArrayList<>();
     }
 
     public Entity(Entity e){
@@ -21,8 +18,6 @@ public class Entity implements Killable{
       this.state = e.getEntityState();
       if(!e.getAttributes().isEmpty())
         this.attribute.addAll(e.getAttributes());
-      if(!e.getChangingAttributes().isEmpty())
-        this.changingAttributes.addAll(e.getChangingAttributes());
       if(!e.getMoveData().isEmpty())
         this.moves.addAll(e.getMoveData());
     }
@@ -43,10 +38,6 @@ public class Entity implements Killable{
       return attribute;
     }
 
-    public List<AttributeData> getChangingAttributes(){
-      return changingAttributes;
-    }
-
     public EntityState getEntityState(){
       return state;
     }
@@ -57,7 +48,6 @@ public class Entity implements Killable{
 
     public void addAttribute(AttributeData attribute){
       this.attribute.add(attribute);
-      this.changingAttributes.add(attribute);
     }
 
     public List<MoveData> getMoveData(){
@@ -74,24 +64,5 @@ public class Entity implements Killable{
     
     public void addMoveData(MoveData moveData){
       moves.add(moveData);
-    }
-
-    public void requestChange(AttributeChangeEvent attribute){
-      if(changingAttributes.contains(attribute.getPreviousState())){
-        changingAttributes.remove(attribute.getPreviousState());
-        changingAttributes.add(attribute.getTargetState());
-      }
-    }
-
-    @Override
-    public void die(){
-      state = EntityState.DEAD;
-      System.out.println("[" + this.toString() + "] " +  "Ufff I died");
-    }
-
-    @Override
-    public String toString() {
-      
-      return this.name;
     }
 }

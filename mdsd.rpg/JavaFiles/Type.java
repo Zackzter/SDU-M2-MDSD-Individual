@@ -3,7 +3,8 @@ import java.util.*;
 public class Type{
 		
 	private List<String> types = new ArrayList<>();
-	//private String typeName;
+	private HashMap<String, TypeRelation> typeRelations = new HashMap<>();
+
 	private static Type type;
 			
 	private Type(){}
@@ -21,5 +22,13 @@ public class Type{
 
 	public List<String> getTypes(){
 		return types;
+	}
+
+	public void addTypeRelation(String typeString, TypeRelation tr){
+		typeRelations.put(typeString, tr);
+	}
+
+	public HashMap<String, TypeRelation> getTypeRelations(){
+		return typeRelations;
 	}
 }

@@ -7,8 +7,8 @@ public class Runner {
         Scanner s = new Scanner(System.in);
         int playerEntityNumber = 0;
         Entity playerEntity;
-        int health = 50;
-        int player_health = 50;
+        Number health = 50;
+        Number player_health = 50;
         Random random = new Random();
         boolean gameOver = false;
 
@@ -58,7 +58,7 @@ public class Runner {
                                 
                                 // Will check that the user writes pick a move which exists
                                 if(moves.contains(moveName)){
-                                    int power = game.getMove().getMove(moveName).getMoveAttributes().get(0).getIntValue();                                    
+                                    Number power = game.getMove().getMove(moveName).getMoveAttributes().get(0).getNumber();                                    
                                     System.out.println("You used "+ moveName + "\n");
                                     // TODO: in xtend file use actual hp hihi
                                     health = health - power;
@@ -92,9 +92,9 @@ public class Runner {
                         else{
                             System.out.println("Enemy Turn...");
                             int move = random.nextInt(enemyEntity.getMoveNameList().size());
-                            int enemyPower = game.getMove().getMove(enemyEntity.getMoveNameList().get(move)).getMoveAttributes().get(0).getIntValue();
+                            Number enemyPower = game.getMove().getMove(enemyEntity.getMoveNameList().get(move)).getMoveAttributes().get(0).getNumber();
                             System.out.println(enemyEntity.getName() + " used " + enemyEntity.getMoveNameList().get(move) + "\n");
-                            player_health = player_health - enemyPower;
+                            player_health -= enemyPower;
                             System.out.println("Player health: " + player_health + "\n");
                             
                             // It will check if the player's entity is dead
