@@ -4,6 +4,24 @@
 package mdsd.validation;
 
 
+import java.util.*;
+import java.util.stream.Collectors;
+
+import org.eclipse.xtext.validation.Check;
+
+import mdsd.rPG.Attribute;
+import mdsd.rPG.Attributes;
+import mdsd.rPG.Death;
+import mdsd.rPG.Declaration;
+import mdsd.rPG.Entities;
+import mdsd.rPG.Entity;
+import mdsd.rPG.Locations;
+import mdsd.rPG.Moves;
+import mdsd.rPG.RPGPackage;
+import mdsd.rPG.Relations;
+import mdsd.rPG.SystemRPG;
+import mdsd.rPG.Teams;
+
 /**
  * This class contains custom validation rules. 
  *
@@ -11,7 +29,9 @@ package mdsd.validation;
  */
 public class RPGValidator extends AbstractRPGValidator {
 	
-//	public static final String INVALID_NAME = "invalidName";
+	public static final String INVALID_NAME = "invalidName";
+	public static final String UNSUPPORTED_OPERATION = "unsupportedOperation";
+	public static final String MISSING_DECLARATION = "missingDeclaration";
 //
 //	@Check
 //	public void checkGreetingStartsWithCapital(Greeting greeting) {
@@ -21,5 +41,79 @@ public class RPGValidator extends AbstractRPGValidator {
 //					INVALID_NAME);
 //		}
 //	}
+	
+	@Check
+	public void checkEntityStartsWithCapital(Entity entity) {
+		if (!Character.isUpperCase(entity.getName().charAt(0))) {
+			warning("Name should be a capital",  RPGPackage.Literals.ENTITY__NAME, INVALID_NAME);
+		}
+	}
+	
+	
+	@Check
+	public void checkAttribute(Attribute att) {
+
+		if(att.getAVal().getLTypes() == null) {
+			warning("This is currently not supported in the language. Please use Float or Integer instead.", RPGPackage.Literals.ATTRIBUTE__NAME, UNSUPPORTED_OPERATION);
+		}
+	}
+	
+	private Map<String, Boolean> setupDeclarationMap() {
+		Map<String, Boolean> mappy = new HashMap<String, Boolean>();
+		
+		mappy.put("Locations", false);
+		mappy.put("Relations", false);
+		mappy.put("Moves", false);
+		mappy.put("Entities", false);
+		mappy.put("Teams", false);
+		mappy.put("Death", false);
+		mappy.put("Attributes", false);
+		
+		return mappy;
+	}
+	
+	@Check
+	public void checkDeclarations(SystemRPG sysrpg) {
+		// Locations | Relations | Moves | Entities | Teams | Death | Attributes
+		
+		Map<String, Boolean> mappy = setupDeclarationMap();
+		
+		for(Declaration d : sysrpg.getDeclarations()) {
+
+			if(d instanceof Locations) {
+				mappy.computeIfPresent("Locations", (k, v) -> true);
+			} else if(d instanceof Relations) {
+				mappy.computeIfPresent("Relations", (k, v) -> true);
+			} else if(d instanceof Moves) {
+				mappy.computeIfPresent("Moves", (k, v) -> true);
+			} else if(d instanceof Entities) {
+				mappy.computeIfPresent("Entities", (k, v) -> true);
+			} else if(d instanceof Teams) {
+				mappy.computeIfPresent("Teams", (k, v) -> true);
+			} else if(d instanceof Death) {
+				mappy.computeIfPresent("Death", (k, v) -> true);
+			} else if(d instanceof Attributes) {
+				mappy.computeIfPresent("Attributes", (k, v) -> true);
+			}		
+			
+		}
+		
+		Map<String, Boolean> notPresent = mappy.entrySet().stream()
+                .filter(map -> map.getValue() == false)
+                .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
+		
+		String missing = "";
+		for(Map.Entry<String, Boolean> entry : notPresent.entrySet()) {
+			missing += " " + "[" +entry.getKey() + "]";
+		}
+		
+		if(notPresent.size() > 0) {
+			error("The following declarations are missing:" + missing + ". Please use them in your language.", RPGPackage.Literals.SYSTEM_RPG__NAME, MISSING_DECLARATION);
+		}
+			
+
+
+	}
+	
 	
 }
