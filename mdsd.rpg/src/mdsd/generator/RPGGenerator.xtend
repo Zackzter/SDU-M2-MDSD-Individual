@@ -74,7 +74,7 @@ class RPGGenerator extends AbstractGenerator {
 			switch(d){
 				Locations:
 					if(!locationbool){ // should be done
-						fsa.generateFile("Location.java" , d.generateLocation)
+						generateLocations(fsa, d)
 						locationbool = true
 					}
 				Relations:
@@ -114,12 +114,21 @@ class RPGGenerator extends AbstractGenerator {
 			}
 
 		}
-		fsa.generateFile(classFileName + ".java", generateGamePOG2(classFileName))
-		
+		fsa.generateFile(classFileName + ".java", classFileName.generateGamePOG2)
+		fsa.generateFile("Runner.java", classFileName.generateRunner)
 	}
 	
-	def generateLocations(Locations locations){
+	def CharSequence generateRunner(String name){
+		'''
+		import java.util.*;
 		
+		public class Runner {
+		    public static void main(String[] args) {
+		    	«name» «name.toLowerCase» = new «name»();
+		    	«name.toLowerCase».run();
+		    }
+		}
+		'''
 	}
 	
 	def CharSequence generateDeathChecker(Death death){
@@ -144,7 +153,6 @@ class RPGGenerator extends AbstractGenerator {
 		
 		public class «classFileName»{
 			private Type type;
-		    private boolean gameFinished;
 		    private List<Entity> entities;
 		    private List<Entity> battleEntities;
 		    private Team team;
@@ -152,31 +160,127 @@ class RPGGenerator extends AbstractGenerator {
 		    private MoveInit moveInit;
 		    private EntityInit entityInit;
 		    private TeamInit teamInit;
-		    private TypeRelationsInit tRI;
+		    private TypeRelationsInit typeRelationsInit;
+		    private LocationsInit locationsInit;
+		    private Location location;
+		    private DeathChecker deathChecker;
+		    private Random random;
 		    
-		    private String currentLocation;
 		    private String currentTeam;
+		    private boolean gameFinished;
+		    private boolean won = false;
+		    private boolean lost = false;
+		    private Scanner s;
+		    private Entity playerEntity;
 		    
 		    public «classFileName»(){
 		    	entities = new ArrayList<>();
+		    	type = Type.getInstance();
 		      	team = new Team();
 		    	battleEntities = new ArrayList<>();
 		    	move = Move.getInstance();
+		    	location = Location.getInstance();
+		    	deathChecker = new DeathChecker();
 		    	moveInit = new MoveInit();
 		    	entityInit = new EntityInit();
 		    	teamInit = new TeamInit();
-		        tRI = new TypeRelationsInit();
+		    	locationsInit = new LocationsInit();
+		        typeRelationsInit = new TypeRelationsInit();
+		        s = new Scanner(System.in);
+		        random = new Random();
 		   	}
 		   	
 		   	public void run(){
 		   		initialize();
+		   		gameLoop();
 		   	}
 		   	
 		   	private void initialize(){
 		   		moveInit.addMoves(move);
 		   		entityInit.createEntities(entities);
 		   		teamInit.createTeams(team, entities);
-		   		tRI.createRelations(type);
+		   		typeRelationsInit.createRelations(type);
+		   		locationsInit.addLocations(location);
+		   	}
+		   	
+		   	private void gameLoop(){
+		   		playerEntity = team.getPlayerTeam().remove(0);
+				while (!gameFinished) {
+					if(won){
+						gameFinished = true;
+						System.out.println("You Won!");
+					}else if(lost){
+						gameFinished = true;
+						System.out.println("You Lost.");
+					}else{
+						// Get current location to fight at
+						String currentLocation = location.getLocations().remove(0);
+						String enemyTeamName = location.getTeams().get(currentLocation);
+						List<Entity> enemyTeam = team.getTeamByName(location.getTeams().get(currentLocation));
+						System.out.println("Current Location: " + currentLocation + ", fighting against: " + enemyTeamName);
+						processGame(enemyTeam);
+					}
+				}
+		   	}
+		   	
+		   	private void processGame(List<Entity> enemyTeam){
+		   		while(enemyTeam.size() > 0 && !lost){
+		   			Entity enemyEntity = enemyTeam.remove(0);
+		   			fight(enemyEntity);
+		   		}
+		   		if(!(location.getLocations().size() > 0) && !lost){
+					won = true;
+		   		}
+		   	}
+		   		
+		   	private void fight(Entity enemyEntity){
+		   		boolean fighting = true;
+		   		while(fighting){
+		   			System.out.println("You are against " + enemyEntity.getName() + " choose your move");
+		   			List<String> moves = playerEntity.getMoveNameList();
+					System.out.println(moves);
+					
+					boolean pickMove = true;
+					while (pickMove){  
+						String moveName = s.nextLine();
+						
+						// Will check that the user writes pick a move which exists
+						if(moves.contains(moveName)){
+							Number power = move.getMove(moveName).getMoveAttributes().get(0).getNumber();                                    
+							System.out.println("You used "+ moveName + "\n");
+							// TODO: in xtend file use actual hp hihi
+							// health = health - power;
+							// System.out.println("Enemy hp: " + health + "\n");
+							pickMove = !pickMove;
+						}else{
+							System.out.println("That's not a possible move!");
+						}
+						if(deathChecker.check(enemyEntity)){
+							System.out.println(enemyEntity.getName() + " is dead!");
+							enemyEntity.setEntityState(EntityState.DEAD);
+							return;
+						}else{
+							System.out.println("Enemy Turn...");
+							int choosenMove = random.nextInt(enemyEntity.getMoveNameList().size());
+							Number enemyPower = move.getMove(enemyEntity.getMoveNameList().get(choosenMove)).getMoveAttributes().get(0).getNumber();
+							System.out.println(enemyEntity.getName() + " used " + enemyEntity.getMoveNameList().get(choosenMove) + "\n");
+							//player_health -= enemyPower;
+							//System.out.println("Player health: " + player_health + "\n");
+							if(deathChecker.check(playerEntity)){
+								System.out.println("Your " + playerEntity.getName() + " is dead");
+								playerEntity.setEntityState(EntityState.DEAD);
+								
+								// Will add the next player entity to the fight, if there are no more, it will go to game over
+								if(!team.getPlayerTeam().isEmpty()){
+									playerEntity = team.getPlayerTeam().remove(0);
+								}else{
+									lost = true;
+									return;
+								}
+							}
+						}
+					}
+		   		}
 		   	}
 		}
 		
@@ -837,7 +941,12 @@ class RPGGenerator extends AbstractGenerator {
 		Float.valueOf(floatstring)
 	}
 	
-	def CharSequence generateLocation(Locations locations){
+	def generateLocations(IFileSystemAccess2 fsa, Locations locations){
+		fsa.generateFile("Location.java", generateLocation)
+		fsa.generateFile("LocationsInit.java", locations.generateLocationInit)
+	}
+	
+	def CharSequence generateLocation(){
 		
 		'''
 		import java.util.*;
@@ -895,6 +1004,9 @@ class RPGGenerator extends AbstractGenerator {
 		    public void addTeamToLocation(String location, String team){
 		        if(locations.contains(location)){
 		            teams.put(location, team);
+		        } else {
+		        	addLocation(location);
+		        	teams.put(location, team);
 		        }
 		    }
 		
@@ -903,10 +1015,27 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 	
+	def CharSequence generateLocationInit(Locations locations){
+		'''
+		import java.util.*;
+		
+		public class LocationsInit{
+			public void addLocations(Location location){
+				String locationName;
+				String teamName;
+				«FOR location : locations.loc»
+				locationName = "«location.name»";
+				teamName = "«location.team.name»";
+				location.addTeamToLocation(locationName, teamName);
+				«ENDFOR»
+			}
+		}
+		'''
+	}
+	
 	def generateMoves(IFileSystemAccess2 fsa, Moves moves){
 		fsa.generateFile("Move.java", generateMove)
 		fsa.generateFile("MoveEnum.java", moves.generateMoveEnum)
-		fsa.generateFile("EntityState.java", generateEntityState)
 		fsa.generateFile("MoveInit.java", moves.generateMoveInit)
 		fsa.generateFile("MoveData.java", generateMoveData)
 	}
@@ -1084,9 +1213,8 @@ class RPGGenerator extends AbstractGenerator {
 				«IF getNumberFromAtomicDab(att.av.an) instanceof Number»
 				tempMoveData.addAttribute(new AttributeData("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
 				«ENDIF»
-				
-				moves.addMove(tempMoveData);
 				«ENDFOR»
+				moves.addMove(tempMoveData);
 				«ENDFOR»
 			}
 		}
@@ -1094,8 +1222,8 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	
 	def generateTeams(IFileSystemAccess2 fsa, Teams teams){
-		fsa.generateFile("Team.java", generateTeam())
-		fsa.generateFile("TeamInit.java", generateTeamInit(teams))
+		fsa.generateFile("Team.java", generateTeam)
+		fsa.generateFile("TeamInit.java", teams.generateTeamInit)
 	}
 	
 	def String addTeamMemberString(Team team){
@@ -1194,7 +1322,7 @@ class RPGGenerator extends AbstractGenerator {
 			
 			private Entity findEntityByName(String name, List<Entity> entities){
 				for(Entity e : entities){
-					if(e.toString().equals(name)){
+					if(e.getName().equals(name)){
 						return e;
 					}
 				}
