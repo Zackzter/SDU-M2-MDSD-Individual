@@ -908,6 +908,7 @@ class RPGGenerator extends AbstractGenerator {
 		fsa.generateFile("MoveEnum.java", moves.generateMoveEnum)
 		fsa.generateFile("EntityState.java", generateEntityState)
 		fsa.generateFile("MoveInit.java", moves.generateMoveInit)
+		fsa.generateFile("MoveData.java", generateMoveData)
 	}
 	
 	def CharSequence generateMove(){
@@ -953,7 +954,7 @@ class RPGGenerator extends AbstractGenerator {
 		
 	}
 	
-	def generateMoveData(){
+	def CharSequence generateMoveData(){
 		'''
 		import java.util.*;
 		

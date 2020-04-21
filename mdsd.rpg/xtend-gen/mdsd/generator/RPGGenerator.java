@@ -2037,6 +2037,7 @@ public class RPGGenerator extends AbstractGenerator {
     fsa.generateFile("MoveEnum.java", this.generateMoveEnum(moves));
     fsa.generateFile("EntityState.java", this.generateEntityState());
     fsa.generateFile("MoveInit.java", this.generateMoveInit(moves));
+    fsa.generateFile("MoveData.java", this.generateMoveData());
   }
   
   public CharSequence generateMove() {
