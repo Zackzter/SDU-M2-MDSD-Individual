@@ -20,6 +20,7 @@ import mdsd.rPG.Moves;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Relations;
 import mdsd.rPG.SystemRPG;
+import mdsd.rPG.Team;
 import mdsd.rPG.Teams;
 
 /**
@@ -32,6 +33,7 @@ public class RPGValidator extends AbstractRPGValidator {
 	public static final String INVALID_NAME = "invalidName";
 	public static final String UNSUPPORTED_OPERATION = "unsupportedOperation";
 	public static final String MISSING_DECLARATION = "missingDeclaration";
+	public static final String EMPTY_ENTTIY_ATTRIBUTES = "emptyEntityAttributes";
 //
 //	@Check
 //	public void checkGreetingStartsWithCapital(Greeting greeting) {
@@ -46,6 +48,13 @@ public class RPGValidator extends AbstractRPGValidator {
 	public void checkEntityStartsWithCapital(Entity entity) {
 		if (!Character.isUpperCase(entity.getName().charAt(0))) {
 			warning("Name should be a capital",  RPGPackage.Literals.ENTITY__NAME, INVALID_NAME);
+		}
+	}
+	
+	@Check
+	public void checkGameStartsWithCapital(SystemRPG sysrpg) {
+		if (!Character.isUpperCase(sysrpg.getName().charAt(0))) {
+			warning("Name should be a capital",  RPGPackage.Literals.SYSTEM_RPG__NAME, INVALID_NAME);
 		}
 	}
 	
@@ -114,6 +123,6 @@ public class RPGValidator extends AbstractRPGValidator {
 
 
 	}
-	
+
 	
 }
