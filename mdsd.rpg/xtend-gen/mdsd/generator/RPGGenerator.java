@@ -4,9 +4,7 @@
 package mdsd.generator;
 
 import com.google.common.collect.Iterators;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import mdsd.rPG.Add;
 import mdsd.rPG.AltAttribute;
 import mdsd.rPG.And;
@@ -15,12 +13,10 @@ import mdsd.rPG.Attribute;
 import mdsd.rPG.Attributes;
 import mdsd.rPG.Bigger;
 import mdsd.rPG.BiggerEq;
-import mdsd.rPG.Carl;
 import mdsd.rPG.Comparator;
 import mdsd.rPG.Death;
 import mdsd.rPG.Declaration;
 import mdsd.rPG.Div;
-import mdsd.rPG.Effect;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
 import mdsd.rPG.EntityAttributes;
@@ -101,7 +97,6 @@ public class RPGGenerator extends AbstractGenerator {
           _matched=true;
           if ((!movesbool)) {
             this.generateMoves(fsa, ((Moves)d));
-            this.test(((Moves)d));
             movesbool = true;
           }
         }
@@ -204,11 +199,23 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t");
+    _builder.append("try{");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("return (");
     CharSequence _new_re = this.new_re(death.getReq());
-    _builder.append(_new_re, "\t\t");
+    _builder.append(_new_re, "\t\t\t");
     _builder.append(");");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("} catch(NullPointerException e){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return false;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
@@ -530,70 +537,70 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("\t\t\t\t");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("\t\t\t\t");
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("if(deathChecker.check(enemyEntity)){");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t");
+    _builder.append("\t\t\t\t");
     _builder.append("System.out.println(enemyEntity.getName() + \" is dead!\");");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t");
+    _builder.append("\t\t\t\t");
     _builder.append("enemyEntity.setEntityState(EntityState.DEAD);");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t");
+    _builder.append("\t\t\t\t");
     _builder.append("return;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}else{");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("}else{");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
     _builder.append("System.out.println(\"Enemy Turn...\");");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t");
+    _builder.append("\t\t\t\t");
     _builder.append("int choosenMove = random.nextInt(enemyEntity.getMoveNameList().size());");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t");
+    _builder.append("\t\t\t\t");
     _builder.append("Number enemyPower = move.getMove(enemyEntity.getMoveNameList().get(choosenMove)).getMoveAttributes().get(0).getNumber();");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t");
+    _builder.append("\t\t\t\t");
     _builder.append("System.out.println(enemyEntity.getName() + \" used \" + enemyEntity.getMoveNameList().get(choosenMove) + \"\\n\");");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t");
+    _builder.append("\t\t\t\t");
     _builder.append("//player_health -= enemyPower;");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t");
+    _builder.append("\t\t\t\t");
     _builder.append("//System.out.println(\"Player health: \" + player_health + \"\\n\");");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t");
+    _builder.append("\t\t\t\t");
     _builder.append("if(deathChecker.check(playerEntity)){");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
+    _builder.append("\t\t\t\t\t");
     _builder.append("System.out.println(\"Your \" + playerEntity.getName() + \" is dead\");");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
+    _builder.append("\t\t\t\t\t");
     _builder.append("playerEntity.setEntityState(EntityState.DEAD);");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
+    _builder.append("\t\t\t\t\t");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
+    _builder.append("\t\t\t\t\t");
     _builder.append("// Will add the next player entity to the fight, if there are no more, it will go to game over");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
+    _builder.append("\t\t\t\t\t");
     _builder.append("if(!team.getPlayerTeam().isEmpty()){");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("\t\t\t\t\t\t");
     _builder.append("playerEntity = team.getPlayerTeam().remove(0);");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
+    _builder.append("\t\t\t\t\t");
     _builder.append("}else{");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("\t\t\t\t\t\t");
     _builder.append("lost = true;");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t\t\t");
-    _builder.append("return;");
-    _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("}");
+    _builder.append("return;");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("}");
@@ -964,96 +971,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     return _builder;
-  }
-  
-  public CharSequence generateEffect(final Moves moves) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      EList<Move> _move = moves.getMove();
-      for(final Move move : _move) {
-        {
-          EList<Effect> _effect = move.getEffect();
-          for(final Effect effect : _effect) {
-            Carl _carl = effect.getRule().getCarl();
-            _builder.append(_carl);
-            _builder.newLineIfNotEmpty();
-            String _name = effect.getRule().getCarl().getAttribute().getAttribute().getName();
-            _builder.append(_name);
-            _builder.append("=");
-            CharSequence _exp = this.exp(effect.getRule().getCarl().getChange());
-            _builder.append(_exp);
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
-    return _builder;
-  }
-  
-  public void test(final Moves moves) {
-    ArrayList<Object> list = new ArrayList<Object>();
-    EList<Move> _move = moves.getMove();
-    for (final Move move : _move) {
-      EList<Effect> _effect = move.getEffect();
-      for (final Effect effects : _effect) {
-        this.exp2(effects.getRule().getCarl().getChange(), list);
-      }
-    }
-    for (final Object o : list) {
-      System.out.println(o.toString());
-    }
-  }
-  
-  protected Object _exp2(final Add x, final List<Object> list) {
-    Object _xblockexpression = null;
-    {
-      this.exp2(x.getLeft(), list);
-      list.add("+");
-      _xblockexpression = this.exp2(x.getRight(), list);
-    }
-    return _xblockexpression;
-  }
-  
-  protected Object _exp2(final Sub x, final List<Object> list) {
-    Object _xblockexpression = null;
-    {
-      this.exp2(x.getLeft(), list);
-      list.add("-");
-      _xblockexpression = this.exp2(x.getRight(), list);
-    }
-    return _xblockexpression;
-  }
-  
-  protected Object _exp2(final Mult x, final List<Object> list) {
-    Object _xblockexpression = null;
-    {
-      this.exp2(x.getLeft(), list);
-      list.add("*");
-      _xblockexpression = this.exp2(x.getRight(), list);
-    }
-    return _xblockexpression;
-  }
-  
-  protected Object _exp2(final Div x, final List<Object> list) {
-    Object _xblockexpression = null;
-    {
-      this.exp2(x.getLeft(), list);
-      list.add("/");
-      _xblockexpression = this.exp2(x.getRight(), list);
-    }
-    return _xblockexpression;
-  }
-  
-  protected Object _exp2(final IntNum x, final List<Object> list) {
-    return Boolean.valueOf(list.add(Integer.valueOf(x.getValue())));
-  }
-  
-  protected Object _exp2(final FloatNum x, final List<Object> list) {
-    return Boolean.valueOf(list.add(Integer.valueOf(x.getDecimal())));
-  }
-  
-  protected Object _exp2(final NameAttribute x, final List<Object> list) {
-    return Boolean.valueOf(list.add(x.getAttribute().getAVal()));
   }
   
   public void generateEntities(final IFileSystemAccess2 fsa, final Entities entities) {
@@ -1890,49 +1807,8 @@ public class RPGGenerator extends AbstractGenerator {
     return null;
   }
   
-  public CharSequence re(final Require req) {
-    return this.logic(req.getLog());
-  }
-  
   public CharSequence new_re(final Require req) {
     return this.new_logic(req.getLog());
-  }
-  
-  protected CharSequence _logic(final Or x) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
-    CharSequence _logic = this.logic(x.getLeft());
-    _builder.append(_logic);
-    _builder.append("||");
-    CharSequence _logic_1 = this.logic(x.getRight());
-    _builder.append(_logic_1);
-    _builder.append(")");
-    return _builder;
-  }
-  
-  protected CharSequence _logic(final And x) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
-    CharSequence _logic = this.logic(x.getLeft());
-    _builder.append(_logic);
-    _builder.append("&&");
-    CharSequence _logic_1 = this.logic(x.getRight());
-    _builder.append(_logic_1);
-    _builder.append(")");
-    return _builder;
-  }
-  
-  protected CharSequence _logic(final NumberComparing x) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
-    CharSequence _exp = this.exp(x.getLeft());
-    _builder.append(_exp);
-    String _generateComp = this.generateComp(x.getComp());
-    _builder.append(_generateComp);
-    CharSequence _exp_1 = this.exp(x.getRight());
-    _builder.append(_exp_1);
-    _builder.append(")");
-    return _builder;
   }
   
   public String generateComp(final Comparator op) {
@@ -1973,70 +1849,6 @@ public class RPGGenerator extends AbstractGenerator {
       }
     }
     return _switchResult;
-  }
-  
-  protected CharSequence _exp(final Add x) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
-    CharSequence _exp = this.exp(x.getLeft());
-    _builder.append(_exp);
-    _builder.append("+");
-    CharSequence _exp_1 = this.exp(x.getRight());
-    _builder.append(_exp_1);
-    _builder.append(")");
-    return _builder;
-  }
-  
-  protected CharSequence _exp(final Sub x) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
-    CharSequence _exp = this.exp(x.getLeft());
-    _builder.append(_exp);
-    _builder.append("-");
-    CharSequence _exp_1 = this.exp(x.getRight());
-    _builder.append(_exp_1);
-    _builder.append(")");
-    return _builder;
-  }
-  
-  protected CharSequence _exp(final Mult x) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
-    CharSequence _exp = this.exp(x.getLeft());
-    _builder.append(_exp);
-    _builder.append("*");
-    CharSequence _exp_1 = this.exp(x.getRight());
-    _builder.append(_exp_1);
-    _builder.append(")");
-    return _builder;
-  }
-  
-  protected CharSequence _exp(final Div x) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
-    CharSequence _exp = this.exp(x.getLeft());
-    _builder.append(_exp);
-    _builder.append("/");
-    CharSequence _exp_1 = this.exp(x.getRight());
-    _builder.append(_exp_1);
-    _builder.append(")");
-    return _builder;
-  }
-  
-  protected CharSequence _exp(final IntNum x) {
-    return Integer.toString(x.getValue());
-  }
-  
-  protected CharSequence _exp(final FloatNum x) {
-    String _string = Integer.toString(x.getI());
-    String _plus = (_string + ".");
-    String _string_1 = Integer.toString(x.getDecimal());
-    return (_plus + _string_1);
-  }
-  
-  protected CharSequence _exp(final NameAttribute x) {
-    String _name = x.getAttribute().getName();
-    return ("_" + _name);
   }
   
   protected CharSequence _new_logic(final Or x) {
@@ -3345,61 +3157,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     return _builder;
-  }
-  
-  public Object exp2(final Sum x, final List<Object> list) {
-    if (x instanceof FloatNum) {
-      return _exp2((FloatNum)x, list);
-    } else if (x instanceof IntNum) {
-      return _exp2((IntNum)x, list);
-    } else if (x instanceof NameAttribute) {
-      return _exp2((NameAttribute)x, list);
-    } else if (x instanceof Div) {
-      return _exp2((Div)x, list);
-    } else if (x instanceof Mult) {
-      return _exp2((Mult)x, list);
-    } else if (x instanceof Add) {
-      return _exp2((Add)x, list);
-    } else if (x instanceof Sub) {
-      return _exp2((Sub)x, list);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(x, list).toString());
-    }
-  }
-  
-  public CharSequence logic(final Proposition x) {
-    if (x instanceof And) {
-      return _logic((And)x);
-    } else if (x instanceof NumberComparing) {
-      return _logic((NumberComparing)x);
-    } else if (x instanceof Or) {
-      return _logic((Or)x);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(x).toString());
-    }
-  }
-  
-  public CharSequence exp(final Sum x) {
-    if (x instanceof FloatNum) {
-      return _exp((FloatNum)x);
-    } else if (x instanceof IntNum) {
-      return _exp((IntNum)x);
-    } else if (x instanceof NameAttribute) {
-      return _exp((NameAttribute)x);
-    } else if (x instanceof Div) {
-      return _exp((Div)x);
-    } else if (x instanceof Mult) {
-      return _exp((Mult)x);
-    } else if (x instanceof Add) {
-      return _exp((Add)x);
-    } else if (x instanceof Sub) {
-      return _exp((Sub)x);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(x).toString());
-    }
   }
   
   public CharSequence new_logic(final Proposition x) {

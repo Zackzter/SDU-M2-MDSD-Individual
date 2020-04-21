@@ -85,7 +85,6 @@ class RPGGenerator extends AbstractGenerator {
 				Moves:
 					if(!movesbool){
 						generateMoves(fsa, d)
-						d.test
 						movesbool = true
 					}
 				Entities:
@@ -140,7 +139,11 @@ class RPGGenerator extends AbstractGenerator {
 				for(AttributeData aData : entity.getAttributes()){
 					eData.put(aData.getAttributeName(), aData.getNumber());
 				}
-				return («death.req.new_re»);
+				try{
+					return («death.req.new_re»);
+				} catch(NullPointerException e){
+					return false;
+				}
 			}
 		}
 		'''
@@ -255,28 +258,28 @@ class RPGGenerator extends AbstractGenerator {
 						}else{
 							System.out.println("That's not a possible move!");
 						}
-						if(deathChecker.check(enemyEntity)){
-							System.out.println(enemyEntity.getName() + " is dead!");
-							enemyEntity.setEntityState(EntityState.DEAD);
-							return;
-						}else{
-							System.out.println("Enemy Turn...");
-							int choosenMove = random.nextInt(enemyEntity.getMoveNameList().size());
-							Number enemyPower = move.getMove(enemyEntity.getMoveNameList().get(choosenMove)).getMoveAttributes().get(0).getNumber();
-							System.out.println(enemyEntity.getName() + " used " + enemyEntity.getMoveNameList().get(choosenMove) + "\n");
-							//player_health -= enemyPower;
-							//System.out.println("Player health: " + player_health + "\n");
-							if(deathChecker.check(playerEntity)){
-								System.out.println("Your " + playerEntity.getName() + " is dead");
-								playerEntity.setEntityState(EntityState.DEAD);
-								
-								// Will add the next player entity to the fight, if there are no more, it will go to game over
-								if(!team.getPlayerTeam().isEmpty()){
-									playerEntity = team.getPlayerTeam().remove(0);
-								}else{
-									lost = true;
-									return;
-								}
+					}
+					if(deathChecker.check(enemyEntity)){
+						System.out.println(enemyEntity.getName() + " is dead!");
+						enemyEntity.setEntityState(EntityState.DEAD);
+						return;
+					}else{
+						System.out.println("Enemy Turn...");
+						int choosenMove = random.nextInt(enemyEntity.getMoveNameList().size());
+						Number enemyPower = move.getMove(enemyEntity.getMoveNameList().get(choosenMove)).getMoveAttributes().get(0).getNumber();
+						System.out.println(enemyEntity.getName() + " used " + enemyEntity.getMoveNameList().get(choosenMove) + "\n");
+						//player_health -= enemyPower;
+						//System.out.println("Player health: " + player_health + "\n");
+						if(deathChecker.check(playerEntity)){
+							System.out.println("Your " + playerEntity.getName() + " is dead");
+							playerEntity.setEntityState(EntityState.DEAD);
+							
+							// Will add the next player entity to the fight, if there are no more, it will go to game over
+							if(!team.getPlayerTeam().isEmpty()){
+								playerEntity = team.getPlayerTeam().remove(0);
+							}else{
+								lost = true;
+								return;
 							}
 						}
 					}
@@ -452,58 +455,6 @@ class RPGGenerator extends AbstractGenerator {
         «ENDFOR»
         }
         '''
-    }
-	
-    def CharSequence generateEffect(Moves moves){
-    '''
-        «FOR move: moves.move»
-            «FOR effect: move.effect»
-                «effect.rule.carl»
-                «effect.rule.carl.attribute.attribute.name»=«effect.rule.carl.change.exp»
-            «ENDFOR»
-        «ENDFOR»
-    '''
-    }
-    
-    def test(Moves moves){
-        var list = new ArrayList<Object>()
-        for(Move move : moves.move){
-            for(Effect effects : move.effect){
-                effects.rule.carl.change.exp2(list)
-            }
-        }
-        for(Object o : list)
-            System.out.println(o.toString())
-    }
-    
-    def dispatch exp2(Add x, List<Object> list){
-        x.left.exp2(list)
-        list.add('+')
-        x.right.exp2(list)
-    }
-    def dispatch exp2(Sub x, List<Object> list){
-        x.left.exp2(list)        
-        list.add('-')
-        x.right.exp2(list)
-    }
-    def dispatch exp2(Mult x, List<Object> list){
-        x.left.exp2(list)        
-        list.add('*')
-        x.right.exp2(list)
-    }
-    def dispatch exp2(Div x, List<Object> list){
-        x.left.exp2(list)
-        list.add('/')
-        x.right.exp2(list)
-    }
-    def dispatch exp2(IntNum x, List<Object> list){
-        list.add(x.value)
-    }
-    def dispatch exp2(FloatNum x, List<Object> list){
-        list.add(x.decimal)
-    }
-    def dispatch exp2(NameAttribute x, List<Object> list){
-        list.add(x.attribute.AVal)
     }
 
 	def generateEntities(IFileSystemAccess2 fsa, Entities entities){
@@ -850,48 +801,14 @@ class RPGGenerator extends AbstractGenerator {
 		
 	}
 	
-	def CharSequence re(Require req){
-		req.log.logic
-	}
-	
 	def CharSequence new_re(Require req){
 		req.log.new_logic
 	}
 	
-	def dispatch CharSequence logic(Or x){
-		'''(«x.left.logic»||«x.right.logic»)'''
-	}
-	def dispatch CharSequence logic(And x){
-		'''(«x.left.logic»&&«x.right.logic»)'''
-	}
-	def dispatch CharSequence logic(NumberComparing x){
-		'''(«x.left.exp»«x.comp.generateComp»«x.right.exp»)'''
-	}
 	def generateComp(Comparator op) {
 		switch op { Eq: '==' Smaller: '<' Bigger: '>' SmallerEq: '<=' BiggerEq: '>=' NEq: '!=' }
 	}
-	def dispatch CharSequence exp(Add x){
-		'''(«x.left.exp»+«x.right.exp»)'''
-	}
-	def dispatch CharSequence exp(Sub x){
-		'''(«x.left.exp»-«x.right.exp»)'''
-	}
-	def dispatch CharSequence exp(Mult x){
-		'''(«x.left.exp»*«x.right.exp»)'''
-	}
-	def dispatch CharSequence exp(Div x){
-		'''(«x.left.exp»/«x.right.exp»)'''
-	}
-	def dispatch CharSequence exp(IntNum x){
-		Integer.toString(x.value)
-	}
-	def dispatch CharSequence exp(FloatNum x){
-		Integer.toString(x.i) + '.' + Integer.toString(x.decimal)
-	}
-	def dispatch CharSequence exp(NameAttribute x){
-		{"_"+x.attribute.name}
-	}
-	
+
 	def dispatch CharSequence new_logic(Or x){
 		'''(«x.left.new_logic»||«x.right.new_logic»)'''
 	}
