@@ -4,7 +4,6 @@
 package mdsd.generator;
 
 import com.google.common.collect.Iterators;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mdsd.rPG.Add;
@@ -17,13 +16,12 @@ import mdsd.rPG.BEffect;
 import mdsd.rPG.Bigger;
 import mdsd.rPG.BiggerEq;
 import mdsd.rPG.Buff;
-import mdsd.rPG.BuffEffect;
 import mdsd.rPG.BuffRule;
 import mdsd.rPG.Comparator;
 import mdsd.rPG.Death;
 import mdsd.rPG.Declaration;
 import mdsd.rPG.Div;
-import mdsd.rPG.Effect2;
+import mdsd.rPG.Effect;
 import mdsd.rPG.Effects;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
@@ -34,7 +32,6 @@ import mdsd.rPG.Locations;
 import mdsd.rPG.MEffect;
 import mdsd.rPG.Move;
 import mdsd.rPG.MoveE;
-import mdsd.rPG.MoveEffect;
 import mdsd.rPG.MoveRule;
 import mdsd.rPG.Moves;
 import mdsd.rPG.Mult;
@@ -107,7 +104,6 @@ public class RPGGenerator extends AbstractGenerator {
           _matched=true;
           if ((!movesbool)) {
             this.generateMoves(fsa, ((Moves)d));
-            this.test(((Moves)d));
             movesbool = true;
           }
         }
@@ -746,8 +742,8 @@ public class RPGGenerator extends AbstractGenerator {
     int i = 1;
     boolean moveEffectBoolean = false;
     boolean buffEffectBoolean = false;
-    EList<Effect2> _effect = effects.getEffect();
-    for (final Effect2 effect : _effect) {
+    EList<Effect> _effect = effects.getEffect();
+    for (final Effect effect : _effect) {
       {
         System.out.println(i);
         boolean _matched = false;
@@ -1077,32 +1073,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     return _builder;
-  }
-  
-  public void test(final Moves moves) {
-    ArrayList<Object> list = new ArrayList<Object>();
-    EList<Move> _move = moves.getMove();
-    for (final Move move : _move) {
-      boolean _isEmpty = move.getMoveE().isEmpty();
-      boolean _not = (!_isEmpty);
-      if (_not) {
-        EList<MoveEffect> _moveE = move.getMoveE();
-        for (final MoveEffect effects : _moveE) {
-          this.generateEffect(effects.getMoveR());
-        }
-        boolean _isEmpty_1 = move.getBuffE().isEmpty();
-        boolean _not_1 = (!_isEmpty_1);
-        if (_not_1) {
-          EList<BuffEffect> _buffE = move.getBuffE();
-          for (final BuffEffect effects_1 : _buffE) {
-            this.generateBuffEffect(effects_1.getMoveB());
-          }
-        }
-      }
-    }
-    for (final Object o : list) {
-      System.out.println(o.toString());
-    }
   }
   
   public Object moveRuleTest(final MoveRule moveRule) {

@@ -20,7 +20,7 @@ package mdsd.rPG;
  * @model
  * @generated
  */
-public interface Require extends AttributeValues, Teams
+public interface Require extends Teams
 {
   /**
    * Returns the value of the '<em><b>Log</b></em>' containment reference.

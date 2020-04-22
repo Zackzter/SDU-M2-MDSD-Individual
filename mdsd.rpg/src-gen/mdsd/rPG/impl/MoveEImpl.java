@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class MoveEImpl extends Effect2Impl implements MoveE
+public class MoveEImpl extends EffectImpl implements MoveE
 {
   /**
    * The cached value of the '{@link #getMoveR() <em>Move R</em>}' containment reference.

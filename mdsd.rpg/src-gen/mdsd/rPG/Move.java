@@ -19,8 +19,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link mdsd.rPG.Move#getName <em>Name</em>}</li>
  *   <li>{@link mdsd.rPG.Move#getEType <em>EType</em>}</li>
  *   <li>{@link mdsd.rPG.Move#getAtt <em>Att</em>}</li>
- *   <li>{@link mdsd.rPG.Move#getMoveE <em>Move E</em>}</li>
- *   <li>{@link mdsd.rPG.Move#getBuffE <em>Buff E</em>}</li>
  *   <li>{@link mdsd.rPG.Move#getMEffect <em>MEffect</em>}</li>
  *   <li>{@link mdsd.rPG.Move#getBEffect <em>BEffect</em>}</li>
  * </ul>
@@ -86,30 +84,6 @@ public interface Move extends EObject
    * @generated
    */
   EList<AltAttribute> getAtt();
-
-  /**
-   * Returns the value of the '<em><b>Move E</b></em>' containment reference list.
-   * The list contents are of type {@link mdsd.rPG.MoveEffect}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Move E</em>' containment reference list.
-   * @see mdsd.rPG.RPGPackage#getMove_MoveE()
-   * @model containment="true"
-   * @generated
-   */
-  EList<MoveEffect> getMoveE();
-
-  /**
-   * Returns the value of the '<em><b>Buff E</b></em>' containment reference list.
-   * The list contents are of type {@link mdsd.rPG.BuffEffect}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Buff E</em>' containment reference list.
-   * @see mdsd.rPG.RPGPackage#getMove_BuffE()
-   * @model containment="true"
-   * @generated
-   */
-  EList<BuffEffect> getBuffE();
 
   /**
    * Returns the value of the '<em><b>MEffect</b></em>' containment reference list.

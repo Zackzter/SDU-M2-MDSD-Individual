@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class BuffImpl extends Effect2Impl implements Buff
+public class BuffImpl extends EffectImpl implements Buff
 {
   /**
    * The cached value of the '{@link #getBuffR() <em>Buff R</em>}' containment reference.

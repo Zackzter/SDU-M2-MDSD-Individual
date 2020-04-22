@@ -20,7 +20,7 @@ package mdsd.rPG;
  * @model
  * @generated
  */
-public interface MoveE extends Effect2
+public interface MoveE extends Effect
 {
   /**
    * Returns the value of the '<em><b>Move R</b></em>' containment reference.

@@ -4,15 +4,11 @@
 package mdsd.rPG.impl;
 
 import mdsd.rPG.Effect;
-import mdsd.rPG.MoveRule;
 import mdsd.rPG.RPGPackage;
-import mdsd.rPG.Rule;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -25,8 +21,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.EffectImpl#getRule <em>Rule</em>}</li>
- *   <li>{@link mdsd.rPG.impl.EffectImpl#getMoveRule <em>Move Rule</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.EffectImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -34,24 +29,24 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
 {
   /**
-   * The cached value of the '{@link #getRule() <em>Rule</em>}' containment reference.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRule()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected Rule rule;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getMoveRule() <em>Move Rule</em>}' containment reference.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getMoveRule()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected MoveRule moveRule;
+  protected String name = NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -80,9 +75,9 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
    * @generated
    */
   @Override
-  public Rule getRule()
+  public String getName()
   {
-    return rule;
+    return name;
   }
 
   /**
@@ -90,106 +85,13 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetRule(Rule newRule, NotificationChain msgs)
+  @Override
+  public void setName(String newName)
   {
-    Rule oldRule = rule;
-    rule = newRule;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.EFFECT__RULE, oldRule, newRule);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setRule(Rule newRule)
-  {
-    if (newRule != rule)
-    {
-      NotificationChain msgs = null;
-      if (rule != null)
-        msgs = ((InternalEObject)rule).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.EFFECT__RULE, null, msgs);
-      if (newRule != null)
-        msgs = ((InternalEObject)newRule).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.EFFECT__RULE, null, msgs);
-      msgs = basicSetRule(newRule, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.EFFECT__RULE, newRule, newRule));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public MoveRule getMoveRule()
-  {
-    return moveRule;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetMoveRule(MoveRule newMoveRule, NotificationChain msgs)
-  {
-    MoveRule oldMoveRule = moveRule;
-    moveRule = newMoveRule;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.EFFECT__MOVE_RULE, oldMoveRule, newMoveRule);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setMoveRule(MoveRule newMoveRule)
-  {
-    if (newMoveRule != moveRule)
-    {
-      NotificationChain msgs = null;
-      if (moveRule != null)
-        msgs = ((InternalEObject)moveRule).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.EFFECT__MOVE_RULE, null, msgs);
-      if (newMoveRule != null)
-        msgs = ((InternalEObject)newMoveRule).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.EFFECT__MOVE_RULE, null, msgs);
-      msgs = basicSetMoveRule(newMoveRule, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.EFFECT__MOVE_RULE, newMoveRule, newMoveRule));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case RPGPackage.EFFECT__RULE:
-        return basicSetRule(null, msgs);
-      case RPGPackage.EFFECT__MOVE_RULE:
-        return basicSetMoveRule(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.EFFECT__NAME, oldName, name));
   }
 
   /**
@@ -202,10 +104,8 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
   {
     switch (featureID)
     {
-      case RPGPackage.EFFECT__RULE:
-        return getRule();
-      case RPGPackage.EFFECT__MOVE_RULE:
-        return getMoveRule();
+      case RPGPackage.EFFECT__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -220,11 +120,8 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
   {
     switch (featureID)
     {
-      case RPGPackage.EFFECT__RULE:
-        setRule((Rule)newValue);
-        return;
-      case RPGPackage.EFFECT__MOVE_RULE:
-        setMoveRule((MoveRule)newValue);
+      case RPGPackage.EFFECT__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -240,11 +137,8 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
   {
     switch (featureID)
     {
-      case RPGPackage.EFFECT__RULE:
-        setRule((Rule)null);
-        return;
-      case RPGPackage.EFFECT__MOVE_RULE:
-        setMoveRule((MoveRule)null);
+      case RPGPackage.EFFECT__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -260,12 +154,27 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
   {
     switch (featureID)
     {
-      case RPGPackage.EFFECT__RULE:
-        return rule != null;
-      case RPGPackage.EFFECT__MOVE_RULE:
-        return moveRule != null;
+      case RPGPackage.EFFECT__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //EffectImpl

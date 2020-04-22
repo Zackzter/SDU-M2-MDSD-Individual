@@ -20,7 +20,7 @@ package mdsd.rPG;
  * @model
  * @generated
  */
-public interface Buff extends Effect2
+public interface Buff extends Effect
 {
   /**
    * Returns the value of the '<em><b>Buff R</b></em>' containment reference.

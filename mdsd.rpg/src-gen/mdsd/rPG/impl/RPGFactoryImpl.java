@@ -68,7 +68,7 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.SYSTEM_RPG: return createSystemRPG();
       case RPGPackage.DECLARATION: return createDeclaration();
       case RPGPackage.EFFECTS: return createEffects();
-      case RPGPackage.EFFECT2: return createEffect2();
+      case RPGPackage.EFFECT: return createEffect();
       case RPGPackage.BUFF: return createBuff();
       case RPGPackage.MOVE_E: return createMoveE();
       case RPGPackage.ATTRIBUTES: return createAttributes();
@@ -80,18 +80,13 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.TYPE_EXPRESSION: return createTypeExpression();
       case RPGPackage.MOVES: return createMoves();
       case RPGPackage.MOVE: return createMove();
-      case RPGPackage.MOVE_EFFECT: return createMoveEffect();
-      case RPGPackage.BUFF_EFFECT: return createBuffEffect();
       case RPGPackage.MEFFECT: return createMEffect();
       case RPGPackage.BEFFECT: return createBEffect();
       case RPGPackage.ETYPE: return createEType();
-      case RPGPackage.EFFECT: return createEffect();
       case RPGPackage.ATTRIBUTE_VALUES: return createAttributeValues();
       case RPGPackage.ALT_ATTRIBUTE: return createAltAttribute();
-      case RPGPackage.RULE: return createRule();
       case RPGPackage.MOVE_RULE: return createMoveRule();
       case RPGPackage.BUFF_RULE: return createBuffRule();
-      case RPGPackage.CARL: return createCarl();
       case RPGPackage.ENTITIES: return createEntities();
       case RPGPackage.DEATH: return createDeath();
       case RPGPackage.ENTITY: return createEntity();
@@ -108,7 +103,6 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.MULTIPLY: return createMultiply();
       case RPGPackage.ATOMIC_NUMBER: return createAtomicNumber();
       case RPGPackage.NAME_ATTRIBUTE: return createNameAttribute();
-      case RPGPackage.SELF_TARGETING: return createSelfTargeting();
       case RPGPackage.INT_NUM: return createIntNum();
       case RPGPackage.FLOAT_NUM: return createFloatNum();
       case RPGPackage.OR: return createOr();
@@ -170,10 +164,10 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
-  public Effect2 createEffect2()
+  public Effect createEffect()
   {
-    Effect2Impl effect2 = new Effect2Impl();
-    return effect2;
+    EffectImpl effect = new EffectImpl();
+    return effect;
   }
 
   /**
@@ -314,30 +308,6 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
-  public MoveEffect createMoveEffect()
-  {
-    MoveEffectImpl moveEffect = new MoveEffectImpl();
-    return moveEffect;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public BuffEffect createBuffEffect()
-  {
-    BuffEffectImpl buffEffect = new BuffEffectImpl();
-    return buffEffect;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public MEffect createMEffect()
   {
     MEffectImpl mEffect = new MEffectImpl();
@@ -374,18 +344,6 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
-  public Effect createEffect()
-  {
-    EffectImpl effect = new EffectImpl();
-    return effect;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public AttributeValues createAttributeValues()
   {
     AttributeValuesImpl attributeValues = new AttributeValuesImpl();
@@ -410,18 +368,6 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
-  public Rule createRule()
-  {
-    RuleImpl rule = new RuleImpl();
-    return rule;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public MoveRule createMoveRule()
   {
     MoveRuleImpl moveRule = new MoveRuleImpl();
@@ -438,18 +384,6 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     BuffRuleImpl buffRule = new BuffRuleImpl();
     return buffRule;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Carl createCarl()
-  {
-    CarlImpl carl = new CarlImpl();
-    return carl;
   }
 
   /**
@@ -642,18 +576,6 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     NameAttributeImpl nameAttribute = new NameAttributeImpl();
     return nameAttribute;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public SelfTargeting createSelfTargeting()
-  {
-    SelfTargetingImpl selfTargeting = new SelfTargetingImpl();
-    return selfTargeting;
   }
 
   /**

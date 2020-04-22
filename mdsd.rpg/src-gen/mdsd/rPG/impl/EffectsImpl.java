@@ -5,7 +5,7 @@ package mdsd.rPG.impl;
 
 import java.util.Collection;
 
-import mdsd.rPG.Effect2;
+import mdsd.rPG.Effect;
 import mdsd.rPG.Effects;
 import mdsd.rPG.RPGPackage;
 
@@ -42,7 +42,7 @@ public class EffectsImpl extends DeclarationImpl implements Effects
    * @generated
    * @ordered
    */
-  protected EList<Effect2> effect;
+  protected EList<Effect> effect;
 
   /**
    * <!-- begin-user-doc -->
@@ -71,11 +71,11 @@ public class EffectsImpl extends DeclarationImpl implements Effects
    * @generated
    */
   @Override
-  public EList<Effect2> getEffect()
+  public EList<Effect> getEffect()
   {
     if (effect == null)
     {
-      effect = new EObjectContainmentEList<Effect2>(Effect2.class, this, RPGPackage.EFFECTS__EFFECT);
+      effect = new EObjectContainmentEList<Effect>(Effect.class, this, RPGPackage.EFFECTS__EFFECT);
     }
     return effect;
   }
@@ -125,7 +125,7 @@ public class EffectsImpl extends DeclarationImpl implements Effects
     {
       case RPGPackage.EFFECTS__EFFECT:
         getEffect().clear();
-        getEffect().addAll((Collection<? extends Effect2>)newValue);
+        getEffect().addAll((Collection<? extends Effect>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

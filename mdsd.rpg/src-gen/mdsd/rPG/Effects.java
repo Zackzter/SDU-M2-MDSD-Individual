@@ -25,7 +25,7 @@ public interface Effects extends Declaration
 {
   /**
    * Returns the value of the '<em><b>Effect</b></em>' containment reference list.
-   * The list contents are of type {@link mdsd.rPG.Effect2}.
+   * The list contents are of type {@link mdsd.rPG.Effect}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Effect</em>' containment reference list.
@@ -33,6 +33,6 @@ public interface Effects extends Declaration
    * @model containment="true"
    * @generated
    */
-  EList<Effect2> getEffect();
+  EList<Effect> getEffect();
 
 } // Effects

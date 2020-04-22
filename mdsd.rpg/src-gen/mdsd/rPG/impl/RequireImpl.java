@@ -3,28 +3,17 @@
  */
 package mdsd.rPG.impl;
 
-import java.util.Collection;
-
-import mdsd.rPG.BattleSize;
-import mdsd.rPG.Declaration;
 import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Require;
-import mdsd.rPG.Team;
-import mdsd.rPG.Teams;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,35 +23,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.RequireImpl#getBs <em>Bs</em>}</li>
- *   <li>{@link mdsd.rPG.impl.RequireImpl#getTeam <em>Team</em>}</li>
  *   <li>{@link mdsd.rPG.impl.RequireImpl#getLog <em>Log</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class RequireImpl extends AttributeValuesImpl implements Require
+public class RequireImpl extends TeamsImpl implements Require
 {
-  /**
-   * The cached value of the '{@link #getBs() <em>Bs</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getBs()
-   * @generated
-   * @ordered
-   */
-  protected BattleSize bs;
-
-  /**
-   * The cached value of the '{@link #getTeam() <em>Team</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTeam()
-   * @generated
-   * @ordered
-   */
-  protected EList<Team> team;
-
   /**
    * The cached value of the '{@link #getLog() <em>Log</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -92,71 +59,6 @@ public class RequireImpl extends AttributeValuesImpl implements Require
   protected EClass eStaticClass()
   {
     return RPGPackage.Literals.REQUIRE;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public BattleSize getBs()
-  {
-    return bs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetBs(BattleSize newBs, NotificationChain msgs)
-  {
-    BattleSize oldBs = bs;
-    bs = newBs;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.REQUIRE__BS, oldBs, newBs);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setBs(BattleSize newBs)
-  {
-    if (newBs != bs)
-    {
-      NotificationChain msgs = null;
-      if (bs != null)
-        msgs = ((InternalEObject)bs).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.REQUIRE__BS, null, msgs);
-      if (newBs != null)
-        msgs = ((InternalEObject)newBs).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.REQUIRE__BS, null, msgs);
-      msgs = basicSetBs(newBs, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.REQUIRE__BS, newBs, newBs));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Team> getTeam()
-  {
-    if (team == null)
-    {
-      team = new EObjectContainmentEList<Team>(Team.class, this, RPGPackage.REQUIRE__TEAM);
-    }
-    return team;
   }
 
   /**
@@ -219,10 +121,6 @@ public class RequireImpl extends AttributeValuesImpl implements Require
   {
     switch (featureID)
     {
-      case RPGPackage.REQUIRE__BS:
-        return basicSetBs(null, msgs);
-      case RPGPackage.REQUIRE__TEAM:
-        return ((InternalEList<?>)getTeam()).basicRemove(otherEnd, msgs);
       case RPGPackage.REQUIRE__LOG:
         return basicSetLog(null, msgs);
     }
@@ -239,10 +137,6 @@ public class RequireImpl extends AttributeValuesImpl implements Require
   {
     switch (featureID)
     {
-      case RPGPackage.REQUIRE__BS:
-        return getBs();
-      case RPGPackage.REQUIRE__TEAM:
-        return getTeam();
       case RPGPackage.REQUIRE__LOG:
         return getLog();
     }
@@ -254,19 +148,11 @@ public class RequireImpl extends AttributeValuesImpl implements Require
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case RPGPackage.REQUIRE__BS:
-        setBs((BattleSize)newValue);
-        return;
-      case RPGPackage.REQUIRE__TEAM:
-        getTeam().clear();
-        getTeam().addAll((Collection<? extends Team>)newValue);
-        return;
       case RPGPackage.REQUIRE__LOG:
         setLog((Proposition)newValue);
         return;
@@ -284,12 +170,6 @@ public class RequireImpl extends AttributeValuesImpl implements Require
   {
     switch (featureID)
     {
-      case RPGPackage.REQUIRE__BS:
-        setBs((BattleSize)null);
-        return;
-      case RPGPackage.REQUIRE__TEAM:
-        getTeam().clear();
-        return;
       case RPGPackage.REQUIRE__LOG:
         setLog((Proposition)null);
         return;
@@ -307,68 +187,10 @@ public class RequireImpl extends AttributeValuesImpl implements Require
   {
     switch (featureID)
     {
-      case RPGPackage.REQUIRE__BS:
-        return bs != null;
-      case RPGPackage.REQUIRE__TEAM:
-        return team != null && !team.isEmpty();
       case RPGPackage.REQUIRE__LOG:
         return log != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == Declaration.class)
-    {
-      switch (derivedFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == Teams.class)
-    {
-      switch (derivedFeatureID)
-      {
-        case RPGPackage.REQUIRE__BS: return RPGPackage.TEAMS__BS;
-        case RPGPackage.REQUIRE__TEAM: return RPGPackage.TEAMS__TEAM;
-        default: return -1;
-      }
-    }
-    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == Declaration.class)
-    {
-      switch (baseFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == Teams.class)
-    {
-      switch (baseFeatureID)
-      {
-        case RPGPackage.TEAMS__BS: return RPGPackage.REQUIRE__BS;
-        case RPGPackage.TEAMS__TEAM: return RPGPackage.REQUIRE__TEAM;
-        default: return -1;
-      }
-    }
-    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
   }
 
 } //RequireImpl

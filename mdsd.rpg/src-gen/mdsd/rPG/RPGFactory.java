@@ -51,13 +51,13 @@ public interface RPGFactory extends EFactory
   Effects createEffects();
 
   /**
-   * Returns a new object of class '<em>Effect2</em>'.
+   * Returns a new object of class '<em>Effect</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Effect2</em>'.
+   * @return a new object of class '<em>Effect</em>'.
    * @generated
    */
-  Effect2 createEffect2();
+  Effect createEffect();
 
   /**
    * Returns a new object of class '<em>Buff</em>'.
@@ -159,24 +159,6 @@ public interface RPGFactory extends EFactory
   Move createMove();
 
   /**
-   * Returns a new object of class '<em>Move Effect</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Move Effect</em>'.
-   * @generated
-   */
-  MoveEffect createMoveEffect();
-
-  /**
-   * Returns a new object of class '<em>Buff Effect</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Buff Effect</em>'.
-   * @generated
-   */
-  BuffEffect createBuffEffect();
-
-  /**
    * Returns a new object of class '<em>MEffect</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -204,15 +186,6 @@ public interface RPGFactory extends EFactory
   EType createEType();
 
   /**
-   * Returns a new object of class '<em>Effect</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Effect</em>'.
-   * @generated
-   */
-  Effect createEffect();
-
-  /**
    * Returns a new object of class '<em>Attribute Values</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -231,15 +204,6 @@ public interface RPGFactory extends EFactory
   AltAttribute createAltAttribute();
 
   /**
-   * Returns a new object of class '<em>Rule</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Rule</em>'.
-   * @generated
-   */
-  Rule createRule();
-
-  /**
    * Returns a new object of class '<em>Move Rule</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -256,15 +220,6 @@ public interface RPGFactory extends EFactory
    * @generated
    */
   BuffRule createBuffRule();
-
-  /**
-   * Returns a new object of class '<em>Carl</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Carl</em>'.
-   * @generated
-   */
-  Carl createCarl();
 
   /**
    * Returns a new object of class '<em>Entities</em>'.
@@ -409,15 +364,6 @@ public interface RPGFactory extends EFactory
    * @generated
    */
   NameAttribute createNameAttribute();
-
-  /**
-   * Returns a new object of class '<em>Self Targeting</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Self Targeting</em>'.
-   * @generated
-   */
-  SelfTargeting createSelfTargeting();
 
   /**
    * Returns a new object of class '<em>Int Num</em>'.

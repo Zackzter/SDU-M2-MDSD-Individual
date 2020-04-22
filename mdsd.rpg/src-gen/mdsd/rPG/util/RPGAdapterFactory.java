@@ -91,9 +91,9 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createEffectsAdapter();
       }
       @Override
-      public Adapter caseEffect2(Effect2 object)
+      public Adapter caseEffect(Effect object)
       {
-        return createEffect2Adapter();
+        return createEffectAdapter();
       }
       @Override
       public Adapter caseBuff(Buff object)
@@ -151,16 +151,6 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createMoveAdapter();
       }
       @Override
-      public Adapter caseMoveEffect(MoveEffect object)
-      {
-        return createMoveEffectAdapter();
-      }
-      @Override
-      public Adapter caseBuffEffect(BuffEffect object)
-      {
-        return createBuffEffectAdapter();
-      }
-      @Override
       public Adapter caseMEffect(MEffect object)
       {
         return createMEffectAdapter();
@@ -176,11 +166,6 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createETypeAdapter();
       }
       @Override
-      public Adapter caseEffect(Effect object)
-      {
-        return createEffectAdapter();
-      }
-      @Override
       public Adapter caseAttributeValues(AttributeValues object)
       {
         return createAttributeValuesAdapter();
@@ -191,11 +176,6 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createAltAttributeAdapter();
       }
       @Override
-      public Adapter caseRule(Rule object)
-      {
-        return createRuleAdapter();
-      }
-      @Override
       public Adapter caseMoveRule(MoveRule object)
       {
         return createMoveRuleAdapter();
@@ -204,11 +184,6 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
       public Adapter caseBuffRule(BuffRule object)
       {
         return createBuffRuleAdapter();
-      }
-      @Override
-      public Adapter caseCarl(Carl object)
-      {
-        return createCarlAdapter();
       }
       @Override
       public Adapter caseEntities(Entities object)
@@ -289,11 +264,6 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
       public Adapter caseNameAttribute(NameAttribute object)
       {
         return createNameAttributeAdapter();
-      }
-      @Override
-      public Adapter caseSelfTargeting(SelfTargeting object)
-      {
-        return createSelfTargetingAdapter();
       }
       @Override
       public Adapter caseIntNum(IntNum object)
@@ -433,16 +403,16 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.Effect2 <em>Effect2</em>}'.
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Effect <em>Effect</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see mdsd.rPG.Effect2
+   * @see mdsd.rPG.Effect
    * @generated
    */
-  public Adapter createEffect2Adapter()
+  public Adapter createEffectAdapter()
   {
     return null;
   }
@@ -613,36 +583,6 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.MoveEffect <em>Move Effect</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see mdsd.rPG.MoveEffect
-   * @generated
-   */
-  public Adapter createMoveEffectAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.BuffEffect <em>Buff Effect</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see mdsd.rPG.BuffEffect
-   * @generated
-   */
-  public Adapter createBuffEffectAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link mdsd.rPG.MEffect <em>MEffect</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -688,21 +628,6 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.Effect <em>Effect</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see mdsd.rPG.Effect
-   * @generated
-   */
-  public Adapter createEffectAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link mdsd.rPG.AttributeValues <em>Attribute Values</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -733,21 +658,6 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.Rule <em>Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see mdsd.rPG.Rule
-   * @generated
-   */
-  public Adapter createRuleAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link mdsd.rPG.MoveRule <em>Move Rule</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -773,21 +683,6 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createBuffRuleAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.Carl <em>Carl</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see mdsd.rPG.Carl
-   * @generated
-   */
-  public Adapter createCarlAdapter()
   {
     return null;
   }
@@ -1028,21 +923,6 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createNameAttributeAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.SelfTargeting <em>Self Targeting</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see mdsd.rPG.SelfTargeting
-   * @generated
-   */
-  public Adapter createSelfTargetingAdapter()
   {
     return null;
   }

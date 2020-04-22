@@ -9,13 +9,10 @@ import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import mdsd.rPG.SystemRPG
 import mdsd.rPG.Entity
-import mdsd.rPG.Type
 import mdsd.rPG.Move
 import mdsd.rPG.Moves
-import mdsd.rPG.Attribute
 import mdsd.rPG.Locations
 import mdsd.rPG.Death
-import mdsd.rPG.AtomicNumber
 import mdsd.rPG.Require
 import mdsd.rPG.Or
 import mdsd.rPG.And
@@ -40,16 +37,11 @@ import mdsd.rPG.Relations
 import mdsd.rPG.Teams
 import mdsd.rPG.NumberComparing
 import mdsd.rPG.Team
-import mdsd.rPG.Members
 import java.util.ArrayList
-import mdsd.rPG.Effect
 import java.util.List
 import mdsd.rPG.MoveRule
-import mdsd.rPG.MoveEffect
 import mdsd.rPG.BuffRule
-import mdsd.rPG.BuffEffect
 import mdsd.rPG.Effects
-import mdsd.rPG.Effect2
 import mdsd.rPG.Buff
 import mdsd.rPG.MoveE
 
@@ -92,7 +84,6 @@ class RPGGenerator extends AbstractGenerator {
 				Moves:
 					if(!movesbool){
 						generateMoves(fsa, d)
-						d.test
 						movesbool = true
 					}
 				Entities:
@@ -551,26 +542,6 @@ class RPGGenerator extends AbstractGenerator {
 				}
 			}
     	'''
-    }
-    
-    def test(Moves moves){
-        var list = new ArrayList<Object>()
-        for(Move move : moves.move){
-        	if(!move.moveE.isEmpty){
-            	for(MoveEffect effects : move.moveE){
-              //  effects.rule.carl.change.exp2(list)
-                //effects.moveRule
-                	effects.moveR.generateEffect
-            	}
-            	if(!move.buffE.isEmpty){
-            		for(BuffEffect effects: move.buffE){
-            			effects.moveB.generateBuffEffect
-            		}
-            	}
-        	}
-        }
-        for(Object o : list)
-            System.out.println(o.toString())
     }
     
     def moveRuleTest(MoveRule moveRule){

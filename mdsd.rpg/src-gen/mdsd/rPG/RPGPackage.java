@@ -142,14 +142,14 @@ public interface RPGPackage extends EPackage
   int EFFECTS_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link mdsd.rPG.impl.Effect2Impl <em>Effect2</em>}' class.
+   * The meta object id for the '{@link mdsd.rPG.impl.EffectImpl <em>Effect</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see mdsd.rPG.impl.Effect2Impl
-   * @see mdsd.rPG.impl.RPGPackageImpl#getEffect2()
+   * @see mdsd.rPG.impl.EffectImpl
+   * @see mdsd.rPG.impl.RPGPackageImpl#getEffect()
    * @generated
    */
-  int EFFECT2 = 3;
+  int EFFECT = 3;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -158,16 +158,16 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EFFECT2__NAME = 0;
+  int EFFECT__NAME = 0;
 
   /**
-   * The number of structural features of the '<em>Effect2</em>' class.
+   * The number of structural features of the '<em>Effect</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EFFECT2_FEATURE_COUNT = 1;
+  int EFFECT_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.BuffImpl <em>Buff</em>}' class.
@@ -186,7 +186,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BUFF__NAME = EFFECT2__NAME;
+  int BUFF__NAME = EFFECT__NAME;
 
   /**
    * The feature id for the '<em><b>Buff R</b></em>' containment reference.
@@ -195,7 +195,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BUFF__BUFF_R = EFFECT2_FEATURE_COUNT + 0;
+  int BUFF__BUFF_R = EFFECT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Buff</em>' class.
@@ -204,7 +204,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BUFF_FEATURE_COUNT = EFFECT2_FEATURE_COUNT + 1;
+  int BUFF_FEATURE_COUNT = EFFECT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.MoveEImpl <em>Move E</em>}' class.
@@ -223,7 +223,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MOVE_E__NAME = EFFECT2__NAME;
+  int MOVE_E__NAME = EFFECT__NAME;
 
   /**
    * The feature id for the '<em><b>Move R</b></em>' containment reference.
@@ -232,7 +232,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MOVE_E__MOVE_R = EFFECT2_FEATURE_COUNT + 0;
+  int MOVE_E__MOVE_R = EFFECT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Move E</em>' class.
@@ -241,7 +241,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MOVE_E_FEATURE_COUNT = EFFECT2_FEATURE_COUNT + 1;
+  int MOVE_E_FEATURE_COUNT = EFFECT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.AttributesImpl <em>Attributes</em>}' class.
@@ -568,31 +568,13 @@ public interface RPGPackage extends EPackage
   int MOVE__ATT = 2;
 
   /**
-   * The feature id for the '<em><b>Move E</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MOVE__MOVE_E = 3;
-
-  /**
-   * The feature id for the '<em><b>Buff E</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MOVE__BUFF_E = 4;
-
-  /**
    * The feature id for the '<em><b>MEffect</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MOVE__MEFFECT = 5;
+  int MOVE__MEFFECT = 3;
 
   /**
    * The feature id for the '<em><b>BEffect</b></em>' containment reference list.
@@ -601,7 +583,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MOVE__BEFFECT = 6;
+  int MOVE__BEFFECT = 4;
 
   /**
    * The number of structural features of the '<em>Move</em>' class.
@@ -610,63 +592,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MOVE_FEATURE_COUNT = 7;
-
-  /**
-   * The meta object id for the '{@link mdsd.rPG.impl.MoveEffectImpl <em>Move Effect</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see mdsd.rPG.impl.MoveEffectImpl
-   * @see mdsd.rPG.impl.RPGPackageImpl#getMoveEffect()
-   * @generated
-   */
-  int MOVE_EFFECT = 15;
-
-  /**
-   * The feature id for the '<em><b>Move R</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MOVE_EFFECT__MOVE_R = 0;
-
-  /**
-   * The number of structural features of the '<em>Move Effect</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MOVE_EFFECT_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link mdsd.rPG.impl.BuffEffectImpl <em>Buff Effect</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see mdsd.rPG.impl.BuffEffectImpl
-   * @see mdsd.rPG.impl.RPGPackageImpl#getBuffEffect()
-   * @generated
-   */
-  int BUFF_EFFECT = 16;
-
-  /**
-   * The feature id for the '<em><b>Move B</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BUFF_EFFECT__MOVE_B = 0;
-
-  /**
-   * The number of structural features of the '<em>Buff Effect</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BUFF_EFFECT_FEATURE_COUNT = 1;
+  int MOVE_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.MEffectImpl <em>MEffect</em>}' class.
@@ -676,7 +602,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMEffect()
    * @generated
    */
-  int MEFFECT = 17;
+  int MEFFECT = 15;
 
   /**
    * The feature id for the '<em><b>Move EName</b></em>' reference.
@@ -704,7 +630,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getBEffect()
    * @generated
    */
-  int BEFFECT = 18;
+  int BEFFECT = 16;
 
   /**
    * The feature id for the '<em><b>Buff EName</b></em>' reference.
@@ -732,7 +658,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEType()
    * @generated
    */
-  int ETYPE = 19;
+  int ETYPE = 17;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -753,43 +679,6 @@ public interface RPGPackage extends EPackage
   int ETYPE_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link mdsd.rPG.impl.EffectImpl <em>Effect</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see mdsd.rPG.impl.EffectImpl
-   * @see mdsd.rPG.impl.RPGPackageImpl#getEffect()
-   * @generated
-   */
-  int EFFECT = 20;
-
-  /**
-   * The feature id for the '<em><b>Rule</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EFFECT__RULE = 0;
-
-  /**
-   * The feature id for the '<em><b>Move Rule</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EFFECT__MOVE_RULE = 1;
-
-  /**
-   * The number of structural features of the '<em>Effect</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EFFECT_FEATURE_COUNT = 2;
-
-  /**
    * The meta object id for the '{@link mdsd.rPG.impl.AttributeValuesImpl <em>Attribute Values</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -797,7 +686,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAttributeValues()
    * @generated
    */
-  int ATTRIBUTE_VALUES = 21;
+  int ATTRIBUTE_VALUES = 18;
 
   /**
    * The feature id for the '<em><b>LTypes</b></em>' attribute.
@@ -834,7 +723,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAltAttribute()
    * @generated
    */
-  int ALT_ATTRIBUTE = 22;
+  int ALT_ATTRIBUTE = 19;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -864,61 +753,6 @@ public interface RPGPackage extends EPackage
   int ALT_ATTRIBUTE_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link mdsd.rPG.impl.RuleImpl <em>Rule</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see mdsd.rPG.impl.RuleImpl
-   * @see mdsd.rPG.impl.RPGPackageImpl#getRule()
-   * @generated
-   */
-  int RULE = 23;
-
-  /**
-   * The feature id for the '<em><b>LTypes</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__LTYPES = ATTRIBUTE_VALUES__LTYPES;
-
-  /**
-   * The feature id for the '<em><b>An</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__AN = ATTRIBUTE_VALUES__AN;
-
-  /**
-   * The feature id for the '<em><b>Or</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__OR = ATTRIBUTE_VALUES_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Carl</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE__CARL = ATTRIBUTE_VALUES_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Rule</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE_FEATURE_COUNT = ATTRIBUTE_VALUES_FEATURE_COUNT + 2;
-
-  /**
    * The meta object id for the '{@link mdsd.rPG.impl.MoveRuleImpl <em>Move Rule</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -926,7 +760,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMoveRule()
    * @generated
    */
-  int MOVE_RULE = 24;
+  int MOVE_RULE = 20;
 
   /**
    * The feature id for the '<em><b>Or</b></em>' containment reference.
@@ -972,7 +806,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getBuffRule()
    * @generated
    */
-  int BUFF_RULE = 25;
+  int BUFF_RULE = 21;
 
   /**
    * The feature id for the '<em><b>Or</b></em>' containment reference.
@@ -1011,43 +845,6 @@ public interface RPGPackage extends EPackage
   int BUFF_RULE_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link mdsd.rPG.impl.CarlImpl <em>Carl</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see mdsd.rPG.impl.CarlImpl
-   * @see mdsd.rPG.impl.RPGPackageImpl#getCarl()
-   * @generated
-   */
-  int CARL = 26;
-
-  /**
-   * The feature id for the '<em><b>Attribute</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CARL__ATTRIBUTE = 0;
-
-  /**
-   * The feature id for the '<em><b>Change</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CARL__CHANGE = 1;
-
-  /**
-   * The number of structural features of the '<em>Carl</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CARL_FEATURE_COUNT = 2;
-
-  /**
    * The meta object id for the '{@link mdsd.rPG.impl.EntitiesImpl <em>Entities</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1055,7 +852,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEntities()
    * @generated
    */
-  int ENTITIES = 27;
+  int ENTITIES = 22;
 
   /**
    * The feature id for the '<em><b>Entity</b></em>' containment reference list.
@@ -1083,7 +880,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getDeath()
    * @generated
    */
-  int DEATH = 28;
+  int DEATH = 23;
 
   /**
    * The feature id for the '<em><b>Req</b></em>' containment reference.
@@ -1111,7 +908,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEntity()
    * @generated
    */
-  int ENTITY = 29;
+  int ENTITY = 24;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1166,7 +963,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEntityMoves()
    * @generated
    */
-  int ENTITY_MOVES = 30;
+  int ENTITY_MOVES = 25;
 
   /**
    * The feature id for the '<em><b>Move</b></em>' reference list.
@@ -1194,7 +991,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getTeams()
    * @generated
    */
-  int TEAMS = 31;
+  int TEAMS = 26;
 
   /**
    * The feature id for the '<em><b>Bs</b></em>' containment reference.
@@ -1231,7 +1028,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getTeam()
    * @generated
    */
-  int TEAM = 32;
+  int TEAM = 27;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1268,7 +1065,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMembers()
    * @generated
    */
-  int MEMBERS = 33;
+  int MEMBERS = 28;
 
   /**
    * The feature id for the '<em><b>Entity</b></em>' reference list.
@@ -1296,7 +1093,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getBattleSize()
    * @generated
    */
-  int BATTLE_SIZE = 34;
+  int BATTLE_SIZE = 29;
 
   /**
    * The number of structural features of the '<em>Battle Size</em>' class.
@@ -1315,25 +1112,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getRequire()
    * @generated
    */
-  int REQUIRE = 35;
-
-  /**
-   * The feature id for the '<em><b>LTypes</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REQUIRE__LTYPES = ATTRIBUTE_VALUES__LTYPES;
-
-  /**
-   * The feature id for the '<em><b>An</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REQUIRE__AN = ATTRIBUTE_VALUES__AN;
+  int REQUIRE = 30;
 
   /**
    * The feature id for the '<em><b>Bs</b></em>' containment reference.
@@ -1342,7 +1121,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REQUIRE__BS = ATTRIBUTE_VALUES_FEATURE_COUNT + 0;
+  int REQUIRE__BS = TEAMS__BS;
 
   /**
    * The feature id for the '<em><b>Team</b></em>' containment reference list.
@@ -1351,7 +1130,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REQUIRE__TEAM = ATTRIBUTE_VALUES_FEATURE_COUNT + 1;
+  int REQUIRE__TEAM = TEAMS__TEAM;
 
   /**
    * The feature id for the '<em><b>Log</b></em>' containment reference.
@@ -1360,7 +1139,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REQUIRE__LOG = ATTRIBUTE_VALUES_FEATURE_COUNT + 2;
+  int REQUIRE__LOG = TEAMS_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Require</em>' class.
@@ -1369,7 +1148,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REQUIRE_FEATURE_COUNT = ATTRIBUTE_VALUES_FEATURE_COUNT + 3;
+  int REQUIRE_FEATURE_COUNT = TEAMS_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.PropositionImpl <em>Proposition</em>}' class.
@@ -1379,7 +1158,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getProposition()
    * @generated
    */
-  int PROPOSITION = 36;
+  int PROPOSITION = 31;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1407,7 +1186,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getNumberComparing()
    * @generated
    */
-  int NUMBER_COMPARING = 37;
+  int NUMBER_COMPARING = 32;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1462,7 +1241,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getComparator()
    * @generated
    */
-  int COMPARATOR = 38;
+  int COMPARATOR = 33;
 
   /**
    * The number of structural features of the '<em>Comparator</em>' class.
@@ -1481,7 +1260,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSum()
    * @generated
    */
-  int SUM = 39;
+  int SUM = 34;
 
   /**
    * The number of structural features of the '<em>Sum</em>' class.
@@ -1500,7 +1279,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMultiply()
    * @generated
    */
-  int MULTIPLY = 40;
+  int MULTIPLY = 35;
 
   /**
    * The number of structural features of the '<em>Multiply</em>' class.
@@ -1519,7 +1298,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAtomicNumber()
    * @generated
    */
-  int ATOMIC_NUMBER = 41;
+  int ATOMIC_NUMBER = 36;
 
   /**
    * The feature id for the '<em><b>Req</b></em>' containment reference.
@@ -1547,7 +1326,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getNameAttribute()
    * @generated
    */
-  int NAME_ATTRIBUTE = 42;
+  int NAME_ATTRIBUTE = 37;
 
   /**
    * The feature id for the '<em><b>Req</b></em>' containment reference.
@@ -1577,34 +1356,6 @@ public interface RPGPackage extends EPackage
   int NAME_ATTRIBUTE_FEATURE_COUNT = ATOMIC_NUMBER_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link mdsd.rPG.impl.SelfTargetingImpl <em>Self Targeting</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see mdsd.rPG.impl.SelfTargetingImpl
-   * @see mdsd.rPG.impl.RPGPackageImpl#getSelfTargeting()
-   * @generated
-   */
-  int SELF_TARGETING = 43;
-
-  /**
-   * The feature id for the '<em><b>Self</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SELF_TARGETING__SELF = 0;
-
-  /**
-   * The number of structural features of the '<em>Self Targeting</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SELF_TARGETING_FEATURE_COUNT = 1;
-
-  /**
    * The meta object id for the '{@link mdsd.rPG.impl.IntNumImpl <em>Int Num</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1612,7 +1363,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getIntNum()
    * @generated
    */
-  int INT_NUM = 44;
+  int INT_NUM = 38;
 
   /**
    * The feature id for the '<em><b>Req</b></em>' containment reference.
@@ -1649,7 +1400,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getFloatNum()
    * @generated
    */
-  int FLOAT_NUM = 45;
+  int FLOAT_NUM = 39;
 
   /**
    * The feature id for the '<em><b>Req</b></em>' containment reference.
@@ -1695,7 +1446,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getOr()
    * @generated
    */
-  int OR = 46;
+  int OR = 40;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1741,7 +1492,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAnd()
    * @generated
    */
-  int AND = 47;
+  int AND = 41;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1787,7 +1538,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSmaller()
    * @generated
    */
-  int SMALLER = 48;
+  int SMALLER = 42;
 
   /**
    * The number of structural features of the '<em>Smaller</em>' class.
@@ -1806,7 +1557,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSmallerEq()
    * @generated
    */
-  int SMALLER_EQ = 49;
+  int SMALLER_EQ = 43;
 
   /**
    * The number of structural features of the '<em>Smaller Eq</em>' class.
@@ -1825,7 +1576,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEq()
    * @generated
    */
-  int EQ = 50;
+  int EQ = 44;
 
   /**
    * The number of structural features of the '<em>Eq</em>' class.
@@ -1844,7 +1595,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getBiggerEq()
    * @generated
    */
-  int BIGGER_EQ = 51;
+  int BIGGER_EQ = 45;
 
   /**
    * The number of structural features of the '<em>Bigger Eq</em>' class.
@@ -1863,7 +1614,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getBigger()
    * @generated
    */
-  int BIGGER = 52;
+  int BIGGER = 46;
 
   /**
    * The number of structural features of the '<em>Bigger</em>' class.
@@ -1882,7 +1633,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getNEq()
    * @generated
    */
-  int NEQ = 53;
+  int NEQ = 47;
 
   /**
    * The number of structural features of the '<em>NEq</em>' class.
@@ -1901,7 +1652,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAdd()
    * @generated
    */
-  int ADD = 54;
+  int ADD = 48;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1938,7 +1689,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSub()
    * @generated
    */
-  int SUB = 55;
+  int SUB = 49;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1975,7 +1726,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMult()
    * @generated
    */
-  int MULT = 56;
+  int MULT = 50;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2012,7 +1763,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getDiv()
    * @generated
    */
-  int DIV = 57;
+  int DIV = 51;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2106,25 +1857,25 @@ public interface RPGPackage extends EPackage
   EReference getEffects_Effect();
 
   /**
-   * Returns the meta object for class '{@link mdsd.rPG.Effect2 <em>Effect2</em>}'.
+   * Returns the meta object for class '{@link mdsd.rPG.Effect <em>Effect</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Effect2</em>'.
-   * @see mdsd.rPG.Effect2
+   * @return the meta object for class '<em>Effect</em>'.
+   * @see mdsd.rPG.Effect
    * @generated
    */
-  EClass getEffect2();
+  EClass getEffect();
 
   /**
-   * Returns the meta object for the attribute '{@link mdsd.rPG.Effect2#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link mdsd.rPG.Effect#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see mdsd.rPG.Effect2#getName()
-   * @see #getEffect2()
+   * @see mdsd.rPG.Effect#getName()
+   * @see #getEffect()
    * @generated
    */
-  EAttribute getEffect2_Name();
+  EAttribute getEffect_Name();
 
   /**
    * Returns the meta object for class '{@link mdsd.rPG.Buff <em>Buff</em>}'.
@@ -2457,28 +2208,6 @@ public interface RPGPackage extends EPackage
   EReference getMove_Att();
 
   /**
-   * Returns the meta object for the containment reference list '{@link mdsd.rPG.Move#getMoveE <em>Move E</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Move E</em>'.
-   * @see mdsd.rPG.Move#getMoveE()
-   * @see #getMove()
-   * @generated
-   */
-  EReference getMove_MoveE();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link mdsd.rPG.Move#getBuffE <em>Buff E</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Buff E</em>'.
-   * @see mdsd.rPG.Move#getBuffE()
-   * @see #getMove()
-   * @generated
-   */
-  EReference getMove_BuffE();
-
-  /**
    * Returns the meta object for the containment reference list '{@link mdsd.rPG.Move#getMEffect <em>MEffect</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2499,48 +2228,6 @@ public interface RPGPackage extends EPackage
    * @generated
    */
   EReference getMove_BEffect();
-
-  /**
-   * Returns the meta object for class '{@link mdsd.rPG.MoveEffect <em>Move Effect</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Move Effect</em>'.
-   * @see mdsd.rPG.MoveEffect
-   * @generated
-   */
-  EClass getMoveEffect();
-
-  /**
-   * Returns the meta object for the containment reference '{@link mdsd.rPG.MoveEffect#getMoveR <em>Move R</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Move R</em>'.
-   * @see mdsd.rPG.MoveEffect#getMoveR()
-   * @see #getMoveEffect()
-   * @generated
-   */
-  EReference getMoveEffect_MoveR();
-
-  /**
-   * Returns the meta object for class '{@link mdsd.rPG.BuffEffect <em>Buff Effect</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Buff Effect</em>'.
-   * @see mdsd.rPG.BuffEffect
-   * @generated
-   */
-  EClass getBuffEffect();
-
-  /**
-   * Returns the meta object for the containment reference '{@link mdsd.rPG.BuffEffect#getMoveB <em>Move B</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Move B</em>'.
-   * @see mdsd.rPG.BuffEffect#getMoveB()
-   * @see #getBuffEffect()
-   * @generated
-   */
-  EReference getBuffEffect_MoveB();
 
   /**
    * Returns the meta object for class '{@link mdsd.rPG.MEffect <em>MEffect</em>}'.
@@ -2606,38 +2293,6 @@ public interface RPGPackage extends EPackage
   EReference getEType_Type();
 
   /**
-   * Returns the meta object for class '{@link mdsd.rPG.Effect <em>Effect</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Effect</em>'.
-   * @see mdsd.rPG.Effect
-   * @generated
-   */
-  EClass getEffect();
-
-  /**
-   * Returns the meta object for the containment reference '{@link mdsd.rPG.Effect#getRule <em>Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Rule</em>'.
-   * @see mdsd.rPG.Effect#getRule()
-   * @see #getEffect()
-   * @generated
-   */
-  EReference getEffect_Rule();
-
-  /**
-   * Returns the meta object for the containment reference '{@link mdsd.rPG.Effect#getMoveRule <em>Move Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Move Rule</em>'.
-   * @see mdsd.rPG.Effect#getMoveRule()
-   * @see #getEffect()
-   * @generated
-   */
-  EReference getEffect_MoveRule();
-
-  /**
    * Returns the meta object for class '{@link mdsd.rPG.AttributeValues <em>Attribute Values</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2700,38 +2355,6 @@ public interface RPGPackage extends EPackage
    * @generated
    */
   EReference getAltAttribute_Av();
-
-  /**
-   * Returns the meta object for class '{@link mdsd.rPG.Rule <em>Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Rule</em>'.
-   * @see mdsd.rPG.Rule
-   * @generated
-   */
-  EClass getRule();
-
-  /**
-   * Returns the meta object for the containment reference '{@link mdsd.rPG.Rule#getOr <em>Or</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Or</em>'.
-   * @see mdsd.rPG.Rule#getOr()
-   * @see #getRule()
-   * @generated
-   */
-  EReference getRule_Or();
-
-  /**
-   * Returns the meta object for the containment reference '{@link mdsd.rPG.Rule#getCarl <em>Carl</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Carl</em>'.
-   * @see mdsd.rPG.Rule#getCarl()
-   * @see #getRule()
-   * @generated
-   */
-  EReference getRule_Carl();
 
   /**
    * Returns the meta object for class '{@link mdsd.rPG.MoveRule <em>Move Rule</em>}'.
@@ -2818,38 +2441,6 @@ public interface RPGPackage extends EPackage
    * @generated
    */
   EReference getBuffRule_Sum();
-
-  /**
-   * Returns the meta object for class '{@link mdsd.rPG.Carl <em>Carl</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Carl</em>'.
-   * @see mdsd.rPG.Carl
-   * @generated
-   */
-  EClass getCarl();
-
-  /**
-   * Returns the meta object for the containment reference '{@link mdsd.rPG.Carl#getAttribute <em>Attribute</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Attribute</em>'.
-   * @see mdsd.rPG.Carl#getAttribute()
-   * @see #getCarl()
-   * @generated
-   */
-  EReference getCarl_Attribute();
-
-  /**
-   * Returns the meta object for the containment reference '{@link mdsd.rPG.Carl#getChange <em>Change</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Change</em>'.
-   * @see mdsd.rPG.Carl#getChange()
-   * @see #getCarl()
-   * @generated
-   */
-  EReference getCarl_Change();
 
   /**
    * Returns the meta object for class '{@link mdsd.rPG.Entities <em>Entities</em>}'.
@@ -3219,27 +2810,6 @@ public interface RPGPackage extends EPackage
    * @generated
    */
   EReference getNameAttribute_Attribute();
-
-  /**
-   * Returns the meta object for class '{@link mdsd.rPG.SelfTargeting <em>Self Targeting</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Self Targeting</em>'.
-   * @see mdsd.rPG.SelfTargeting
-   * @generated
-   */
-  EClass getSelfTargeting();
-
-  /**
-   * Returns the meta object for the attribute '{@link mdsd.rPG.SelfTargeting#getSelf <em>Self</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Self</em>'.
-   * @see mdsd.rPG.SelfTargeting#getSelf()
-   * @see #getSelfTargeting()
-   * @generated
-   */
-  EAttribute getSelfTargeting_Self();
 
   /**
    * Returns the meta object for class '{@link mdsd.rPG.IntNum <em>Int Num</em>}'.
@@ -3624,14 +3194,14 @@ public interface RPGPackage extends EPackage
     EReference EFFECTS__EFFECT = eINSTANCE.getEffects_Effect();
 
     /**
-     * The meta object literal for the '{@link mdsd.rPG.impl.Effect2Impl <em>Effect2</em>}' class.
+     * The meta object literal for the '{@link mdsd.rPG.impl.EffectImpl <em>Effect</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see mdsd.rPG.impl.Effect2Impl
-     * @see mdsd.rPG.impl.RPGPackageImpl#getEffect2()
+     * @see mdsd.rPG.impl.EffectImpl
+     * @see mdsd.rPG.impl.RPGPackageImpl#getEffect()
      * @generated
      */
-    EClass EFFECT2 = eINSTANCE.getEffect2();
+    EClass EFFECT = eINSTANCE.getEffect();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -3639,7 +3209,7 @@ public interface RPGPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EFFECT2__NAME = eINSTANCE.getEffect2_Name();
+    EAttribute EFFECT__NAME = eINSTANCE.getEffect_Name();
 
     /**
      * The meta object literal for the '{@link mdsd.rPG.impl.BuffImpl <em>Buff</em>}' class.
@@ -3912,22 +3482,6 @@ public interface RPGPackage extends EPackage
     EReference MOVE__ATT = eINSTANCE.getMove_Att();
 
     /**
-     * The meta object literal for the '<em><b>Move E</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MOVE__MOVE_E = eINSTANCE.getMove_MoveE();
-
-    /**
-     * The meta object literal for the '<em><b>Buff E</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MOVE__BUFF_E = eINSTANCE.getMove_BuffE();
-
-    /**
      * The meta object literal for the '<em><b>MEffect</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3942,42 +3496,6 @@ public interface RPGPackage extends EPackage
      * @generated
      */
     EReference MOVE__BEFFECT = eINSTANCE.getMove_BEffect();
-
-    /**
-     * The meta object literal for the '{@link mdsd.rPG.impl.MoveEffectImpl <em>Move Effect</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see mdsd.rPG.impl.MoveEffectImpl
-     * @see mdsd.rPG.impl.RPGPackageImpl#getMoveEffect()
-     * @generated
-     */
-    EClass MOVE_EFFECT = eINSTANCE.getMoveEffect();
-
-    /**
-     * The meta object literal for the '<em><b>Move R</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MOVE_EFFECT__MOVE_R = eINSTANCE.getMoveEffect_MoveR();
-
-    /**
-     * The meta object literal for the '{@link mdsd.rPG.impl.BuffEffectImpl <em>Buff Effect</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see mdsd.rPG.impl.BuffEffectImpl
-     * @see mdsd.rPG.impl.RPGPackageImpl#getBuffEffect()
-     * @generated
-     */
-    EClass BUFF_EFFECT = eINSTANCE.getBuffEffect();
-
-    /**
-     * The meta object literal for the '<em><b>Move B</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference BUFF_EFFECT__MOVE_B = eINSTANCE.getBuffEffect_MoveB();
 
     /**
      * The meta object literal for the '{@link mdsd.rPG.impl.MEffectImpl <em>MEffect</em>}' class.
@@ -4034,32 +3552,6 @@ public interface RPGPackage extends EPackage
     EReference ETYPE__TYPE = eINSTANCE.getEType_Type();
 
     /**
-     * The meta object literal for the '{@link mdsd.rPG.impl.EffectImpl <em>Effect</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see mdsd.rPG.impl.EffectImpl
-     * @see mdsd.rPG.impl.RPGPackageImpl#getEffect()
-     * @generated
-     */
-    EClass EFFECT = eINSTANCE.getEffect();
-
-    /**
-     * The meta object literal for the '<em><b>Rule</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EFFECT__RULE = eINSTANCE.getEffect_Rule();
-
-    /**
-     * The meta object literal for the '<em><b>Move Rule</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EFFECT__MOVE_RULE = eINSTANCE.getEffect_MoveRule();
-
-    /**
      * The meta object literal for the '{@link mdsd.rPG.impl.AttributeValuesImpl <em>Attribute Values</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -4110,32 +3602,6 @@ public interface RPGPackage extends EPackage
      * @generated
      */
     EReference ALT_ATTRIBUTE__AV = eINSTANCE.getAltAttribute_Av();
-
-    /**
-     * The meta object literal for the '{@link mdsd.rPG.impl.RuleImpl <em>Rule</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see mdsd.rPG.impl.RuleImpl
-     * @see mdsd.rPG.impl.RPGPackageImpl#getRule()
-     * @generated
-     */
-    EClass RULE = eINSTANCE.getRule();
-
-    /**
-     * The meta object literal for the '<em><b>Or</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference RULE__OR = eINSTANCE.getRule_Or();
-
-    /**
-     * The meta object literal for the '<em><b>Carl</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference RULE__CARL = eINSTANCE.getRule_Carl();
 
     /**
      * The meta object literal for the '{@link mdsd.rPG.impl.MoveRuleImpl <em>Move Rule</em>}' class.
@@ -4204,32 +3670,6 @@ public interface RPGPackage extends EPackage
      * @generated
      */
     EReference BUFF_RULE__SUM = eINSTANCE.getBuffRule_Sum();
-
-    /**
-     * The meta object literal for the '{@link mdsd.rPG.impl.CarlImpl <em>Carl</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see mdsd.rPG.impl.CarlImpl
-     * @see mdsd.rPG.impl.RPGPackageImpl#getCarl()
-     * @generated
-     */
-    EClass CARL = eINSTANCE.getCarl();
-
-    /**
-     * The meta object literal for the '<em><b>Attribute</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference CARL__ATTRIBUTE = eINSTANCE.getCarl_Attribute();
-
-    /**
-     * The meta object literal for the '<em><b>Change</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference CARL__CHANGE = eINSTANCE.getCarl_Change();
 
     /**
      * The meta object literal for the '{@link mdsd.rPG.impl.EntitiesImpl <em>Entities</em>}' class.
@@ -4542,24 +3982,6 @@ public interface RPGPackage extends EPackage
      * @generated
      */
     EReference NAME_ATTRIBUTE__ATTRIBUTE = eINSTANCE.getNameAttribute_Attribute();
-
-    /**
-     * The meta object literal for the '{@link mdsd.rPG.impl.SelfTargetingImpl <em>Self Targeting</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see mdsd.rPG.impl.SelfTargetingImpl
-     * @see mdsd.rPG.impl.RPGPackageImpl#getSelfTargeting()
-     * @generated
-     */
-    EClass SELF_TARGETING = eINSTANCE.getSelfTargeting();
-
-    /**
-     * The meta object literal for the '<em><b>Self</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute SELF_TARGETING__SELF = eINSTANCE.getSelfTargeting_Self();
 
     /**
      * The meta object literal for the '{@link mdsd.rPG.impl.IntNumImpl <em>Int Num</em>}' class.
