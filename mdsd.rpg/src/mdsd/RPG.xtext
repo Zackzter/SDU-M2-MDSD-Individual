@@ -7,15 +7,24 @@ SystemRPG:
 ;
 	
 Declaration:
-	Locations | Relations | Moves | Entities | Teams | Death | Attributes // MoveAttributes | EntityAttributes | 
+	Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects // MoveAttributes | EntityAttributes | 
 ;
 
-EntityAttributes:
-	'entity_attribute' attribute+=Attribute+
+Effects:
+	'effects' effect+=Effect2+
 ;
 
-MoveAttributes:
-	'move_attribute' attribute+=Attribute+
+Effect2:
+	'effect' (Buff | MoveE)
+;
+
+Buff:
+	'buff' name=ID buffR=BuffRule
+;
+
+MoveE:
+	'move' name=ID moveR=MoveRule
+	
 ;
 
 Attributes:
@@ -53,17 +62,33 @@ Moves:
 ;
 
 Move:
-	'move' name=ID eType=EType? att+=AltAttribute* effect+=Effect*
+	'move' name=ID eType=EType? att+=AltAttribute* (moveE+=MoveEffect | buffE+=BuffEffect | mEffect+=MEffect | bEffect+=BEffect)*//effect+=Effect*
 ;
 
+MoveEffect:
+	'effect' 'move' moveR=MoveRule
+;
+
+BuffEffect:
+	'effect' 'buff' moveB=BuffRule
+;
+
+MEffect:
+	'effect' 'move' moveEName=[MoveE]
+;
+
+BEffect:
+	'effect' 'buff' buffEName=[Buff]
+;
 
 EType:
 	'type' type=[Type]
 ;
 
 Effect:
-	'effect' rule=Rule 
+	'effect' (rule=Rule | moveRule=MoveRule)
 ;
+
 
 AttributeValues:
 	'is' (lTypes=LegalType | an=AtomicNumber) | ( Rule | Require)
@@ -77,14 +102,19 @@ Rule:
 	'if' or=ORcondition  'then' carl=Carl
 ;
 
+MoveRule:
+	'if' or = ORcondition 'then' target=[Attribute] 'is' sum=Sum
+;
+
+BuffRule:
+	'if' or = ORcondition 'then' target=[Attribute] 'is' sum=Sum//targetChange=[Attribute] '-' moveAttribute=[Attribute]
+;
+
 
 Carl:
 		attribute=NameAttribute '=' change=Sum
 ;
 
-Set:
-	{Equal} '='
-;
 
 Entities:
 	'entities' entity+=Entity+

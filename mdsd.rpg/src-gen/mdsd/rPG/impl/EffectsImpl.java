@@ -5,8 +5,8 @@ package mdsd.rPG.impl;
 
 import java.util.Collection;
 
-import mdsd.rPG.Attribute;
-import mdsd.rPG.EntityAttributes;
+import mdsd.rPG.Effect2;
+import mdsd.rPG.Effects;
 import mdsd.rPG.RPGPackage;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -16,42 +16,40 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Entity Attributes</b></em>'.
+ * An implementation of the model object '<em><b>Effects</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.EntityAttributesImpl#getAttribute <em>Attribute</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.EffectsImpl#getEffect <em>Effect</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EntityAttributesImpl extends MinimalEObjectImpl.Container implements EntityAttributes
+public class EffectsImpl extends DeclarationImpl implements Effects
 {
   /**
-   * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' containment reference list.
+   * The cached value of the '{@link #getEffect() <em>Effect</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAttribute()
+   * @see #getEffect()
    * @generated
    * @ordered
    */
-  protected EList<Attribute> attribute;
+  protected EList<Effect2> effect;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EntityAttributesImpl()
+  protected EffectsImpl()
   {
     super();
   }
@@ -64,7 +62,7 @@ public class EntityAttributesImpl extends MinimalEObjectImpl.Container implement
   @Override
   protected EClass eStaticClass()
   {
-    return RPGPackage.Literals.ENTITY_ATTRIBUTES;
+    return RPGPackage.Literals.EFFECTS;
   }
 
   /**
@@ -73,13 +71,13 @@ public class EntityAttributesImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public EList<Attribute> getAttribute()
+  public EList<Effect2> getEffect()
   {
-    if (attribute == null)
+    if (effect == null)
     {
-      attribute = new EObjectContainmentEList<Attribute>(Attribute.class, this, RPGPackage.ENTITY_ATTRIBUTES__ATTRIBUTE);
+      effect = new EObjectContainmentEList<Effect2>(Effect2.class, this, RPGPackage.EFFECTS__EFFECT);
     }
-    return attribute;
+    return effect;
   }
 
   /**
@@ -92,8 +90,8 @@ public class EntityAttributesImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case RPGPackage.ENTITY_ATTRIBUTES__ATTRIBUTE:
-        return ((InternalEList<?>)getAttribute()).basicRemove(otherEnd, msgs);
+      case RPGPackage.EFFECTS__EFFECT:
+        return ((InternalEList<?>)getEffect()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,8 +106,8 @@ public class EntityAttributesImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case RPGPackage.ENTITY_ATTRIBUTES__ATTRIBUTE:
-        return getAttribute();
+      case RPGPackage.EFFECTS__EFFECT:
+        return getEffect();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -125,9 +123,9 @@ public class EntityAttributesImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case RPGPackage.ENTITY_ATTRIBUTES__ATTRIBUTE:
-        getAttribute().clear();
-        getAttribute().addAll((Collection<? extends Attribute>)newValue);
+      case RPGPackage.EFFECTS__EFFECT:
+        getEffect().clear();
+        getEffect().addAll((Collection<? extends Effect2>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +141,8 @@ public class EntityAttributesImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case RPGPackage.ENTITY_ATTRIBUTES__ATTRIBUTE:
-        getAttribute().clear();
+      case RPGPackage.EFFECTS__EFFECT:
+        getEffect().clear();
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +158,10 @@ public class EntityAttributesImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case RPGPackage.ENTITY_ATTRIBUTES__ATTRIBUTE:
-        return attribute != null && !attribute.isEmpty();
+      case RPGPackage.EFFECTS__EFFECT:
+        return effect != null && !effect.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //EntityAttributesImpl
+} //EffectsImpl

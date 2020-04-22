@@ -3,55 +3,49 @@
  */
 package mdsd.rPG.impl;
 
-import java.util.Collection;
-
-import mdsd.rPG.Attribute;
-import mdsd.rPG.MoveAttributes;
+import mdsd.rPG.MEffect;
+import mdsd.rPG.MoveE;
 import mdsd.rPG.RPGPackage;
 
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Move Attributes</b></em>'.
+ * An implementation of the model object '<em><b>MEffect</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.MoveAttributesImpl#getAttribute <em>Attribute</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.MEffectImpl#getMoveEName <em>Move EName</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class MoveAttributesImpl extends MinimalEObjectImpl.Container implements MoveAttributes
+public class MEffectImpl extends MinimalEObjectImpl.Container implements MEffect
 {
   /**
-   * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' containment reference list.
+   * The cached value of the '{@link #getMoveEName() <em>Move EName</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAttribute()
+   * @see #getMoveEName()
    * @generated
    * @ordered
    */
-  protected EList<Attribute> attribute;
+  protected MoveE moveEName;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected MoveAttributesImpl()
+  protected MEffectImpl()
   {
     super();
   }
@@ -64,7 +58,7 @@ public class MoveAttributesImpl extends MinimalEObjectImpl.Container implements 
   @Override
   protected EClass eStaticClass()
   {
-    return RPGPackage.Literals.MOVE_ATTRIBUTES;
+    return RPGPackage.Literals.MEFFECT;
   }
 
   /**
@@ -73,13 +67,29 @@ public class MoveAttributesImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public EList<Attribute> getAttribute()
+  public MoveE getMoveEName()
   {
-    if (attribute == null)
+    if (moveEName != null && moveEName.eIsProxy())
     {
-      attribute = new EObjectContainmentEList<Attribute>(Attribute.class, this, RPGPackage.MOVE_ATTRIBUTES__ATTRIBUTE);
+      InternalEObject oldMoveEName = (InternalEObject)moveEName;
+      moveEName = (MoveE)eResolveProxy(oldMoveEName);
+      if (moveEName != oldMoveEName)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RPGPackage.MEFFECT__MOVE_ENAME, oldMoveEName, moveEName));
+      }
     }
-    return attribute;
+    return moveEName;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MoveE basicGetMoveEName()
+  {
+    return moveEName;
   }
 
   /**
@@ -88,14 +98,12 @@ public class MoveAttributesImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  public void setMoveEName(MoveE newMoveEName)
   {
-    switch (featureID)
-    {
-      case RPGPackage.MOVE_ATTRIBUTES__ATTRIBUTE:
-        return ((InternalEList<?>)getAttribute()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    MoveE oldMoveEName = moveEName;
+    moveEName = newMoveEName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.MEFFECT__MOVE_ENAME, oldMoveEName, moveEName));
   }
 
   /**
@@ -108,8 +116,9 @@ public class MoveAttributesImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case RPGPackage.MOVE_ATTRIBUTES__ATTRIBUTE:
-        return getAttribute();
+      case RPGPackage.MEFFECT__MOVE_ENAME:
+        if (resolve) return getMoveEName();
+        return basicGetMoveEName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,15 +128,13 @@ public class MoveAttributesImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case RPGPackage.MOVE_ATTRIBUTES__ATTRIBUTE:
-        getAttribute().clear();
-        getAttribute().addAll((Collection<? extends Attribute>)newValue);
+      case RPGPackage.MEFFECT__MOVE_ENAME:
+        setMoveEName((MoveE)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +150,8 @@ public class MoveAttributesImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case RPGPackage.MOVE_ATTRIBUTES__ATTRIBUTE:
-        getAttribute().clear();
+      case RPGPackage.MEFFECT__MOVE_ENAME:
+        setMoveEName((MoveE)null);
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +167,10 @@ public class MoveAttributesImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case RPGPackage.MOVE_ATTRIBUTES__ATTRIBUTE:
-        return attribute != null && !attribute.isEmpty();
+      case RPGPackage.MEFFECT__MOVE_ENAME:
+        return moveEName != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //MoveAttributesImpl
+} //MEffectImpl

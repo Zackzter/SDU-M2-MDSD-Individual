@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.Effect#getRule <em>Rule</em>}</li>
+ *   <li>{@link mdsd.rPG.Effect#getMoveRule <em>Move Rule</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getEffect()
@@ -44,5 +45,27 @@ public interface Effect extends EObject
    * @generated
    */
   void setRule(Rule value);
+
+  /**
+   * Returns the value of the '<em><b>Move Rule</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Move Rule</em>' containment reference.
+   * @see #setMoveRule(MoveRule)
+   * @see mdsd.rPG.RPGPackage#getEffect_MoveRule()
+   * @model containment="true"
+   * @generated
+   */
+  MoveRule getMoveRule();
+
+  /**
+   * Sets the value of the '{@link mdsd.rPG.Effect#getMoveRule <em>Move Rule</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Move Rule</em>' containment reference.
+   * @see #getMoveRule()
+   * @generated
+   */
+  void setMoveRule(MoveRule value);
 
 } // Effect

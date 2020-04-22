@@ -31,7 +31,14 @@ moves
 		attribute power is 50
 		
 		effect if self.current_health >= max_health / 2 
-		then power = power * anger 
+		then power = power * anger
+        
+        effect buff currentEntity.getCurrentHp >= currentEntity.getMaxHp /2
+        then move.getPower = move.getPower * currentEntity.getAnger or INT
+        
+        effect move 
+        if move.getCost > cost
+        then targetEnemy().getCurrentHP = target.getCurrentHP - movepower
 		
 		effect if self.current_energy > cost AND speed > 1 
 		then speed = speed * 0.5
@@ -42,7 +49,9 @@ moves
 		type Priest 
 		attribute cost is 50 
 		attribute power is 30 
-	
+	   
+       
+       
 		effect if self.current_energy > cost AND current_health != max_health
 		then current_health = current_health + power
 			 self.current_energy = self.current_energy - cost

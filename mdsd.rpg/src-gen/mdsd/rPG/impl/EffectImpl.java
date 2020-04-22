@@ -4,6 +4,7 @@
 package mdsd.rPG.impl;
 
 import mdsd.rPG.Effect;
+import mdsd.rPG.MoveRule;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Rule;
 
@@ -25,6 +26,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.impl.EffectImpl#getRule <em>Rule</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.EffectImpl#getMoveRule <em>Move Rule</em>}</li>
  * </ul>
  *
  * @generated
@@ -40,6 +42,16 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
    * @ordered
    */
   protected Rule rule;
+
+  /**
+   * The cached value of the '{@link #getMoveRule() <em>Move Rule</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMoveRule()
+   * @generated
+   * @ordered
+   */
+  protected MoveRule moveRule;
 
   /**
    * <!-- begin-user-doc -->
@@ -118,12 +130,64 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
    * @generated
    */
   @Override
+  public MoveRule getMoveRule()
+  {
+    return moveRule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetMoveRule(MoveRule newMoveRule, NotificationChain msgs)
+  {
+    MoveRule oldMoveRule = moveRule;
+    moveRule = newMoveRule;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.EFFECT__MOVE_RULE, oldMoveRule, newMoveRule);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setMoveRule(MoveRule newMoveRule)
+  {
+    if (newMoveRule != moveRule)
+    {
+      NotificationChain msgs = null;
+      if (moveRule != null)
+        msgs = ((InternalEObject)moveRule).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.EFFECT__MOVE_RULE, null, msgs);
+      if (newMoveRule != null)
+        msgs = ((InternalEObject)newMoveRule).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.EFFECT__MOVE_RULE, null, msgs);
+      msgs = basicSetMoveRule(newMoveRule, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.EFFECT__MOVE_RULE, newMoveRule, newMoveRule));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
       case RPGPackage.EFFECT__RULE:
         return basicSetRule(null, msgs);
+      case RPGPackage.EFFECT__MOVE_RULE:
+        return basicSetMoveRule(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -140,6 +204,8 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
     {
       case RPGPackage.EFFECT__RULE:
         return getRule();
+      case RPGPackage.EFFECT__MOVE_RULE:
+        return getMoveRule();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -156,6 +222,9 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
     {
       case RPGPackage.EFFECT__RULE:
         setRule((Rule)newValue);
+        return;
+      case RPGPackage.EFFECT__MOVE_RULE:
+        setMoveRule((MoveRule)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -174,6 +243,9 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
       case RPGPackage.EFFECT__RULE:
         setRule((Rule)null);
         return;
+      case RPGPackage.EFFECT__MOVE_RULE:
+        setMoveRule((MoveRule)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -190,6 +262,8 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
     {
       case RPGPackage.EFFECT__RULE:
         return rule != null;
+      case RPGPackage.EFFECT__MOVE_RULE:
+        return moveRule != null;
     }
     return super.eIsSet(featureID);
   }

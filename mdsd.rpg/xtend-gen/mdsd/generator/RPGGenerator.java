@@ -13,23 +13,29 @@ import mdsd.rPG.And;
 import mdsd.rPG.AtomicNumber;
 import mdsd.rPG.Attribute;
 import mdsd.rPG.Attributes;
+import mdsd.rPG.BEffect;
 import mdsd.rPG.Bigger;
 import mdsd.rPG.BiggerEq;
-import mdsd.rPG.Carl;
+import mdsd.rPG.Buff;
+import mdsd.rPG.BuffEffect;
+import mdsd.rPG.BuffRule;
 import mdsd.rPG.Comparator;
 import mdsd.rPG.Death;
 import mdsd.rPG.Declaration;
 import mdsd.rPG.Div;
-import mdsd.rPG.Effect;
+import mdsd.rPG.Effect2;
+import mdsd.rPG.Effects;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
-import mdsd.rPG.EntityAttributes;
 import mdsd.rPG.Eq;
 import mdsd.rPG.FloatNum;
 import mdsd.rPG.IntNum;
 import mdsd.rPG.Locations;
+import mdsd.rPG.MEffect;
 import mdsd.rPG.Move;
-import mdsd.rPG.MoveAttributes;
+import mdsd.rPG.MoveE;
+import mdsd.rPG.MoveEffect;
+import mdsd.rPG.MoveRule;
 import mdsd.rPG.Moves;
 import mdsd.rPG.Mult;
 import mdsd.rPG.NEq;
@@ -75,6 +81,7 @@ public class RPGGenerator extends AbstractGenerator {
     boolean teamsbool = false;
     boolean attributesbool = false;
     boolean deathbool = false;
+    boolean effectbool = false;
     final String classFileName = thing.getName();
     EList<Declaration> _declarations = thing.getDeclarations();
     for (final Declaration d : _declarations) {
@@ -142,6 +149,16 @@ public class RPGGenerator extends AbstractGenerator {
         }
       }
       if (!_matched) {
+        if (d instanceof Effects) {
+          _matched=true;
+          System.out.println("Hello");
+          if ((!effectbool)) {
+            this.generateEffectFiles(fsa, ((Effects)d));
+            effectbool = true;
+          }
+        }
+      }
+      if (!_matched) {
         System.out.println("reported");
       }
     }
@@ -175,10 +192,208 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return (");
-    CharSequence _new_re = this.new_re(death.getReq());
+    CharSequence _new_re = this.new_re(death.getReq(), false);
     _builder.append(_new_re, "\t\t");
     _builder.append(");");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence generateEffect(final MoveRule moveRule) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("public class Effect{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Entity player;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Entity enemy;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String moveName = \"ember\";");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Move ember;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int moveInt;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public boolean effectMove(){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("HashMap<String, Number> eData = new HashMap<>();\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("//if(ember.getMove(moveName).getAttributes)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(AttributeData aData : ember.getMove(moveName).getMoveAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("eData.put(aData.getAttributeName(), aData.getNumber());");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(AttributeData aData : player.getAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("eData.put(aData.getAttributeName(), aData.getNumber());");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void Test(){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("p");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence generateBuffEffect(final BuffRule buffRule) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("public boolean effectBuff(Move move, String name, Entity player){");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("HashMap<String, Number> eData = new HashMap<>();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for(AttributeData playerData : player.getAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("eData.put(aData.getAttributeName(), aData.getNumber());");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}\t\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for(AttributeData aData : move.getMove(name).getMoveAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("eData.put(aData.getAttributeName(), aData.getNumber());\t\t\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return ");
+    CharSequence _new_logic = this.new_logic(buffRule.getOr(), false);
+    _builder.append(_new_logic, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public Number changeBuff(Move move, String name Entity player){");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("HashMap<String, Number> eData = new HashMap<>();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for(AttributeData playerData : player.getAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("eData.put(aData.getAttributeName(), aData.getNumber());");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}\t\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for(AttributeData aData : move.getMove(name).getMoveAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("eData.put(aData.getAttributeName(), aData.getNumber());\t\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return ");
+    CharSequence _new_exp = this.new_exp(buffRule.getSum(), false);
+    _builder.append(_new_exp, "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("public void doMove(){");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("if(effectBuff(move, \"ember\", player)){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(AttributeData aData : player.getAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("if(aData.getName() == ");
+    String _name = buffRule.getTarget().getName();
+    _builder.append(_name, "\t\t\t");
+    _builder.append("){");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t");
+    _builder.append("aData.setNumber(changeBuff(move, \"ember\", player));");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}\t\t\t");
+    _builder.newLine();
+    _builder.append("}\t\t");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence generateBuffEffectAttName() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("if((eData.get(\"current_hp\").floatValue()>(eData.get(\"current_hp\").floatValue()/5)))){");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for(AttributeData aData : player.getAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if(aData.getName() == \"power\"){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("aData.setNumber(eData.get(\"power\").intValue()*eData.get(\"pp\").intValue()));");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
@@ -227,8 +442,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("private TypeRelationsInit tRI;");
-    _builder.newLine();
-    _builder.append("    ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("private String currentLocation;");
@@ -371,138 +584,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("return attributes;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public CharSequence generateMoveAttribute(final MoveAttributes attribute) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.util.*;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("public class MoveAttributes {");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("private List<AttributeData> moveattributes = new ArrayList<>();");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("private static MoveAttributes attribute;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("private MoveAttributes() {");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public static MoveAttributes getInstance() {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("if (attribute == null) {");
-    _builder.newLine();
-    _builder.append("            ");
-    _builder.append("attribute = new MoveAttributes();");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("return attribute;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public void addAttribute(AttributeData attribute) {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("moveattributes.add(attribute);");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public List<AttributeData> getAttributes() {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("return moveattributes;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public CharSequence generateEntityAttribute(final EntityAttributes attribute) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.util.*;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("public class EntityAttributes {");
-    _builder.newLine();
-    _builder.append("private List<AttributeData> entityattributes = new ArrayList<>();");
-    _builder.newLine();
-    _builder.append("private static EntityAttributes attribute;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private EntityAttributes() {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public static EntityAttributes getInstance() {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("if (attribute == null) {");
-    _builder.newLine();
-    _builder.append("            ");
-    _builder.append("attribute = new EntityAttributes();");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("return attribute;");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public void addAttribute(AttributeData attribute) {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("entityattributes.add(attribute);");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("public List<AttributeData> getAttributes() {");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("return entityattributes;");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
@@ -658,26 +739,343 @@ public class RPGGenerator extends AbstractGenerator {
   }
   
   public CharSequence generateEffect(final Moves moves) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      EList<Move> _move = moves.getMove();
-      for(final Move move : _move) {
-        {
-          EList<Effect> _effect = move.getEffect();
-          for(final Effect effect : _effect) {
-            Carl _carl = effect.getRule().getCarl();
-            _builder.append(_carl);
-            _builder.newLineIfNotEmpty();
-            String _name = effect.getRule().getCarl().getAttribute().getAttribute().getName();
-            _builder.append(_name);
-            _builder.append("=");
-            CharSequence _exp = this.exp(effect.getRule().getCarl().getChange());
-            _builder.append(_exp);
-            _builder.newLineIfNotEmpty();
+    return null;
+  }
+  
+  public void generateEffectFiles(final IFileSystemAccess2 fsa, final Effects effects) {
+    int i = 1;
+    boolean moveEffectBoolean = false;
+    boolean buffEffectBoolean = false;
+    EList<Effect2> _effect = effects.getEffect();
+    for (final Effect2 effect : _effect) {
+      {
+        System.out.println(i);
+        boolean _matched = false;
+        if (effect instanceof Buff) {
+          _matched=true;
+          if ((!buffEffectBoolean)) {
+            fsa.generateFile("EffectBuff.java", this.generateEffectBuff());
+            buffEffectBoolean = true;
+          }
+          String _name = ((Buff)effect).getName();
+          String _plus = (_name + ".java");
+          fsa.generateFile(_plus, this.generateBuffEffectFile(((Buff)effect)));
+          System.out.println(((Buff)effect).getName());
+        }
+        if (!_matched) {
+          if (effect instanceof MoveE) {
+            _matched=true;
+            if ((!moveEffectBoolean)) {
+              fsa.generateFile("EffectMove.java", this.generateEffectMove());
+              moveEffectBoolean = true;
+            }
+            String _name = ((MoveE)effect).getName();
+            String _plus = (_name + ".java");
+            fsa.generateFile(_plus, this.generateMoveEffectFile(((MoveE)effect)));
+            System.out.println(((MoveE)effect).getName());
           }
         }
+        i++;
       }
     }
+  }
+  
+  public CharSequence generateEffectMove() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*;");
+    _builder.newLine();
+    _builder.append("public abstract class EffectMove {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public abstract boolean effectMove(Move move, String name, Entity enemy);");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public abstract Number changeMove(Move move, String name, Entity enemy);");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public abstract void doEffect(Move move, String name, Entity enemy);    \t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence generateEffectBuff() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*;");
+    _builder.newLine();
+    _builder.append("public abstract class EffectBuff {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public abstract boolean effectBuff(Move move, String name, Entity player);");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public abstract Number changeBuff(Move move, String name, Entity player);");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public abstract void doEffect(Move move, String name, Entity player);    \t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence generateBuffEffectFile(final Buff buff) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*;");
+    _builder.newLine();
+    _builder.append("public class ");
+    String _name = buff.getName();
+    _builder.append(_name);
+    _builder.append(" extends EffectBuff{");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public boolean effectBuff(Move move, String name, Entity player){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("HashMap<String, Number> eData = new HashMap<>();");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(AttributeData playerData : player.getAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("eData.put(playerData.getAttributeName(), playerData.getNumber());");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(AttributeData aData : move.getMove(name).getMoveAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("eData.put(aData.getAttributeName(), aData.getNumber());\t\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return ");
+    CharSequence _new_logic = this.new_logic(buff.getBuffR().getOr(), false);
+    _builder.append(_new_logic, "\t\t");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public Number changeBuff(Move move, String name, Entity player){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("HashMap<String, Number> eData = new HashMap<>();");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(AttributeData playerData : player.getAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("eData.put(playerData.getAttributeName(), playerData.getNumber());");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(AttributeData aData : move.getMove(name).getMoveAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("eData.put(aData.getAttributeName(), aData.getNumber());\t\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return ");
+    CharSequence _new_exp = this.new_exp(buff.getBuffR().getSum(), false);
+    _builder.append(_new_exp, "\t\t\t");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void doEffect(Move move, String name, Entity player){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if(effectBuff(move, name, player)){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("for(AttributeData aData : player.getAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("if(aData.getAttributeName() == \"");
+    String _name_1 = buff.getBuffR().getTarget().getName();
+    _builder.append(_name_1, "\t\t\t\t");
+    _builder.append("\"){");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("aData.setNumber(changeBuff(move, name, player));");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}\t\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence generateMoveEffectFile(final MoveE moveE) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*;");
+    _builder.newLine();
+    _builder.append("public class ");
+    String _name = moveE.getName();
+    _builder.append(_name);
+    _builder.append(" extends EffectMove{");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public boolean effectMove(Move move, String name, Entity enemy){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("HashMap<String, Number> eData = new HashMap<>();");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(AttributeData enemyData : enemy.getAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("eData.put(enemyData.getAttributeName(), enemyData.getNumber());");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(AttributeData aData : move.getMove(name).getMoveAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("eData.put(aData.getAttributeName(), aData.getNumber());\t\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return ");
+    CharSequence _new_logic = this.new_logic(moveE.getMoveR().getOr(), false);
+    _builder.append(_new_logic, "\t\t");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public Number changeMove(Move move, String name, Entity enemy){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("HashMap<String, Number> eData = new HashMap<>();");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(AttributeData enemyData : enemy.getAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("eData.put(enemyData.getAttributeName(), enemyData.getNumber());");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(AttributeData aData : move.getMove(name).getMoveAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("eData.put(aData.getAttributeName(), aData.getNumber());\t\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return ");
+    CharSequence _new_exp = this.new_exp(moveE.getMoveR().getSum(), false);
+    _builder.append(_new_exp, "\t\t\t");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void doEffect(Move move, String name, Entity enemy){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if(effectMove(move, name, enemy)){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("for(AttributeData aData : enemy.getAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("if(aData.getAttributeName() == \"");
+    String _name_1 = moveE.getMoveR().getTarget().getName();
+    _builder.append(_name_1, "\t\t\t\t");
+    _builder.append("\"){");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("aData.setNumber(changeMove(move, name, enemy));");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}\t\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
     return _builder;
   }
   
@@ -685,14 +1083,30 @@ public class RPGGenerator extends AbstractGenerator {
     ArrayList<Object> list = new ArrayList<Object>();
     EList<Move> _move = moves.getMove();
     for (final Move move : _move) {
-      EList<Effect> _effect = move.getEffect();
-      for (final Effect effects : _effect) {
-        this.exp2(effects.getRule().getCarl().getChange(), list);
+      boolean _isEmpty = move.getMoveE().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        EList<MoveEffect> _moveE = move.getMoveE();
+        for (final MoveEffect effects : _moveE) {
+          this.generateEffect(effects.getMoveR());
+        }
+        boolean _isEmpty_1 = move.getBuffE().isEmpty();
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
+          EList<BuffEffect> _buffE = move.getBuffE();
+          for (final BuffEffect effects_1 : _buffE) {
+            this.generateBuffEffect(effects_1.getMoveB());
+          }
+        }
       }
     }
     for (final Object o : list) {
       System.out.println(o.toString());
     }
+  }
+  
+  public Object moveRuleTest(final MoveRule moveRule) {
+    return null;
   }
   
   protected Object _exp2(final Add x, final List<Object> list) {
@@ -1585,8 +1999,8 @@ public class RPGGenerator extends AbstractGenerator {
     return this.logic(req.getLog());
   }
   
-  public CharSequence new_re(final Require req) {
-    return this.new_logic(req.getLog());
+  public CharSequence new_re(final Require req, final boolean effect) {
+    return this.new_logic(req.getLog(), effect);
   }
   
   protected CharSequence _logic(final Or x) {
@@ -1730,138 +2144,177 @@ public class RPGGenerator extends AbstractGenerator {
     return ("_" + _name);
   }
   
-  protected CharSequence _new_logic(final Or x) {
+  protected CharSequence _new_logic(final Or x, final boolean effect) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("(");
-    CharSequence _new_logic = this.new_logic(x.getLeft());
+    CharSequence _new_logic = this.new_logic(x.getLeft(), effect);
     _builder.append(_new_logic);
     _builder.append("||");
-    CharSequence _new_logic_1 = this.new_logic(x.getRight());
+    CharSequence _new_logic_1 = this.new_logic(x.getRight(), effect);
     _builder.append(_new_logic_1);
     _builder.append(")");
     return _builder;
   }
   
-  protected CharSequence _new_logic(final And x) {
+  protected CharSequence _new_logic(final And x, final boolean effect) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("(");
-    CharSequence _new_logic = this.new_logic(x.getLeft());
+    CharSequence _new_logic = this.new_logic(x.getLeft(), effect);
     _builder.append(_new_logic);
     _builder.append("&&");
-    CharSequence _new_logic_1 = this.new_logic(x.getRight());
+    CharSequence _new_logic_1 = this.new_logic(x.getRight(), effect);
     _builder.append(_new_logic_1);
     _builder.append(")");
     return _builder;
   }
   
-  protected CharSequence _new_logic(final NumberComparing x) {
+  protected CharSequence _new_logic(final NumberComparing x, final boolean effect) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("(");
-    CharSequence _new_exp = this.new_exp(x.getLeft());
+    CharSequence _new_exp = this.new_exp(x.getLeft(), effect);
     _builder.append(_new_exp);
     String _generateComp = this.generateComp(x.getComp());
     _builder.append(_generateComp);
-    CharSequence _new_exp_1 = this.new_exp(x.getRight());
+    CharSequence _new_exp_1 = this.new_exp(x.getRight(), effect);
     _builder.append(_new_exp_1);
     _builder.append(")");
     return _builder;
   }
   
-  protected CharSequence _new_exp(final Add x) {
+  protected CharSequence _new_exp(final Add x, final boolean effect) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("(");
-    CharSequence _new_exp = this.new_exp(x.getLeft());
+    CharSequence _new_exp = this.new_exp(x.getLeft(), effect);
     _builder.append(_new_exp);
     _builder.append("+");
-    CharSequence _new_exp_1 = this.new_exp(x.getRight());
+    CharSequence _new_exp_1 = this.new_exp(x.getRight(), effect);
     _builder.append(_new_exp_1);
     _builder.append(")");
     return _builder;
   }
   
-  protected CharSequence _new_exp(final Sub x) {
+  protected CharSequence _new_exp(final Sub x, final boolean effect) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("(");
-    CharSequence _new_exp = this.new_exp(x.getLeft());
+    CharSequence _new_exp = this.new_exp(x.getLeft(), effect);
     _builder.append(_new_exp);
     _builder.append("-");
-    CharSequence _new_exp_1 = this.new_exp(x.getRight());
+    CharSequence _new_exp_1 = this.new_exp(x.getRight(), effect);
     _builder.append(_new_exp_1);
     _builder.append(")");
     return _builder;
   }
   
-  protected CharSequence _new_exp(final Mult x) {
+  protected CharSequence _new_exp(final Mult x, final boolean effect) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("(");
-    CharSequence _new_exp = this.new_exp(x.getLeft());
+    CharSequence _new_exp = this.new_exp(x.getLeft(), effect);
     _builder.append(_new_exp);
     _builder.append("*");
-    CharSequence _new_exp_1 = this.new_exp(x.getRight());
+    CharSequence _new_exp_1 = this.new_exp(x.getRight(), effect);
     _builder.append(_new_exp_1);
     _builder.append(")");
     return _builder;
   }
   
-  protected CharSequence _new_exp(final Div x) {
+  protected CharSequence _new_exp(final Div x, final boolean effect) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("(");
-    CharSequence _new_exp = this.new_exp(x.getLeft());
+    CharSequence _new_exp = this.new_exp(x.getLeft(), effect);
     _builder.append(_new_exp);
     _builder.append("/");
-    CharSequence _new_exp_1 = this.new_exp(x.getRight());
+    CharSequence _new_exp_1 = this.new_exp(x.getRight(), effect);
     _builder.append(_new_exp_1);
     _builder.append(")");
     return _builder;
   }
   
-  protected CharSequence _new_exp(final IntNum x) {
+  protected CharSequence _new_exp(final IntNum x, final boolean effect) {
     return Integer.toString(x.getValue());
   }
   
-  protected CharSequence _new_exp(final FloatNum x) {
+  protected CharSequence _new_exp(final FloatNum x, final boolean effect) {
     String _string = Integer.toString(x.getI());
     String _plus = (_string + ".");
     String _string_1 = Integer.toString(x.getDecimal());
     return (_plus + _string_1);
   }
   
-  protected CharSequence _new_exp(final NameAttribute x) {
+  protected CharSequence _new_exp(final NameAttribute x, final boolean effect) {
     String _xifexpression = null;
-    if (((x.getAttribute().getAVal().getLTypes() != null) && x.getAttribute().getAVal().getLTypes().equals("Integer"))) {
-      String _name = x.getAttribute().getName();
-      String _plus = (("eData.get(" + "\"") + _name);
-      String _plus_1 = (_plus + "\"");
-      _xifexpression = (_plus_1 + ").intValue()");
-    } else {
+    if ((!effect)) {
       String _xifexpression_1 = null;
-      if (((x.getAttribute().getAVal().getLTypes() != null) && x.getAttribute().getAVal().getLTypes().equals("Float"))) {
-        String _name_1 = x.getAttribute().getName();
-        String _plus_2 = (("eData.get(" + "\"") + _name_1);
-        String _plus_3 = (_plus_2 + "\"");
-        _xifexpression_1 = (_plus_3 + ").floatValue()");
+      if (((x.getAttribute().getAVal().getLTypes() != null) && x.getAttribute().getAVal().getLTypes().equals("Integer"))) {
+        String _name = x.getAttribute().getName();
+        String _plus = (("eData.get(" + "\"") + _name);
+        String _plus_1 = (_plus + "\"");
+        _xifexpression_1 = (_plus_1 + ").intValue()");
       } else {
         String _xifexpression_2 = null;
-        if (((x.getAttribute().getAVal().getAn() != null) && (x.getAttribute().getAVal().getAn() instanceof IntNum))) {
-          String _name_2 = x.getAttribute().getName();
-          String _plus_4 = (("eData.get(" + "\"") + _name_2);
-          String _plus_5 = (_plus_4 + "\"");
-          _xifexpression_2 = (_plus_5 + ").intValue()");
+        if (((x.getAttribute().getAVal().getLTypes() != null) && x.getAttribute().getAVal().getLTypes().equals("Float"))) {
+          String _name_1 = x.getAttribute().getName();
+          String _plus_2 = (("eData.get(" + "\"") + _name_1);
+          String _plus_3 = (_plus_2 + "\"");
+          _xifexpression_2 = (_plus_3 + ").floatValue()");
         } else {
           String _xifexpression_3 = null;
-          if (((x.getAttribute().getAVal().getAn() != null) && (x.getAttribute().getAVal().getAn() instanceof FloatNum))) {
-            String _name_3 = x.getAttribute().getName();
-            String _plus_6 = (("eData.get(" + "\"") + _name_3);
-            String _plus_7 = (_plus_6 + "\"");
-            _xifexpression_3 = (_plus_7 + ").floatValue()");
+          if (((x.getAttribute().getAVal().getAn() != null) && (x.getAttribute().getAVal().getAn() instanceof IntNum))) {
+            String _name_2 = x.getAttribute().getName();
+            String _plus_4 = (("eData.get(" + "\"") + _name_2);
+            String _plus_5 = (_plus_4 + "\"");
+            _xifexpression_3 = (_plus_5 + ").intValue()");
           } else {
-            _xifexpression_3 = "Shit son";
+            String _xifexpression_4 = null;
+            if (((x.getAttribute().getAVal().getAn() != null) && (x.getAttribute().getAVal().getAn() instanceof FloatNum))) {
+              String _name_3 = x.getAttribute().getName();
+              String _plus_6 = (("eData.get(" + "\"") + _name_3);
+              String _plus_7 = (_plus_6 + "\"");
+              _xifexpression_4 = (_plus_7 + ").floatValue()");
+            } else {
+              _xifexpression_4 = "Shit son";
+            }
+            _xifexpression_3 = _xifexpression_4;
           }
           _xifexpression_2 = _xifexpression_3;
         }
         _xifexpression_1 = _xifexpression_2;
       }
       _xifexpression = _xifexpression_1;
+    } else {
+      String _xifexpression_5 = null;
+      if (((x.getAttribute().getAVal().getLTypes() != null) && x.getAttribute().getAVal().getLTypes().equals("Integer"))) {
+        _xifexpression_5 = "eData.get(moveEffect.getList(i)).intValue()";
+      } else {
+        String _xifexpression_6 = null;
+        if (((x.getAttribute().getAVal().getLTypes() != null) && x.getAttribute().getAVal().getLTypes().equals("Float"))) {
+          String _name_4 = x.getAttribute().getName();
+          String _plus_8 = (("eData.get(" + "\"") + _name_4);
+          String _plus_9 = (_plus_8 + "\"");
+          _xifexpression_6 = (_plus_9 + ").floatValue()");
+        } else {
+          String _xifexpression_7 = null;
+          if (((x.getAttribute().getAVal().getAn() != null) && (x.getAttribute().getAVal().getAn() instanceof IntNum))) {
+            String _name_5 = x.getAttribute().getName();
+            String _plus_10 = (("eData.get(" + "\"") + _name_5);
+            String _plus_11 = (_plus_10 + "\"");
+            _xifexpression_7 = (_plus_11 + ").intValue()");
+          } else {
+            String _xifexpression_8 = null;
+            if (((x.getAttribute().getAVal().getAn() != null) && (x.getAttribute().getAVal().getAn() instanceof FloatNum))) {
+              String _name_6 = x.getAttribute().getName();
+              String _plus_12 = (("eData.get(" + "\"") + _name_6);
+              String _plus_13 = (_plus_12 + "\"");
+              _xifexpression_8 = (_plus_13 + ").floatValue()");
+            } else {
+              _xifexpression_8 = "Shit son";
+            }
+            _xifexpression_7 = _xifexpression_8;
+          }
+          _xifexpression_6 = _xifexpression_7;
+        }
+        _xifexpression_5 = _xifexpression_6;
+      }
+      _xifexpression = _xifexpression_5;
     }
     return _xifexpression;
   }
@@ -2038,6 +2491,8 @@ public class RPGGenerator extends AbstractGenerator {
     fsa.generateFile("EntityState.java", this.generateEntityState());
     fsa.generateFile("MoveInit.java", this.generateMoveInit(moves));
     fsa.generateFile("MoveData.java", this.generateMoveData());
+    fsa.generateFile("MoveEffectData.java", this.generateMoveEffectData());
+    fsa.generateFile("BuffEffectData.java", this.generateBuffEffectData());
   }
   
   public CharSequence generateMove() {
@@ -2153,6 +2608,12 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("    ");
     _builder.append("private List<AttributeData> moveAttributes;");
     _builder.newLine();
+    _builder.append("    ");
+    _builder.append("private List<EffectMove> moveEffects;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("private List<EffectBuff> buffEffects;\t\t    ");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public MoveData(){");
@@ -2165,7 +2626,7 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("public MoveData(String moveName, String type, List<AttributeData> moveAttributes) {");
+    _builder.append("public MoveData(String moveName, String type, List<AttributeData> moveAttributes, List<EffectMove> moveEffects, List<EffectBuff> buffEffects) {");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("this.moveName = moveName;");
@@ -2175,6 +2636,12 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("this.moveAttributes = moveAttributes;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.moveEffects = moveEffects;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.buffEffects = buffEffects;\t\t        ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
@@ -2248,6 +2715,47 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public List<EffectBuff> getBuffEffects(){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return this.buffEffects;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public List<EffectMove> getMoveEffects(){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return this.moveEffects;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void addMoveEffect(EffectMove moveEffect){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.moveEffects.add(moveEffect);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void addBuffEffect(EffectBuff buffEffect){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.buffEffects.add(buffEffect);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}\t\t    ");
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
@@ -2422,17 +2930,178 @@ public class RPGGenerator extends AbstractGenerator {
                 _builder.newLineIfNotEmpty();
               }
             }
-            _builder.append("\t\t");
-            _builder.newLine();
-            _builder.append("\t\t");
-            _builder.append("moves.addMove(tempMoveData);");
-            _builder.newLine();
           }
         }
+        {
+          EList<MEffect> _mEffect = move.getMEffect();
+          for(final MEffect moveEffect : _mEffect) {
+            {
+              if ((moveEffect != null)) {
+                _builder.append("\t\t");
+                _builder.append("tempMoveData.addMoveEffect(new ");
+                String _name_3 = moveEffect.getMoveEName().getName();
+                _builder.append(_name_3, "\t\t");
+                _builder.append("());");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
+        {
+          EList<BEffect> _bEffect = move.getBEffect();
+          for(final BEffect buffEffect : _bEffect) {
+            {
+              if ((buffEffect != null)) {
+                _builder.append("\t\t");
+                _builder.append("tempMoveData.addBuffEffect(new ");
+                String _name_4 = buffEffect.getBuffEName().getName();
+                _builder.append(_name_4, "\t\t");
+                _builder.append("());");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
+        _builder.append("\t\t");
+        _builder.append("moves.addMove(tempMoveData);");
+        _builder.newLine();
       }
     }
     _builder.append("\t");
     _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence generateMoveEffectData() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class MoveEffectData {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("private String statement;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("private String attributeName;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("private String changeStatement;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public MoveEffectData(String statement, String attributeName, String changeStatement){");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("this.statement = statement;");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("this.attributeName = attributeName;");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("this.changeStatement = changeStatement;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public String getStatement() {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("return this.statement;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public String getAttributeName() {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("return this.attributeName;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public String getChangeStatement() {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("return this.changeStatement;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence generateBuffEffectData() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("public class BuffEffectData {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("private String statement;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("private String attributeName;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("private String changeStatement;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public BuffEffectData(String statement, String attributeName, String changeStatement){");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("this.statement = statement;");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("this.attributeName = attributeName;");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("this.changeStatement = changeStatement;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public String getStatement() {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("return this.statement;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public String getAttributeName() {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("return this.attributeName;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public String getChangeStatement() {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("return this.changeStatement;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -3038,37 +3707,37 @@ public class RPGGenerator extends AbstractGenerator {
     }
   }
   
-  public CharSequence new_logic(final Proposition x) {
+  public CharSequence new_logic(final Proposition x, final boolean effect) {
     if (x instanceof And) {
-      return _new_logic((And)x);
+      return _new_logic((And)x, effect);
     } else if (x instanceof NumberComparing) {
-      return _new_logic((NumberComparing)x);
+      return _new_logic((NumberComparing)x, effect);
     } else if (x instanceof Or) {
-      return _new_logic((Or)x);
+      return _new_logic((Or)x, effect);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(x).toString());
+        Arrays.<Object>asList(x, effect).toString());
     }
   }
   
-  public CharSequence new_exp(final Sum x) {
+  public CharSequence new_exp(final Sum x, final boolean effect) {
     if (x instanceof FloatNum) {
-      return _new_exp((FloatNum)x);
+      return _new_exp((FloatNum)x, effect);
     } else if (x instanceof IntNum) {
-      return _new_exp((IntNum)x);
+      return _new_exp((IntNum)x, effect);
     } else if (x instanceof NameAttribute) {
-      return _new_exp((NameAttribute)x);
+      return _new_exp((NameAttribute)x, effect);
     } else if (x instanceof Div) {
-      return _new_exp((Div)x);
+      return _new_exp((Div)x, effect);
     } else if (x instanceof Mult) {
-      return _new_exp((Mult)x);
+      return _new_exp((Mult)x, effect);
     } else if (x instanceof Add) {
-      return _new_exp((Add)x);
+      return _new_exp((Add)x, effect);
     } else if (x instanceof Sub) {
-      return _new_exp((Sub)x);
+      return _new_exp((Sub)x, effect);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(x).toString());
+        Arrays.<Object>asList(x, effect).toString());
     }
   }
   

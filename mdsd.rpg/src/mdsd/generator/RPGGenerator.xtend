@@ -44,8 +44,14 @@ import mdsd.rPG.Members
 import java.util.ArrayList
 import mdsd.rPG.Effect
 import java.util.List
-import mdsd.rPG.MoveAttributes
-import mdsd.rPG.EntityAttributes
+import mdsd.rPG.MoveRule
+import mdsd.rPG.MoveEffect
+import mdsd.rPG.BuffRule
+import mdsd.rPG.BuffEffect
+import mdsd.rPG.Effects
+import mdsd.rPG.Effect2
+import mdsd.rPG.Buff
+import mdsd.rPG.MoveE
 
 /**
  * Generates code from your model files on save.
@@ -69,6 +75,7 @@ class RPGGenerator extends AbstractGenerator {
 		var teamsbool = false
 		var attributesbool = false
 		var deathbool = false
+		var effectbool = false		
 		val classFileName = thing.getName() 
 		for (Declaration d : thing.getDeclarations()){
 			switch(d){
@@ -108,13 +115,22 @@ class RPGGenerator extends AbstractGenerator {
 						fsa.generateFile("DeathChecker.java", d.generateDeathChecker)
 						deathbool = true
 					}
+				Effects: {
+						System.out.println("Hello")
+						if(!effectbool){
+							generateEffectFiles(fsa, d)
+							effectbool = true	
+						}
+					}
 					
 				default:
 					System.out.println("reported")
 			}
 
 		}
+		
 		fsa.generateFile(classFileName + ".java", generateGamePOG2(classFileName))
+		
 		
 	}
 	
@@ -131,7 +147,97 @@ class RPGGenerator extends AbstractGenerator {
 				for(AttributeData aData : entity.getAttributes()){
 					eData.put(aData.getAttributeName(), aData.getNumber());
 				}
-				return («death.req.new_re»);
+				return («death.req.new_re(false)»);
+			}
+		}
+		'''
+	}
+	
+	def  generateEffect(MoveRule moveRule){
+		
+		//System.out.println(moveRule.or.new_logic)
+		'''
+		
+		public class Effect{
+			Entity player;
+			Entity enemy;
+			String moveName = "ember";
+			Move ember;
+			int moveInt;
+			public boolean effectMove(){
+				HashMap<String, Number> eData = new HashMap<>();			
+				//if(ember.getMove(moveName).getAttributes)
+				for(AttributeData aData : ember.getMove(moveName).getMoveAttributes()){
+					eData.put(aData.getAttributeName(), aData.getNumber());
+					}
+				for(AttributeData aData : player.getAttributes()){
+					eData.put(aData.getAttributeName(), aData.getNumber());
+
+					}
+«««				return «moveRule.or.new_logic»;
+			}
+		
+			
+			public void Test(){
+				if()
+			}
+			
+			p
+		}
+		'''
+	}
+	
+	def  generateBuffEffect(BuffRule buffRule){
+		//Map<String, Map<String, String>>
+//		System.out.println(buffRule.or.new_logic)
+//		System.out.println(buffRule.target.name)
+//		System.out.println(buffRule.sum.new_exp)
+		'''
+			
+			public boolean effectBuff(Move move, String name, Entity player){
+				HashMap<String, Number> eData = new HashMap<>();
+				for(AttributeData playerData : player.getAttributes()){
+					eData.put(aData.getAttributeName(), aData.getNumber());
+				}			
+				for(AttributeData aData : move.getMove(name).getMoveAttributes()){
+					eData.put(aData.getAttributeName(), aData.getNumber());				
+				}
+				
+				return «buffRule.or.new_logic(false)»
+			}
+			
+			public Number changeBuff(Move move, String name Entity player){
+				HashMap<String, Number> eData = new HashMap<>();
+				for(AttributeData playerData : player.getAttributes()){
+						eData.put(aData.getAttributeName(), aData.getNumber());
+					}			
+				for(AttributeData aData : move.getMove(name).getMoveAttributes()){
+						eData.put(aData.getAttributeName(), aData.getNumber());				
+					}
+					return «buffRule.sum.new_exp(false)»
+			}
+			
+			
+						
+			public void doMove(){
+				if(effectBuff(move, "ember", player)){
+					for(AttributeData aData : player.getAttributes()){
+						if(aData.getName() == «buffRule.target.name»){
+							aData.setNumber(changeBuff(move, "ember", player));
+						}
+					}
+				}			
+			}		
+		'''
+	}
+	
+	def generateBuffEffectAttName(){
+		'''
+		if((eData.get("current_hp").floatValue()>(eData.get("current_hp").floatValue()/5)))){
+			for(AttributeData aData : player.getAttributes()){
+				if(aData.getName() == "power"){
+					aData.setNumber(eData.get("power").intValue()*eData.get("pp").intValue()));
+				}
 			}
 		}
 		'''
@@ -153,7 +259,6 @@ class RPGGenerator extends AbstractGenerator {
 		    private EntityInit entityInit;
 		    private TeamInit teamInit;
 		    private TypeRelationsInit tRI;
-		    
 		    private String currentLocation;
 		    private String currentTeam;
 		    
@@ -221,66 +326,6 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 
-	def CharSequence generateMoveAttribute(MoveAttributes attribute){
-	'''
-	import java.util.*;
-	
-	public class MoveAttributes {
-	    private List<AttributeData> moveattributes = new ArrayList<>();
-	
-	    private static MoveAttributes attribute;
-	
-	    private MoveAttributes() {
-	
-	    }
-	
-	    public static MoveAttributes getInstance() {
-	        if (attribute == null) {
-	            attribute = new MoveAttributes();
-	        }
-	        return attribute;
-	    }
-	
-	    public void addAttribute(AttributeData attribute) {
-	        moveattributes.add(attribute);
-	    }
-	    
-	    public List<AttributeData> getAttributes() {
-	        return moveattributes;
-	    }
-	}
-	'''
-	}
-	
-	def CharSequence generateEntityAttribute(EntityAttributes attribute){
-	'''
-	import java.util.*;
-
-	public class EntityAttributes {
-	private List<AttributeData> entityattributes = new ArrayList<>();
-	private static EntityAttributes attribute;
-
-		private EntityAttributes() {
-		
-		}
-
-	    public static EntityAttributes getInstance() {
-	        if (attribute == null) {
-	            attribute = new EntityAttributes();
-	        }
-	        return attribute;
-	    }
-	
-	    public void addAttribute(AttributeData attribute) {
-	        entityattributes.add(attribute);
-	    }
-	    
-	    public List<AttributeData> getAttributes() {
-	        return entityattributes;
-	    }
-	}
-	'''
-	}
 	
 	def generateAttributeChangeEvent(){
 		'''
@@ -351,25 +396,185 @@ class RPGGenerator extends AbstractGenerator {
     }
 	
     def CharSequence generateEffect(Moves moves){
-    '''
-        «FOR move: moves.move»
-            «FOR effect: move.effect»
-                «effect.rule.carl»
-                «effect.rule.carl.attribute.attribute.name»=«effect.rule.carl.change.exp»
-            «ENDFOR»
-        «ENDFOR»
-    '''
+//    '''
+//        «FOR move: moves.move»
+//            «FOR effect: move.effect»
+//                «effect.rule.carl»
+//                «effect.rule.carl.attribute.attribute.name»=«effect.rule.carl.change.exp»
+//            «ENDFOR»
+//        «ENDFOR»
+//    '''
+    }
+    
+    def generateEffectFiles(IFileSystemAccess2 fsa, Effects effects){
+
+    	
+    	var i = 1
+    	var moveEffectBoolean = false
+    	var buffEffectBoolean = false    	
+    	for (effect : effects.effect){
+    		System.out.println(i)
+    		switch effect{
+    			Buff:  {
+    					
+    					if(!buffEffectBoolean){
+    						fsa.generateFile("EffectBuff.java", generateEffectBuff)
+    						buffEffectBoolean = true
+    					}
+    					fsa.generateFile(effect.name + ".java", effect.generateBuffEffectFile)
+    					System.out.println(effect.name)}
+    			MoveE: {
+    					if(!moveEffectBoolean){
+    						fsa.generateFile("EffectMove.java", generateEffectMove)
+    						moveEffectBoolean = true
+    					}
+    					fsa.generateFile(effect.name + ".java", effect.generateMoveEffectFile)
+    					System.out.println(effect.name)}
+    			}
+    		i++	
+    		}
+    		
+		}
+		
+		def CharSequence generateEffectMove(){
+			    	'''
+    	import java.util.*;
+    	public abstract class EffectMove {
+    	
+    	    public abstract boolean effectMove(Move move, String name, Entity enemy);
+    	
+    	    public abstract Number changeMove(Move move, String name, Entity enemy);
+    	
+    	    public abstract void doEffect(Move move, String name, Entity enemy);    	
+    	}
+    	'''
+		}
+		
+		def CharSequence generateEffectBuff(){
+			    	'''
+    	import java.util.*;
+    	public abstract class EffectBuff {
+    	
+    	    public abstract boolean effectBuff(Move move, String name, Entity player);
+    	
+    	    public abstract Number changeBuff(Move move, String name, Entity player);
+    	
+    	    public abstract void doEffect(Move move, String name, Entity player);    	
+    	}
+    	'''
+		}		
+    
+    def CharSequence generateBuffEffectFile(Buff buff){
+    	'''
+			import java.util.*;
+			public class «buff.name» extends EffectBuff{
+				
+				@Override
+				public boolean effectBuff(Move move, String name, Entity player){
+					HashMap<String, Number> eData = new HashMap<>();
+					for(AttributeData playerData : player.getAttributes()){
+						eData.put(playerData.getAttributeName(), playerData.getNumber());
+					}			
+					for(AttributeData aData : move.getMove(name).getMoveAttributes()){
+						eData.put(aData.getAttributeName(), aData.getNumber());				
+					}
+					
+					return «buff.buffR.or.new_logic(false)»;
+				}
+			
+				@Override
+				public Number changeBuff(Move move, String name, Entity player){
+					HashMap<String, Number> eData = new HashMap<>();
+					for(AttributeData playerData : player.getAttributes()){
+							eData.put(playerData.getAttributeName(), playerData.getNumber());
+						}			
+					for(AttributeData aData : move.getMove(name).getMoveAttributes()){
+							eData.put(aData.getAttributeName(), aData.getNumber());				
+						}
+						return «buff.buffR.sum.new_exp(false)»;
+				}
+			
+			
+				@Override		
+				public void doEffect(Move move, String name, Entity player){
+					if(effectBuff(move, name, player)){
+						for(AttributeData aData : player.getAttributes()){
+							if(aData.getAttributeName() == "«buff.buffR.target.name»"){
+								aData.setNumber(changeBuff(move, name, player));
+							}
+						}
+					}			
+				}
+			}
+    	'''
+    }
+	 def CharSequence generateMoveEffectFile(MoveE moveE){
+    	'''
+			import java.util.*;
+			public class «moveE.name» extends EffectMove{
+				
+				@Override
+				public boolean effectMove(Move move, String name, Entity enemy){
+					HashMap<String, Number> eData = new HashMap<>();
+					for(AttributeData enemyData : enemy.getAttributes()){
+						eData.put(enemyData.getAttributeName(), enemyData.getNumber());
+					}			
+					for(AttributeData aData : move.getMove(name).getMoveAttributes()){
+						eData.put(aData.getAttributeName(), aData.getNumber());				
+					}
+					
+					return «moveE.moveR.or.new_logic(false)»;
+				}
+				
+				@Override
+				public Number changeMove(Move move, String name, Entity enemy){
+					HashMap<String, Number> eData = new HashMap<>();
+					for(AttributeData enemyData : enemy.getAttributes()){
+							eData.put(enemyData.getAttributeName(), enemyData.getNumber());
+						}			
+					for(AttributeData aData : move.getMove(name).getMoveAttributes()){
+							eData.put(aData.getAttributeName(), aData.getNumber());				
+						}
+						return «moveE.moveR.sum.new_exp(false)»;
+				}
+			
+			
+				@Override		
+				public void doEffect(Move move, String name, Entity enemy){
+					if(effectMove(move, name, enemy)){
+						for(AttributeData aData : enemy.getAttributes()){
+							if(aData.getAttributeName() == "«moveE.moveR.target.name»"){
+								aData.setNumber(changeMove(move, name, enemy));
+							}
+						}
+					}			
+				}
+			}
+    	'''
     }
     
     def test(Moves moves){
         var list = new ArrayList<Object>()
         for(Move move : moves.move){
-            for(Effect effects : move.effect){
-                effects.rule.carl.change.exp2(list)
-            }
+        	if(!move.moveE.isEmpty){
+            	for(MoveEffect effects : move.moveE){
+              //  effects.rule.carl.change.exp2(list)
+                //effects.moveRule
+                	effects.moveR.generateEffect
+            	}
+            	if(!move.buffE.isEmpty){
+            		for(BuffEffect effects: move.buffE){
+            			effects.moveB.generateBuffEffect
+            		}
+            	}
+        	}
         }
         for(Object o : list)
             System.out.println(o.toString())
+    }
+    
+    def moveRuleTest(MoveRule moveRule){
+    	
     }
     
     def dispatch exp2(Add x, List<Object> list){
@@ -750,8 +955,8 @@ class RPGGenerator extends AbstractGenerator {
 		req.log.logic
 	}
 	
-	def CharSequence new_re(Require req){
-		req.log.new_logic
+	def CharSequence new_re(Require req, boolean effect){
+		req.log.new_logic(effect)
 	}
 	
 	def dispatch CharSequence logic(Or x){
@@ -788,44 +993,61 @@ class RPGGenerator extends AbstractGenerator {
 		{"_"+x.attribute.name}
 	}
 	
-	def dispatch CharSequence new_logic(Or x){
-		'''(«x.left.new_logic»||«x.right.new_logic»)'''
+	def dispatch CharSequence new_logic(Or x, boolean effect){
+		'''(«x.left.new_logic(effect)»||«x.right.new_logic(effect)»)'''
 	}
-	def dispatch CharSequence new_logic(And x){
-		'''(«x.left.new_logic»&&«x.right.new_logic»)'''
+	def dispatch CharSequence new_logic(And x, boolean effect){
+		'''(«x.left.new_logic(effect)»&&«x.right.new_logic(effect)»)'''
 	}
-	def dispatch CharSequence new_logic(NumberComparing x){
-		'''(«x.left.new_exp»«x.comp.generateComp»«x.right.new_exp»)'''
+	def dispatch CharSequence new_logic(NumberComparing x, boolean effect){
+		'''(«x.left.new_exp(effect)»«x.comp.generateComp»«x.right.new_exp(effect)»)'''
 	}
-	def dispatch CharSequence new_exp(Add x){
-		'''(«x.left.new_exp»+«x.right.new_exp»)'''
+	def dispatch CharSequence new_exp(Add x, boolean effect){
+		'''(«x.left.new_exp(effect)»+«x.right.new_exp(effect)»)'''
 	}
-	def dispatch CharSequence new_exp(Sub x){
-		'''(«x.left.new_exp»-«x.right.new_exp»)'''
+	def dispatch CharSequence new_exp(Sub x, boolean effect){
+		'''(«x.left.new_exp(effect)»-«x.right.new_exp(effect)»)'''
 	}
-	def dispatch CharSequence new_exp(Mult x){
-		'''(«x.left.new_exp»*«x.right.new_exp»)'''
+	def dispatch CharSequence new_exp(Mult x, boolean effect){
+		'''(«x.left.new_exp(effect)»*«x.right.new_exp(effect)»)'''
 	}
-	def dispatch CharSequence new_exp(Div x){
-		'''(«x.left.new_exp»/«x.right.new_exp»)'''
+	def dispatch CharSequence new_exp(Div x, boolean effect){
+		'''(«x.left.new_exp(effect)»/«x.right.new_exp(effect)»)'''
 	}
-	def dispatch CharSequence new_exp(IntNum x){
+	def dispatch CharSequence new_exp(IntNum x, boolean effect){
 		Integer.toString(x.value)
 	}
-	def dispatch CharSequence new_exp(FloatNum x){
+	def dispatch CharSequence new_exp(FloatNum x, boolean effect){
 		Integer.toString(x.i) + '.' + Integer.toString(x.decimal)
 	}
-	def dispatch CharSequence new_exp(NameAttribute x){
+	def dispatch CharSequence new_exp(NameAttribute x, boolean effect){
+		
+		if(!effect){
+			if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Integer")){
+				"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
+			}else if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Float")){ 
+				"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
+			}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof IntNum){
+				"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
+			}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof FloatNum){
+				"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
+			} else {
+				"Shit son" 
+			}
+		}
+		else{
 		if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Integer")){
-			"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
-		}else if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Float")){ 
-			"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
-		}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof IntNum){
-			"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
-		}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof FloatNum){
-			"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
-		} else {
-			"Shit son" 
+				"eData.get(moveEffect.getList(i)).intValue()"
+			}else if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Float")){ 
+				"eData.get(" + '\"' +x.attribute.name + '\"' + ").floatValue()"
+			}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof IntNum){
+				"eData.get(" + '\"' +x.attribute.name + '\"' + ").intValue()"
+			}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof FloatNum){
+				"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
+			} else {
+				"Shit son" 
+			}
+			
 		}
 	}
 
@@ -909,7 +1131,9 @@ class RPGGenerator extends AbstractGenerator {
 		fsa.generateFile("EntityState.java", generateEntityState)
 		fsa.generateFile("MoveInit.java", moves.generateMoveInit)
 		fsa.generateFile("MoveData.java", generateMoveData)
-	}
+		fsa.generateFile("MoveEffectData.java", generateMoveEffectData)
+		fsa.generateFile("BuffEffectData.java", generateBuffEffectData)
+		}
 	
 	def CharSequence generateMove(){
 		'''
@@ -963,15 +1187,19 @@ class RPGGenerator extends AbstractGenerator {
 		    private String moveName;
 			private String type;
 		    private List<AttributeData> moveAttributes;
+		    private List<EffectMove> moveEffects;
+		    private List<EffectBuff> buffEffects;		    
 		
 		    public MoveData(){
 		        this.moveAttributes = new ArrayList<>();
 		    }
 		
-		    public MoveData(String moveName, String type, List<AttributeData> moveAttributes) {
+		    public MoveData(String moveName, String type, List<AttributeData> moveAttributes, List<EffectMove> moveEffects, List<EffectBuff> buffEffects) {
 		        this.moveName = moveName;
 		        this.type = type;
 		        this.moveAttributes = moveAttributes;
+				this.moveEffects = moveEffects;
+				this.buffEffects = buffEffects;		        
 		    }
 		
 		    public String getMoveName(){
@@ -1001,6 +1229,22 @@ class RPGGenerator extends AbstractGenerator {
 		    public void addAttribute(AttributeData attribute){
 		        moveAttributes.add(attribute);
 		    }
+		    
+			public List<EffectBuff> getBuffEffects(){
+				return this.buffEffects;
+			}
+
+			public List<EffectMove> getMoveEffects(){
+				return this.moveEffects;
+			}
+
+			public void addMoveEffect(EffectMove moveEffect){
+				this.moveEffects.add(moveEffect);
+			}
+
+			public void addBuffEffect(EffectBuff buffEffect){
+				this.buffEffects.add(buffEffect);
+			}		    
 		
 		    @Override
 		    public boolean equals(Object o) {
@@ -1060,6 +1304,7 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	
 	def CharSequence generateMoveInit(Moves moves){
+
 		/*
 		 * 
 		 * «IF getNumberFromAtomicDab(att.av.an) instanceof Integer»
@@ -1084,15 +1329,85 @@ class RPGGenerator extends AbstractGenerator {
 				«IF getNumberFromAtomicDab(att.av.an) instanceof Number»
 				tempMoveData.addAttribute(new AttributeData("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
 				«ENDIF»
-				
-				moves.addMove(tempMoveData);
 				«ENDFOR»
+				«FOR moveEffect : move.MEffect»
+				«IF moveEffect !== null»
+				tempMoveData.addMoveEffect(new «moveEffect.moveEName.name»());
+				«ENDIF»
+				«ENDFOR»
+				«FOR buffEffect : move.BEffect»
+				«IF buffEffect !== null»
+				tempMoveData.addBuffEffect(new «buffEffect.buffEName.name»());
+				«ENDIF»
+				«ENDFOR»				
+				moves.addMove(tempMoveData);
 				«ENDFOR»
 			}
 		}
 		'''
 	}
 	
+	def CharSequence generateMoveEffectData(){
+		'''
+		public class MoveEffectData {
+		    private String statement;
+		    private String attributeName;
+		    private String changeStatement;
+		
+		
+		    public MoveEffectData(String statement, String attributeName, String changeStatement){
+		        this.statement = statement;
+		        this.attributeName = attributeName;
+		        this.changeStatement = changeStatement;
+		    }
+		
+		    public String getStatement() {
+		        return this.statement;
+		    }
+		
+		    public String getAttributeName() {
+		        return this.attributeName;
+		    }
+		
+		    public String getChangeStatement() {
+		        return this.changeStatement;
+		    }
+		}
+		
+		'''
+	}
+	
+	def CharSequence generateBuffEffectData(){
+		'''
+		
+		public class BuffEffectData {
+		    private String statement;
+		    private String attributeName;
+		    private String changeStatement;
+		
+		
+		    public BuffEffectData(String statement, String attributeName, String changeStatement){
+		        this.statement = statement;
+		        this.attributeName = attributeName;
+		        this.changeStatement = changeStatement;
+		    }
+		
+		    public String getStatement() {
+		        return this.statement;
+		    }
+		
+		    public String getAttributeName() {
+		        return this.attributeName;
+		    }
+		
+		    public String getChangeStatement() {
+		        return this.changeStatement;
+		    }
+		
+		}
+		'''
+	}
+
 	def generateTeams(IFileSystemAccess2 fsa, Teams teams){
 		fsa.generateFile("Team.java", generateTeam())
 		fsa.generateFile("TeamInit.java", generateTeamInit(teams))

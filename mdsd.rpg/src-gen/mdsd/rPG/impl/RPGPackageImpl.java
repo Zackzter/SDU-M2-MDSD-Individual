@@ -10,9 +10,13 @@ import mdsd.rPG.AtomicNumber;
 import mdsd.rPG.Attribute;
 import mdsd.rPG.AttributeValues;
 import mdsd.rPG.Attributes;
+import mdsd.rPG.BEffect;
 import mdsd.rPG.BattleSize;
 import mdsd.rPG.Bigger;
 import mdsd.rPG.BiggerEq;
+import mdsd.rPG.Buff;
+import mdsd.rPG.BuffEffect;
+import mdsd.rPG.BuffRule;
 import mdsd.rPG.Carl;
 import mdsd.rPG.Comparator;
 import mdsd.rPG.Death;
@@ -20,19 +24,22 @@ import mdsd.rPG.Declaration;
 import mdsd.rPG.Div;
 import mdsd.rPG.EType;
 import mdsd.rPG.Effect;
+import mdsd.rPG.Effect2;
+import mdsd.rPG.Effects;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
-import mdsd.rPG.EntityAttributes;
 import mdsd.rPG.EntityMoves;
 import mdsd.rPG.Eq;
-import mdsd.rPG.Equal;
 import mdsd.rPG.FloatNum;
 import mdsd.rPG.IntNum;
 import mdsd.rPG.Loc;
 import mdsd.rPG.Locations;
+import mdsd.rPG.MEffect;
 import mdsd.rPG.Members;
 import mdsd.rPG.Move;
-import mdsd.rPG.MoveAttributes;
+import mdsd.rPG.MoveE;
+import mdsd.rPG.MoveEffect;
+import mdsd.rPG.MoveRule;
 import mdsd.rPG.Moves;
 import mdsd.rPG.Mult;
 import mdsd.rPG.Multiply;
@@ -47,7 +54,6 @@ import mdsd.rPG.Relations;
 import mdsd.rPG.Require;
 import mdsd.rPG.Rule;
 import mdsd.rPG.SelfTargeting;
-import mdsd.rPG.Set;
 import mdsd.rPG.Smaller;
 import mdsd.rPG.SmallerEq;
 import mdsd.rPG.Sub;
@@ -92,14 +98,28 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass entityAttributesEClass = null;
+  private EClass effectsEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass moveAttributesEClass = null;
+  private EClass effect2EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass buffEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass moveEEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -169,6 +189,34 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass moveEffectEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass buffEffectEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass mEffectEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass bEffectEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass eTypeEClass = null;
 
   /**
@@ -204,14 +252,21 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass carlEClass = null;
+  private EClass moveRuleEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass setEClass = null;
+  private EClass buffRuleEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass carlEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -345,13 +400,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   private EClass floatNumEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass equalEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -550,9 +598,9 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EClass getEntityAttributes()
+  public EClass getEffects()
   {
-    return entityAttributesEClass;
+    return effectsEClass;
   }
 
   /**
@@ -561,9 +609,9 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EReference getEntityAttributes_Attribute()
+  public EReference getEffects_Effect()
   {
-    return (EReference)entityAttributesEClass.getEStructuralFeatures().get(0);
+    return (EReference)effectsEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -572,9 +620,9 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EClass getMoveAttributes()
+  public EClass getEffect2()
   {
-    return moveAttributesEClass;
+    return effect2EClass;
   }
 
   /**
@@ -583,9 +631,53 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EReference getMoveAttributes_Attribute()
+  public EAttribute getEffect2_Name()
   {
-    return (EReference)moveAttributesEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)effect2EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getBuff()
+  {
+    return buffEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getBuff_BuffR()
+  {
+    return (EReference)buffEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getMoveE()
+  {
+    return moveEEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMoveE_MoveR()
+  {
+    return (EReference)moveEEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -891,9 +983,130 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EReference getMove_Effect()
+  public EReference getMove_MoveE()
   {
     return (EReference)moveEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMove_BuffE()
+  {
+    return (EReference)moveEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMove_MEffect()
+  {
+    return (EReference)moveEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMove_BEffect()
+  {
+    return (EReference)moveEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getMoveEffect()
+  {
+    return moveEffectEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMoveEffect_MoveR()
+  {
+    return (EReference)moveEffectEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getBuffEffect()
+  {
+    return buffEffectEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getBuffEffect_MoveB()
+  {
+    return (EReference)buffEffectEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getMEffect()
+  {
+    return mEffectEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMEffect_MoveEName()
+  {
+    return (EReference)mEffectEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getBEffect()
+  {
+    return bEffectEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getBEffect_BuffEName()
+  {
+    return (EReference)bEffectEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -938,6 +1151,17 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
   public EReference getEffect_Rule()
   {
     return (EReference)effectEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getEffect_MoveRule()
+  {
+    return (EReference)effectEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1045,6 +1269,94 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
+  public EClass getMoveRule()
+  {
+    return moveRuleEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMoveRule_Or()
+  {
+    return (EReference)moveRuleEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMoveRule_Target()
+  {
+    return (EReference)moveRuleEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMoveRule_Sum()
+  {
+    return (EReference)moveRuleEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getBuffRule()
+  {
+    return buffRuleEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getBuffRule_Or()
+  {
+    return (EReference)buffRuleEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getBuffRule_Target()
+  {
+    return (EReference)buffRuleEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getBuffRule_Sum()
+  {
+    return (EReference)buffRuleEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getCarl()
   {
     return carlEClass;
@@ -1070,17 +1382,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
   public EReference getCarl_Change()
   {
     return (EReference)carlEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getSet()
-  {
-    return setEClass;
   }
 
   /**
@@ -1551,17 +1852,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EClass getEqual()
-  {
-    return equalEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getOr()
   {
     return orEClass;
@@ -1857,11 +2147,17 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
 
     declarationEClass = createEClass(DECLARATION);
 
-    entityAttributesEClass = createEClass(ENTITY_ATTRIBUTES);
-    createEReference(entityAttributesEClass, ENTITY_ATTRIBUTES__ATTRIBUTE);
+    effectsEClass = createEClass(EFFECTS);
+    createEReference(effectsEClass, EFFECTS__EFFECT);
 
-    moveAttributesEClass = createEClass(MOVE_ATTRIBUTES);
-    createEReference(moveAttributesEClass, MOVE_ATTRIBUTES__ATTRIBUTE);
+    effect2EClass = createEClass(EFFECT2);
+    createEAttribute(effect2EClass, EFFECT2__NAME);
+
+    buffEClass = createEClass(BUFF);
+    createEReference(buffEClass, BUFF__BUFF_R);
+
+    moveEEClass = createEClass(MOVE_E);
+    createEReference(moveEEClass, MOVE_E__MOVE_R);
 
     attributesEClass = createEClass(ATTRIBUTES);
     createEReference(attributesEClass, ATTRIBUTES__ATTRIBUTE);
@@ -1898,13 +2194,29 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     createEAttribute(moveEClass, MOVE__NAME);
     createEReference(moveEClass, MOVE__ETYPE);
     createEReference(moveEClass, MOVE__ATT);
-    createEReference(moveEClass, MOVE__EFFECT);
+    createEReference(moveEClass, MOVE__MOVE_E);
+    createEReference(moveEClass, MOVE__BUFF_E);
+    createEReference(moveEClass, MOVE__MEFFECT);
+    createEReference(moveEClass, MOVE__BEFFECT);
+
+    moveEffectEClass = createEClass(MOVE_EFFECT);
+    createEReference(moveEffectEClass, MOVE_EFFECT__MOVE_R);
+
+    buffEffectEClass = createEClass(BUFF_EFFECT);
+    createEReference(buffEffectEClass, BUFF_EFFECT__MOVE_B);
+
+    mEffectEClass = createEClass(MEFFECT);
+    createEReference(mEffectEClass, MEFFECT__MOVE_ENAME);
+
+    bEffectEClass = createEClass(BEFFECT);
+    createEReference(bEffectEClass, BEFFECT__BUFF_ENAME);
 
     eTypeEClass = createEClass(ETYPE);
     createEReference(eTypeEClass, ETYPE__TYPE);
 
     effectEClass = createEClass(EFFECT);
     createEReference(effectEClass, EFFECT__RULE);
+    createEReference(effectEClass, EFFECT__MOVE_RULE);
 
     attributeValuesEClass = createEClass(ATTRIBUTE_VALUES);
     createEAttribute(attributeValuesEClass, ATTRIBUTE_VALUES__LTYPES);
@@ -1918,11 +2230,19 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     createEReference(ruleEClass, RULE__OR);
     createEReference(ruleEClass, RULE__CARL);
 
+    moveRuleEClass = createEClass(MOVE_RULE);
+    createEReference(moveRuleEClass, MOVE_RULE__OR);
+    createEReference(moveRuleEClass, MOVE_RULE__TARGET);
+    createEReference(moveRuleEClass, MOVE_RULE__SUM);
+
+    buffRuleEClass = createEClass(BUFF_RULE);
+    createEReference(buffRuleEClass, BUFF_RULE__OR);
+    createEReference(buffRuleEClass, BUFF_RULE__TARGET);
+    createEReference(buffRuleEClass, BUFF_RULE__SUM);
+
     carlEClass = createEClass(CARL);
     createEReference(carlEClass, CARL__ATTRIBUTE);
     createEReference(carlEClass, CARL__CHANGE);
-
-    setEClass = createEClass(SET);
 
     entitiesEClass = createEClass(ENTITIES);
     createEReference(entitiesEClass, ENTITIES__ENTITY);
@@ -1984,8 +2304,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     floatNumEClass = createEClass(FLOAT_NUM);
     createEAttribute(floatNumEClass, FLOAT_NUM__I);
     createEAttribute(floatNumEClass, FLOAT_NUM__DECIMAL);
-
-    equalEClass = createEClass(EQUAL);
 
     orEClass = createEClass(OR);
     createEReference(orEClass, OR__LEFT);
@@ -2053,6 +2371,9 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    effectsEClass.getESuperTypes().add(this.getDeclaration());
+    buffEClass.getESuperTypes().add(this.getEffect2());
+    moveEEClass.getESuperTypes().add(this.getEffect2());
     attributesEClass.getESuperTypes().add(this.getDeclaration());
     locationsEClass.getESuperTypes().add(this.getDeclaration());
     relationsEClass.getESuperTypes().add(this.getDeclaration());
@@ -2070,7 +2391,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     nameAttributeEClass.getESuperTypes().add(this.getAtomicNumber());
     intNumEClass.getESuperTypes().add(this.getAtomicNumber());
     floatNumEClass.getESuperTypes().add(this.getAtomicNumber());
-    equalEClass.getESuperTypes().add(this.getSet());
     orEClass.getESuperTypes().add(this.getProposition());
     andEClass.getESuperTypes().add(this.getProposition());
     smallerEClass.getESuperTypes().add(this.getComparator());
@@ -2091,11 +2411,17 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
 
     initEClass(declarationEClass, Declaration.class, "Declaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(entityAttributesEClass, EntityAttributes.class, "EntityAttributes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEntityAttributes_Attribute(), this.getAttribute(), null, "attribute", null, 0, -1, EntityAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(effectsEClass, Effects.class, "Effects", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEffects_Effect(), this.getEffect2(), null, "effect", null, 0, -1, Effects.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(moveAttributesEClass, MoveAttributes.class, "MoveAttributes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMoveAttributes_Attribute(), this.getAttribute(), null, "attribute", null, 0, -1, MoveAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(effect2EClass, Effect2.class, "Effect2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEffect2_Name(), ecorePackage.getEString(), "name", null, 0, 1, Effect2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(buffEClass, Buff.class, "Buff", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getBuff_BuffR(), this.getBuffRule(), null, "buffR", null, 0, 1, Buff.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(moveEEClass, MoveE.class, "MoveE", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMoveE_MoveR(), this.getMoveRule(), null, "moveR", null, 0, 1, MoveE.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attributesEClass, Attributes.class, "Attributes", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAttributes_Attribute(), this.getAttribute(), null, "attribute", null, 0, -1, Attributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2132,13 +2458,29 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     initEAttribute(getMove_Name(), ecorePackage.getEString(), "name", null, 0, 1, Move.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMove_EType(), this.getEType(), null, "eType", null, 0, 1, Move.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMove_Att(), this.getAltAttribute(), null, "att", null, 0, -1, Move.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getMove_Effect(), this.getEffect(), null, "effect", null, 0, -1, Move.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMove_MoveE(), this.getMoveEffect(), null, "moveE", null, 0, -1, Move.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMove_BuffE(), this.getBuffEffect(), null, "buffE", null, 0, -1, Move.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMove_MEffect(), this.getMEffect(), null, "mEffect", null, 0, -1, Move.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMove_BEffect(), this.getBEffect(), null, "bEffect", null, 0, -1, Move.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(moveEffectEClass, MoveEffect.class, "MoveEffect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMoveEffect_MoveR(), this.getMoveRule(), null, "moveR", null, 0, 1, MoveEffect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(buffEffectEClass, BuffEffect.class, "BuffEffect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getBuffEffect_MoveB(), this.getBuffRule(), null, "moveB", null, 0, 1, BuffEffect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(mEffectEClass, MEffect.class, "MEffect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMEffect_MoveEName(), this.getMoveE(), null, "moveEName", null, 0, 1, MEffect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(bEffectEClass, BEffect.class, "BEffect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getBEffect_BuffEName(), this.getBuff(), null, "buffEName", null, 0, 1, BEffect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eTypeEClass, EType.class, "EType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEType_Type(), this.getType(), null, "type", null, 0, 1, EType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(effectEClass, Effect.class, "Effect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEffect_Rule(), this.getRule(), null, "rule", null, 0, 1, Effect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEffect_MoveRule(), this.getMoveRule(), null, "moveRule", null, 0, 1, Effect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attributeValuesEClass, AttributeValues.class, "AttributeValues", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAttributeValues_LTypes(), ecorePackage.getEString(), "lTypes", null, 0, 1, AttributeValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2152,11 +2494,19 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     initEReference(getRule_Or(), this.getProposition(), null, "or", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRule_Carl(), this.getCarl(), null, "carl", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(moveRuleEClass, MoveRule.class, "MoveRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMoveRule_Or(), this.getProposition(), null, "or", null, 0, 1, MoveRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMoveRule_Target(), this.getAttribute(), null, "target", null, 0, 1, MoveRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMoveRule_Sum(), this.getSum(), null, "sum", null, 0, 1, MoveRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(buffRuleEClass, BuffRule.class, "BuffRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getBuffRule_Or(), this.getProposition(), null, "or", null, 0, 1, BuffRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getBuffRule_Target(), this.getAttribute(), null, "target", null, 0, 1, BuffRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getBuffRule_Sum(), this.getSum(), null, "sum", null, 0, 1, BuffRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(carlEClass, Carl.class, "Carl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCarl_Attribute(), this.getNameAttribute(), null, "attribute", null, 0, 1, Carl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCarl_Change(), this.getSum(), null, "change", null, 0, 1, Carl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(setEClass, Set.class, "Set", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(entitiesEClass, Entities.class, "Entities", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEntities_Entity(), this.getEntity(), null, "entity", null, 0, -1, Entities.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2218,8 +2568,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     initEClass(floatNumEClass, FloatNum.class, "FloatNum", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getFloatNum_I(), ecorePackage.getEInt(), "i", null, 0, 1, FloatNum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getFloatNum_Decimal(), ecorePackage.getEInt(), "decimal", null, 0, 1, FloatNum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(equalEClass, Equal.class, "Equal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(orEClass, Or.class, "Or", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOr_Left(), this.getProposition(), null, "left", null, 0, 1, Or.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

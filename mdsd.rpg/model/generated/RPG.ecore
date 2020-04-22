@@ -7,13 +7,20 @@
         eType="#//Declaration" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Declaration"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EntityAttributes">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
-        eType="#//Attribute" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Effects" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" upperBound="-1"
+        eType="#//Effect2" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MoveAttributes">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
-        eType="#//Attribute" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Effect2">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Buff" eSuperTypes="#//Effect2">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="buffR" eType="#//BuffRule"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MoveE" eSuperTypes="#//Effect2">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moveR" eType="#//MoveRule"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Attributes" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
@@ -60,14 +67,36 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="att" upperBound="-1" eType="#//AltAttribute"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" upperBound="-1"
-        eType="#//Effect" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moveE" upperBound="-1"
+        eType="#//MoveEffect" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="buffE" upperBound="-1"
+        eType="#//BuffEffect" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mEffect" upperBound="-1"
+        eType="#//MEffect" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bEffect" upperBound="-1"
+        eType="#//BEffect" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MoveEffect">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moveR" eType="#//MoveRule"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BuffEffect">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moveB" eType="#//BuffRule"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MEffect">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moveEName" eType="#//MoveE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BEffect">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="buffEName" eType="#//Buff"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Effect">
     <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="#//Rule" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moveRule" eType="#//MoveRule"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AttributeValues">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lTypes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -84,13 +113,24 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="carl" eType="#//Carl" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MoveRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="or" eType="#//Proposition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sum" eType="#//Sum" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BuffRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="or" eType="#//Proposition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sum" eType="#//Sum" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Carl">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//NameAttribute"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="change" eType="#//Sum"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Set"/>
   <eClassifiers xsi:type="ecore:EClass" name="Entities" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="entity" upperBound="-1"
         eType="#//Entity" containment="true"/>
@@ -161,7 +201,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="i" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="decimal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Equal" eSuperTypes="#//Set"/>
   <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//Proposition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Proposition"
         containment="true"/>

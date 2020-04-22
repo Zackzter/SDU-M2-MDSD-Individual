@@ -42,22 +42,40 @@ public interface RPGFactory extends EFactory
   Declaration createDeclaration();
 
   /**
-   * Returns a new object of class '<em>Entity Attributes</em>'.
+   * Returns a new object of class '<em>Effects</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Entity Attributes</em>'.
+   * @return a new object of class '<em>Effects</em>'.
    * @generated
    */
-  EntityAttributes createEntityAttributes();
+  Effects createEffects();
 
   /**
-   * Returns a new object of class '<em>Move Attributes</em>'.
+   * Returns a new object of class '<em>Effect2</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Move Attributes</em>'.
+   * @return a new object of class '<em>Effect2</em>'.
    * @generated
    */
-  MoveAttributes createMoveAttributes();
+  Effect2 createEffect2();
+
+  /**
+   * Returns a new object of class '<em>Buff</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Buff</em>'.
+   * @generated
+   */
+  Buff createBuff();
+
+  /**
+   * Returns a new object of class '<em>Move E</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Move E</em>'.
+   * @generated
+   */
+  MoveE createMoveE();
 
   /**
    * Returns a new object of class '<em>Attributes</em>'.
@@ -141,6 +159,42 @@ public interface RPGFactory extends EFactory
   Move createMove();
 
   /**
+   * Returns a new object of class '<em>Move Effect</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Move Effect</em>'.
+   * @generated
+   */
+  MoveEffect createMoveEffect();
+
+  /**
+   * Returns a new object of class '<em>Buff Effect</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Buff Effect</em>'.
+   * @generated
+   */
+  BuffEffect createBuffEffect();
+
+  /**
+   * Returns a new object of class '<em>MEffect</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>MEffect</em>'.
+   * @generated
+   */
+  MEffect createMEffect();
+
+  /**
+   * Returns a new object of class '<em>BEffect</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>BEffect</em>'.
+   * @generated
+   */
+  BEffect createBEffect();
+
+  /**
    * Returns a new object of class '<em>EType</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -186,6 +240,24 @@ public interface RPGFactory extends EFactory
   Rule createRule();
 
   /**
+   * Returns a new object of class '<em>Move Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Move Rule</em>'.
+   * @generated
+   */
+  MoveRule createMoveRule();
+
+  /**
+   * Returns a new object of class '<em>Buff Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Buff Rule</em>'.
+   * @generated
+   */
+  BuffRule createBuffRule();
+
+  /**
    * Returns a new object of class '<em>Carl</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -193,15 +265,6 @@ public interface RPGFactory extends EFactory
    * @generated
    */
   Carl createCarl();
-
-  /**
-   * Returns a new object of class '<em>Set</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Set</em>'.
-   * @generated
-   */
-  Set createSet();
 
   /**
    * Returns a new object of class '<em>Entities</em>'.
@@ -373,15 +436,6 @@ public interface RPGFactory extends EFactory
    * @generated
    */
   FloatNum createFloatNum();
-
-  /**
-   * Returns a new object of class '<em>Equal</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Equal</em>'.
-   * @generated
-   */
-  Equal createEqual();
 
   /**
    * Returns a new object of class '<em>Or</em>'.
