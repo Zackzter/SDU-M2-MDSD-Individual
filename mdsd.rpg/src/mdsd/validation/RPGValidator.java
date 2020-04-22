@@ -14,6 +14,7 @@ import mdsd.rPG.Attributes;
 import mdsd.rPG.Buff;
 import mdsd.rPG.Death;
 import mdsd.rPG.Declaration;
+import mdsd.rPG.Effects;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
 import mdsd.rPG.Locations;
@@ -92,13 +93,14 @@ public class RPGValidator extends AbstractRPGValidator {
 		mappy.put("Teams", false);
 		mappy.put("Death", false);
 		mappy.put("Attributes", false);
+		mappy.put("Effects", false);
 		
 		return mappy;
 	}
 	
 	@Check
 	public void checkDeclarations(SystemRPG sysrpg) {
-		// Locations | Relations | Moves | Entities | Teams | Death | Attributes
+		// Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects
 		
 		Map<String, Boolean> mappy = setupDeclarationMap();
 		
@@ -118,7 +120,9 @@ public class RPGValidator extends AbstractRPGValidator {
 				mappy.computeIfPresent("Death", (k, v) -> true);
 			} else if(d instanceof Attributes) {
 				mappy.computeIfPresent("Attributes", (k, v) -> true);
-			}		
+			} else if(d instanceof Effects) {
+				mappy.computeIfPresent("Effects", (k, v) -> true);
+			}			
 			
 		}
 		
