@@ -1995,20 +1995,6 @@ ruleStatement returns [EObject current=null]
 				newLeafNode(otherlv_3, grammarAccess.getStatementAccess().getRightParenthesisKeyword_1_2());
 			}
 		)
-		    |
-		(
-			(
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getStatementRule());
-					}
-				}
-				otherlv_4=RULE_ID
-				{
-					newLeafNode(otherlv_4, grammarAccess.getStatementAccess().getTypeTypeCrossReference_2_0());
-				}
-			)
-		)
 	)
 ;
 

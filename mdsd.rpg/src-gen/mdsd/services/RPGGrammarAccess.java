@@ -68,8 +68,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cEffectsParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		
 		//Declaration:
-		//	Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects // MoveAttributes | EntityAttributes | 
-		//;
+		//	Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects
@@ -1144,15 +1143,12 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLeftParenthesisKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cORconditionParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
-		private final Assignment cTypeAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
-		private final CrossReference cTypeTypeCrossReference_2_0 = (CrossReference)cTypeAssignment_2.eContents().get(0);
-		private final RuleCall cTypeTypeIDTerminalRuleCall_2_0_1 = (RuleCall)cTypeTypeCrossReference_2_0.eContents().get(1);
 		
 		//Statement Proposition:
-		//	NumberComparing | '(' ORcondition ')' | type=[Type];
+		//	NumberComparing | '(' ORcondition ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//NumberComparing | '(' ORcondition ')' | type=[Type]
+		//NumberComparing | '(' ORcondition ')'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//NumberComparing
@@ -1169,15 +1165,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//')'
 		public Keyword getRightParenthesisKeyword_1_2() { return cRightParenthesisKeyword_1_2; }
-		
-		//type=[Type]
-		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
-		
-		//[Type]
-		public CrossReference getTypeTypeCrossReference_2_0() { return cTypeTypeCrossReference_2_0; }
-		
-		//ID
-		public RuleCall getTypeTypeIDTerminalRuleCall_2_0_1() { return cTypeTypeIDTerminalRuleCall_2_0_1; }
 	}
 	public class NumberComparingElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.NumberComparing");
@@ -1652,8 +1639,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Declaration:
-	//	Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects // MoveAttributes | EntityAttributes | 
-	//;
+	//	Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects;
 	public DeclarationElements getDeclarationAccess() {
 		return pDeclaration;
 	}
@@ -1973,7 +1959,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Statement Proposition:
-	//	NumberComparing | '(' ORcondition ')' | type=[Type];
+	//	NumberComparing | '(' ORcondition ')';
 	public StatementElements getStatementAccess() {
 		return pStatement;
 	}

@@ -49,13 +49,13 @@ import mdsd.rPG.AfterE
 class RPGGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-		val mathLul = resource.allContents.filter(SystemRPG).next
+		val result = resource.allContents.filter(SystemRPG).next
 		
-		god(mathLul, fsa)
+		main(result, fsa)
 		
 	}
 	
-	def god(SystemRPG thing, IFileSystemAccess2 fsa){
+	def main(SystemRPG systemRPG, IFileSystemAccess2 fsa){
 		var locationbool = false
 		var relationbool = false
 		var movesbool = false
@@ -64,58 +64,58 @@ class RPGGenerator extends AbstractGenerator {
 		var attributesbool = false
 		var deathbool = false
 		var effectbool = false		
-		val classFileName = thing.getName() 
-		for (Declaration d : thing.getDeclarations()){
-			switch(d){
+		val classFileName = systemRPG.getName() 
+		for (Declaration decleration : systemRPG.getDeclarations()){
+			switch(decleration){
 				Locations:
 					if(!locationbool){ // should be done
-						generateLocations(fsa, d)
+						generateLocations(fsa, decleration)
 						locationbool = true
 					}
 				Relations:
 					if(!relationbool){ // should be done
-                        generateTypes(fsa, d)
+                        generateTypes(fsa, decleration)
                         relationbool = true
                     }
 				Moves:
 					if(!movesbool){
-						generateMoves(fsa, d)
+						generateMoves(fsa, decleration)
 						movesbool = true
 					}
 				Entities:
 					if(!entitiesbool){ // should be done
-						generateEntities(fsa, d)
+						generateEntities(fsa, decleration)
 						entitiesbool = true
 					}
 				Teams:
 					if(!teamsbool){ // should be done
-						generateTeams(fsa, d)
+						generateTeams(fsa, decleration)
 						teamsbool = true
 					}
 				Attributes: // should be done
 					if(!attributesbool){
-						generateAttributes(fsa, d)
+						generateAttributes(fsa, decleration)
                         attributesbool = true
                     }
 				Death: // should be done
 					if(!deathbool){
-						fsa.generateFile("DeathChecker.java", d.generateDeathChecker)
+						fsa.generateFile("DeathChecker.java", decleration.generateDeathChecker)
 						deathbool = true
 					}
 				Effects: {
 						System.out.println("Hello")
 						if(!effectbool){
-							generateEffectFiles(fsa, d)
+							generateEffectFiles(fsa, decleration)
 							effectbool = true	
 						}
 					}
 					
 				default:
-					System.out.println("reported")
+					System.out.println("This is not a supported instance of Decleration")
 			}
 
 		}
-		fsa.generateFile(classFileName + ".java", classFileName.generateGamePOG2)
+		fsa.generateFile(classFileName + ".java", classFileName.generateGame)
 		fsa.generateFile("Runner.java", classFileName.generateRunner)
 	}
 	
@@ -152,7 +152,7 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 	
-	def CharSequence generateGamePOG2(String classFileName){
+	def CharSequence generateGame(String classFileName){
 		'''
 		import java.util.*;
 		import java.awt.event.*;
@@ -324,7 +324,6 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	
 	def generateAttributes(IFileSystemAccess2 fsa, Attributes attributes){
-		//fsa.generateFile("Attribute.java" , generateAttribute)
         fsa.generateFile("AttributeEnum.java", attributes.generateAttributeEnum)
         fsa.generateFile("AttributeData.java", generateAttributeData)
 	}
@@ -662,7 +661,6 @@ class RPGGenerator extends AbstractGenerator {
     	'''
     }	
 
-
 	def generateEntities(IFileSystemAccess2 fsa, Entities entities){
 		fsa.generateFile("Entity.java", generateEntity)
 		fsa.generateFile("EntityEnum.java", entities.generateEntityEnum)
@@ -790,8 +788,8 @@ class RPGGenerator extends AbstractGenerator {
 				«entity.name.toLowerCase».addMoveData(Move.getInstance().getMove("«move.name»"));
 				«ENDFOR»
 				«FOR att : entity.att»
-				«IF getNumberFromAtomicDab(att.av.an) instanceof Number»
-				«entity.name.toLowerCase».addAttribute(new AttributeData("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«IF getNumberFromAtomic(att.av.an) instanceof Number»
+				«entity.name.toLowerCase».addAttribute(new AttributeData("«att.attribute.name»", «getNumberFromAtomic(att.av.an)»));
 				«ENDIF»
 				«ENDFOR»
 				entities.add(«entity.name.toLowerCase»);
@@ -801,10 +799,6 @@ class RPGGenerator extends AbstractGenerator {
 		}
 		
 		'''
-	}
-	
-	def CharSequence generateKillable(Death death){
-		
 	}
 	
 	def CharSequence new_re(Require req){
@@ -852,14 +846,14 @@ class RPGGenerator extends AbstractGenerator {
 		}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof FloatNum){
 			"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
 		} else {
-			"Shit son" 
+			"Something went wrong" 
 		}
 	}
-
-	def dispatch Number getNumberFromAtomicDab(IntNum x){
+	
+	def dispatch Number getNumberFromAtomic(IntNum x){
 		x.value
 	}
-	def dispatch Number getNumberFromAtomicDab(FloatNum x){
+	def dispatch Number getNumberFromAtomic(FloatNum x){
 		val floatstring = x.i + "." + x.decimal
 		Float.valueOf(floatstring)
 	}
@@ -1166,8 +1160,8 @@ class RPGGenerator extends AbstractGenerator {
 				tempMoveData.setMoveName("«move.name»");
 				tempMoveData.setType("«move.EType.type.name»");
 				«FOR att : move.att»
-				«IF getNumberFromAtomicDab(att.av.an) instanceof Number»
-				tempMoveData.addAttribute(new AttributeData("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«IF getNumberFromAtomic(att.av.an) instanceof Number»
+				tempMoveData.addAttribute(new AttributeData("«att.attribute.name»", «getNumberFromAtomic(att.av.an)»));
 				«ENDIF»
 				«ENDFOR»
 				«FOR moveEffect : move.MEffect»
@@ -1360,6 +1354,7 @@ class RPGGenerator extends AbstractGenerator {
 				«FOR t : relations.type»
 				tr = new TypeRelation();
 				currentType = "«t.name»";
+				«IF t.TExpression !== null»
 				tr.addStrongAgainst("«t.TExpression.strong.name»");
 				«FOR better : t.TExpression.strong2»
 				tr.addStrongAgainst("«better.name»");
@@ -1368,6 +1363,7 @@ class RPGGenerator extends AbstractGenerator {
 				«FOR worse : t.TExpression.weak2»
 				tr.addWeakAgainst("«worse.name»");
 				«ENDFOR»
+				«ENDIF»
 				type.addTypeRelation(currentType, tr);
 				«ENDFOR»
 			}

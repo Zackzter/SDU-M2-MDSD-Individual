@@ -39,7 +39,6 @@ import mdsd.rPG.NEq;
 import mdsd.rPG.NameAttribute;
 import mdsd.rPG.NumberComparing;
 import mdsd.rPG.Or;
-import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Relations;
 import mdsd.rPG.Require;
@@ -178,9 +177,6 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RPGPackage.OR:
 				sequence_ORcondition(context, (Or) semanticObject); 
-				return; 
-			case RPGPackage.PROPOSITION:
-				sequence_Statement(context, (Proposition) semanticObject); 
 				return; 
 			case RPGPackage.RELATIONS:
 				sequence_Relations(context, (Relations) semanticObject); 
@@ -909,28 +905,6 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		feeder.accept(grammarAccess.getRuleAccess().getOrORconditionParserRuleCall_1_0(), semanticObject.getOr());
 		feeder.accept(grammarAccess.getRuleAccess().getTargetAttributeIDTerminalRuleCall_3_0_1(), semanticObject.eGet(RPGPackage.Literals.RULE__TARGET, false));
 		feeder.accept(grammarAccess.getRuleAccess().getSumSumParserRuleCall_5_0(), semanticObject.getSum());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     ORcondition returns Proposition
-	 *     ORcondition.Or_1_1 returns Proposition
-	 *     ANDcondition returns Proposition
-	 *     ANDcondition.And_1_1 returns Proposition
-	 *     Statement returns Proposition
-	 *
-	 * Constraint:
-	 *     type=[Type|ID]
-	 */
-	protected void sequence_Statement(ISerializationContext context, Proposition semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.PROPOSITION__TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.PROPOSITION__TYPE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getStatementAccess().getTypeTypeIDTerminalRuleCall_2_0_1(), semanticObject.eGet(RPGPackage.Literals.PROPOSITION__TYPE, false));
 		feeder.finish();
 	}
 	

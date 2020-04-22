@@ -7,7 +7,7 @@ SystemRPG:
 ;
 	
 Declaration:
-	Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects // MoveAttributes | EntityAttributes | 
+	Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects
 ;
 
 Effects:
@@ -108,8 +108,6 @@ Entity:
 	'entity' name=ID eType=EType att+=AltAttribute* eMoves=EntityMoves
 ;
 
-
-
 EntityMoves:
 	'move' move+=[Move]+
 ;
@@ -126,7 +124,6 @@ Members:
 	'members' entity+=[Entity]+
 ;
 
-
 Require:
 	'require' log=ORcondition
 ;
@@ -141,7 +138,7 @@ ANDcondition returns Proposition:
 ;
 
 Statement returns Proposition:
-	NumberComparing | '(' ORcondition ')' | type=[Type]
+	NumberComparing | '(' ORcondition ')'
 ;
 
 NumberComparing:
@@ -159,7 +156,6 @@ Sum:
 Multiply:
 	AtomicNumber (('*' {Mult.left=current} | '/' {Div.left=current}) right=AtomicNumber)*
 ;
-
 
 AtomicNumber:
 	FloatNum | IntNum |  NameAttribute

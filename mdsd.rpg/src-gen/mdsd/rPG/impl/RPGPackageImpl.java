@@ -1397,17 +1397,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EReference getProposition_Type()
-  {
-    return (EReference)propositionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getNumberComparing()
   {
     return numberComparingEClass;
@@ -1974,7 +1963,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     createEReference(requireEClass, REQUIRE__LOG);
 
     propositionEClass = createEClass(PROPOSITION);
-    createEReference(propositionEClass, PROPOSITION__TYPE);
 
     numberComparingEClass = createEClass(NUMBER_COMPARING);
     createEReference(numberComparingEClass, NUMBER_COMPARING__LEFT);
@@ -2209,7 +2197,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     initEReference(getRequire_Log(), this.getProposition(), null, "log", null, 0, 1, Require.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(propositionEClass, Proposition.class, "Proposition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getProposition_Type(), this.getType(), null, "type", null, 0, 1, Proposition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(numberComparingEClass, NumberComparing.class, "NumberComparing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getNumberComparing_Left(), this.getSum(), null, "left", null, 0, 1, NumberComparing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -56,7 +56,6 @@ public class RPGSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) left=Sum
-	 *     (rule start) (ambiguity) type=[Type|ID]
 	 *     (rule start) (ambiguity) {And.left=}
 	 *     (rule start) (ambiguity) {Or.left=}
 	 */
