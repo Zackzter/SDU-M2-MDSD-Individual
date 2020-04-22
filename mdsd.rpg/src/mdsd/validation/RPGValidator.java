@@ -11,11 +11,13 @@ import org.eclipse.xtext.validation.Check;
 
 import mdsd.rPG.Attribute;
 import mdsd.rPG.Attributes;
+import mdsd.rPG.Buff;
 import mdsd.rPG.Death;
 import mdsd.rPG.Declaration;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
 import mdsd.rPG.Locations;
+import mdsd.rPG.MoveE;
 import mdsd.rPG.Moves;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Relations;
@@ -47,14 +49,28 @@ public class RPGValidator extends AbstractRPGValidator {
 	@Check
 	public void checkEntityStartsWithCapital(Entity entity) {
 		if (!Character.isUpperCase(entity.getName().charAt(0))) {
-			warning("Name should be a capital",  RPGPackage.Literals.ENTITY__NAME, INVALID_NAME);
+			warning("The name of an entity should be a capital letter.",  RPGPackage.Literals.ENTITY__NAME, INVALID_NAME);
 		}
 	}
 	
 	@Check
 	public void checkGameStartsWithCapital(SystemRPG sysrpg) {
 		if (!Character.isUpperCase(sysrpg.getName().charAt(0))) {
-			warning("Name should be a capital",  RPGPackage.Literals.SYSTEM_RPG__NAME, INVALID_NAME);
+			error("The name of the game should start with a capital letter.",  RPGPackage.Literals.SYSTEM_RPG__NAME, INVALID_NAME);
+		}
+	}
+	
+	@Check
+	public void checkEffectStartsWithCapital(Buff buff) {
+		if (!Character.isUpperCase(buff.getName().charAt(0))) {
+			error("The name of this effect should start with a capital letter.",  RPGPackage.Literals.EFFECT__NAME, INVALID_NAME);
+		}
+	}
+	
+	@Check
+	public void checkEffectStartsWithCapital(MoveE buff) {
+		if (!Character.isUpperCase(buff.getName().charAt(0))) {
+			error("The name of this effect should start with a capital letter.",  RPGPackage.Literals.EFFECT__NAME, INVALID_NAME);
 		}
 	}
 	
