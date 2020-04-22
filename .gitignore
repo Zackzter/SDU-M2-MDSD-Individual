@@ -3,13 +3,17 @@
 
 # Files to not ignore
 !/.gitignore
-!/mdsd.rpg.tests/src/mdsd/tests/RPGParsingTest.xtend
 
 # Folder to not ignore
 !/mdsd.rpg/
+!/mdsd.rpg.tests/
 
 /mdsd.rpg/bin/mdsd/generator/.RPGGenerator.xtendbin
 /mdsd.rpg/xtend-gen/mdsd/generator/.RPGGenerator.xtendbin
 *.class
 *.class
 /mdsd.rpg/bin/*
+/mdsd.rpg.tests/src-gen/*
+/mdsd.rpg.tests/test-bin/*
+/mdsd.rpg.tests/xtend-gen/*
+/mdsd.rpg.tests/.settings/*
