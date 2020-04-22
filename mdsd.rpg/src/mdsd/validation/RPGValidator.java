@@ -22,7 +22,6 @@ import mdsd.rPG.Moves;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Relations;
 import mdsd.rPG.SystemRPG;
-import mdsd.rPG.Team;
 import mdsd.rPG.Teams;
 
 /**
