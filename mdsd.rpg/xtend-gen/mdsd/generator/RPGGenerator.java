@@ -605,10 +605,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("System.out.println(\"You used \"+ moveName + \"\\n\");");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("System.out.println(enemyEntity.getAttributes().get(1).getNumber());");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("System.out.println(\"mana: \" + playerEntity.getAttributes().get(2).getNumber());\t\t\t\t\t");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("executeBuffMove(move, moveName, playerEntity);");
@@ -620,10 +616,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("executeAfter(move, moveName, playerEntity);");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("System.out.println(\"mana: \" + playerEntity.getAttributes().get(2).getNumber());");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("System.out.println(enemyEntity.getAttributes().get(1).getNumber());");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("pickMove = !pickMove;");
@@ -668,6 +660,8 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("System.out.println(enemyEntity.getName() + \" used \" + enemyEntity.getMoveNameList().get(choosenMove) + \"\\n\");");
     _builder.newLine();
     _builder.append("\t\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
     _builder.append("executeBuffMove(move, enemyEntity.getMoveNameList().get(choosenMove), enemyEntity);");
     _builder.newLine();
     _builder.append("\t\t\t\t");
@@ -675,6 +669,8 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("executeAfter(move, enemyEntity.getMoveNameList().get(choosenMove), enemyEntity);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("if(deathChecker.check(playerEntity)){");
@@ -1136,6 +1132,9 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("\t\t\t\t\t");
     _builder.append("aData.setNumber(changeAfter(move, name, player));");
     _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("System.out.println(player.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());");
+    _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("}");
     _builder.newLine();
@@ -1153,6 +1152,9 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
     _builder.append("aData.setNumber(changeAfter(move, name, player));");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("System.out.println(player.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());\t\t\t\t\t\t\t\t");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("}\t\t\t\t");
@@ -1326,6 +1328,11 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("\t\t\t\t\t");
     _builder.append("aData.setNumber(changeBuff(move, name, player));");
     _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("System.out.println(player.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("}");
     _builder.newLine();
@@ -1343,6 +1350,11 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
     _builder.append("aData.setNumber(changeBuff(move, name, player));");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("System.out.println(player.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("}\t\t\t\t");
@@ -1470,6 +1482,10 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t\t");
     _builder.append("aData.setNumber(changeMove(move, name, enemy));");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("System.out.println(enemy.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("}");

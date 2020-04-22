@@ -278,13 +278,11 @@ class RPGGenerator extends AbstractGenerator {
 						if(moves.contains(moveName)){
 							Number power = move.getMove(moveName).getMoveAttributes().get(0).getNumber();                                    
 							System.out.println("You used "+ moveName + "\n");
-							System.out.println(enemyEntity.getAttributes().get(1).getNumber());
-							System.out.println("mana: " + playerEntity.getAttributes().get(2).getNumber());					
+							
 							executeBuffMove(move, moveName, playerEntity);
 							executeMove(move, moveName, enemyEntity, playerEntity);
 							executeAfter(move, moveName, playerEntity);
-							System.out.println("mana: " + playerEntity.getAttributes().get(2).getNumber());
-							System.out.println(enemyEntity.getAttributes().get(1).getNumber());
+							
 							pickMove = !pickMove;
 						}else{
 							System.out.println("That's not a possible move!");
@@ -299,9 +297,11 @@ class RPGGenerator extends AbstractGenerator {
 						int choosenMove = random.nextInt(enemyEntity.getMoveNameList().size());
 						Number enemyPower = move.getMove(enemyEntity.getMoveNameList().get(choosenMove)).getMoveAttributes().get(0).getNumber();
 						System.out.println(enemyEntity.getName() + " used " + enemyEntity.getMoveNameList().get(choosenMove) + "\n");
+						
 						executeBuffMove(move, enemyEntity.getMoveNameList().get(choosenMove), enemyEntity);
 						executeMove(move, enemyEntity.getMoveNameList().get(choosenMove), playerEntity, enemyEntity);
 						executeAfter(move, enemyEntity.getMoveNameList().get(choosenMove), enemyEntity);
+						
 						if(deathChecker.check(playerEntity)){
 							System.out.println("Your " + playerEntity.getName() + " is dead");
 							playerEntity.setEntityState(EntityState.DEAD);
@@ -518,11 +518,13 @@ class RPGGenerator extends AbstractGenerator {
 						for(AttributeData aData : player.getAttributes()){
 							if(aData.getAttributeName() == "«afterEffect.rule.target.name»"){
 								aData.setNumber(changeAfter(move, name, player));
+								System.out.println(player.getName() + "'(s) "  + aData.getAttributeName() + " is now: " + aData.getNumber());
 							}
 						}
 						for(AttributeData aData : move.getMove(name).getMoveAttributes()){
 							if(aData.getAttributeName() == "«afterEffect.rule.target.name»"){
 								aData.setNumber(changeAfter(move, name, player));
+								System.out.println(player.getName() + "'(s) "  + aData.getAttributeName() + " is now: " + aData.getNumber());								
 							}				
 						}						
 					}			
@@ -596,11 +598,15 @@ class RPGGenerator extends AbstractGenerator {
 						for(AttributeData aData : player.getAttributes()){
 							if(aData.getAttributeName() == "«buff.rule.target.name»"){
 								aData.setNumber(changeBuff(move, name, player));
+								System.out.println(player.getName() + "'(s) "  + aData.getAttributeName() + " is now: " + aData.getNumber());
+								
 							}
 						}
 						for(AttributeData aData : move.getMove(name).getMoveAttributes()){
 							if(aData.getAttributeName() == "«buff.rule.target.name»"){
 								aData.setNumber(changeBuff(move, name, player));
+								System.out.println(player.getName() + "'(s) "  + aData.getAttributeName() + " is now: " + aData.getNumber());
+								
 							}				
 						}						
 					}			
@@ -646,6 +652,8 @@ class RPGGenerator extends AbstractGenerator {
 						for(AttributeData aData : enemy.getAttributes()){
 							if(aData.getAttributeName() == "«moveE.rule.target.name»"){
 								aData.setNumber(changeMove(move, name, enemy));
+								System.out.println(enemy.getName() + "'(s) "  + aData.getAttributeName() + " is now: " + aData.getNumber());
+
 							}
 						}
 					}			
