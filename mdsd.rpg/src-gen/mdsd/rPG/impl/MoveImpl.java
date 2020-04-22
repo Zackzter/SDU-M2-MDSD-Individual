@@ -6,8 +6,9 @@ package mdsd.rPG.impl;
 import java.util.Collection;
 
 import mdsd.rPG.AltAttribute;
+import mdsd.rPG.BEffect;
 import mdsd.rPG.EType;
-import mdsd.rPG.Effect;
+import mdsd.rPG.MEffect;
 import mdsd.rPG.Move;
 import mdsd.rPG.RPGPackage;
 
@@ -36,7 +37,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link mdsd.rPG.impl.MoveImpl#getName <em>Name</em>}</li>
  *   <li>{@link mdsd.rPG.impl.MoveImpl#getEType <em>EType</em>}</li>
  *   <li>{@link mdsd.rPG.impl.MoveImpl#getAtt <em>Att</em>}</li>
- *   <li>{@link mdsd.rPG.impl.MoveImpl#getEffect <em>Effect</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.MoveImpl#getMEffect <em>MEffect</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.MoveImpl#getBEffect <em>BEffect</em>}</li>
  * </ul>
  *
  * @generated
@@ -84,14 +86,24 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
   protected EList<AltAttribute> att;
 
   /**
-   * The cached value of the '{@link #getEffect() <em>Effect</em>}' containment reference list.
+   * The cached value of the '{@link #getMEffect() <em>MEffect</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getEffect()
+   * @see #getMEffect()
    * @generated
    * @ordered
    */
-  protected EList<Effect> effect;
+  protected EList<MEffect> mEffect;
+
+  /**
+   * The cached value of the '{@link #getBEffect() <em>BEffect</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getBEffect()
+   * @generated
+   * @ordered
+   */
+  protected EList<BEffect> bEffect;
 
   /**
    * <!-- begin-user-doc -->
@@ -210,13 +222,28 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
    * @generated
    */
   @Override
-  public EList<Effect> getEffect()
+  public EList<MEffect> getMEffect()
   {
-    if (effect == null)
+    if (mEffect == null)
     {
-      effect = new EObjectContainmentEList<Effect>(Effect.class, this, RPGPackage.MOVE__EFFECT);
+      mEffect = new EObjectContainmentEList<MEffect>(MEffect.class, this, RPGPackage.MOVE__MEFFECT);
     }
-    return effect;
+    return mEffect;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<BEffect> getBEffect()
+  {
+    if (bEffect == null)
+    {
+      bEffect = new EObjectContainmentEList<BEffect>(BEffect.class, this, RPGPackage.MOVE__BEFFECT);
+    }
+    return bEffect;
   }
 
   /**
@@ -233,8 +260,10 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
         return basicSetEType(null, msgs);
       case RPGPackage.MOVE__ATT:
         return ((InternalEList<?>)getAtt()).basicRemove(otherEnd, msgs);
-      case RPGPackage.MOVE__EFFECT:
-        return ((InternalEList<?>)getEffect()).basicRemove(otherEnd, msgs);
+      case RPGPackage.MOVE__MEFFECT:
+        return ((InternalEList<?>)getMEffect()).basicRemove(otherEnd, msgs);
+      case RPGPackage.MOVE__BEFFECT:
+        return ((InternalEList<?>)getBEffect()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -255,8 +284,10 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
         return getEType();
       case RPGPackage.MOVE__ATT:
         return getAtt();
-      case RPGPackage.MOVE__EFFECT:
-        return getEffect();
+      case RPGPackage.MOVE__MEFFECT:
+        return getMEffect();
+      case RPGPackage.MOVE__BEFFECT:
+        return getBEffect();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -282,9 +313,13 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
         getAtt().clear();
         getAtt().addAll((Collection<? extends AltAttribute>)newValue);
         return;
-      case RPGPackage.MOVE__EFFECT:
-        getEffect().clear();
-        getEffect().addAll((Collection<? extends Effect>)newValue);
+      case RPGPackage.MOVE__MEFFECT:
+        getMEffect().clear();
+        getMEffect().addAll((Collection<? extends MEffect>)newValue);
+        return;
+      case RPGPackage.MOVE__BEFFECT:
+        getBEffect().clear();
+        getBEffect().addAll((Collection<? extends BEffect>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -309,8 +344,11 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
       case RPGPackage.MOVE__ATT:
         getAtt().clear();
         return;
-      case RPGPackage.MOVE__EFFECT:
-        getEffect().clear();
+      case RPGPackage.MOVE__MEFFECT:
+        getMEffect().clear();
+        return;
+      case RPGPackage.MOVE__BEFFECT:
+        getBEffect().clear();
         return;
     }
     super.eUnset(featureID);
@@ -332,8 +370,10 @@ public class MoveImpl extends MinimalEObjectImpl.Container implements Move
         return eType != null;
       case RPGPackage.MOVE__ATT:
         return att != null && !att.isEmpty();
-      case RPGPackage.MOVE__EFFECT:
-        return effect != null && !effect.isEmpty();
+      case RPGPackage.MOVE__MEFFECT:
+        return mEffect != null && !mEffect.isEmpty();
+      case RPGPackage.MOVE__BEFFECT:
+        return bEffect != null && !bEffect.isEmpty();
     }
     return super.eIsSet(featureID);
   }

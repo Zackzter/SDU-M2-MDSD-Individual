@@ -5,20 +5,16 @@ package mdsd.rPG.impl;
 
 import java.util.Collection;
 
-import mdsd.rPG.BattleSize;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Team;
 import mdsd.rPG.Teams;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -31,7 +27,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.TeamsImpl#getBs <em>Bs</em>}</li>
  *   <li>{@link mdsd.rPG.impl.TeamsImpl#getTeam <em>Team</em>}</li>
  * </ul>
  *
@@ -39,16 +34,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class TeamsImpl extends DeclarationImpl implements Teams
 {
-  /**
-   * The cached value of the '{@link #getBs() <em>Bs</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getBs()
-   * @generated
-   * @ordered
-   */
-  protected BattleSize bs;
-
   /**
    * The cached value of the '{@link #getTeam() <em>Team</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -86,56 +71,6 @@ public class TeamsImpl extends DeclarationImpl implements Teams
    * @generated
    */
   @Override
-  public BattleSize getBs()
-  {
-    return bs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetBs(BattleSize newBs, NotificationChain msgs)
-  {
-    BattleSize oldBs = bs;
-    bs = newBs;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.TEAMS__BS, oldBs, newBs);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setBs(BattleSize newBs)
-  {
-    if (newBs != bs)
-    {
-      NotificationChain msgs = null;
-      if (bs != null)
-        msgs = ((InternalEObject)bs).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.TEAMS__BS, null, msgs);
-      if (newBs != null)
-        msgs = ((InternalEObject)newBs).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.TEAMS__BS, null, msgs);
-      msgs = basicSetBs(newBs, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.TEAMS__BS, newBs, newBs));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EList<Team> getTeam()
   {
     if (team == null)
@@ -155,8 +90,6 @@ public class TeamsImpl extends DeclarationImpl implements Teams
   {
     switch (featureID)
     {
-      case RPGPackage.TEAMS__BS:
-        return basicSetBs(null, msgs);
       case RPGPackage.TEAMS__TEAM:
         return ((InternalEList<?>)getTeam()).basicRemove(otherEnd, msgs);
     }
@@ -173,8 +106,6 @@ public class TeamsImpl extends DeclarationImpl implements Teams
   {
     switch (featureID)
     {
-      case RPGPackage.TEAMS__BS:
-        return getBs();
       case RPGPackage.TEAMS__TEAM:
         return getTeam();
     }
@@ -192,9 +123,6 @@ public class TeamsImpl extends DeclarationImpl implements Teams
   {
     switch (featureID)
     {
-      case RPGPackage.TEAMS__BS:
-        setBs((BattleSize)newValue);
-        return;
       case RPGPackage.TEAMS__TEAM:
         getTeam().clear();
         getTeam().addAll((Collection<? extends Team>)newValue);
@@ -213,9 +141,6 @@ public class TeamsImpl extends DeclarationImpl implements Teams
   {
     switch (featureID)
     {
-      case RPGPackage.TEAMS__BS:
-        setBs((BattleSize)null);
-        return;
       case RPGPackage.TEAMS__TEAM:
         getTeam().clear();
         return;
@@ -233,8 +158,6 @@ public class TeamsImpl extends DeclarationImpl implements Teams
   {
     switch (featureID)
     {
-      case RPGPackage.TEAMS__BS:
-        return bs != null;
       case RPGPackage.TEAMS__TEAM:
         return team != null && !team.isEmpty();
     }

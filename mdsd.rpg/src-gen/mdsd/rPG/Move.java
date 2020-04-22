@@ -19,7 +19,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link mdsd.rPG.Move#getName <em>Name</em>}</li>
  *   <li>{@link mdsd.rPG.Move#getEType <em>EType</em>}</li>
  *   <li>{@link mdsd.rPG.Move#getAtt <em>Att</em>}</li>
- *   <li>{@link mdsd.rPG.Move#getEffect <em>Effect</em>}</li>
+ *   <li>{@link mdsd.rPG.Move#getMEffect <em>MEffect</em>}</li>
+ *   <li>{@link mdsd.rPG.Move#getBEffect <em>BEffect</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getMove()
@@ -85,15 +86,27 @@ public interface Move extends EObject
   EList<AltAttribute> getAtt();
 
   /**
-   * Returns the value of the '<em><b>Effect</b></em>' containment reference list.
-   * The list contents are of type {@link mdsd.rPG.Effect}.
+   * Returns the value of the '<em><b>MEffect</b></em>' containment reference list.
+   * The list contents are of type {@link mdsd.rPG.MEffect}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Effect</em>' containment reference list.
-   * @see mdsd.rPG.RPGPackage#getMove_Effect()
+   * @return the value of the '<em>MEffect</em>' containment reference list.
+   * @see mdsd.rPG.RPGPackage#getMove_MEffect()
    * @model containment="true"
    * @generated
    */
-  EList<Effect> getEffect();
+  EList<MEffect> getMEffect();
+
+  /**
+   * Returns the value of the '<em><b>BEffect</b></em>' containment reference list.
+   * The list contents are of type {@link mdsd.rPG.BEffect}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>BEffect</em>' containment reference list.
+   * @see mdsd.rPG.RPGPackage#getMove_BEffect()
+   * @model containment="true"
+   * @generated
+   */
+  EList<BEffect> getBEffect();
 
 } // Move

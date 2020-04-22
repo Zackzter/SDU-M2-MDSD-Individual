@@ -3,57 +3,49 @@
  */
 package mdsd.rPG.impl;
 
+import mdsd.rPG.MEffect;
+import mdsd.rPG.MoveE;
 import mdsd.rPG.RPGPackage;
-import mdsd.rPG.SelfTargeting;
 
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Self Targeting</b></em>'.
+ * An implementation of the model object '<em><b>MEffect</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.SelfTargetingImpl#getSelf <em>Self</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.MEffectImpl#getMoveEName <em>Move EName</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements SelfTargeting
+public class MEffectImpl extends MinimalEObjectImpl.Container implements MEffect
 {
   /**
-   * The default value of the '{@link #getSelf() <em>Self</em>}' attribute.
+   * The cached value of the '{@link #getMoveEName() <em>Move EName</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSelf()
+   * @see #getMoveEName()
    * @generated
    * @ordered
    */
-  protected static final String SELF_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getSelf() <em>Self</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSelf()
-   * @generated
-   * @ordered
-   */
-  protected String self = SELF_EDEFAULT;
+  protected MoveE moveEName;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected SelfTargetingImpl()
+  protected MEffectImpl()
   {
     super();
   }
@@ -66,7 +58,7 @@ public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements S
   @Override
   protected EClass eStaticClass()
   {
-    return RPGPackage.Literals.SELF_TARGETING;
+    return RPGPackage.Literals.MEFFECT;
   }
 
   /**
@@ -75,9 +67,29 @@ public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements S
    * @generated
    */
   @Override
-  public String getSelf()
+  public MoveE getMoveEName()
   {
-    return self;
+    if (moveEName != null && moveEName.eIsProxy())
+    {
+      InternalEObject oldMoveEName = (InternalEObject)moveEName;
+      moveEName = (MoveE)eResolveProxy(oldMoveEName);
+      if (moveEName != oldMoveEName)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RPGPackage.MEFFECT__MOVE_ENAME, oldMoveEName, moveEName));
+      }
+    }
+    return moveEName;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MoveE basicGetMoveEName()
+  {
+    return moveEName;
   }
 
   /**
@@ -86,12 +98,12 @@ public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements S
    * @generated
    */
   @Override
-  public void setSelf(String newSelf)
+  public void setMoveEName(MoveE newMoveEName)
   {
-    String oldSelf = self;
-    self = newSelf;
+    MoveE oldMoveEName = moveEName;
+    moveEName = newMoveEName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.SELF_TARGETING__SELF, oldSelf, self));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.MEFFECT__MOVE_ENAME, oldMoveEName, moveEName));
   }
 
   /**
@@ -104,8 +116,9 @@ public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements S
   {
     switch (featureID)
     {
-      case RPGPackage.SELF_TARGETING__SELF:
-        return getSelf();
+      case RPGPackage.MEFFECT__MOVE_ENAME:
+        if (resolve) return getMoveEName();
+        return basicGetMoveEName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -120,8 +133,8 @@ public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements S
   {
     switch (featureID)
     {
-      case RPGPackage.SELF_TARGETING__SELF:
-        setSelf((String)newValue);
+      case RPGPackage.MEFFECT__MOVE_ENAME:
+        setMoveEName((MoveE)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +150,8 @@ public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements S
   {
     switch (featureID)
     {
-      case RPGPackage.SELF_TARGETING__SELF:
-        setSelf(SELF_EDEFAULT);
+      case RPGPackage.MEFFECT__MOVE_ENAME:
+        setMoveEName((MoveE)null);
         return;
     }
     super.eUnset(featureID);
@@ -154,27 +167,10 @@ public class SelfTargetingImpl extends MinimalEObjectImpl.Container implements S
   {
     switch (featureID)
     {
-      case RPGPackage.SELF_TARGETING__SELF:
-        return SELF_EDEFAULT == null ? self != null : !SELF_EDEFAULT.equals(self);
+      case RPGPackage.MEFFECT__MOVE_ENAME:
+        return moveEName != null;
     }
     return super.eIsSet(featureID);
   }
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (self: ");
-    result.append(self);
-    result.append(')');
-    return result.toString();
-  }
-
-} //SelfTargetingImpl
+} //MEffectImpl

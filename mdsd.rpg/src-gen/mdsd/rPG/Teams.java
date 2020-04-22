@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.Teams#getBs <em>Bs</em>}</li>
  *   <li>{@link mdsd.rPG.Teams#getTeam <em>Team</em>}</li>
  * </ul>
  *
@@ -24,28 +23,6 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Teams extends Declaration
 {
-  /**
-   * Returns the value of the '<em><b>Bs</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Bs</em>' containment reference.
-   * @see #setBs(BattleSize)
-   * @see mdsd.rPG.RPGPackage#getTeams_Bs()
-   * @model containment="true"
-   * @generated
-   */
-  BattleSize getBs();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Teams#getBs <em>Bs</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Bs</em>' containment reference.
-   * @see #getBs()
-   * @generated
-   */
-  void setBs(BattleSize value);
-
   /**
    * Returns the value of the '<em><b>Team</b></em>' containment reference list.
    * The list contents are of type {@link mdsd.rPG.Team}.

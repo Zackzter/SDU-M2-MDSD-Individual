@@ -9,13 +9,9 @@ import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import mdsd.rPG.SystemRPG
 import mdsd.rPG.Entity
-import mdsd.rPG.Type
-import mdsd.rPG.Move
 import mdsd.rPG.Moves
-import mdsd.rPG.Attribute
 import mdsd.rPG.Locations
 import mdsd.rPG.Death
-import mdsd.rPG.AtomicNumber
 import mdsd.rPG.Require
 import mdsd.rPG.Or
 import mdsd.rPG.And
@@ -40,12 +36,9 @@ import mdsd.rPG.Relations
 import mdsd.rPG.Teams
 import mdsd.rPG.NumberComparing
 import mdsd.rPG.Team
-import mdsd.rPG.Members
-import java.util.ArrayList
-import mdsd.rPG.Effect
-import java.util.List
-import mdsd.rPG.MoveAttributes
-import mdsd.rPG.EntityAttributes
+import mdsd.rPG.Effects
+import mdsd.rPG.Buff
+import mdsd.rPG.MoveE
 
 /**
  * Generates code from your model files on save.
@@ -69,6 +62,7 @@ class RPGGenerator extends AbstractGenerator {
 		var teamsbool = false
 		var attributesbool = false
 		var deathbool = false
+		var effectbool = false		
 		val classFileName = thing.getName() 
 		for (Declaration d : thing.getDeclarations()){
 			switch(d){
@@ -106,6 +100,13 @@ class RPGGenerator extends AbstractGenerator {
 					if(!deathbool){
 						fsa.generateFile("DeathChecker.java", d.generateDeathChecker)
 						deathbool = true
+					}
+				Effects: {
+						System.out.println("Hello")
+						if(!effectbool){
+							generateEffectFiles(fsa, d)
+							effectbool = true	
+						}
 					}
 					
 				default:
@@ -328,67 +329,6 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 
-	def CharSequence generateMoveAttribute(MoveAttributes attribute){
-	'''
-	import java.util.*;
-	
-	public class MoveAttributes {
-	    private List<AttributeData> moveattributes = new ArrayList<>();
-	
-	    private static MoveAttributes attribute;
-	
-	    private MoveAttributes() {
-	
-	    }
-	
-	    public static MoveAttributes getInstance() {
-	        if (attribute == null) {
-	            attribute = new MoveAttributes();
-	        }
-	        return attribute;
-	    }
-	
-	    public void addAttribute(AttributeData attribute) {
-	        moveattributes.add(attribute);
-	    }
-	    
-	    public List<AttributeData> getAttributes() {
-	        return moveattributes;
-	    }
-	}
-	'''
-	}
-	
-	def CharSequence generateEntityAttribute(EntityAttributes attribute){
-	'''
-	import java.util.*;
-
-	public class EntityAttributes {
-	private List<AttributeData> entityattributes = new ArrayList<>();
-	private static EntityAttributes attribute;
-
-		private EntityAttributes() {
-		
-		}
-
-	    public static EntityAttributes getInstance() {
-	        if (attribute == null) {
-	            attribute = new EntityAttributes();
-	        }
-	        return attribute;
-	    }
-	
-	    public void addAttribute(AttributeData attribute) {
-	        entityattributes.add(attribute);
-	    }
-	    
-	    public List<AttributeData> getAttributes() {
-	        return entityattributes;
-	    }
-	}
-	'''
-	}
-	
 	def generateAttributeChangeEvent(){
 		'''
 		public class AttributeChangeEvent{
@@ -456,6 +396,148 @@ class RPGGenerator extends AbstractGenerator {
         }
         '''
     }
+    
+	def generateEffectFiles(IFileSystemAccess2 fsa, Effects effects){
+      	var moveEffectBoolean = false
+    	var buffEffectBoolean = false    	
+    	for (effect : effects.effect){
+    		switch effect{
+    			Buff:  {    					
+    					if(!buffEffectBoolean){
+    						fsa.generateFile("EffectBuff.java", generateEffectBuff)
+    						buffEffectBoolean = true
+    					}
+    					fsa.generateFile(effect.name + ".java", effect.generateBuffEffectFile)
+    					}
+    			MoveE: {
+    					if(!moveEffectBoolean){
+    						fsa.generateFile("EffectMove.java", generateEffectMove)
+    						moveEffectBoolean = true
+    					}
+    					fsa.generateFile(effect.name + ".java", effect.generateMoveEffectFile)
+    					}
+    		}
+		}
+	}
+	
+	def CharSequence generateEffectMove(){
+			    	'''
+    	import java.util.*;
+    	public abstract class EffectMove {
+    	
+    	    public abstract boolean effectMove(Move move, String name, Entity enemy);
+    	
+    	    public abstract Number changeMove(Move move, String name, Entity enemy);
+    	
+    	    public abstract void doEffect(Move move, String name, Entity enemy);    	
+    	}
+    	'''
+		}
+		
+	def CharSequence generateEffectBuff(){
+			    	'''
+    	import java.util.*;
+    	public abstract class EffectBuff {
+    	
+    	    public abstract boolean effectBuff(Move move, String name, Entity player);
+    	
+    	    public abstract Number changeBuff(Move move, String name, Entity player);
+    	
+    	    public abstract void doEffect(Move move, String name, Entity player);    	
+    	}
+    	'''
+		}		
+    
+    def CharSequence generateBuffEffectFile(Buff buff){
+    	'''
+			import java.util.*;
+			public class «buff.name» extends EffectBuff{
+				
+				@Override
+				public boolean effectBuff(Move move, String name, Entity player){
+					HashMap<String, Number> eData = new HashMap<>();
+					for(AttributeData playerData : player.getAttributes()){
+						eData.put(playerData.getAttributeName(), playerData.getNumber());
+					}			
+					for(AttributeData aData : move.getMove(name).getMoveAttributes()){
+						eData.put(aData.getAttributeName(), aData.getNumber());				
+					}
+					
+					return «buff.buffR.or.new_logic»;
+				}
+			
+				@Override
+				public Number changeBuff(Move move, String name, Entity player){
+					HashMap<String, Number> eData = new HashMap<>();
+					for(AttributeData playerData : player.getAttributes()){
+							eData.put(playerData.getAttributeName(), playerData.getNumber());
+						}			
+					for(AttributeData aData : move.getMove(name).getMoveAttributes()){
+							eData.put(aData.getAttributeName(), aData.getNumber());				
+						}
+						return «buff.buffR.sum.new_exp»;
+				}
+			
+			
+				@Override		
+				public void doEffect(Move move, String name, Entity player){
+					if(effectBuff(move, name, player)){
+						for(AttributeData aData : player.getAttributes()){
+							if(aData.getAttributeName() == "«buff.buffR.target.name»"){
+								aData.setNumber(changeBuff(move, name, player));
+							}
+						}
+					}			
+				}
+			}
+    	'''
+    }
+    
+	def CharSequence generateMoveEffectFile(MoveE moveE){
+    	'''
+			import java.util.*;
+			public class «moveE.name» extends EffectMove{
+				
+				@Override
+				public boolean effectMove(Move move, String name, Entity enemy){
+					HashMap<String, Number> eData = new HashMap<>();
+					for(AttributeData enemyData : enemy.getAttributes()){
+						eData.put(enemyData.getAttributeName(), enemyData.getNumber());
+					}			
+					for(AttributeData aData : move.getMove(name).getMoveAttributes()){
+						eData.put(aData.getAttributeName(), aData.getNumber());				
+					}
+					
+					return «moveE.moveR.or.new_logic»;
+				}
+				
+				@Override
+				public Number changeMove(Move move, String name, Entity enemy){
+					HashMap<String, Number> eData = new HashMap<>();
+					for(AttributeData enemyData : enemy.getAttributes()){
+							eData.put(enemyData.getAttributeName(), enemyData.getNumber());
+						}			
+					for(AttributeData aData : move.getMove(name).getMoveAttributes()){
+							eData.put(aData.getAttributeName(), aData.getNumber());				
+						}
+						return «moveE.moveR.sum.new_exp»;
+				}
+			
+			
+				@Override		
+				public void doEffect(Move move, String name, Entity enemy){
+					if(effectMove(move, name, enemy)){
+						for(AttributeData aData : enemy.getAttributes()){
+							if(aData.getAttributeName() == "«moveE.moveR.target.name»"){
+								aData.setNumber(changeMove(move, name, enemy));
+							}
+						}
+					}			
+				}
+			}
+    	'''
+    }	
+
 
 	def generateEntities(IFileSystemAccess2 fsa, Entities entities){
 		fsa.generateFile("Entity.java", generateEntity)
@@ -592,206 +674,6 @@ class RPGGenerator extends AbstractGenerator {
 				«ENDFOR»
 				
 			}
-		}
-		
-		'''
-	}
-	
-	def CharSequence generateGamePOG(SystemRPG systemRPG){
-		'''
-		import java.util.*;
-		import java.awt.event.*;
-		
-		public class Game implements KeyListener{
-		    private Type type;
-		    private List<Attribute> attributes;
-		    private Attribute attribute;
-		    private boolean gameFinished;
-		    private List<Entity> eList; 
-		    private List<Entity> battleEntities;
-		    private Team team;
-		
-		    private String currentLocation;
-		    private String currentTeam;
-		
-		    public Game(){
-		      eList = new ArrayList<>();
-		      attributes = new ArrayList<>();
-		      team = new Team();
-		      battleEntities = new ArrayList<>();
-		    }
-		
-		    public boolean isGameFinished(){
-		        return gameFinished;
-		    }
-		
-		    public void toggleGameFinished(){
-		        gameFinished = !gameFinished;
-		    }
-		
-		    public void addTypes(){
-		        type = Type.getInstance();
-		        for(TypeEnum typeName : TypeEnum.values()){
-		            type.addType(typeName.toString());
-		        }
-		        System.out.println(type.getTypes());
-		        type = null;
-		    }
-		
-		    public void addMoves(){
-		        Move moves = Move.getInstance();
-		
-		        for(MoveEnum mE: MoveEnum.values()){
-		            MoveData tempMoveData = new MoveData();
-		            tempMoveData.setMoveName(mE.toString());
-		            tempMoveData.setType(mE.getType());
-		            tempMoveData.addAttribute(AttributeData.createAttributeWithStringAndDefaultValues("power"));
-		            tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt("pp", 25));
-		            moves.addMove(tempMoveData);
-		        }
-		        moves = null;
-		    }
-		
-		    public Move getMove(){
-		        return Move.getInstance();
-		    }
-		
-		    public void addAttributes(){
-		        attribute = Attribute.getInstance();
-		        for (AttributeEnum e : AttributeEnum.values()){
-		            attribute.addAttribute(AttributeData.createAttributeWithStringAndDefaultValues(e.toString()));
-		        }
-		        System.out.println(attribute.getAttributes());
-		    }
-		
-		    public void addTeam() {
-		        Entity zyndaquil = new Entity();
-		        Entity zotodile = new Entity();
-		
-		        zyndaquil.setName("zyndaquil");
-		        zyndaquil.setType("fire");
-		        zyndaquil.addMoveData(Move.getInstance().getMove("Ember"));
-		
-		
-		        zotodile.setName("zotodile");
-		        zotodile.setType("water");
-		        zotodile.addMoveData(Move.getInstance().getMove("Water_gun"));
-		        zotodile.addMoveData(Move.getInstance().getMove("Razor_leaf"));
-		
-		
-		        getAttributes().forEach(element -> zyndaquil.addAttribute(element));
-		        getAttributes().forEach(element -> zotodile.addAttribute(element));
-		
-		
-		        team.addTeamMember("Zilver", zyndaquil);
-		        team.addTeamMember("Zilver", zotodile);
-		        team.addTeamMember("Rival", zotodile);
-		        team.addTeamMember("Rival", zyndaquil);
-		        team.addTeamMember("Red", zotodile);
-		        team.addTeamMember("Red", zotodile);
-		    }
-		
-		    public void addLocation(){
-		        Location tempLoc = Location.getInstance();
-		        tempLoc.addLocation("Johto");
-		        tempLoc.addTeamToLocation("Johto", "Rival");
-		
-		        tempLoc.addLocation("Kanto");
-		        tempLoc.addTeamToLocation("Kanto", "Red");
-		    }
-		
-		    public Location getLocation(){
-		        return Location.getInstance();
-		    }
-		
-		    public List<String> getTypes(){
-		        Type tempType = Type.getInstance();
-		        List<String> aString = new ArrayList<>();
-		
-		        aString.addAll(tempType.getTypes());
-		
-		        tempType = null;
-		        return aString;
-		
-		    }
-		
-		    public List<AttributeData> getAttributes(){
-		        Attribute tempAttribute = Attribute.getInstance();
-		
-		        List<AttributeData> aAttribute = new ArrayList<>();
-		
-		        aAttribute.addAll(tempAttribute.getAttributes());
-		
-		        tempAttribute = null;
-		        return aAttribute;
-		
-		    }
-		
-		    public void addEntity(){
-		      String[] types = {"fire", "water", "grass"};
-		      int index = 0;
-		      for (EntityEnum ee : EntityEnum.values() ) {
-		        Entity e = new Entity();
-		        e.setName(ee.toString());
-		        e.setType(types[index]);
-		        Attribute.getInstance().getAttributes().forEach(element -> e.addAttribute(element));
-		        Move.getInstance().getMoves().forEach(element -> e.addMoveData(element)); 
-		        eList.add(e);
-		        if(index<2){
-		            index++;
-		        } else {
-		            index = 0;
-		        }
-		      }
-		    }
-		
-		    public List<Entity> getEList(){
-		        return eList;
-		    }
-		
-		    public List<Entity> getBattleEntities(){
-		        return this.battleEntities;
-		    }
-		
-		    /**
-		     * @return the team
-		     */
-		    public Team getTeam() {
-		        return team;
-		    }
-		
-		    public String getCurrentLocation(){
-		        return this.currentLocation;
-		    }
-		
-		    public void setCurrentLocation(String currentLocation) {
-		        this.currentLocation = currentLocation;
-		    }
-		
-		    public String getCurrentTeam(){
-		        return this.currentTeam;
-		    }
-		
-		    public void setCurrentTeam(String currentTeam) {
-		        this.currentTeam = currentTeam;
-		    }
-		
-		    @Override
-		    public void keyPressed(KeyEvent e){
-		        if (e.getKeyChar() == 'x') {
-		            toggleGameFinished();
-		        }
-		    }
-		
-		    @Override
-		    public void keyReleased(KeyEvent e){
-		
-		    }
-		
-		    @Override
-		    public void keyTyped(KeyEvent e){
-		
-		    }
 		}
 		
 		'''
@@ -1009,15 +891,19 @@ class RPGGenerator extends AbstractGenerator {
 		    private String moveName;
 			private String type;
 		    private List<AttributeData> moveAttributes;
+		    private List<EffectMove> moveEffects;
+		    private List<EffectBuff> buffEffects;
 		
 		    public MoveData(){
 		        this.moveAttributes = new ArrayList<>();
 		    }
 		
-		    public MoveData(String moveName, String type, List<AttributeData> moveAttributes) {
+		    public MoveData(String moveName, String type, List<AttributeData> moveAttributes, List<EffectMove> moveEffects, List<EffectBuff> buffEffects) {
 		        this.moveName = moveName;
 		        this.type = type;
 		        this.moveAttributes = moveAttributes;
+				this.moveEffects = moveEffects;
+				this.buffEffects = buffEffects;	
 		    }
 		
 		    public String getMoveName(){
@@ -1047,6 +933,22 @@ class RPGGenerator extends AbstractGenerator {
 		    public void addAttribute(AttributeData attribute){
 		        moveAttributes.add(attribute);
 		    }
+			
+			public List<EffectBuff> getBuffEffects(){
+				return this.buffEffects;
+			}
+			
+			public List<EffectMove> getMoveEffects(){
+				return this.moveEffects;
+			}
+			
+			public void addMoveEffect(EffectMove moveEffect){
+				this.moveEffects.add(moveEffect);
+			}
+			
+			public void addBuffEffect(EffectBuff buffEffect){
+				this.buffEffects.add(buffEffect);
+			}
 		
 		    @Override
 		    public boolean equals(Object o) {
@@ -1061,7 +963,7 @@ class RPGGenerator extends AbstractGenerator {
 		
 		    @Override
 		    public int hashCode() {
-		        return Objects.hash(moveName, type, moveAttributes);
+		        return Objects.hash(moveName, type, moveAttributes, moveEffects, buffEffects);
 		    }
 		
 		    @Override
@@ -1129,6 +1031,16 @@ class RPGGenerator extends AbstractGenerator {
 				«FOR att : move.att»
 				«IF getNumberFromAtomicDab(att.av.an) instanceof Number»
 				tempMoveData.addAttribute(new AttributeData("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
+				«ENDIF»
+				«ENDFOR»
+				«FOR moveEffect : move.MEffect»
+				«IF moveEffect !== null»
+				tempMoveData.addMoveEffect(new «moveEffect.moveEName.name»());
+				«ENDIF»
+				«ENDFOR»
+				«FOR buffEffect : move.BEffect»
+				«IF buffEffect !== null»
+				tempMoveData.addBuffEffect(new «buffEffect.buffEName.name»());
 				«ENDIF»
 				«ENDFOR»
 				moves.addMove(tempMoveData);

@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.Effect#getRule <em>Rule</em>}</li>
+ *   <li>{@link mdsd.rPG.Effect#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getEffect()
@@ -24,25 +24,25 @@ import org.eclipse.emf.ecore.EObject;
 public interface Effect extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Rule</b></em>' containment reference.
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Rule</em>' containment reference.
-   * @see #setRule(Rule)
-   * @see mdsd.rPG.RPGPackage#getEffect_Rule()
-   * @model containment="true"
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see mdsd.rPG.RPGPackage#getEffect_Name()
+   * @model
    * @generated
    */
-  Rule getRule();
+  String getName();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.Effect#getRule <em>Rule</em>}' containment reference.
+   * Sets the value of the '{@link mdsd.rPG.Effect#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Rule</em>' containment reference.
-   * @see #getRule()
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
    * @generated
    */
-  void setRule(Rule value);
+  void setName(String value);
 
 } // Effect

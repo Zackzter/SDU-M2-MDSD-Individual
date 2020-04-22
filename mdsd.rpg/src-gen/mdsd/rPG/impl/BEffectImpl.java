@@ -3,55 +3,49 @@
  */
 package mdsd.rPG.impl;
 
-import java.util.Collection;
-
-import mdsd.rPG.Attribute;
-import mdsd.rPG.EntityAttributes;
+import mdsd.rPG.BEffect;
+import mdsd.rPG.Buff;
 import mdsd.rPG.RPGPackage;
 
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Entity Attributes</b></em>'.
+ * An implementation of the model object '<em><b>BEffect</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.EntityAttributesImpl#getAttribute <em>Attribute</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.BEffectImpl#getBuffEName <em>Buff EName</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EntityAttributesImpl extends MinimalEObjectImpl.Container implements EntityAttributes
+public class BEffectImpl extends MinimalEObjectImpl.Container implements BEffect
 {
   /**
-   * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' containment reference list.
+   * The cached value of the '{@link #getBuffEName() <em>Buff EName</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAttribute()
+   * @see #getBuffEName()
    * @generated
    * @ordered
    */
-  protected EList<Attribute> attribute;
+  protected Buff buffEName;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EntityAttributesImpl()
+  protected BEffectImpl()
   {
     super();
   }
@@ -64,7 +58,7 @@ public class EntityAttributesImpl extends MinimalEObjectImpl.Container implement
   @Override
   protected EClass eStaticClass()
   {
-    return RPGPackage.Literals.ENTITY_ATTRIBUTES;
+    return RPGPackage.Literals.BEFFECT;
   }
 
   /**
@@ -73,13 +67,29 @@ public class EntityAttributesImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public EList<Attribute> getAttribute()
+  public Buff getBuffEName()
   {
-    if (attribute == null)
+    if (buffEName != null && buffEName.eIsProxy())
     {
-      attribute = new EObjectContainmentEList<Attribute>(Attribute.class, this, RPGPackage.ENTITY_ATTRIBUTES__ATTRIBUTE);
+      InternalEObject oldBuffEName = (InternalEObject)buffEName;
+      buffEName = (Buff)eResolveProxy(oldBuffEName);
+      if (buffEName != oldBuffEName)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RPGPackage.BEFFECT__BUFF_ENAME, oldBuffEName, buffEName));
+      }
     }
-    return attribute;
+    return buffEName;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Buff basicGetBuffEName()
+  {
+    return buffEName;
   }
 
   /**
@@ -88,14 +98,12 @@ public class EntityAttributesImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  public void setBuffEName(Buff newBuffEName)
   {
-    switch (featureID)
-    {
-      case RPGPackage.ENTITY_ATTRIBUTES__ATTRIBUTE:
-        return ((InternalEList<?>)getAttribute()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    Buff oldBuffEName = buffEName;
+    buffEName = newBuffEName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.BEFFECT__BUFF_ENAME, oldBuffEName, buffEName));
   }
 
   /**
@@ -108,8 +116,9 @@ public class EntityAttributesImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case RPGPackage.ENTITY_ATTRIBUTES__ATTRIBUTE:
-        return getAttribute();
+      case RPGPackage.BEFFECT__BUFF_ENAME:
+        if (resolve) return getBuffEName();
+        return basicGetBuffEName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,15 +128,13 @@ public class EntityAttributesImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case RPGPackage.ENTITY_ATTRIBUTES__ATTRIBUTE:
-        getAttribute().clear();
-        getAttribute().addAll((Collection<? extends Attribute>)newValue);
+      case RPGPackage.BEFFECT__BUFF_ENAME:
+        setBuffEName((Buff)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +150,8 @@ public class EntityAttributesImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case RPGPackage.ENTITY_ATTRIBUTES__ATTRIBUTE:
-        getAttribute().clear();
+      case RPGPackage.BEFFECT__BUFF_ENAME:
+        setBuffEName((Buff)null);
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +167,10 @@ public class EntityAttributesImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case RPGPackage.ENTITY_ATTRIBUTES__ATTRIBUTE:
-        return attribute != null && !attribute.isEmpty();
+      case RPGPackage.BEFFECT__BUFF_ENAME:
+        return buffEName != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //EntityAttributesImpl
+} //BEffectImpl
