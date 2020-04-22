@@ -5,7 +5,9 @@ package mdsd.serializer;
 
 import com.google.inject.Inject;
 import java.util.Set;
+import mdsd.rPG.AEffect;
 import mdsd.rPG.Add;
+import mdsd.rPG.AfterE;
 import mdsd.rPG.AltAttribute;
 import mdsd.rPG.And;
 import mdsd.rPG.Attribute;
@@ -15,7 +17,6 @@ import mdsd.rPG.BEffect;
 import mdsd.rPG.Bigger;
 import mdsd.rPG.BiggerEq;
 import mdsd.rPG.Buff;
-import mdsd.rPG.BuffRule;
 import mdsd.rPG.Death;
 import mdsd.rPG.Div;
 import mdsd.rPG.EType;
@@ -32,7 +33,6 @@ import mdsd.rPG.MEffect;
 import mdsd.rPG.Members;
 import mdsd.rPG.Move;
 import mdsd.rPG.MoveE;
-import mdsd.rPG.MoveRule;
 import mdsd.rPG.Moves;
 import mdsd.rPG.Mult;
 import mdsd.rPG.NEq;
@@ -43,6 +43,7 @@ import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Relations;
 import mdsd.rPG.Require;
+import mdsd.rPG.Rule;
 import mdsd.rPG.Smaller;
 import mdsd.rPG.SmallerEq;
 import mdsd.rPG.Sub;
@@ -76,8 +77,14 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == RPGPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case RPGPackage.AEFFECT:
+				sequence_AEffect(context, (AEffect) semanticObject); 
+				return; 
 			case RPGPackage.ADD:
 				sequence_Sum(context, (Add) semanticObject); 
+				return; 
+			case RPGPackage.AFTER_E:
+				sequence_AfterE(context, (AfterE) semanticObject); 
 				return; 
 			case RPGPackage.ALT_ATTRIBUTE:
 				sequence_AltAttribute(context, (AltAttribute) semanticObject); 
@@ -105,9 +112,6 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RPGPackage.BUFF:
 				sequence_Buff(context, (Buff) semanticObject); 
-				return; 
-			case RPGPackage.BUFF_RULE:
-				sequence_BuffRule(context, (BuffRule) semanticObject); 
 				return; 
 			case RPGPackage.DEATH:
 				sequence_Death(context, (Death) semanticObject); 
@@ -157,9 +161,6 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RPGPackage.MOVE_E:
 				sequence_MoveE(context, (MoveE) semanticObject); 
 				return; 
-			case RPGPackage.MOVE_RULE:
-				sequence_MoveRule(context, (MoveRule) semanticObject); 
-				return; 
 			case RPGPackage.MOVES:
 				sequence_Moves(context, (Moves) semanticObject); 
 				return; 
@@ -195,6 +196,9 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 					return; 
 				}
 				else break;
+			case RPGPackage.RULE:
+				sequence_Rule(context, (Rule) semanticObject); 
+				return; 
 			case RPGPackage.SMALLER:
 				sequence_Comparator(context, (Smaller) semanticObject); 
 				return; 
@@ -226,6 +230,24 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     AEffect returns AEffect
+	 *
+	 * Constraint:
+	 *     afterEName=[AfterE|ID]
+	 */
+	protected void sequence_AEffect(ISerializationContext context, AEffect semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.AEFFECT__AFTER_ENAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.AEFFECT__AFTER_ENAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAEffectAccess().getAfterENameAfterEIDTerminalRuleCall_2_0_1(), semanticObject.eGet(RPGPackage.Literals.AEFFECT__AFTER_ENAME, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     ORcondition returns And
 	 *     ORcondition.Or_1_1 returns And
 	 *     ANDcondition returns And
@@ -245,6 +267,28 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getANDconditionAccess().getAndLeftAction_1_1(), semanticObject.getLeft());
 		feeder.accept(grammarAccess.getANDconditionAccess().getRightStatementParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Effect returns AfterE
+	 *     AfterE returns AfterE
+	 *
+	 * Constraint:
+	 *     (name=ID rule=Rule)
+	 */
+	protected void sequence_AfterE(ISerializationContext context, AfterE semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.EFFECT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.EFFECT__NAME));
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.EFFECT__RULE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.EFFECT__RULE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAfterEAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getAfterEAccess().getRuleRuleParserRuleCall_2_0(), semanticObject.getRule());
 		feeder.finish();
 	}
 	
@@ -327,46 +371,22 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     BuffRule returns BuffRule
-	 *
-	 * Constraint:
-	 *     (or=ORcondition target=[Attribute|ID] sum=Sum)
-	 */
-	protected void sequence_BuffRule(ISerializationContext context, BuffRule semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.BUFF_RULE__OR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.BUFF_RULE__OR));
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.BUFF_RULE__TARGET) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.BUFF_RULE__TARGET));
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.BUFF_RULE__SUM) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.BUFF_RULE__SUM));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getBuffRuleAccess().getOrORconditionParserRuleCall_1_0(), semanticObject.getOr());
-		feeder.accept(grammarAccess.getBuffRuleAccess().getTargetAttributeIDTerminalRuleCall_3_0_1(), semanticObject.eGet(RPGPackage.Literals.BUFF_RULE__TARGET, false));
-		feeder.accept(grammarAccess.getBuffRuleAccess().getSumSumParserRuleCall_5_0(), semanticObject.getSum());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     Effect returns Buff
 	 *     Buff returns Buff
 	 *
 	 * Constraint:
-	 *     (name=ID buffR=BuffRule)
+	 *     (name=ID rule=Rule)
 	 */
 	protected void sequence_Buff(ISerializationContext context, Buff semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.EFFECT__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.EFFECT__NAME));
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.BUFF__BUFF_R) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.BUFF__BUFF_R));
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.EFFECT__RULE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.EFFECT__RULE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getBuffAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getBuffAccess().getBuffRBuffRuleParserRuleCall_2_0(), semanticObject.getBuffR());
+		feeder.accept(grammarAccess.getBuffAccess().getRuleRuleParserRuleCall_2_0(), semanticObject.getRule());
 		feeder.finish();
 	}
 	
@@ -653,42 +673,18 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     MoveE returns MoveE
 	 *
 	 * Constraint:
-	 *     (name=ID moveR=MoveRule)
+	 *     (name=ID rule=Rule)
 	 */
 	protected void sequence_MoveE(ISerializationContext context, MoveE semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.EFFECT__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.EFFECT__NAME));
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.MOVE_E__MOVE_R) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.MOVE_E__MOVE_R));
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.EFFECT__RULE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.EFFECT__RULE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getMoveEAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getMoveEAccess().getMoveRMoveRuleParserRuleCall_2_0(), semanticObject.getMoveR());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     MoveRule returns MoveRule
-	 *
-	 * Constraint:
-	 *     (or=ORcondition target=[Attribute|ID] sum=Sum)
-	 */
-	protected void sequence_MoveRule(ISerializationContext context, MoveRule semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.MOVE_RULE__OR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.MOVE_RULE__OR));
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.MOVE_RULE__TARGET) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.MOVE_RULE__TARGET));
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.MOVE_RULE__SUM) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.MOVE_RULE__SUM));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getMoveRuleAccess().getOrORconditionParserRuleCall_1_0(), semanticObject.getOr());
-		feeder.accept(grammarAccess.getMoveRuleAccess().getTargetAttributeIDTerminalRuleCall_3_0_1(), semanticObject.eGet(RPGPackage.Literals.MOVE_RULE__TARGET, false));
-		feeder.accept(grammarAccess.getMoveRuleAccess().getSumSumParserRuleCall_5_0(), semanticObject.getSum());
+		feeder.accept(grammarAccess.getMoveEAccess().getRuleRuleParserRuleCall_2_0(), semanticObject.getRule());
 		feeder.finish();
 	}
 	
@@ -698,7 +694,7 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Move returns Move
 	 *
 	 * Constraint:
-	 *     (name=ID eType=EType? att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect)*)
+	 *     (name=ID eType=EType? att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect | aEffect+=AEffect)*)
 	 */
 	protected void sequence_Move(ISerializationContext context, Move semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -890,6 +886,30 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_Require_Teams(ISerializationContext context, Require semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Rule returns Rule
+	 *
+	 * Constraint:
+	 *     (or=ORcondition target=[Attribute|ID] sum=Sum)
+	 */
+	protected void sequence_Rule(ISerializationContext context, Rule semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.RULE__OR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.RULE__OR));
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.RULE__TARGET) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.RULE__TARGET));
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.RULE__SUM) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.RULE__SUM));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRuleAccess().getOrORconditionParserRuleCall_1_0(), semanticObject.getOr());
+		feeder.accept(grammarAccess.getRuleAccess().getTargetAttributeIDTerminalRuleCall_3_0_1(), semanticObject.eGet(RPGPackage.Literals.RULE__TARGET, false));
+		feeder.accept(grammarAccess.getRuleAccess().getSumSumParserRuleCall_5_0(), semanticObject.getSum());
+		feeder.finish();
 	}
 	
 	

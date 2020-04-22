@@ -4,9 +4,9 @@
 package mdsd.rPG.impl;
 
 import mdsd.rPG.Attribute;
-import mdsd.rPG.MoveRule;
 import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
+import mdsd.rPG.Rule;
 import mdsd.rPG.Sum;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -20,20 +20,20 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Move Rule</b></em>'.
+ * An implementation of the model object '<em><b>Rule</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.MoveRuleImpl#getOr <em>Or</em>}</li>
- *   <li>{@link mdsd.rPG.impl.MoveRuleImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link mdsd.rPG.impl.MoveRuleImpl#getSum <em>Sum</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.RuleImpl#getOr <em>Or</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.RuleImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.RuleImpl#getSum <em>Sum</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class MoveRuleImpl extends MinimalEObjectImpl.Container implements MoveRule
+public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
 {
   /**
    * The cached value of the '{@link #getOr() <em>Or</em>}' containment reference.
@@ -70,7 +70,7 @@ public class MoveRuleImpl extends MinimalEObjectImpl.Container implements MoveRu
    * <!-- end-user-doc -->
    * @generated
    */
-  protected MoveRuleImpl()
+  protected RuleImpl()
   {
     super();
   }
@@ -83,7 +83,7 @@ public class MoveRuleImpl extends MinimalEObjectImpl.Container implements MoveRu
   @Override
   protected EClass eStaticClass()
   {
-    return RPGPackage.Literals.MOVE_RULE;
+    return RPGPackage.Literals.RULE;
   }
 
   /**
@@ -108,7 +108,7 @@ public class MoveRuleImpl extends MinimalEObjectImpl.Container implements MoveRu
     or = newOr;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.MOVE_RULE__OR, oldOr, newOr);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__OR, oldOr, newOr);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -126,14 +126,14 @@ public class MoveRuleImpl extends MinimalEObjectImpl.Container implements MoveRu
     {
       NotificationChain msgs = null;
       if (or != null)
-        msgs = ((InternalEObject)or).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.MOVE_RULE__OR, null, msgs);
+        msgs = ((InternalEObject)or).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__OR, null, msgs);
       if (newOr != null)
-        msgs = ((InternalEObject)newOr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.MOVE_RULE__OR, null, msgs);
+        msgs = ((InternalEObject)newOr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__OR, null, msgs);
       msgs = basicSetOr(newOr, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.MOVE_RULE__OR, newOr, newOr));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__OR, newOr, newOr));
   }
 
   /**
@@ -151,7 +151,7 @@ public class MoveRuleImpl extends MinimalEObjectImpl.Container implements MoveRu
       if (target != oldTarget)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RPGPackage.MOVE_RULE__TARGET, oldTarget, target));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RPGPackage.RULE__TARGET, oldTarget, target));
       }
     }
     return target;
@@ -178,7 +178,7 @@ public class MoveRuleImpl extends MinimalEObjectImpl.Container implements MoveRu
     Attribute oldTarget = target;
     target = newTarget;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.MOVE_RULE__TARGET, oldTarget, target));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__TARGET, oldTarget, target));
   }
 
   /**
@@ -203,7 +203,7 @@ public class MoveRuleImpl extends MinimalEObjectImpl.Container implements MoveRu
     sum = newSum;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.MOVE_RULE__SUM, oldSum, newSum);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__SUM, oldSum, newSum);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -221,14 +221,14 @@ public class MoveRuleImpl extends MinimalEObjectImpl.Container implements MoveRu
     {
       NotificationChain msgs = null;
       if (sum != null)
-        msgs = ((InternalEObject)sum).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.MOVE_RULE__SUM, null, msgs);
+        msgs = ((InternalEObject)sum).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__SUM, null, msgs);
       if (newSum != null)
-        msgs = ((InternalEObject)newSum).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.MOVE_RULE__SUM, null, msgs);
+        msgs = ((InternalEObject)newSum).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__SUM, null, msgs);
       msgs = basicSetSum(newSum, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.MOVE_RULE__SUM, newSum, newSum));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__SUM, newSum, newSum));
   }
 
   /**
@@ -241,9 +241,9 @@ public class MoveRuleImpl extends MinimalEObjectImpl.Container implements MoveRu
   {
     switch (featureID)
     {
-      case RPGPackage.MOVE_RULE__OR:
+      case RPGPackage.RULE__OR:
         return basicSetOr(null, msgs);
-      case RPGPackage.MOVE_RULE__SUM:
+      case RPGPackage.RULE__SUM:
         return basicSetSum(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -259,12 +259,12 @@ public class MoveRuleImpl extends MinimalEObjectImpl.Container implements MoveRu
   {
     switch (featureID)
     {
-      case RPGPackage.MOVE_RULE__OR:
+      case RPGPackage.RULE__OR:
         return getOr();
-      case RPGPackage.MOVE_RULE__TARGET:
+      case RPGPackage.RULE__TARGET:
         if (resolve) return getTarget();
         return basicGetTarget();
-      case RPGPackage.MOVE_RULE__SUM:
+      case RPGPackage.RULE__SUM:
         return getSum();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -280,13 +280,13 @@ public class MoveRuleImpl extends MinimalEObjectImpl.Container implements MoveRu
   {
     switch (featureID)
     {
-      case RPGPackage.MOVE_RULE__OR:
+      case RPGPackage.RULE__OR:
         setOr((Proposition)newValue);
         return;
-      case RPGPackage.MOVE_RULE__TARGET:
+      case RPGPackage.RULE__TARGET:
         setTarget((Attribute)newValue);
         return;
-      case RPGPackage.MOVE_RULE__SUM:
+      case RPGPackage.RULE__SUM:
         setSum((Sum)newValue);
         return;
     }
@@ -303,13 +303,13 @@ public class MoveRuleImpl extends MinimalEObjectImpl.Container implements MoveRu
   {
     switch (featureID)
     {
-      case RPGPackage.MOVE_RULE__OR:
+      case RPGPackage.RULE__OR:
         setOr((Proposition)null);
         return;
-      case RPGPackage.MOVE_RULE__TARGET:
+      case RPGPackage.RULE__TARGET:
         setTarget((Attribute)null);
         return;
-      case RPGPackage.MOVE_RULE__SUM:
+      case RPGPackage.RULE__SUM:
         setSum((Sum)null);
         return;
     }
@@ -326,14 +326,14 @@ public class MoveRuleImpl extends MinimalEObjectImpl.Container implements MoveRu
   {
     switch (featureID)
     {
-      case RPGPackage.MOVE_RULE__OR:
+      case RPGPackage.RULE__OR:
         return or != null;
-      case RPGPackage.MOVE_RULE__TARGET:
+      case RPGPackage.RULE__TARGET:
         return target != null;
-      case RPGPackage.MOVE_RULE__SUM:
+      case RPGPackage.RULE__SUM:
         return sum != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //MoveRuleImpl
+} //RuleImpl

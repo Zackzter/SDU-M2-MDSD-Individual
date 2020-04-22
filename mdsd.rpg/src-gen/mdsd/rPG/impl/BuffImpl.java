@@ -4,42 +4,19 @@
 package mdsd.rPG.impl;
 
 import mdsd.rPG.Buff;
-import mdsd.rPG.BuffRule;
 import mdsd.rPG.RPGPackage;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Buff</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * </p>
- * <ul>
- *   <li>{@link mdsd.rPG.impl.BuffImpl#getBuffR <em>Buff R</em>}</li>
- * </ul>
  *
  * @generated
  */
 public class BuffImpl extends EffectImpl implements Buff
 {
-  /**
-   * The cached value of the '{@link #getBuffR() <em>Buff R</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getBuffR()
-   * @generated
-   * @ordered
-   */
-  protected BuffRule buffR;
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -59,138 +36,6 @@ public class BuffImpl extends EffectImpl implements Buff
   protected EClass eStaticClass()
   {
     return RPGPackage.Literals.BUFF;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public BuffRule getBuffR()
-  {
-    return buffR;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetBuffR(BuffRule newBuffR, NotificationChain msgs)
-  {
-    BuffRule oldBuffR = buffR;
-    buffR = newBuffR;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.BUFF__BUFF_R, oldBuffR, newBuffR);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setBuffR(BuffRule newBuffR)
-  {
-    if (newBuffR != buffR)
-    {
-      NotificationChain msgs = null;
-      if (buffR != null)
-        msgs = ((InternalEObject)buffR).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.BUFF__BUFF_R, null, msgs);
-      if (newBuffR != null)
-        msgs = ((InternalEObject)newBuffR).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.BUFF__BUFF_R, null, msgs);
-      msgs = basicSetBuffR(newBuffR, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.BUFF__BUFF_R, newBuffR, newBuffR));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case RPGPackage.BUFF__BUFF_R:
-        return basicSetBuffR(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
-    switch (featureID)
-    {
-      case RPGPackage.BUFF__BUFF_R:
-        return getBuffR();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
-    switch (featureID)
-    {
-      case RPGPackage.BUFF__BUFF_R:
-        setBuffR((BuffRule)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID)
-  {
-    switch (featureID)
-    {
-      case RPGPackage.BUFF__BUFF_R:
-        setBuffR((BuffRule)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
-    switch (featureID)
-    {
-      case RPGPackage.BUFF__BUFF_R:
-        return buffR != null;
-    }
-    return super.eIsSet(featureID);
   }
 
 } //BuffImpl

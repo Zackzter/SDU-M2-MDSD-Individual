@@ -7,23 +7,23 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Move Rule</b></em>'.
+ * A representation of the model object '<em><b>Rule</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.MoveRule#getOr <em>Or</em>}</li>
- *   <li>{@link mdsd.rPG.MoveRule#getTarget <em>Target</em>}</li>
- *   <li>{@link mdsd.rPG.MoveRule#getSum <em>Sum</em>}</li>
+ *   <li>{@link mdsd.rPG.Rule#getOr <em>Or</em>}</li>
+ *   <li>{@link mdsd.rPG.Rule#getTarget <em>Target</em>}</li>
+ *   <li>{@link mdsd.rPG.Rule#getSum <em>Sum</em>}</li>
  * </ul>
  *
- * @see mdsd.rPG.RPGPackage#getMoveRule()
+ * @see mdsd.rPG.RPGPackage#getRule()
  * @model
  * @generated
  */
-public interface MoveRule extends EObject
+public interface Rule extends EObject
 {
   /**
    * Returns the value of the '<em><b>Or</b></em>' containment reference.
@@ -31,14 +31,14 @@ public interface MoveRule extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Or</em>' containment reference.
    * @see #setOr(Proposition)
-   * @see mdsd.rPG.RPGPackage#getMoveRule_Or()
+   * @see mdsd.rPG.RPGPackage#getRule_Or()
    * @model containment="true"
    * @generated
    */
   Proposition getOr();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.MoveRule#getOr <em>Or</em>}' containment reference.
+   * Sets the value of the '{@link mdsd.rPG.Rule#getOr <em>Or</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Or</em>' containment reference.
@@ -53,14 +53,14 @@ public interface MoveRule extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Target</em>' reference.
    * @see #setTarget(Attribute)
-   * @see mdsd.rPG.RPGPackage#getMoveRule_Target()
+   * @see mdsd.rPG.RPGPackage#getRule_Target()
    * @model
    * @generated
    */
   Attribute getTarget();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.MoveRule#getTarget <em>Target</em>}' reference.
+   * Sets the value of the '{@link mdsd.rPG.Rule#getTarget <em>Target</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Target</em>' reference.
@@ -75,14 +75,14 @@ public interface MoveRule extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Sum</em>' containment reference.
    * @see #setSum(Sum)
-   * @see mdsd.rPG.RPGPackage#getMoveRule_Sum()
+   * @see mdsd.rPG.RPGPackage#getRule_Sum()
    * @model containment="true"
    * @generated
    */
   Sum getSum();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.MoveRule#getSum <em>Sum</em>}' containment reference.
+   * Sets the value of the '{@link mdsd.rPG.Rule#getSum <em>Sum</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Sum</em>' containment reference.
@@ -91,4 +91,4 @@ public interface MoveRule extends EObject
    */
   void setSum(Sum value);
 
-} // MoveRule
+} // Rule

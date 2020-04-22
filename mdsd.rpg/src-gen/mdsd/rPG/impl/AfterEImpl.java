@@ -3,26 +3,26 @@
  */
 package mdsd.rPG.impl;
 
-import mdsd.rPG.MoveE;
+import mdsd.rPG.AfterE;
 import mdsd.rPG.RPGPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Move E</b></em>'.
+ * An implementation of the model object '<em><b>After E</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class MoveEImpl extends EffectImpl implements MoveE
+public class AfterEImpl extends EffectImpl implements AfterE
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected MoveEImpl()
+  protected AfterEImpl()
   {
     super();
   }
@@ -35,7 +35,7 @@ public class MoveEImpl extends EffectImpl implements MoveE
   @Override
   protected EClass eStaticClass()
   {
-    return RPGPackage.Literals.MOVE_E;
+    return RPGPackage.Literals.AFTER_E;
   }
 
-} //MoveEImpl
+} //AfterEImpl

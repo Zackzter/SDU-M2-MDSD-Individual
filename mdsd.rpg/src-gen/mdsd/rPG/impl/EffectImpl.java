@@ -5,10 +5,13 @@ package mdsd.rPG.impl;
 
 import mdsd.rPG.Effect;
 import mdsd.rPG.RPGPackage;
+import mdsd.rPG.Rule;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -22,6 +25,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.impl.EffectImpl#getName <em>Name</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.EffectImpl#getRule <em>Rule</em>}</li>
  * </ul>
  *
  * @generated
@@ -47,6 +51,16 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getRule() <em>Rule</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRule()
+   * @generated
+   * @ordered
+   */
+  protected Rule rule;
 
   /**
    * <!-- begin-user-doc -->
@@ -100,12 +114,80 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
    * @generated
    */
   @Override
+  public Rule getRule()
+  {
+    return rule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetRule(Rule newRule, NotificationChain msgs)
+  {
+    Rule oldRule = rule;
+    rule = newRule;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.EFFECT__RULE, oldRule, newRule);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setRule(Rule newRule)
+  {
+    if (newRule != rule)
+    {
+      NotificationChain msgs = null;
+      if (rule != null)
+        msgs = ((InternalEObject)rule).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.EFFECT__RULE, null, msgs);
+      if (newRule != null)
+        msgs = ((InternalEObject)newRule).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.EFFECT__RULE, null, msgs);
+      msgs = basicSetRule(newRule, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.EFFECT__RULE, newRule, newRule));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case RPGPackage.EFFECT__RULE:
+        return basicSetRule(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
       case RPGPackage.EFFECT__NAME:
         return getName();
+      case RPGPackage.EFFECT__RULE:
+        return getRule();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -122,6 +204,9 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
     {
       case RPGPackage.EFFECT__NAME:
         setName((String)newValue);
+        return;
+      case RPGPackage.EFFECT__RULE:
+        setRule((Rule)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -140,6 +225,9 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
       case RPGPackage.EFFECT__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case RPGPackage.EFFECT__RULE:
+        setRule((Rule)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -156,6 +244,8 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
     {
       case RPGPackage.EFFECT__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case RPGPackage.EFFECT__RULE:
+        return rule != null;
     }
     return super.eIsSet(featureID);
   }

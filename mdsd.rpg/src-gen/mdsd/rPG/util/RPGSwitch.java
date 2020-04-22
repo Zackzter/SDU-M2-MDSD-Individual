@@ -118,6 +118,14 @@ public class RPGSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RPGPackage.AFTER_E:
+      {
+        AfterE afterE = (AfterE)theEObject;
+        T result = caseAfterE(afterE);
+        if (result == null) result = caseEffect(afterE);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RPGPackage.ATTRIBUTES:
       {
         Attributes attributes = (Attributes)theEObject;
@@ -199,6 +207,13 @@ public class RPGSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RPGPackage.AEFFECT:
+      {
+        AEffect aEffect = (AEffect)theEObject;
+        T result = caseAEffect(aEffect);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RPGPackage.ETYPE:
       {
         EType eType = (EType)theEObject;
@@ -220,17 +235,10 @@ public class RPGSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RPGPackage.MOVE_RULE:
+      case RPGPackage.RULE:
       {
-        MoveRule moveRule = (MoveRule)theEObject;
-        T result = caseMoveRule(moveRule);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case RPGPackage.BUFF_RULE:
-      {
-        BuffRule buffRule = (BuffRule)theEObject;
-        T result = caseBuffRule(buffRule);
+        Rule rule = (Rule)theEObject;
+        T result = caseRule(rule);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -570,6 +578,22 @@ public class RPGSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>After E</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>After E</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAfterE(AfterE object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Attributes</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -746,6 +770,22 @@ public class RPGSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>AEffect</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>AEffect</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAEffect(AEffect object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>EType</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -794,33 +834,17 @@ public class RPGSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Move Rule</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Rule</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Move Rule</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Rule</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseMoveRule(MoveRule object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Buff Rule</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Buff Rule</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseBuffRule(BuffRule object)
+  public T caseRule(Rule object)
   {
     return null;
   }

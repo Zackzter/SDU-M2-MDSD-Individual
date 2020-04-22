@@ -71,6 +71,7 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.EFFECT: return createEffect();
       case RPGPackage.BUFF: return createBuff();
       case RPGPackage.MOVE_E: return createMoveE();
+      case RPGPackage.AFTER_E: return createAfterE();
       case RPGPackage.ATTRIBUTES: return createAttributes();
       case RPGPackage.ATTRIBUTE: return createAttribute();
       case RPGPackage.LOCATIONS: return createLocations();
@@ -82,11 +83,11 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.MOVE: return createMove();
       case RPGPackage.MEFFECT: return createMEffect();
       case RPGPackage.BEFFECT: return createBEffect();
+      case RPGPackage.AEFFECT: return createAEffect();
       case RPGPackage.ETYPE: return createEType();
       case RPGPackage.ATTRIBUTE_VALUES: return createAttributeValues();
       case RPGPackage.ALT_ATTRIBUTE: return createAltAttribute();
-      case RPGPackage.MOVE_RULE: return createMoveRule();
-      case RPGPackage.BUFF_RULE: return createBuffRule();
+      case RPGPackage.RULE: return createRule();
       case RPGPackage.ENTITIES: return createEntities();
       case RPGPackage.DEATH: return createDeath();
       case RPGPackage.ENTITY: return createEntity();
@@ -191,6 +192,18 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     MoveEImpl moveE = new MoveEImpl();
     return moveE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public AfterE createAfterE()
+  {
+    AfterEImpl afterE = new AfterEImpl();
+    return afterE;
   }
 
   /**
@@ -331,6 +344,18 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
+  public AEffect createAEffect()
+  {
+    AEffectImpl aEffect = new AEffectImpl();
+    return aEffect;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EType createEType()
   {
     ETypeImpl eType = new ETypeImpl();
@@ -367,22 +392,10 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
-  public MoveRule createMoveRule()
+  public Rule createRule()
   {
-    MoveRuleImpl moveRule = new MoveRuleImpl();
-    return moveRule;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public BuffRule createBuffRule()
-  {
-    BuffRuleImpl buffRule = new BuffRuleImpl();
-    return buffRule;
+    RuleImpl rule = new RuleImpl();
+    return rule;
   }
 
   /**

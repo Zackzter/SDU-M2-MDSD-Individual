@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link mdsd.rPG.Move#getAtt <em>Att</em>}</li>
  *   <li>{@link mdsd.rPG.Move#getMEffect <em>MEffect</em>}</li>
  *   <li>{@link mdsd.rPG.Move#getBEffect <em>BEffect</em>}</li>
+ *   <li>{@link mdsd.rPG.Move#getAEffect <em>AEffect</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getMove()
@@ -108,5 +109,17 @@ public interface Move extends EObject
    * @generated
    */
   EList<BEffect> getBEffect();
+
+  /**
+   * Returns the value of the '<em><b>AEffect</b></em>' containment reference list.
+   * The list contents are of type {@link mdsd.rPG.AEffect}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>AEffect</em>' containment reference list.
+   * @see mdsd.rPG.RPGPackage#getMove_AEffect()
+   * @model containment="true"
+   * @generated
+   */
+  EList<AEffect> getAEffect();
 
 } // Move

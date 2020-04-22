@@ -9,12 +9,6 @@ package mdsd.rPG;
  * A representation of the model object '<em><b>Buff</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link mdsd.rPG.Buff#getBuffR <em>Buff R</em>}</li>
- * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getBuff()
  * @model
@@ -22,26 +16,4 @@ package mdsd.rPG;
  */
 public interface Buff extends Effect
 {
-  /**
-   * Returns the value of the '<em><b>Buff R</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Buff R</em>' containment reference.
-   * @see #setBuffR(BuffRule)
-   * @see mdsd.rPG.RPGPackage#getBuff_BuffR()
-   * @model containment="true"
-   * @generated
-   */
-  BuffRule getBuffR();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Buff#getBuffR <em>Buff R</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Buff R</em>' containment reference.
-   * @see #getBuffR()
-   * @generated
-   */
-  void setBuffR(BuffRule value);
-
 } // Buff
