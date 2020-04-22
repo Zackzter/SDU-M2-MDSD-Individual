@@ -3,6 +3,7 @@
 
 # Files to not ignore
 !/.gitignore
+!/mdsd.rpg.tests/src/mdsd/tests/RPGParsingTest.xtend
 
 # Folder to not ignore
 !/mdsd.rpg/
