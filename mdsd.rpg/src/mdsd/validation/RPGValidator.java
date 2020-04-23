@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.eclipse.xtext.validation.Check;
 
+import mdsd.rPG.AfterE;
 import mdsd.rPG.Attribute;
 import mdsd.rPG.Attributes;
 import mdsd.rPG.Buff;
@@ -35,6 +36,7 @@ public class RPGValidator extends AbstractRPGValidator {
 	public static final String INVALID_NAME = "invalidName";
 	public static final String UNSUPPORTED_OPERATION = "unsupportedOperation";
 	public static final String MISSING_DECLARATION = "missingDeclaration";
+	public static final String DUPLICATED_DECLARATION = "duplicatedDeclaration";
 	public static final String EMPTY_ENTTIY_ATTRIBUTES = "emptyEntityAttributes";
 //
 //	@Check
@@ -74,6 +76,13 @@ public class RPGValidator extends AbstractRPGValidator {
 		}
 	}
 	
+	@Check
+	public void checkEffectStartsWithCapital(AfterE buff) {
+		if (!Character.isUpperCase(buff.getName().charAt(0))) {
+			error("The name of this effect should start with a capital letter.",  RPGPackage.Literals.EFFECT__NAME, INVALID_NAME);
+		}
+	}
+	
 	
 	@Check
 	public void checkAttribute(Attribute att) {
@@ -83,7 +92,7 @@ public class RPGValidator extends AbstractRPGValidator {
 		}
 	}
 	
-	private Map<String, Boolean> setupDeclarationMap() {
+	private Map<String, Boolean> setupBooleanDeclarationMap() {
 		Map<String, Boolean> mappy = new HashMap<String, Boolean>();
 		
 		mappy.put("Locations", false);
@@ -98,11 +107,26 @@ public class RPGValidator extends AbstractRPGValidator {
 		return mappy;
 	}
 	
+	private Map<String, Integer> setupIntegerDeclarationMap() {
+		Map<String, Integer> mappy = new HashMap<String, Integer>();
+		
+		mappy.put("Locations", 0);
+		mappy.put("Relations", 0);
+		mappy.put("Moves", 0);
+		mappy.put("Entities", 0);
+		mappy.put("Teams", 0);
+		mappy.put("Death", 0);
+		mappy.put("Attributes", 0);
+		mappy.put("Effects", 0);
+		
+		return mappy;
+	}
+	
 	@Check
 	public void checkDeclarations(SystemRPG sysrpg) {
 		// Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects
 		
-		Map<String, Boolean> mappy = setupDeclarationMap();
+		Map<String, Boolean> mappy = setupBooleanDeclarationMap();
 		
 		for(Declaration d : sysrpg.getDeclarations()) {
 
@@ -141,6 +165,50 @@ public class RPGValidator extends AbstractRPGValidator {
 			
 
 
+	}
+	
+	@Check
+	public void checkDuplicateDeclarations(SystemRPG sysrpg) {
+		
+		Map<String, Integer> mappy = setupIntegerDeclarationMap();
+		
+		for(Declaration d : sysrpg.getDeclarations()) {
+
+			if(d instanceof Locations) {
+				mappy.computeIfPresent("Locations", (k, v) -> v+=1);
+			} else if(d instanceof Relations) {
+				mappy.computeIfPresent("Relations", (k, v) -> v+=1);
+			} else if(d instanceof Moves) {
+				mappy.computeIfPresent("Moves", (k, v) -> v+=1);
+			} else if(d instanceof Entities) {
+				mappy.computeIfPresent("Entities", (k, v) -> v+=1);
+			} else if(d instanceof Teams) {
+				mappy.computeIfPresent("Teams", (k, v) -> v+=1);
+			} else if(d instanceof Death) {
+				mappy.computeIfPresent("Death", (k, v) -> v+=1);
+			} else if(d instanceof Attributes) {
+				mappy.computeIfPresent("Attributes", (k, v) -> v+=1);
+			} else if(d instanceof Effects) {
+				mappy.computeIfPresent("Effects", (k, v) -> v+=1);
+			}			
+			
+		}
+		
+		Map<String, Integer> notPresent = mappy.entrySet().stream()
+                .filter(map -> map.getValue() > 1)
+                .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
+		
+		String missing = "";
+		for(Map.Entry<String, Integer> entry : notPresent.entrySet()) {
+			missing += " " + "[" +entry.getKey() + "]";
+		}
+		
+		if(notPresent.size() > 0) {
+			error("The following declarations are duplicated:" + missing + ". Please only use one of each.", RPGPackage.Literals.SYSTEM_RPG__NAME, MISSING_DECLARATION);
+		}
+		
+		
+		
 	}
 
 	
