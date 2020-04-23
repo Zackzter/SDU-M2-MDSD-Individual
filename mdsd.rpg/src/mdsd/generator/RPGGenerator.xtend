@@ -68,12 +68,12 @@ class RPGGenerator extends AbstractGenerator {
 		for (Declaration decleration : systemRPG.getDeclarations()){
 			switch(decleration){
 				Locations:
-					if(!locationbool){ // should be done
+					if(!locationbool){
 						generateLocations(fsa, decleration)
 						locationbool = true
 					}
 				Relations:
-					if(!relationbool){ // should be done
+					if(!relationbool){
                         generateTypes(fsa, decleration)
                         relationbool = true
                     }
@@ -83,21 +83,21 @@ class RPGGenerator extends AbstractGenerator {
 						movesbool = true
 					}
 				Entities:
-					if(!entitiesbool){ // should be done
+					if(!entitiesbool){
 						generateEntities(fsa, decleration)
 						entitiesbool = true
 					}
 				Teams:
-					if(!teamsbool){ // should be done
+					if(!teamsbool){
 						generateTeams(fsa, decleration)
 						teamsbool = true
 					}
-				Attributes: // should be done
+				Attributes:
 					if(!attributesbool){
 						generateAttributes(fsa, decleration)
                         attributesbool = true
                     }
-				Death: // should be done
+				Death:
 					if(!deathbool){
 						fsa.generateFile("DeathChecker.java", decleration.generateDeathChecker)
 						deathbool = true
@@ -768,13 +768,7 @@ class RPGGenerator extends AbstractGenerator {
 		'''
 	}
 	
-	def CharSequence generateEntityInit(Entities entities){
-		/*«IF getNumberFromAtomicDab(att.av.an) instanceof Integer»
-				«entity.name.toLowerCase».addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
-				«ELSEIF getNumberFromAtomicDab(att.av.an) instanceof Float»
-				«entity.name.toLowerCase».addAttribute(AttributeData.createAttributeDataWithFloat("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
-				«ENDIF» */
-		
+	def CharSequence generateEntityInit(Entities entities){	
 		'''
 		import java.util.*;
 		
@@ -1139,16 +1133,6 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	
 	def CharSequence generateMoveInit(Moves moves){
-		/*
-		 * 
-		 * «IF getNumberFromAtomicDab(att.av.an) instanceof Integer»
-				tempMoveData.addAttribute(AttributeData.createAttributeDataWithInt("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
-				«ELSEIF getNumberFromAtomicDab(att.av.an) instanceof Float»
-				tempMoveData.addAttribute(AttributeData.createAttributeDataWithFloat("«att.attribute.name»", «getNumberFromAtomicDab(att.av.an)»));
-				«ENDIF»
-		 */
-		
-		
 		'''
 		import java.util.*;
 		
