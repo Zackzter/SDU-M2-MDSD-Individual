@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import org.eclipse.xtext.validation.Check;
 
 import mdsd.rPG.AfterE;
+import mdsd.rPG.AltAttribute;
 import mdsd.rPG.Attribute;
 import mdsd.rPG.Attributes;
 import mdsd.rPG.Buff;
@@ -19,6 +20,7 @@ import mdsd.rPG.Effects;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
 import mdsd.rPG.Locations;
+import mdsd.rPG.Move;
 import mdsd.rPG.MoveE;
 import mdsd.rPG.Moves;
 import mdsd.rPG.RPGPackage;
@@ -39,6 +41,7 @@ public class RPGValidator extends AbstractRPGValidator {
 	public static final String DUPLICATED_DECLARATION = "duplicatedDeclaration";
 	public static final String EMPTY_ENTTIY_ATTRIBUTES = "emptyEntityAttributes";
 	public static final String INCORRECT_TEAM_COUNT = "incorrectTeamCount";
+	public static final String INDISTINCT_ATTRIBUTES = "indistinctAttributes";
 	
 //
 //	@Check
@@ -97,7 +100,7 @@ public class RPGValidator extends AbstractRPGValidator {
 	private Map<String, Boolean> setupBooleanDeclarationMap() {
 		Map<String, Boolean> mappy = new HashMap<String, Boolean>();
 		
-		mappy.put("Locations", false);
+		mappy.put("Location", false);
 		mappy.put("Relations", false);
 		mappy.put("Moves", false);
 		mappy.put("Entities", false);
@@ -112,7 +115,7 @@ public class RPGValidator extends AbstractRPGValidator {
 	private Map<String, Integer> setupIntegerDeclarationMap() {
 		Map<String, Integer> mappy = new HashMap<String, Integer>();
 		
-		mappy.put("Locations", 0);
+		mappy.put("Location", 0);
 		mappy.put("Relations", 0);
 		mappy.put("Moves", 0);
 		mappy.put("Entities", 0);
@@ -133,7 +136,7 @@ public class RPGValidator extends AbstractRPGValidator {
 		for(Declaration d : sysrpg.getDeclarations()) {
 
 			if(d instanceof Locations) {
-				mappy.computeIfPresent("Locations", (k, v) -> true);
+				mappy.computeIfPresent("Location", (k, v) -> true);
 			} else if(d instanceof Relations) {
 				mappy.computeIfPresent("Relations", (k, v) -> true);
 			} else if(d instanceof Moves) {
@@ -177,7 +180,7 @@ public class RPGValidator extends AbstractRPGValidator {
 		for(Declaration d : sysrpg.getDeclarations()) {
 
 			if(d instanceof Locations) {
-				mappy.computeIfPresent("Locations", (k, v) -> v+=1);
+				mappy.computeIfPresent("Location", (k, v) -> v+=1);
 			} else if(d instanceof Relations) {
 				mappy.computeIfPresent("Relations", (k, v) -> v+=1);
 			} else if(d instanceof Moves) {
@@ -218,6 +221,51 @@ public class RPGValidator extends AbstractRPGValidator {
 		if(teams.getTeam().size() < 2) {
 			warning("There is currently only one team, you will instantly win with no opponents.", RPGPackage.Literals.TEAMS__TEAM, INCORRECT_TEAM_COUNT);
 		}
+	}
+	
+	@Check
+	public void checkAttributesAreDistinct(SystemRPG sysrpg) {
+		ArrayList<String> existingAttributes = new ArrayList<>();
+		HashSet<String> moveAttributes = new HashSet<>();
+		HashSet<String> entityAttributes = new HashSet<>();
+		
+		for(Declaration dec : sysrpg.getDeclarations()) {
+			if(dec instanceof Attributes) {
+				for(Attribute att : ((Attributes) dec).getAttribute()) {
+					existingAttributes.add(att.getName());
+				}
+			} else if(dec instanceof Moves) {
+				for(Move mov : ((Moves) dec).getMove()) {
+					for(AltAttribute a : mov.getAtt()) {
+						moveAttributes.add(a.getAttribute().getName());
+					}					
+				}
+			} else if(dec instanceof Entities) {
+				for(Entity ent : ((Entities) dec).getEntity()) {
+					for(AltAttribute a : ent.getAtt()) {
+						entityAttributes.add(a.getAttribute().getName());
+					}
+				}
+			}
+		}
+		
+		ArrayList<String> duplicates = new ArrayList<String>();
+		
+		for(String s : moveAttributes) {
+			for(String d : entityAttributes) {
+				if(s.equals(d)) {
+					duplicates.add(d);
+				}
+			}
+		}
+		
+		if(!duplicates.isEmpty()) {
+			warning("Due to way the code has been implemented, using the same attribute in both an entity, and a move,"
+					+ " can cause unwanted side effects, please consider changing the following duplicated attribute(s): " 
+					+ duplicates, RPGPackage.Literals.SYSTEM_RPG__NAME, INDISTINCT_ATTRIBUTES);
+		}
+		
+		
 	}
 
 	
