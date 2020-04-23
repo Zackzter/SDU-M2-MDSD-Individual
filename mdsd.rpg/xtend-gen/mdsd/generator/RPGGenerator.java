@@ -72,91 +72,58 @@ public class RPGGenerator extends AbstractGenerator {
   }
   
   public void main(final SystemRPG systemRPG, final IFileSystemAccess2 fsa) {
-    boolean locationbool = false;
-    boolean relationbool = false;
-    boolean movesbool = false;
-    boolean entitiesbool = false;
-    boolean teamsbool = false;
-    boolean attributesbool = false;
-    boolean deathbool = false;
-    boolean effectbool = false;
     final String classFileName = systemRPG.getName();
     EList<Declaration> _declarations = systemRPG.getDeclarations();
     for (final Declaration decleration : _declarations) {
       boolean _matched = false;
       if (decleration instanceof Locations) {
         _matched=true;
-        if ((!locationbool)) {
-          this.generateLocations(fsa, ((Locations)decleration));
-          locationbool = true;
-        }
+        this.generateLocations(fsa, ((Locations)decleration));
       }
       if (!_matched) {
         if (decleration instanceof Relations) {
           _matched=true;
-          if ((!relationbool)) {
-            this.generateTypes(fsa, ((Relations)decleration));
-            relationbool = true;
-          }
+          this.generateTypes(fsa, ((Relations)decleration));
         }
       }
       if (!_matched) {
         if (decleration instanceof Moves) {
           _matched=true;
-          if ((!movesbool)) {
-            this.generateMoves(fsa, ((Moves)decleration));
-            movesbool = true;
-          }
+          this.generateMoves(fsa, ((Moves)decleration));
         }
       }
       if (!_matched) {
         if (decleration instanceof Entities) {
           _matched=true;
-          if ((!entitiesbool)) {
-            this.generateEntities(fsa, ((Entities)decleration));
-            entitiesbool = true;
-          }
+          this.generateEntities(fsa, ((Entities)decleration));
         }
       }
       if (!_matched) {
         if (decleration instanceof Teams) {
           _matched=true;
-          if ((!teamsbool)) {
-            this.generateTeams(fsa, ((Teams)decleration));
-            teamsbool = true;
-          }
+          this.generateTeams(fsa, ((Teams)decleration));
         }
       }
       if (!_matched) {
         if (decleration instanceof Attributes) {
           _matched=true;
-          if ((!attributesbool)) {
-            this.generateAttributes(fsa, ((Attributes)decleration));
-            attributesbool = true;
-          }
+          this.generateAttributes(fsa, ((Attributes)decleration));
         }
       }
       if (!_matched) {
         if (decleration instanceof Death) {
           _matched=true;
-          if ((!deathbool)) {
-            fsa.generateFile("DeathChecker.java", this.generateDeathChecker(((Death)decleration)));
-            deathbool = true;
-          }
+          fsa.generateFile("DeathChecker.java", this.generateDeathChecker(((Death)decleration)));
         }
       }
       if (!_matched) {
         if (decleration instanceof Effects) {
           _matched=true;
-          System.out.println("Hello");
-          if ((!effectbool)) {
-            this.generateEffectFiles(fsa, ((Effects)decleration));
-            effectbool = true;
-          }
+          this.generateEffectFiles(fsa, ((Effects)decleration));
         }
       }
       if (!_matched) {
-        System.out.println("This is not a supported instance of Decleration");
+        System.out.println("This is not a supported instance of Declaration");
       }
     }
     fsa.generateFile((classFileName + ".java"), this.generateGame(classFileName));

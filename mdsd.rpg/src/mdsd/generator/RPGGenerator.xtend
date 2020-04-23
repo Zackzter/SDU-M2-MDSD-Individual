@@ -55,63 +55,28 @@ class RPGGenerator extends AbstractGenerator {
 		
 	}
 	
-	def main(SystemRPG systemRPG, IFileSystemAccess2 fsa){
-		var locationbool = false
-		var relationbool = false
-		var movesbool = false
-		var entitiesbool = false
-		var teamsbool = false
-		var attributesbool = false
-		var deathbool = false
-		var effectbool = false		
+	def main(SystemRPG systemRPG, IFileSystemAccess2 fsa){	
 		val classFileName = systemRPG.getName() 
 		for (Declaration decleration : systemRPG.getDeclarations()){
 			switch(decleration){
 				Locations:
-					if(!locationbool){
-						generateLocations(fsa, decleration)
-						locationbool = true
-					}
+					generateLocations(fsa, decleration)
 				Relations:
-					if(!relationbool){
-                        generateTypes(fsa, decleration)
-                        relationbool = true
-                    }
+					generateTypes(fsa, decleration)
 				Moves:
-					if(!movesbool){
-						generateMoves(fsa, decleration)
-						movesbool = true
-					}
+					generateMoves(fsa, decleration)
 				Entities:
-					if(!entitiesbool){
-						generateEntities(fsa, decleration)
-						entitiesbool = true
-					}
+					generateEntities(fsa, decleration)
 				Teams:
-					if(!teamsbool){
-						generateTeams(fsa, decleration)
-						teamsbool = true
-					}
+					generateTeams(fsa, decleration)
 				Attributes:
-					if(!attributesbool){
-						generateAttributes(fsa, decleration)
-                        attributesbool = true
-                    }
+					generateAttributes(fsa, decleration)
 				Death:
-					if(!deathbool){
-						fsa.generateFile("DeathChecker.java", decleration.generateDeathChecker)
-						deathbool = true
-					}
-				Effects: {
-						System.out.println("Hello")
-						if(!effectbool){
-							generateEffectFiles(fsa, decleration)
-							effectbool = true	
-						}
-					}
-					
+					fsa.generateFile("DeathChecker.java", decleration.generateDeathChecker)
+				Effects:
+					generateEffectFiles(fsa, decleration)
 				default:
-					System.out.println("This is not a supported instance of Decleration")
+					System.out.println("This is not a supported instance of Declaration")
 			}
 
 		}
