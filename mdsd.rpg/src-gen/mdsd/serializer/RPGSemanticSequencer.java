@@ -182,16 +182,8 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				sequence_Relations(context, (Relations) semanticObject); 
 				return; 
 			case RPGPackage.REQUIRE:
-				if (rule == grammarAccess.getRequireRule()) {
-					sequence_Require(context, (Require) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getDeclarationRule()
-						|| rule == grammarAccess.getTeamsRule()) {
-					sequence_Require_Teams(context, (Require) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Require(context, (Require) semanticObject); 
+				return; 
 			case RPGPackage.RULE:
 				sequence_Rule(context, (Rule) semanticObject); 
 				return; 
@@ -690,7 +682,7 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Move returns Move
 	 *
 	 * Constraint:
-	 *     (name=ID eType=EType? att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect | aEffect+=AEffect)*)
+	 *     (name=ID eType=EType att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect | aEffect+=AEffect)*)
 	 */
 	protected void sequence_Move(ISerializationContext context, Move semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -869,19 +861,6 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getRequireAccess().getLogORconditionParserRuleCall_1_0(), semanticObject.getLog());
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Declaration returns Require
-	 *     Teams returns Require
-	 *
-	 * Constraint:
-	 *     (log=ORcondition team+=Team+)
-	 */
-	protected void sequence_Require_Teams(ISerializationContext context, Require semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

@@ -2064,7 +2064,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     entitiesEClass.getESuperTypes().add(this.getDeclaration());
     deathEClass.getESuperTypes().add(this.getDeclaration());
     teamsEClass.getESuperTypes().add(this.getDeclaration());
-    requireEClass.getESuperTypes().add(this.getTeams());
     numberComparingEClass.getESuperTypes().add(this.getProposition());
     multiplyEClass.getESuperTypes().add(this.getSum());
     atomicNumberEClass.getESuperTypes().add(this.getMultiply());

@@ -298,8 +298,6 @@ public class RPGSwitch<T> extends Switch<T>
       {
         Require require = (Require)theEObject;
         T result = caseRequire(require);
-        if (result == null) result = caseTeams(require);
-        if (result == null) result = caseDeclaration(require);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }

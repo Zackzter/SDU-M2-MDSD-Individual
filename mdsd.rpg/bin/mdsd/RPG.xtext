@@ -65,7 +65,7 @@ Moves:
 ;
 
 Move:
-	'move' name=ID eType=EType? att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect | aEffect+=AEffect)*
+	'move' name=ID eType=EType att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect | aEffect+=AEffect)*
 ;
 
 MEffect:

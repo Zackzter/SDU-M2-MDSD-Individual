@@ -3,6 +3,7 @@
  */
 package mdsd.rPG;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +21,7 @@ package mdsd.rPG;
  * @model
  * @generated
  */
-public interface Require extends Teams
+public interface Require extends EObject
 {
   /**
    * Returns the value of the '<em><b>Log</b></em>' containment reference.

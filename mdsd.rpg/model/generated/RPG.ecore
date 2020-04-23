@@ -132,7 +132,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="entity" unique="false"
         upperBound="-1" eType="#//Entity"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Require" eSuperTypes="#//Teams">
+  <eClassifiers xsi:type="ecore:EClass" name="Require">
     <eStructuralFeatures xsi:type="ecore:EReference" name="log" eType="#//Proposition"
         containment="true"/>
   </eClassifiers>

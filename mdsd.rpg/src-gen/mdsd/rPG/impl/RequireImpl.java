@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class RequireImpl extends TeamsImpl implements Require
+public class RequireImpl extends MinimalEObjectImpl.Container implements Require
 {
   /**
    * The cached value of the '{@link #getLog() <em>Log</em>}' containment reference.

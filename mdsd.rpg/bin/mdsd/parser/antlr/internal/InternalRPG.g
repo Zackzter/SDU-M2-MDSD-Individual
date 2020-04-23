@@ -985,7 +985,7 @@ ruleMove returns [EObject current=null]
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)?
+		)
 		(
 			(
 				{
@@ -1665,21 +1665,11 @@ ruleTeams returns [EObject current=null]
 			newLeafNode(otherlv_0, grammarAccess.getTeamsAccess().getTeamsKeyword_0());
 		}
 		(
-			{
-				newCompositeNode(grammarAccess.getTeamsAccess().getRequireParserRuleCall_1());
-			}
-			this_Require_1=ruleRequire
-			{
-				$current = $this_Require_1.current;
-				afterParserOrEnumRuleCall();
-			}
-		)?
-		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTeamsAccess().getTeamTeamParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getTeamsAccess().getTeamTeamParserRuleCall_1_0());
 				}
-				lv_team_2_0=ruleTeam
+				lv_team_1_0=ruleTeam
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTeamsRule());
@@ -1687,7 +1677,7 @@ ruleTeams returns [EObject current=null]
 					add(
 						$current,
 						"team",
-						lv_team_2_0,
+						lv_team_1_0,
 						"mdsd.RPG.Team");
 					afterParserOrEnumRuleCall();
 				}

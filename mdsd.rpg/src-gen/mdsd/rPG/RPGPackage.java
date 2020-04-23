@@ -1124,22 +1124,13 @@ public interface RPGPackage extends EPackage
   int REQUIRE = 30;
 
   /**
-   * The feature id for the '<em><b>Team</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REQUIRE__TEAM = TEAMS__TEAM;
-
-  /**
    * The feature id for the '<em><b>Log</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REQUIRE__LOG = TEAMS_FEATURE_COUNT + 0;
+  int REQUIRE__LOG = 0;
 
   /**
    * The number of structural features of the '<em>Require</em>' class.
@@ -1148,7 +1139,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REQUIRE_FEATURE_COUNT = TEAMS_FEATURE_COUNT + 1;
+  int REQUIRE_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.PropositionImpl <em>Proposition</em>}' class.

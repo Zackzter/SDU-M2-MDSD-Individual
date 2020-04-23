@@ -548,10 +548,10 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAEffectAEffectParserRuleCall_4_2_0 = (RuleCall)cAEffectAssignment_4_2.eContents().get(0);
 		
 		//Move:
-		//	'move' name=ID eType=EType? att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect | aEffect+=AEffect)*;
+		//	'move' name=ID eType=EType att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect | aEffect+=AEffect)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'move' name=ID eType=EType? att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect | aEffect+=AEffect)*
+		//'move' name=ID eType=EType att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect | aEffect+=AEffect)*
 		public Group getGroup() { return cGroup; }
 		
 		//'move'
@@ -563,7 +563,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//eType=EType?
+		//eType=EType
 		public Assignment getETypeAssignment_2() { return cETypeAssignment_2; }
 		
 		//EType
@@ -961,28 +961,24 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Teams");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTeamsKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cRequireParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final Assignment cTeamAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cTeamTeamParserRuleCall_2_0 = (RuleCall)cTeamAssignment_2.eContents().get(0);
+		private final Assignment cTeamAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTeamTeamParserRuleCall_1_0 = (RuleCall)cTeamAssignment_1.eContents().get(0);
 		
 		//Teams:
-		//	'teams' Require? team+=Team+;
+		//	'teams' team+=Team+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'teams' Require? team+=Team+
+		//'teams' team+=Team+
 		public Group getGroup() { return cGroup; }
 		
 		//'teams'
 		public Keyword getTeamsKeyword_0() { return cTeamsKeyword_0; }
 		
-		//Require?
-		public RuleCall getRequireParserRuleCall_1() { return cRequireParserRuleCall_1; }
-		
 		//team+=Team+
-		public Assignment getTeamAssignment_2() { return cTeamAssignment_2; }
+		public Assignment getTeamAssignment_1() { return cTeamAssignment_1; }
 		
 		//Team
-		public RuleCall getTeamTeamParserRuleCall_2_0() { return cTeamTeamParserRuleCall_2_0; }
+		public RuleCall getTeamTeamParserRuleCall_1_0() { return cTeamTeamParserRuleCall_1_0; }
 	}
 	public class TeamElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Team");
@@ -1779,7 +1775,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Move:
-	//	'move' name=ID eType=EType? att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect | aEffect+=AEffect)*;
+	//	'move' name=ID eType=EType att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect | aEffect+=AEffect)*;
 	public MoveElements getMoveAccess() {
 		return pMove;
 	}
@@ -1899,7 +1895,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Teams:
-	//	'teams' Require? team+=Team+;
+	//	'teams' team+=Team+;
 	public TeamsElements getTeamsAccess() {
 		return pTeams;
 	}
