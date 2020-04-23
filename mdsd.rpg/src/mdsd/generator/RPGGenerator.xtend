@@ -241,7 +241,6 @@ class RPGGenerator extends AbstractGenerator {
 						
 						// Will check that the user picks a move which exists
 						if(moves.contains(moveName)){
-							Number power = move.getMove(moveName).getMoveAttributes().get(0).getNumber();                                    
 							System.out.println("You used "+ moveName + "\n");
 							
 							executeBuffMove(move, moveName, playerEntity);
@@ -260,7 +259,6 @@ class RPGGenerator extends AbstractGenerator {
 					}else{
 						System.out.println("Enemy Turn...");
 						int choosenMove = random.nextInt(enemyEntity.getMoveNameList().size());
-						Number enemyPower = move.getMove(enemyEntity.getMoveNameList().get(choosenMove)).getMoveAttributes().get(0).getNumber();
 						System.out.println(enemyEntity.getName() + " used " + enemyEntity.getMoveNameList().get(choosenMove) + "\n");
 						
 						executeBuffMove(move, enemyEntity.getMoveNameList().get(choosenMove), enemyEntity);
@@ -451,16 +449,19 @@ class RPGGenerator extends AbstractGenerator {
 			public class «afterEffect.name» extends EffectAfter{
 				
 				@Override
-				public boolean effectAfter(Move move, String name, Entity player){
+				public boolean effectAfter(Move move, String name, Entity player){					
+					«IF afterEffect.rule.or !== null»
 					HashMap<String, Number> eData = new HashMap<>();
 					for(AttributeData playerData : player.getAttributes()){
 						eData.put(playerData.getAttributeName(), playerData.getNumber());
 					}			
 					for(AttributeData aData : move.getMove(name).getMoveAttributes()){
 						eData.put(aData.getAttributeName(), aData.getNumber());				
-					}
-					
+					}					
 					return «afterEffect.rule.or.new_logic»;
+					«ELSE»
+					return true;					
+					«ENDIF»
 				}
 			
 				@Override
@@ -532,15 +533,18 @@ class RPGGenerator extends AbstractGenerator {
 				
 				@Override
 				public boolean effectBuff(Move move, String name, Entity player){
+					«IF buff.rule.or !== null»
 					HashMap<String, Number> eData = new HashMap<>();
 					for(AttributeData playerData : player.getAttributes()){
 						eData.put(playerData.getAttributeName(), playerData.getNumber());
 					}			
 					for(AttributeData aData : move.getMove(name).getMoveAttributes()){
 						eData.put(aData.getAttributeName(), aData.getNumber());				
-					}
-					
+					}					
 					return «buff.rule.or.new_logic»;
+					«ELSE»
+					return true;					
+					«ENDIF»
 				}
 			
 				@Override
@@ -586,15 +590,18 @@ class RPGGenerator extends AbstractGenerator {
 				
 				@Override
 				public boolean effectMove(Move move, String name, Entity enemy){
+					«IF moveE.rule.or !== null»
 					HashMap<String, Number> eData = new HashMap<>();
 					for(AttributeData enemyData : enemy.getAttributes()){
 						eData.put(enemyData.getAttributeName(), enemyData.getNumber());
 					}			
 					for(AttributeData aData : move.getMove(name).getMoveAttributes()){
 						eData.put(aData.getAttributeName(), aData.getNumber());				
-					}
-					
+					}					
 					return «moveE.rule.or.new_logic»;
+					«ELSE»
+					return true;					
+					«ENDIF»
 				}
 				
 				@Override

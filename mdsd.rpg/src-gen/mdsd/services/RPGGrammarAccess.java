@@ -789,53 +789,57 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	public class RuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Rule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cIfKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cOrAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cOrORconditionParserRuleCall_1_0 = (RuleCall)cOrAssignment_1.eContents().get(0);
-		private final Keyword cThenKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cTargetAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cTargetAttributeCrossReference_3_0 = (CrossReference)cTargetAssignment_3.eContents().get(0);
-		private final RuleCall cTargetAttributeIDTerminalRuleCall_3_0_1 = (RuleCall)cTargetAttributeCrossReference_3_0.eContents().get(1);
-		private final Keyword cIsKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cSumAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cSumSumParserRuleCall_5_0 = (RuleCall)cSumAssignment_5.eContents().get(0);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Keyword cIfKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cOrAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cOrORconditionParserRuleCall_0_1_0 = (RuleCall)cOrAssignment_0_1.eContents().get(0);
+		private final Keyword cThenKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
+		private final Assignment cTargetAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cTargetAttributeCrossReference_1_0 = (CrossReference)cTargetAssignment_1.eContents().get(0);
+		private final RuleCall cTargetAttributeIDTerminalRuleCall_1_0_1 = (RuleCall)cTargetAttributeCrossReference_1_0.eContents().get(1);
+		private final Keyword cIsKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cSumAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cSumSumParserRuleCall_3_0 = (RuleCall)cSumAssignment_3.eContents().get(0);
 		
 		//Rule:
-		//	'if' or=ORcondition 'then' target=[Attribute] 'is' sum=Sum;
+		//	('if' or=ORcondition 'then')? target=[Attribute] 'is' sum=Sum;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'if' or=ORcondition 'then' target=[Attribute] 'is' sum=Sum
+		//('if' or=ORcondition 'then')? target=[Attribute] 'is' sum=Sum
 		public Group getGroup() { return cGroup; }
 		
+		//('if' or=ORcondition 'then')?
+		public Group getGroup_0() { return cGroup_0; }
+		
 		//'if'
-		public Keyword getIfKeyword_0() { return cIfKeyword_0; }
+		public Keyword getIfKeyword_0_0() { return cIfKeyword_0_0; }
 		
 		//or=ORcondition
-		public Assignment getOrAssignment_1() { return cOrAssignment_1; }
+		public Assignment getOrAssignment_0_1() { return cOrAssignment_0_1; }
 		
 		//ORcondition
-		public RuleCall getOrORconditionParserRuleCall_1_0() { return cOrORconditionParserRuleCall_1_0; }
+		public RuleCall getOrORconditionParserRuleCall_0_1_0() { return cOrORconditionParserRuleCall_0_1_0; }
 		
 		//'then'
-		public Keyword getThenKeyword_2() { return cThenKeyword_2; }
+		public Keyword getThenKeyword_0_2() { return cThenKeyword_0_2; }
 		
 		//target=[Attribute]
-		public Assignment getTargetAssignment_3() { return cTargetAssignment_3; }
+		public Assignment getTargetAssignment_1() { return cTargetAssignment_1; }
 		
 		//[Attribute]
-		public CrossReference getTargetAttributeCrossReference_3_0() { return cTargetAttributeCrossReference_3_0; }
+		public CrossReference getTargetAttributeCrossReference_1_0() { return cTargetAttributeCrossReference_1_0; }
 		
 		//ID
-		public RuleCall getTargetAttributeIDTerminalRuleCall_3_0_1() { return cTargetAttributeIDTerminalRuleCall_3_0_1; }
+		public RuleCall getTargetAttributeIDTerminalRuleCall_1_0_1() { return cTargetAttributeIDTerminalRuleCall_1_0_1; }
 		
 		//'is'
-		public Keyword getIsKeyword_4() { return cIsKeyword_4; }
+		public Keyword getIsKeyword_2() { return cIsKeyword_2; }
 		
 		//sum=Sum
-		public Assignment getSumAssignment_5() { return cSumAssignment_5; }
+		public Assignment getSumAssignment_3() { return cSumAssignment_3; }
 		
 		//Sum
-		public RuleCall getSumSumParserRuleCall_5_0() { return cSumSumParserRuleCall_5_0; }
+		public RuleCall getSumSumParserRuleCall_3_0() { return cSumSumParserRuleCall_3_0; }
 	}
 	public class EntitiesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Entities");
@@ -1845,7 +1849,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Rule:
-	//	'if' or=ORcondition 'then' target=[Attribute] 'is' sum=Sum;
+	//	('if' or=ORcondition 'then')? target=[Attribute] 'is' sum=Sum;
 	public RuleElements getRuleAccess() {
 		return pRule;
 	}

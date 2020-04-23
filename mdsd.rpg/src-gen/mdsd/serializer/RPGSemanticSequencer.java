@@ -869,22 +869,10 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Rule returns Rule
 	 *
 	 * Constraint:
-	 *     (or=ORcondition target=[Attribute|ID] sum=Sum)
+	 *     (or=ORcondition? target=[Attribute|ID] sum=Sum)
 	 */
 	protected void sequence_Rule(ISerializationContext context, Rule semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.RULE__OR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.RULE__OR));
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.RULE__TARGET) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.RULE__TARGET));
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.RULE__SUM) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.RULE__SUM));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getRuleAccess().getOrORconditionParserRuleCall_1_0(), semanticObject.getOr());
-		feeder.accept(grammarAccess.getRuleAccess().getTargetAttributeIDTerminalRuleCall_3_0_1(), semanticObject.eGet(RPGPackage.Literals.RULE__TARGET, false));
-		feeder.accept(grammarAccess.getRuleAccess().getSumSumParserRuleCall_5_0(), semanticObject.getSum());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

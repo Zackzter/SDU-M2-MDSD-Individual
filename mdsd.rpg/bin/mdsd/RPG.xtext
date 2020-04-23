@@ -93,7 +93,7 @@ AltAttribute:
 ;
 
 Rule:
-	'if' or = ORcondition 'then' target=[Attribute] 'is' sum=Sum
+	('if' or = ORcondition 'then')? target=[Attribute] 'is' sum=Sum
 ;
 
 Entities:

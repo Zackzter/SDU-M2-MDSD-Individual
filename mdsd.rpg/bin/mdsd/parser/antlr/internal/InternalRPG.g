@@ -1360,33 +1360,35 @@ ruleRule returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='if'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getRuleAccess().getIfKeyword_0());
-		}
 		(
+			otherlv_0='if'
+			{
+				newLeafNode(otherlv_0, grammarAccess.getRuleAccess().getIfKeyword_0_0());
+			}
 			(
-				{
-					newCompositeNode(grammarAccess.getRuleAccess().getOrORconditionParserRuleCall_1_0());
-				}
-				lv_or_1_0=ruleORcondition
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getRuleRule());
+				(
+					{
+						newCompositeNode(grammarAccess.getRuleAccess().getOrORconditionParserRuleCall_0_1_0());
 					}
-					set(
-						$current,
-						"or",
-						lv_or_1_0,
-						"mdsd.RPG.ORcondition");
-					afterParserOrEnumRuleCall();
-				}
+					lv_or_1_0=ruleORcondition
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getRuleRule());
+						}
+						set(
+							$current,
+							"or",
+							lv_or_1_0,
+							"mdsd.RPG.ORcondition");
+						afterParserOrEnumRuleCall();
+					}
+				)
 			)
-		)
-		otherlv_2='then'
-		{
-			newLeafNode(otherlv_2, grammarAccess.getRuleAccess().getThenKeyword_2());
-		}
+			otherlv_2='then'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getRuleAccess().getThenKeyword_0_2());
+			}
+		)?
 		(
 			(
 				{
@@ -1396,18 +1398,18 @@ ruleRule returns [EObject current=null]
 				}
 				otherlv_3=RULE_ID
 				{
-					newLeafNode(otherlv_3, grammarAccess.getRuleAccess().getTargetAttributeCrossReference_3_0());
+					newLeafNode(otherlv_3, grammarAccess.getRuleAccess().getTargetAttributeCrossReference_1_0());
 				}
 			)
 		)
 		otherlv_4='is'
 		{
-			newLeafNode(otherlv_4, grammarAccess.getRuleAccess().getIsKeyword_4());
+			newLeafNode(otherlv_4, grammarAccess.getRuleAccess().getIsKeyword_2());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getRuleAccess().getSumSumParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getRuleAccess().getSumSumParserRuleCall_3_0());
 				}
 				lv_sum_5_0=ruleSum
 				{
