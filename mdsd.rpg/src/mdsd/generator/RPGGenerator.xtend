@@ -57,24 +57,24 @@ class RPGGenerator extends AbstractGenerator {
 	
 	def main(SystemRPG systemRPG, IFileSystemAccess2 fsa){	
 		val classFileName = systemRPG.getName() 
-		for (Declaration decleration : systemRPG.getDeclarations()){
-			switch(decleration){
+		for (Declaration declaration : systemRPG.getDeclarations()){
+			switch(declaration){
 				Locations:
-					generateLocations(fsa, decleration)
+					generateLocations(fsa, declaration)
 				Relations:
-					generateTypes(fsa, decleration)
+					generateTypes(fsa, declaration)
 				Moves:
-					generateMoves(fsa, decleration)
+					generateMoves(fsa, declaration)
 				Entities:
-					generateEntities(fsa, decleration)
+					generateEntities(fsa, declaration)
 				Teams:
-					generateTeams(fsa, decleration)
+					generateTeams(fsa, declaration)
 				Attributes:
-					generateAttributes(fsa, decleration)
+					generateAttributes(fsa, declaration)
 				Death:
-					fsa.generateFile("DeathChecker.java", decleration.generateDeathChecker)
+					fsa.generateFile("DeathChecker.java", declaration.generateDeathChecker)
 				Effects:
-					generateEffectFiles(fsa, decleration)
+					generateEffectFiles(fsa, declaration)
 				default:
 					System.out.println("This is not a supported instance of Declaration")
 			}

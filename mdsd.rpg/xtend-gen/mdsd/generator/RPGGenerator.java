@@ -74,52 +74,52 @@ public class RPGGenerator extends AbstractGenerator {
   public void main(final SystemRPG systemRPG, final IFileSystemAccess2 fsa) {
     final String classFileName = systemRPG.getName();
     EList<Declaration> _declarations = systemRPG.getDeclarations();
-    for (final Declaration decleration : _declarations) {
+    for (final Declaration declaration : _declarations) {
       boolean _matched = false;
-      if (decleration instanceof Locations) {
+      if (declaration instanceof Locations) {
         _matched=true;
-        this.generateLocations(fsa, ((Locations)decleration));
+        this.generateLocations(fsa, ((Locations)declaration));
       }
       if (!_matched) {
-        if (decleration instanceof Relations) {
+        if (declaration instanceof Relations) {
           _matched=true;
-          this.generateTypes(fsa, ((Relations)decleration));
+          this.generateTypes(fsa, ((Relations)declaration));
         }
       }
       if (!_matched) {
-        if (decleration instanceof Moves) {
+        if (declaration instanceof Moves) {
           _matched=true;
-          this.generateMoves(fsa, ((Moves)decleration));
+          this.generateMoves(fsa, ((Moves)declaration));
         }
       }
       if (!_matched) {
-        if (decleration instanceof Entities) {
+        if (declaration instanceof Entities) {
           _matched=true;
-          this.generateEntities(fsa, ((Entities)decleration));
+          this.generateEntities(fsa, ((Entities)declaration));
         }
       }
       if (!_matched) {
-        if (decleration instanceof Teams) {
+        if (declaration instanceof Teams) {
           _matched=true;
-          this.generateTeams(fsa, ((Teams)decleration));
+          this.generateTeams(fsa, ((Teams)declaration));
         }
       }
       if (!_matched) {
-        if (decleration instanceof Attributes) {
+        if (declaration instanceof Attributes) {
           _matched=true;
-          this.generateAttributes(fsa, ((Attributes)decleration));
+          this.generateAttributes(fsa, ((Attributes)declaration));
         }
       }
       if (!_matched) {
-        if (decleration instanceof Death) {
+        if (declaration instanceof Death) {
           _matched=true;
-          fsa.generateFile("DeathChecker.java", this.generateDeathChecker(((Death)decleration)));
+          fsa.generateFile("DeathChecker.java", this.generateDeathChecker(((Death)declaration)));
         }
       }
       if (!_matched) {
-        if (decleration instanceof Effects) {
+        if (declaration instanceof Effects) {
           _matched=true;
-          this.generateEffectFiles(fsa, ((Effects)decleration));
+          this.generateEffectFiles(fsa, ((Effects)declaration));
         }
       }
       if (!_matched) {
