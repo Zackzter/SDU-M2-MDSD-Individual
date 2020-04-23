@@ -38,6 +38,8 @@ public class RPGValidator extends AbstractRPGValidator {
 	public static final String MISSING_DECLARATION = "missingDeclaration";
 	public static final String DUPLICATED_DECLARATION = "duplicatedDeclaration";
 	public static final String EMPTY_ENTTIY_ATTRIBUTES = "emptyEntityAttributes";
+	public static final String INCORRECT_TEAM_COUNT = "incorrectTeamCount";
+	
 //
 //	@Check
 //	public void checkGreetingStartsWithCapital(Greeting greeting) {
@@ -209,6 +211,13 @@ public class RPGValidator extends AbstractRPGValidator {
 		
 		
 		
+	}
+	
+	@Check
+	public void checkTeamSize(Teams teams) {
+		if(teams.getTeam().size() < 2) {
+			warning("There is currently only one team, you will instantly win with no opponents.", RPGPackage.Literals.TEAMS__TEAM, INCORRECT_TEAM_COUNT);
+		}
 	}
 
 	
