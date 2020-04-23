@@ -50,6 +50,7 @@ import mdsd.rPG.SystemRPG;
 import mdsd.rPG.Team;
 import mdsd.rPG.Teams;
 import mdsd.rPG.Type;
+import mdsd.rPG.TypeExpression;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -66,11 +67,11 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 public class RPGGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
-    final SystemRPG mathLul = Iterators.<SystemRPG>filter(resource.getAllContents(), SystemRPG.class).next();
-    this.god(mathLul, fsa);
+    final SystemRPG result = Iterators.<SystemRPG>filter(resource.getAllContents(), SystemRPG.class).next();
+    this.main(result, fsa);
   }
   
-  public void god(final SystemRPG thing, final IFileSystemAccess2 fsa) {
+  public void main(final SystemRPG systemRPG, final IFileSystemAccess2 fsa) {
     boolean locationbool = false;
     boolean relationbool = false;
     boolean movesbool = false;
@@ -79,86 +80,86 @@ public class RPGGenerator extends AbstractGenerator {
     boolean attributesbool = false;
     boolean deathbool = false;
     boolean effectbool = false;
-    final String classFileName = thing.getName();
-    EList<Declaration> _declarations = thing.getDeclarations();
-    for (final Declaration d : _declarations) {
+    final String classFileName = systemRPG.getName();
+    EList<Declaration> _declarations = systemRPG.getDeclarations();
+    for (final Declaration decleration : _declarations) {
       boolean _matched = false;
-      if (d instanceof Locations) {
+      if (decleration instanceof Locations) {
         _matched=true;
         if ((!locationbool)) {
-          this.generateLocations(fsa, ((Locations)d));
+          this.generateLocations(fsa, ((Locations)decleration));
           locationbool = true;
         }
       }
       if (!_matched) {
-        if (d instanceof Relations) {
+        if (decleration instanceof Relations) {
           _matched=true;
           if ((!relationbool)) {
-            this.generateTypes(fsa, ((Relations)d));
+            this.generateTypes(fsa, ((Relations)decleration));
             relationbool = true;
           }
         }
       }
       if (!_matched) {
-        if (d instanceof Moves) {
+        if (decleration instanceof Moves) {
           _matched=true;
           if ((!movesbool)) {
-            this.generateMoves(fsa, ((Moves)d));
+            this.generateMoves(fsa, ((Moves)decleration));
             movesbool = true;
           }
         }
       }
       if (!_matched) {
-        if (d instanceof Entities) {
+        if (decleration instanceof Entities) {
           _matched=true;
           if ((!entitiesbool)) {
-            this.generateEntities(fsa, ((Entities)d));
+            this.generateEntities(fsa, ((Entities)decleration));
             entitiesbool = true;
           }
         }
       }
       if (!_matched) {
-        if (d instanceof Teams) {
+        if (decleration instanceof Teams) {
           _matched=true;
           if ((!teamsbool)) {
-            this.generateTeams(fsa, ((Teams)d));
+            this.generateTeams(fsa, ((Teams)decleration));
             teamsbool = true;
           }
         }
       }
       if (!_matched) {
-        if (d instanceof Attributes) {
+        if (decleration instanceof Attributes) {
           _matched=true;
           if ((!attributesbool)) {
-            this.generateAttributes(fsa, ((Attributes)d));
+            this.generateAttributes(fsa, ((Attributes)decleration));
             attributesbool = true;
           }
         }
       }
       if (!_matched) {
-        if (d instanceof Death) {
+        if (decleration instanceof Death) {
           _matched=true;
           if ((!deathbool)) {
-            fsa.generateFile("DeathChecker.java", this.generateDeathChecker(((Death)d)));
+            fsa.generateFile("DeathChecker.java", this.generateDeathChecker(((Death)decleration)));
             deathbool = true;
           }
         }
       }
       if (!_matched) {
-        if (d instanceof Effects) {
+        if (decleration instanceof Effects) {
           _matched=true;
           System.out.println("Hello");
           if ((!effectbool)) {
-            this.generateEffectFiles(fsa, ((Effects)d));
+            this.generateEffectFiles(fsa, ((Effects)decleration));
             effectbool = true;
           }
         }
       }
       if (!_matched) {
-        System.out.println("reported");
+        System.out.println("This is not a supported instance of Decleration");
       }
     }
-    fsa.generateFile((classFileName + ".java"), this.generateGamePOG2(classFileName));
+    fsa.generateFile((classFileName + ".java"), this.generateGame(classFileName));
     fsa.generateFile("Runner.java", this.generateRunner(classFileName));
   }
   
@@ -244,7 +245,7 @@ public class RPGGenerator extends AbstractGenerator {
     return _builder;
   }
   
-  public CharSequence generateGamePOG2(final String classFileName) {
+  public CharSequence generateGame(final String classFileName) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*;");
     _builder.newLine();
@@ -1800,8 +1801,8 @@ public class RPGGenerator extends AbstractGenerator {
           EList<AltAttribute> _att = entity.getAtt();
           for(final AltAttribute att : _att) {
             {
-              Number _numberFromAtomicDab = this.getNumberFromAtomicDab(att.getAv().getAn());
-              if ((_numberFromAtomicDab instanceof Number)) {
+              Number _numberFromAtomic = this.getNumberFromAtomic(att.getAv().getAn());
+              if ((_numberFromAtomic instanceof Number)) {
                 _builder.append("\t\t");
                 String _lowerCase_4 = entity.getName().toLowerCase();
                 _builder.append(_lowerCase_4, "\t\t");
@@ -1809,8 +1810,8 @@ public class RPGGenerator extends AbstractGenerator {
                 String _name_3 = att.getAttribute().getName();
                 _builder.append(_name_3, "\t\t");
                 _builder.append("\", ");
-                Number _numberFromAtomicDab_1 = this.getNumberFromAtomicDab(att.getAv().getAn());
-                _builder.append(_numberFromAtomicDab_1, "\t\t");
+                Number _numberFromAtomic_1 = this.getNumberFromAtomic(att.getAv().getAn());
+                _builder.append(_numberFromAtomic_1, "\t\t");
                 _builder.append("));");
                 _builder.newLineIfNotEmpty();
               }
@@ -1834,10 +1835,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.newLine();
     return _builder;
-  }
-  
-  public CharSequence generateKillable(final Death death) {
-    return null;
   }
   
   public CharSequence new_re(final Require req) {
@@ -2009,7 +2006,7 @@ public class RPGGenerator extends AbstractGenerator {
             String _plus_7 = (_plus_6 + "\"");
             _xifexpression_3 = (_plus_7 + ").floatValue()");
           } else {
-            _xifexpression_3 = "Shit son";
+            _xifexpression_3 = "Something went wrong";
           }
           _xifexpression_2 = _xifexpression_3;
         }
@@ -2020,11 +2017,11 @@ public class RPGGenerator extends AbstractGenerator {
     return _xifexpression;
   }
   
-  protected Number _getNumberFromAtomicDab(final IntNum x) {
+  protected Number _getNumberFromAtomic(final IntNum x) {
     return Integer.valueOf(x.getValue());
   }
   
-  protected Number _getNumberFromAtomicDab(final FloatNum x) {
+  protected Number _getNumberFromAtomic(final FloatNum x) {
     Float _xblockexpression = null;
     {
       int _i = x.getI();
@@ -2713,15 +2710,15 @@ public class RPGGenerator extends AbstractGenerator {
           EList<AltAttribute> _att = move.getAtt();
           for(final AltAttribute att : _att) {
             {
-              Number _numberFromAtomicDab = this.getNumberFromAtomicDab(att.getAv().getAn());
-              if ((_numberFromAtomicDab instanceof Number)) {
+              Number _numberFromAtomic = this.getNumberFromAtomic(att.getAv().getAn());
+              if ((_numberFromAtomic instanceof Number)) {
                 _builder.append("\t\t");
                 _builder.append("tempMoveData.addAttribute(new AttributeData(\"");
                 String _name_2 = att.getAttribute().getName();
                 _builder.append(_name_2, "\t\t");
                 _builder.append("\", ");
-                Number _numberFromAtomicDab_1 = this.getNumberFromAtomicDab(att.getAv().getAn());
-                _builder.append(_numberFromAtomicDab_1, "\t\t");
+                Number _numberFromAtomic_1 = this.getNumberFromAtomic(att.getAv().getAn());
+                _builder.append(_numberFromAtomic_1, "\t\t");
                 _builder.append("));");
                 _builder.newLineIfNotEmpty();
               }
@@ -3175,38 +3172,44 @@ public class RPGGenerator extends AbstractGenerator {
         _builder.append(_name, "\t\t");
         _builder.append("\";");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("tr.addStrongAgainst(\"");
-        String _name_1 = t.getTExpression().getStrong().getName();
-        _builder.append(_name_1, "\t\t");
-        _builder.append("\");");
-        _builder.newLineIfNotEmpty();
         {
-          EList<Type> _strong2 = t.getTExpression().getStrong2();
-          for(final Type better : _strong2) {
+          TypeExpression _tExpression = t.getTExpression();
+          boolean _tripleNotEquals = (_tExpression != null);
+          if (_tripleNotEquals) {
             _builder.append("\t\t");
             _builder.append("tr.addStrongAgainst(\"");
-            String _name_2 = better.getName();
-            _builder.append(_name_2, "\t\t");
+            String _name_1 = t.getTExpression().getStrong().getName();
+            _builder.append(_name_1, "\t\t");
             _builder.append("\");");
             _builder.newLineIfNotEmpty();
-          }
-        }
-        _builder.append("\t\t");
-        _builder.append("tr.addWeakAgainst(\"");
-        String _name_3 = t.getTExpression().getWeak().getName();
-        _builder.append(_name_3, "\t\t");
-        _builder.append("\");");
-        _builder.newLineIfNotEmpty();
-        {
-          EList<Type> _weak2 = t.getTExpression().getWeak2();
-          for(final Type worse : _weak2) {
+            {
+              EList<Type> _strong2 = t.getTExpression().getStrong2();
+              for(final Type better : _strong2) {
+                _builder.append("\t\t");
+                _builder.append("tr.addStrongAgainst(\"");
+                String _name_2 = better.getName();
+                _builder.append(_name_2, "\t\t");
+                _builder.append("\");");
+                _builder.newLineIfNotEmpty();
+              }
+            }
             _builder.append("\t\t");
             _builder.append("tr.addWeakAgainst(\"");
-            String _name_4 = worse.getName();
-            _builder.append(_name_4, "\t\t");
+            String _name_3 = t.getTExpression().getWeak().getName();
+            _builder.append(_name_3, "\t\t");
             _builder.append("\");");
             _builder.newLineIfNotEmpty();
+            {
+              EList<Type> _weak2 = t.getTExpression().getWeak2();
+              for(final Type worse : _weak2) {
+                _builder.append("\t\t");
+                _builder.append("tr.addWeakAgainst(\"");
+                String _name_4 = worse.getName();
+                _builder.append(_name_4, "\t\t");
+                _builder.append("\");");
+                _builder.newLineIfNotEmpty();
+              }
+            }
           }
         }
         _builder.append("\t\t");
@@ -3364,11 +3367,11 @@ public class RPGGenerator extends AbstractGenerator {
     }
   }
   
-  public Number getNumberFromAtomicDab(final AtomicNumber x) {
+  public Number getNumberFromAtomic(final AtomicNumber x) {
     if (x instanceof FloatNum) {
-      return _getNumberFromAtomicDab((FloatNum)x);
+      return _getNumberFromAtomic((FloatNum)x);
     } else if (x instanceof IntNum) {
-      return _getNumberFromAtomicDab((IntNum)x);
+      return _getNumberFromAtomic((IntNum)x);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(x).toString());

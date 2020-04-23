@@ -113,9 +113,7 @@
     <genClasses ecoreClass="RPG.ecore#//Require">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Require/log"/>
     </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//Proposition">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//Proposition/type"/>
-    </genClasses>
+    <genClasses ecoreClass="RPG.ecore#//Proposition"/>
     <genClasses ecoreClass="RPG.ecore#//NumberComparing">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//NumberComparing/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//NumberComparing/comp"/>

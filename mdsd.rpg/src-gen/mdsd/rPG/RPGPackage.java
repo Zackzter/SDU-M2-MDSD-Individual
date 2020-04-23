@@ -1161,22 +1161,13 @@ public interface RPGPackage extends EPackage
   int PROPOSITION = 31;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PROPOSITION__TYPE = 0;
-
-  /**
    * The number of structural features of the '<em>Proposition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PROPOSITION_FEATURE_COUNT = 1;
+  int PROPOSITION_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.NumberComparingImpl <em>Number Comparing</em>}' class.
@@ -1187,15 +1178,6 @@ public interface RPGPackage extends EPackage
    * @generated
    */
   int NUMBER_COMPARING = 32;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NUMBER_COMPARING__TYPE = PROPOSITION__TYPE;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1413,15 +1395,6 @@ public interface RPGPackage extends EPackage
   int OR = 40;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OR__TYPE = PROPOSITION__TYPE;
-
-  /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1457,15 +1430,6 @@ public interface RPGPackage extends EPackage
    * @generated
    */
   int AND = 41;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int AND__TYPE = PROPOSITION__TYPE;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2617,17 +2581,6 @@ public interface RPGPackage extends EPackage
   EClass getProposition();
 
   /**
-   * Returns the meta object for the reference '{@link mdsd.rPG.Proposition#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Type</em>'.
-   * @see mdsd.rPG.Proposition#getType()
-   * @see #getProposition()
-   * @generated
-   */
-  EReference getProposition_Type();
-
-  /**
    * Returns the meta object for class '{@link mdsd.rPG.NumberComparing <em>Number Comparing</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3770,14 +3723,6 @@ public interface RPGPackage extends EPackage
      * @generated
      */
     EClass PROPOSITION = eINSTANCE.getProposition();
-
-    /**
-     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PROPOSITION__TYPE = eINSTANCE.getProposition_Type();
 
     /**
      * The meta object literal for the '{@link mdsd.rPG.impl.NumberComparingImpl <em>Number Comparing</em>}' class.

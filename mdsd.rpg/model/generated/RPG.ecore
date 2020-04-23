@@ -136,9 +136,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="log" eType="#//Proposition"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Proposition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Proposition"/>
   <eClassifiers xsi:type="ecore:EClass" name="NumberComparing" eSuperTypes="#//Proposition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Sum" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="comp" eType="#//Comparator"
