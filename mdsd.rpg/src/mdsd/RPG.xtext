@@ -113,7 +113,7 @@ EntityMoves:
 ;
 
 Teams:
-	'teams' Require? team+=Team+
+	'teams' team+=Team+
 ;
 
 Team:
