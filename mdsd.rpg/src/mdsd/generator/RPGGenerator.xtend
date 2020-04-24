@@ -754,7 +754,7 @@ class RPGGenerator extends AbstractGenerator {
 				«entity.name.toLowerCase».addMoveData(Move.getInstance().getMove("«move.name»"));
 				«ENDFOR»
 				«FOR att : entity.att»
-				«entity.name.toLowerCase».addAttribute(new AttributeData("«att.attribute.name»", «getNumberFromAtomic(att.av.an)»));
+				«entity.name.toLowerCase».addAttribute(new AttributeData("«att.attribute.name»", «getNumberValue(att.av.an)»));
 				«ENDFOR»
 				entities.add(«entity.name.toLowerCase»);
 				«ENDFOR»
@@ -814,10 +814,10 @@ class RPGGenerator extends AbstractGenerator {
 		}
 	}
 	
-	def dispatch Number getNumberFromAtomic(IntNum x){
+	def dispatch Number getNumberValue(IntNum x){
 		x.value
 	}
-	def dispatch Number getNumberFromAtomic(FloatNum x){
+	def dispatch Number getNumberValue(FloatNum x){
 		val floatstring = x.i + "." + x.decimal
 		Float.valueOf(floatstring)
 	}
@@ -1114,7 +1114,7 @@ class RPGGenerator extends AbstractGenerator {
 				tempMoveData.setMoveName("«move.name»");
 				tempMoveData.setType("«move.EType.type.name»");
 				«FOR att : move.att»
-				tempMoveData.addAttribute(new AttributeData("«att.attribute.name»", «getNumberFromAtomic(att.av.an)»));
+				tempMoveData.addAttribute(new AttributeData("«att.attribute.name»", «getNumberValue(att.av.an)»));
 				«ENDFOR»
 				«FOR moveEffect : move.MEffect»
 				«IF moveEffect !== null»

@@ -1798,8 +1798,8 @@ public class RPGGenerator extends AbstractGenerator {
             String _name_3 = att.getAttribute().getName();
             _builder.append(_name_3, "\t\t");
             _builder.append("\", ");
-            Number _numberFromAtomic = this.getNumberFromAtomic(att.getAv().getAn());
-            _builder.append(_numberFromAtomic, "\t\t");
+            Number _numberValue = this.getNumberValue(att.getAv().getAn());
+            _builder.append(_numberValue, "\t\t");
             _builder.append("));");
             _builder.newLineIfNotEmpty();
           }
@@ -2003,11 +2003,11 @@ public class RPGGenerator extends AbstractGenerator {
     return _xifexpression;
   }
   
-  protected Number _getNumberFromAtomic(final IntNum x) {
+  protected Number _getNumberValue(final IntNum x) {
     return Integer.valueOf(x.getValue());
   }
   
-  protected Number _getNumberFromAtomic(final FloatNum x) {
+  protected Number _getNumberValue(final FloatNum x) {
     Float _xblockexpression = null;
     {
       int _i = x.getI();
@@ -2700,8 +2700,8 @@ public class RPGGenerator extends AbstractGenerator {
             String _name_2 = att.getAttribute().getName();
             _builder.append(_name_2, "\t\t");
             _builder.append("\", ");
-            Number _numberFromAtomic = this.getNumberFromAtomic(att.getAv().getAn());
-            _builder.append(_numberFromAtomic, "\t\t");
+            Number _numberValue = this.getNumberValue(att.getAv().getAn());
+            _builder.append(_numberValue, "\t\t");
             _builder.append("));");
             _builder.newLineIfNotEmpty();
           }
@@ -3348,11 +3348,11 @@ public class RPGGenerator extends AbstractGenerator {
     }
   }
   
-  public Number getNumberFromAtomic(final ActualNumbers x) {
+  public Number getNumberValue(final ActualNumbers x) {
     if (x instanceof FloatNum) {
-      return _getNumberFromAtomic((FloatNum)x);
+      return _getNumberValue((FloatNum)x);
     } else if (x instanceof IntNum) {
-      return _getNumberFromAtomic((IntNum)x);
+      return _getNumberValue((IntNum)x);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(x).toString());
