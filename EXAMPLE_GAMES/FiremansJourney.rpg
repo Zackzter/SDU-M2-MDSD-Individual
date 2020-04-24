@@ -1,0 +1,63 @@
+game FireFighter  
+
+attributes
+	attribute lose is Integer
+	attribute damage is Integer
+	attribute water_proof is Integer
+
+relations
+	type Human
+	type Environment
+
+death
+	require(lose >= 3)
+
+moves
+	move water_hose
+		type Environment
+		attribute damage is 1
+		effect move Water
+	move chemical_fire_extinguisher
+		type Environment
+		attribute damage is 2
+		effect move Extinguish
+	move fire
+		type Environment
+		attribute damage is 1
+		effect move Hot
+
+entities
+	entity Fireman
+		type Human
+		attribute lose is 0
+		attribute water_proof is 0
+		move water_hose chemical_fire_extinguisher
+
+	entity Flaming_Tree
+		type Environment
+		attribute lose is 0
+		attribute water_proof is 0
+		move fire
+		
+	entity Flaming_Pan
+		type Environment
+		attribute lose is 0
+		attribute water_proof is 1
+		move fire
+
+teams
+	team fireman members Fireman
+	team tree members Flaming_Tree
+	team pan members Flaming_Pan
+
+location
+	Forest opponents tree
+	Home opponents pan
+
+effects
+	effect move Water
+		if water_proof == 0 then lose is lose+damage*3
+	effect move Extinguish
+		lose is lose+damage
+	effect move Hot
+		lose is lose+damage

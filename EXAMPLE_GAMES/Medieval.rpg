@@ -1,0 +1,125 @@
+game ChampsOfNorth
+location Denmark opponents Crusaders
+relations 
+	type Viking
+		Priest, Archer < Viking < Warrior
+	type Priest
+		Archer < Priest< Viking, Warrior
+	type Archer
+		Viking < Archer < Priest
+	type Warrior
+		 Viking < Warrior < Archer
+	type Undead
+		 Warrior< Undead < Priest
+
+
+attributes
+	attribute power is Integer
+	attribute max_health is Integer
+	attribute cost is Integer
+	attribute speed is Integer
+	attribute current_health is Integer
+	attribute current_energy is Integer
+	attribute anger is Float
+	
+death require current_health <= 0
+
+effects
+	effect move Damage
+	if cost <= current_energy then current_health is current_health - power
+	
+	effect buff Heal
+	if cost <= current_energy then current_health is current_health + power
+
+	effect buff Anger
+	if current_health <= max_health / 2 then power is power*2
+	
+	effect move Slow
+	if cost <= current_energy then speed is speed - 1
+	
+	effect after ReduceEnergy
+	if cost <= current_energy then current_energy is current_energy - cost 
+
+moves 
+	move Axe_Throw
+		type Viking
+		attribute cost is 100
+		attribute power is 50
+		
+		effect buff Anger
+		effect move Slow
+		effect move Damage
+		effect after ReduceEnergy 
+			 
+	move Praise  
+		type Priest 
+		attribute cost is 50 
+		attribute power is 30 
+	
+		effect buff Heal
+		effect after ReduceEnergy 
+		
+	move Arrow_Rain 
+		type Priest
+		attribute power is 20
+		attribute cost is 65
+	
+		effect move Damage
+		effect after ReduceEnergy
+			
+	move Slash
+		type Warrior
+		attribute power is 20
+		attribute cost is 10
+
+		effect move Damage
+		effect after ReduceEnergy
+		
+	move Stab
+		type Warrior 
+		attribute power is 10
+		attribute cost is 5
+	
+		effect move Damage
+		effect after ReduceEnergy
+
+entities 
+	entity Bluetooth 
+		type Viking 
+		attribute current_health is 500
+		attribute current_energy is 500
+		attribute max_health is 500
+		attribute speed is 5 
+		move Axe_Throw
+	
+	entity Dio
+		type Priest
+		attribute current_health is 500
+		attribute current_energy is 500
+		attribute max_health is 500
+		attribute speed is 7
+		move Praise Stab
+	
+	entity Karl
+		type Archer
+		attribute current_health is 500
+		attribute current_energy is 500
+		attribute max_health is 500	
+		attribute speed is 15
+		move Arrow_Rain
+	
+	entity Lewis
+		type Warrior
+		attribute current_health is 500
+		attribute current_energy is 500
+		attribute max_health is 500		
+		attribute speed is 10
+		move Slash Stab
+		
+	
+
+teams
+	team Northen_Squad
+		members Bluetooth Karl
+	team Crusaders 
+		members Dio Lewis

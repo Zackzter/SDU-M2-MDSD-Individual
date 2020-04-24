@@ -1,0 +1,78 @@
+game Pokemond                                 
+location Johtoz opponents Rival
+ 
+relations
+	type fire  
+		grass, bug < fire < water, bug
+	type grass
+		water < grass < fire, bug
+	type water
+		fire < water < grass 
+	type bug
+		grass < bug < fire
+     
+attributes
+	attribute pp is Integer  
+	attribute power is Integer 
+	attribute current_hp is Integer
+	attribute speed is Integer
+	attribute max_hp is Integer
+	attribute cost is Integer
+            
+death require current_hp <= 0.1
+
+effects
+	effect move Damage 
+	if cost <= pp then current_hp is current_hp-power
+	
+	effect after ReduceMana
+	if cost <= pp then pp is pp - 1
+	
+	effect buff PowerUp
+	if current_hp < max_hp / 2 then power is power * 2
+	
+moves
+	move Ember type fire
+		attribute power is 1
+		
+		effect move Damage
+		effect after ReduceMana
+		effect buff PowerUp
+
+	move Water_Gun type water      
+		attribute power is 1
+		
+		effect after ReduceMana
+		effect move Damage
+
+	move Razor_Leaf	type grass
+		attribute power is 55
+		
+		effect move Damage
+		effect after ReduceMana
+
+entities
+	entity Zyndaquil type fire
+		attribute max_hp is 225
+        attribute current_hp is 225
+        attribute pp is 25
+		move Ember Water_Gun
+
+	entity Zotodile	type water
+		attribute max_hp is 200
+        attribute current_hp is 200
+        attribute pp is 25
+		move Water_Gun
+
+	entity Zhikorita type grass
+		attribute max_hp is 250
+        attribute current_hp is 250
+        attribute pp is 25
+		move Razor_Leaf
+	
+
+teams
+	team Zilver
+		members Zyndaquil
+	team Rival 
+		members Zotodile Zhikorita
