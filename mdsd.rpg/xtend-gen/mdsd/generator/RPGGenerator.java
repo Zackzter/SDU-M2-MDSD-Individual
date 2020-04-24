@@ -1791,22 +1791,17 @@ public class RPGGenerator extends AbstractGenerator {
         {
           EList<AltAttribute> _att = entity.getAtt();
           for(final AltAttribute att : _att) {
-            {
-              Number _numberFromAtomic = this.getNumberFromAtomic(att.getAv().getAn());
-              if ((_numberFromAtomic instanceof Number)) {
-                _builder.append("\t\t");
-                String _lowerCase_4 = entity.getName().toLowerCase();
-                _builder.append(_lowerCase_4, "\t\t");
-                _builder.append(".addAttribute(new AttributeData(\"");
-                String _name_3 = att.getAttribute().getName();
-                _builder.append(_name_3, "\t\t");
-                _builder.append("\", ");
-                Number _numberFromAtomic_1 = this.getNumberFromAtomic(att.getAv().getAn());
-                _builder.append(_numberFromAtomic_1, "\t\t");
-                _builder.append("));");
-                _builder.newLineIfNotEmpty();
-              }
-            }
+            _builder.append("\t\t");
+            String _lowerCase_4 = entity.getName().toLowerCase();
+            _builder.append(_lowerCase_4, "\t\t");
+            _builder.append(".addAttribute(new AttributeData(\"");
+            String _name_3 = att.getAttribute().getName();
+            _builder.append(_name_3, "\t\t");
+            _builder.append("\", ");
+            Number _numberFromAtomic = this.getNumberFromAtomic(att.getAv().getAn());
+            _builder.append(_numberFromAtomic, "\t\t");
+            _builder.append("));");
+            _builder.newLineIfNotEmpty();
           }
         }
         _builder.append("\t\t");
@@ -2700,20 +2695,15 @@ public class RPGGenerator extends AbstractGenerator {
         {
           EList<AltAttribute> _att = move.getAtt();
           for(final AltAttribute att : _att) {
-            {
-              Number _numberFromAtomic = this.getNumberFromAtomic(att.getAv().getAn());
-              if ((_numberFromAtomic instanceof Number)) {
-                _builder.append("\t\t");
-                _builder.append("tempMoveData.addAttribute(new AttributeData(\"");
-                String _name_2 = att.getAttribute().getName();
-                _builder.append(_name_2, "\t\t");
-                _builder.append("\", ");
-                Number _numberFromAtomic_1 = this.getNumberFromAtomic(att.getAv().getAn());
-                _builder.append(_numberFromAtomic_1, "\t\t");
-                _builder.append("));");
-                _builder.newLineIfNotEmpty();
-              }
-            }
+            _builder.append("\t\t");
+            _builder.append("tempMoveData.addAttribute(new AttributeData(\"");
+            String _name_2 = att.getAttribute().getName();
+            _builder.append(_name_2, "\t\t");
+            _builder.append("\", ");
+            Number _numberFromAtomic = this.getNumberFromAtomic(att.getAv().getAn());
+            _builder.append(_numberFromAtomic, "\t\t");
+            _builder.append("));");
+            _builder.newLineIfNotEmpty();
           }
         }
         {

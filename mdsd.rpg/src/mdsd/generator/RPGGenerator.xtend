@@ -754,9 +754,7 @@ class RPGGenerator extends AbstractGenerator {
 				«entity.name.toLowerCase».addMoveData(Move.getInstance().getMove("«move.name»"));
 				«ENDFOR»
 				«FOR att : entity.att»
-				«IF getNumberFromAtomic(att.av.an) instanceof Number»
 				«entity.name.toLowerCase».addAttribute(new AttributeData("«att.attribute.name»", «getNumberFromAtomic(att.av.an)»));
-				«ENDIF»
 				«ENDFOR»
 				entities.add(«entity.name.toLowerCase»);
 				«ENDFOR»
@@ -1116,9 +1114,7 @@ class RPGGenerator extends AbstractGenerator {
 				tempMoveData.setMoveName("«move.name»");
 				tempMoveData.setType("«move.EType.type.name»");
 				«FOR att : move.att»
-				«IF getNumberFromAtomic(att.av.an) instanceof Number»
 				tempMoveData.addAttribute(new AttributeData("«att.attribute.name»", «getNumberFromAtomic(att.av.an)»));
-				«ENDIF»
 				«ENDFOR»
 				«FOR moveEffect : move.MEffect»
 				«IF moveEffect !== null»
