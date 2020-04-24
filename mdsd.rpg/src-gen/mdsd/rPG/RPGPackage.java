@@ -1283,6 +1283,25 @@ public interface RPGPackage extends EPackage
   int ATOMIC_NUMBER_FEATURE_COUNT = MULTIPLY_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link mdsd.rPG.impl.ActualNumbersImpl <em>Actual Numbers</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see mdsd.rPG.impl.ActualNumbersImpl
+   * @see mdsd.rPG.impl.RPGPackageImpl#getActualNumbers()
+   * @generated
+   */
+  int ACTUAL_NUMBERS = 37;
+
+  /**
+   * The number of structural features of the '<em>Actual Numbers</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTUAL_NUMBERS_FEATURE_COUNT = ATOMIC_NUMBER_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link mdsd.rPG.impl.NameAttributeImpl <em>Name Attribute</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1290,7 +1309,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getNameAttribute()
    * @generated
    */
-  int NAME_ATTRIBUTE = 37;
+  int NAME_ATTRIBUTE = 38;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -1318,7 +1337,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getIntNum()
    * @generated
    */
-  int INT_NUM = 38;
+  int INT_NUM = 39;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1327,7 +1346,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INT_NUM__VALUE = ATOMIC_NUMBER_FEATURE_COUNT + 0;
+  int INT_NUM__VALUE = ACTUAL_NUMBERS_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Int Num</em>' class.
@@ -1336,7 +1355,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INT_NUM_FEATURE_COUNT = ATOMIC_NUMBER_FEATURE_COUNT + 1;
+  int INT_NUM_FEATURE_COUNT = ACTUAL_NUMBERS_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.FloatNumImpl <em>Float Num</em>}' class.
@@ -1346,7 +1365,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getFloatNum()
    * @generated
    */
-  int FLOAT_NUM = 39;
+  int FLOAT_NUM = 40;
 
   /**
    * The feature id for the '<em><b>I</b></em>' attribute.
@@ -1355,7 +1374,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FLOAT_NUM__I = ATOMIC_NUMBER_FEATURE_COUNT + 0;
+  int FLOAT_NUM__I = ACTUAL_NUMBERS_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Decimal</b></em>' attribute.
@@ -1364,7 +1383,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FLOAT_NUM__DECIMAL = ATOMIC_NUMBER_FEATURE_COUNT + 1;
+  int FLOAT_NUM__DECIMAL = ACTUAL_NUMBERS_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Float Num</em>' class.
@@ -1373,7 +1392,7 @@ public interface RPGPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FLOAT_NUM_FEATURE_COUNT = ATOMIC_NUMBER_FEATURE_COUNT + 2;
+  int FLOAT_NUM_FEATURE_COUNT = ACTUAL_NUMBERS_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.OrImpl <em>Or</em>}' class.
@@ -1383,7 +1402,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getOr()
    * @generated
    */
-  int OR = 40;
+  int OR = 41;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1420,7 +1439,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAnd()
    * @generated
    */
-  int AND = 41;
+  int AND = 42;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1457,7 +1476,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSmaller()
    * @generated
    */
-  int SMALLER = 42;
+  int SMALLER = 43;
 
   /**
    * The number of structural features of the '<em>Smaller</em>' class.
@@ -1476,7 +1495,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSmallerEq()
    * @generated
    */
-  int SMALLER_EQ = 43;
+  int SMALLER_EQ = 44;
 
   /**
    * The number of structural features of the '<em>Smaller Eq</em>' class.
@@ -1495,7 +1514,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEq()
    * @generated
    */
-  int EQ = 44;
+  int EQ = 45;
 
   /**
    * The number of structural features of the '<em>Eq</em>' class.
@@ -1514,7 +1533,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getBiggerEq()
    * @generated
    */
-  int BIGGER_EQ = 45;
+  int BIGGER_EQ = 46;
 
   /**
    * The number of structural features of the '<em>Bigger Eq</em>' class.
@@ -1533,7 +1552,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getBigger()
    * @generated
    */
-  int BIGGER = 46;
+  int BIGGER = 47;
 
   /**
    * The number of structural features of the '<em>Bigger</em>' class.
@@ -1552,7 +1571,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getNEq()
    * @generated
    */
-  int NEQ = 47;
+  int NEQ = 48;
 
   /**
    * The number of structural features of the '<em>NEq</em>' class.
@@ -1571,7 +1590,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAdd()
    * @generated
    */
-  int ADD = 48;
+  int ADD = 49;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1608,7 +1627,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSub()
    * @generated
    */
-  int SUB = 49;
+  int SUB = 50;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1645,7 +1664,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMult()
    * @generated
    */
-  int MULT = 50;
+  int MULT = 51;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1682,7 +1701,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getDiv()
    * @generated
    */
-  int DIV = 51;
+  int DIV = 52;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2653,6 +2672,16 @@ public interface RPGPackage extends EPackage
    * @generated
    */
   EClass getAtomicNumber();
+
+  /**
+   * Returns the meta object for class '{@link mdsd.rPG.ActualNumbers <em>Actual Numbers</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Actual Numbers</em>'.
+   * @see mdsd.rPG.ActualNumbers
+   * @generated
+   */
+  EClass getActualNumbers();
 
   /**
    * Returns the meta object for class '{@link mdsd.rPG.NameAttribute <em>Name Attribute</em>}'.
@@ -3788,6 +3817,16 @@ public interface RPGPackage extends EPackage
      * @generated
      */
     EClass ATOMIC_NUMBER = eINSTANCE.getAtomicNumber();
+
+    /**
+     * The meta object literal for the '{@link mdsd.rPG.impl.ActualNumbersImpl <em>Actual Numbers</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see mdsd.rPG.impl.ActualNumbersImpl
+     * @see mdsd.rPG.impl.RPGPackageImpl#getActualNumbers()
+     * @generated
+     */
+    EClass ACTUAL_NUMBERS = eINSTANCE.getActualNumbers();
 
     /**
      * The meta object literal for the '{@link mdsd.rPG.impl.NameAttributeImpl <em>Name Attribute</em>}' class.

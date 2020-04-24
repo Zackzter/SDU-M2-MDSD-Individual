@@ -724,19 +724,19 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cLTypesAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
 		private final RuleCall cLTypesLegalTypeParserRuleCall_1_0_0 = (RuleCall)cLTypesAssignment_1_0.eContents().get(0);
 		private final Assignment cAnAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final RuleCall cAnAtomicNumberParserRuleCall_1_1_0 = (RuleCall)cAnAssignment_1_1.eContents().get(0);
+		private final RuleCall cAnActualNumbersParserRuleCall_1_1_0 = (RuleCall)cAnAssignment_1_1.eContents().get(0);
 		
 		//AttributeValues:
-		//	'is' (lTypes=LegalType | an=AtomicNumber);
+		//	'is' (lTypes=LegalType | an=ActualNumbers);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'is' (lTypes=LegalType | an=AtomicNumber)
+		//'is' (lTypes=LegalType | an=ActualNumbers)
 		public Group getGroup() { return cGroup; }
 		
 		//'is'
 		public Keyword getIsKeyword_0() { return cIsKeyword_0; }
 		
-		//(lTypes=LegalType | an=AtomicNumber)
+		//(lTypes=LegalType | an=ActualNumbers)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//lTypes=LegalType
@@ -745,11 +745,11 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		//LegalType
 		public RuleCall getLTypesLegalTypeParserRuleCall_1_0_0() { return cLTypesLegalTypeParserRuleCall_1_0_0; }
 		
-		//an=AtomicNumber
+		//an=ActualNumbers
 		public Assignment getAnAssignment_1_1() { return cAnAssignment_1_1; }
 		
-		//AtomicNumber
-		public RuleCall getAnAtomicNumberParserRuleCall_1_1_0() { return cAnAtomicNumberParserRuleCall_1_1_0; }
+		//ActualNumbers
+		public RuleCall getAnActualNumbersParserRuleCall_1_1_0() { return cAnActualNumbersParserRuleCall_1_1_0; }
 	}
 	public class AltAttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.AltAttribute");
@@ -1397,15 +1397,33 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	public class AtomicNumberElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.AtomicNumber");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cFloatNumParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cIntNumParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cNameAttributeParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cActualNumbersParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cNameAttributeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//AtomicNumber:
-		//	FloatNum | IntNum | NameAttribute;
+		//	ActualNumbers | NameAttribute;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//FloatNum | IntNum | NameAttribute
+		//ActualNumbers | NameAttribute
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ActualNumbers
+		public RuleCall getActualNumbersParserRuleCall_0() { return cActualNumbersParserRuleCall_0; }
+		
+		//NameAttribute
+		public RuleCall getNameAttributeParserRuleCall_1() { return cNameAttributeParserRuleCall_1; }
+	}
+	public class ActualNumbersElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.ActualNumbers");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cFloatNumParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cIntNumParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//ActualNumbers:
+		//	FloatNum | IntNum;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//FloatNum | IntNum
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//FloatNum
@@ -1413,9 +1431,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//IntNum
 		public RuleCall getIntNumParserRuleCall_1() { return cIntNumParserRuleCall_1; }
-		
-		//NameAttribute
-		public RuleCall getNameAttributeParserRuleCall_2() { return cNameAttributeParserRuleCall_2; }
 	}
 	public class NameAttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.NameAttribute");
@@ -1542,6 +1557,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	private final SumElements pSum;
 	private final MultiplyElements pMultiply;
 	private final AtomicNumberElements pAtomicNumber;
+	private final ActualNumbersElements pActualNumbers;
 	private final NameAttributeElements pNameAttribute;
 	private final IntNumElements pIntNum;
 	private final FloatNumElements pFloatNum;
@@ -1595,6 +1611,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		this.pSum = new SumElements();
 		this.pMultiply = new MultiplyElements();
 		this.pAtomicNumber = new AtomicNumberElements();
+		this.pActualNumbers = new ActualNumbersElements();
 		this.pNameAttribute = new NameAttributeElements();
 		this.pIntNum = new IntNumElements();
 		this.pFloatNum = new FloatNumElements();
@@ -1829,7 +1846,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//AttributeValues:
-	//	'is' (lTypes=LegalType | an=AtomicNumber);
+	//	'is' (lTypes=LegalType | an=ActualNumbers);
 	public AttributeValuesElements getAttributeValuesAccess() {
 		return pAttributeValues;
 	}
@@ -2009,13 +2026,23 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//AtomicNumber:
-	//	FloatNum | IntNum | NameAttribute;
+	//	ActualNumbers | NameAttribute;
 	public AtomicNumberElements getAtomicNumberAccess() {
 		return pAtomicNumber;
 	}
 	
 	public ParserRule getAtomicNumberRule() {
 		return getAtomicNumberAccess().getRule();
+	}
+	
+	//ActualNumbers:
+	//	FloatNum | IntNum;
+	public ActualNumbersElements getActualNumbersAccess() {
+		return pActualNumbers;
+	}
+	
+	public ParserRule getActualNumbersRule() {
+		return getActualNumbersAccess().getRule();
 	}
 	
 	//NameAttribute:

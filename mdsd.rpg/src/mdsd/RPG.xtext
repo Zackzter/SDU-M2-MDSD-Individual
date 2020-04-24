@@ -85,7 +85,7 @@ EType:
 ;
 
 AttributeValues:
-	'is' (lTypes=LegalType | an=AtomicNumber)
+	'is' (lTypes=LegalType | an=ActualNumbers)
 ;
 
 AltAttribute:
@@ -158,7 +158,11 @@ Multiply:
 ;
 
 AtomicNumber:
-	FloatNum | IntNum |  NameAttribute
+	ActualNumbers | NameAttribute
+;
+
+ActualNumbers:
+	FloatNum | IntNum
 ;
 
 NameAttribute:

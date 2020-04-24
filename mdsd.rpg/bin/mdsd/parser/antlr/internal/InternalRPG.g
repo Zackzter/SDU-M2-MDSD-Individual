@@ -1269,9 +1269,9 @@ ruleAttributeValues returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getAttributeValuesAccess().getAnAtomicNumberParserRuleCall_1_1_0());
+						newCompositeNode(grammarAccess.getAttributeValuesAccess().getAnActualNumbersParserRuleCall_1_1_0());
 					}
-					lv_an_2_0=ruleAtomicNumber
+					lv_an_2_0=ruleActualNumbers
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getAttributeValuesRule());
@@ -1280,7 +1280,7 @@ ruleAttributeValues returns [EObject current=null]
 							$current,
 							"an",
 							lv_an_2_0,
-							"mdsd.RPG.AtomicNumber");
+							"mdsd.RPG.ActualNumbers");
 						afterParserOrEnumRuleCall();
 					}
 				)
@@ -2339,7 +2339,43 @@ ruleAtomicNumber returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getAtomicNumberAccess().getFloatNumParserRuleCall_0());
+			newCompositeNode(grammarAccess.getAtomicNumberAccess().getActualNumbersParserRuleCall_0());
+		}
+		this_ActualNumbers_0=ruleActualNumbers
+		{
+			$current = $this_ActualNumbers_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getAtomicNumberAccess().getNameAttributeParserRuleCall_1());
+		}
+		this_NameAttribute_1=ruleNameAttribute
+		{
+			$current = $this_NameAttribute_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleActualNumbers
+entryRuleActualNumbers returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getActualNumbersRule()); }
+	iv_ruleActualNumbers=ruleActualNumbers
+	{ $current=$iv_ruleActualNumbers.current; }
+	EOF;
+
+// Rule ActualNumbers
+ruleActualNumbers returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getActualNumbersAccess().getFloatNumParserRuleCall_0());
 		}
 		this_FloatNum_0=ruleFloatNum
 		{
@@ -2348,20 +2384,11 @@ ruleAtomicNumber returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getAtomicNumberAccess().getIntNumParserRuleCall_1());
+			newCompositeNode(grammarAccess.getActualNumbersAccess().getIntNumParserRuleCall_1());
 		}
 		this_IntNum_1=ruleIntNum
 		{
 			$current = $this_IntNum_1.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getAtomicNumberAccess().getNameAttributeParserRuleCall_2());
-		}
-		this_NameAttribute_2=ruleNameAttribute
-		{
-			$current = $this_NameAttribute_2.current;
 			afterParserOrEnumRuleCall();
 		}
 	)

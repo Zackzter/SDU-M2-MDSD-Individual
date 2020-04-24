@@ -261,6 +261,11 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createAtomicNumberAdapter();
       }
       @Override
+      public Adapter caseActualNumbers(ActualNumbers object)
+      {
+        return createActualNumbersAdapter();
+      }
+      @Override
       public Adapter caseNameAttribute(NameAttribute object)
       {
         return createNameAttributeAdapter();
@@ -908,6 +913,21 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAtomicNumberAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.ActualNumbers <em>Actual Numbers</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.ActualNumbers
+   * @generated
+   */
+  public Adapter createActualNumbersAdapter()
   {
     return null;
   }

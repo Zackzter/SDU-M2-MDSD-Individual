@@ -3,7 +3,7 @@
  */
 package mdsd.rPG.impl;
 
-import mdsd.rPG.AtomicNumber;
+import mdsd.rPG.ActualNumbers;
 import mdsd.rPG.AttributeValues;
 import mdsd.rPG.RPGPackage;
 
@@ -60,7 +60,7 @@ public class AttributeValuesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    * @ordered
    */
-  protected AtomicNumber an;
+  protected ActualNumbers an;
 
   /**
    * <!-- begin-user-doc -->
@@ -114,7 +114,7 @@ public class AttributeValuesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public AtomicNumber getAn()
+  public ActualNumbers getAn()
   {
     return an;
   }
@@ -124,9 +124,9 @@ public class AttributeValuesImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetAn(AtomicNumber newAn, NotificationChain msgs)
+  public NotificationChain basicSetAn(ActualNumbers newAn, NotificationChain msgs)
   {
-    AtomicNumber oldAn = an;
+    ActualNumbers oldAn = an;
     an = newAn;
     if (eNotificationRequired())
     {
@@ -142,7 +142,7 @@ public class AttributeValuesImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public void setAn(AtomicNumber newAn)
+  public void setAn(ActualNumbers newAn)
   {
     if (newAn != an)
     {
@@ -206,7 +206,7 @@ public class AttributeValuesImpl extends MinimalEObjectImpl.Container implements
         setLTypes((String)newValue);
         return;
       case RPGPackage.ATTRIBUTE_VALUES__AN:
-        setAn((AtomicNumber)newValue);
+        setAn((ActualNumbers)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -226,7 +226,7 @@ public class AttributeValuesImpl extends MinimalEObjectImpl.Container implements
         setLTypes(LTYPES_EDEFAULT);
         return;
       case RPGPackage.ATTRIBUTE_VALUES__AN:
-        setAn((AtomicNumber)null);
+        setAn((ActualNumbers)null);
         return;
     }
     super.eUnset(featureID);

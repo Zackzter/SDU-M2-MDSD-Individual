@@ -357,6 +357,15 @@ public interface RPGFactory extends EFactory
   AtomicNumber createAtomicNumber();
 
   /**
+   * Returns a new object of class '<em>Actual Numbers</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Actual Numbers</em>'.
+   * @generated
+   */
+  ActualNumbers createActualNumbers();
+
+  /**
    * Returns a new object of class '<em>Name Attribute</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

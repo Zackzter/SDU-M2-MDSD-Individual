@@ -51,12 +51,12 @@ public interface AttributeValues extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>An</em>' containment reference.
-   * @see #setAn(AtomicNumber)
+   * @see #setAn(ActualNumbers)
    * @see mdsd.rPG.RPGPackage#getAttributeValues_An()
    * @model containment="true"
    * @generated
    */
-  AtomicNumber getAn();
+  ActualNumbers getAn();
 
   /**
    * Sets the value of the '{@link mdsd.rPG.AttributeValues#getAn <em>An</em>}' containment reference.
@@ -66,6 +66,6 @@ public interface AttributeValues extends EObject
    * @see #getAn()
    * @generated
    */
-  void setAn(AtomicNumber value);
+  void setAn(ActualNumbers value);
 
 } // AttributeValues

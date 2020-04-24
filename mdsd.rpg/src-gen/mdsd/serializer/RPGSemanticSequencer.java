@@ -298,7 +298,7 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     AttributeValues returns AttributeValues
 	 *
 	 * Constraint:
-	 *     (lTypes=LegalType | an=AtomicNumber)
+	 *     (lTypes=LegalType | an=ActualNumbers)
 	 */
 	protected void sequence_AttributeValues(ISerializationContext context, AttributeValues semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -547,6 +547,7 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Multiply.Mult_1_0_0_1 returns FloatNum
 	 *     Multiply.Div_1_0_1_1 returns FloatNum
 	 *     AtomicNumber returns FloatNum
+	 *     ActualNumbers returns FloatNum
 	 *     FloatNum returns FloatNum
 	 *
 	 * Constraint:
@@ -575,6 +576,7 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Multiply.Mult_1_0_0_1 returns IntNum
 	 *     Multiply.Div_1_0_1_1 returns IntNum
 	 *     AtomicNumber returns IntNum
+	 *     ActualNumbers returns IntNum
 	 *     IntNum returns IntNum
 	 *
 	 * Constraint:

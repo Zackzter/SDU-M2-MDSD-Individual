@@ -84,7 +84,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AttributeValues">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lTypes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="an" eType="#//AtomicNumber"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="an" eType="#//ActualNumbers"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AltAttribute">
@@ -147,13 +147,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="Sum"/>
   <eClassifiers xsi:type="ecore:EClass" name="Multiply" eSuperTypes="#//Sum"/>
   <eClassifiers xsi:type="ecore:EClass" name="AtomicNumber" eSuperTypes="#//Multiply"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActualNumbers" eSuperTypes="#//AtomicNumber"/>
   <eClassifiers xsi:type="ecore:EClass" name="NameAttribute" eSuperTypes="#//AtomicNumber">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntNum" eSuperTypes="#//AtomicNumber">
+  <eClassifiers xsi:type="ecore:EClass" name="IntNum" eSuperTypes="#//ActualNumbers">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FloatNum" eSuperTypes="#//AtomicNumber">
+  <eClassifiers xsi:type="ecore:EClass" name="FloatNum" eSuperTypes="#//ActualNumbers">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="i" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="decimal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>

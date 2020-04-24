@@ -102,6 +102,7 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.SUM: return createSum();
       case RPGPackage.MULTIPLY: return createMultiply();
       case RPGPackage.ATOMIC_NUMBER: return createAtomicNumber();
+      case RPGPackage.ACTUAL_NUMBERS: return createActualNumbers();
       case RPGPackage.NAME_ATTRIBUTE: return createNameAttribute();
       case RPGPackage.INT_NUM: return createIntNum();
       case RPGPackage.FLOAT_NUM: return createFloatNum();
@@ -564,6 +565,18 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     AtomicNumberImpl atomicNumber = new AtomicNumberImpl();
     return atomicNumber;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ActualNumbers createActualNumbers()
+  {
+    ActualNumbersImpl actualNumbers = new ActualNumbersImpl();
+    return actualNumbers;
   }
 
   /**

@@ -21,7 +21,7 @@ package mdsd.rPG;
  * @model
  * @generated
  */
-public interface FloatNum extends AtomicNumber
+public interface FloatNum extends ActualNumbers
 {
   /**
    * Returns the value of the '<em><b>I</b></em>' attribute.

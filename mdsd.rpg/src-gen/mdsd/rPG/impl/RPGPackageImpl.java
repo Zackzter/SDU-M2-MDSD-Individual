@@ -4,6 +4,7 @@
 package mdsd.rPG.impl;
 
 import mdsd.rPG.AEffect;
+import mdsd.rPG.ActualNumbers;
 import mdsd.rPG.Add;
 import mdsd.rPG.AfterE;
 import mdsd.rPG.AltAttribute;
@@ -331,6 +332,13 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   private EClass atomicNumberEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass actualNumbersEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1485,6 +1493,17 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
+  public EClass getActualNumbers()
+  {
+    return actualNumbersEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getNameAttribute()
   {
     return nameAttributeEClass;
@@ -1977,6 +1996,8 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
 
     atomicNumberEClass = createEClass(ATOMIC_NUMBER);
 
+    actualNumbersEClass = createEClass(ACTUAL_NUMBERS);
+
     nameAttributeEClass = createEClass(NAME_ATTRIBUTE);
     createEReference(nameAttributeEClass, NAME_ATTRIBUTE__ATTRIBUTE);
 
@@ -2067,9 +2088,10 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     numberComparingEClass.getESuperTypes().add(this.getProposition());
     multiplyEClass.getESuperTypes().add(this.getSum());
     atomicNumberEClass.getESuperTypes().add(this.getMultiply());
+    actualNumbersEClass.getESuperTypes().add(this.getAtomicNumber());
     nameAttributeEClass.getESuperTypes().add(this.getAtomicNumber());
-    intNumEClass.getESuperTypes().add(this.getAtomicNumber());
-    floatNumEClass.getESuperTypes().add(this.getAtomicNumber());
+    intNumEClass.getESuperTypes().add(this.getActualNumbers());
+    floatNumEClass.getESuperTypes().add(this.getActualNumbers());
     orEClass.getESuperTypes().add(this.getProposition());
     andEClass.getESuperTypes().add(this.getProposition());
     smallerEClass.getESuperTypes().add(this.getComparator());
@@ -2156,7 +2178,7 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
 
     initEClass(attributeValuesEClass, AttributeValues.class, "AttributeValues", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAttributeValues_LTypes(), ecorePackage.getEString(), "lTypes", null, 0, 1, AttributeValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAttributeValues_An(), this.getAtomicNumber(), null, "an", null, 0, 1, AttributeValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAttributeValues_An(), this.getActualNumbers(), null, "an", null, 0, 1, AttributeValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(altAttributeEClass, AltAttribute.class, "AltAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAltAttribute_Attribute(), this.getAttribute(), null, "attribute", null, 0, 1, AltAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2209,6 +2231,8 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     initEClass(multiplyEClass, Multiply.class, "Multiply", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(atomicNumberEClass, AtomicNumber.class, "AtomicNumber", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(actualNumbersEClass, ActualNumbers.class, "ActualNumbers", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(nameAttributeEClass, NameAttribute.class, "NameAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getNameAttribute_Attribute(), this.getAttribute(), null, "attribute", null, 0, 1, NameAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

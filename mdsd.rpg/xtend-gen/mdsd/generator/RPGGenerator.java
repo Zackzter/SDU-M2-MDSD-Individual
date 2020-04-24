@@ -6,11 +6,11 @@ package mdsd.generator;
 import com.google.common.collect.Iterators;
 import java.util.Arrays;
 import mdsd.rPG.AEffect;
+import mdsd.rPG.ActualNumbers;
 import mdsd.rPG.Add;
 import mdsd.rPG.AfterE;
 import mdsd.rPG.AltAttribute;
 import mdsd.rPG.And;
-import mdsd.rPG.AtomicNumber;
 import mdsd.rPG.Attribute;
 import mdsd.rPG.Attributes;
 import mdsd.rPG.BEffect;
@@ -3358,7 +3358,7 @@ public class RPGGenerator extends AbstractGenerator {
     }
   }
   
-  public Number getNumberFromAtomic(final AtomicNumber x) {
+  public Number getNumberFromAtomic(final ActualNumbers x) {
     if (x instanceof FloatNum) {
       return _getNumberFromAtomic((FloatNum)x);
     } else if (x instanceof IntNum) {

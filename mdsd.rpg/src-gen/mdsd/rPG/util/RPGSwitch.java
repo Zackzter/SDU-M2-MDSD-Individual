@@ -347,6 +347,16 @@ public class RPGSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RPGPackage.ACTUAL_NUMBERS:
+      {
+        ActualNumbers actualNumbers = (ActualNumbers)theEObject;
+        T result = caseActualNumbers(actualNumbers);
+        if (result == null) result = caseAtomicNumber(actualNumbers);
+        if (result == null) result = caseMultiply(actualNumbers);
+        if (result == null) result = caseSum(actualNumbers);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RPGPackage.NAME_ATTRIBUTE:
       {
         NameAttribute nameAttribute = (NameAttribute)theEObject;
@@ -361,6 +371,7 @@ public class RPGSwitch<T> extends Switch<T>
       {
         IntNum intNum = (IntNum)theEObject;
         T result = caseIntNum(intNum);
+        if (result == null) result = caseActualNumbers(intNum);
         if (result == null) result = caseAtomicNumber(intNum);
         if (result == null) result = caseMultiply(intNum);
         if (result == null) result = caseSum(intNum);
@@ -371,6 +382,7 @@ public class RPGSwitch<T> extends Switch<T>
       {
         FloatNum floatNum = (FloatNum)theEObject;
         T result = caseFloatNum(floatNum);
+        if (result == null) result = caseActualNumbers(floatNum);
         if (result == null) result = caseAtomicNumber(floatNum);
         if (result == null) result = caseMultiply(floatNum);
         if (result == null) result = caseSum(floatNum);
@@ -1067,6 +1079,22 @@ public class RPGSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseAtomicNumber(AtomicNumber object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Actual Numbers</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Actual Numbers</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseActualNumbers(ActualNumbers object)
   {
     return null;
   }

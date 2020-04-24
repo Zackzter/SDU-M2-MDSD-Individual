@@ -20,7 +20,7 @@ package mdsd.rPG;
  * @model
  * @generated
  */
-public interface IntNum extends AtomicNumber
+public interface IntNum extends ActualNumbers
 {
   /**
    * Returns the value of the '<em><b>Value</b></em>' attribute.

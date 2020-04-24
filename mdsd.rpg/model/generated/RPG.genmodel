@@ -123,6 +123,7 @@
     <genClasses ecoreClass="RPG.ecore#//Sum"/>
     <genClasses ecoreClass="RPG.ecore#//Multiply"/>
     <genClasses ecoreClass="RPG.ecore#//AtomicNumber"/>
+    <genClasses ecoreClass="RPG.ecore#//ActualNumbers"/>
     <genClasses ecoreClass="RPG.ecore#//NameAttribute">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//NameAttribute/attribute"/>
     </genClasses>

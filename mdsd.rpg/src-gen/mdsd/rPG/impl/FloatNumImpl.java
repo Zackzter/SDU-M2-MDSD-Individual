@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class FloatNumImpl extends AtomicNumberImpl implements FloatNum
+public class FloatNumImpl extends ActualNumbersImpl implements FloatNum
 {
   /**
    * The default value of the '{@link #getI() <em>I</em>}' attribute.
