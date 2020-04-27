@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import org.eclipse.xtext.validation.Check;
 
-import mdsd.rPG.AfterE;
 import mdsd.rPG.AltAttribute;
 import mdsd.rPG.Attribute;
 import mdsd.rPG.Attributes;
@@ -81,12 +80,6 @@ public class RPGValidator extends AbstractRPGValidator {
 		}
 	}
 	
-	@Check
-	public void checkEffectStartsWithCapital(AfterE buff) {
-		if (!Character.isUpperCase(buff.getName().charAt(0))) {
-			error("The name of this effect should start with a capital letter.",  RPGPackage.Literals.EFFECT__NAME, INVALID_NAME);
-		}
-	}
 	
 	
 	@Check

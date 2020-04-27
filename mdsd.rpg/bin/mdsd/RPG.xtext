@@ -7,7 +7,11 @@ SystemRPG:
 ;
 	
 Declaration:
-	Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects
+	Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects | Speed
+;
+
+Speed:
+	'speed' speedValue=[Attribute]
 ;
 
 Effects:
@@ -33,6 +37,18 @@ Attributes:
 Attribute:
 	'attribute' name=ID aVal=AttributeValues
 ;
+
+//Attribute:
+//	(AttributeRelation | NormalAttribute)
+//;
+
+//AttributeRelation:
+//	'attribute2' 'relation' name=ID aVal=AttributeValues
+//;
+//
+//NormalAttribute:
+//	'attribute2' name=ID aVal=AttributeValues
+//;
 
 	
 Locations:
@@ -176,6 +192,7 @@ ActualNumbers:
 NameAttribute:
 	attribute=[Attribute]
 ;
+
 
 
 IntNum:

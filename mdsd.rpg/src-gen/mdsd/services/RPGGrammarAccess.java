@@ -271,6 +271,16 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cLocAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cLocLocParserRuleCall_1_0 = (RuleCall)cLocAssignment_1.eContents().get(0);
 		
+		////Attribute:
+		////	(AttributeRelation | NormalAttribute)
+		////;
+		////AttributeRelation:
+		////	'attribute2' 'relation' name=ID aVal=AttributeValues
+		////;
+		////
+		////NormalAttribute:
+		////	'attribute2' name=ID aVal=AttributeValues
+		////;
 		//Locations:
 		//	'location' loc+=Loc+;
 		@Override public ParserRule getRule() { return rule; }
@@ -1783,6 +1793,16 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		return getAttributeAccess().getRule();
 	}
 	
+	////Attribute:
+	////	(AttributeRelation | NormalAttribute)
+	////;
+	////AttributeRelation:
+	////	'attribute2' 'relation' name=ID aVal=AttributeValues
+	////;
+	////
+	////NormalAttribute:
+	////	'attribute2' name=ID aVal=AttributeValues
+	////;
 	//Locations:
 	//	'location' loc+=Loc+;
 	public LocationsElements getLocationsAccess() {

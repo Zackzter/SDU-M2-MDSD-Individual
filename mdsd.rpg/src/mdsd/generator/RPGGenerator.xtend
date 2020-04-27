@@ -471,11 +471,15 @@ class RPGGenerator extends AbstractGenerator {
     	
     	    protected Map<String, Number> eData;
     	    
+«««    	    protected float typeFactor = 1;
+    	    
     	    public abstract boolean effectMove(Move move, String name, Entity enemy);
     	
     	    public abstract Map<String, Number> changeMove(Move move, String name, Entity enemy);
     	
     	    public abstract void doEffect(Move move, String name, Entity enemy, Entity player);
+    	    
+«««    	    public abstract int checkStrongType(String moveType, String entityType);
     	    
     	    «moveEClasses»    	
     	}
@@ -811,17 +815,32 @@ class RPGGenerator extends AbstractGenerator {
 		Integer.toString(x.i) + '.' + Integer.toString(x.decimal)
 	}
 	def dispatch CharSequence new_exp(NameAttribute x){
-		if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Integer")){
-			"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
-		}else if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Float")){ 
-			"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
-		}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof IntNum){
-			"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
-		}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof FloatNum){
-			"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
-		} else {
-			"Something went wrong" 
-		}
+		//if (x.attribute instanceof NormalAttribute){
+			if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Integer")){
+				"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
+			}else if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Float")){ 
+				"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
+			}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof IntNum){
+				"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
+			}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof FloatNum){
+				"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
+			} else {
+				"Something went wrong" 
+			}
+	//	}
+//		else if(x.attribute instanceof AttributeRelation){
+//			if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Integer")){
+//				"(eData.get(" + '"' +x.attribute.name + '"' + ").intValue()*typeFactor)"
+//			}else if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Float")){ 
+//				"(eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()*typeFactor)"
+//			}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof IntNum){
+//				"(eData.get(" + '"' +x.attribute.name + '"' + ").intValue()*typeFactor)"
+//			}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof FloatNum){
+//				"(eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()*typeFactor)"
+//			} else {
+//				"Something went wrong" 
+//			}			
+//		}
 	}
 	
 	def dispatch Number getNumberValue(IntNum x){

@@ -1095,6 +1095,8 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("    ");
     _builder.newLine();
     _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
     _builder.append("public abstract boolean effectMove(Move move, String name, Entity enemy);");
     _builder.newLine();
     _builder.newLine();
@@ -1104,6 +1106,8 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public abstract void doEffect(Move move, String name, Entity enemy, Entity player);");
+    _builder.newLine();
+    _builder.append("    ");
     _builder.newLine();
     _builder.append("    ");
     _builder.newLine();
