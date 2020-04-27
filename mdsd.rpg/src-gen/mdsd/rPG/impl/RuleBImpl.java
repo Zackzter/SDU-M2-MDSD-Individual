@@ -3,13 +3,17 @@
  */
 package mdsd.rPG.impl;
 
-import mdsd.rPG.Change;
+import java.util.Collection;
+
 import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
-import mdsd.rPG.Rule;
+import mdsd.rPG.RuleB;
+import mdsd.rPG.Target;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -17,21 +21,24 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Rule</b></em>'.
+ * An implementation of the model object '<em><b>Rule B</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.RuleImpl#getOr <em>Or</em>}</li>
- *   <li>{@link mdsd.rPG.impl.RuleImpl#getChange <em>Change</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.RuleBImpl#getOr <em>Or</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.RuleBImpl#getTarget <em>Target</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
+public class RuleBImpl extends MinimalEObjectImpl.Container implements RuleB
 {
   /**
    * The cached value of the '{@link #getOr() <em>Or</em>}' containment reference.
@@ -44,21 +51,21 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   protected Proposition or;
 
   /**
-   * The cached value of the '{@link #getChange() <em>Change</em>}' containment reference.
+   * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getChange()
+   * @see #getTarget()
    * @generated
    * @ordered
    */
-  protected Change change;
+  protected EList<Target> target;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected RuleImpl()
+  protected RuleBImpl()
   {
     super();
   }
@@ -71,7 +78,7 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   @Override
   protected EClass eStaticClass()
   {
-    return RPGPackage.Literals.RULE;
+    return RPGPackage.Literals.RULE_B;
   }
 
   /**
@@ -96,7 +103,7 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     or = newOr;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__OR, oldOr, newOr);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.RULE_B__OR, oldOr, newOr);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -114,14 +121,14 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     {
       NotificationChain msgs = null;
       if (or != null)
-        msgs = ((InternalEObject)or).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__OR, null, msgs);
+        msgs = ((InternalEObject)or).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE_B__OR, null, msgs);
       if (newOr != null)
-        msgs = ((InternalEObject)newOr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__OR, null, msgs);
+        msgs = ((InternalEObject)newOr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE_B__OR, null, msgs);
       msgs = basicSetOr(newOr, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__OR, newOr, newOr));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE_B__OR, newOr, newOr));
   }
 
   /**
@@ -130,48 +137,13 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * @generated
    */
   @Override
-  public Change getChange()
+  public EList<Target> getTarget()
   {
-    return change;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetChange(Change newChange, NotificationChain msgs)
-  {
-    Change oldChange = change;
-    change = newChange;
-    if (eNotificationRequired())
+    if (target == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__CHANGE, oldChange, newChange);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      target = new EObjectContainmentEList<Target>(Target.class, this, RPGPackage.RULE_B__TARGET);
     }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setChange(Change newChange)
-  {
-    if (newChange != change)
-    {
-      NotificationChain msgs = null;
-      if (change != null)
-        msgs = ((InternalEObject)change).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__CHANGE, null, msgs);
-      if (newChange != null)
-        msgs = ((InternalEObject)newChange).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__CHANGE, null, msgs);
-      msgs = basicSetChange(newChange, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__CHANGE, newChange, newChange));
+    return target;
   }
 
   /**
@@ -184,10 +156,10 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
-      case RPGPackage.RULE__OR:
+      case RPGPackage.RULE_B__OR:
         return basicSetOr(null, msgs);
-      case RPGPackage.RULE__CHANGE:
-        return basicSetChange(null, msgs);
+      case RPGPackage.RULE_B__TARGET:
+        return ((InternalEList<?>)getTarget()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -202,10 +174,10 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
-      case RPGPackage.RULE__OR:
+      case RPGPackage.RULE_B__OR:
         return getOr();
-      case RPGPackage.RULE__CHANGE:
-        return getChange();
+      case RPGPackage.RULE_B__TARGET:
+        return getTarget();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -215,16 +187,18 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case RPGPackage.RULE__OR:
+      case RPGPackage.RULE_B__OR:
         setOr((Proposition)newValue);
         return;
-      case RPGPackage.RULE__CHANGE:
-        setChange((Change)newValue);
+      case RPGPackage.RULE_B__TARGET:
+        getTarget().clear();
+        getTarget().addAll((Collection<? extends Target>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -240,11 +214,11 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
-      case RPGPackage.RULE__OR:
+      case RPGPackage.RULE_B__OR:
         setOr((Proposition)null);
         return;
-      case RPGPackage.RULE__CHANGE:
-        setChange((Change)null);
+      case RPGPackage.RULE_B__TARGET:
+        getTarget().clear();
         return;
     }
     super.eUnset(featureID);
@@ -260,12 +234,12 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   {
     switch (featureID)
     {
-      case RPGPackage.RULE__OR:
+      case RPGPackage.RULE_B__OR:
         return or != null;
-      case RPGPackage.RULE__CHANGE:
-        return change != null;
+      case RPGPackage.RULE_B__TARGET:
+        return target != null && !target.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //RuleImpl
+} //RuleBImpl

@@ -118,14 +118,6 @@ public class RPGSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RPGPackage.AFTER_E:
-      {
-        AfterE afterE = (AfterE)theEObject;
-        T result = caseAfterE(afterE);
-        if (result == null) result = caseEffect(afterE);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case RPGPackage.ATTRIBUTES:
       {
         Attributes attributes = (Attributes)theEObject;
@@ -207,13 +199,6 @@ public class RPGSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case RPGPackage.AEFFECT:
-      {
-        AEffect aEffect = (AEffect)theEObject;
-        T result = caseAEffect(aEffect);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case RPGPackage.ETYPE:
       {
         EType eType = (EType)theEObject;
@@ -239,6 +224,34 @@ public class RPGSwitch<T> extends Switch<T>
       {
         Rule rule = (Rule)theEObject;
         T result = caseRule(rule);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.RULE_B:
+      {
+        RuleB ruleB = (RuleB)theEObject;
+        T result = caseRuleB(ruleB);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.CHANGE:
+      {
+        Change change = (Change)theEObject;
+        T result = caseChange(change);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.SELF:
+      {
+        Self self = (Self)theEObject;
+        T result = caseSelf(self);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.TARGET:
+      {
+        Target target = (Target)theEObject;
+        T result = caseTarget(target);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -588,22 +601,6 @@ public class RPGSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>After E</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>After E</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAfterE(AfterE object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Attributes</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -780,22 +777,6 @@ public class RPGSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>AEffect</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>AEffect</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAEffect(AEffect object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>EType</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -855,6 +836,70 @@ public class RPGSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseRule(Rule object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Rule B</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Rule B</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRuleB(RuleB object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Change</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Change</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseChange(Change object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Self</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Self</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSelf(Self object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Target</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Target</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTarget(Target object)
   {
     return null;
   }

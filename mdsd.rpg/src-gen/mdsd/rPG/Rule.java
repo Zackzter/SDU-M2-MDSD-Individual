@@ -15,8 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.Rule#getOr <em>Or</em>}</li>
- *   <li>{@link mdsd.rPG.Rule#getTarget <em>Target</em>}</li>
- *   <li>{@link mdsd.rPG.Rule#getSum <em>Sum</em>}</li>
+ *   <li>{@link mdsd.rPG.Rule#getChange <em>Change</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getRule()
@@ -48,47 +47,25 @@ public interface Rule extends EObject
   void setOr(Proposition value);
 
   /**
-   * Returns the value of the '<em><b>Target</b></em>' reference.
+   * Returns the value of the '<em><b>Change</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Target</em>' reference.
-   * @see #setTarget(Attribute)
-   * @see mdsd.rPG.RPGPackage#getRule_Target()
-   * @model
-   * @generated
-   */
-  Attribute getTarget();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Rule#getTarget <em>Target</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Target</em>' reference.
-   * @see #getTarget()
-   * @generated
-   */
-  void setTarget(Attribute value);
-
-  /**
-   * Returns the value of the '<em><b>Sum</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Sum</em>' containment reference.
-   * @see #setSum(Sum)
-   * @see mdsd.rPG.RPGPackage#getRule_Sum()
+   * @return the value of the '<em>Change</em>' containment reference.
+   * @see #setChange(Change)
+   * @see mdsd.rPG.RPGPackage#getRule_Change()
    * @model containment="true"
    * @generated
    */
-  Sum getSum();
+  Change getChange();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.Rule#getSum <em>Sum</em>}' containment reference.
+   * Sets the value of the '{@link mdsd.rPG.Rule#getChange <em>Change</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Sum</em>' containment reference.
-   * @see #getSum()
+   * @param value the new value of the '<em>Change</em>' containment reference.
+   * @see #getChange()
    * @generated
    */
-  void setSum(Sum value);
+  void setChange(Change value);
 
 } // Rule

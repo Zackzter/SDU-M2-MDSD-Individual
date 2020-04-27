@@ -5,10 +5,8 @@ package mdsd.generator;
 
 import com.google.common.collect.Iterators;
 import java.util.Arrays;
-import mdsd.rPG.AEffect;
 import mdsd.rPG.ActualNumbers;
 import mdsd.rPG.Add;
-import mdsd.rPG.AfterE;
 import mdsd.rPG.AltAttribute;
 import mdsd.rPG.And;
 import mdsd.rPG.Attribute;
@@ -42,11 +40,13 @@ import mdsd.rPG.Or;
 import mdsd.rPG.Proposition;
 import mdsd.rPG.Relations;
 import mdsd.rPG.Require;
+import mdsd.rPG.Self;
 import mdsd.rPG.Smaller;
 import mdsd.rPG.SmallerEq;
 import mdsd.rPG.Sub;
 import mdsd.rPG.Sum;
 import mdsd.rPG.SystemRPG;
+import mdsd.rPG.Target;
 import mdsd.rPG.Team;
 import mdsd.rPG.Teams;
 import mdsd.rPG.Type;
@@ -233,6 +233,9 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("private List<Entity> battleEntities;");
     _builder.newLine();
     _builder.append("    ");
+    _builder.append("private List<Entity> currentEnemyTeam;");
+    _builder.newLine();
+    _builder.append("    ");
     _builder.append("private Team team;");
     _builder.newLine();
     _builder.append("    ");
@@ -283,6 +286,11 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("private Entity playerEntity;");
     _builder.newLine();
     _builder.append("    ");
+    _builder.append("private Entity targetEntity;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public ");
@@ -300,6 +308,9 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("    \t");
     _builder.append("battleEntities = new ArrayList<>();");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("currentEnemyTeam = new ArrayList<>();    \t");
     _builder.newLine();
     _builder.append("    \t");
     _builder.append("move = Move.getInstance();");
@@ -379,6 +390,11 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("   \t\t");
     _builder.append("playerEntity = team.getPlayerTeam().remove(0);");
     _builder.newLine();
+    _builder.append("   \t\t");
+    _builder.append("battleEntities.add(playerEntity);   ");
+    _builder.newLine();
+    _builder.append("   \t\t");
+    _builder.newLine();
     _builder.append("\t\t");
     _builder.append("while (!gameFinished) {");
     _builder.newLine();
@@ -440,6 +456,11 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("   \t\t\t");
     _builder.append("Entity enemyEntity = enemyTeam.remove(0);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("currentEnemyTeam.add(enemyEntity);");
+    _builder.newLine();
+    _builder.append("   \t\t\t");
     _builder.newLine();
     _builder.append("   \t\t\t");
     _builder.append("fight(enemyEntity);");
@@ -504,28 +525,7 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private void executeAfter(Move move, String moveName, Entity target){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("if(!move.getMove(moveName).getAfterEffects().isEmpty()){");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("for(EffectAfter afterEffect: move.getMove(moveName).getAfterEffects()){");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("afterEffect.doEffect(move, moveName, target);");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}\t\t   \t");
+    _builder.append("\t\t\t   \t");
     _builder.newLine();
     _builder.append("   \t\t");
     _builder.newLine();
@@ -567,6 +567,140 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("if(moves.contains(moveName)){");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
+    _builder.append("boolean pickTeam = true;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("List<Entity> chosenTeam = null;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("while(pickTeam){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("System.out.println(\"What team do you want to target: enemy or self\");");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("String targetTeam = s.nextLine();");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("boolean pickTarget = true;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("if(targetTeam.equals(\"enemy\")){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("System.out.println(\"The enemy targets are: \" + currentEnemyTeam.toString());");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("chosenTeam = currentEnemyTeam;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("pickTeam = false;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("while(pickTarget){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t");
+    _builder.append("String target = s.nextLine();");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t");
+    _builder.append("if(currentEnemyTeam.toString().contains(target)){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t\t");
+    _builder.append("currentEnemyTeam.forEach(targetEnemy ->{ if(targetEnemy.getName().equals(target)){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t\t\t");
+    _builder.append("targetEntity = targetEnemy;}});");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t\t");
+    _builder.append("pickTarget = false;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t");
+    _builder.append("else{");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t\t");
+    _builder.append("System.out.println(\"Not a possible target.\");");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("else if(targetTeam.equals(\"self\")){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("System.out.println(\"Your team is: \" + battleEntities);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("chosenTeam = battleEntities;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("pickTeam = false;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("while(pickTarget){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t");
+    _builder.append("String target = s.nextLine();");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t");
+    _builder.append("if(battleEntities.toString().contains(target)){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t\t");
+    _builder.append("battleEntities.forEach(targetSelf ->{ if(targetSelf.getName().equals(target)){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t\t\t");
+    _builder.append("targetEntity = targetSelf;}});");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t\t");
+    _builder.append("pickTarget = false;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t");
+    _builder.append("else{");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t\t");
+    _builder.append("System.out.println(\"Not a possible target.\");");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("else{");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t\t");
+    _builder.append("System.out.println(\"Not a team.\");");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
     _builder.append("System.out.println(\"You used \"+ moveName + \"\\n\");");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
@@ -575,10 +709,7 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("executeBuffMove(move, moveName, playerEntity);");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("executeMove(move, moveName, enemyEntity, playerEntity);");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("executeAfter(move, moveName, playerEntity);");
+    _builder.append("executeMove(move, moveName, targetEntity, playerEntity);");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.newLine();
@@ -607,6 +738,9 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("enemyEntity.setEntityState(EntityState.DEAD);");
     _builder.newLine();
     _builder.append("\t\t\t\t");
+    _builder.append("currentEnemyTeam.remove(enemyEntity);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
     _builder.append("return;");
     _builder.newLine();
     _builder.append("\t\t\t");
@@ -630,9 +764,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("executeMove(move, enemyEntity.getMoveNameList().get(choosenMove), playerEntity, enemyEntity);");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("executeAfter(move, enemyEntity.getMoveNameList().get(choosenMove), enemyEntity);");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("if(deathChecker.check(playerEntity)){");
@@ -644,6 +775,9 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("playerEntity.setEntityState(EntityState.DEAD);");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
+    _builder.append("battleEntities.remove(playerEntity);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("// Will add the next player entity to the fight, if there are no more, it will go to game over");
@@ -653,6 +787,9 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
     _builder.append("playerEntity = team.getPlayerTeam().remove(0);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("battleEntities.add(playerEntity);");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("}else{");
@@ -917,235 +1054,35 @@ public class RPGGenerator extends AbstractGenerator {
   }
   
   public void generateEffectFiles(final IFileSystemAccess2 fsa, final Effects effects) {
-    boolean effectBoolean = false;
+    String buffClasses = "";
+    String moveEClasses = "";
     EList<Effect> _effect = effects.getEffect();
     for (final Effect effect : _effect) {
       boolean _matched = false;
       if (effect instanceof Buff) {
         _matched=true;
-        if ((!effectBoolean)) {
-          this.addEveryEffect(fsa);
-          effectBoolean = true;
-        }
-        String _name = ((Buff)effect).getName();
-        String _plus = (_name + ".java");
-        fsa.generateFile(_plus, this.generateBuffEffectFile(((Buff)effect)));
+        String _buffClasses = buffClasses;
+        CharSequence _generateBuffEffectFile = this.generateBuffEffectFile(((Buff)effect));
+        buffClasses = (_buffClasses + _generateBuffEffectFile);
       }
       if (!_matched) {
         if (effect instanceof MoveE) {
           _matched=true;
-          if ((!effectBoolean)) {
-            this.addEveryEffect(fsa);
-            effectBoolean = true;
-          }
-          String _name = ((MoveE)effect).getName();
-          String _plus = (_name + ".java");
-          fsa.generateFile(_plus, this.generateMoveEffectFile(((MoveE)effect)));
-        }
-      }
-      if (!_matched) {
-        if (effect instanceof AfterE) {
-          _matched=true;
-          if ((!effectBoolean)) {
-            this.addEveryEffect(fsa);
-            effectBoolean = true;
-          }
-          String _name = ((AfterE)effect).getName();
-          String _plus = (_name + ".java");
-          fsa.generateFile(_plus, this.generateAfterEffetFile(((AfterE)effect)));
+          String _moveEClasses = moveEClasses;
+          CharSequence _generateMoveEffectFile = this.generateMoveEffectFile(((MoveE)effect));
+          moveEClasses = (_moveEClasses + _generateMoveEffectFile);
         }
       }
     }
+    this.addEveryEffect(fsa, buffClasses, moveEClasses);
   }
   
-  public void addEveryEffect(final IFileSystemAccess2 fsa) {
-    fsa.generateFile("EffectBuff.java", this.generateEffectBuff());
-    fsa.generateFile("EffectMove.java", this.generateEffectMove());
-    fsa.generateFile("EffectAfter.java", this.generateEffectAfter());
+  public void addEveryEffect(final IFileSystemAccess2 fsa, final String buffClasses, final String moveEClasses) {
+    fsa.generateFile("EffectBuff.java", this.generateEffectBuff(buffClasses));
+    fsa.generateFile("EffectMove.java", this.generateEffectMove(moveEClasses));
   }
   
-  public CharSequence generateEffectAfter() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("public abstract class EffectAfter {");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public abstract boolean effectAfter(Move move, String name, Entity player);");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public abstract Number changeAfter(Move move, String name, Entity player);");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public abstract void doEffect(Move move, String name, Entity player);    ");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public CharSequence generateAfterEffetFile(final AfterE afterEffect) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.util.*;");
-    _builder.newLine();
-    _builder.append("public class ");
-    String _name = afterEffect.getName();
-    _builder.append(_name);
-    _builder.append(" extends EffectAfter{");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Override");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public boolean effectAfter(Move move, String name, Entity player){\t\t\t\t\t");
-    _builder.newLine();
-    {
-      Proposition _or = afterEffect.getRule().getOr();
-      boolean _tripleNotEquals = (_or != null);
-      if (_tripleNotEquals) {
-        _builder.append("\t\t");
-        _builder.append("HashMap<String, Number> eData = new HashMap<>();");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("for(AttributeData playerData : player.getAttributes()){");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("\t");
-        _builder.append("eData.put(playerData.getAttributeName(), playerData.getNumber());");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("}\t\t\t");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("for(AttributeData aData : move.getMove(name).getMoveAttributes()){");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("\t");
-        _builder.append("eData.put(aData.getAttributeName(), aData.getNumber());\t\t\t\t");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("}\t\t\t\t\t");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("return ");
-        CharSequence _new_logic = this.new_logic(afterEffect.getRule().getOr());
-        _builder.append(_new_logic, "\t\t");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-      } else {
-        _builder.append("\t\t");
-        _builder.append("return true;\t\t\t\t\t");
-        _builder.newLine();
-      }
-    }
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Override");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public Number changeAfter(Move move, String name, Entity player){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("HashMap<String, Number> eData = new HashMap<>();");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("for(AttributeData playerData : player.getAttributes()){");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("eData.put(playerData.getAttributeName(), playerData.getNumber());");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("for(AttributeData aData : move.getMove(name).getMoveAttributes()){");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("eData.put(aData.getAttributeName(), aData.getNumber());\t\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("return ");
-    CharSequence _new_exp = this.new_exp(afterEffect.getRule().getSum());
-    _builder.append(_new_exp, "\t\t\t");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Override\t\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public void doEffect(Move move, String name, Entity player){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("if(effectAfter(move, name, player)){");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("for(AttributeData aData : player.getAttributes()){");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("if(aData.getAttributeName() == \"");
-    String _name_1 = afterEffect.getRule().getTarget().getName();
-    _builder.append(_name_1, "\t\t\t\t");
-    _builder.append("\"){");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("aData.setNumber(changeAfter(move, name, player));");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("System.out.println(player.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("for(AttributeData aData : move.getMove(name).getMoveAttributes()){");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("if(aData.getAttributeName() == \"");
-    String _name_2 = afterEffect.getRule().getTarget().getName();
-    _builder.append(_name_2, "\t\t\t\t");
-    _builder.append("\"){");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("aData.setNumber(changeAfter(move, name, player));");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("System.out.println(player.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());\t\t\t\t\t\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("}\t\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}\t\t\t\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}\t\t\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}\t\t");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public CharSequence generateEffectMove() {
+  public CharSequence generateEffectMove(final String moveEClasses) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*;");
     _builder.newLine();
@@ -1153,39 +1090,62 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
+    _builder.append("protected Map<String, Number> eData;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
     _builder.append("public abstract boolean effectMove(Move move, String name, Entity enemy);");
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("public abstract Number changeMove(Move move, String name, Entity enemy);");
+    _builder.append("public abstract Map<String, Number> changeMove(Move move, String name, Entity enemy);");
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("public abstract void doEffect(Move move, String name, Entity enemy, Entity player);    \t");
+    _builder.append("public abstract void doEffect(Move move, String name, Entity enemy, Entity player);");
     _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append(moveEClasses, "    ");
+    _builder.append("    \t");
+    _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
     return _builder;
   }
   
-  public CharSequence generateEffectBuff() {
+  public CharSequence generateEffectBuff(final String buffClasses) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.*;");
     _builder.newLine();
     _builder.append("public abstract class EffectBuff {");
     _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("protected Map<String, Number> eData;");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public abstract boolean effectBuff(Move move, String name, Entity player);");
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("public abstract Number changeBuff(Move move, String name, Entity player);");
+    _builder.append("public abstract Map<String, Number> changeBuff(Move move, String name, Entity player);");
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("public abstract void doEffect(Move move, String name, Entity player);    \t");
+    _builder.append("public abstract void doEffect(Move move, String name, Entity player);  ");
     _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append(buffClasses, "    ");
+    _builder.append("  \t");
+    _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
     return _builder;
@@ -1193,14 +1153,12 @@ public class RPGGenerator extends AbstractGenerator {
   
   public CharSequence generateBuffEffectFile(final Buff buff) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.util.*;");
-    _builder.newLine();
-    _builder.append("public class ");
+    _builder.append("public static class ");
     String _name = buff.getName();
     _builder.append(_name);
     _builder.append(" extends EffectBuff{");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
+    _builder.append("\t\t\t\t\t");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("@Override");
@@ -1213,7 +1171,7 @@ public class RPGGenerator extends AbstractGenerator {
       boolean _tripleNotEquals = (_or != null);
       if (_tripleNotEquals) {
         _builder.append("\t\t");
-        _builder.append("HashMap<String, Number> eData = new HashMap<>();");
+        _builder.append("eData = new HashMap<>();");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("for(AttributeData playerData : player.getAttributes()){");
@@ -1255,10 +1213,10 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Number changeBuff(Move move, String name, Entity player){");
+    _builder.append("public Map<String, Number> changeBuff(Move move, String name, Entity player){");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("HashMap<String, Number> eData = new HashMap<>();");
+    _builder.append("eData = new HashMap<>();");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("for(AttributeData playerData : player.getAttributes()){");
@@ -1279,11 +1237,8 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("return ");
-    CharSequence _new_exp = this.new_exp(buff.getRule().getSum());
-    _builder.append(_new_exp, "\t\t\t");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
+    _builder.append("return eData;");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
@@ -1299,53 +1254,87 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("if(effectBuff(move, name, player)){");
     _builder.newLine();
     _builder.append("\t\t\t");
+    _builder.append("eData = changeBuff(move, name, player);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("for(AttributeData aData : player.getAttributes()){");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("if(aData.getAttributeName() == \"");
-    String _name_1 = buff.getRule().getTarget().getName();
-    _builder.append(_name_1, "\t\t\t\t");
-    _builder.append("\"){");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("aData.setNumber(changeBuff(move, name, player));");
     _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("System.out.println(player.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());");
-    _builder.newLine();
+    {
+      EList<Target> _target = buff.getRule().getTarget();
+      for(final Target change : _target) {
+        _builder.append("\t\t\t\t");
+        _builder.append("if(aData.getAttributeName() == \"");
+        String _name_1 = change.getTarget().getName();
+        _builder.append(_name_1, "\t\t\t\t");
+        _builder.append("\"){");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t\t");
+        _builder.append("\t");
+        _builder.append("aData.setNumber(");
+        CharSequence _new_exp = this.new_exp(change.getSum());
+        _builder.append(_new_exp, "\t\t\t\t\t");
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t\t");
+        _builder.append("\t");
+        _builder.append("System.out.println(player.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());\t\t\t\t\t\t\t\t\t");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("\t");
+        _builder.append("break;");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.newLine();
+      }
+    }
     _builder.append("\t\t\t\t\t");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("for(AttributeData aData : move.getMove(name).getMoveAttributes()){");
     _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("if(aData.getAttributeName() == \"");
-    String _name_2 = buff.getRule().getTarget().getName();
-    _builder.append(_name_2, "\t\t\t\t");
-    _builder.append("\"){");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("aData.setNumber(changeBuff(move, name, player));");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("System.out.println(player.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("}\t\t\t\t");
+    {
+      EList<Target> _target_1 = buff.getRule().getTarget();
+      for(final Target change_1 : _target_1) {
+        _builder.append("\t\t\t\t");
+        _builder.append("if(aData.getAttributeName() == \"");
+        String _name_2 = change_1.getTarget().getName();
+        _builder.append(_name_2, "\t\t\t\t");
+        _builder.append("\"){");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t\t");
+        _builder.append("\t");
+        _builder.append("aData.setNumber(");
+        CharSequence _new_exp_1 = this.new_exp(change_1.getSum());
+        _builder.append(_new_exp_1, "\t\t\t\t\t");
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t\t");
+        _builder.append("\t");
+        _builder.append("System.out.println(player.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("}\t\t\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("}\t\t\t");
+    _builder.append("}\t\t\t\t\t\t");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -1357,14 +1346,12 @@ public class RPGGenerator extends AbstractGenerator {
   
   public CharSequence generateMoveEffectFile(final MoveE moveE) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.util.*;");
-    _builder.newLine();
-    _builder.append("public class ");
+    _builder.append("public static class ");
     String _name = moveE.getName();
     _builder.append(_name);
     _builder.append(" extends EffectMove{");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
+    _builder.append("\t\t\t\t\t");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("@Override");
@@ -1377,7 +1364,7 @@ public class RPGGenerator extends AbstractGenerator {
       boolean _tripleNotEquals = (_or != null);
       if (_tripleNotEquals) {
         _builder.append("\t\t");
-        _builder.append("HashMap<String, Number> eData = new HashMap<>();");
+        _builder.append("eData = new HashMap<>();");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("for(AttributeData enemyData : enemy.getAttributes()){");
@@ -1420,10 +1407,10 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("@Override");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Number changeMove(Move move, String name, Entity enemy){");
+    _builder.append("public Map<String, Number> changeMove(Move move, String name, Entity enemy){");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("HashMap<String, Number> eData = new HashMap<>();");
+    _builder.append("eData = new HashMap<>();");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("for(AttributeData enemyData : enemy.getAttributes()){");
@@ -1444,11 +1431,8 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("return ");
-    CharSequence _new_exp = this.new_exp(moveE.getRule().getSum());
-    _builder.append(_new_exp, "\t\t\t");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
+    _builder.append("return eData;");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
@@ -1463,28 +1447,113 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("\t\t");
     _builder.append("if(effectMove(move, name, player)){");
     _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("for(AttributeData aData : enemy.getAttributes()){");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("if(aData.getAttributeName() == \"");
-    String _name_1 = moveE.getRule().getTarget().getName();
-    _builder.append(_name_1, "\t\t\t\t");
-    _builder.append("\"){");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("aData.setNumber(changeMove(move, name, enemy));");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("System.out.println(enemy.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
+    {
+      boolean _isEmpty = moveE.getRule().getChange().getTarget().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _builder.append("\t\t\t");
+        _builder.append("eData = changeMove(move, name, enemy);");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("for(AttributeData aData : enemy.getAttributes()){");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.newLine();
+        {
+          EList<Target> _target = moveE.getRule().getChange().getTarget();
+          for(final Target change : _target) {
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("if(aData.getAttributeName() == \"");
+            String _name_1 = change.getTarget().getName();
+            _builder.append(_name_1, "\t\t\t\t");
+            _builder.append("\"){");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("eData = changeMove(move, name, enemy);");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("aData.setNumber(");
+            CharSequence _new_exp = this.new_exp(change.getSum());
+            _builder.append(_new_exp, "\t\t\t\t\t");
+            _builder.append(");");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("System.out.println(enemy.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());");
+            _builder.newLine();
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.newLine();
+          }
+        }
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    {
+      boolean _isEmpty_1 = moveE.getRule().getChange().getSelfT().isEmpty();
+      boolean _not_1 = (!_isEmpty_1);
+      if (_not_1) {
+        _builder.append("\t\t\t");
+        _builder.append("eData = changeMove(move, name, player);");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("for(AttributeData aData : player.getAttributes()){");
+        _builder.newLine();
+        {
+          EList<Self> _selfT = moveE.getRule().getChange().getSelfT();
+          for(final Self change_1 : _selfT) {
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("if(aData.getAttributeName() == \"");
+            String _name_2 = change_1.getTarget().getName();
+            _builder.append(_name_2, "\t\t\t\t");
+            _builder.append("\"){");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("aData.setNumber(");
+            CharSequence _new_exp_1 = this.new_exp(change_1.getSum());
+            _builder.append(_new_exp_1, "\t\t\t\t\t");
+            _builder.append(");");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("System.out.println(player.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());");
+            _builder.newLine();
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("}\t\t\t\t\t\t\t");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
     _builder.append("\t\t");
     _builder.append("}\t\t\t");
     _builder.newLine();
@@ -1686,6 +1755,22 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public String toString() {");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("return this.name.toString();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -2353,9 +2438,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("    ");
     _builder.append("private List<EffectBuff> buffEffects;");
     _builder.newLine();
-    _builder.append("    ");
-    _builder.append("private List<EffectAfter> afterEffects;");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public MoveData(){");
@@ -2369,15 +2451,12 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("\t\t");
     _builder.append("this.buffEffects = new ArrayList<>();");
     _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("this.afterEffects = new ArrayList<>();");
-    _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("public MoveData(String moveName, String type, List<AttributeData> moveAttributes, List<EffectMove> moveEffects, List<EffectBuff> buffEffects, List<EffectAfter> afterEffects) {");
+    _builder.append("public MoveData(String moveName, String type, List<AttributeData> moveAttributes, List<EffectMove> moveEffects, List<EffectBuff> buffEffects) {");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("this.moveName = moveName;");
@@ -2393,9 +2472,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("this.buffEffects = buffEffects;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("this.afterEffects = afterEffects;\t");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
@@ -2495,17 +2571,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public List<EffectAfter> getAfterEffects(){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("return this.afterEffects;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
     _builder.append("public void addMoveEffect(EffectMove moveEffect){");
     _builder.newLine();
     _builder.append("\t\t");
@@ -2526,15 +2591,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public void addAfterEffect(EffectAfter afterEffect){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("this.afterEffects.add(afterEffect);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
     _builder.newLine();
     _builder.newLine();
     _builder.append("    ");
@@ -2575,7 +2631,7 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("public int hashCode() {");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("return Objects.hash(moveName, type, moveAttributes, moveEffects, buffEffects, afterEffects);");
+    _builder.append("return Objects.hash(moveName, type, moveAttributes, moveEffects, buffEffects);");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
@@ -2712,7 +2768,7 @@ public class RPGGenerator extends AbstractGenerator {
             {
               if ((moveEffect != null)) {
                 _builder.append("\t\t");
-                _builder.append("tempMoveData.addMoveEffect(new ");
+                _builder.append("tempMoveData.addMoveEffect(new EffectMove.");
                 String _name_3 = moveEffect.getMoveEName().getName();
                 _builder.append(_name_3, "\t\t");
                 _builder.append("());");
@@ -2727,24 +2783,9 @@ public class RPGGenerator extends AbstractGenerator {
             {
               if ((buffEffect != null)) {
                 _builder.append("\t\t");
-                _builder.append("tempMoveData.addBuffEffect(new ");
+                _builder.append("tempMoveData.addBuffEffect(new EffectBuff.");
                 String _name_4 = buffEffect.getBuffEName().getName();
                 _builder.append(_name_4, "\t\t");
-                _builder.append("());");
-                _builder.newLineIfNotEmpty();
-              }
-            }
-          }
-        }
-        {
-          EList<AEffect> _aEffect = move.getAEffect();
-          for(final AEffect afterEffect : _aEffect) {
-            {
-              if ((afterEffect != null)) {
-                _builder.append("\t\t");
-                _builder.append("tempMoveData.addAfterEffect(new ");
-                String _name_5 = afterEffect.getAfterEName().getName();
-                _builder.append(_name_5, "\t\t");
                 _builder.append("());");
                 _builder.newLineIfNotEmpty();
               }

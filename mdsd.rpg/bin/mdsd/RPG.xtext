@@ -15,19 +15,15 @@ Effects:
 ;
 
 Effect:
-	'effect' (Buff | MoveE | AfterE)
+	'effect' (Buff | MoveE)
 ;
 
 Buff:
-	'buff' name=ID rule=Rule
+	'buff' name=ID rule=RuleB
 ;
 
 MoveE:
 	'move' name=ID rule=Rule
-;
-
-AfterE:
-	'after' name=ID rule=Rule
 ;
 
 Attributes:
@@ -65,7 +61,7 @@ Moves:
 ;
 
 Move:
-	'move' name=ID eType=EType att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect | aEffect+=AEffect)*
+	'move' name=ID eType=EType att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect)*
 ;
 
 MEffect:
@@ -74,10 +70,6 @@ MEffect:
 
 BEffect:
 	'effect' 'buff' buffEName=[Buff]
-;
-
-AEffect:
-	'effect' 'after' afterEName=[AfterE]
 ;
 
 EType:
@@ -93,7 +85,23 @@ AltAttribute:
 ;
 
 Rule:
-	('if' or = ORcondition 'then')? target=[Attribute] 'is' sum=Sum
+	('if' or = ORcondition 'then')? change=Change
+;
+
+RuleB:
+	('if' or = ORcondition 'then')? target+=Target+
+;
+
+Change:
+	(selfT+=Self | target+=Target)+
+;
+
+Self:
+	'self' target=[Attribute] 'is' sum=Sum
+;
+
+Target:
+	'target' target=[Attribute] 'is' sum=Sum
 ;
 
 Entities:

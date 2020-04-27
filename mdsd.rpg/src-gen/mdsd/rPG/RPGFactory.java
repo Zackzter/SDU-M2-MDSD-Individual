@@ -78,15 +78,6 @@ public interface RPGFactory extends EFactory
   MoveE createMoveE();
 
   /**
-   * Returns a new object of class '<em>After E</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>After E</em>'.
-   * @generated
-   */
-  AfterE createAfterE();
-
-  /**
    * Returns a new object of class '<em>Attributes</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -186,15 +177,6 @@ public interface RPGFactory extends EFactory
   BEffect createBEffect();
 
   /**
-   * Returns a new object of class '<em>AEffect</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>AEffect</em>'.
-   * @generated
-   */
-  AEffect createAEffect();
-
-  /**
    * Returns a new object of class '<em>EType</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -229,6 +211,42 @@ public interface RPGFactory extends EFactory
    * @generated
    */
   Rule createRule();
+
+  /**
+   * Returns a new object of class '<em>Rule B</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Rule B</em>'.
+   * @generated
+   */
+  RuleB createRuleB();
+
+  /**
+   * Returns a new object of class '<em>Change</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Change</em>'.
+   * @generated
+   */
+  Change createChange();
+
+  /**
+   * Returns a new object of class '<em>Self</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Self</em>'.
+   * @generated
+   */
+  Self createSelf();
+
+  /**
+   * Returns a new object of class '<em>Target</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Target</em>'.
+   * @generated
+   */
+  Target createTarget();
 
   /**
    * Returns a new object of class '<em>Entities</em>'.
