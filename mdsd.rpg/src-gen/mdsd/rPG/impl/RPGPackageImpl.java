@@ -52,6 +52,7 @@ import mdsd.rPG.RuleB;
 import mdsd.rPG.Self;
 import mdsd.rPG.Smaller;
 import mdsd.rPG.SmallerEq;
+import mdsd.rPG.Speed;
 import mdsd.rPG.Sub;
 import mdsd.rPG.Sum;
 import mdsd.rPG.SystemRPG;
@@ -89,6 +90,13 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   private EClass declarationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass speedEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -566,6 +574,28 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
   public EClass getDeclaration()
   {
     return declarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getSpeed()
+  {
+    return speedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getSpeed_SpeedValue()
+  {
+    return (EReference)speedEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1980,6 +2010,9 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
 
     declarationEClass = createEClass(DECLARATION);
 
+    speedEClass = createEClass(SPEED);
+    createEReference(speedEClass, SPEED__SPEED_VALUE);
+
     effectsEClass = createEClass(EFFECTS);
     createEReference(effectsEClass, EFFECTS__EFFECT);
 
@@ -2188,6 +2221,7 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    speedEClass.getESuperTypes().add(this.getDeclaration());
     effectsEClass.getESuperTypes().add(this.getDeclaration());
     buffEClass.getESuperTypes().add(this.getEffect());
     moveEEClass.getESuperTypes().add(this.getEffect());
@@ -2224,6 +2258,9 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     initEReference(getSystemRPG_Declarations(), this.getDeclaration(), null, "declarations", null, 0, -1, SystemRPG.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(declarationEClass, Declaration.class, "Declaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(speedEClass, Speed.class, "Speed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSpeed_SpeedValue(), this.getAttribute(), null, "speedValue", null, 0, 1, Speed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(effectsEClass, Effects.class, "Effects", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEffects_Effect(), this.getEffect(), null, "effect", null, 0, -1, Effects.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

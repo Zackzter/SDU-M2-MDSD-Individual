@@ -119,13 +119,10 @@ class RPGGenerator extends AbstractGenerator {
 	def CharSequence generateGame(String classFileName){
 		'''
 		import java.util.*;
-		import java.awt.event.*;
 		
 		public class «classFileName»{
 			private Type type;
 		    private List<Entity> entities;
-		    private List<Entity> battleEntities;
-		    private List<Entity> currentEnemyTeam;
 		    private Team team;
 		    private Move move;
 		    private MoveInit moveInit;
@@ -137,21 +134,24 @@ class RPGGenerator extends AbstractGenerator {
 		    private DeathChecker deathChecker;
 		    private Random random;
 		    
-		    private String currentTeam;
 		    private boolean gameFinished;
 		    private boolean won = false;
 		    private boolean lost = false;
 		    private Scanner s;
-		    private Entity playerEntity;
-		    private Entity targetEntity;
+			private Entity targetEntity;
+			private Map<String, Entity> playerNameID;
+			private Map<String, Entity> enemyNameID;
+			private Map<Entity, Map<Entity, String>> moveQueue;
+			private Map<Entity, String> targetMap;
+			private List<String> targetList;
+		
+			private final int membersFighting = 2;
 		    
 		    
 		    public «classFileName»(){
 		    	entities = new ArrayList<>();
 		    	type = Type.getInstance();
-		      	team = new Team();
-		    	battleEntities = new ArrayList<>();
-				currentEnemyTeam = new ArrayList<>();    	
+		      	team = new Team();    	
 		    	move = Move.getInstance();
 		    	location = Location.getInstance();
 		    	deathChecker = new DeathChecker();
@@ -161,7 +161,11 @@ class RPGGenerator extends AbstractGenerator {
 		    	locationsInit = new LocationsInit();
 		        typeRelationsInit = new TypeRelationsInit();
 		        s = new Scanner(System.in);
-		        random = new Random();
+				random = new Random();
+				
+				playerNameID = new HashMap<>();
+				enemyNameID = new HashMap<>();
+				moveQueue = new HashMap<>();
 		   	}
 		   	
 		   	public void run(){
@@ -175,11 +179,45 @@ class RPGGenerator extends AbstractGenerator {
 		   		teamInit.createTeams(team, entities);
 		   		typeRelationsInit.createRelations(type);
 		   		locationsInit.addLocations(location);
-		   	}
+			   }
+			   
+			private void reffereceMap(List<Entity> entities, Map<String, Entity> entityMap){
+				int entitiesLeft = membersFighting;
+				if(entities.size() < membersFighting) entitiesLeft = entities.size();
+		
+				for (int i = 0; i < entitiesLeft; i++) {
+					Entity currentEntity = entities.remove(0);
+					System.out.println("name: " + currentEntity);
+					if(entityMap.get(currentEntity.getName()) == null){
+						entityMap.put(currentEntity.getName(), currentEntity);
+					}
+					else{
+						for(i=2; i < entitiesLeft + 2; i++){
+							String extendedName = currentEntity.getName() + i;
+							if(entityMap.get(extendedName) == null){
+								entityMap.put(extendedName, currentEntity);
+								break;
+							}
+						}
+					}
+				}
+			}
 		   	
 		   	private void gameLoop(){
-		   		playerEntity = team.getPlayerTeam().remove(0);
-		   		battleEntities.add(playerEntity);   
+				//playerEntity = team.getPlayerTeam().remove(0);
+				reffereceMap(team.getPlayerTeam(), playerNameID);
+				// if(playerNameID.get(playerEntity.getName()) == null){
+				// 	playerNameID.put(playerEntity.getName(), playerEntity);
+				// }
+				// else{
+				// 	//for(i = 2; i < teamSize+2; i++)
+				// 	String extendName = playerEntity.getName() + Integer.toString(playerNumber);
+				// 	if (playerNameID.get(extendName) == null){
+				// 		playerNameID.put(extendName, playerEntity);
+				// 		playerNumber++;
+				// 	}
+				// }
+		   		//battleEntities.add(playerEntity);   
 		   		
 				while (!gameFinished) {
 					if(won){
@@ -201,10 +239,10 @@ class RPGGenerator extends AbstractGenerator {
 		   	
 		   	private void processGame(List<Entity> enemyTeam){
 		   		while(enemyTeam.size() > 0 && !lost){
-		   			Entity enemyEntity = enemyTeam.remove(0);
-					currentEnemyTeam.add(enemyEntity);
-		   			
-		   			fight(enemyEntity);
+		   			//Entity enemyEntity = enemyTeam.remove(0);
+					//currentEnemyTeam.add(enemyEntity);
+		   			reffereceMap(enemyTeam, enemyNameID);
+		   			fight();
 		   		}
 		   		if(!(location.getLocations().size() > 0) && !lost){
 					won = true;
@@ -218,7 +256,7 @@ class RPGGenerator extends AbstractGenerator {
 					}
 				}
 			}
-
+		
 			private void executeMove(Move move, String moveName, Entity target, Entity user){
 				if(!move.getMove(moveName).getMoveEffects().isEmpty()){
 					for(EffectMove moveEffect: move.getMove(moveName).getMoveEffects()){
@@ -228,108 +266,157 @@ class RPGGenerator extends AbstractGenerator {
 			}
 					   	
 		   		
-		   	private void fight(Entity enemyEntity){
-		   		boolean fighting = true;
+		   	private void fight(){
+				boolean fighting = true;
+				Entity currentEntity;
 		   		while(fighting){
-		   			System.out.println("You are against " + enemyEntity.getName() + " choose your move");
-		   			List<String> moves = playerEntity.getMoveNameList();
-					System.out.println(moves);
+					System.out.println("You are against " + enemyNameID.keySet() + " choose your move");
+					for(String entityName : playerNameID.keySet()){
+						currentEntity = playerNameID.get(entityName);
+						List<String> moves = currentEntity.getMoveNameList();
+						System.out.println(moves);
 					
-					boolean pickMove = true;
-					while (pickMove){  
-						String moveName = s.nextLine();
+						//List<String> moves = playerEntity.getMoveNameList();
 						
-						// Will check that the user picks a move which exists
-						if(moves.contains(moveName)){
-							boolean pickTeam = true;
-							List<Entity> chosenTeam = null;
-							while(pickTeam){
-								System.out.println("What team do you want to target: enemy or self");
-								String targetTeam = s.nextLine();
-								boolean pickTarget = true;
-								if(targetTeam.equals("enemy")){
-									System.out.println("The enemy targets are: " + currentEnemyTeam.toString());
-									chosenTeam = currentEnemyTeam;
-									pickTeam = false;
-									
-									while(pickTarget){
-										String target = s.nextLine();
-										if(currentEnemyTeam.toString().contains(target)){
-											currentEnemyTeam.forEach(targetEnemy ->{ if(targetEnemy.getName().equals(target)){
-												targetEntity = targetEnemy;}});
-											pickTarget = false;
-										}
-										else{
-											System.out.println("Not a possible target.");
-										}
-									}
-								}
-								else if(targetTeam.equals("self")){
-									System.out.println("Your team is: " + battleEntities);
-									chosenTeam = battleEntities;
-									pickTeam = false;
-									
-									while(pickTarget){
-										String target = s.nextLine();
-										if(battleEntities.toString().contains(target)){
-											battleEntities.forEach(targetSelf ->{ if(targetSelf.getName().equals(target)){
-												targetEntity = targetSelf;}});
-											pickTarget = false;
-										}
-										else{
-											System.out.println("Not a possible target.");
+						boolean pickMove = true;
+						while (pickMove){  
+							String moveName = s.nextLine();
+							
+							// Will check that the user picks a move which exists
+							if(moves.contains(moveName)){
+								boolean pickTeam = true;
+								//List<Entity> chosenTeam = null;
+								while(pickTeam){
+									System.out.println("What team do you want to target: enemy or self");
+									String targetTeam = s.nextLine();
+									boolean pickTarget = true;
+									if(targetTeam.equals("enemy")){
+										System.out.println("The enemy targets are: " + enemyNameID.keySet());
+										//chosenTeam = currentEnemyTeam;
+										pickTeam = false;
+										
+										while(pickTarget){
+											String target = s.nextLine();
+											if(enemyNameID.keySet().contains(target)){
+											//if(currentEnemyTeam.toString().contains(target)){
+												for(String targetEnemy : enemyNameID.keySet()){
+													System.out.println("name " + targetEnemy);
+													if(targetEnemy.equals(target)){ 
+														targetEntity = enemyNameID.get(target);
+														break;
+													}
+		
+												}
+												//currentEnemyTeam.forEach(targetEnemy ->{ if(targetEnemy.getName().equals(target)){targetEntity = targetEnemy;}});
+												pickTarget = false;
+											}
+											else{
+												System.out.println("Not a possible target.");
+											}
 										}
 									}
+									else if(targetTeam.equals("self")){
+										System.out.println("Your team is: " + playerNameID.keySet());
+										//chosenTeam = battleEntities;
+										pickTeam = false;
+										
+										while(pickTarget){
+											String target = s.nextLine();
+											if(playerNameID.keySet().contains(target)){
+												for(String targetSelf : playerNameID.keySet()){
+													if(targetSelf.equals(target)) targetEntity = playerNameID.get(target);
+													break;
+												}
+											//if(battleEntities.toString().contains(target)){
+												// battleEntities.forEach(targetSelf ->{ if(targetSelf.getName().equals(target)){
+												// 	targetEntity = targetSelf;}});
+												pickTarget = false;
+											}
+											else{
+												System.out.println("Not a possible target.");
+											}
+										}
+									}
+									else{
+										System.out.println("Not a team.");
+									}
 								}
-								else{
-									System.out.println("Not a team.");
-								}
+								targetMap = new HashMap<>();
+								targetMap.put(targetEntity, moveName);
+								moveQueue.put(currentEntity, targetMap);
+								// System.out.println("You used "+ moveName + "\n");
+								
+								// executeBuffMove(move, moveName, playerEntity);
+								// executeMove(move, moveName, targetEntity, playerEntity); TODO::: USE MOVE SOMEWHERE ELSE
+								
+								pickMove = !pickMove;
+							}else{
+								System.out.println("That's not a possible move!");
 							}
-							
-							
-							System.out.println("You used "+ moveName + "\n");
-							
-							executeBuffMove(move, moveName, playerEntity);
-							executeMove(move, moveName, targetEntity, playerEntity);
-							
-							pickMove = !pickMove;
-						}else{
-							System.out.println("That's not a possible move!");
 						}
 					}
-					if(deathChecker.check(enemyEntity)){
-						System.out.println(enemyEntity.getName() + " is dead!");
-						enemyEntity.setEntityState(EntityState.DEAD);
-						currentEnemyTeam.remove(enemyEntity);
-						return;
-					}else{
-						System.out.println("Enemy Turn...");
-						int choosenMove = random.nextInt(enemyEntity.getMoveNameList().size());
-						System.out.println(enemyEntity.getName() + " used " + enemyEntity.getMoveNameList().get(choosenMove) + "\n");
+		
+					for(String enemyName : enemyNameID.keySet()){
+						currentEntity = enemyNameID.get(enemyName);
+						int choosenMove = random.nextInt(currentEntity.getMoveNameList().size());
+						String moveName = currentEntity.getMoveNameList().get(choosenMove);
+						targetList = new ArrayList<>(playerNameID.keySet());
+						targetEntity = playerNameID.get(targetList.get(random.nextInt(targetList.size())));
+						targetMap = new HashMap<>();
+						targetMap.put(targetEntity, moveName);
+						moveQueue.put(currentEntity, targetMap);
+					}
+					// if(deathChecker.check(targetEntity)){
+					// 	System.out.println(targetEntity.getName() + " is dead!");
+					// 	targetEntity.setEntityState(EntityState.DEAD);
+					// 	currentEnemyTeam.remove(targetEntity);
+					// 	enemyNameID.remove(targetEntity.getName());
+					// 	return;
+					// }else{
+					// 	//System.out.println("Enemy Turn...");
+		
+					// 	int choosenMove = random.nextInt(enemyEntity.getMoveNameList().size());
+					// 	System.out.println(enemyEntity.getName() + " used " + enemyEntity.getMoveNameList().get(choosenMove) + "\n");
 						
-						executeBuffMove(move, enemyEntity.getMoveNameList().get(choosenMove), enemyEntity);
-						executeMove(move, enemyEntity.getMoveNameList().get(choosenMove), playerEntity, enemyEntity);
+					// 	executeBuffMove(move, enemyEntity.getMoveNameList().get(choosenMove), enemyEntity);
+					// 	executeMove(move, enemyEntity.getMoveNameList().get(choosenMove), playerEntity, enemyEntity);
 						
-						if(deathChecker.check(playerEntity)){
-							System.out.println("Your " + playerEntity.getName() + " is dead");
-							playerEntity.setEntityState(EntityState.DEAD);
-							battleEntities.remove(playerEntity);
+					// 	if(deathChecker.check(playerEntity)){
+					// 		System.out.println("Your " + playerEntity.getName() + " is dead");
+					// 		playerEntity.setEntityState(EntityState.DEAD);
+					// 		playerNameID.remove(playerEntity.getName()); //TODO:: FIX
+					// 		battleEntities.remove(playerEntity);
 							
-							// Will add the next player entity to the fight, if there are no more, it will go to game over
-							if(!team.getPlayerTeam().isEmpty()){
-								playerEntity = team.getPlayerTeam().remove(0);
-								battleEntities.add(playerEntity);
-							}else{
-								lost = true;
-								return;
-							}
+					// 		// Will add the next player entity to the fight, if there are no more, it will go to game over
+					// 		if(!team.getPlayerTeam().isEmpty()){
+					// 			// playerEntity = team.getPlayerTeam().remove(0);
+					// 			// battleEntities.add(playerEntity);
+					// 			reffereceMap(team.getPlayerTeam(), playerNameID);
+					// 		}else{
+					// 			lost = true;
+					// 			return;
+					// 		}
+					// 	}
+					// }
+					System.out.println(moveQueue);
+					for(Entity fighEntity : moveQueue.keySet()){
+						String moveName = "";
+						for(Entity target : moveQueue.get(fighEntity).keySet()){
+							targetEntity = target;
+							moveName = moveQueue.get(fighEntity).get(target);
+						}
+						executeBuffMove(move, moveName, fighEntity);
+						executeMove(move, moveName, targetEntity, fighEntity);
+						System.out.println("playermap: " + playerNameID.containsValue(targetEntity));
+						System.out.println("enemymap: " + enemyNameID.containsValue(targetEntity));
+						if(deathChecker.check(targetEntity)){
+							moveQueue.remove(targetEntity);
+							playerNameID.containsValue(targetEntity);
 						}
 					}
 		   		}
 		   	}
 		}
-		
-		
 		'''
 	}
 	
@@ -1293,7 +1380,7 @@ class RPGGenerator extends AbstractGenerator {
 				    }
 				
 				    public void addWeakAgainst(String weak){
-				        strongAgainst.add(weak);
+				        weakAgainst.add(weak);
 				    }
 				
 				    public ArrayList<String> getWeakAgainst(){

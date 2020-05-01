@@ -11,6 +11,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//SystemRPG/declarations"/>
     </genClasses>
     <genClasses ecoreClass="RPG.ecore#//Declaration"/>
+    <genClasses ecoreClass="RPG.ecore#//Speed">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//Speed/speedValue"/>
+    </genClasses>
     <genClasses ecoreClass="RPG.ecore#//Effects">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Effects/effect"/>
     </genClasses>

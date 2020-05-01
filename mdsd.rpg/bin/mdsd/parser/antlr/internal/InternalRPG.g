@@ -207,6 +207,51 @@ ruleDeclaration returns [EObject current=null]
 			$current = $this_Effects_7.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getDeclarationAccess().getSpeedParserRuleCall_8());
+		}
+		this_Speed_8=ruleSpeed
+		{
+			$current = $this_Speed_8.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleSpeed
+entryRuleSpeed returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSpeedRule()); }
+	iv_ruleSpeed=ruleSpeed
+	{ $current=$iv_ruleSpeed.current; }
+	EOF;
+
+// Rule Speed
+ruleSpeed returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='speed'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getSpeedAccess().getSpeedKeyword_0());
+		}
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getSpeedRule());
+					}
+				}
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getSpeedAccess().getSpeedValueAttributeCrossReference_1_0());
+				}
+			)
+		)
 	)
 ;
 

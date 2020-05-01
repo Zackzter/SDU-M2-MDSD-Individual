@@ -67,6 +67,7 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
     {
       case RPGPackage.SYSTEM_RPG: return createSystemRPG();
       case RPGPackage.DECLARATION: return createDeclaration();
+      case RPGPackage.SPEED: return createSpeed();
       case RPGPackage.EFFECTS: return createEffects();
       case RPGPackage.EFFECT: return createEffect();
       case RPGPackage.BUFF: return createBuff();
@@ -147,6 +148,18 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     DeclarationImpl declaration = new DeclarationImpl();
     return declaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Speed createSpeed()
+  {
+    SpeedImpl speed = new SpeedImpl();
+    return speed;
   }
 
   /**

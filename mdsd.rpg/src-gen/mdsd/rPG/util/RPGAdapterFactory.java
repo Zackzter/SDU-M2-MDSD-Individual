@@ -86,6 +86,11 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createDeclarationAdapter();
       }
       @Override
+      public Adapter caseSpeed(Speed object)
+      {
+        return createSpeedAdapter();
+      }
+      @Override
       public Adapter caseEffects(Effects object)
       {
         return createEffectsAdapter();
@@ -398,6 +403,21 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Speed <em>Speed</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.Speed
+   * @generated
+   */
+  public Adapter createSpeedAdapter()
   {
     return null;
   }

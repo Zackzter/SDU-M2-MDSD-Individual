@@ -7,6 +7,9 @@
         eType="#//Declaration" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Declaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Speed" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="speedValue" eType="#//Attribute"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Effects" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="effect" upperBound="-1"
         eType="#//Effect" containment="true"/>

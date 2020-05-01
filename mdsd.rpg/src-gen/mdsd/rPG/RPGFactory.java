@@ -42,6 +42,15 @@ public interface RPGFactory extends EFactory
   Declaration createDeclaration();
 
   /**
+   * Returns a new object of class '<em>Speed</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Speed</em>'.
+   * @generated
+   */
+  Speed createSpeed();
+
+  /**
    * Returns a new object of class '<em>Effects</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

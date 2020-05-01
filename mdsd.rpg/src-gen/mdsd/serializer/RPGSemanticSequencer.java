@@ -46,6 +46,7 @@ import mdsd.rPG.RuleB;
 import mdsd.rPG.Self;
 import mdsd.rPG.Smaller;
 import mdsd.rPG.SmallerEq;
+import mdsd.rPG.Speed;
 import mdsd.rPG.Sub;
 import mdsd.rPG.SystemRPG;
 import mdsd.rPG.Target;
@@ -197,6 +198,9 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RPGPackage.SMALLER_EQ:
 				sequence_Comparator(context, (SmallerEq) semanticObject); 
+				return; 
+			case RPGPackage.SPEED:
+				sequence_Speed(context, (Speed) semanticObject); 
 				return; 
 			case RPGPackage.SUB:
 				sequence_Sum(context, (Sub) semanticObject); 
@@ -887,6 +891,25 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getSelfAccess().getTargetAttributeIDTerminalRuleCall_1_0_1(), semanticObject.eGet(RPGPackage.Literals.SELF__TARGET, false));
 		feeder.accept(grammarAccess.getSelfAccess().getSumSumParserRuleCall_3_0(), semanticObject.getSum());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Declaration returns Speed
+	 *     Speed returns Speed
+	 *
+	 * Constraint:
+	 *     speedValue=[Attribute|ID]
+	 */
+	protected void sequence_Speed(ISerializationContext context, Speed semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.SPEED__SPEED_VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.SPEED__SPEED_VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getSpeedAccess().getSpeedValueAttributeIDTerminalRuleCall_1_0_1(), semanticObject.eGet(RPGPackage.Literals.SPEED__SPEED_VALUE, false));
 		feeder.finish();
 	}
 	

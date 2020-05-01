@@ -66,12 +66,13 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDeathParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		private final RuleCall cAttributesParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		private final RuleCall cEffectsParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
+		private final RuleCall cSpeedParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
 		
 		//Declaration:
-		//	Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects;
+		//	Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects | Speed;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects
+		//Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects | Speed
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Locations
@@ -97,6 +98,36 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Effects
 		public RuleCall getEffectsParserRuleCall_7() { return cEffectsParserRuleCall_7; }
+		
+		//Speed
+		public RuleCall getSpeedParserRuleCall_8() { return cSpeedParserRuleCall_8; }
+	}
+	public class SpeedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Speed");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cSpeedKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cSpeedValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cSpeedValueAttributeCrossReference_1_0 = (CrossReference)cSpeedValueAssignment_1.eContents().get(0);
+		private final RuleCall cSpeedValueAttributeIDTerminalRuleCall_1_0_1 = (RuleCall)cSpeedValueAttributeCrossReference_1_0.eContents().get(1);
+		
+		//Speed:
+		//	'speed' speedValue=[Attribute];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'speed' speedValue=[Attribute]
+		public Group getGroup() { return cGroup; }
+		
+		//'speed'
+		public Keyword getSpeedKeyword_0() { return cSpeedKeyword_0; }
+		
+		//speedValue=[Attribute]
+		public Assignment getSpeedValueAssignment_1() { return cSpeedValueAssignment_1; }
+		
+		//[Attribute]
+		public CrossReference getSpeedValueAttributeCrossReference_1_0() { return cSpeedValueAttributeCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getSpeedValueAttributeIDTerminalRuleCall_1_0_1() { return cSpeedValueAttributeIDTerminalRuleCall_1_0_1; }
 	}
 	public class EffectsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Effects");
@@ -1584,6 +1615,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private final SystemRPGElements pSystemRPG;
 	private final DeclarationElements pDeclaration;
+	private final SpeedElements pSpeed;
 	private final EffectsElements pEffects;
 	private final EffectElements pEffect;
 	private final BuffElements pBuff;
@@ -1640,6 +1672,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		this.gaTerminals = gaTerminals;
 		this.pSystemRPG = new SystemRPGElements();
 		this.pDeclaration = new DeclarationElements();
+		this.pSpeed = new SpeedElements();
 		this.pEffects = new EffectsElements();
 		this.pEffect = new EffectElements();
 		this.pBuff = new BuffElements();
@@ -1724,13 +1757,23 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Declaration:
-	//	Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects;
+	//	Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects | Speed;
 	public DeclarationElements getDeclarationAccess() {
 		return pDeclaration;
 	}
 	
 	public ParserRule getDeclarationRule() {
 		return getDeclarationAccess().getRule();
+	}
+	
+	//Speed:
+	//	'speed' speedValue=[Attribute];
+	public SpeedElements getSpeedAccess() {
+		return pSpeed;
+	}
+	
+	public ParserRule getSpeedRule() {
+		return getSpeedAccess().getRule();
 	}
 	
 	//Effects:

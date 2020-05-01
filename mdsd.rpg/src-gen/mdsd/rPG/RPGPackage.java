@@ -114,6 +114,34 @@ public interface RPGPackage extends EPackage
   int DECLARATION_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link mdsd.rPG.impl.SpeedImpl <em>Speed</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see mdsd.rPG.impl.SpeedImpl
+   * @see mdsd.rPG.impl.RPGPackageImpl#getSpeed()
+   * @generated
+   */
+  int SPEED = 2;
+
+  /**
+   * The feature id for the '<em><b>Speed Value</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SPEED__SPEED_VALUE = DECLARATION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Speed</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SPEED_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link mdsd.rPG.impl.EffectsImpl <em>Effects</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -121,7 +149,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEffects()
    * @generated
    */
-  int EFFECTS = 2;
+  int EFFECTS = 3;
 
   /**
    * The feature id for the '<em><b>Effect</b></em>' containment reference list.
@@ -149,7 +177,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEffect()
    * @generated
    */
-  int EFFECT = 3;
+  int EFFECT = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -177,7 +205,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getBuff()
    * @generated
    */
-  int BUFF = 4;
+  int BUFF = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -214,7 +242,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMoveE()
    * @generated
    */
-  int MOVE_E = 5;
+  int MOVE_E = 6;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -251,7 +279,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAttributes()
    * @generated
    */
-  int ATTRIBUTES = 6;
+  int ATTRIBUTES = 7;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' containment reference list.
@@ -279,7 +307,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAttribute()
    * @generated
    */
-  int ATTRIBUTE = 7;
+  int ATTRIBUTE = 8;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -316,7 +344,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getLocations()
    * @generated
    */
-  int LOCATIONS = 8;
+  int LOCATIONS = 9;
 
   /**
    * The feature id for the '<em><b>Loc</b></em>' containment reference list.
@@ -344,7 +372,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getLoc()
    * @generated
    */
-  int LOC = 9;
+  int LOC = 10;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -381,7 +409,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getRelations()
    * @generated
    */
-  int RELATIONS = 10;
+  int RELATIONS = 11;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference list.
@@ -409,7 +437,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getType()
    * @generated
    */
-  int TYPE = 11;
+  int TYPE = 12;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -446,7 +474,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getTypeExpression()
    * @generated
    */
-  int TYPE_EXPRESSION = 12;
+  int TYPE_EXPRESSION = 13;
 
   /**
    * The feature id for the '<em><b>Strong</b></em>' reference.
@@ -510,7 +538,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMoves()
    * @generated
    */
-  int MOVES = 13;
+  int MOVES = 14;
 
   /**
    * The feature id for the '<em><b>Move</b></em>' containment reference list.
@@ -538,7 +566,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMove()
    * @generated
    */
-  int MOVE = 14;
+  int MOVE = 15;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -602,7 +630,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMEffect()
    * @generated
    */
-  int MEFFECT = 15;
+  int MEFFECT = 16;
 
   /**
    * The feature id for the '<em><b>Move EName</b></em>' reference.
@@ -630,7 +658,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getBEffect()
    * @generated
    */
-  int BEFFECT = 16;
+  int BEFFECT = 17;
 
   /**
    * The feature id for the '<em><b>Buff EName</b></em>' reference.
@@ -658,7 +686,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEType()
    * @generated
    */
-  int ETYPE = 17;
+  int ETYPE = 18;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -686,7 +714,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAttributeValues()
    * @generated
    */
-  int ATTRIBUTE_VALUES = 18;
+  int ATTRIBUTE_VALUES = 19;
 
   /**
    * The feature id for the '<em><b>LTypes</b></em>' attribute.
@@ -723,7 +751,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAltAttribute()
    * @generated
    */
-  int ALT_ATTRIBUTE = 19;
+  int ALT_ATTRIBUTE = 20;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -760,7 +788,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getRule()
    * @generated
    */
-  int RULE = 20;
+  int RULE = 21;
 
   /**
    * The feature id for the '<em><b>Or</b></em>' containment reference.
@@ -797,7 +825,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getRuleB()
    * @generated
    */
-  int RULE_B = 21;
+  int RULE_B = 22;
 
   /**
    * The feature id for the '<em><b>Or</b></em>' containment reference.
@@ -834,7 +862,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getChange()
    * @generated
    */
-  int CHANGE = 22;
+  int CHANGE = 23;
 
   /**
    * The feature id for the '<em><b>Self T</b></em>' containment reference list.
@@ -871,7 +899,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSelf()
    * @generated
    */
-  int SELF = 23;
+  int SELF = 24;
 
   /**
    * The feature id for the '<em><b>Target</b></em>' reference.
@@ -908,7 +936,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getTarget()
    * @generated
    */
-  int TARGET = 24;
+  int TARGET = 25;
 
   /**
    * The feature id for the '<em><b>Target</b></em>' reference.
@@ -945,7 +973,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEntities()
    * @generated
    */
-  int ENTITIES = 25;
+  int ENTITIES = 26;
 
   /**
    * The feature id for the '<em><b>Entity</b></em>' containment reference list.
@@ -973,7 +1001,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getDeath()
    * @generated
    */
-  int DEATH = 26;
+  int DEATH = 27;
 
   /**
    * The feature id for the '<em><b>Req</b></em>' containment reference.
@@ -1001,7 +1029,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEntity()
    * @generated
    */
-  int ENTITY = 27;
+  int ENTITY = 28;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1056,7 +1084,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEntityMoves()
    * @generated
    */
-  int ENTITY_MOVES = 28;
+  int ENTITY_MOVES = 29;
 
   /**
    * The feature id for the '<em><b>Move</b></em>' reference list.
@@ -1084,7 +1112,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getTeams()
    * @generated
    */
-  int TEAMS = 29;
+  int TEAMS = 30;
 
   /**
    * The feature id for the '<em><b>Team</b></em>' containment reference list.
@@ -1112,7 +1140,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getTeam()
    * @generated
    */
-  int TEAM = 30;
+  int TEAM = 31;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1149,7 +1177,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMembers()
    * @generated
    */
-  int MEMBERS = 31;
+  int MEMBERS = 32;
 
   /**
    * The feature id for the '<em><b>Entity</b></em>' reference list.
@@ -1177,7 +1205,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getRequire()
    * @generated
    */
-  int REQUIRE = 32;
+  int REQUIRE = 33;
 
   /**
    * The feature id for the '<em><b>Log</b></em>' containment reference.
@@ -1205,7 +1233,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getProposition()
    * @generated
    */
-  int PROPOSITION = 33;
+  int PROPOSITION = 34;
 
   /**
    * The number of structural features of the '<em>Proposition</em>' class.
@@ -1224,7 +1252,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getNumberComparing()
    * @generated
    */
-  int NUMBER_COMPARING = 34;
+  int NUMBER_COMPARING = 35;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1270,7 +1298,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getComparator()
    * @generated
    */
-  int COMPARATOR = 35;
+  int COMPARATOR = 36;
 
   /**
    * The number of structural features of the '<em>Comparator</em>' class.
@@ -1289,7 +1317,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSum()
    * @generated
    */
-  int SUM = 36;
+  int SUM = 37;
 
   /**
    * The number of structural features of the '<em>Sum</em>' class.
@@ -1308,7 +1336,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMultiply()
    * @generated
    */
-  int MULTIPLY = 37;
+  int MULTIPLY = 38;
 
   /**
    * The number of structural features of the '<em>Multiply</em>' class.
@@ -1327,7 +1355,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAtomicNumber()
    * @generated
    */
-  int ATOMIC_NUMBER = 38;
+  int ATOMIC_NUMBER = 39;
 
   /**
    * The number of structural features of the '<em>Atomic Number</em>' class.
@@ -1346,7 +1374,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getActualNumbers()
    * @generated
    */
-  int ACTUAL_NUMBERS = 39;
+  int ACTUAL_NUMBERS = 40;
 
   /**
    * The number of structural features of the '<em>Actual Numbers</em>' class.
@@ -1365,7 +1393,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getNameAttribute()
    * @generated
    */
-  int NAME_ATTRIBUTE = 40;
+  int NAME_ATTRIBUTE = 41;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -1393,7 +1421,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getIntNum()
    * @generated
    */
-  int INT_NUM = 41;
+  int INT_NUM = 42;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1421,7 +1449,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getFloatNum()
    * @generated
    */
-  int FLOAT_NUM = 42;
+  int FLOAT_NUM = 43;
 
   /**
    * The feature id for the '<em><b>I</b></em>' attribute.
@@ -1458,7 +1486,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getOr()
    * @generated
    */
-  int OR = 43;
+  int OR = 44;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1495,7 +1523,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAnd()
    * @generated
    */
-  int AND = 44;
+  int AND = 45;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1532,7 +1560,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSmaller()
    * @generated
    */
-  int SMALLER = 45;
+  int SMALLER = 46;
 
   /**
    * The number of structural features of the '<em>Smaller</em>' class.
@@ -1551,7 +1579,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSmallerEq()
    * @generated
    */
-  int SMALLER_EQ = 46;
+  int SMALLER_EQ = 47;
 
   /**
    * The number of structural features of the '<em>Smaller Eq</em>' class.
@@ -1570,7 +1598,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEq()
    * @generated
    */
-  int EQ = 47;
+  int EQ = 48;
 
   /**
    * The number of structural features of the '<em>Eq</em>' class.
@@ -1589,7 +1617,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getBiggerEq()
    * @generated
    */
-  int BIGGER_EQ = 48;
+  int BIGGER_EQ = 49;
 
   /**
    * The number of structural features of the '<em>Bigger Eq</em>' class.
@@ -1608,7 +1636,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getBigger()
    * @generated
    */
-  int BIGGER = 49;
+  int BIGGER = 50;
 
   /**
    * The number of structural features of the '<em>Bigger</em>' class.
@@ -1627,7 +1655,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getNEq()
    * @generated
    */
-  int NEQ = 50;
+  int NEQ = 51;
 
   /**
    * The number of structural features of the '<em>NEq</em>' class.
@@ -1646,7 +1674,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAdd()
    * @generated
    */
-  int ADD = 51;
+  int ADD = 52;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1683,7 +1711,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSub()
    * @generated
    */
-  int SUB = 52;
+  int SUB = 53;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1720,7 +1748,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMult()
    * @generated
    */
-  int MULT = 53;
+  int MULT = 54;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1757,7 +1785,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getDiv()
    * @generated
    */
-  int DIV = 54;
+  int DIV = 55;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1828,6 +1856,27 @@ public interface RPGPackage extends EPackage
    * @generated
    */
   EClass getDeclaration();
+
+  /**
+   * Returns the meta object for class '{@link mdsd.rPG.Speed <em>Speed</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Speed</em>'.
+   * @see mdsd.rPG.Speed
+   * @generated
+   */
+  EClass getSpeed();
+
+  /**
+   * Returns the meta object for the reference '{@link mdsd.rPG.Speed#getSpeedValue <em>Speed Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Speed Value</em>'.
+   * @see mdsd.rPG.Speed#getSpeedValue()
+   * @see #getSpeed()
+   * @generated
+   */
+  EReference getSpeed_SpeedValue();
 
   /**
    * Returns the meta object for class '{@link mdsd.rPG.Effects <em>Effects</em>}'.
@@ -3209,6 +3258,24 @@ public interface RPGPackage extends EPackage
      * @generated
      */
     EClass DECLARATION = eINSTANCE.getDeclaration();
+
+    /**
+     * The meta object literal for the '{@link mdsd.rPG.impl.SpeedImpl <em>Speed</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see mdsd.rPG.impl.SpeedImpl
+     * @see mdsd.rPG.impl.RPGPackageImpl#getSpeed()
+     * @generated
+     */
+    EClass SPEED = eINSTANCE.getSpeed();
+
+    /**
+     * The meta object literal for the '<em><b>Speed Value</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SPEED__SPEED_VALUE = eINSTANCE.getSpeed_SpeedValue();
 
     /**
      * The meta object literal for the '{@link mdsd.rPG.impl.EffectsImpl <em>Effects</em>}' class.

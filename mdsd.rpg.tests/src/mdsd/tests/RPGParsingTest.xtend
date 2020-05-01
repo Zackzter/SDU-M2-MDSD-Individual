@@ -88,6 +88,8 @@ class RPGParsingTest {
 				
 			death require testAttributeOne <= 0
 			
+			speed testAttributeTwo
+			
 			effects
 			    effect move TestEffect 
 			    if testAttributeTwo > 0 then testAttributeOne is testAttributeOne-1
@@ -111,7 +113,7 @@ class RPGParsingTest {
 				team TestTeamB
 					members TestEntityTwo
 		''')
-		Assertions.assertEquals(result.declarations.size(), 8)
+		Assertions.assertEquals(result.declarations.size(), 9)
 		val errors = result.eResource.errors
 		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
 	}
