@@ -88,7 +88,7 @@ class RPGParsingTest {
 				
 			death require testAttributeOne <= 0
 			
-			speed testAttributeTwo
+			speed_value testAttributeTwo
 			
 			effects
 			    effect move TestEffect 
@@ -132,6 +132,8 @@ class RPGParsingTest {
 			attributes
 				attribute testAttributeOne is Integer
 				attribute testAttributeTwo is Integer
+				
+			speed_value testAttributeTwo
 				
 			death require testAttributeOne <= 0
 			

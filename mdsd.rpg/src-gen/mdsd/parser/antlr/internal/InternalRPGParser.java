@@ -21,7 +21,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalRPGParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'game'", "'speed'", "'effects'", "'effect'", "'buff'", "'move'", "'attributes'", "'attribute'", "'location'", "'opponents'", "'relations'", "'type'", "','", "'<'", "'moves'", "'is'", "'if'", "'then'", "'self'", "'target'", "'entities'", "'death'", "'entity'", "'teams'", "'team'", "'members'", "'require'", "'OR'", "'AND'", "'('", "')'", "'<='", "'=='", "'>='", "'>'", "'!='", "'+'", "'-'", "'*'", "'/'", "'.'", "'Float'", "'Integer'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'game'", "'speed_value'", "'effects'", "'effect'", "'buff'", "'move'", "'attributes'", "'attribute'", "'location'", "'opponents'", "'relations'", "'type'", "','", "'<'", "'moves'", "'is'", "'if'", "'then'", "'self'", "'target'", "'entities'", "'death'", "'entity'", "'teams'", "'team'", "'members'", "'require'", "'OR'", "'AND'", "'('", "')'", "'<='", "'=='", "'>='", "'>'", "'!='", "'+'", "'-'", "'*'", "'/'", "'.'", "'Float'", "'Integer'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -615,7 +615,7 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSpeed"
-    // InternalRPG.g:230:1: ruleSpeed returns [EObject current=null] : (otherlv_0= 'speed' ( (otherlv_1= RULE_ID ) ) ) ;
+    // InternalRPG.g:230:1: ruleSpeed returns [EObject current=null] : (otherlv_0= 'speed_value' ( (otherlv_1= RULE_ID ) ) ) ;
     public final EObject ruleSpeed() throws RecognitionException {
         EObject current = null;
 
@@ -626,15 +626,15 @@ public class InternalRPGParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalRPG.g:236:2: ( (otherlv_0= 'speed' ( (otherlv_1= RULE_ID ) ) ) )
-            // InternalRPG.g:237:2: (otherlv_0= 'speed' ( (otherlv_1= RULE_ID ) ) )
+            // InternalRPG.g:236:2: ( (otherlv_0= 'speed_value' ( (otherlv_1= RULE_ID ) ) ) )
+            // InternalRPG.g:237:2: (otherlv_0= 'speed_value' ( (otherlv_1= RULE_ID ) ) )
             {
-            // InternalRPG.g:237:2: (otherlv_0= 'speed' ( (otherlv_1= RULE_ID ) ) )
-            // InternalRPG.g:238:3: otherlv_0= 'speed' ( (otherlv_1= RULE_ID ) )
+            // InternalRPG.g:237:2: (otherlv_0= 'speed_value' ( (otherlv_1= RULE_ID ) ) )
+            // InternalRPG.g:238:3: otherlv_0= 'speed_value' ( (otherlv_1= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,12,FOLLOW_3); 
 
-            			newLeafNode(otherlv_0, grammarAccess.getSpeedAccess().getSpeedKeyword_0());
+            			newLeafNode(otherlv_0, grammarAccess.getSpeedAccess().getSpeed_valueKeyword_0());
             		
             // InternalRPG.g:242:3: ( (otherlv_1= RULE_ID ) )
             // InternalRPG.g:243:4: (otherlv_1= RULE_ID )

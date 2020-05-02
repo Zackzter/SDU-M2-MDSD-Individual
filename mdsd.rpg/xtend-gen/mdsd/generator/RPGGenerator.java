@@ -3,6 +3,7 @@
  */
 package mdsd.generator;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterators;
 import java.util.Arrays;
 import mdsd.rPG.ActualNumbers;
@@ -43,6 +44,7 @@ import mdsd.rPG.Require;
 import mdsd.rPG.Self;
 import mdsd.rPG.Smaller;
 import mdsd.rPG.SmallerEq;
+import mdsd.rPG.Speed;
 import mdsd.rPG.Sub;
 import mdsd.rPG.Sum;
 import mdsd.rPG.SystemRPG;
@@ -123,11 +125,164 @@ public class RPGGenerator extends AbstractGenerator {
         }
       }
       if (!_matched) {
+        if (declaration instanceof Speed) {
+          _matched=true;
+          fsa.generateFile("Speed.java", this.generateSpeed(((Speed)declaration)));
+        }
+      }
+      if (!_matched) {
         System.out.println("This is not a supported instance of Declaration");
       }
     }
     fsa.generateFile((classFileName + ".java"), this.generateGame(classFileName));
     fsa.generateFile("Runner.java", this.generateRunner(classFileName));
+  }
+  
+  public CharSequence generateSpeed(final Speed speed) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class Speed implements Comparator<Entity> {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("private Map<Entity, Number> entitySpeed;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public Speed(Map<Entity, Number> entitySpeed){");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("this.entitySpeed = entitySpeed;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public Speed(){}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public ");
+    {
+      boolean _checkSpeedValue = this.checkSpeedValue(speed);
+      if (_checkSpeedValue) {
+        _builder.append(" int ");
+      } else {
+        _builder.append(" float ");
+      }
+    }
+    _builder.append(" getSpeed(Entity entity){");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("HashMap<String, Number> eData = new HashMap<>();");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(AttributeData aData : entity.getAttributes()){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("eData.put(aData.getAttributeName(), aData.getNumber());");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("try{");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return eData.get(\"");
+    String _name = speed.getSpeedValue().getName();
+    _builder.append(_name, "\t\t\t");
+    _builder.append("\")");
+    CharSequence _numValue = this.numValue(speed);
+    _builder.append(_numValue, "\t\t\t");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("} catch(NullPointerException e){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("System.out.println(\"The target seems to have no speed\");");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("return 0;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public int compare(Entity o1, Entity o2) {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("if (entitySpeed.get(o1)");
+    CharSequence _numValue_1 = this.numValue(speed);
+    _builder.append(_numValue_1, "        ");
+    _builder.append(" >= entitySpeed.get(o2)");
+    CharSequence _numValue_2 = this.numValue(speed);
+    _builder.append(_numValue_2, "        ");
+    _builder.append(") {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("            ");
+    _builder.append("return -1;");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("} else {");
+    _builder.newLine();
+    _builder.append("            ");
+    _builder.append("return 1;");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("} // returning 0 would merge keys");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public Map<Entity, Number> getEntitySpeed(){");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("return this.entitySpeed;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public boolean checkSpeedValue(final Speed speed) {
+    if (((speed.getSpeedValue() instanceof IntNum) || Objects.equal(speed.getSpeedValue().getAVal().getLTypes(), "Integer"))) {
+      return true;
+    }
+    return false;
+  }
+  
+  public CharSequence numValue(final Speed speed) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _checkSpeedValue = this.checkSpeedValue(speed);
+      if (_checkSpeedValue) {
+        _builder.append(".intValue()");
+      } else {
+        _builder.append(".floatValue()");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    return _builder;
   }
   
   public CharSequence generateRunner(final String name) {
@@ -254,8 +409,11 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("    ");
     _builder.append("private DeathChecker deathChecker;");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("\t");
     _builder.append("private Random random;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private Speed speed;");
     _builder.newLine();
     _builder.append("    ");
     _builder.newLine();
@@ -281,6 +439,9 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("private Map<String, Entity> enemyNameID;");
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("private List<Entity> enemyTeam;");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("private Map<Entity, Map<Entity, String>> moveQueue;");
     _builder.newLine();
     _builder.append("\t");
@@ -288,6 +449,15 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("private List<String> targetList;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private Map<Entity, Number> entitySpeed;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private Map<Entity, Number> treeSpeed;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private Speed sortedSpeed;");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
@@ -317,13 +487,16 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("    \t");
     _builder.append("location = Location.getInstance();");
     _builder.newLine();
-    _builder.append("    \t");
+    _builder.append("\t\t");
     _builder.append("deathChecker = new DeathChecker();");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("speed = new Speed();");
     _builder.newLine();
     _builder.append("    \t");
     _builder.append("moveInit = new MoveInit();");
     _builder.newLine();
-    _builder.append("    \t");
+    _builder.append("\t\t");
     _builder.append("entityInit = new EntityInit();");
     _builder.newLine();
     _builder.append("    \t");
@@ -344,6 +517,9 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("\t\t");
     _builder.newLine();
     _builder.append("\t\t");
+    _builder.append("entitySpeed = new HashMap<>();");
+    _builder.newLine();
+    _builder.append("\t\t");
     _builder.append("playerNameID = new HashMap<>();");
     _builder.newLine();
     _builder.append("\t\t");
@@ -351,6 +527,12 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("moveQueue = new HashMap<>();");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("sortedSpeed = new Speed(entitySpeed);");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("treeSpeed = new TreeMap<>(sortedSpeed);");
     _builder.newLine();
     _builder.append("   \t");
     _builder.append("}");
@@ -461,46 +643,7 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("private void gameLoop(){");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("//playerEntity = team.getPlayerTeam().remove(0);");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("reffereceMap(team.getPlayerTeam(), playerNameID);");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// if(playerNameID.get(playerEntity.getName()) == null){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// \tplayerNameID.put(playerEntity.getName(), playerEntity);");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// }");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// else{");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// \t//for(i = 2; i < teamSize+2; i++)");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// \tString extendName = playerEntity.getName() + Integer.toString(playerNumber);");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// \tif (playerNameID.get(extendName) == null){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// \t\tplayerNameID.put(extendName, playerEntity);");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// \t\tplayerNumber++;");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// \t}");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("// }");
-    _builder.newLine();
-    _builder.append("   \t\t");
-    _builder.append("//battleEntities.add(playerEntity);   ");
+    _builder.append("reffereceMap(team.getPlayerTeam(), playerNameID);  ");
     _builder.newLine();
     _builder.append("   \t\t");
     _builder.newLine();
@@ -538,13 +681,13 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("String enemyTeamName = location.getTeams().get(currentLocation);");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("List<Entity> enemyTeam = team.getTeamByName(location.getTeams().get(currentLocation));");
+    _builder.append("enemyTeam = team.getTeamByName(location.getTeams().get(currentLocation));");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("System.out.println(\"Current Location: \" + currentLocation + \", fighting against: \" + enemyTeamName);");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("processGame(enemyTeam);");
+    _builder.append("processGame();");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
@@ -558,7 +701,7 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("   \t");
     _builder.newLine();
     _builder.append("   \t");
-    _builder.append("private void processGame(List<Entity> enemyTeam){");
+    _builder.append("private void processGame(){");
     _builder.newLine();
     _builder.append("   \t\t");
     _builder.append("while(enemyTeam.size() > 0 && !lost){");
@@ -635,6 +778,8 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
     _builder.append("\t\t\t   \t");
     _builder.newLine();
     _builder.append("   \t\t");
@@ -659,6 +804,12 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("currentEntity = playerNameID.get(entityName);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("entitySpeed.put(currentEntity, speed.getSpeed(currentEntity));");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("//treeSpeed.put(currentEntity, speed.getSpeed(currentEntity));");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("List<String> moves = currentEntity.getMoveNameList();");
@@ -905,6 +1056,12 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("currentEntity = enemyNameID.get(enemyName);");
     _builder.newLine();
     _builder.append("\t\t\t\t");
+    _builder.append("entitySpeed.put(currentEntity, speed.getSpeed(currentEntity));");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("//treeSpeed.put(currentEntity, speed.getSpeed(currentEntity));");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
     _builder.append("int choosenMove = random.nextInt(currentEntity.getMoveNameList().size());");
     _builder.newLine();
     _builder.append("\t\t\t\t");
@@ -1023,43 +1180,124 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("System.out.println(moveQueue);");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("for(Entity fighEntity : moveQueue.keySet()){");
+    _builder.append("System.out.println(entitySpeed);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("System.out.println(\"------------\");");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("treeSpeed.putAll(entitySpeed);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("System.out.println(treeSpeed);");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("boolean enemyEntityDead = false;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("for(Entity fightingEntity : treeSpeed.keySet()){");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("String moveName = \"\";");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("for(Entity target : moveQueue.get(fighEntity).keySet()){");
+    _builder.append("for(Entity target : moveQueue.get(fightingEntity).keySet()){");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("targetEntity = target;");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("moveName = moveQueue.get(fighEntity).get(target);");
+    _builder.append("moveName = moveQueue.get(fightingEntity).get(target);");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("executeBuffMove(move, moveName, fighEntity);");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("executeMove(move, moveName, targetEntity, fighEntity);");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("System.out.println(\"playermap: \" + playerNameID.containsValue(targetEntity));");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("System.out.println(\"enemymap: \" + enemyNameID.containsValue(targetEntity));");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("if(deathChecker.check(targetEntity)){");
+    _builder.append("if(playerNameID.containsValue(targetEntity)){");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("moveQueue.remove(targetEntity);");
+    _builder.append("useMove(playerNameID, fightingEntity, targetEntity, moveName);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("else if(enemyNameID.containsValue(targetEntity)){");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("playerNameID.containsValue(targetEntity);");
+    _builder.append("useMove(enemyNameID, fightingEntity, targetEntity, moveName);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("else{");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("System.out.println(\"You missed...\");");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("moveQueue.clear();");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("entitySpeed.clear();");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("treeSpeed.clear();");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("for(String entityName : playerNameID.keySet()){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("if(playerNameID.get(entityName).getEntityState().equals(EntityState.DEAD)){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("playerNameID.remove(entityName);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("if(!team.getPlayerTeam().isEmpty())\treffereceMap(team.getPlayerTeam(), playerNameID);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("else if(playerNameID.isEmpty()){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("lost = true;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("return;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("for(String entityName : enemyNameID.keySet()){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("if(enemyNameID.get(entityName).getEntityState().equals(EntityState.DEAD)){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("enemyNameID.remove(entityName);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("if(!enemyTeam.isEmpty()) reffereceMap(enemyTeam, enemyNameID);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("else if(enemyNameID.isEmpty()) return;");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("}");
@@ -1070,10 +1308,48 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("   \t\t");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("   \t");
+    _builder.append("\t   ");
     _builder.append("}");
     _builder.newLine();
+    _builder.append("\t   ");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private void useMove(Map<String, Entity> nameID, Entity fightingEntity, Entity targetEntity, String moveName){");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("System.out.println(fightingEntity.getName() + \" uses \" + moveName);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("executeBuffMove(move, moveName, fightingEntity);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("executeMove(move, moveName, targetEntity, fightingEntity);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("if(deathChecker.check(targetEntity)){");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("targetEntity.setEntityState(EntityState.DEAD);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("System.out.println(targetEntity.getName() + \" is dead!\");");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("treeSpeed.remove(targetEntity);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("//nameID.values().remove(targetEntity);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
     _builder.newLine();
     return _builder;
   }
@@ -2120,12 +2396,17 @@ public class RPGGenerator extends AbstractGenerator {
         _builder.append(_name_1, "\t\t");
         _builder.append("\");");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        String _lowerCase_3 = entity.getName().toLowerCase();
+        _builder.append(_lowerCase_3, "\t\t");
+        _builder.append(".setEntityState(EntityState.ALIVE);");
+        _builder.newLineIfNotEmpty();
         {
           EList<Move> _move = entity.getEMoves().getMove();
           for(final Move move : _move) {
             _builder.append("\t\t");
-            String _lowerCase_3 = entity.getName().toLowerCase();
-            _builder.append(_lowerCase_3, "\t\t");
+            String _lowerCase_4 = entity.getName().toLowerCase();
+            _builder.append(_lowerCase_4, "\t\t");
             _builder.append(".addMoveData(Move.getInstance().getMove(\"");
             String _name_2 = move.getName();
             _builder.append(_name_2, "\t\t");
@@ -2137,8 +2418,8 @@ public class RPGGenerator extends AbstractGenerator {
           EList<AltAttribute> _att = entity.getAtt();
           for(final AltAttribute att : _att) {
             _builder.append("\t\t");
-            String _lowerCase_4 = entity.getName().toLowerCase();
-            _builder.append(_lowerCase_4, "\t\t");
+            String _lowerCase_5 = entity.getName().toLowerCase();
+            _builder.append(_lowerCase_5, "\t\t");
             _builder.append(".addAttribute(new AttributeData(\"");
             String _name_3 = att.getAttribute().getName();
             _builder.append(_name_3, "\t\t");
@@ -2151,8 +2432,8 @@ public class RPGGenerator extends AbstractGenerator {
         }
         _builder.append("\t\t");
         _builder.append("entities.add(");
-        String _lowerCase_5 = entity.getName().toLowerCase();
-        _builder.append(_lowerCase_5, "\t\t");
+        String _lowerCase_6 = entity.getName().toLowerCase();
+        _builder.append(_lowerCase_6, "\t\t");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
       }

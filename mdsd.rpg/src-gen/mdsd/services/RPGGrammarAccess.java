@@ -105,20 +105,20 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	public class SpeedElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Speed");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cSpeedKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cSpeed_valueKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cSpeedValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cSpeedValueAttributeCrossReference_1_0 = (CrossReference)cSpeedValueAssignment_1.eContents().get(0);
 		private final RuleCall cSpeedValueAttributeIDTerminalRuleCall_1_0_1 = (RuleCall)cSpeedValueAttributeCrossReference_1_0.eContents().get(1);
 		
 		//Speed:
-		//	'speed' speedValue=[Attribute];
+		//	'speed_value' speedValue=[Attribute];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'speed' speedValue=[Attribute]
+		//'speed_value' speedValue=[Attribute]
 		public Group getGroup() { return cGroup; }
 		
-		//'speed'
-		public Keyword getSpeedKeyword_0() { return cSpeedKeyword_0; }
+		//'speed_value'
+		public Keyword getSpeed_valueKeyword_0() { return cSpeed_valueKeyword_0; }
 		
 		//speedValue=[Attribute]
 		public Assignment getSpeedValueAssignment_1() { return cSpeedValueAssignment_1; }
@@ -1767,7 +1767,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Speed:
-	//	'speed' speedValue=[Attribute];
+	//	'speed_value' speedValue=[Attribute];
 	public SpeedElements getSpeedAccess() {
 		return pSpeed;
 	}

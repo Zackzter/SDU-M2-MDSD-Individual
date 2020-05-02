@@ -11,7 +11,7 @@ Declaration:
 ;
 
 Speed:
-	'speed' speedValue=[Attribute]
+	'speed_value' speedValue=[Attribute]
 ;
 
 Effects:

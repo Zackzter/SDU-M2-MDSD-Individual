@@ -235,9 +235,9 @@ ruleSpeed returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='speed'
+		otherlv_0='speed_value'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getSpeedAccess().getSpeedKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getSpeedAccess().getSpeed_valueKeyword_0());
 		}
 		(
 			(
