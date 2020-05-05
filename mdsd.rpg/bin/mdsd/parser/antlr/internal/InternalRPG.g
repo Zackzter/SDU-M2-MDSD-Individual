@@ -654,6 +654,85 @@ ruleLoc returns [EObject current=null]
 				}
 			)
 		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getLocAccess().getTerrainTerrainParserRuleCall_3_0());
+				}
+				lv_terrain_3_0=ruleTerrain
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getLocRule());
+					}
+					set(
+						$current,
+						"terrain",
+						lv_terrain_3_0,
+						"mdsd.RPG.Terrain");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleTerrain
+entryRuleTerrain returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getTerrainRule()); }
+	iv_ruleTerrain=ruleTerrain
+	{ $current=$iv_ruleTerrain.current; }
+	EOF;
+
+// Rule Terrain
+ruleTerrain returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='terrain'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getTerrainAccess().getTerrainKeyword_0());
+		}
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getTerrainAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getTerrainRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getTerrainAccess().getETypeETypeParserRuleCall_2_0());
+				}
+				lv_eType_2_0=ruleEType
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getTerrainRule());
+					}
+					set(
+						$current,
+						"eType",
+						lv_eType_2_0,
+						"mdsd.RPG.EType");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
 	)
 ;
 
@@ -1811,9 +1890,28 @@ ruleTeams returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTeamsAccess().getTeamTeamParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getTeamsAccess().getSizeTeamSizeParserRuleCall_1_0());
 				}
-				lv_team_1_0=ruleTeam
+				lv_size_1_0=ruleTeamSize
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getTeamsRule());
+					}
+					set(
+						$current,
+						"size",
+						lv_size_1_0,
+						"mdsd.RPG.TeamSize");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getTeamsAccess().getTeamTeamParserRuleCall_2_0());
+				}
+				lv_team_2_0=ruleTeam
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTeamsRule());
@@ -1821,12 +1919,53 @@ ruleTeams returns [EObject current=null]
 					add(
 						$current,
 						"team",
-						lv_team_1_0,
+						lv_team_2_0,
 						"mdsd.RPG.Team");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)+
+	)
+;
+
+// Entry rule entryRuleTeamSize
+entryRuleTeamSize returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getTeamSizeRule()); }
+	iv_ruleTeamSize=ruleTeamSize
+	{ $current=$iv_ruleTeamSize.current; }
+	EOF;
+
+// Rule TeamSize
+ruleTeamSize returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='size'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getTeamSizeAccess().getSizeKeyword_0());
+		}
+		(
+			(
+				lv_value_1_0=RULE_INT
+				{
+					newLeafNode(lv_value_1_0, grammarAccess.getTeamSizeAccess().getValueINTTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getTeamSizeRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"value",
+						lv_value_1_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
 	)
 ;
 

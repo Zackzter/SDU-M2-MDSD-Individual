@@ -51,7 +51,9 @@ import mdsd.rPG.Sub;
 import mdsd.rPG.SystemRPG;
 import mdsd.rPG.Target;
 import mdsd.rPG.Team;
+import mdsd.rPG.TeamSize;
 import mdsd.rPG.Teams;
+import mdsd.rPG.Terrain;
 import mdsd.rPG.Type;
 import mdsd.rPG.TypeExpression;
 import mdsd.services.RPGGrammarAccess;
@@ -214,8 +216,14 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RPGPackage.TEAM:
 				sequence_Team(context, (Team) semanticObject); 
 				return; 
+			case RPGPackage.TEAM_SIZE:
+				sequence_TeamSize(context, (TeamSize) semanticObject); 
+				return; 
 			case RPGPackage.TEAMS:
 				sequence_Teams(context, (Teams) semanticObject); 
+				return; 
+			case RPGPackage.TERRAIN:
+				sequence_Terrain(context, (Terrain) semanticObject); 
 				return; 
 			case RPGPackage.TYPE:
 				sequence_Type(context, (Type) semanticObject); 
@@ -582,7 +590,7 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Loc returns Loc
 	 *
 	 * Constraint:
-	 *     (name=ID team=[Team|ID])
+	 *     (name=ID team=[Team|ID] terrain=Terrain)
 	 */
 	protected void sequence_Loc(ISerializationContext context, Loc semanticObject) {
 		if (errorAcceptor != null) {
@@ -590,10 +598,13 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.LOC__NAME));
 			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.LOC__TEAM) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.LOC__TEAM));
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.LOC__TERRAIN) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.LOC__TERRAIN));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getLocAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getLocAccess().getTeamTeamIDTerminalRuleCall_2_0_1(), semanticObject.eGet(RPGPackage.Literals.LOC__TEAM, false));
+		feeder.accept(grammarAccess.getLocAccess().getTerrainTerrainParserRuleCall_3_0(), semanticObject.getTerrain());
 		feeder.finish();
 	}
 	
@@ -995,6 +1006,24 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     TeamSize returns TeamSize
+	 *
+	 * Constraint:
+	 *     value=INT
+	 */
+	protected void sequence_TeamSize(ISerializationContext context, TeamSize semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.TEAM_SIZE__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.TEAM_SIZE__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTeamSizeAccess().getValueINTTerminalRuleCall_1_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Team returns Team
 	 *
 	 * Constraint:
@@ -1020,10 +1049,31 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Teams returns Teams
 	 *
 	 * Constraint:
-	 *     team+=Team+
+	 *     (size=TeamSize team+=Team+)
 	 */
 	protected void sequence_Teams(ISerializationContext context, Teams semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Terrain returns Terrain
+	 *
+	 * Constraint:
+	 *     (name=ID eType=EType)
+	 */
+	protected void sequence_Terrain(ISerializationContext context, Terrain semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.TERRAIN__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.TERRAIN__NAME));
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.TERRAIN__ETYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.TERRAIN__ETYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTerrainAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getTerrainAccess().getETypeETypeParserRuleCall_2_0(), semanticObject.getEType());
+		feeder.finish();
 	}
 	
 	

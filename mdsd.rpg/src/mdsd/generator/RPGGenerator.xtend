@@ -93,6 +93,8 @@ class RPGGenerator extends AbstractGenerator {
 		public class Speed implements Comparator<Entity> {
 		
 		    private Map<Entity, Number> entitySpeed;
+		    private Type type = Type.getInstance();
+		    private List<String> strongTypes;
 		
 		    public Speed(Map<Entity, Number> entitySpeed){
 		        this.entitySpeed = entitySpeed;
@@ -100,18 +102,25 @@ class RPGGenerator extends AbstractGenerator {
 		
 		    public Speed(){}
 		
-		    public «IF speed.checkSpeedValue» int «ELSE» float «ENDIF» getSpeed(Entity entity){
+		    public«IF speed.checkSpeedValue» int «ELSE» float «ENDIF»getSpeed(Entity entity, String terrain){
 				HashMap<String, Number> eData = new HashMap<>();
 				for(AttributeData aData : entity.getAttributes()){
 					eData.put(aData.getAttributeName(), aData.getNumber());
 				}
 				try{
-					return eData.get("«speed.speedValue.name»")«speed.numValue»;
+					return checkType(entity, eData.get("«speed.speedValue.name»")«speed.numValue», terrain);
 				} catch(NullPointerException e){
 					System.out.println("The target seems to have no speed");
 					return 0;
 				}
 		    }
+		    
+		    public«IF speed.checkSpeedValue» int «ELSE» float «ENDIF»checkType(Entity entity, int speed, String terrain){
+		        strongTypes = type.getTypeRelations().get(terrain).getStrongAgainst();
+		        if(entity.getType().equals(terrain)) return speed *2;
+		        else if(strongTypes.contains(entity.getType())) return speed / 2;
+		        return speed;	
+		    } 
 		    
 		
 		    @Override
@@ -210,8 +219,7 @@ class RPGGenerator extends AbstractGenerator {
 			private Map<Entity, Number> entitySpeed;
 			private Map<Entity, Number> treeSpeed;
 			private Speed sortedSpeed;
-		
-			private final int membersFighting = 2;
+			private String terrainType;
 		    
 		    
 		    public «classFileName»(){
@@ -252,8 +260,8 @@ class RPGGenerator extends AbstractGenerator {
 			   }
 			   
 			private void reffereceMap(List<Entity> entities, Map<String, Entity> entityMap){
-				int entitiesLeft = membersFighting;
-				if(entities.size() < membersFighting) entitiesLeft = entities.size();
+				int entitiesLeft = team.getTeamSize();
+				if(entities.size() < team.getTeamSize()) entitiesLeft = entities.size();
 		
 				for (int i = 0; i < entitiesLeft; i++) {
 					Entity currentEntity = entities.remove(0);
@@ -274,7 +282,8 @@ class RPGGenerator extends AbstractGenerator {
 			}
 		   	
 		   	private void gameLoop(){
-				reffereceMap(team.getPlayerTeam(), playerNameID);  
+				reffereceMap(team.getPlayerTeam(), playerNameID);
+		
 		   		
 				while (!gameFinished) {
 					if(won){
@@ -285,11 +294,20 @@ class RPGGenerator extends AbstractGenerator {
 						System.out.println("You Lost.");
 					}else{
 						// Get current location to fight at
-						String currentLocation = location.getLocations().remove(0);
-						String enemyTeamName = location.getTeams().get(currentLocation);
-						enemyTeam = team.getTeamByName(location.getTeams().get(currentLocation));
-						System.out.println("Current Location: " + currentLocation + ", fighting against: " + enemyTeamName);
-						processGame();
+						for(LocationData locationD : location.getLocations()){
+							System.out.println(location.getLocations().remove(0));
+							String currentLocation = locationD.getLocationName();
+							String enemyTeamName = locationD.getTeam();
+							String terrain = locationD.getTerrain().getName();
+							terrainType = locationD.getTerrain().getType();
+							enemyTeam = team.getTeamByName(enemyTeamName);
+							System.out.println("Current Location: " + currentLocation + ", fighting against: " + enemyTeamName + ".\nTerrain is: " + terrain);
+							processGame();
+							if((location.getLocations().isEmpty()) && !lost){
+								won = true;
+								break;
+							   }
+						}
 					}
 				}
 		   	}
@@ -301,9 +319,7 @@ class RPGGenerator extends AbstractGenerator {
 		   			reffereceMap(enemyTeam, enemyNameID);
 		   			fight();
 		   		}
-		   		if(!(location.getLocations().size() > 0) && !lost){
-					won = true;
-		   		}
+		
 		   	}
 		   	
 			private void executeBuffMove(Move move, String moveName, Entity target){
@@ -332,7 +348,8 @@ class RPGGenerator extends AbstractGenerator {
 					System.out.println("You are against " + enemyNameID.keySet() + " choose your move");
 					for(String entityName : playerNameID.keySet()){
 						currentEntity = playerNameID.get(entityName);
-						entitySpeed.put(currentEntity, speed.getSpeed(currentEntity));
+						//entitySpeed.put(currentEntity, speed.getSpeed(currentEntity));
+						entitySpeed.put(currentEntity, speed.getSpeed(currentEntity, terrainType));
 						//treeSpeed.put(currentEntity, speed.getSpeed(currentEntity));
 						List<String> moves = currentEntity.getMoveNameList();
 						System.out.println(moves);
@@ -419,7 +436,7 @@ class RPGGenerator extends AbstractGenerator {
 		
 					for(String enemyName : enemyNameID.keySet()){
 						currentEntity = enemyNameID.get(enemyName);
-						entitySpeed.put(currentEntity, speed.getSpeed(currentEntity));
+						entitySpeed.put(currentEntity, speed.getSpeed(currentEntity, terrainType));
 						//treeSpeed.put(currentEntity, speed.getSpeed(currentEntity));
 						int choosenMove = random.nextInt(currentEntity.getMoveNameList().size());
 						String moveName = currentEntity.getMoveNameList().get(choosenMove);
@@ -466,9 +483,6 @@ class RPGGenerator extends AbstractGenerator {
 					System.out.println("------------");
 					treeSpeed.putAll(entitySpeed);
 					System.out.println(treeSpeed);
-		
-					boolean enemyEntityDead = false;
-		
 		
 					for(Entity fightingEntity : treeSpeed.keySet()){
 						String moveName = "";
@@ -523,7 +537,6 @@ class RPGGenerator extends AbstractGenerator {
 			}
 		
 		}
-
 		'''
 	}
 	
@@ -1048,6 +1061,7 @@ class RPGGenerator extends AbstractGenerator {
 	
 	def generateLocations(IFileSystemAccess2 fsa, Locations locations){
 		fsa.generateFile("Location.java", generateLocation)
+		fsa.generateFile("LocationData.java", generateLocationData)
 		fsa.generateFile("LocationsInit.java", locations.generateLocationInit)
 	}
 	
@@ -1057,18 +1071,12 @@ class RPGGenerator extends AbstractGenerator {
 		import java.util.*;
 		
 		public class Location {
-		    private List<String> locations;
-		    private String currentLocation;
-		    private String currentTeam;
-		
-		    private Map<String, String> teams;
+		    private List<LocationData> locations;
 		
 		    private static Location location;    
 		
 		    private Location(){
 		        locations = new ArrayList<>();
-		        teams = new HashMap<>();
-		
 		    }
 		
 		    public static Location getInstance(){
@@ -1078,45 +1086,85 @@ class RPGGenerator extends AbstractGenerator {
 		        return location;
 		    }
 		
-		    public String getCurrentLocation(){
-		        return this.currentLocation;
-		    }
-		
-		    public String getCurrentTeam(){
-		        return this.currentTeam;
-		    }
-		
-		    public Map<String, String> getTeams(){
-		        return this.teams;
-		    }
-		
-		    public List<String> getLocations(){
+		    public List<LocationData> getLocations(){
 		        return this.locations;
 		    }
 		
-		    public void setLocations(List<String> locations){
-		        this.locations = locations;
-		    }
 		
-		    public void setCurrentLocation(String currentLocation){
-		        this.currentLocation = currentLocation;
-		    }
-		
-		    public void addLocation(String location){
+		    public void addLocation(LocationData location){
 		        locations.add(location);
 		    }
+		}
+		'''
+	}
+	
+	def CharSequence generateLocationData(){
+		'''
+		public class LocationData {
+		    private Terrain terrain;
+		    private String locationName;
+		    private String team;
 		
-		    public void addTeamToLocation(String location, String team){
-		        if(locations.contains(location)){
-		            teams.put(location, team);
-		        } else {
-		        	addLocation(location);
-		        	teams.put(location, team);
+		    public class Terrain{
+		        private String name;
+		        private String type;
+		
+		        public Terrain(String name, String type){
+		            this.name = name;
+		            this.type = type;
 		        }
+		
+		        public String getName(){
+		            return this.name;
+		        }
+		
+		        public String getType(){
+		            return this.type;
+		        }
+		
+		        public void setName(String name){
+		            this.name = name;
+		        }
+		
+		        public void setType(String type){
+		            this.type= type;
+		        }
+		
 		    }
 		
+		    public LocationData(){}
 		
-		}
+		    public LocationData(Terrain terrain, String locationName, String team){
+		        this.locationName = locationName;
+		        this.team = team;
+		        this.terrain = terrain;
+		    }
+		
+		    public Terrain getTerrain() {
+		        return this.terrain;
+		    }
+		
+		    public void setTerrain(Terrain terrain) {
+		        this.terrain = terrain;
+		    }
+		
+		    public String getLocationName() {
+		        return this.locationName;
+		    }
+		
+		    public void setLocationName(String locationName) {
+		        this.locationName = locationName;
+		    }
+		
+		    public String getTeam() {
+		        return this.team;
+		    }
+		
+		    public void setTeam(String team) {
+		        this.team = team;
+		    }
+		}		
+		
 		'''
 	}
 	
@@ -1126,12 +1174,13 @@ class RPGGenerator extends AbstractGenerator {
 		
 		public class LocationsInit{
 			public void addLocations(Location location){
-				String locationName;
-				String teamName;
+				LocationData locationData;
 				«FOR location : locations.loc»
-				locationName = "«location.name»";
-				teamName = "«location.team.name»";
-				location.addTeamToLocation(locationName, teamName);
+				locationData = new LocationData();
+				locationData.setLocationName("«location.name»");
+				locationData.setTeam("«location.team.name»");
+				locationData.setTerrain(locationData.new Terrain("«location.terrain.name»", "«location.terrain.EType.type.name»"));
+				location.addLocation(locationData);
 				«ENDFOR»
 			}
 		}
@@ -1348,7 +1397,7 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	
 	def generateTeams(IFileSystemAccess2 fsa, Teams teams){
-		fsa.generateFile("Team.java", generateTeam)
+		fsa.generateFile("Team.java", teams.generateTeam)
 		fsa.generateFile("TeamInit.java", teams.generateTeamInit)
 	}
 	
@@ -1367,13 +1416,14 @@ class RPGGenerator extends AbstractGenerator {
 		createTeamString
 	}
 	
-	def CharSequence generateTeam(){
+	def CharSequence generateTeam(Teams teams){
 		'''
 		import java.util.*;
 		
 		public class Team {
 		    private Map<String, List<Entity>> teams;
 		    private List<String> teamNames;
+		    private final int teamSize = «teams.size.value»;
 		
 		    public Team() {
 		        teams = new HashMap<>();
@@ -1411,6 +1461,10 @@ class RPGGenerator extends AbstractGenerator {
 		
 		    public List<Entity> getPlayerTeam(){
 		        return teams.get(teamNames.get(0));
+		    }
+		    
+		    public int getTeamSize(){
+		    	return this.teamSize;
 		    }
 		
 		    public boolean checkPlayerEntities(){

@@ -7,14 +7,18 @@ import java.util.Collection;
 
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Team;
+import mdsd.rPG.TeamSize;
 import mdsd.rPG.Teams;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -27,6 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link mdsd.rPG.impl.TeamsImpl#getSize <em>Size</em>}</li>
  *   <li>{@link mdsd.rPG.impl.TeamsImpl#getTeam <em>Team</em>}</li>
  * </ul>
  *
@@ -34,6 +39,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class TeamsImpl extends DeclarationImpl implements Teams
 {
+  /**
+   * The cached value of the '{@link #getSize() <em>Size</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSize()
+   * @generated
+   * @ordered
+   */
+  protected TeamSize size;
+
   /**
    * The cached value of the '{@link #getTeam() <em>Team</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -71,6 +86,56 @@ public class TeamsImpl extends DeclarationImpl implements Teams
    * @generated
    */
   @Override
+  public TeamSize getSize()
+  {
+    return size;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetSize(TeamSize newSize, NotificationChain msgs)
+  {
+    TeamSize oldSize = size;
+    size = newSize;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.TEAMS__SIZE, oldSize, newSize);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setSize(TeamSize newSize)
+  {
+    if (newSize != size)
+    {
+      NotificationChain msgs = null;
+      if (size != null)
+        msgs = ((InternalEObject)size).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.TEAMS__SIZE, null, msgs);
+      if (newSize != null)
+        msgs = ((InternalEObject)newSize).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.TEAMS__SIZE, null, msgs);
+      msgs = basicSetSize(newSize, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.TEAMS__SIZE, newSize, newSize));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList<Team> getTeam()
   {
     if (team == null)
@@ -90,6 +155,8 @@ public class TeamsImpl extends DeclarationImpl implements Teams
   {
     switch (featureID)
     {
+      case RPGPackage.TEAMS__SIZE:
+        return basicSetSize(null, msgs);
       case RPGPackage.TEAMS__TEAM:
         return ((InternalEList<?>)getTeam()).basicRemove(otherEnd, msgs);
     }
@@ -106,6 +173,8 @@ public class TeamsImpl extends DeclarationImpl implements Teams
   {
     switch (featureID)
     {
+      case RPGPackage.TEAMS__SIZE:
+        return getSize();
       case RPGPackage.TEAMS__TEAM:
         return getTeam();
     }
@@ -123,6 +192,9 @@ public class TeamsImpl extends DeclarationImpl implements Teams
   {
     switch (featureID)
     {
+      case RPGPackage.TEAMS__SIZE:
+        setSize((TeamSize)newValue);
+        return;
       case RPGPackage.TEAMS__TEAM:
         getTeam().clear();
         getTeam().addAll((Collection<? extends Team>)newValue);
@@ -141,6 +213,9 @@ public class TeamsImpl extends DeclarationImpl implements Teams
   {
     switch (featureID)
     {
+      case RPGPackage.TEAMS__SIZE:
+        setSize((TeamSize)null);
+        return;
       case RPGPackage.TEAMS__TEAM:
         getTeam().clear();
         return;
@@ -158,6 +233,8 @@ public class TeamsImpl extends DeclarationImpl implements Teams
   {
     switch (featureID)
     {
+      case RPGPackage.TEAMS__SIZE:
+        return size != null;
       case RPGPackage.TEAMS__TEAM:
         return team != null && !team.isEmpty();
     }

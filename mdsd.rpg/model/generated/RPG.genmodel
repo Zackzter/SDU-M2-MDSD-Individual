@@ -39,6 +39,11 @@
     <genClasses ecoreClass="RPG.ecore#//Loc">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RPG.ecore#//Loc/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//Loc/team"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Loc/terrain"/>
+    </genClasses>
+    <genClasses ecoreClass="RPG.ecore#//Terrain">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RPG.ecore#//Terrain/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Terrain/eType"/>
     </genClasses>
     <genClasses ecoreClass="RPG.ecore#//Relations">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Relations/type"/>
@@ -117,7 +122,11 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//EntityMoves/move"/>
     </genClasses>
     <genClasses ecoreClass="RPG.ecore#//Teams">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Teams/size"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Teams/team"/>
+    </genClasses>
+    <genClasses ecoreClass="RPG.ecore#//TeamSize">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RPG.ecore#//TeamSize/value"/>
     </genClasses>
     <genClasses ecoreClass="RPG.ecore#//Team">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RPG.ecore#//Team/name"/>

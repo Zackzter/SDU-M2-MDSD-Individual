@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link mdsd.rPG.Loc#getName <em>Name</em>}</li>
  *   <li>{@link mdsd.rPG.Loc#getTeam <em>Team</em>}</li>
+ *   <li>{@link mdsd.rPG.Loc#getTerrain <em>Terrain</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getLoc()
@@ -67,5 +68,27 @@ public interface Loc extends EObject
    * @generated
    */
   void setTeam(Team value);
+
+  /**
+   * Returns the value of the '<em><b>Terrain</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Terrain</em>' containment reference.
+   * @see #setTerrain(Terrain)
+   * @see mdsd.rPG.RPGPackage#getLoc_Terrain()
+   * @model containment="true"
+   * @generated
+   */
+  Terrain getTerrain();
+
+  /**
+   * Sets the value of the '{@link mdsd.rPG.Loc#getTerrain <em>Terrain</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Terrain</em>' containment reference.
+   * @see #getTerrain()
+   * @generated
+   */
+  void setTerrain(Terrain value);
 
 } // Loc

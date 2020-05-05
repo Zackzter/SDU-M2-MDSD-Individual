@@ -76,6 +76,7 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.ATTRIBUTE: return createAttribute();
       case RPGPackage.LOCATIONS: return createLocations();
       case RPGPackage.LOC: return createLoc();
+      case RPGPackage.TERRAIN: return createTerrain();
       case RPGPackage.RELATIONS: return createRelations();
       case RPGPackage.TYPE: return createType();
       case RPGPackage.TYPE_EXPRESSION: return createTypeExpression();
@@ -96,6 +97,7 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.ENTITY: return createEntity();
       case RPGPackage.ENTITY_MOVES: return createEntityMoves();
       case RPGPackage.TEAMS: return createTeams();
+      case RPGPackage.TEAM_SIZE: return createTeamSize();
       case RPGPackage.TEAM: return createTeam();
       case RPGPackage.MEMBERS: return createMembers();
       case RPGPackage.REQUIRE: return createRequire();
@@ -256,6 +258,18 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     LocImpl loc = new LocImpl();
     return loc;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Terrain createTerrain()
+  {
+    TerrainImpl terrain = new TerrainImpl();
+    return terrain;
   }
 
   /**
@@ -496,6 +510,18 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     TeamsImpl teams = new TeamsImpl();
     return teams;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public TeamSize createTeamSize()
+  {
+    TeamSizeImpl teamSize = new TeamSizeImpl();
+    return teamSize;
   }
 
   /**

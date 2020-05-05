@@ -337,12 +337,14 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cTeamAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cTeamTeamCrossReference_2_0 = (CrossReference)cTeamAssignment_2.eContents().get(0);
 		private final RuleCall cTeamTeamIDTerminalRuleCall_2_0_1 = (RuleCall)cTeamTeamCrossReference_2_0.eContents().get(1);
+		private final Assignment cTerrainAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cTerrainTerrainParserRuleCall_3_0 = (RuleCall)cTerrainAssignment_3.eContents().get(0);
 		
 		//Loc:
-		//	name=ID 'opponents' team=[Team];
+		//	name=ID 'opponents' team=[Team] terrain=Terrain;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID 'opponents' team=[Team]
+		//name=ID 'opponents' team=[Team] terrain=Terrain
 		public Group getGroup() { return cGroup; }
 		
 		//name=ID
@@ -362,6 +364,43 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ID
 		public RuleCall getTeamTeamIDTerminalRuleCall_2_0_1() { return cTeamTeamIDTerminalRuleCall_2_0_1; }
+		
+		//terrain=Terrain
+		public Assignment getTerrainAssignment_3() { return cTerrainAssignment_3; }
+		
+		//Terrain
+		public RuleCall getTerrainTerrainParserRuleCall_3_0() { return cTerrainTerrainParserRuleCall_3_0; }
+	}
+	public class TerrainElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Terrain");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cTerrainKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cETypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cETypeETypeParserRuleCall_2_0 = (RuleCall)cETypeAssignment_2.eContents().get(0);
+		
+		//Terrain:
+		//	'terrain' name=ID eType=EType;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'terrain' name=ID eType=EType
+		public Group getGroup() { return cGroup; }
+		
+		//'terrain'
+		public Keyword getTerrainKeyword_0() { return cTerrainKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//eType=EType
+		public Assignment getETypeAssignment_2() { return cETypeAssignment_2; }
+		
+		//EType
+		public RuleCall getETypeETypeParserRuleCall_2_0() { return cETypeETypeParserRuleCall_2_0; }
 	}
 	public class RelationsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Relations");
@@ -1060,24 +1099,55 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Teams");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTeamsKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cTeamAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTeamTeamParserRuleCall_1_0 = (RuleCall)cTeamAssignment_1.eContents().get(0);
+		private final Assignment cSizeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cSizeTeamSizeParserRuleCall_1_0 = (RuleCall)cSizeAssignment_1.eContents().get(0);
+		private final Assignment cTeamAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cTeamTeamParserRuleCall_2_0 = (RuleCall)cTeamAssignment_2.eContents().get(0);
 		
 		//Teams:
-		//	'teams' team+=Team+;
+		//	'teams' size=TeamSize team+=Team+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'teams' team+=Team+
+		//'teams' size=TeamSize team+=Team+
 		public Group getGroup() { return cGroup; }
 		
 		//'teams'
 		public Keyword getTeamsKeyword_0() { return cTeamsKeyword_0; }
 		
+		//size=TeamSize
+		public Assignment getSizeAssignment_1() { return cSizeAssignment_1; }
+		
+		//TeamSize
+		public RuleCall getSizeTeamSizeParserRuleCall_1_0() { return cSizeTeamSizeParserRuleCall_1_0; }
+		
 		//team+=Team+
-		public Assignment getTeamAssignment_1() { return cTeamAssignment_1; }
+		public Assignment getTeamAssignment_2() { return cTeamAssignment_2; }
 		
 		//Team
-		public RuleCall getTeamTeamParserRuleCall_1_0() { return cTeamTeamParserRuleCall_1_0; }
+		public RuleCall getTeamTeamParserRuleCall_2_0() { return cTeamTeamParserRuleCall_2_0; }
+	}
+	public class TeamSizeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.TeamSize");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cSizeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValueINTTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		
+		//TeamSize:
+		//	'size' value=INT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'size' value=INT
+		public Group getGroup() { return cGroup; }
+		
+		//'size'
+		public Keyword getSizeKeyword_0() { return cSizeKeyword_0; }
+		
+		//value=INT
+		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
+		
+		//INT
+		public RuleCall getValueINTTerminalRuleCall_1_0() { return cValueINTTerminalRuleCall_1_0; }
 	}
 	public class TeamElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.Team");
@@ -1624,6 +1694,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	private final AttributeElements pAttribute;
 	private final LocationsElements pLocations;
 	private final LocElements pLoc;
+	private final TerrainElements pTerrain;
 	private final RelationsElements pRelations;
 	private final TypeElements pType;
 	private final TypeExpressionElements pTypeExpression;
@@ -1644,6 +1715,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	private final EntityElements pEntity;
 	private final EntityMovesElements pEntityMoves;
 	private final TeamsElements pTeams;
+	private final TeamSizeElements pTeamSize;
 	private final TeamElements pTeam;
 	private final MembersElements pMembers;
 	private final RequireElements pRequire;
@@ -1681,6 +1753,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		this.pAttribute = new AttributeElements();
 		this.pLocations = new LocationsElements();
 		this.pLoc = new LocElements();
+		this.pTerrain = new TerrainElements();
 		this.pRelations = new RelationsElements();
 		this.pType = new TypeElements();
 		this.pTypeExpression = new TypeExpressionElements();
@@ -1701,6 +1774,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		this.pEntity = new EntityElements();
 		this.pEntityMoves = new EntityMovesElements();
 		this.pTeams = new TeamsElements();
+		this.pTeamSize = new TeamSizeElements();
 		this.pTeam = new TeamElements();
 		this.pMembers = new MembersElements();
 		this.pRequire = new RequireElements();
@@ -1857,13 +1931,23 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Loc:
-	//	name=ID 'opponents' team=[Team];
+	//	name=ID 'opponents' team=[Team] terrain=Terrain;
 	public LocElements getLocAccess() {
 		return pLoc;
 	}
 	
 	public ParserRule getLocRule() {
 		return getLocAccess().getRule();
+	}
+	
+	//Terrain:
+	//	'terrain' name=ID eType=EType;
+	public TerrainElements getTerrainAccess() {
+		return pTerrain;
+	}
+	
+	public ParserRule getTerrainRule() {
+		return getTerrainAccess().getRule();
 	}
 	
 	//Relations:
@@ -2057,13 +2141,23 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Teams:
-	//	'teams' team+=Team+;
+	//	'teams' size=TeamSize team+=Team+;
 	public TeamsElements getTeamsAccess() {
 		return pTeams;
 	}
 	
 	public ParserRule getTeamsRule() {
 		return getTeamsAccess().getRule();
+	}
+	
+	//TeamSize:
+	//	'size' value=INT;
+	public TeamSizeElements getTeamSizeAccess() {
+		return pTeamSize;
+	}
+	
+	public ParserRule getTeamSizeRule() {
+		return getTeamSizeAccess().getRule();
 	}
 	
 	//Team:

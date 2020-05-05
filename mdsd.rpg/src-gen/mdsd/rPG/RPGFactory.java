@@ -123,6 +123,15 @@ public interface RPGFactory extends EFactory
   Loc createLoc();
 
   /**
+   * Returns a new object of class '<em>Terrain</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Terrain</em>'.
+   * @generated
+   */
+  Terrain createTerrain();
+
+  /**
    * Returns a new object of class '<em>Relations</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -301,6 +310,15 @@ public interface RPGFactory extends EFactory
    * @generated
    */
   Teams createTeams();
+
+  /**
+   * Returns a new object of class '<em>Team Size</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Team Size</em>'.
+   * @generated
+   */
+  TeamSize createTeamSize();
 
   /**
    * Returns a new object of class '<em>Team</em>'.

@@ -56,7 +56,11 @@ Locations:
 ;
 
 Loc:
-	name=ID 'opponents' team=[Team]
+	name=ID 'opponents' team=[Team] terrain=Terrain
+;
+
+Terrain:
+	'terrain' name=ID eType=EType 
 ;
 
 Relations:
@@ -137,7 +141,11 @@ EntityMoves:
 ;
 
 Teams:
-	'teams' team+=Team+
+	'teams' size=TeamSize  team+=Team+
+;
+
+TeamSize:
+	'size' value=INT
 ;
 
 Team:

@@ -58,7 +58,9 @@ import mdsd.rPG.Sum;
 import mdsd.rPG.SystemRPG;
 import mdsd.rPG.Target;
 import mdsd.rPG.Team;
+import mdsd.rPG.TeamSize;
 import mdsd.rPG.Teams;
+import mdsd.rPG.Terrain;
 import mdsd.rPG.Type;
 import mdsd.rPG.TypeExpression;
 
@@ -153,6 +155,13 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   private EClass locEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass terrainEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -293,6 +302,13 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   private EClass teamsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass teamSizeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -794,6 +810,50 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
   public EReference getLoc_Team()
   {
     return (EReference)locEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getLoc_Terrain()
+  {
+    return (EReference)locEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getTerrain()
+  {
+    return terrainEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getTerrain_Name()
+  {
+    return (EAttribute)terrainEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getTerrain_EType()
+  {
+    return (EReference)terrainEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1440,9 +1500,42 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EReference getTeams_Team()
+  public EReference getTeams_Size()
   {
     return (EReference)teamsEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getTeams_Team()
+  {
+    return (EReference)teamsEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getTeamSize()
+  {
+    return teamSizeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getTeamSize_Value()
+  {
+    return (EAttribute)teamSizeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2038,6 +2131,11 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     locEClass = createEClass(LOC);
     createEAttribute(locEClass, LOC__NAME);
     createEReference(locEClass, LOC__TEAM);
+    createEReference(locEClass, LOC__TERRAIN);
+
+    terrainEClass = createEClass(TERRAIN);
+    createEAttribute(terrainEClass, TERRAIN__NAME);
+    createEReference(terrainEClass, TERRAIN__ETYPE);
 
     relationsEClass = createEClass(RELATIONS);
     createEReference(relationsEClass, RELATIONS__TYPE);
@@ -2116,7 +2214,11 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     createEReference(entityMovesEClass, ENTITY_MOVES__MOVE);
 
     teamsEClass = createEClass(TEAMS);
+    createEReference(teamsEClass, TEAMS__SIZE);
     createEReference(teamsEClass, TEAMS__TEAM);
+
+    teamSizeEClass = createEClass(TEAM_SIZE);
+    createEAttribute(teamSizeEClass, TEAM_SIZE__VALUE);
 
     teamEClass = createEClass(TEAM);
     createEAttribute(teamEClass, TEAM__NAME);
@@ -2287,6 +2389,11 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     initEClass(locEClass, Loc.class, "Loc", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getLoc_Name(), ecorePackage.getEString(), "name", null, 0, 1, Loc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLoc_Team(), this.getTeam(), null, "team", null, 0, 1, Loc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getLoc_Terrain(), this.getTerrain(), null, "terrain", null, 0, 1, Loc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(terrainEClass, Terrain.class, "Terrain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTerrain_Name(), ecorePackage.getEString(), "name", null, 0, 1, Terrain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTerrain_EType(), this.getEType(), null, "eType", null, 0, 1, Terrain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(relationsEClass, Relations.class, "Relations", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRelations_Type(), this.getType(), null, "type", null, 0, -1, Relations.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2365,7 +2472,11 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     initEReference(getEntityMoves_Move(), this.getMove(), null, "move", null, 0, -1, EntityMoves.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(teamsEClass, Teams.class, "Teams", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTeams_Size(), this.getTeamSize(), null, "size", null, 0, 1, Teams.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTeams_Team(), this.getTeam(), null, "team", null, 0, -1, Teams.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(teamSizeEClass, TeamSize.class, "TeamSize", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTeamSize_Value(), ecorePackage.getEInt(), "value", null, 0, 1, TeamSize.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(teamEClass, Team.class, "Team", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTeam_Name(), ecorePackage.getEString(), "name", null, 0, 1, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

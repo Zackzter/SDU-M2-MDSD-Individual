@@ -156,6 +156,13 @@ public class RPGSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RPGPackage.TERRAIN:
+      {
+        Terrain terrain = (Terrain)theEObject;
+        T result = caseTerrain(terrain);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RPGPackage.RELATIONS:
       {
         Relations relations = (Relations)theEObject;
@@ -298,6 +305,13 @@ public class RPGSwitch<T> extends Switch<T>
         Teams teams = (Teams)theEObject;
         T result = caseTeams(teams);
         if (result == null) result = caseDeclaration(teams);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RPGPackage.TEAM_SIZE:
+      {
+        TeamSize teamSize = (TeamSize)theEObject;
+        T result = caseTeamSize(teamSize);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -689,6 +703,22 @@ public class RPGSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Terrain</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Terrain</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTerrain(Terrain object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Relations</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1004,6 +1034,22 @@ public class RPGSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseTeams(Teams object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Team Size</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Team Size</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTeamSize(TeamSize object)
   {
     return null;
   }

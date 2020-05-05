@@ -3,9 +3,8 @@
  */
 package mdsd.rPG.impl;
 
-import mdsd.rPG.Loc;
+import mdsd.rPG.EType;
 import mdsd.rPG.RPGPackage;
-import mdsd.rPG.Team;
 import mdsd.rPG.Terrain;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -19,20 +18,19 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Loc</b></em>'.
+ * An implementation of the model object '<em><b>Terrain</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.LocImpl#getName <em>Name</em>}</li>
- *   <li>{@link mdsd.rPG.impl.LocImpl#getTeam <em>Team</em>}</li>
- *   <li>{@link mdsd.rPG.impl.LocImpl#getTerrain <em>Terrain</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.TerrainImpl#getName <em>Name</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.TerrainImpl#getEType <em>EType</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class LocImpl extends MinimalEObjectImpl.Container implements Loc
+public class TerrainImpl extends MinimalEObjectImpl.Container implements Terrain
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -55,31 +53,21 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getTeam() <em>Team</em>}' reference.
+   * The cached value of the '{@link #getEType() <em>EType</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTeam()
+   * @see #getEType()
    * @generated
    * @ordered
    */
-  protected Team team;
-
-  /**
-   * The cached value of the '{@link #getTerrain() <em>Terrain</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTerrain()
-   * @generated
-   * @ordered
-   */
-  protected Terrain terrain;
+  protected EType eType;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected LocImpl()
+  protected TerrainImpl()
   {
     super();
   }
@@ -92,7 +80,7 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
   @Override
   protected EClass eStaticClass()
   {
-    return RPGPackage.Literals.LOC;
+    return RPGPackage.Literals.TERRAIN;
   }
 
   /**
@@ -117,7 +105,7 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.LOC__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.TERRAIN__NAME, oldName, name));
   }
 
   /**
@@ -126,19 +114,9 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
    * @generated
    */
   @Override
-  public Team getTeam()
+  public EType getEType()
   {
-    if (team != null && team.eIsProxy())
-    {
-      InternalEObject oldTeam = (InternalEObject)team;
-      team = (Team)eResolveProxy(oldTeam);
-      if (team != oldTeam)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RPGPackage.LOC__TEAM, oldTeam, team));
-      }
-    }
-    return team;
+    return eType;
   }
 
   /**
@@ -146,48 +124,13 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
    * <!-- end-user-doc -->
    * @generated
    */
-  public Team basicGetTeam()
+  public NotificationChain basicSetEType(EType newEType, NotificationChain msgs)
   {
-    return team;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setTeam(Team newTeam)
-  {
-    Team oldTeam = team;
-    team = newTeam;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.LOC__TEAM, oldTeam, team));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Terrain getTerrain()
-  {
-    return terrain;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTerrain(Terrain newTerrain, NotificationChain msgs)
-  {
-    Terrain oldTerrain = terrain;
-    terrain = newTerrain;
+    EType oldEType = eType;
+    eType = newEType;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.LOC__TERRAIN, oldTerrain, newTerrain);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.TERRAIN__ETYPE, oldEType, newEType);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -199,20 +142,20 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
    * @generated
    */
   @Override
-  public void setTerrain(Terrain newTerrain)
+  public void setEType(EType newEType)
   {
-    if (newTerrain != terrain)
+    if (newEType != eType)
     {
       NotificationChain msgs = null;
-      if (terrain != null)
-        msgs = ((InternalEObject)terrain).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.LOC__TERRAIN, null, msgs);
-      if (newTerrain != null)
-        msgs = ((InternalEObject)newTerrain).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.LOC__TERRAIN, null, msgs);
-      msgs = basicSetTerrain(newTerrain, msgs);
+      if (eType != null)
+        msgs = ((InternalEObject)eType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.TERRAIN__ETYPE, null, msgs);
+      if (newEType != null)
+        msgs = ((InternalEObject)newEType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.TERRAIN__ETYPE, null, msgs);
+      msgs = basicSetEType(newEType, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.LOC__TERRAIN, newTerrain, newTerrain));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.TERRAIN__ETYPE, newEType, newEType));
   }
 
   /**
@@ -225,8 +168,8 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
   {
     switch (featureID)
     {
-      case RPGPackage.LOC__TERRAIN:
-        return basicSetTerrain(null, msgs);
+      case RPGPackage.TERRAIN__ETYPE:
+        return basicSetEType(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -241,13 +184,10 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
   {
     switch (featureID)
     {
-      case RPGPackage.LOC__NAME:
+      case RPGPackage.TERRAIN__NAME:
         return getName();
-      case RPGPackage.LOC__TEAM:
-        if (resolve) return getTeam();
-        return basicGetTeam();
-      case RPGPackage.LOC__TERRAIN:
-        return getTerrain();
+      case RPGPackage.TERRAIN__ETYPE:
+        return getEType();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -262,14 +202,11 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
   {
     switch (featureID)
     {
-      case RPGPackage.LOC__NAME:
+      case RPGPackage.TERRAIN__NAME:
         setName((String)newValue);
         return;
-      case RPGPackage.LOC__TEAM:
-        setTeam((Team)newValue);
-        return;
-      case RPGPackage.LOC__TERRAIN:
-        setTerrain((Terrain)newValue);
+      case RPGPackage.TERRAIN__ETYPE:
+        setEType((EType)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -285,14 +222,11 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
   {
     switch (featureID)
     {
-      case RPGPackage.LOC__NAME:
+      case RPGPackage.TERRAIN__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RPGPackage.LOC__TEAM:
-        setTeam((Team)null);
-        return;
-      case RPGPackage.LOC__TERRAIN:
-        setTerrain((Terrain)null);
+      case RPGPackage.TERRAIN__ETYPE:
+        setEType((EType)null);
         return;
     }
     super.eUnset(featureID);
@@ -308,12 +242,10 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
   {
     switch (featureID)
     {
-      case RPGPackage.LOC__NAME:
+      case RPGPackage.TERRAIN__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RPGPackage.LOC__TEAM:
-        return team != null;
-      case RPGPackage.LOC__TERRAIN:
-        return terrain != null;
+      case RPGPackage.TERRAIN__ETYPE:
+        return eType != null;
     }
     return super.eIsSet(featureID);
   }
@@ -335,4 +267,4 @@ public class LocImpl extends MinimalEObjectImpl.Container implements Loc
     return result.toString();
   }
 
-} //LocImpl
+} //TerrainImpl

@@ -131,6 +131,11 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createLocAdapter();
       }
       @Override
+      public Adapter caseTerrain(Terrain object)
+      {
+        return createTerrainAdapter();
+      }
+      @Override
       public Adapter caseRelations(Relations object)
       {
         return createRelationsAdapter();
@@ -229,6 +234,11 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
       public Adapter caseTeams(Teams object)
       {
         return createTeamsAdapter();
+      }
+      @Override
+      public Adapter caseTeamSize(TeamSize object)
+      {
+        return createTeamSizeAdapter();
       }
       @Override
       public Adapter caseTeam(Team object)
@@ -543,6 +553,21 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.Terrain <em>Terrain</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.Terrain
+   * @generated
+   */
+  public Adapter createTerrainAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link mdsd.rPG.Relations <em>Relations</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -838,6 +863,21 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTeamsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link mdsd.rPG.TeamSize <em>Team Size</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see mdsd.rPG.TeamSize
+   * @generated
+   */
+  public Adapter createTeamSizeAdapter()
   {
     return null;
   }
