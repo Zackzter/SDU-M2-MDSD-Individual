@@ -9,22 +9,22 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Change</b></em>'.
+ * A representation of the model object '<em><b>Attribute Reference</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.Change#getSelfT <em>Self T</em>}</li>
- *   <li>{@link mdsd.rPG.Change#getTarget <em>Target</em>}</li>
+ *   <li>{@link mdsd.rPG.AttributeReference#getSelfT <em>Self T</em>}</li>
+ *   <li>{@link mdsd.rPG.AttributeReference#getTarget <em>Target</em>}</li>
  * </ul>
  *
- * @see mdsd.rPG.RPGPackage#getChange()
+ * @see mdsd.rPG.RPGPackage#getAttributeReference()
  * @model
  * @generated
  */
-public interface Change extends EObject
+public interface AttributeReference extends EObject
 {
   /**
    * Returns the value of the '<em><b>Self T</b></em>' containment reference list.
@@ -32,7 +32,7 @@ public interface Change extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Self T</em>' containment reference list.
-   * @see mdsd.rPG.RPGPackage#getChange_SelfT()
+   * @see mdsd.rPG.RPGPackage#getAttributeReference_SelfT()
    * @model containment="true"
    * @generated
    */
@@ -44,10 +44,10 @@ public interface Change extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Target</em>' containment reference list.
-   * @see mdsd.rPG.RPGPackage#getChange_Target()
+   * @see mdsd.rPG.RPGPackage#getAttributeReference_Target()
    * @model containment="true"
    * @generated
    */
   EList<Target> getTarget();
 
-} // Change
+} // AttributeReference

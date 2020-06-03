@@ -5,9 +5,10 @@ package mdsd.rPG.impl;
 
 import java.util.Collection;
 
-import mdsd.rPG.AltAttribute;
+import mdsd.rPG.Buff;
 import mdsd.rPG.EType;
 import mdsd.rPG.Entity;
+import mdsd.rPG.EntityAttribute;
 import mdsd.rPG.EntityMoves;
 import mdsd.rPG.RPGPackage;
 
@@ -35,8 +36,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link mdsd.rPG.impl.EntityImpl#getName <em>Name</em>}</li>
  *   <li>{@link mdsd.rPG.impl.EntityImpl#getEType <em>EType</em>}</li>
- *   <li>{@link mdsd.rPG.impl.EntityImpl#getAtt <em>Att</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.EntityImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link mdsd.rPG.impl.EntityImpl#getEMoves <em>EMoves</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.EntityImpl#getLocalEffects <em>Local Effects</em>}</li>
  * </ul>
  *
  * @generated
@@ -74,14 +76,14 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
   protected EType eType;
 
   /**
-   * The cached value of the '{@link #getAtt() <em>Att</em>}' containment reference list.
+   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAtt()
+   * @see #getAttributes()
    * @generated
    * @ordered
    */
-  protected EList<AltAttribute> att;
+  protected EList<EntityAttribute> attributes;
 
   /**
    * The cached value of the '{@link #getEMoves() <em>EMoves</em>}' containment reference.
@@ -92,6 +94,16 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
    * @ordered
    */
   protected EntityMoves eMoves;
+
+  /**
+   * The cached value of the '{@link #getLocalEffects() <em>Local Effects</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getLocalEffects()
+   * @generated
+   * @ordered
+   */
+  protected EList<Buff> localEffects;
 
   /**
    * <!-- begin-user-doc -->
@@ -195,13 +207,13 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
    * @generated
    */
   @Override
-  public EList<AltAttribute> getAtt()
+  public EList<EntityAttribute> getAttributes()
   {
-    if (att == null)
+    if (attributes == null)
     {
-      att = new EObjectContainmentEList<AltAttribute>(AltAttribute.class, this, RPGPackage.ENTITY__ATT);
+      attributes = new EObjectContainmentEList<EntityAttribute>(EntityAttribute.class, this, RPGPackage.ENTITY__ATTRIBUTES);
     }
-    return att;
+    return attributes;
   }
 
   /**
@@ -260,16 +272,33 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
    * @generated
    */
   @Override
+  public EList<Buff> getLocalEffects()
+  {
+    if (localEffects == null)
+    {
+      localEffects = new EObjectContainmentEList<Buff>(Buff.class, this, RPGPackage.ENTITY__LOCAL_EFFECTS);
+    }
+    return localEffects;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
       case RPGPackage.ENTITY__ETYPE:
         return basicSetEType(null, msgs);
-      case RPGPackage.ENTITY__ATT:
-        return ((InternalEList<?>)getAtt()).basicRemove(otherEnd, msgs);
+      case RPGPackage.ENTITY__ATTRIBUTES:
+        return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
       case RPGPackage.ENTITY__EMOVES:
         return basicSetEMoves(null, msgs);
+      case RPGPackage.ENTITY__LOCAL_EFFECTS:
+        return ((InternalEList<?>)getLocalEffects()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -288,10 +317,12 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
         return getName();
       case RPGPackage.ENTITY__ETYPE:
         return getEType();
-      case RPGPackage.ENTITY__ATT:
-        return getAtt();
+      case RPGPackage.ENTITY__ATTRIBUTES:
+        return getAttributes();
       case RPGPackage.ENTITY__EMOVES:
         return getEMoves();
+      case RPGPackage.ENTITY__LOCAL_EFFECTS:
+        return getLocalEffects();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -313,12 +344,16 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
       case RPGPackage.ENTITY__ETYPE:
         setEType((EType)newValue);
         return;
-      case RPGPackage.ENTITY__ATT:
-        getAtt().clear();
-        getAtt().addAll((Collection<? extends AltAttribute>)newValue);
+      case RPGPackage.ENTITY__ATTRIBUTES:
+        getAttributes().clear();
+        getAttributes().addAll((Collection<? extends EntityAttribute>)newValue);
         return;
       case RPGPackage.ENTITY__EMOVES:
         setEMoves((EntityMoves)newValue);
+        return;
+      case RPGPackage.ENTITY__LOCAL_EFFECTS:
+        getLocalEffects().clear();
+        getLocalEffects().addAll((Collection<? extends Buff>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -340,11 +375,14 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
       case RPGPackage.ENTITY__ETYPE:
         setEType((EType)null);
         return;
-      case RPGPackage.ENTITY__ATT:
-        getAtt().clear();
+      case RPGPackage.ENTITY__ATTRIBUTES:
+        getAttributes().clear();
         return;
       case RPGPackage.ENTITY__EMOVES:
         setEMoves((EntityMoves)null);
+        return;
+      case RPGPackage.ENTITY__LOCAL_EFFECTS:
+        getLocalEffects().clear();
         return;
     }
     super.eUnset(featureID);
@@ -364,10 +402,12 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case RPGPackage.ENTITY__ETYPE:
         return eType != null;
-      case RPGPackage.ENTITY__ATT:
-        return att != null && !att.isEmpty();
+      case RPGPackage.ENTITY__ATTRIBUTES:
+        return attributes != null && !attributes.isEmpty();
       case RPGPackage.ENTITY__EMOVES:
         return eMoves != null;
+      case RPGPackage.ENTITY__LOCAL_EFFECTS:
+        return localEffects != null && !localEffects.isEmpty();
     }
     return super.eIsSet(featureID);
   }

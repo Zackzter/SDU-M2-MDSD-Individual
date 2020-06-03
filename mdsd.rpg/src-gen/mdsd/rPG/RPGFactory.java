@@ -87,6 +87,60 @@ public interface RPGFactory extends EFactory
   MoveE createMoveE();
 
   /**
+   * Returns a new object of class '<em>Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Rule</em>'.
+   * @generated
+   */
+  Rule createRule();
+
+  /**
+   * Returns a new object of class '<em>Attribute Buff</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Attribute Buff</em>'.
+   * @generated
+   */
+  AttributeBuff createAttributeBuff();
+
+  /**
+   * Returns a new object of class '<em>Attribute Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Attribute Reference</em>'.
+   * @generated
+   */
+  AttributeReference createAttributeReference();
+
+  /**
+   * Returns a new object of class '<em>Self</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Self</em>'.
+   * @generated
+   */
+  Self createSelf();
+
+  /**
+   * Returns a new object of class '<em>Target</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Target</em>'.
+   * @generated
+   */
+  Target createTarget();
+
+  /**
+   * Returns a new object of class '<em>Local Target</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Local Target</em>'.
+   * @generated
+   */
+  LocalTarget createLocalTarget();
+
+  /**
    * Returns a new object of class '<em>Attributes</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -222,51 +276,6 @@ public interface RPGFactory extends EFactory
   AltAttribute createAltAttribute();
 
   /**
-   * Returns a new object of class '<em>Rule</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Rule</em>'.
-   * @generated
-   */
-  Rule createRule();
-
-  /**
-   * Returns a new object of class '<em>Rule B</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Rule B</em>'.
-   * @generated
-   */
-  RuleB createRuleB();
-
-  /**
-   * Returns a new object of class '<em>Change</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Change</em>'.
-   * @generated
-   */
-  Change createChange();
-
-  /**
-   * Returns a new object of class '<em>Self</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Self</em>'.
-   * @generated
-   */
-  Self createSelf();
-
-  /**
-   * Returns a new object of class '<em>Target</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Target</em>'.
-   * @generated
-   */
-  Target createTarget();
-
-  /**
    * Returns a new object of class '<em>Entities</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -292,6 +301,24 @@ public interface RPGFactory extends EFactory
    * @generated
    */
   Entity createEntity();
+
+  /**
+   * Returns a new object of class '<em>Entity Attribute</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Entity Attribute</em>'.
+   * @generated
+   */
+  EntityAttribute createEntityAttribute();
+
+  /**
+   * Returns a new object of class '<em>Local Attribute</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Local Attribute</em>'.
+   * @generated
+   */
+  LocalAttribute createLocalAttribute();
 
   /**
    * Returns a new object of class '<em>Entity Moves</em>'.

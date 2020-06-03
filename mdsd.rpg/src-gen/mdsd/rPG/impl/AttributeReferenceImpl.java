@@ -5,12 +5,11 @@ package mdsd.rPG.impl;
 
 import java.util.Collection;
 
-import mdsd.rPG.Proposition;
+import mdsd.rPG.AttributeReference;
 import mdsd.rPG.RPGPackage;
-import mdsd.rPG.RuleB;
+import mdsd.rPG.Self;
 import mdsd.rPG.Target;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -18,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -26,29 +24,29 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Rule B</b></em>'.
+ * An implementation of the model object '<em><b>Attribute Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.RuleBImpl#getOr <em>Or</em>}</li>
- *   <li>{@link mdsd.rPG.impl.RuleBImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.AttributeReferenceImpl#getSelfT <em>Self T</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.AttributeReferenceImpl#getTarget <em>Target</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class RuleBImpl extends MinimalEObjectImpl.Container implements RuleB
+public class AttributeReferenceImpl extends MinimalEObjectImpl.Container implements AttributeReference
 {
   /**
-   * The cached value of the '{@link #getOr() <em>Or</em>}' containment reference.
+   * The cached value of the '{@link #getSelfT() <em>Self T</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getOr()
+   * @see #getSelfT()
    * @generated
    * @ordered
    */
-  protected Proposition or;
+  protected EList<Self> selfT;
 
   /**
    * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference list.
@@ -65,7 +63,7 @@ public class RuleBImpl extends MinimalEObjectImpl.Container implements RuleB
    * <!-- end-user-doc -->
    * @generated
    */
-  protected RuleBImpl()
+  protected AttributeReferenceImpl()
   {
     super();
   }
@@ -78,7 +76,7 @@ public class RuleBImpl extends MinimalEObjectImpl.Container implements RuleB
   @Override
   protected EClass eStaticClass()
   {
-    return RPGPackage.Literals.RULE_B;
+    return RPGPackage.Literals.ATTRIBUTE_REFERENCE;
   }
 
   /**
@@ -87,48 +85,13 @@ public class RuleBImpl extends MinimalEObjectImpl.Container implements RuleB
    * @generated
    */
   @Override
-  public Proposition getOr()
+  public EList<Self> getSelfT()
   {
-    return or;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetOr(Proposition newOr, NotificationChain msgs)
-  {
-    Proposition oldOr = or;
-    or = newOr;
-    if (eNotificationRequired())
+    if (selfT == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.RULE_B__OR, oldOr, newOr);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      selfT = new EObjectContainmentEList<Self>(Self.class, this, RPGPackage.ATTRIBUTE_REFERENCE__SELF_T);
     }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setOr(Proposition newOr)
-  {
-    if (newOr != or)
-    {
-      NotificationChain msgs = null;
-      if (or != null)
-        msgs = ((InternalEObject)or).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE_B__OR, null, msgs);
-      if (newOr != null)
-        msgs = ((InternalEObject)newOr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE_B__OR, null, msgs);
-      msgs = basicSetOr(newOr, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE_B__OR, newOr, newOr));
+    return selfT;
   }
 
   /**
@@ -141,7 +104,7 @@ public class RuleBImpl extends MinimalEObjectImpl.Container implements RuleB
   {
     if (target == null)
     {
-      target = new EObjectContainmentEList<Target>(Target.class, this, RPGPackage.RULE_B__TARGET);
+      target = new EObjectContainmentEList<Target>(Target.class, this, RPGPackage.ATTRIBUTE_REFERENCE__TARGET);
     }
     return target;
   }
@@ -156,9 +119,9 @@ public class RuleBImpl extends MinimalEObjectImpl.Container implements RuleB
   {
     switch (featureID)
     {
-      case RPGPackage.RULE_B__OR:
-        return basicSetOr(null, msgs);
-      case RPGPackage.RULE_B__TARGET:
+      case RPGPackage.ATTRIBUTE_REFERENCE__SELF_T:
+        return ((InternalEList<?>)getSelfT()).basicRemove(otherEnd, msgs);
+      case RPGPackage.ATTRIBUTE_REFERENCE__TARGET:
         return ((InternalEList<?>)getTarget()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -174,9 +137,9 @@ public class RuleBImpl extends MinimalEObjectImpl.Container implements RuleB
   {
     switch (featureID)
     {
-      case RPGPackage.RULE_B__OR:
-        return getOr();
-      case RPGPackage.RULE_B__TARGET:
+      case RPGPackage.ATTRIBUTE_REFERENCE__SELF_T:
+        return getSelfT();
+      case RPGPackage.ATTRIBUTE_REFERENCE__TARGET:
         return getTarget();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -193,10 +156,11 @@ public class RuleBImpl extends MinimalEObjectImpl.Container implements RuleB
   {
     switch (featureID)
     {
-      case RPGPackage.RULE_B__OR:
-        setOr((Proposition)newValue);
+      case RPGPackage.ATTRIBUTE_REFERENCE__SELF_T:
+        getSelfT().clear();
+        getSelfT().addAll((Collection<? extends Self>)newValue);
         return;
-      case RPGPackage.RULE_B__TARGET:
+      case RPGPackage.ATTRIBUTE_REFERENCE__TARGET:
         getTarget().clear();
         getTarget().addAll((Collection<? extends Target>)newValue);
         return;
@@ -214,10 +178,10 @@ public class RuleBImpl extends MinimalEObjectImpl.Container implements RuleB
   {
     switch (featureID)
     {
-      case RPGPackage.RULE_B__OR:
-        setOr((Proposition)null);
+      case RPGPackage.ATTRIBUTE_REFERENCE__SELF_T:
+        getSelfT().clear();
         return;
-      case RPGPackage.RULE_B__TARGET:
+      case RPGPackage.ATTRIBUTE_REFERENCE__TARGET:
         getTarget().clear();
         return;
     }
@@ -234,12 +198,12 @@ public class RuleBImpl extends MinimalEObjectImpl.Container implements RuleB
   {
     switch (featureID)
     {
-      case RPGPackage.RULE_B__OR:
-        return or != null;
-      case RPGPackage.RULE_B__TARGET:
+      case RPGPackage.ATTRIBUTE_REFERENCE__SELF_T:
+        return selfT != null && !selfT.isEmpty();
+      case RPGPackage.ATTRIBUTE_REFERENCE__TARGET:
         return target != null && !target.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //RuleBImpl
+} //AttributeReferenceImpl

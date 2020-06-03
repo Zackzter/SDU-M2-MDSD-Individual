@@ -18,6 +18,9 @@ import mdsd.rPG.Declaration;
 import mdsd.rPG.Effects;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
+import mdsd.rPG.EntityAttribute;
+import mdsd.rPG.LocalAttribute;
+import mdsd.rPG.LocalTarget;
 import mdsd.rPG.Locations;
 import mdsd.rPG.Move;
 import mdsd.rPG.MoveE;
@@ -41,7 +44,10 @@ public class RPGValidator extends AbstractRPGValidator {
 	public static final String EMPTY_ENTTIY_ATTRIBUTES = "emptyEntityAttributes";
 	public static final String INCORRECT_TEAM_COUNT = "incorrectTeamCount";
 	public static final String INDISTINCT_ATTRIBUTES = "indistinctAttributes";
-	
+	public static final String DUPLICATE_ATTRIBUTES = "duplicateAttributes";
+	public static final String INCORRECT_BATTLE_SIZE = "incorrectBattleSize";
+	public static final String LOCAL_OTHER_ENTITY = "localNotFound";
+
 //
 //	@Check
 //	public void checkGreetingStartsWithCapital(Greeting greeting) {
@@ -217,10 +223,111 @@ public class RPGValidator extends AbstractRPGValidator {
 	}
 	
 	@Check
+	public void checkBattleSize(Teams teams) {
+		if(teams.getSize().getValue() < 1) {
+			error("The battle size should at least be one.", RPGPackage.Literals.TEAMS__SIZE, INCORRECT_BATTLE_SIZE);
+		}
+	}
+	
+	@Check
+	public void checkDublicateAttributes(SystemRPG sysrpg) {
+		ArrayList<String> existingAttributes = new ArrayList<>();
+		HashSet<String> entityAttributes = new HashSet<>();
+		
+		for(Declaration dec : sysrpg.getDeclarations()) {
+			if(dec instanceof Attributes) {
+				for(Attribute att : ((Attributes) dec).getAttribute()) {
+					existingAttributes.add(att.getName());
+				}
+			}
+			
+			else if (dec instanceof Entities) {
+				for(Entity ent : ((Entities) dec).getEntity()) {
+					for(EntityAttribute ea : ent.getAttributes()) {
+						if(ea instanceof LocalAttribute) {
+							entityAttributes.add(((LocalAttribute) ea).getName());
+						}
+					}
+				}
+			}
+		}
+		ArrayList<String> duplicates = new ArrayList<String>();
+		
+		for(String s : existingAttributes) {
+			for(String d : entityAttributes) {
+				if(s.equals(d)) {
+					duplicates.add(d);
+				}
+			}
+		}
+		
+//		if(!duplicates.isEmpty()) {
+//			for(String duplicate : duplicates) {
+//				if(existingAttributes.contains(duplicate)) {
+//					error("f " + duplicate, RPGPackage.Literals.SYSTEM_RPG__NAME., DUPLICATE_ATTRIBUTES);
+//				}
+//			}
+//		}
+		
+		if(!duplicates.isEmpty()) {
+			error("Local attributes cannot have the same name as a global attribute,"
+					+ " the duplicated attribute(s) found are: " 
+					+ duplicates, RPGPackage.Literals.SYSTEM_RPG__NAME, DUPLICATE_ATTRIBUTES);
+		}
+		
+	}
+	
+	@Check
+	public void checkLocalAttribute(SystemRPG sysrpg) {
+		Map<String, List<String>> localVariableHolder = new HashMap<>();
+		for(Declaration dec : sysrpg.getDeclarations()) {
+			if(dec instanceof Entities) {
+				for(Entity ent : ((Entities) dec).getEntity()) {
+					
+					List<String> localVariables = new ArrayList<>();
+					localVariableHolder.put(ent.getName(), localVariables);
+					
+					for(EntityAttribute ea : ent.getAttributes()) {
+						if(ea instanceof LocalAttribute) {
+							localVariables.add(((LocalAttribute) ea).getName());
+						}
+					}
+				}
+				for(Entity ent : ((Entities) dec).getEntity()) {
+					if(!ent.getLocalEffects().isEmpty()) {
+						
+						for(Buff effect : ent.getLocalEffects()) {
+							for(LocalTarget lt: effect.getReference().getLocal()) {
+								
+								if(!localVariableHolder.get(ent.getName()).contains(lt.getAttribute().getName())) {
+									for(Map.Entry<String, List<String>> entity : localVariableHolder.entrySet()) {
+										if(entity.getValue().contains(lt.getAttribute().getName())) {
+											error("Local attribute has been found at another entity, prob make it global, entity found: " 
+													+ entity.getKey(), RPGPackage.Literals.SYSTEM_RPG__NAME, LOCAL_OTHER_ENTITY);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+			}
+			
+		}
+	}
+	
+//	for (Map.Entry<String,String> entry : gfg.entrySet())  
+//        System.out.println("Key = " + entry.getKey() + 
+//                         ", Value = " + entry.getValue()); 
+
+	
+	@Check
 	public void checkAttributesAreDistinct(SystemRPG sysrpg) {
 		ArrayList<String> existingAttributes = new ArrayList<>();
 		HashSet<String> moveAttributes = new HashSet<>();
 		HashSet<String> entityAttributes = new HashSet<>();
+		
 		
 		for(Declaration dec : sysrpg.getDeclarations()) {
 			if(dec instanceof Attributes) {
@@ -235,9 +342,12 @@ public class RPGValidator extends AbstractRPGValidator {
 				}
 			} else if(dec instanceof Entities) {
 				for(Entity ent : ((Entities) dec).getEntity()) {
-					for(AltAttribute a : ent.getAtt()) {
-						entityAttributes.add(a.getAttribute().getName());
+					for(EntityAttribute ea : ent.getAttributes()) {
+						if(ea instanceof AltAttribute) {
+							entityAttributes.add(((AltAttribute) ea).getAttribute().getName());
+						}
 					}
+
 				}
 			}
 		}

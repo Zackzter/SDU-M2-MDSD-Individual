@@ -19,12 +19,36 @@
     </genClasses>
     <genClasses ecoreClass="RPG.ecore#//Effect">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RPG.ecore#//Effect/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Effect/rule"/>
     </genClasses>
     <genClasses ecoreClass="RPG.ecore#//Buff">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Buff/rule"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Buff/reference"/>
     </genClasses>
     <genClasses ecoreClass="RPG.ecore#//MoveE">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//MoveE/rule"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//MoveE/reference"/>
+    </genClasses>
+    <genClasses ecoreClass="RPG.ecore#//Rule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Rule/or"/>
+    </genClasses>
+    <genClasses ecoreClass="RPG.ecore#//AttributeBuff">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//AttributeBuff/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//AttributeBuff/local"/>
+    </genClasses>
+    <genClasses ecoreClass="RPG.ecore#//AttributeReference">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//AttributeReference/selfT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//AttributeReference/target"/>
+    </genClasses>
+    <genClasses ecoreClass="RPG.ecore#//Self">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//Self/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Self/sum"/>
+    </genClasses>
+    <genClasses ecoreClass="RPG.ecore#//Target">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//Target/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Target/sum"/>
+    </genClasses>
+    <genClasses ecoreClass="RPG.ecore#//LocalTarget">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//LocalTarget/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//LocalTarget/sum"/>
     </genClasses>
     <genClasses ecoreClass="RPG.ecore#//Attributes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Attributes/attribute"/>
@@ -86,26 +110,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//AltAttribute/attribute"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//AltAttribute/av"/>
     </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//Rule">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Rule/or"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Rule/change"/>
-    </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//RuleB">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//RuleB/or"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//RuleB/target"/>
-    </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//Change">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Change/selfT"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Change/target"/>
-    </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//Self">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//Self/target"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Self/sum"/>
-    </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//Target">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//Target/target"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Target/sum"/>
-    </genClasses>
     <genClasses ecoreClass="RPG.ecore#//Entities">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Entities/entity"/>
     </genClasses>
@@ -115,8 +119,14 @@
     <genClasses ecoreClass="RPG.ecore#//Entity">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RPG.ecore#//Entity/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Entity/eType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Entity/att"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Entity/attributes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Entity/eMoves"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Entity/localEffects"/>
+    </genClasses>
+    <genClasses ecoreClass="RPG.ecore#//EntityAttribute"/>
+    <genClasses ecoreClass="RPG.ecore#//LocalAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RPG.ecore#//LocalAttribute/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//LocalAttribute/aval"/>
     </genClasses>
     <genClasses ecoreClass="RPG.ecore#//EntityMoves">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//EntityMoves/move"/>

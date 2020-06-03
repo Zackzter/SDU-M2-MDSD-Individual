@@ -23,12 +23,45 @@ Effect:
 ;
 
 Buff:
-	'buff' name=ID rule=RuleB
+	'buff' name=ID rule=Rule? reference=AttributeBuff
 ;
 
 MoveE:
-	'move' name=ID rule=Rule
+	'move' name=ID rule=Rule? reference=AttributeReference
 ;
+
+Rule:
+	('if' or = ORcondition 'then')
+;
+
+//Rule:
+//	('if' or = ORcondition 'then') reference=AttributeReference
+//;
+//
+//RuleB:
+//	('if' or = ORcondition 'then') reference+=Target+
+//;
+
+AttributeBuff:
+	(target += Target | local +=LocalTarget)+
+;
+
+AttributeReference:
+	(selfT+=Self | target+=Target)+
+;
+
+Self:
+	'self' target=[Attribute] 'is' sum=Sum
+;
+
+Target:
+	'target' target=[Attribute] 'is' sum=Sum
+;
+
+LocalTarget:
+	'local' attribute=[LocalAttribute] 'is' sum=Sum
+;
+
 
 Attributes:
 	'attributes' attribute+=Attribute+
@@ -104,26 +137,6 @@ AltAttribute:
 	 'attribute' attribute=[Attribute] av=AttributeValues?
 ;
 
-Rule:
-	('if' or = ORcondition 'then')? change=Change
-;
-
-RuleB:
-	('if' or = ORcondition 'then')? target+=Target+
-;
-
-Change:
-	(selfT+=Self | target+=Target)+
-;
-
-Self:
-	'self' target=[Attribute] 'is' sum=Sum
-;
-
-Target:
-	'target' target=[Attribute] 'is' sum=Sum
-;
-
 Entities:
 	'entities' entity+=Entity+
 ;
@@ -133,7 +146,15 @@ Death:
 ;
 
 Entity:
-	'entity' name=ID eType=EType att+=AltAttribute* eMoves=EntityMoves
+	'entity' name=ID eType=EType attributes+=EntityAttribute* eMoves=EntityMoves localEffects+=Buff?
+;
+
+EntityAttribute:
+	 AltAttribute | LocalAttribute
+;
+
+LocalAttribute:
+	'local' name=ID aval=AttributeValues
 ;
 
 EntityMoves:

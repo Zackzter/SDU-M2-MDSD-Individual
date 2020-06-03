@@ -3,9 +3,9 @@
  */
 package mdsd.rPG.impl;
 
-import mdsd.rPG.Effect;
+import mdsd.rPG.AttributeValues;
+import mdsd.rPG.LocalAttribute;
 import mdsd.rPG.RPGPackage;
-import mdsd.rPG.Rule;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -14,23 +14,22 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Effect</b></em>'.
+ * An implementation of the model object '<em><b>Local Attribute</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.EffectImpl#getName <em>Name</em>}</li>
- *   <li>{@link mdsd.rPG.impl.EffectImpl#getRule <em>Rule</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.LocalAttributeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.LocalAttributeImpl#getAval <em>Aval</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
+public class LocalAttributeImpl extends EntityAttributeImpl implements LocalAttribute
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -53,21 +52,21 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getRule() <em>Rule</em>}' containment reference.
+   * The cached value of the '{@link #getAval() <em>Aval</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRule()
+   * @see #getAval()
    * @generated
    * @ordered
    */
-  protected Rule rule;
+  protected AttributeValues aval;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EffectImpl()
+  protected LocalAttributeImpl()
   {
     super();
   }
@@ -80,7 +79,7 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
   @Override
   protected EClass eStaticClass()
   {
-    return RPGPackage.Literals.EFFECT;
+    return RPGPackage.Literals.LOCAL_ATTRIBUTE;
   }
 
   /**
@@ -105,7 +104,7 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.EFFECT__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.LOCAL_ATTRIBUTE__NAME, oldName, name));
   }
 
   /**
@@ -114,9 +113,9 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
    * @generated
    */
   @Override
-  public Rule getRule()
+  public AttributeValues getAval()
   {
-    return rule;
+    return aval;
   }
 
   /**
@@ -124,13 +123,13 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetRule(Rule newRule, NotificationChain msgs)
+  public NotificationChain basicSetAval(AttributeValues newAval, NotificationChain msgs)
   {
-    Rule oldRule = rule;
-    rule = newRule;
+    AttributeValues oldAval = aval;
+    aval = newAval;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.EFFECT__RULE, oldRule, newRule);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.LOCAL_ATTRIBUTE__AVAL, oldAval, newAval);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -142,20 +141,20 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
    * @generated
    */
   @Override
-  public void setRule(Rule newRule)
+  public void setAval(AttributeValues newAval)
   {
-    if (newRule != rule)
+    if (newAval != aval)
     {
       NotificationChain msgs = null;
-      if (rule != null)
-        msgs = ((InternalEObject)rule).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.EFFECT__RULE, null, msgs);
-      if (newRule != null)
-        msgs = ((InternalEObject)newRule).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.EFFECT__RULE, null, msgs);
-      msgs = basicSetRule(newRule, msgs);
+      if (aval != null)
+        msgs = ((InternalEObject)aval).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.LOCAL_ATTRIBUTE__AVAL, null, msgs);
+      if (newAval != null)
+        msgs = ((InternalEObject)newAval).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.LOCAL_ATTRIBUTE__AVAL, null, msgs);
+      msgs = basicSetAval(newAval, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.EFFECT__RULE, newRule, newRule));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.LOCAL_ATTRIBUTE__AVAL, newAval, newAval));
   }
 
   /**
@@ -168,8 +167,8 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
   {
     switch (featureID)
     {
-      case RPGPackage.EFFECT__RULE:
-        return basicSetRule(null, msgs);
+      case RPGPackage.LOCAL_ATTRIBUTE__AVAL:
+        return basicSetAval(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -184,10 +183,10 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
   {
     switch (featureID)
     {
-      case RPGPackage.EFFECT__NAME:
+      case RPGPackage.LOCAL_ATTRIBUTE__NAME:
         return getName();
-      case RPGPackage.EFFECT__RULE:
-        return getRule();
+      case RPGPackage.LOCAL_ATTRIBUTE__AVAL:
+        return getAval();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -202,11 +201,11 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
   {
     switch (featureID)
     {
-      case RPGPackage.EFFECT__NAME:
+      case RPGPackage.LOCAL_ATTRIBUTE__NAME:
         setName((String)newValue);
         return;
-      case RPGPackage.EFFECT__RULE:
-        setRule((Rule)newValue);
+      case RPGPackage.LOCAL_ATTRIBUTE__AVAL:
+        setAval((AttributeValues)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -222,11 +221,11 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
   {
     switch (featureID)
     {
-      case RPGPackage.EFFECT__NAME:
+      case RPGPackage.LOCAL_ATTRIBUTE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case RPGPackage.EFFECT__RULE:
-        setRule((Rule)null);
+      case RPGPackage.LOCAL_ATTRIBUTE__AVAL:
+        setAval((AttributeValues)null);
         return;
     }
     super.eUnset(featureID);
@@ -242,10 +241,10 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
   {
     switch (featureID)
     {
-      case RPGPackage.EFFECT__NAME:
+      case RPGPackage.LOCAL_ATTRIBUTE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case RPGPackage.EFFECT__RULE:
-        return rule != null;
+      case RPGPackage.LOCAL_ATTRIBUTE__AVAL:
+        return aval != null;
     }
     return super.eIsSet(featureID);
   }
@@ -267,4 +266,4 @@ public class EffectImpl extends MinimalEObjectImpl.Container implements Effect
     return result.toString();
   }
 
-} //EffectImpl
+} //LocalAttributeImpl

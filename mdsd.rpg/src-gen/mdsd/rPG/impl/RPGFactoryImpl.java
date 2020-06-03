@@ -72,6 +72,12 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.EFFECT: return createEffect();
       case RPGPackage.BUFF: return createBuff();
       case RPGPackage.MOVE_E: return createMoveE();
+      case RPGPackage.RULE: return createRule();
+      case RPGPackage.ATTRIBUTE_BUFF: return createAttributeBuff();
+      case RPGPackage.ATTRIBUTE_REFERENCE: return createAttributeReference();
+      case RPGPackage.SELF: return createSelf();
+      case RPGPackage.TARGET: return createTarget();
+      case RPGPackage.LOCAL_TARGET: return createLocalTarget();
       case RPGPackage.ATTRIBUTES: return createAttributes();
       case RPGPackage.ATTRIBUTE: return createAttribute();
       case RPGPackage.LOCATIONS: return createLocations();
@@ -87,14 +93,11 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.ETYPE: return createEType();
       case RPGPackage.ATTRIBUTE_VALUES: return createAttributeValues();
       case RPGPackage.ALT_ATTRIBUTE: return createAltAttribute();
-      case RPGPackage.RULE: return createRule();
-      case RPGPackage.RULE_B: return createRuleB();
-      case RPGPackage.CHANGE: return createChange();
-      case RPGPackage.SELF: return createSelf();
-      case RPGPackage.TARGET: return createTarget();
       case RPGPackage.ENTITIES: return createEntities();
       case RPGPackage.DEATH: return createDeath();
       case RPGPackage.ENTITY: return createEntity();
+      case RPGPackage.ENTITY_ATTRIBUTE: return createEntityAttribute();
+      case RPGPackage.LOCAL_ATTRIBUTE: return createLocalAttribute();
       case RPGPackage.ENTITY_MOVES: return createEntityMoves();
       case RPGPackage.TEAMS: return createTeams();
       case RPGPackage.TEAM_SIZE: return createTeamSize();
@@ -210,6 +213,78 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     MoveEImpl moveE = new MoveEImpl();
     return moveE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Rule createRule()
+  {
+    RuleImpl rule = new RuleImpl();
+    return rule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public AttributeBuff createAttributeBuff()
+  {
+    AttributeBuffImpl attributeBuff = new AttributeBuffImpl();
+    return attributeBuff;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public AttributeReference createAttributeReference()
+  {
+    AttributeReferenceImpl attributeReference = new AttributeReferenceImpl();
+    return attributeReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Self createSelf()
+  {
+    SelfImpl self = new SelfImpl();
+    return self;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Target createTarget()
+  {
+    TargetImpl target = new TargetImpl();
+    return target;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public LocalTarget createLocalTarget()
+  {
+    LocalTargetImpl localTarget = new LocalTargetImpl();
+    return localTarget;
   }
 
   /**
@@ -398,66 +473,6 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
    * @generated
    */
   @Override
-  public Rule createRule()
-  {
-    RuleImpl rule = new RuleImpl();
-    return rule;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public RuleB createRuleB()
-  {
-    RuleBImpl ruleB = new RuleBImpl();
-    return ruleB;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Change createChange()
-  {
-    ChangeImpl change = new ChangeImpl();
-    return change;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Self createSelf()
-  {
-    SelfImpl self = new SelfImpl();
-    return self;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Target createTarget()
-  {
-    TargetImpl target = new TargetImpl();
-    return target;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Entities createEntities()
   {
     EntitiesImpl entities = new EntitiesImpl();
@@ -486,6 +501,30 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     EntityImpl entity = new EntityImpl();
     return entity;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EntityAttribute createEntityAttribute()
+  {
+    EntityAttributeImpl entityAttribute = new EntityAttributeImpl();
+    return entityAttribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public LocalAttribute createLocalAttribute()
+  {
+    LocalAttributeImpl localAttribute = new LocalAttributeImpl();
+    return localAttribute;
   }
 
   /**

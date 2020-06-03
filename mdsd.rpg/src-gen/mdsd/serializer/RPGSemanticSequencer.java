@@ -9,13 +9,14 @@ import mdsd.rPG.Add;
 import mdsd.rPG.AltAttribute;
 import mdsd.rPG.And;
 import mdsd.rPG.Attribute;
+import mdsd.rPG.AttributeBuff;
+import mdsd.rPG.AttributeReference;
 import mdsd.rPG.AttributeValues;
 import mdsd.rPG.Attributes;
 import mdsd.rPG.BEffect;
 import mdsd.rPG.Bigger;
 import mdsd.rPG.BiggerEq;
 import mdsd.rPG.Buff;
-import mdsd.rPG.Change;
 import mdsd.rPG.Death;
 import mdsd.rPG.Div;
 import mdsd.rPG.EType;
@@ -27,6 +28,8 @@ import mdsd.rPG.Eq;
 import mdsd.rPG.FloatNum;
 import mdsd.rPG.IntNum;
 import mdsd.rPG.Loc;
+import mdsd.rPG.LocalAttribute;
+import mdsd.rPG.LocalTarget;
 import mdsd.rPG.Locations;
 import mdsd.rPG.MEffect;
 import mdsd.rPG.Members;
@@ -42,7 +45,6 @@ import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Relations;
 import mdsd.rPG.Require;
 import mdsd.rPG.Rule;
-import mdsd.rPG.RuleB;
 import mdsd.rPG.Self;
 import mdsd.rPG.Smaller;
 import mdsd.rPG.SmallerEq;
@@ -93,6 +95,12 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case RPGPackage.ATTRIBUTE:
 				sequence_Attribute(context, (Attribute) semanticObject); 
 				return; 
+			case RPGPackage.ATTRIBUTE_BUFF:
+				sequence_AttributeBuff(context, (AttributeBuff) semanticObject); 
+				return; 
+			case RPGPackage.ATTRIBUTE_REFERENCE:
+				sequence_AttributeReference(context, (AttributeReference) semanticObject); 
+				return; 
 			case RPGPackage.ATTRIBUTE_VALUES:
 				sequence_AttributeValues(context, (AttributeValues) semanticObject); 
 				return; 
@@ -110,9 +118,6 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RPGPackage.BUFF:
 				sequence_Buff(context, (Buff) semanticObject); 
-				return; 
-			case RPGPackage.CHANGE:
-				sequence_Change(context, (Change) semanticObject); 
 				return; 
 			case RPGPackage.DEATH:
 				sequence_Death(context, (Death) semanticObject); 
@@ -146,6 +151,12 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RPGPackage.LOC:
 				sequence_Loc(context, (Loc) semanticObject); 
+				return; 
+			case RPGPackage.LOCAL_ATTRIBUTE:
+				sequence_LocalAttribute(context, (LocalAttribute) semanticObject); 
+				return; 
+			case RPGPackage.LOCAL_TARGET:
+				sequence_LocalTarget(context, (LocalTarget) semanticObject); 
 				return; 
 			case RPGPackage.LOCATIONS:
 				sequence_Locations(context, (Locations) semanticObject); 
@@ -188,9 +199,6 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RPGPackage.RULE:
 				sequence_Rule(context, (Rule) semanticObject); 
-				return; 
-			case RPGPackage.RULE_B:
-				sequence_RuleB(context, (RuleB) semanticObject); 
 				return; 
 			case RPGPackage.SELF:
 				sequence_Self(context, (Self) semanticObject); 
@@ -264,11 +272,36 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * Contexts:
 	 *     AltAttribute returns AltAttribute
+	 *     EntityAttribute returns AltAttribute
 	 *
 	 * Constraint:
 	 *     (attribute=[Attribute|ID] av=AttributeValues?)
 	 */
 	protected void sequence_AltAttribute(ISerializationContext context, AltAttribute semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     AttributeBuff returns AttributeBuff
+	 *
+	 * Constraint:
+	 *     (target+=Target | local+=LocalTarget)+
+	 */
+	protected void sequence_AttributeBuff(ISerializationContext context, AttributeBuff semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     AttributeReference returns AttributeReference
+	 *
+	 * Constraint:
+	 *     (selfT+=Self | target+=Target)+
+	 */
+	protected void sequence_AttributeReference(ISerializationContext context, AttributeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -343,30 +376,9 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Buff returns Buff
 	 *
 	 * Constraint:
-	 *     (name=ID rule=RuleB)
+	 *     (name=ID rule=Rule? reference=AttributeBuff)
 	 */
 	protected void sequence_Buff(ISerializationContext context, Buff semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.EFFECT__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.EFFECT__NAME));
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.BUFF__RULE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.BUFF__RULE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getBuffAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getBuffAccess().getRuleRuleBParserRuleCall_2_0(), semanticObject.getRule());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Change returns Change
-	 *
-	 * Constraint:
-	 *     (selfT+=Self | target+=Target)+
-	 */
-	protected void sequence_Change(ISerializationContext context, Change semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -523,7 +535,7 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Entity returns Entity
 	 *
 	 * Constraint:
-	 *     (name=ID eType=EType att+=AltAttribute* eMoves=EntityMoves)
+	 *     (name=ID eType=EType attributes+=EntityAttribute* eMoves=EntityMoves localEffects+=Buff?)
 	 */
 	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -611,6 +623,49 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     EntityAttribute returns LocalAttribute
+	 *     LocalAttribute returns LocalAttribute
+	 *
+	 * Constraint:
+	 *     (name=ID aval=AttributeValues)
+	 */
+	protected void sequence_LocalAttribute(ISerializationContext context, LocalAttribute semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.LOCAL_ATTRIBUTE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.LOCAL_ATTRIBUTE__NAME));
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.LOCAL_ATTRIBUTE__AVAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.LOCAL_ATTRIBUTE__AVAL));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getLocalAttributeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getLocalAttributeAccess().getAvalAttributeValuesParserRuleCall_2_0(), semanticObject.getAval());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     LocalTarget returns LocalTarget
+	 *
+	 * Constraint:
+	 *     (attribute=[LocalAttribute|ID] sum=Sum)
+	 */
+	protected void sequence_LocalTarget(ISerializationContext context, LocalTarget semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.LOCAL_TARGET__ATTRIBUTE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.LOCAL_TARGET__ATTRIBUTE));
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.LOCAL_TARGET__SUM) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.LOCAL_TARGET__SUM));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getLocalTargetAccess().getAttributeLocalAttributeIDTerminalRuleCall_1_0_1(), semanticObject.eGet(RPGPackage.Literals.LOCAL_TARGET__ATTRIBUTE, false));
+		feeder.accept(grammarAccess.getLocalTargetAccess().getSumSumParserRuleCall_3_0(), semanticObject.getSum());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Declaration returns Locations
 	 *     Locations returns Locations
 	 *
@@ -658,19 +713,10 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     MoveE returns MoveE
 	 *
 	 * Constraint:
-	 *     (name=ID rule=Rule)
+	 *     (name=ID rule=Rule? reference=AttributeReference)
 	 */
 	protected void sequence_MoveE(ISerializationContext context, MoveE semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.EFFECT__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.EFFECT__NAME));
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.MOVE_E__RULE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.MOVE_E__RULE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getMoveEAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getMoveEAccess().getRuleRuleParserRuleCall_2_0(), semanticObject.getRule());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -863,25 +909,19 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     RuleB returns RuleB
-	 *
-	 * Constraint:
-	 *     (or=ORcondition? target+=Target+)
-	 */
-	protected void sequence_RuleB(ISerializationContext context, RuleB semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     Rule returns Rule
 	 *
 	 * Constraint:
-	 *     (or=ORcondition? change=Change)
+	 *     or=ORcondition
 	 */
 	protected void sequence_Rule(ISerializationContext context, Rule semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.RULE__OR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.RULE__OR));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRuleAccess().getOrORconditionParserRuleCall_1_0(), semanticObject.getOr());
+		feeder.finish();
 	}
 	
 	

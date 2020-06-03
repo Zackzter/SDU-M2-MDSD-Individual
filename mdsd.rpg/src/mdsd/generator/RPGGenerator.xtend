@@ -40,6 +40,9 @@ import mdsd.rPG.Effects
 import mdsd.rPG.Buff
 import mdsd.rPG.MoveE
 import mdsd.rPG.Speed
+import mdsd.rPG.AltAttribute
+import mdsd.rPG.LocalAttribute
+import mdsd.rPG.LocalTarget
 
 /**
  * Generates code from your model files on save.
@@ -717,7 +720,7 @@ class RPGGenerator extends AbstractGenerator {
 								
 				@Override
 				public boolean effectBuff(Move move, String name, Entity player){
-					«IF buff.rule.or !== null»
+					«IF buff.rule !== null»
 					eData = new HashMap<>();
 					for(AttributeData playerData : player.getAttributes()){
 						eData.put(playerData.getAttributeName(), playerData.getNumber());
@@ -749,28 +752,23 @@ class RPGGenerator extends AbstractGenerator {
 					if(effectBuff(move, name, player)){
 						eData = changeBuff(move, name, player);
 						for(AttributeData aData : player.getAttributes()){
-							
-							«FOR change : buff.rule.target»
-								if(aData.getAttributeName() == "«change.target.name»"){
-									aData.setNumber(«change.sum.new_exp»);
+							«FOR attribute : buff.reference.target»
+								if(aData.getAttributeName() == "«attribute.target.name»"){
+									aData.setNumber(«attribute.sum.new_exp»);																
 									System.out.println(player.getName() + "'(s) "  + aData.getAttributeName() + " is now: " + aData.getNumber());									
-									break;
 								}
-								
-							«ENDFOR»							
-								
+								«ENDFOR»
 							}
 						for(AttributeData aData : move.getMove(name).getMoveAttributes()){
-							«FOR change : buff.rule.target»
-							if(aData.getAttributeName() == "«change.target.name»"){
-								aData.setNumber(«change.sum.new_exp»);
+							«FOR attribute : buff.reference.target»
+							if(aData.getAttributeName() == "«attribute.target.name»"){
+								aData.setNumber(«attribute.sum.new_exp»);
 								System.out.println(player.getName() + "'(s) "  + aData.getAttributeName() + " is now: " + aData.getNumber());
 								
 							}
 							«ENDFOR»										
 
 						}
-
 					}						
 				}
 			}
@@ -783,7 +781,7 @@ class RPGGenerator extends AbstractGenerator {
 								
 				@Override
 				public boolean effectMove(Move move, String name, Entity enemy){
-					«IF moveE.rule.or !== null»
+					«IF moveE.rule !== null»
 					eData = new HashMap<>();
 					for(AttributeData enemyData : enemy.getAttributes()){
 						eData.put(enemyData.getAttributeName(), enemyData.getNumber());
@@ -813,11 +811,11 @@ class RPGGenerator extends AbstractGenerator {
 				@Override		
 				public void doEffect(Move move, String name, Entity enemy, Entity player){
 					if(effectMove(move, name, player)){
-						«IF !moveE.rule.change.target.isEmpty»
+						«IF !moveE.reference.target.isEmpty»
 						eData = changeMove(move, name, enemy);
 						for(AttributeData aData : enemy.getAttributes()){
 							
-							«FOR change : moveE.rule.change.target»
+							«FOR change : moveE.reference.target»
 							if(aData.getAttributeName() == "«change.target.name»"){
 								eData = changeMove(move, name, enemy);
 								
@@ -830,10 +828,10 @@ class RPGGenerator extends AbstractGenerator {
 
 						}
 						«ENDIF»
-						«IF !moveE.rule.change.selfT.isEmpty()»
+						«IF !moveE.reference.selfT.isEmpty()»
 						eData = changeMove(move, name, player);
 						for(AttributeData aData : player.getAttributes()){
-							«FOR change : moveE.rule.change.selfT»
+							«FOR change : moveE.reference.selfT»
 							if(aData.getAttributeName() == "«change.target.name»"){
 								aData.setNumber(«change.sum.new_exp»);
 								System.out.println(player.getName() + "'(s) "  + aData.getAttributeName() + " is now: " + aData.getNumber());
@@ -975,9 +973,22 @@ class RPGGenerator extends AbstractGenerator {
 				«FOR move : entity.EMoves.move»
 				«entity.name.toLowerCase».addMoveData(Move.getInstance().getMove("«move.name»"));
 				«ENDFOR»
-				«FOR att : entity.att»
+				«FOR att : entity.attributes»
+				«IF att instanceof AltAttribute»
 				«entity.name.toLowerCase».addAttribute(new AttributeData("«att.attribute.name»", «getNumberValue(att.av.an)»));
+				«ELSEIF att instanceof LocalAttribute»
+				«entity.name.toLowerCase».addAttribute(new AttributeData("«att.name»", «getNumberValue(att.aval.an)»));				
+				«ENDIF»
 				«ENDFOR»
+«««				«IF !entity.localEffects.isEmpty»
+«««				«FOR effect : entity.localEffects»
+«««				«IF !effect.reference.local.isEmpty»
+«««				«FOR attribute : effect.reference.local»
+«««				«print("here " + attribute.attribute.name + "\n")»
+«««				«ENDFOR»
+«««				«ENDIF»
+«««				«ENDFOR»
+«««				«ENDIF»
 				entities.add(«entity.name.toLowerCase»);
 				«ENDFOR»
 				
@@ -986,6 +997,7 @@ class RPGGenerator extends AbstractGenerator {
 		
 		'''
 	}
+	
 	
 	def CharSequence new_re(Require req){
 		req.log.new_logic

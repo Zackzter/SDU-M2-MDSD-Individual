@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.Rule#getOr <em>Or</em>}</li>
- *   <li>{@link mdsd.rPG.Rule#getChange <em>Change</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getRule()
@@ -45,27 +44,5 @@ public interface Rule extends EObject
    * @generated
    */
   void setOr(Proposition value);
-
-  /**
-   * Returns the value of the '<em><b>Change</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Change</em>' containment reference.
-   * @see #setChange(Change)
-   * @see mdsd.rPG.RPGPackage#getRule_Change()
-   * @model containment="true"
-   * @generated
-   */
-  Change getChange();
-
-  /**
-   * Sets the value of the '{@link mdsd.rPG.Rule#getChange <em>Change</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Change</em>' containment reference.
-   * @see #getChange()
-   * @generated
-   */
-  void setChange(Change value);
 
 } // Rule

@@ -3,7 +3,6 @@
  */
 package mdsd.rPG.impl;
 
-import mdsd.rPG.Change;
 import mdsd.rPG.Proposition;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Rule;
@@ -26,7 +25,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.impl.RuleImpl#getOr <em>Or</em>}</li>
- *   <li>{@link mdsd.rPG.impl.RuleImpl#getChange <em>Change</em>}</li>
  * </ul>
  *
  * @generated
@@ -42,16 +40,6 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * @ordered
    */
   protected Proposition or;
-
-  /**
-   * The cached value of the '{@link #getChange() <em>Change</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getChange()
-   * @generated
-   * @ordered
-   */
-  protected Change change;
 
   /**
    * <!-- begin-user-doc -->
@@ -130,64 +118,12 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * @generated
    */
   @Override
-  public Change getChange()
-  {
-    return change;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetChange(Change newChange, NotificationChain msgs)
-  {
-    Change oldChange = change;
-    change = newChange;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__CHANGE, oldChange, newChange);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setChange(Change newChange)
-  {
-    if (newChange != change)
-    {
-      NotificationChain msgs = null;
-      if (change != null)
-        msgs = ((InternalEObject)change).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__CHANGE, null, msgs);
-      if (newChange != null)
-        msgs = ((InternalEObject)newChange).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.RULE__CHANGE, null, msgs);
-      msgs = basicSetChange(newChange, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.RULE__CHANGE, newChange, newChange));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
       case RPGPackage.RULE__OR:
         return basicSetOr(null, msgs);
-      case RPGPackage.RULE__CHANGE:
-        return basicSetChange(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -204,8 +140,6 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     {
       case RPGPackage.RULE__OR:
         return getOr();
-      case RPGPackage.RULE__CHANGE:
-        return getChange();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -222,9 +156,6 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     {
       case RPGPackage.RULE__OR:
         setOr((Proposition)newValue);
-        return;
-      case RPGPackage.RULE__CHANGE:
-        setChange((Change)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -243,9 +174,6 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
       case RPGPackage.RULE__OR:
         setOr((Proposition)null);
         return;
-      case RPGPackage.RULE__CHANGE:
-        setChange((Change)null);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -262,8 +190,6 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
     {
       case RPGPackage.RULE__OR:
         return or != null;
-      case RPGPackage.RULE__CHANGE:
-        return change != null;
     }
     return super.eIsSet(featureID);
   }

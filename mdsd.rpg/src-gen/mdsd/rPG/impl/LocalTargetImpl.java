@@ -3,10 +3,10 @@
  */
 package mdsd.rPG.impl;
 
-import mdsd.rPG.AltAttribute;
-import mdsd.rPG.Attribute;
-import mdsd.rPG.AttributeValues;
+import mdsd.rPG.LocalAttribute;
+import mdsd.rPG.LocalTarget;
 import mdsd.rPG.RPGPackage;
+import mdsd.rPG.Sum;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -15,22 +15,23 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Alt Attribute</b></em>'.
+ * An implementation of the model object '<em><b>Local Target</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.AltAttributeImpl#getAttribute <em>Attribute</em>}</li>
- *   <li>{@link mdsd.rPG.impl.AltAttributeImpl#getAv <em>Av</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.LocalTargetImpl#getAttribute <em>Attribute</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.LocalTargetImpl#getSum <em>Sum</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class AltAttributeImpl extends EntityAttributeImpl implements AltAttribute
+public class LocalTargetImpl extends MinimalEObjectImpl.Container implements LocalTarget
 {
   /**
    * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
@@ -40,24 +41,24 @@ public class AltAttributeImpl extends EntityAttributeImpl implements AltAttribut
    * @generated
    * @ordered
    */
-  protected Attribute attribute;
+  protected LocalAttribute attribute;
 
   /**
-   * The cached value of the '{@link #getAv() <em>Av</em>}' containment reference.
+   * The cached value of the '{@link #getSum() <em>Sum</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAv()
+   * @see #getSum()
    * @generated
    * @ordered
    */
-  protected AttributeValues av;
+  protected Sum sum;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AltAttributeImpl()
+  protected LocalTargetImpl()
   {
     super();
   }
@@ -70,7 +71,7 @@ public class AltAttributeImpl extends EntityAttributeImpl implements AltAttribut
   @Override
   protected EClass eStaticClass()
   {
-    return RPGPackage.Literals.ALT_ATTRIBUTE;
+    return RPGPackage.Literals.LOCAL_TARGET;
   }
 
   /**
@@ -79,16 +80,16 @@ public class AltAttributeImpl extends EntityAttributeImpl implements AltAttribut
    * @generated
    */
   @Override
-  public Attribute getAttribute()
+  public LocalAttribute getAttribute()
   {
     if (attribute != null && attribute.eIsProxy())
     {
       InternalEObject oldAttribute = (InternalEObject)attribute;
-      attribute = (Attribute)eResolveProxy(oldAttribute);
+      attribute = (LocalAttribute)eResolveProxy(oldAttribute);
       if (attribute != oldAttribute)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RPGPackage.ALT_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RPGPackage.LOCAL_TARGET__ATTRIBUTE, oldAttribute, attribute));
       }
     }
     return attribute;
@@ -99,7 +100,7 @@ public class AltAttributeImpl extends EntityAttributeImpl implements AltAttribut
    * <!-- end-user-doc -->
    * @generated
    */
-  public Attribute basicGetAttribute()
+  public LocalAttribute basicGetAttribute()
   {
     return attribute;
   }
@@ -110,12 +111,12 @@ public class AltAttributeImpl extends EntityAttributeImpl implements AltAttribut
    * @generated
    */
   @Override
-  public void setAttribute(Attribute newAttribute)
+  public void setAttribute(LocalAttribute newAttribute)
   {
-    Attribute oldAttribute = attribute;
+    LocalAttribute oldAttribute = attribute;
     attribute = newAttribute;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.ALT_ATTRIBUTE__ATTRIBUTE, oldAttribute, attribute));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.LOCAL_TARGET__ATTRIBUTE, oldAttribute, attribute));
   }
 
   /**
@@ -124,9 +125,9 @@ public class AltAttributeImpl extends EntityAttributeImpl implements AltAttribut
    * @generated
    */
   @Override
-  public AttributeValues getAv()
+  public Sum getSum()
   {
-    return av;
+    return sum;
   }
 
   /**
@@ -134,13 +135,13 @@ public class AltAttributeImpl extends EntityAttributeImpl implements AltAttribut
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetAv(AttributeValues newAv, NotificationChain msgs)
+  public NotificationChain basicSetSum(Sum newSum, NotificationChain msgs)
   {
-    AttributeValues oldAv = av;
-    av = newAv;
+    Sum oldSum = sum;
+    sum = newSum;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.ALT_ATTRIBUTE__AV, oldAv, newAv);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.LOCAL_TARGET__SUM, oldSum, newSum);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -152,20 +153,20 @@ public class AltAttributeImpl extends EntityAttributeImpl implements AltAttribut
    * @generated
    */
   @Override
-  public void setAv(AttributeValues newAv)
+  public void setSum(Sum newSum)
   {
-    if (newAv != av)
+    if (newSum != sum)
     {
       NotificationChain msgs = null;
-      if (av != null)
-        msgs = ((InternalEObject)av).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.ALT_ATTRIBUTE__AV, null, msgs);
-      if (newAv != null)
-        msgs = ((InternalEObject)newAv).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.ALT_ATTRIBUTE__AV, null, msgs);
-      msgs = basicSetAv(newAv, msgs);
+      if (sum != null)
+        msgs = ((InternalEObject)sum).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.LOCAL_TARGET__SUM, null, msgs);
+      if (newSum != null)
+        msgs = ((InternalEObject)newSum).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.LOCAL_TARGET__SUM, null, msgs);
+      msgs = basicSetSum(newSum, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.ALT_ATTRIBUTE__AV, newAv, newAv));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.LOCAL_TARGET__SUM, newSum, newSum));
   }
 
   /**
@@ -178,8 +179,8 @@ public class AltAttributeImpl extends EntityAttributeImpl implements AltAttribut
   {
     switch (featureID)
     {
-      case RPGPackage.ALT_ATTRIBUTE__AV:
-        return basicSetAv(null, msgs);
+      case RPGPackage.LOCAL_TARGET__SUM:
+        return basicSetSum(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -194,11 +195,11 @@ public class AltAttributeImpl extends EntityAttributeImpl implements AltAttribut
   {
     switch (featureID)
     {
-      case RPGPackage.ALT_ATTRIBUTE__ATTRIBUTE:
+      case RPGPackage.LOCAL_TARGET__ATTRIBUTE:
         if (resolve) return getAttribute();
         return basicGetAttribute();
-      case RPGPackage.ALT_ATTRIBUTE__AV:
-        return getAv();
+      case RPGPackage.LOCAL_TARGET__SUM:
+        return getSum();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -213,11 +214,11 @@ public class AltAttributeImpl extends EntityAttributeImpl implements AltAttribut
   {
     switch (featureID)
     {
-      case RPGPackage.ALT_ATTRIBUTE__ATTRIBUTE:
-        setAttribute((Attribute)newValue);
+      case RPGPackage.LOCAL_TARGET__ATTRIBUTE:
+        setAttribute((LocalAttribute)newValue);
         return;
-      case RPGPackage.ALT_ATTRIBUTE__AV:
-        setAv((AttributeValues)newValue);
+      case RPGPackage.LOCAL_TARGET__SUM:
+        setSum((Sum)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -233,11 +234,11 @@ public class AltAttributeImpl extends EntityAttributeImpl implements AltAttribut
   {
     switch (featureID)
     {
-      case RPGPackage.ALT_ATTRIBUTE__ATTRIBUTE:
-        setAttribute((Attribute)null);
+      case RPGPackage.LOCAL_TARGET__ATTRIBUTE:
+        setAttribute((LocalAttribute)null);
         return;
-      case RPGPackage.ALT_ATTRIBUTE__AV:
-        setAv((AttributeValues)null);
+      case RPGPackage.LOCAL_TARGET__SUM:
+        setSum((Sum)null);
         return;
     }
     super.eUnset(featureID);
@@ -253,12 +254,12 @@ public class AltAttributeImpl extends EntityAttributeImpl implements AltAttribut
   {
     switch (featureID)
     {
-      case RPGPackage.ALT_ATTRIBUTE__ATTRIBUTE:
+      case RPGPackage.LOCAL_TARGET__ATTRIBUTE:
         return attribute != null;
-      case RPGPackage.ALT_ATTRIBUTE__AV:
-        return av != null;
+      case RPGPackage.LOCAL_TARGET__SUM:
+        return sum != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //AltAttributeImpl
+} //LocalTargetImpl

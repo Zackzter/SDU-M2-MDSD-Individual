@@ -13,7 +13,7 @@ package mdsd.rPG;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.Buff#getRule <em>Rule</em>}</li>
+ *   <li>{@link mdsd.rPG.Buff#getReference <em>Reference</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getBuff()
@@ -23,25 +23,25 @@ package mdsd.rPG;
 public interface Buff extends Effect
 {
   /**
-   * Returns the value of the '<em><b>Rule</b></em>' containment reference.
+   * Returns the value of the '<em><b>Reference</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Rule</em>' containment reference.
-   * @see #setRule(RuleB)
-   * @see mdsd.rPG.RPGPackage#getBuff_Rule()
+   * @return the value of the '<em>Reference</em>' containment reference.
+   * @see #setReference(AttributeBuff)
+   * @see mdsd.rPG.RPGPackage#getBuff_Reference()
    * @model containment="true"
    * @generated
    */
-  RuleB getRule();
+  AttributeBuff getReference();
 
   /**
-   * Sets the value of the '{@link mdsd.rPG.Buff#getRule <em>Rule</em>}' containment reference.
+   * Sets the value of the '{@link mdsd.rPG.Buff#getReference <em>Reference</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Rule</em>' containment reference.
-   * @see #getRule()
+   * @param value the new value of the '<em>Reference</em>' containment reference.
+   * @see #getReference()
    * @generated
    */
-  void setRule(RuleB value);
+  void setReference(AttributeBuff value);
 
 } // Buff

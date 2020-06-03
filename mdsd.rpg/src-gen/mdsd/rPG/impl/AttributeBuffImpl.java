@@ -5,9 +5,9 @@ package mdsd.rPG.impl;
 
 import java.util.Collection;
 
-import mdsd.rPG.Change;
+import mdsd.rPG.AttributeBuff;
+import mdsd.rPG.LocalTarget;
 import mdsd.rPG.RPGPackage;
-import mdsd.rPG.Self;
 import mdsd.rPG.Target;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -24,30 +24,20 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Change</b></em>'.
+ * An implementation of the model object '<em><b>Attribute Buff</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.ChangeImpl#getSelfT <em>Self T</em>}</li>
- *   <li>{@link mdsd.rPG.impl.ChangeImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.AttributeBuffImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.AttributeBuffImpl#getLocal <em>Local</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ChangeImpl extends MinimalEObjectImpl.Container implements Change
+public class AttributeBuffImpl extends MinimalEObjectImpl.Container implements AttributeBuff
 {
-  /**
-   * The cached value of the '{@link #getSelfT() <em>Self T</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSelfT()
-   * @generated
-   * @ordered
-   */
-  protected EList<Self> selfT;
-
   /**
    * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -59,11 +49,21 @@ public class ChangeImpl extends MinimalEObjectImpl.Container implements Change
   protected EList<Target> target;
 
   /**
+   * The cached value of the '{@link #getLocal() <em>Local</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getLocal()
+   * @generated
+   * @ordered
+   */
+  protected EList<LocalTarget> local;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ChangeImpl()
+  protected AttributeBuffImpl()
   {
     super();
   }
@@ -76,22 +76,7 @@ public class ChangeImpl extends MinimalEObjectImpl.Container implements Change
   @Override
   protected EClass eStaticClass()
   {
-    return RPGPackage.Literals.CHANGE;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Self> getSelfT()
-  {
-    if (selfT == null)
-    {
-      selfT = new EObjectContainmentEList<Self>(Self.class, this, RPGPackage.CHANGE__SELF_T);
-    }
-    return selfT;
+    return RPGPackage.Literals.ATTRIBUTE_BUFF;
   }
 
   /**
@@ -104,9 +89,24 @@ public class ChangeImpl extends MinimalEObjectImpl.Container implements Change
   {
     if (target == null)
     {
-      target = new EObjectContainmentEList<Target>(Target.class, this, RPGPackage.CHANGE__TARGET);
+      target = new EObjectContainmentEList<Target>(Target.class, this, RPGPackage.ATTRIBUTE_BUFF__TARGET);
     }
     return target;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<LocalTarget> getLocal()
+  {
+    if (local == null)
+    {
+      local = new EObjectContainmentEList<LocalTarget>(LocalTarget.class, this, RPGPackage.ATTRIBUTE_BUFF__LOCAL);
+    }
+    return local;
   }
 
   /**
@@ -119,10 +119,10 @@ public class ChangeImpl extends MinimalEObjectImpl.Container implements Change
   {
     switch (featureID)
     {
-      case RPGPackage.CHANGE__SELF_T:
-        return ((InternalEList<?>)getSelfT()).basicRemove(otherEnd, msgs);
-      case RPGPackage.CHANGE__TARGET:
+      case RPGPackage.ATTRIBUTE_BUFF__TARGET:
         return ((InternalEList<?>)getTarget()).basicRemove(otherEnd, msgs);
+      case RPGPackage.ATTRIBUTE_BUFF__LOCAL:
+        return ((InternalEList<?>)getLocal()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -137,10 +137,10 @@ public class ChangeImpl extends MinimalEObjectImpl.Container implements Change
   {
     switch (featureID)
     {
-      case RPGPackage.CHANGE__SELF_T:
-        return getSelfT();
-      case RPGPackage.CHANGE__TARGET:
+      case RPGPackage.ATTRIBUTE_BUFF__TARGET:
         return getTarget();
+      case RPGPackage.ATTRIBUTE_BUFF__LOCAL:
+        return getLocal();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -156,13 +156,13 @@ public class ChangeImpl extends MinimalEObjectImpl.Container implements Change
   {
     switch (featureID)
     {
-      case RPGPackage.CHANGE__SELF_T:
-        getSelfT().clear();
-        getSelfT().addAll((Collection<? extends Self>)newValue);
-        return;
-      case RPGPackage.CHANGE__TARGET:
+      case RPGPackage.ATTRIBUTE_BUFF__TARGET:
         getTarget().clear();
         getTarget().addAll((Collection<? extends Target>)newValue);
+        return;
+      case RPGPackage.ATTRIBUTE_BUFF__LOCAL:
+        getLocal().clear();
+        getLocal().addAll((Collection<? extends LocalTarget>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -178,11 +178,11 @@ public class ChangeImpl extends MinimalEObjectImpl.Container implements Change
   {
     switch (featureID)
     {
-      case RPGPackage.CHANGE__SELF_T:
-        getSelfT().clear();
-        return;
-      case RPGPackage.CHANGE__TARGET:
+      case RPGPackage.ATTRIBUTE_BUFF__TARGET:
         getTarget().clear();
+        return;
+      case RPGPackage.ATTRIBUTE_BUFF__LOCAL:
+        getLocal().clear();
         return;
     }
     super.eUnset(featureID);
@@ -198,12 +198,12 @@ public class ChangeImpl extends MinimalEObjectImpl.Container implements Change
   {
     switch (featureID)
     {
-      case RPGPackage.CHANGE__SELF_T:
-        return selfT != null && !selfT.isEmpty();
-      case RPGPackage.CHANGE__TARGET:
+      case RPGPackage.ATTRIBUTE_BUFF__TARGET:
         return target != null && !target.isEmpty();
+      case RPGPackage.ATTRIBUTE_BUFF__LOCAL:
+        return local != null && !local.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ChangeImpl
+} //AttributeBuffImpl

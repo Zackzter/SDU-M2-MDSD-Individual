@@ -3,7 +3,6 @@
  */
 package mdsd.rPG;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface AltAttribute extends EObject
+public interface AltAttribute extends EntityAttribute
 {
   /**
    * Returns the value of the '<em><b>Attribute</b></em>' reference.

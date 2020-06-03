@@ -3,9 +3,9 @@
  */
 package mdsd.rPG.impl;
 
+import mdsd.rPG.AttributeReference;
 import mdsd.rPG.MoveE;
 import mdsd.rPG.RPGPackage;
-import mdsd.rPG.Rule;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link mdsd.rPG.impl.MoveEImpl#getRule <em>Rule</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.MoveEImpl#getReference <em>Reference</em>}</li>
  * </ul>
  *
  * @generated
@@ -31,14 +31,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 public class MoveEImpl extends EffectImpl implements MoveE
 {
   /**
-   * The cached value of the '{@link #getRule() <em>Rule</em>}' containment reference.
+   * The cached value of the '{@link #getReference() <em>Reference</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRule()
+   * @see #getReference()
    * @generated
    * @ordered
    */
-  protected Rule rule;
+  protected AttributeReference reference;
 
   /**
    * <!-- begin-user-doc -->
@@ -67,9 +67,9 @@ public class MoveEImpl extends EffectImpl implements MoveE
    * @generated
    */
   @Override
-  public Rule getRule()
+  public AttributeReference getReference()
   {
-    return rule;
+    return reference;
   }
 
   /**
@@ -77,13 +77,13 @@ public class MoveEImpl extends EffectImpl implements MoveE
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetRule(Rule newRule, NotificationChain msgs)
+  public NotificationChain basicSetReference(AttributeReference newReference, NotificationChain msgs)
   {
-    Rule oldRule = rule;
-    rule = newRule;
+    AttributeReference oldReference = reference;
+    reference = newReference;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.MOVE_E__RULE, oldRule, newRule);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RPGPackage.MOVE_E__REFERENCE, oldReference, newReference);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -95,20 +95,20 @@ public class MoveEImpl extends EffectImpl implements MoveE
    * @generated
    */
   @Override
-  public void setRule(Rule newRule)
+  public void setReference(AttributeReference newReference)
   {
-    if (newRule != rule)
+    if (newReference != reference)
     {
       NotificationChain msgs = null;
-      if (rule != null)
-        msgs = ((InternalEObject)rule).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.MOVE_E__RULE, null, msgs);
-      if (newRule != null)
-        msgs = ((InternalEObject)newRule).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.MOVE_E__RULE, null, msgs);
-      msgs = basicSetRule(newRule, msgs);
+      if (reference != null)
+        msgs = ((InternalEObject)reference).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - RPGPackage.MOVE_E__REFERENCE, null, msgs);
+      if (newReference != null)
+        msgs = ((InternalEObject)newReference).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - RPGPackage.MOVE_E__REFERENCE, null, msgs);
+      msgs = basicSetReference(newReference, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.MOVE_E__RULE, newRule, newRule));
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.MOVE_E__REFERENCE, newReference, newReference));
   }
 
   /**
@@ -121,8 +121,8 @@ public class MoveEImpl extends EffectImpl implements MoveE
   {
     switch (featureID)
     {
-      case RPGPackage.MOVE_E__RULE:
-        return basicSetRule(null, msgs);
+      case RPGPackage.MOVE_E__REFERENCE:
+        return basicSetReference(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -137,8 +137,8 @@ public class MoveEImpl extends EffectImpl implements MoveE
   {
     switch (featureID)
     {
-      case RPGPackage.MOVE_E__RULE:
-        return getRule();
+      case RPGPackage.MOVE_E__REFERENCE:
+        return getReference();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -153,8 +153,8 @@ public class MoveEImpl extends EffectImpl implements MoveE
   {
     switch (featureID)
     {
-      case RPGPackage.MOVE_E__RULE:
-        setRule((Rule)newValue);
+      case RPGPackage.MOVE_E__REFERENCE:
+        setReference((AttributeReference)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -170,8 +170,8 @@ public class MoveEImpl extends EffectImpl implements MoveE
   {
     switch (featureID)
     {
-      case RPGPackage.MOVE_E__RULE:
-        setRule((Rule)null);
+      case RPGPackage.MOVE_E__REFERENCE:
+        setReference((AttributeReference)null);
         return;
     }
     super.eUnset(featureID);
@@ -187,8 +187,8 @@ public class MoveEImpl extends EffectImpl implements MoveE
   {
     switch (featureID)
     {
-      case RPGPackage.MOVE_E__RULE:
-        return rule != null;
+      case RPGPackage.MOVE_E__REFERENCE:
+        return reference != null;
     }
     return super.eIsSet(featureID);
   }

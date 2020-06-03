@@ -24,10 +24,12 @@ import mdsd.rPG.Effect;
 import mdsd.rPG.Effects;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
+import mdsd.rPG.EntityAttribute;
 import mdsd.rPG.Eq;
 import mdsd.rPG.FloatNum;
 import mdsd.rPG.IntNum;
 import mdsd.rPG.Loc;
+import mdsd.rPG.LocalAttribute;
 import mdsd.rPG.Locations;
 import mdsd.rPG.MEffect;
 import mdsd.rPG.Move;
@@ -41,6 +43,7 @@ import mdsd.rPG.Or;
 import mdsd.rPG.Proposition;
 import mdsd.rPG.Relations;
 import mdsd.rPG.Require;
+import mdsd.rPG.Rule;
 import mdsd.rPG.Self;
 import mdsd.rPG.Smaller;
 import mdsd.rPG.SmallerEq;
@@ -1754,8 +1757,8 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("public boolean effectBuff(Move move, String name, Entity player){");
     _builder.newLine();
     {
-      Proposition _or = buff.getRule().getOr();
-      boolean _tripleNotEquals = (_or != null);
+      Rule _rule = buff.getRule();
+      boolean _tripleNotEquals = (_rule != null);
       if (_tripleNotEquals) {
         _builder.append("\t\t");
         _builder.append("eData = new HashMap<>();");
@@ -1846,41 +1849,31 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("\t\t\t");
     _builder.append("for(AttributeData aData : player.getAttributes()){");
     _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.newLine();
     {
-      EList<Target> _target = buff.getRule().getTarget();
-      for(final Target change : _target) {
+      EList<Target> _target = buff.getReference().getTarget();
+      for(final Target attribute : _target) {
         _builder.append("\t\t\t\t");
         _builder.append("if(aData.getAttributeName() == \"");
-        String _name_1 = change.getTarget().getName();
+        String _name_1 = attribute.getTarget().getName();
         _builder.append(_name_1, "\t\t\t\t");
         _builder.append("\"){");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t\t");
         _builder.append("\t");
         _builder.append("aData.setNumber(");
-        CharSequence _new_exp = this.new_exp(change.getSum());
+        CharSequence _new_exp = this.new_exp(attribute.getSum());
         _builder.append(_new_exp, "\t\t\t\t\t");
-        _builder.append(");");
+        _builder.append(");\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t\t");
         _builder.append("\t");
         _builder.append("System.out.println(player.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());\t\t\t\t\t\t\t\t\t");
         _builder.newLine();
         _builder.append("\t\t\t\t");
-        _builder.append("\t");
-        _builder.append("break;");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
         _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
         _builder.newLine();
       }
     }
-    _builder.append("\t\t\t\t\t");
-    _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("}");
     _builder.newLine();
@@ -1888,18 +1881,18 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("for(AttributeData aData : move.getMove(name).getMoveAttributes()){");
     _builder.newLine();
     {
-      EList<Target> _target_1 = buff.getRule().getTarget();
-      for(final Target change_1 : _target_1) {
+      EList<Target> _target_1 = buff.getReference().getTarget();
+      for(final Target attribute_1 : _target_1) {
         _builder.append("\t\t\t\t");
         _builder.append("if(aData.getAttributeName() == \"");
-        String _name_2 = change_1.getTarget().getName();
+        String _name_2 = attribute_1.getTarget().getName();
         _builder.append(_name_2, "\t\t\t\t");
         _builder.append("\"){");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t\t");
         _builder.append("\t");
         _builder.append("aData.setNumber(");
-        CharSequence _new_exp_1 = this.new_exp(change_1.getSum());
+        CharSequence _new_exp_1 = this.new_exp(attribute_1.getSum());
         _builder.append(_new_exp_1, "\t\t\t\t\t");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
@@ -1918,7 +1911,6 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}\t\t\t\t\t\t");
@@ -1947,8 +1939,8 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("public boolean effectMove(Move move, String name, Entity enemy){");
     _builder.newLine();
     {
-      Proposition _or = moveE.getRule().getOr();
-      boolean _tripleNotEquals = (_or != null);
+      Rule _rule = moveE.getRule();
+      boolean _tripleNotEquals = (_rule != null);
       if (_tripleNotEquals) {
         _builder.append("\t\t");
         _builder.append("eData = new HashMap<>();");
@@ -2035,7 +2027,7 @@ public class RPGGenerator extends AbstractGenerator {
     _builder.append("if(effectMove(move, name, player)){");
     _builder.newLine();
     {
-      boolean _isEmpty = moveE.getRule().getChange().getTarget().isEmpty();
+      boolean _isEmpty = moveE.getReference().getTarget().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
         _builder.append("\t\t\t");
@@ -2048,7 +2040,7 @@ public class RPGGenerator extends AbstractGenerator {
         _builder.append("\t");
         _builder.newLine();
         {
-          EList<Target> _target = moveE.getRule().getChange().getTarget();
+          EList<Target> _target = moveE.getReference().getTarget();
           for(final Target change : _target) {
             _builder.append("\t\t\t");
             _builder.append("\t");
@@ -2097,7 +2089,7 @@ public class RPGGenerator extends AbstractGenerator {
       }
     }
     {
-      boolean _isEmpty_1 = moveE.getRule().getChange().getSelfT().isEmpty();
+      boolean _isEmpty_1 = moveE.getReference().getSelfT().isEmpty();
       boolean _not_1 = (!_isEmpty_1);
       if (_not_1) {
         _builder.append("\t\t\t");
@@ -2107,7 +2099,7 @@ public class RPGGenerator extends AbstractGenerator {
         _builder.append("for(AttributeData aData : player.getAttributes()){");
         _builder.newLine();
         {
-          EList<Self> _selfT = moveE.getRule().getChange().getSelfT();
+          EList<Self> _selfT = moveE.getReference().getSelfT();
           for(final Self change_1 : _selfT) {
             _builder.append("\t\t\t");
             _builder.append("\t");
@@ -2466,25 +2458,43 @@ public class RPGGenerator extends AbstractGenerator {
           }
         }
         {
-          EList<AltAttribute> _att = entity.getAtt();
-          for(final AltAttribute att : _att) {
-            _builder.append("\t\t");
-            String _lowerCase_5 = entity.getName().toLowerCase();
-            _builder.append(_lowerCase_5, "\t\t");
-            _builder.append(".addAttribute(new AttributeData(\"");
-            String _name_3 = att.getAttribute().getName();
-            _builder.append(_name_3, "\t\t");
-            _builder.append("\", ");
-            Number _numberValue = this.getNumberValue(att.getAv().getAn());
-            _builder.append(_numberValue, "\t\t");
-            _builder.append("));");
-            _builder.newLineIfNotEmpty();
+          EList<EntityAttribute> _attributes = entity.getAttributes();
+          for(final EntityAttribute att : _attributes) {
+            {
+              if ((att instanceof AltAttribute)) {
+                _builder.append("\t\t");
+                String _lowerCase_5 = entity.getName().toLowerCase();
+                _builder.append(_lowerCase_5, "\t\t");
+                _builder.append(".addAttribute(new AttributeData(\"");
+                String _name_3 = ((AltAttribute)att).getAttribute().getName();
+                _builder.append(_name_3, "\t\t");
+                _builder.append("\", ");
+                Number _numberValue = this.getNumberValue(((AltAttribute)att).getAv().getAn());
+                _builder.append(_numberValue, "\t\t");
+                _builder.append("));");
+                _builder.newLineIfNotEmpty();
+              } else {
+                if ((att instanceof LocalAttribute)) {
+                  _builder.append("\t\t");
+                  String _lowerCase_6 = entity.getName().toLowerCase();
+                  _builder.append(_lowerCase_6, "\t\t");
+                  _builder.append(".addAttribute(new AttributeData(\"");
+                  String _name_4 = ((LocalAttribute)att).getName();
+                  _builder.append(_name_4, "\t\t");
+                  _builder.append("\", ");
+                  Number _numberValue_1 = this.getNumberValue(((LocalAttribute)att).getAval().getAn());
+                  _builder.append(_numberValue_1, "\t\t");
+                  _builder.append("));\t\t\t\t");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            }
           }
         }
         _builder.append("\t\t");
         _builder.append("entities.add(");
-        String _lowerCase_6 = entity.getName().toLowerCase();
-        _builder.append(_lowerCase_6, "\t\t");
+        String _lowerCase_7 = entity.getName().toLowerCase();
+        _builder.append(_lowerCase_7, "\t\t");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
       }
