@@ -121,7 +121,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Entity/eType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Entity/attributes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Entity/eMoves"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RPG.ecore#//Entity/localEffects"/>
     </genClasses>
     <genClasses ecoreClass="RPG.ecore#//EntityAttribute"/>
     <genClasses ecoreClass="RPG.ecore#//LocalAttribute">
@@ -161,6 +160,10 @@
     <genClasses ecoreClass="RPG.ecore#//ActualNumbers"/>
     <genClasses ecoreClass="RPG.ecore#//NameAttribute">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//NameAttribute/attribute"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//NameAttribute/local"/>
+    </genClasses>
+    <genClasses ecoreClass="RPG.ecore#//NameLocalAttribute">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//NameLocalAttribute/attribute"/>
     </genClasses>
     <genClasses ecoreClass="RPG.ecore#//IntNum">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RPG.ecore#//IntNum/value"/>

@@ -146,7 +146,7 @@ Death:
 ;
 
 Entity:
-	'entity' name=ID eType=EType attributes+=EntityAttribute* eMoves=EntityMoves localEffects+=Buff?
+	'entity' name=ID eType=EType attributes+=EntityAttribute* eMoves=EntityMoves
 ;
 
 EntityAttribute:
@@ -211,7 +211,7 @@ Multiply:
 ;
 
 AtomicNumber:
-	ActualNumbers | NameAttribute
+	ActualNumbers | NameAttribute 
 ;
 
 ActualNumbers:
@@ -219,10 +219,12 @@ ActualNumbers:
 ;
 
 NameAttribute:
-	attribute=[Attribute]
+	attribute=[Attribute] | 'local' local = [LocalAttribute]
 ;
 
-
+NameLocalAttribute:
+	attribute = [LocalAttribute]
+;
 
 IntNum:
 	value=INT

@@ -1071,14 +1071,12 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAttributesEntityAttributeParserRuleCall_3_0 = (RuleCall)cAttributesAssignment_3.eContents().get(0);
 		private final Assignment cEMovesAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cEMovesEntityMovesParserRuleCall_4_0 = (RuleCall)cEMovesAssignment_4.eContents().get(0);
-		private final Assignment cLocalEffectsAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cLocalEffectsBuffParserRuleCall_5_0 = (RuleCall)cLocalEffectsAssignment_5.eContents().get(0);
 		
 		//Entity:
-		//	'entity' name=ID eType=EType attributes+=EntityAttribute* eMoves=EntityMoves localEffects+=Buff?;
+		//	'entity' name=ID eType=EType attributes+=EntityAttribute* eMoves=EntityMoves;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'entity' name=ID eType=EType attributes+=EntityAttribute* eMoves=EntityMoves localEffects+=Buff?
+		//'entity' name=ID eType=EType attributes+=EntityAttribute* eMoves=EntityMoves
 		public Group getGroup() { return cGroup; }
 		
 		//'entity'
@@ -1107,12 +1105,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//EntityMoves
 		public RuleCall getEMovesEntityMovesParserRuleCall_4_0() { return cEMovesEntityMovesParserRuleCall_4_0; }
-		
-		//localEffects+=Buff?
-		public Assignment getLocalEffectsAssignment_5() { return cLocalEffectsAssignment_5; }
-		
-		//Buff
-		public RuleCall getLocalEffectsBuffParserRuleCall_5_0() { return cLocalEffectsBuffParserRuleCall_5_0; }
 	}
 	public class EntityAttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.EntityAttribute");
@@ -1695,22 +1687,65 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class NameAttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.NameAttribute");
-		private final Assignment cAttributeAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cAttributeAttributeCrossReference_0 = (CrossReference)cAttributeAssignment.eContents().get(0);
-		private final RuleCall cAttributeAttributeIDTerminalRuleCall_0_1 = (RuleCall)cAttributeAttributeCrossReference_0.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Assignment cAttributeAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final CrossReference cAttributeAttributeCrossReference_0_0 = (CrossReference)cAttributeAssignment_0.eContents().get(0);
+		private final RuleCall cAttributeAttributeIDTerminalRuleCall_0_0_1 = (RuleCall)cAttributeAttributeCrossReference_0_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Keyword cLocalKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cLocalAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final CrossReference cLocalLocalAttributeCrossReference_1_1_0 = (CrossReference)cLocalAssignment_1_1.eContents().get(0);
+		private final RuleCall cLocalLocalAttributeIDTerminalRuleCall_1_1_0_1 = (RuleCall)cLocalLocalAttributeCrossReference_1_1_0.eContents().get(1);
 		
 		//NameAttribute:
-		//	attribute=[Attribute];
+		//	attribute=[Attribute] | 'local' local=[LocalAttribute];
 		@Override public ParserRule getRule() { return rule; }
 		
+		//attribute=[Attribute] | 'local' local=[LocalAttribute]
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
 		//attribute=[Attribute]
-		public Assignment getAttributeAssignment() { return cAttributeAssignment; }
+		public Assignment getAttributeAssignment_0() { return cAttributeAssignment_0; }
 		
 		//[Attribute]
-		public CrossReference getAttributeAttributeCrossReference_0() { return cAttributeAttributeCrossReference_0; }
+		public CrossReference getAttributeAttributeCrossReference_0_0() { return cAttributeAttributeCrossReference_0_0; }
 		
 		//ID
-		public RuleCall getAttributeAttributeIDTerminalRuleCall_0_1() { return cAttributeAttributeIDTerminalRuleCall_0_1; }
+		public RuleCall getAttributeAttributeIDTerminalRuleCall_0_0_1() { return cAttributeAttributeIDTerminalRuleCall_0_0_1; }
+		
+		//'local' local=[LocalAttribute]
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'local'
+		public Keyword getLocalKeyword_1_0() { return cLocalKeyword_1_0; }
+		
+		//local=[LocalAttribute]
+		public Assignment getLocalAssignment_1_1() { return cLocalAssignment_1_1; }
+		
+		//[LocalAttribute]
+		public CrossReference getLocalLocalAttributeCrossReference_1_1_0() { return cLocalLocalAttributeCrossReference_1_1_0; }
+		
+		//ID
+		public RuleCall getLocalLocalAttributeIDTerminalRuleCall_1_1_0_1() { return cLocalLocalAttributeIDTerminalRuleCall_1_1_0_1; }
+	}
+	public class NameLocalAttributeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.NameLocalAttribute");
+		private final Assignment cAttributeAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cAttributeLocalAttributeCrossReference_0 = (CrossReference)cAttributeAssignment.eContents().get(0);
+		private final RuleCall cAttributeLocalAttributeIDTerminalRuleCall_0_1 = (RuleCall)cAttributeLocalAttributeCrossReference_0.eContents().get(1);
+		
+		//NameLocalAttribute:
+		//	attribute=[LocalAttribute];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//attribute=[LocalAttribute]
+		public Assignment getAttributeAssignment() { return cAttributeAssignment; }
+		
+		//[LocalAttribute]
+		public CrossReference getAttributeLocalAttributeCrossReference_0() { return cAttributeLocalAttributeCrossReference_0; }
+		
+		//ID
+		public RuleCall getAttributeLocalAttributeIDTerminalRuleCall_0_1() { return cAttributeLocalAttributeIDTerminalRuleCall_0_1; }
 	}
 	public class IntNumElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.IntNum");
@@ -1828,6 +1863,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	private final AtomicNumberElements pAtomicNumber;
 	private final ActualNumbersElements pActualNumbers;
 	private final NameAttributeElements pNameAttribute;
+	private final NameLocalAttributeElements pNameLocalAttribute;
 	private final IntNumElements pIntNum;
 	private final FloatNumElements pFloatNum;
 	private final LegalTypeElements pLegalType;
@@ -1890,6 +1926,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		this.pAtomicNumber = new AtomicNumberElements();
 		this.pActualNumbers = new ActualNumbersElements();
 		this.pNameAttribute = new NameAttributeElements();
+		this.pNameLocalAttribute = new NameLocalAttributeElements();
 		this.pIntNum = new IntNumElements();
 		this.pFloatNum = new FloatNumElements();
 		this.pLegalType = new LegalTypeElements();
@@ -2240,7 +2277,7 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Entity:
-	//	'entity' name=ID eType=EType attributes+=EntityAttribute* eMoves=EntityMoves localEffects+=Buff?;
+	//	'entity' name=ID eType=EType attributes+=EntityAttribute* eMoves=EntityMoves;
 	public EntityElements getEntityAccess() {
 		return pEntity;
 	}
@@ -2420,13 +2457,23 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//NameAttribute:
-	//	attribute=[Attribute];
+	//	attribute=[Attribute] | 'local' local=[LocalAttribute];
 	public NameAttributeElements getNameAttributeAccess() {
 		return pNameAttribute;
 	}
 	
 	public ParserRule getNameAttributeRule() {
 		return getNameAttributeAccess().getRule();
+	}
+	
+	//NameLocalAttribute:
+	//	attribute=[LocalAttribute];
+	public NameLocalAttributeElements getNameLocalAttributeAccess() {
+		return pNameLocalAttribute;
+	}
+	
+	public ParserRule getNameLocalAttributeRule() {
+		return getNameLocalAttributeAccess().getRule();
 	}
 	
 	//IntNum:

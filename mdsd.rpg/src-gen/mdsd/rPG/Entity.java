@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link mdsd.rPG.Entity#getEType <em>EType</em>}</li>
  *   <li>{@link mdsd.rPG.Entity#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link mdsd.rPG.Entity#getEMoves <em>EMoves</em>}</li>
- *   <li>{@link mdsd.rPG.Entity#getLocalEffects <em>Local Effects</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getEntity()
@@ -106,17 +105,5 @@ public interface Entity extends EObject
    * @generated
    */
   void setEMoves(EntityMoves value);
-
-  /**
-   * Returns the value of the '<em><b>Local Effects</b></em>' containment reference list.
-   * The list contents are of type {@link mdsd.rPG.Buff}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Local Effects</em>' containment reference list.
-   * @see mdsd.rPG.RPGPackage#getEntity_LocalEffects()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Buff> getLocalEffects();
 
 } // Entity

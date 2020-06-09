@@ -7,11 +7,14 @@ package mdsd.validation;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.Literals;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.validation.Check;
 
 import mdsd.rPG.AltAttribute;
 import mdsd.rPG.Attribute;
 import mdsd.rPG.Attributes;
+import mdsd.rPG.BEffect;
 import mdsd.rPG.Buff;
 import mdsd.rPG.Death;
 import mdsd.rPG.Declaration;
@@ -19,6 +22,7 @@ import mdsd.rPG.Effects;
 import mdsd.rPG.Entities;
 import mdsd.rPG.Entity;
 import mdsd.rPG.EntityAttribute;
+import mdsd.rPG.EntityMoves;
 import mdsd.rPG.LocalAttribute;
 import mdsd.rPG.LocalTarget;
 import mdsd.rPG.Locations;
@@ -27,7 +31,9 @@ import mdsd.rPG.MoveE;
 import mdsd.rPG.Moves;
 import mdsd.rPG.RPGPackage;
 import mdsd.rPG.Relations;
+import mdsd.rPG.Speed;
 import mdsd.rPG.SystemRPG;
+import mdsd.rPG.Target;
 import mdsd.rPG.Teams;
 
 /**
@@ -44,9 +50,13 @@ public class RPGValidator extends AbstractRPGValidator {
 	public static final String EMPTY_ENTTIY_ATTRIBUTES = "emptyEntityAttributes";
 	public static final String INCORRECT_TEAM_COUNT = "incorrectTeamCount";
 	public static final String INDISTINCT_ATTRIBUTES = "indistinctAttributes";
-	public static final String DUPLICATE_ATTRIBUTES = "duplicateAttributes";
+	public static final String DUPLICATE_ATTRIBUTES = "duplicateLocalGlobalAttributes";
 	public static final String INCORRECT_BATTLE_SIZE = "incorrectBattleSize";
 	public static final String LOCAL_OTHER_ENTITY = "localNotFound";
+	public static final String SPEED_ATTRIBUTE_ON_ENTITY = "speedAttributeNotAsserted";
+	public static final String MISSING_ATTRIBUTE = "missingAttribute";
+	public static final String DUPLICATE_ATTRIBUTE_NAME = "duplicateGlobalAttributes";
+
 
 //
 //	@Check
@@ -230,15 +240,13 @@ public class RPGValidator extends AbstractRPGValidator {
 	}
 	
 	@Check
-	public void checkDublicateAttributes(SystemRPG sysrpg) {
-		ArrayList<String> existingAttributes = new ArrayList<>();
+	public void checkDuplicateAttributesGloabalLocal(SystemRPG sysrpg) {
+		List<String> existingAttributes = new ArrayList<>();
 		HashSet<String> entityAttributes = new HashSet<>();
 		
 		for(Declaration dec : sysrpg.getDeclarations()) {
 			if(dec instanceof Attributes) {
-				for(Attribute att : ((Attributes) dec).getAttribute()) {
-					existingAttributes.add(att.getName());
-				}
+				existingAttributes = getGlobalAttributes((Attributes) dec);
 			}
 			
 			else if (dec instanceof Entities) {
@@ -251,66 +259,82 @@ public class RPGValidator extends AbstractRPGValidator {
 				}
 			}
 		}
-		ArrayList<String> duplicates = new ArrayList<String>();
 		
 		for(String s : existingAttributes) {
 			for(String d : entityAttributes) {
 				if(s.equals(d)) {
-					duplicates.add(d);
+					error("Duplicate attribute found for local and global attribute: " + d,
+							RPGPackage.Literals.SYSTEM_RPG__NAME, DUPLICATE_ATTRIBUTES);
 				}
 			}
-		}
-		
-//		if(!duplicates.isEmpty()) {
-//			for(String duplicate : duplicates) {
-//				if(existingAttributes.contains(duplicate)) {
-//					error("f " + duplicate, RPGPackage.Literals.SYSTEM_RPG__NAME., DUPLICATE_ATTRIBUTES);
-//				}
-//			}
-//		}
-		
-		if(!duplicates.isEmpty()) {
-			error("Local attributes cannot have the same name as a global attribute,"
-					+ " the duplicated attribute(s) found are: " 
-					+ duplicates, RPGPackage.Literals.SYSTEM_RPG__NAME, DUPLICATE_ATTRIBUTES);
-		}
-		
+		}		
 	}
 	
 	@Check
-	public void checkLocalAttribute(SystemRPG sysrpg) {
-		Map<String, List<String>> localVariableHolder = new HashMap<>();
+	public void checkMissingAttribute(SystemRPG sysrpg) {		
 		for(Declaration dec : sysrpg.getDeclarations()) {
 			if(dec instanceof Entities) {
 				for(Entity ent : ((Entities) dec).getEntity()) {
-					
-					List<String> localVariables = new ArrayList<>();
-					localVariableHolder.put(ent.getName(), localVariables);
-					
+
+					List<String> entityAttributes = new ArrayList<>(); // rename					
 					for(EntityAttribute ea : ent.getAttributes()) {
 						if(ea instanceof LocalAttribute) {
-							localVariables.add(((LocalAttribute) ea).getName());
+							entityAttributes.add(((LocalAttribute) ea).getName());
+						}
+						if(ea instanceof AltAttribute) {
+							entityAttributes.add(((AltAttribute) ea).getAttribute().getName());
 						}
 					}
-				}
-				for(Entity ent : ((Entities) dec).getEntity()) {
-					if(!ent.getLocalEffects().isEmpty()) {
+					
+					for(Move emove : ent.getEMoves().getMove()) {
+						List<String> moveAttributes = new ArrayList<>();
+						for(AltAttribute attribute : emove.getAtt()) {
+							moveAttributes.add(attribute.getAttribute().getName());
+						}
 						
-						for(Buff effect : ent.getLocalEffects()) {
-							for(LocalTarget lt: effect.getReference().getLocal()) {
-								
-								if(!localVariableHolder.get(ent.getName()).contains(lt.getAttribute().getName())) {
-									for(Map.Entry<String, List<String>> entity : localVariableHolder.entrySet()) {
-										if(entity.getValue().contains(lt.getAttribute().getName())) {
-											error("Local attribute has been found at another entity, prob make it global, entity found: " 
-													+ entity.getKey(), RPGPackage.Literals.SYSTEM_RPG__NAME, LOCAL_OTHER_ENTITY);
-										}
-									}
-								}
+						for (BEffect buff : emove.getBEffect()) {
+							Set<String> variables = new HashSet<>();
+							for(LocalTarget localTarget : buff.getBuffEName().getReference().getLocal()) {
+								if(!moveAttributes.contains(localTarget.getAttribute().getName())) variables.add(localTarget.getAttribute().getName());
 							}
+							for(Target target : buff.getBuffEName().getReference().getTarget()) {
+								if(!moveAttributes.contains(target.getTarget().getName())) variables.add(target.getTarget().getName());
+							}
+							
+							List<String> missingAttributes = new ArrayList<>();
+							for(String attributeName : variables) {
+								if(!entityAttributes.contains(attributeName)) missingAttributes.add(attributeName);
+
+							}
+							if(!missingAttributes.isEmpty())
+								error(ent.getName() + " or " + emove.getName() + " are missing the attribute(s): " + missingAttributes + " to use the effect " + buff.getBuffEName().getName(),
+									RPGPackage.Literals.SYSTEM_RPG__NAME, MISSING_ATTRIBUTE); //put effect name and variable name in map of set
 						}
+						
+
 					}
 				}
+				
+				
+				
+//				for(Entity ent : ((Entities) dec).getEntity()) {
+//					if(!ent.getLocalEffects().isEmpty()) {
+//						
+//						for(Buff effect : ent.getLocalEffects()) {
+//							for(LocalTarget lt: effect.getReference().getLocal()) {
+//								
+//								if(!localVariableHolder.get(ent.getName()).contains(lt.getAttribute())) {
+//									for(Map.Entry<String, List<String>> entity : localVariableHolder.entrySet()) {
+//										if(entity.getValue().contains(lt.getAttribute())) {
+//											error("Local attribute has been found at another entity, prob make it global, entity found: " 
+//													+ entity.getKey(), RPGPackage.Literals.SYSTEM_RPG__NAME, LOCAL_OTHER_ENTITY);
+//										}
+//									}
+//								}
+//							}
+//						}
+//					}
+//				}
 
 			}
 			
@@ -322,19 +346,67 @@ public class RPGValidator extends AbstractRPGValidator {
 //                         ", Value = " + entry.getValue()); 
 
 	
+	public Attribute getSpeedAttribute(SystemRPG sysrpg) {
+		Attribute speedAttribute = null;
+		for(Declaration dec : sysrpg.getDeclarations()) {
+			if(dec instanceof Speed) {
+				speedAttribute = ((Speed) dec).getSpeedValue();
+			}
+		}
+		return speedAttribute;
+	}
+	
+	public List<String> getGlobalAttributes(Attributes attributes){
+		List<String> attributesList = new ArrayList<>();
+		for(Attribute attribute : attributes.getAttribute()) {
+			attributesList.add(attribute.getName());
+		}
+		return attributesList;
+	}
+	
+	@Check
+	public void checkSpeedAttribute(SystemRPG sysrpg) {
+		Attribute speedAttribute = getSpeedAttribute(sysrpg);
+		for(Declaration dec : sysrpg.getDeclarations()) {
+			if(dec instanceof Entities) {
+				for(Entity entity : ((Entities) dec).getEntity()) {
+					boolean hasSpeedAttribute = false;
+					for(EntityAttribute attribute : entity.getAttributes()) {
+						if(attribute instanceof AltAttribute) {
+							if(((AltAttribute) attribute).getAttribute().getName().equals(speedAttribute.getName())) hasSpeedAttribute = true;
+						}
+					}
+					if(!hasSpeedAttribute) warning( entity.getName() + " does not have the speed attribute: " + 
+							speedAttribute.getName(), RPGPackage.Literals.SYSTEM_RPG__NAME, SPEED_ATTRIBUTE_ON_ENTITY);
+				}
+			}
+		}
+	}
+	
+	@Check
+	public void checkDuplicateGlobalAttributeName(Attributes attributes) {
+		List<String> attributesList = getGlobalAttributes(attributes);
+		Set<String> firstSet = new HashSet<>();
+		
+		for(String attribute : attributesList) {
+			if(!firstSet.add(attribute)) {
+				error(attribute + " has already been declared once.",
+						RPGPackage.Literals.ATTRIBUTES__ATTRIBUTE, DUPLICATE_ATTRIBUTE_NAME);
+			}
+
+		}
+	}
+	
+	
+	
 	@Check
 	public void checkAttributesAreDistinct(SystemRPG sysrpg) {
-		ArrayList<String> existingAttributes = new ArrayList<>();
 		HashSet<String> moveAttributes = new HashSet<>();
 		HashSet<String> entityAttributes = new HashSet<>();
 		
 		
 		for(Declaration dec : sysrpg.getDeclarations()) {
-			if(dec instanceof Attributes) {
-				for(Attribute att : ((Attributes) dec).getAttribute()) {
-					existingAttributes.add(att.getName());
-				}
-			} else if(dec instanceof Moves) {
+			if(dec instanceof Moves) {
 				for(Move mov : ((Moves) dec).getMove()) {
 					for(AltAttribute a : mov.getAtt()) {
 						moveAttributes.add(a.getAttribute().getName());

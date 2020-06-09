@@ -425,6 +425,13 @@ public class RPGSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RPGPackage.NAME_LOCAL_ATTRIBUTE:
+      {
+        NameLocalAttribute nameLocalAttribute = (NameLocalAttribute)theEObject;
+        T result = caseNameLocalAttribute(nameLocalAttribute);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RPGPackage.INT_NUM:
       {
         IntNum intNum = (IntNum)theEObject;
@@ -1297,6 +1304,22 @@ public class RPGSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseNameAttribute(NameAttribute object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Name Local Attribute</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Name Local Attribute</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNameLocalAttribute(NameLocalAttribute object)
   {
     return null;
   }

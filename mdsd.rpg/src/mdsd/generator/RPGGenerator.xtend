@@ -758,7 +758,16 @@ class RPGGenerator extends AbstractGenerator {
 									System.out.println(player.getName() + "'(s) "  + aData.getAttributeName() + " is now: " + aData.getNumber());									
 								}
 								«ENDFOR»
-							}
+							«FOR attribute : buff.reference.local»
+								if(aData.getAttributeName() == "«attribute.attribute.name»"){
+									aData.setNumber(«attribute.sum.new_exp»);
+									System.out.println(player.getName() + "'(s) "  + aData.getAttributeName() + " is now: " + aData.getNumber());
+									
+								}							
+							«ENDFOR»							
+						}
+						
+						«IF !buff.reference.target.empty »
 						for(AttributeData aData : move.getMove(name).getMoveAttributes()){
 							«FOR attribute : buff.reference.target»
 							if(aData.getAttributeName() == "«attribute.target.name»"){
@@ -766,10 +775,10 @@ class RPGGenerator extends AbstractGenerator {
 								System.out.println(player.getName() + "'(s) "  + aData.getAttributeName() + " is now: " + aData.getNumber());
 								
 							}
-							«ENDFOR»										
-
-						}
-					}						
+							«ENDFOR»
+						}																
+						«ENDIF»
+					}
 				}
 			}
     	'''
@@ -1036,17 +1045,32 @@ class RPGGenerator extends AbstractGenerator {
 	}
 	def dispatch CharSequence new_exp(NameAttribute x){
 		//if (x.attribute instanceof NormalAttribute){
-			if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Integer")){
-				"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
-			}else if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Float")){ 
-				"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
-			}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof IntNum){
-				"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
-			}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof FloatNum){
-				"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
-			} else {
-				"Something went wrong" 
+		if(x.attribute !== null){
+				if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Integer")){
+					"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
+				}else if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Float")){ 
+					"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
+				}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof IntNum){
+					"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
+				}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof FloatNum){
+					"eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()"
+				} else {
+					"Something went wrong" 
+				}
 			}
+		else{
+				if(x.local.aval.LTypes !== null && x.local.aval.LTypes.equals("Integer")){
+					"eData.get(" + '"' +x.local.name + '"' + ").intValue()"
+				}else if(x.local.aval.LTypes !== null && x.local.aval.LTypes.equals("Float")){ 
+					"eData.get(" + '"' +x.local.name + '"' + ").floatValue()"
+				}else if(x.local.aval.an !== null && x.local.aval.an instanceof IntNum){
+					"eData.get(" + '"' +x.local.name + '"' + ").intValue()"
+				}else if(x.local.aval.an !== null && x.local.aval.an instanceof FloatNum){
+					"eData.get(" + '"' +x.local.name + '"' + ").floatValue()"
+				} else {
+					"Something went wrong" 
+				}			
+		}
 	//	}
 //		else if(x.attribute instanceof AttributeRelation){
 //			if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Integer")){

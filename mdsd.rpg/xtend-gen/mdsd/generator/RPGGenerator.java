@@ -30,6 +30,7 @@ import mdsd.rPG.FloatNum;
 import mdsd.rPG.IntNum;
 import mdsd.rPG.Loc;
 import mdsd.rPG.LocalAttribute;
+import mdsd.rPG.LocalTarget;
 import mdsd.rPG.Locations;
 import mdsd.rPG.MEffect;
 import mdsd.rPG.Move;
@@ -1874,18 +1875,12 @@ public class RPGGenerator extends AbstractGenerator {
         _builder.newLine();
       }
     }
-    _builder.append("\t\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("for(AttributeData aData : move.getMove(name).getMoveAttributes()){");
-    _builder.newLine();
     {
-      EList<Target> _target_1 = buff.getReference().getTarget();
-      for(final Target attribute_1 : _target_1) {
+      EList<LocalTarget> _local = buff.getReference().getLocal();
+      for(final LocalTarget attribute_1 : _local) {
         _builder.append("\t\t\t\t");
         _builder.append("if(aData.getAttributeName() == \"");
-        String _name_2 = attribute_1.getTarget().getName();
+        String _name_2 = attribute_1.getAttribute().getName();
         _builder.append(_name_2, "\t\t\t\t");
         _builder.append("\"){");
         _builder.newLineIfNotEmpty();
@@ -1904,16 +1899,62 @@ public class RPGGenerator extends AbstractGenerator {
         _builder.append("\t");
         _builder.newLine();
         _builder.append("\t\t\t\t");
-        _builder.append("}");
+        _builder.append("}\t\t\t\t\t\t\t");
         _builder.newLine();
       }
     }
-    _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
     _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    {
+      boolean _isEmpty = buff.getReference().getTarget().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _builder.append("\t\t\t");
+        _builder.append("for(AttributeData aData : move.getMove(name).getMoveAttributes()){");
+        _builder.newLine();
+        {
+          EList<Target> _target_1 = buff.getReference().getTarget();
+          for(final Target attribute_2 : _target_1) {
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("if(aData.getAttributeName() == \"");
+            String _name_3 = attribute_2.getTarget().getName();
+            _builder.append(_name_3, "\t\t\t\t");
+            _builder.append("\"){");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("aData.setNumber(");
+            CharSequence _new_exp_2 = this.new_exp(attribute_2.getSum());
+            _builder.append(_new_exp_2, "\t\t\t\t\t");
+            _builder.append(");");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("System.out.println(player.getName() + \"\'(s) \"  + aData.getAttributeName() + \" is now: \" + aData.getNumber());");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t\t\t");
+        _builder.append("}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t");
+        _builder.newLine();
+      }
+    }
     _builder.append("\t\t");
-    _builder.append("}\t\t\t\t\t\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -2652,40 +2693,84 @@ public class RPGGenerator extends AbstractGenerator {
   
   protected CharSequence _new_exp(final NameAttribute x) {
     String _xifexpression = null;
-    if (((x.getAttribute().getAVal().getLTypes() != null) && x.getAttribute().getAVal().getLTypes().equals("Integer"))) {
-      String _name = x.getAttribute().getName();
-      String _plus = (("eData.get(" + "\"") + _name);
-      String _plus_1 = (_plus + "\"");
-      _xifexpression = (_plus_1 + ").intValue()");
-    } else {
+    Attribute _attribute = x.getAttribute();
+    boolean _tripleNotEquals = (_attribute != null);
+    if (_tripleNotEquals) {
       String _xifexpression_1 = null;
-      if (((x.getAttribute().getAVal().getLTypes() != null) && x.getAttribute().getAVal().getLTypes().equals("Float"))) {
-        String _name_1 = x.getAttribute().getName();
-        String _plus_2 = (("eData.get(" + "\"") + _name_1);
-        String _plus_3 = (_plus_2 + "\"");
-        _xifexpression_1 = (_plus_3 + ").floatValue()");
+      if (((x.getAttribute().getAVal().getLTypes() != null) && x.getAttribute().getAVal().getLTypes().equals("Integer"))) {
+        String _name = x.getAttribute().getName();
+        String _plus = (("eData.get(" + "\"") + _name);
+        String _plus_1 = (_plus + "\"");
+        _xifexpression_1 = (_plus_1 + ").intValue()");
       } else {
         String _xifexpression_2 = null;
-        if (((x.getAttribute().getAVal().getAn() != null) && (x.getAttribute().getAVal().getAn() instanceof IntNum))) {
-          String _name_2 = x.getAttribute().getName();
-          String _plus_4 = (("eData.get(" + "\"") + _name_2);
-          String _plus_5 = (_plus_4 + "\"");
-          _xifexpression_2 = (_plus_5 + ").intValue()");
+        if (((x.getAttribute().getAVal().getLTypes() != null) && x.getAttribute().getAVal().getLTypes().equals("Float"))) {
+          String _name_1 = x.getAttribute().getName();
+          String _plus_2 = (("eData.get(" + "\"") + _name_1);
+          String _plus_3 = (_plus_2 + "\"");
+          _xifexpression_2 = (_plus_3 + ").floatValue()");
         } else {
           String _xifexpression_3 = null;
-          if (((x.getAttribute().getAVal().getAn() != null) && (x.getAttribute().getAVal().getAn() instanceof FloatNum))) {
-            String _name_3 = x.getAttribute().getName();
-            String _plus_6 = (("eData.get(" + "\"") + _name_3);
-            String _plus_7 = (_plus_6 + "\"");
-            _xifexpression_3 = (_plus_7 + ").floatValue()");
+          if (((x.getAttribute().getAVal().getAn() != null) && (x.getAttribute().getAVal().getAn() instanceof IntNum))) {
+            String _name_2 = x.getAttribute().getName();
+            String _plus_4 = (("eData.get(" + "\"") + _name_2);
+            String _plus_5 = (_plus_4 + "\"");
+            _xifexpression_3 = (_plus_5 + ").intValue()");
           } else {
-            _xifexpression_3 = "Something went wrong";
+            String _xifexpression_4 = null;
+            if (((x.getAttribute().getAVal().getAn() != null) && (x.getAttribute().getAVal().getAn() instanceof FloatNum))) {
+              String _name_3 = x.getAttribute().getName();
+              String _plus_6 = (("eData.get(" + "\"") + _name_3);
+              String _plus_7 = (_plus_6 + "\"");
+              _xifexpression_4 = (_plus_7 + ").floatValue()");
+            } else {
+              _xifexpression_4 = "Something went wrong";
+            }
+            _xifexpression_3 = _xifexpression_4;
           }
           _xifexpression_2 = _xifexpression_3;
         }
         _xifexpression_1 = _xifexpression_2;
       }
       _xifexpression = _xifexpression_1;
+    } else {
+      String _xifexpression_5 = null;
+      if (((x.getLocal().getAval().getLTypes() != null) && x.getLocal().getAval().getLTypes().equals("Integer"))) {
+        String _name_4 = x.getLocal().getName();
+        String _plus_8 = (("eData.get(" + "\"") + _name_4);
+        String _plus_9 = (_plus_8 + "\"");
+        _xifexpression_5 = (_plus_9 + ").intValue()");
+      } else {
+        String _xifexpression_6 = null;
+        if (((x.getLocal().getAval().getLTypes() != null) && x.getLocal().getAval().getLTypes().equals("Float"))) {
+          String _name_5 = x.getLocal().getName();
+          String _plus_10 = (("eData.get(" + "\"") + _name_5);
+          String _plus_11 = (_plus_10 + "\"");
+          _xifexpression_6 = (_plus_11 + ").floatValue()");
+        } else {
+          String _xifexpression_7 = null;
+          if (((x.getLocal().getAval().getAn() != null) && (x.getLocal().getAval().getAn() instanceof IntNum))) {
+            String _name_6 = x.getLocal().getName();
+            String _plus_12 = (("eData.get(" + "\"") + _name_6);
+            String _plus_13 = (_plus_12 + "\"");
+            _xifexpression_7 = (_plus_13 + ").intValue()");
+          } else {
+            String _xifexpression_8 = null;
+            if (((x.getLocal().getAval().getAn() != null) && (x.getLocal().getAval().getAn() instanceof FloatNum))) {
+              String _name_7 = x.getLocal().getName();
+              String _plus_14 = (("eData.get(" + "\"") + _name_7);
+              String _plus_15 = (_plus_14 + "\"");
+              _xifexpression_8 = (_plus_15 + ").floatValue()");
+            } else {
+              _xifexpression_8 = "Something went wrong";
+            }
+            _xifexpression_7 = _xifexpression_8;
+          }
+          _xifexpression_6 = _xifexpression_7;
+        }
+        _xifexpression_5 = _xifexpression_6;
+      }
+      _xifexpression = _xifexpression_5;
     }
     return _xifexpression;
   }

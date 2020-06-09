@@ -1188,22 +1188,13 @@ public interface RPGPackage extends EPackage
   int ENTITY__EMOVES = 3;
 
   /**
-   * The feature id for the '<em><b>Local Effects</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ENTITY__LOCAL_EFFECTS = 4;
-
-  /**
    * The number of structural features of the '<em>Entity</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY_FEATURE_COUNT = 5;
+  int ENTITY_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.LocalAttributeImpl <em>Local Attribute</em>}' class.
@@ -1608,13 +1599,50 @@ public interface RPGPackage extends EPackage
   int NAME_ATTRIBUTE__ATTRIBUTE = ATOMIC_NUMBER_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Local</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAME_ATTRIBUTE__LOCAL = ATOMIC_NUMBER_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Name Attribute</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int NAME_ATTRIBUTE_FEATURE_COUNT = ATOMIC_NUMBER_FEATURE_COUNT + 1;
+  int NAME_ATTRIBUTE_FEATURE_COUNT = ATOMIC_NUMBER_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link mdsd.rPG.impl.NameLocalAttributeImpl <em>Name Local Attribute</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see mdsd.rPG.impl.NameLocalAttributeImpl
+   * @see mdsd.rPG.impl.RPGPackageImpl#getNameLocalAttribute()
+   * @generated
+   */
+  int NAME_LOCAL_ATTRIBUTE = 47;
+
+  /**
+   * The feature id for the '<em><b>Attribute</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAME_LOCAL_ATTRIBUTE__ATTRIBUTE = 0;
+
+  /**
+   * The number of structural features of the '<em>Name Local Attribute</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAME_LOCAL_ATTRIBUTE_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link mdsd.rPG.impl.IntNumImpl <em>Int Num</em>}' class.
@@ -1624,7 +1652,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getIntNum()
    * @generated
    */
-  int INT_NUM = 47;
+  int INT_NUM = 48;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1652,7 +1680,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getFloatNum()
    * @generated
    */
-  int FLOAT_NUM = 48;
+  int FLOAT_NUM = 49;
 
   /**
    * The feature id for the '<em><b>I</b></em>' attribute.
@@ -1689,7 +1717,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getOr()
    * @generated
    */
-  int OR = 49;
+  int OR = 50;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1726,7 +1754,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAnd()
    * @generated
    */
-  int AND = 50;
+  int AND = 51;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1763,7 +1791,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSmaller()
    * @generated
    */
-  int SMALLER = 51;
+  int SMALLER = 52;
 
   /**
    * The number of structural features of the '<em>Smaller</em>' class.
@@ -1782,7 +1810,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSmallerEq()
    * @generated
    */
-  int SMALLER_EQ = 52;
+  int SMALLER_EQ = 53;
 
   /**
    * The number of structural features of the '<em>Smaller Eq</em>' class.
@@ -1801,7 +1829,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getEq()
    * @generated
    */
-  int EQ = 53;
+  int EQ = 54;
 
   /**
    * The number of structural features of the '<em>Eq</em>' class.
@@ -1820,7 +1848,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getBiggerEq()
    * @generated
    */
-  int BIGGER_EQ = 54;
+  int BIGGER_EQ = 55;
 
   /**
    * The number of structural features of the '<em>Bigger Eq</em>' class.
@@ -1839,7 +1867,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getBigger()
    * @generated
    */
-  int BIGGER = 55;
+  int BIGGER = 56;
 
   /**
    * The number of structural features of the '<em>Bigger</em>' class.
@@ -1858,7 +1886,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getNEq()
    * @generated
    */
-  int NEQ = 56;
+  int NEQ = 57;
 
   /**
    * The number of structural features of the '<em>NEq</em>' class.
@@ -1877,7 +1905,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getAdd()
    * @generated
    */
-  int ADD = 57;
+  int ADD = 58;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1914,7 +1942,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getSub()
    * @generated
    */
-  int SUB = 58;
+  int SUB = 59;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1951,7 +1979,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getMult()
    * @generated
    */
-  int MULT = 59;
+  int MULT = 60;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1988,7 +2016,7 @@ public interface RPGPackage extends EPackage
    * @see mdsd.rPG.impl.RPGPackageImpl#getDiv()
    * @generated
    */
-  int DIV = 60;
+  int DIV = 61;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2934,17 +2962,6 @@ public interface RPGPackage extends EPackage
   EReference getEntity_EMoves();
 
   /**
-   * Returns the meta object for the containment reference list '{@link mdsd.rPG.Entity#getLocalEffects <em>Local Effects</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Local Effects</em>'.
-   * @see mdsd.rPG.Entity#getLocalEffects()
-   * @see #getEntity()
-   * @generated
-   */
-  EReference getEntity_LocalEffects();
-
-  /**
    * Returns the meta object for class '{@link mdsd.rPG.EntityAttribute <em>Entity Attribute</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3257,6 +3274,38 @@ public interface RPGPackage extends EPackage
    * @generated
    */
   EReference getNameAttribute_Attribute();
+
+  /**
+   * Returns the meta object for the reference '{@link mdsd.rPG.NameAttribute#getLocal <em>Local</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Local</em>'.
+   * @see mdsd.rPG.NameAttribute#getLocal()
+   * @see #getNameAttribute()
+   * @generated
+   */
+  EReference getNameAttribute_Local();
+
+  /**
+   * Returns the meta object for class '{@link mdsd.rPG.NameLocalAttribute <em>Name Local Attribute</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Name Local Attribute</em>'.
+   * @see mdsd.rPG.NameLocalAttribute
+   * @generated
+   */
+  EClass getNameLocalAttribute();
+
+  /**
+   * Returns the meta object for the reference '{@link mdsd.rPG.NameLocalAttribute#getAttribute <em>Attribute</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Attribute</em>'.
+   * @see mdsd.rPG.NameLocalAttribute#getAttribute()
+   * @see #getNameLocalAttribute()
+   * @generated
+   */
+  EReference getNameLocalAttribute_Attribute();
 
   /**
    * Returns the meta object for class '{@link mdsd.rPG.IntNum <em>Int Num</em>}'.
@@ -4337,14 +4386,6 @@ public interface RPGPackage extends EPackage
     EReference ENTITY__EMOVES = eINSTANCE.getEntity_EMoves();
 
     /**
-     * The meta object literal for the '<em><b>Local Effects</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ENTITY__LOCAL_EFFECTS = eINSTANCE.getEntity_LocalEffects();
-
-    /**
      * The meta object literal for the '{@link mdsd.rPG.impl.EntityAttributeImpl <em>Entity Attribute</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -4615,6 +4656,32 @@ public interface RPGPackage extends EPackage
      * @generated
      */
     EReference NAME_ATTRIBUTE__ATTRIBUTE = eINSTANCE.getNameAttribute_Attribute();
+
+    /**
+     * The meta object literal for the '<em><b>Local</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference NAME_ATTRIBUTE__LOCAL = eINSTANCE.getNameAttribute_Local();
+
+    /**
+     * The meta object literal for the '{@link mdsd.rPG.impl.NameLocalAttributeImpl <em>Name Local Attribute</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see mdsd.rPG.impl.NameLocalAttributeImpl
+     * @see mdsd.rPG.impl.RPGPackageImpl#getNameLocalAttribute()
+     * @generated
+     */
+    EClass NAME_LOCAL_ATTRIBUTE = eINSTANCE.getNameLocalAttribute();
+
+    /**
+     * The meta object literal for the '<em><b>Attribute</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference NAME_LOCAL_ATTRIBUTE__ATTRIBUTE = eINSTANCE.getNameLocalAttribute_Attribute();
 
     /**
      * The meta object literal for the '{@link mdsd.rPG.impl.IntNumImpl <em>Int Num</em>}' class.

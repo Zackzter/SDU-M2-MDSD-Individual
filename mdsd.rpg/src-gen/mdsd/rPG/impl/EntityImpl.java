@@ -5,7 +5,6 @@ package mdsd.rPG.impl;
 
 import java.util.Collection;
 
-import mdsd.rPG.Buff;
 import mdsd.rPG.EType;
 import mdsd.rPG.Entity;
 import mdsd.rPG.EntityAttribute;
@@ -38,7 +37,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link mdsd.rPG.impl.EntityImpl#getEType <em>EType</em>}</li>
  *   <li>{@link mdsd.rPG.impl.EntityImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link mdsd.rPG.impl.EntityImpl#getEMoves <em>EMoves</em>}</li>
- *   <li>{@link mdsd.rPG.impl.EntityImpl#getLocalEffects <em>Local Effects</em>}</li>
  * </ul>
  *
  * @generated
@@ -94,16 +92,6 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
    * @ordered
    */
   protected EntityMoves eMoves;
-
-  /**
-   * The cached value of the '{@link #getLocalEffects() <em>Local Effects</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getLocalEffects()
-   * @generated
-   * @ordered
-   */
-  protected EList<Buff> localEffects;
 
   /**
    * <!-- begin-user-doc -->
@@ -272,21 +260,6 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
    * @generated
    */
   @Override
-  public EList<Buff> getLocalEffects()
-  {
-    if (localEffects == null)
-    {
-      localEffects = new EObjectContainmentEList<Buff>(Buff.class, this, RPGPackage.ENTITY__LOCAL_EFFECTS);
-    }
-    return localEffects;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -297,8 +270,6 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
         return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
       case RPGPackage.ENTITY__EMOVES:
         return basicSetEMoves(null, msgs);
-      case RPGPackage.ENTITY__LOCAL_EFFECTS:
-        return ((InternalEList<?>)getLocalEffects()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -321,8 +292,6 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
         return getAttributes();
       case RPGPackage.ENTITY__EMOVES:
         return getEMoves();
-      case RPGPackage.ENTITY__LOCAL_EFFECTS:
-        return getLocalEffects();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -351,10 +320,6 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
       case RPGPackage.ENTITY__EMOVES:
         setEMoves((EntityMoves)newValue);
         return;
-      case RPGPackage.ENTITY__LOCAL_EFFECTS:
-        getLocalEffects().clear();
-        getLocalEffects().addAll((Collection<? extends Buff>)newValue);
-        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -381,9 +346,6 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
       case RPGPackage.ENTITY__EMOVES:
         setEMoves((EntityMoves)null);
         return;
-      case RPGPackage.ENTITY__LOCAL_EFFECTS:
-        getLocalEffects().clear();
-        return;
     }
     super.eUnset(featureID);
   }
@@ -406,8 +368,6 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
         return attributes != null && !attributes.isEmpty();
       case RPGPackage.ENTITY__EMOVES:
         return eMoves != null;
-      case RPGPackage.ENTITY__LOCAL_EFFECTS:
-        return localEffects != null && !localEffects.isEmpty();
     }
     return super.eIsSet(featureID);
   }

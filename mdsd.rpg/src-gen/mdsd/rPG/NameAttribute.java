@@ -14,6 +14,7 @@ package mdsd.rPG;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.NameAttribute#getAttribute <em>Attribute</em>}</li>
+ *   <li>{@link mdsd.rPG.NameAttribute#getLocal <em>Local</em>}</li>
  * </ul>
  *
  * @see mdsd.rPG.RPGPackage#getNameAttribute()
@@ -43,5 +44,27 @@ public interface NameAttribute extends AtomicNumber
    * @generated
    */
   void setAttribute(Attribute value);
+
+  /**
+   * Returns the value of the '<em><b>Local</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Local</em>' reference.
+   * @see #setLocal(LocalAttribute)
+   * @see mdsd.rPG.RPGPackage#getNameAttribute_Local()
+   * @model
+   * @generated
+   */
+  LocalAttribute getLocal();
+
+  /**
+   * Sets the value of the '{@link mdsd.rPG.NameAttribute#getLocal <em>Local</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Local</em>' reference.
+   * @see #getLocal()
+   * @generated
+   */
+  void setLocal(LocalAttribute value);
 
 } // NameAttribute

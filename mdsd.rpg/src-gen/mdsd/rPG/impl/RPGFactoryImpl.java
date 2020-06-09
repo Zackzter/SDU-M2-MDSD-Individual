@@ -112,6 +112,7 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
       case RPGPackage.ATOMIC_NUMBER: return createAtomicNumber();
       case RPGPackage.ACTUAL_NUMBERS: return createActualNumbers();
       case RPGPackage.NAME_ATTRIBUTE: return createNameAttribute();
+      case RPGPackage.NAME_LOCAL_ATTRIBUTE: return createNameLocalAttribute();
       case RPGPackage.INT_NUM: return createIntNum();
       case RPGPackage.FLOAT_NUM: return createFloatNum();
       case RPGPackage.OR: return createOr();
@@ -693,6 +694,18 @@ public class RPGFactoryImpl extends EFactoryImpl implements RPGFactory
   {
     NameAttributeImpl nameAttribute = new NameAttributeImpl();
     return nameAttribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NameLocalAttribute createNameLocalAttribute()
+  {
+    NameLocalAttributeImpl nameLocalAttribute = new NameLocalAttributeImpl();
+    return nameLocalAttribute;
   }
 
   /**

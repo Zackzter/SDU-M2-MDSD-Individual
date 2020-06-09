@@ -146,8 +146,6 @@
         eType="#//EntityAttribute" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eMoves" eType="#//EntityMoves"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="localEffects" upperBound="-1"
-        eType="#//Buff" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EntityAttribute"/>
   <eClassifiers xsi:type="ecore:EClass" name="LocalAttribute" eSuperTypes="#//EntityAttribute">
@@ -195,6 +193,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="ActualNumbers" eSuperTypes="#//AtomicNumber"/>
   <eClassifiers xsi:type="ecore:EClass" name="NameAttribute" eSuperTypes="#//AtomicNumber">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="local" eType="#//LocalAttribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NameLocalAttribute">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//LocalAttribute"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntNum" eSuperTypes="#//ActualNumbers">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>

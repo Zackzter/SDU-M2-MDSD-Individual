@@ -31,7 +31,7 @@ class RPGParsingTest {
 		val result = parseHelper.parse('''
 			game TestGame
 			
-			location Test opponents TestTeamB
+			location Test opponents TestTeamB terrain TestTerrain type one
 			
 			relations
 				type one
@@ -43,9 +43,11 @@ class RPGParsingTest {
 				
 			death require testAttributeOne <= 0
 			
+			speed_value testAttributeTwo
+			
 			effects
 			    effect move TestEffect 
-			    if testAttributeTwo > 0 then testAttributeOne is testAttributeOne-1
+			    if testAttributeTwo > 0 then target testAttributeOne is testAttributeOne-1
 			    
 			moves
 				move testMove type one
@@ -55,12 +57,15 @@ class RPGParsingTest {
 			entities
 				entity TestEntityOne type one
 					attribute testAttributeOne is 5
+					attribute testAttributeTwo is 6					
 					move testMove
-				entity TestEntityOne type one
+				entity TestEntityTwo type one
 					attribute testAttributeOne is 5
+					attribute testAttributeTwo is 6					
+					local testLocalAttribute is 5
 					move testMove
 					
-			teams
+			teams size 1
 				team TestTeamA
 					members TestEntityOne
 				team TestTeamB
@@ -76,7 +81,7 @@ class RPGParsingTest {
 		val result = parseHelper.parse('''
 			game TestGame
 			
-			location Test opponents TestTeamB
+			location Test opponents TestTeamB terrain TestTerrain type one
 			
 			relations
 				type one
@@ -92,7 +97,7 @@ class RPGParsingTest {
 			
 			effects
 			    effect move TestEffect 
-			    if testAttributeTwo > 0 then testAttributeOne is testAttributeOne-1
+			    if testAttributeTwo > 0 then target testAttributeOne is testAttributeOne-1
 			    
 			moves
 				move testMove type one
@@ -102,12 +107,15 @@ class RPGParsingTest {
 			entities
 				entity TestEntityOne type one
 					attribute testAttributeOne is 5
+					attribute testAttributeTwo is 6					
 					move testMove
-				entity TestEntityOne type one
+				entity TestEntityTwo type one
 					attribute testAttributeOne is 5
+					attribute testAttributeTwo is 6					
+					local testLocalAttribute is 5
 					move testMove
 					
-			teams
+			teams size 1
 				team TestTeamA
 					members TestEntityOne
 				team TestTeamB
@@ -123,7 +131,7 @@ class RPGParsingTest {
 		val result = parseHelper.parse('''
 			game TestGame
 			
-			location Test opponents TestTeamB
+			location Test opponents TestTeamB terrain TestTerrain type one
 			
 			relations
 				type one
@@ -133,13 +141,13 @@ class RPGParsingTest {
 				attribute testAttributeOne is Integer
 				attribute testAttributeTwo is Integer
 				
-			speed_value testAttributeTwo
-				
 			death require testAttributeOne <= 0
+			
+			speed_value testAttributeTwo
 			
 			effects
 			    effect move TestEffect 
-			    if testAttributeTwo > 0 then testAttributeOne is testAttributeOne-1
+			    if testAttributeTwo > 0 then target testAttributeOne is testAttributeOne-1
 			    
 			moves
 				move testMove type one
@@ -149,20 +157,23 @@ class RPGParsingTest {
 			entities
 				entity TestEntityOne type one
 					attribute testAttributeOne is 5
+					attribute testAttributeTwo is 6					
 					move testMove
-				entity TestEntityOne type one
+				entity TestEntityTwo type one
 					attribute testAttributeOne is 5
+					attribute testAttributeTwo is 6					
+					local testLocalAttribute is 5
 					move testMove
 					
-			teams
+			teams size 1
 				team TestTeamA
 					members TestEntityOne
 				team TestTeamB
 					members TestEntityTwo
 		''')
-		Assertions.assertTrue(result.declarations.get(6) instanceof Entities)
-		Assertions.assertTrue(result.declarations.get(6).eContents.size == 2)
-		for(EObject e : result.declarations.get(6).eContents) {
+		Assertions.assertTrue(result.declarations.get(7) instanceof Entities)
+		Assertions.assertTrue(result.declarations.get(7).eContents.size == 2)
+		for(EObject e : result.declarations.get(7).eContents) {
 			val temp = e as Entity
 			Assertions.assertTrue(temp.name == "TestEntityOne" || temp.name == "TestEntityTwo")
 			Assertions.assertTrue(temp.EMoves.move.size > 0)

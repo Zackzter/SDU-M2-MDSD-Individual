@@ -4,6 +4,7 @@
 package mdsd.rPG.impl;
 
 import mdsd.rPG.Attribute;
+import mdsd.rPG.LocalAttribute;
 import mdsd.rPG.NameAttribute;
 import mdsd.rPG.RPGPackage;
 
@@ -23,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link mdsd.rPG.impl.NameAttributeImpl#getAttribute <em>Attribute</em>}</li>
+ *   <li>{@link mdsd.rPG.impl.NameAttributeImpl#getLocal <em>Local</em>}</li>
  * </ul>
  *
  * @generated
@@ -38,6 +40,16 @@ public class NameAttributeImpl extends AtomicNumberImpl implements NameAttribute
    * @ordered
    */
   protected Attribute attribute;
+
+  /**
+   * The cached value of the '{@link #getLocal() <em>Local</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getLocal()
+   * @generated
+   * @ordered
+   */
+  protected LocalAttribute local;
 
   /**
    * <!-- begin-user-doc -->
@@ -111,6 +123,51 @@ public class NameAttributeImpl extends AtomicNumberImpl implements NameAttribute
    * @generated
    */
   @Override
+  public LocalAttribute getLocal()
+  {
+    if (local != null && local.eIsProxy())
+    {
+      InternalEObject oldLocal = (InternalEObject)local;
+      local = (LocalAttribute)eResolveProxy(oldLocal);
+      if (local != oldLocal)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, RPGPackage.NAME_ATTRIBUTE__LOCAL, oldLocal, local));
+      }
+    }
+    return local;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public LocalAttribute basicGetLocal()
+  {
+    return local;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setLocal(LocalAttribute newLocal)
+  {
+    LocalAttribute oldLocal = local;
+    local = newLocal;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RPGPackage.NAME_ATTRIBUTE__LOCAL, oldLocal, local));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
@@ -118,6 +175,9 @@ public class NameAttributeImpl extends AtomicNumberImpl implements NameAttribute
       case RPGPackage.NAME_ATTRIBUTE__ATTRIBUTE:
         if (resolve) return getAttribute();
         return basicGetAttribute();
+      case RPGPackage.NAME_ATTRIBUTE__LOCAL:
+        if (resolve) return getLocal();
+        return basicGetLocal();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -134,6 +194,9 @@ public class NameAttributeImpl extends AtomicNumberImpl implements NameAttribute
     {
       case RPGPackage.NAME_ATTRIBUTE__ATTRIBUTE:
         setAttribute((Attribute)newValue);
+        return;
+      case RPGPackage.NAME_ATTRIBUTE__LOCAL:
+        setLocal((LocalAttribute)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -152,6 +215,9 @@ public class NameAttributeImpl extends AtomicNumberImpl implements NameAttribute
       case RPGPackage.NAME_ATTRIBUTE__ATTRIBUTE:
         setAttribute((Attribute)null);
         return;
+      case RPGPackage.NAME_ATTRIBUTE__LOCAL:
+        setLocal((LocalAttribute)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -168,6 +234,8 @@ public class NameAttributeImpl extends AtomicNumberImpl implements NameAttribute
     {
       case RPGPackage.NAME_ATTRIBUTE__ATTRIBUTE:
         return attribute != null;
+      case RPGPackage.NAME_ATTRIBUTE__LOCAL:
+        return local != null;
     }
     return super.eIsSet(featureID);
   }

@@ -3,6 +3,22 @@
  */
 package mdsd.scoping;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.Scopes;
+import java.util.List;
+
+import mdsd.rPG.AltAttribute;
+import mdsd.rPG.Attribute;
+import mdsd.rPG.LocalAttribute;
+import mdsd.rPG.LocalTarget;
+import mdsd.rPG.NameAttribute;
+import mdsd.rPG.RPGPackage;
+
+import org.eclipse.xtext.EcoreUtil2;
+
+
 
 /**
  * This class contains custom scoping description.
@@ -11,5 +27,26 @@ package mdsd.scoping;
  * on how and when to use it.
  */
 public class RPGScopeProvider extends AbstractRPGScopeProvider {
+	
+	@Override 
+	public IScope getScope(EObject context, EReference reference) {
+		if (context instanceof AltAttribute && reference == RPGPackage.Literals.ALT_ATTRIBUTE__ATTRIBUTE) {
+			EObject rootElement = EcoreUtil2.getRootContainer(context);
+			//EObject entity = EcoreUtil2.getContainerOfType(context, Entity.class);
+			List<Attribute> attributes = EcoreUtil2.getAllContentsOfType(rootElement, Attribute.class);
+			return Scopes.scopeFor(attributes);
+		}
+		if(context instanceof LocalTarget && reference == RPGPackage.Literals.LOCAL_TARGET__ATTRIBUTE) {
+			EObject rootElement = EcoreUtil2.getRootContainer(context);
+			List<LocalAttribute> attributes = EcoreUtil2.getAllContentsOfType(rootElement, LocalAttribute.class);
+			return Scopes.scopeFor(attributes);
+		}
+		if(context instanceof NameAttribute && reference == RPGPackage.Literals.NAME_ATTRIBUTE__LOCAL) {
+			EObject rootElement = EcoreUtil2.getRootContainer(context);
+			List<LocalAttribute> attributes = EcoreUtil2.getAllContentsOfType(rootElement, LocalAttribute.class);
+			return Scopes.scopeFor(attributes);
+		}
+		return super.getScope(context, reference);
+	}
 
 }

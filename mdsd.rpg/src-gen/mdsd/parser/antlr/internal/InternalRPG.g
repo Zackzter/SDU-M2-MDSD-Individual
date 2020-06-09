@@ -1895,25 +1895,6 @@ ruleEntity returns [EObject current=null]
 				}
 			)
 		)
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getEntityAccess().getLocalEffectsBuffParserRuleCall_5_0());
-				}
-				lv_localEffects_5_0=ruleBuff
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getEntityRule());
-					}
-					add(
-						$current,
-						"localEffects",
-						lv_localEffects_5_0,
-						"mdsd.RPG.Buff");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)?
 	)
 ;
 
@@ -2874,15 +2855,37 @@ ruleNameAttribute returns [EObject current=null]
 }:
 	(
 		(
-			{
-				if ($current==null) {
-					$current = createModelElement(grammarAccess.getNameAttributeRule());
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getNameAttributeRule());
+					}
 				}
-			}
-			otherlv_0=RULE_ID
+				otherlv_0=RULE_ID
+				{
+					newLeafNode(otherlv_0, grammarAccess.getNameAttributeAccess().getAttributeAttributeCrossReference_0_0());
+				}
+			)
+		)
+		    |
+		(
+			otherlv_1='local'
 			{
-				newLeafNode(otherlv_0, grammarAccess.getNameAttributeAccess().getAttributeAttributeCrossReference_0());
+				newLeafNode(otherlv_1, grammarAccess.getNameAttributeAccess().getLocalKeyword_1_0());
 			}
+			(
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getNameAttributeRule());
+						}
+					}
+					otherlv_2=RULE_ID
+					{
+						newLeafNode(otherlv_2, grammarAccess.getNameAttributeAccess().getLocalLocalAttributeCrossReference_1_1_0());
+					}
+				)
+			)
 		)
 	)
 ;
