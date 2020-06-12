@@ -44,7 +44,6 @@ import mdsd.rPG.Mult;
 import mdsd.rPG.Multiply;
 import mdsd.rPG.NEq;
 import mdsd.rPG.NameAttribute;
-import mdsd.rPG.NameLocalAttribute;
 import mdsd.rPG.NumberComparing;
 import mdsd.rPG.Or;
 import mdsd.rPG.Proposition;
@@ -411,13 +410,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   private EClass nameAttributeEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass nameLocalAttributeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1873,28 +1865,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
    * @generated
    */
   @Override
-  public EClass getNameLocalAttribute()
-  {
-    return nameLocalAttributeEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getNameLocalAttribute_Attribute()
-  {
-    return (EReference)nameLocalAttributeEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getIntNum()
   {
     return intNumEClass;
@@ -2403,9 +2373,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     createEReference(nameAttributeEClass, NAME_ATTRIBUTE__ATTRIBUTE);
     createEReference(nameAttributeEClass, NAME_ATTRIBUTE__LOCAL);
 
-    nameLocalAttributeEClass = createEClass(NAME_LOCAL_ATTRIBUTE);
-    createEReference(nameLocalAttributeEClass, NAME_LOCAL_ATTRIBUTE__ATTRIBUTE);
-
     intNumEClass = createEClass(INT_NUM);
     createEAttribute(intNumEClass, INT_NUM__VALUE);
 
@@ -2676,9 +2643,6 @@ public class RPGPackageImpl extends EPackageImpl implements RPGPackage
     initEClass(nameAttributeEClass, NameAttribute.class, "NameAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getNameAttribute_Attribute(), this.getAttribute(), null, "attribute", null, 0, 1, NameAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getNameAttribute_Local(), this.getLocalAttribute(), null, "local", null, 0, 1, NameAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(nameLocalAttributeEClass, NameLocalAttribute.class, "NameLocalAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getNameLocalAttribute_Attribute(), this.getLocalAttribute(), null, "attribute", null, 0, 1, NameLocalAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(intNumEClass, IntNum.class, "IntNum", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getIntNum_Value(), ecorePackage.getEInt(), "value", null, 0, 1, IntNum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

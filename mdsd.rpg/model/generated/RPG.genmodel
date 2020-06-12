@@ -162,9 +162,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//NameAttribute/attribute"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//NameAttribute/local"/>
     </genClasses>
-    <genClasses ecoreClass="RPG.ecore#//NameLocalAttribute">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RPG.ecore#//NameLocalAttribute/attribute"/>
-    </genClasses>
     <genClasses ecoreClass="RPG.ecore#//IntNum">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RPG.ecore#//IntNum/value"/>
     </genClasses>

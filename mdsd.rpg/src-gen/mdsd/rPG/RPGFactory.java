@@ -447,15 +447,6 @@ public interface RPGFactory extends EFactory
   NameAttribute createNameAttribute();
 
   /**
-   * Returns a new object of class '<em>Name Local Attribute</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Name Local Attribute</em>'.
-   * @generated
-   */
-  NameLocalAttribute createNameLocalAttribute();
-
-  /**
    * Returns a new object of class '<em>Int Num</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -39,7 +39,6 @@ import mdsd.rPG.Moves;
 import mdsd.rPG.Mult;
 import mdsd.rPG.NEq;
 import mdsd.rPG.NameAttribute;
-import mdsd.rPG.NameLocalAttribute;
 import mdsd.rPG.NumberComparing;
 import mdsd.rPG.Or;
 import mdsd.rPG.RPGPackage;
@@ -185,9 +184,6 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case RPGPackage.NAME_ATTRIBUTE:
 				sequence_NameAttribute(context, (NameAttribute) semanticObject); 
-				return; 
-			case RPGPackage.NAME_LOCAL_ATTRIBUTE:
-				sequence_NameLocalAttribute(context, (NameLocalAttribute) semanticObject); 
 				return; 
 			case RPGPackage.NUMBER_COMPARING:
 				sequence_NumberComparing(context, (NumberComparing) semanticObject); 
@@ -817,24 +813,6 @@ public class RPGSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_NameAttribute(ISerializationContext context, NameAttribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     NameLocalAttribute returns NameLocalAttribute
-	 *
-	 * Constraint:
-	 *     attribute=[LocalAttribute|ID]
-	 */
-	protected void sequence_NameLocalAttribute(ISerializationContext context, NameLocalAttribute semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RPGPackage.Literals.NAME_LOCAL_ATTRIBUTE__ATTRIBUTE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RPGPackage.Literals.NAME_LOCAL_ATTRIBUTE__ATTRIBUTE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNameLocalAttributeAccess().getAttributeLocalAttributeIDTerminalRuleCall_0_1(), semanticObject.eGet(RPGPackage.Literals.NAME_LOCAL_ATTRIBUTE__ATTRIBUTE, false));
-		feeder.finish();
 	}
 	
 	

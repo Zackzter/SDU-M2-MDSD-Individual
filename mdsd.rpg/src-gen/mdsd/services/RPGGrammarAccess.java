@@ -292,13 +292,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cLocalAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cLocalLocalTargetParserRuleCall_1_0 = (RuleCall)cLocalAssignment_1.eContents().get(0);
 		
-		////Rule:
-		////	('if' or = ORcondition 'then') reference=AttributeReference
-		////;
-		////
-		////RuleB:
-		////	('if' or = ORcondition 'then') reference+=Target+
-		////;
 		//AttributeBuff:
 		//	(target+=Target | local+=LocalTarget)+;
 		@Override public ParserRule getRule() { return rule; }
@@ -523,16 +516,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cLocAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cLocLocParserRuleCall_1_0 = (RuleCall)cLocAssignment_1.eContents().get(0);
 		
-		////Attribute:
-		////	(AttributeRelation | NormalAttribute)
-		////;
-		////AttributeRelation:
-		////	'attribute2' 'relation' name=ID aVal=AttributeValues
-		////;
-		////
-		////NormalAttribute:
-		////	'attribute2' name=ID aVal=AttributeValues
-		////;
 		//Locations:
 		//	'location' loc+=Loc+;
 		@Override public ParserRule getRule() { return rule; }
@@ -1728,25 +1711,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getLocalLocalAttributeIDTerminalRuleCall_1_1_0_1() { return cLocalLocalAttributeIDTerminalRuleCall_1_1_0_1; }
 	}
-	public class NameLocalAttributeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.NameLocalAttribute");
-		private final Assignment cAttributeAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cAttributeLocalAttributeCrossReference_0 = (CrossReference)cAttributeAssignment.eContents().get(0);
-		private final RuleCall cAttributeLocalAttributeIDTerminalRuleCall_0_1 = (RuleCall)cAttributeLocalAttributeCrossReference_0.eContents().get(1);
-		
-		//NameLocalAttribute:
-		//	attribute=[LocalAttribute];
-		@Override public ParserRule getRule() { return rule; }
-		
-		//attribute=[LocalAttribute]
-		public Assignment getAttributeAssignment() { return cAttributeAssignment; }
-		
-		//[LocalAttribute]
-		public CrossReference getAttributeLocalAttributeCrossReference_0() { return cAttributeLocalAttributeCrossReference_0; }
-		
-		//ID
-		public RuleCall getAttributeLocalAttributeIDTerminalRuleCall_0_1() { return cAttributeLocalAttributeIDTerminalRuleCall_0_1; }
-	}
 	public class IntNumElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "mdsd.RPG.IntNum");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
@@ -1863,7 +1827,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	private final AtomicNumberElements pAtomicNumber;
 	private final ActualNumbersElements pActualNumbers;
 	private final NameAttributeElements pNameAttribute;
-	private final NameLocalAttributeElements pNameLocalAttribute;
 	private final IntNumElements pIntNum;
 	private final FloatNumElements pFloatNum;
 	private final LegalTypeElements pLegalType;
@@ -1926,7 +1889,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		this.pAtomicNumber = new AtomicNumberElements();
 		this.pActualNumbers = new ActualNumbersElements();
 		this.pNameAttribute = new NameAttributeElements();
-		this.pNameLocalAttribute = new NameLocalAttributeElements();
 		this.pIntNum = new IntNumElements();
 		this.pFloatNum = new FloatNumElements();
 		this.pLegalType = new LegalTypeElements();
@@ -2039,13 +2001,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		return getRuleAccess().getRule();
 	}
 	
-	////Rule:
-	////	('if' or = ORcondition 'then') reference=AttributeReference
-	////;
-	////
-	////RuleB:
-	////	('if' or = ORcondition 'then') reference+=Target+
-	////;
 	//AttributeBuff:
 	//	(target+=Target | local+=LocalTarget)+;
 	public AttributeBuffElements getAttributeBuffAccess() {
@@ -2116,16 +2071,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 		return getAttributeAccess().getRule();
 	}
 	
-	////Attribute:
-	////	(AttributeRelation | NormalAttribute)
-	////;
-	////AttributeRelation:
-	////	'attribute2' 'relation' name=ID aVal=AttributeValues
-	////;
-	////
-	////NormalAttribute:
-	////	'attribute2' name=ID aVal=AttributeValues
-	////;
 	//Locations:
 	//	'location' loc+=Loc+;
 	public LocationsElements getLocationsAccess() {
@@ -2464,16 +2409,6 @@ public class RPGGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getNameAttributeRule() {
 		return getNameAttributeAccess().getRule();
-	}
-	
-	//NameLocalAttribute:
-	//	attribute=[LocalAttribute];
-	public NameLocalAttributeElements getNameLocalAttributeAccess() {
-		return pNameLocalAttribute;
-	}
-	
-	public ParserRule getNameLocalAttributeRule() {
-		return getNameLocalAttributeAccess().getRule();
 	}
 	
 	//IntNum:

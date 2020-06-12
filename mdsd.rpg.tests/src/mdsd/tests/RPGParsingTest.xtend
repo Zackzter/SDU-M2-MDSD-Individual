@@ -15,6 +15,9 @@ import mdsd.rPG.Entities
 import mdsd.rPG.Entity
 import org.eclipse.emf.ecore.EObject
 import mdsd.rPG.Move
+import mdsd.rPG.Speed
+import mdsd.rPG.EntityAttribute
+import mdsd.rPG.AltAttribute
 
 @ExtendWith(InjectionExtension)
 @InjectWith(RPGInjectorProvider)
@@ -173,12 +176,23 @@ class RPGParsingTest {
 		''')
 		Assertions.assertTrue(result.declarations.get(7) instanceof Entities)
 		Assertions.assertTrue(result.declarations.get(7).eContents.size == 2)
+		
+		val speedAttribute = result.declarations.get(4) as Speed
+		val speedName = speedAttribute.speedValue.name
+		
 		for(EObject e : result.declarations.get(7).eContents) {
 			val temp = e as Entity
 			Assertions.assertTrue(temp.name == "TestEntityOne" || temp.name == "TestEntityTwo")
 			Assertions.assertTrue(temp.EMoves.move.size > 0)
 			Assertions.assertTrue(temp.EMoves.move.get(0) instanceof Move)
 			Assertions.assertTrue(temp.EMoves.move.get(0).name == "testMove")
+			var checkSpeed = false
+			for(EntityAttribute attributes : temp.attributes){
+				if(attributes instanceof AltAttribute){
+					if(attributes.attribute.name.equals(speedName)) checkSpeed = true
+				}
+			}
+			Assertions.assertTrue(checkSpeed)
 		}
 		
 		val errors = result.eResource.errors

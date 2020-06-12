@@ -42,7 +42,6 @@ import mdsd.rPG.MoveE
 import mdsd.rPG.Speed
 import mdsd.rPG.AltAttribute
 import mdsd.rPG.LocalAttribute
-import mdsd.rPG.LocalTarget
 
 /**
  * Generates code from your model files on save.
@@ -268,7 +267,6 @@ class RPGGenerator extends AbstractGenerator {
 		
 				for (int i = 0; i < entitiesLeft; i++) {
 					Entity currentEntity = entities.remove(0);
-					System.out.println("name: " + currentEntity);
 					if(entityMap.get(currentEntity.getName()) == null){
 						entityMap.put(currentEntity.getName(), currentEntity);
 					}
@@ -295,10 +293,10 @@ class RPGGenerator extends AbstractGenerator {
 					}else if(lost){
 						gameFinished = true;
 						System.out.println("You Lost.");
-					}else{
+					}else if(!lost){
+						int teamsBeaten = 0;
 						// Get current location to fight at
 						for(LocationData locationD : location.getLocations()){
-							System.out.println(location.getLocations().remove(0));
 							String currentLocation = locationD.getLocationName();
 							String enemyTeamName = locationD.getTeam();
 							String terrain = locationD.getTerrain().getName();
@@ -306,7 +304,9 @@ class RPGGenerator extends AbstractGenerator {
 							enemyTeam = team.getTeamByName(enemyTeamName);
 							System.out.println("Current Location: " + currentLocation + ", fighting against: " + enemyTeamName + ".\nTerrain is: " + terrain);
 							processGame();
-							if((location.getLocations().isEmpty()) && !lost){
+							teamsBeaten++;
+							if(lost) break;
+							if(location.getLocations().size() == teamsBeaten && !lost){
 								won = true;
 								break;
 							   }
@@ -317,8 +317,6 @@ class RPGGenerator extends AbstractGenerator {
 		   	
 		   	private void processGame(){
 		   		while(enemyTeam.size() > 0 && !lost){
-		   			//Entity enemyEntity = enemyTeam.remove(0);
-					//currentEnemyTeam.add(enemyEntity);
 		   			reffereceMap(enemyTeam, enemyNameID);
 		   			fight();
 		   		}
@@ -351,14 +349,10 @@ class RPGGenerator extends AbstractGenerator {
 					System.out.println("You are against " + enemyNameID.keySet() + " choose your move");
 					for(String entityName : playerNameID.keySet()){
 						currentEntity = playerNameID.get(entityName);
-						//entitySpeed.put(currentEntity, speed.getSpeed(currentEntity));
 						entitySpeed.put(currentEntity, speed.getSpeed(currentEntity, terrainType));
-						//treeSpeed.put(currentEntity, speed.getSpeed(currentEntity));
 						List<String> moves = currentEntity.getMoveNameList();
 						System.out.println(moves);
-					
-						//List<String> moves = playerEntity.getMoveNameList();
-						
+											
 						boolean pickMove = true;
 						while (pickMove){  
 							String moveName = s.nextLine();
@@ -366,20 +360,17 @@ class RPGGenerator extends AbstractGenerator {
 							// Will check that the user picks a move which exists
 							if(moves.contains(moveName)){
 								boolean pickTeam = true;
-								//List<Entity> chosenTeam = null;
 								while(pickTeam){
 									System.out.println("What team do you want to target: enemy or self");
 									String targetTeam = s.nextLine();
 									boolean pickTarget = true;
 									if(targetTeam.equals("enemy")){
 										System.out.println("The enemy targets are: " + enemyNameID.keySet());
-										//chosenTeam = currentEnemyTeam;
 										pickTeam = false;
 										
 										while(pickTarget){
 											String target = s.nextLine();
 											if(enemyNameID.keySet().contains(target)){
-											//if(currentEnemyTeam.toString().contains(target)){
 												for(String targetEnemy : enemyNameID.keySet()){
 													System.out.println("name " + targetEnemy);
 													if(targetEnemy.equals(target)){ 
@@ -388,7 +379,6 @@ class RPGGenerator extends AbstractGenerator {
 													}
 		
 												}
-												//currentEnemyTeam.forEach(targetEnemy ->{ if(targetEnemy.getName().equals(target)){targetEntity = targetEnemy;}});
 												pickTarget = false;
 											}
 											else{
@@ -398,7 +388,6 @@ class RPGGenerator extends AbstractGenerator {
 									}
 									else if(targetTeam.equals("self")){
 										System.out.println("Your team is: " + playerNameID.keySet());
-										//chosenTeam = battleEntities;
 										pickTeam = false;
 										
 										while(pickTarget){
@@ -408,9 +397,6 @@ class RPGGenerator extends AbstractGenerator {
 													if(targetSelf.equals(target)) targetEntity = playerNameID.get(target);
 													break;
 												}
-											//if(battleEntities.toString().contains(target)){
-												// battleEntities.forEach(targetSelf ->{ if(targetSelf.getName().equals(target)){
-												// 	targetEntity = targetSelf;}});
 												pickTarget = false;
 											}
 											else{
@@ -425,10 +411,7 @@ class RPGGenerator extends AbstractGenerator {
 								targetMap = new HashMap<>();
 								targetMap.put(targetEntity, moveName);
 								moveQueue.put(currentEntity, targetMap);
-								// System.out.println("You used "+ moveName + "\n");
 								
-								// executeBuffMove(move, moveName, playerEntity);
-								// executeMove(move, moveName, targetEntity, playerEntity); TODO::: USE MOVE SOMEWHERE ELSE
 								
 								pickMove = !pickMove;
 							}else{
@@ -440,7 +423,6 @@ class RPGGenerator extends AbstractGenerator {
 					for(String enemyName : enemyNameID.keySet()){
 						currentEntity = enemyNameID.get(enemyName);
 						entitySpeed.put(currentEntity, speed.getSpeed(currentEntity, terrainType));
-						//treeSpeed.put(currentEntity, speed.getSpeed(currentEntity));
 						int choosenMove = random.nextInt(currentEntity.getMoveNameList().size());
 						String moveName = currentEntity.getMoveNameList().get(choosenMove);
 						targetList = new ArrayList<>(playerNameID.keySet());
@@ -449,43 +431,10 @@ class RPGGenerator extends AbstractGenerator {
 						targetMap.put(targetEntity, moveName);
 						moveQueue.put(currentEntity, targetMap);
 					}
-					// if(deathChecker.check(targetEntity)){
-					// 	System.out.println(targetEntity.getName() + " is dead!");
-					// 	targetEntity.setEntityState(EntityState.DEAD);
-					// 	currentEnemyTeam.remove(targetEntity);
-					// 	enemyNameID.remove(targetEntity.getName());
-					// 	return;
-					// }else{
-					// 	//System.out.println("Enemy Turn...");
 		
-					// 	int choosenMove = random.nextInt(enemyEntity.getMoveNameList().size());
-					// 	System.out.println(enemyEntity.getName() + " used " + enemyEntity.getMoveNameList().get(choosenMove) + "\n");
-						
-					// 	executeBuffMove(move, enemyEntity.getMoveNameList().get(choosenMove), enemyEntity);
-					// 	executeMove(move, enemyEntity.getMoveNameList().get(choosenMove), playerEntity, enemyEntity);
-						
-					// 	if(deathChecker.check(playerEntity)){
-					// 		System.out.println("Your " + playerEntity.getName() + " is dead");
-					// 		playerEntity.setEntityState(EntityState.DEAD);
-					// 		playerNameID.remove(playerEntity.getName()); //TODO:: FIX
-					// 		battleEntities.remove(playerEntity);
-							
-					// 		// Will add the next player entity to the fight, if there are no more, it will go to game over
-					// 		if(!team.getPlayerTeam().isEmpty()){
-					// 			// playerEntity = team.getPlayerTeam().remove(0);
-					// 			// battleEntities.add(playerEntity);
-					// 			reffereceMap(team.getPlayerTeam(), playerNameID);
-					// 		}else{
-					// 			lost = true;
-					// 			return;
-					// 		}
-					// 	}
-					// }
-					System.out.println(moveQueue);
-					System.out.println(entitySpeed);
-					System.out.println("------------");
+					// Sort the speed values
 					treeSpeed.putAll(entitySpeed);
-					System.out.println(treeSpeed);
+		
 		
 					for(Entity fightingEntity : treeSpeed.keySet()){
 						String moveName = "";
@@ -493,10 +442,10 @@ class RPGGenerator extends AbstractGenerator {
 							targetEntity = target;
 							moveName = moveQueue.get(fightingEntity).get(target);
 						}
-						if(playerNameID.containsValue(targetEntity)){
+						if(playerNameID.containsValue(targetEntity) && fightingEntity.getEntityState().equals(EntityState.ALIVE)){
 							useMove(playerNameID, fightingEntity, targetEntity, moveName);
 						}
-						else if(enemyNameID.containsValue(targetEntity)){
+						else if(enemyNameID.containsValue(targetEntity) && fightingEntity.getEntityState().equals(EntityState.ALIVE)){
 							useMove(enemyNameID, fightingEntity, targetEntity, moveName);
 						}
 						else{
@@ -533,9 +482,6 @@ class RPGGenerator extends AbstractGenerator {
 					executeMove(move, moveName, targetEntity, fightingEntity);
 					if(deathChecker.check(targetEntity)){
 						targetEntity.setEntityState(EntityState.DEAD);
-						System.out.println(targetEntity.getName() + " is dead!");
-						treeSpeed.remove(targetEntity);
-						//nameID.values().remove(targetEntity);
 					}
 			}
 		
@@ -680,17 +626,13 @@ class RPGGenerator extends AbstractGenerator {
     	public abstract class EffectMove {
     	
     	    protected Map<String, Number> eData;
-    	    
-«««    	    protected float typeFactor = 1;
-    	    
+    	        	    
     	    public abstract boolean effectMove(Move move, String name, Entity enemy);
     	
     	    public abstract Map<String, Number> changeMove(Move move, String name, Entity enemy);
     	
     	    public abstract void doEffect(Move move, String name, Entity enemy, Entity player);
-    	    
-«««    	    public abstract int checkStrongType(String moveType, String entityType);
-    	    
+    	        	    
     	    «moveEClasses»    	
     	}
     	'''
@@ -767,7 +709,6 @@ class RPGGenerator extends AbstractGenerator {
 							«ENDFOR»							
 						}
 						
-						«IF !buff.reference.target.empty »
 						for(AttributeData aData : move.getMove(name).getMoveAttributes()){
 							«FOR attribute : buff.reference.target»
 							if(aData.getAttributeName() == "«attribute.target.name»"){
@@ -777,7 +718,6 @@ class RPGGenerator extends AbstractGenerator {
 							}
 							«ENDFOR»
 						}																
-						«ENDIF»
 					}
 				}
 			}
@@ -989,15 +929,6 @@ class RPGGenerator extends AbstractGenerator {
 				«entity.name.toLowerCase».addAttribute(new AttributeData("«att.name»", «getNumberValue(att.aval.an)»));				
 				«ENDIF»
 				«ENDFOR»
-«««				«IF !entity.localEffects.isEmpty»
-«««				«FOR effect : entity.localEffects»
-«««				«IF !effect.reference.local.isEmpty»
-«««				«FOR attribute : effect.reference.local»
-«««				«print("here " + attribute.attribute.name + "\n")»
-«««				«ENDFOR»
-«««				«ENDIF»
-«««				«ENDFOR»
-«««				«ENDIF»
 				entities.add(«entity.name.toLowerCase»);
 				«ENDFOR»
 				
@@ -1044,7 +975,6 @@ class RPGGenerator extends AbstractGenerator {
 		Integer.toString(x.i) + '.' + Integer.toString(x.decimal)
 	}
 	def dispatch CharSequence new_exp(NameAttribute x){
-		//if (x.attribute instanceof NormalAttribute){
 		if(x.attribute !== null){
 				if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Integer")){
 					"eData.get(" + '"' +x.attribute.name + '"' + ").intValue()"
@@ -1071,20 +1001,6 @@ class RPGGenerator extends AbstractGenerator {
 					"Something went wrong" 
 				}			
 		}
-	//	}
-//		else if(x.attribute instanceof AttributeRelation){
-//			if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Integer")){
-//				"(eData.get(" + '"' +x.attribute.name + '"' + ").intValue()*typeFactor)"
-//			}else if(x.attribute.AVal.LTypes !== null && x.attribute.AVal.LTypes.equals("Float")){ 
-//				"(eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()*typeFactor)"
-//			}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof IntNum){
-//				"(eData.get(" + '"' +x.attribute.name + '"' + ").intValue()*typeFactor)"
-//			}else if(x.attribute.AVal.an !== null && x.attribute.AVal.an instanceof FloatNum){
-//				"(eData.get(" + '"' +x.attribute.name + '"' + ").floatValue()*typeFactor)"
-//			} else {
-//				"Something went wrong" 
-//			}			
-//		}
 	}
 	
 	def dispatch Number getNumberValue(IntNum x){
@@ -1545,10 +1461,6 @@ class RPGGenerator extends AbstractGenerator {
 				return null;
 			}
 		}
-		
-		
-		
-		
 		'''
 	}
 	

@@ -195,9 +195,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="local" eType="#//LocalAttribute"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NameLocalAttribute">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//LocalAttribute"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntNum" eSuperTypes="#//ActualNumbers">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>

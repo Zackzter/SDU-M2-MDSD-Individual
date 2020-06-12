@@ -311,11 +311,6 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
         return createNameAttributeAdapter();
       }
       @Override
-      public Adapter caseNameLocalAttribute(NameLocalAttribute object)
-      {
-        return createNameLocalAttributeAdapter();
-      }
-      @Override
       public Adapter caseIntNum(IntNum object)
       {
         return createIntNumAdapter();
@@ -1108,21 +1103,6 @@ public class RPGAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createNameAttributeAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link mdsd.rPG.NameLocalAttribute <em>Name Local Attribute</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see mdsd.rPG.NameLocalAttribute
-   * @generated
-   */
-  public Adapter createNameLocalAttributeAdapter()
   {
     return null;
   }

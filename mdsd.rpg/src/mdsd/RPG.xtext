@@ -31,16 +31,9 @@ MoveE:
 ;
 
 Rule:
-	('if' or = ORcondition 'then')
+	'if' or = ORcondition 'then'
 ;
 
-//Rule:
-//	('if' or = ORcondition 'then') reference=AttributeReference
-//;
-//
-//RuleB:
-//	('if' or = ORcondition 'then') reference+=Target+
-//;
 
 AttributeBuff:
 	(target += Target | local +=LocalTarget)+
@@ -70,18 +63,6 @@ Attributes:
 Attribute:
 	'attribute' name=ID aVal=AttributeValues
 ;
-
-//Attribute:
-//	(AttributeRelation | NormalAttribute)
-//;
-
-//AttributeRelation:
-//	'attribute2' 'relation' name=ID aVal=AttributeValues
-//;
-//
-//NormalAttribute:
-//	'attribute2' name=ID aVal=AttributeValues
-//;
 
 	
 Locations:
@@ -222,9 +203,6 @@ NameAttribute:
 	attribute=[Attribute] | 'local' local = [LocalAttribute]
 ;
 
-NameLocalAttribute:
-	attribute = [LocalAttribute]
-;
 
 IntNum:
 	value=INT
