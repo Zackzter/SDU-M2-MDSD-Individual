@@ -4,6 +4,7 @@ attributes
 	attribute lose is Integer
 	attribute damage is Integer
 	attribute water_proof is Integer
+	attribute speed is Integer
 
 relations
 	type Human
@@ -11,6 +12,8 @@ relations
 
 death
 	require(lose >= 3)
+	
+speed_value speed
 
 moves
 	move water_hose
@@ -45,19 +48,19 @@ entities
 		attribute water_proof is 1
 		move fire
 
-teams
+teams size 1
 	team fireman members Fireman
 	team tree members Flaming_Tree
 	team pan members Flaming_Pan
 
 location
-	Forest opponents tree
-	Home opponents pan
+	Forest opponents tree terrain Muddy  type Environment
+	Home opponents pan terrain House type Environment
 
 effects
 	effect move Water
-		if water_proof == 0 then lose is lose+damage*3
+		if water_proof == 0 then target lose is lose+damage*3
 	effect move Extinguish
-		lose is lose+damage
+		target lose is lose+damage
 	effect move Hot
-		lose is lose+damage
+		target lose is lose+damage

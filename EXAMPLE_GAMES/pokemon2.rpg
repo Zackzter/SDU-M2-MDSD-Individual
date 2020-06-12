@@ -1,5 +1,7 @@
 game Pokemond                                 
-location Johtoz opponents Rival
+
+location Johtoz opponents Rival terrain Volcano type fire
+		 MT_silver opponents Red terrain Thunder type electric
  
 relations
 	type fire  
@@ -10,69 +12,111 @@ relations
 		fire < water < grass 
 	type bug
 		grass < bug < fire
+	type electric
+
+
+speed_value speed
      
 attributes
 	attribute pp is Integer  
-	attribute power is Integer 
+	attribute power is Integer	
 	attribute current_hp is Integer
-	attribute speed is Integer
 	attribute max_hp is Integer
 	attribute cost is Integer
-            
+	attribute speed is Integer
+             
 death require current_hp <= 0.1
 
 effects
 	effect move Damage 
-	if cost <= pp then current_hp is current_hp-power
+	if pp > 0
+	then 
+		target current_hp is current_hp-power
+		self pp is pp -1
 	
-	effect after ReduceMana
-	if cost <= pp then pp is pp - 1
 	
 	effect buff PowerUp
-	if current_hp < max_hp / 2 then power is power * 2
+	if current_hp < max_hp / 2 then target power is power * 2
+	
+	effect buff Flames local flame_on is local flame_on + 1
+					target max_hp is 500
+	
+	effect move FireBurst if local flame_on > 9 then target current_hp is current_hp - 50
+
+	
+	effect move Hi
+	self max_hp is 2
+	
+
 	
 moves
 	move Ember type fire
-		attribute power is 1
+		attribute power is 500
 		
 		effect move Damage
-		effect after ReduceMana
-		effect buff PowerUp
+		effect buff PowerUp 
+		effect buff Flames
+		effect move FireBurst
 
-	move Water_Gun type water      
+	move Water_Gun type water     
 		attribute power is 1
-		
-		effect after ReduceMana
+		effect move FireBurst
 		effect move Damage
 
 	move Razor_Leaf	type grass
 		attribute power is 55
 		
 		effect move Damage
-		effect after ReduceMana
+	
+	move Thunder_Bolt type electric
+		attribute power is 55
+		
+		effect move Damage
+		
 
 entities
 	entity Zyndaquil type fire
-		attribute max_hp is 225
-        attribute current_hp is 225
-        attribute pp is 25
+		attribute max_hp is 225 
+	    attribute current_hp is 225
+	    attribute pp is 25
+	    attribute speed is 10
+	    local flame_on is 5
 		move Ember Water_Gun
-
+ 
 	entity Zotodile	type water
 		attribute max_hp is 200
         attribute current_hp is 200
-        attribute pp is 25
+        attribute pp is 20
+        attribute speed is 10
+        local flame_on is 1
 		move Water_Gun
 
 	entity Zhikorita type grass
-		attribute max_hp is 250
-        attribute current_hp is 250
+		attribute max_hp is 1
+        attribute current_hp is 1
+        attribute speed is 55
+
+        
         attribute pp is 25
 		move Razor_Leaf
-	
+		
+	entity Pika type electric
+		attribute max_hp is 250
+        attribute current_hp is 250
+        attribute speed is 100
 
-teams
+        
+        attribute pp is 25
+		move Thunder_Bolt
+
+		
+
+
+teams size 1
 	team Zilver
-		members Zyndaquil
+		members Zhikorita Zyndaquil
 	team Rival 
-		members Zotodile Zhikorita
+		members Zotodile
+	team Red
+		members Pika
+

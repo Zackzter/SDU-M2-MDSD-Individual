@@ -1,5 +1,5 @@
 game ChampsOfNorth
-location Denmark opponents Crusaders
+location Denmark opponents Crusaders terrain Lowland type Viking
 relations 
 	type Viking
 		Priest, Archer < Viking < Warrior
@@ -24,21 +24,25 @@ attributes
 	
 death require current_health <= 0
 
+speed_value speed
+
 effects
 	effect move Damage
-	if cost <= current_energy then current_health is current_health - power
+	if cost <= current_energy then target current_health is current_health - power
+	self current_energy is current_energy - cost
 	
-	effect buff Heal
-	if cost <= current_energy then current_health is current_health + power
+	effect move Heal
+	if cost <= current_energy then 
+	target current_health is current_health + power
+	self current_energy is current_energy - cost
 
 	effect buff Anger
-	if current_health <= max_health / 2 then power is power*2
+	if current_health <= max_health / 2 then target power is power*2
 	
-	effect move Slow
-	if cost <= current_energy then speed is speed - 1
+	effect move Slow 
+	if cost <= current_energy then 
+	target speed is speed - 1
 	
-	effect after ReduceEnergy
-	if cost <= current_energy then current_energy is current_energy - cost 
 
 moves 
 	move Axe_Throw
@@ -49,15 +53,13 @@ moves
 		effect buff Anger
 		effect move Slow
 		effect move Damage
-		effect after ReduceEnergy 
 			 
 	move Praise  
 		type Priest 
 		attribute cost is 50 
 		attribute power is 30 
 	
-		effect buff Heal
-		effect after ReduceEnergy 
+		effect move Heal
 		
 	move Arrow_Rain 
 		type Priest
@@ -65,7 +67,6 @@ moves
 		attribute cost is 65
 	
 		effect move Damage
-		effect after ReduceEnergy
 			
 	move Slash
 		type Warrior
@@ -73,7 +74,6 @@ moves
 		attribute cost is 10
 
 		effect move Damage
-		effect after ReduceEnergy
 		
 	move Stab
 		type Warrior 
@@ -81,7 +81,6 @@ moves
 		attribute cost is 5
 	
 		effect move Damage
-		effect after ReduceEnergy
 
 entities 
 	entity Bluetooth 
@@ -118,8 +117,8 @@ entities
 		
 	
 
-teams
+teams size 1
 	team Northen_Squad
-		members Bluetooth Karl
+		members Bluetooth Dio
 	team Crusaders 
-		members Dio Lewis
+		members Karl Lewis
