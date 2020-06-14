@@ -276,72 +276,60 @@ public class RPGValidator extends AbstractRPGValidator {
 	}
 	
 	@Check
-	public void checkMissingAttribute(SystemRPG sysrpg) {		
-		for(Declaration dec : sysrpg.getDeclarations()) {
-			if(dec instanceof Entities) {
-				for(Entity ent : ((Entities) dec).getEntity()) {
-
-					List<String> entityAttributes = new ArrayList<>();					
-					for(EntityAttribute ea : ent.getAttributes()) {
-						if(ea instanceof LocalAttribute) {
-							entityAttributes.add(((LocalAttribute) ea).getName());
-						}
-						if(ea instanceof AltAttribute) {
-							entityAttributes.add(((AltAttribute) ea).getAttribute().getName());
-						}
-					}
-					
-					for(Move emove : ent.getEMoves().getMove()) {
-						List<String> moveAttributes = new ArrayList<>();
-						for(AltAttribute attribute : emove.getAtt()) {
-							moveAttributes.add(attribute.getAttribute().getName());
-						}
-						
-						//change here
-						for (BEffect buff : emove.getBEffect()) {
-							Set<String> variables = new HashSet<>();
-							for(LocalTarget localTarget : buff.getBuffEName().getReference().getLocal()) {
-								if(!moveAttributes.contains(localTarget.getAttribute().getName())) variables.add(localTarget.getAttribute().getName());
-							}
-							for(Target target : buff.getBuffEName().getReference().getTarget()) {
-								if(!moveAttributes.contains(target.getTarget().getName())) variables.add(target.getTarget().getName());
-							}
-							
-							List<String> missingAttributes = new ArrayList<>();
-							for(String attributeName : variables) {
-								if(!entityAttributes.contains(attributeName)) missingAttributes.add(attributeName);
-
-							}
-							if(!missingAttributes.isEmpty())
-								error(ent.getName() + " or " + emove.getName() + " are missing the attribute(s): " + missingAttributes + " to use the effect " + buff.getBuffEName().getName(),
-									ent, RPGPackage.Literals.ENTITY__ATTRIBUTES, MISSING_ATTRIBUTE); //put effect name and variable name in map of set
-						}
-						
-						for (MEffect move : emove.getMEffect()) {
-							Set<String> variables = new HashSet<>();
-							
-							for(Self selfTarget : move.getMoveEName().getReference().getSelfT()) {
-								if(!moveAttributes.contains(selfTarget.getTarget().getName())) variables.add(selfTarget.getTarget().getName());
-							}
-							List<String> missingAttributes = new ArrayList<>();
-							for(String attributeName : variables) {
-								if(!entityAttributes.contains(attributeName)) missingAttributes.add(attributeName);
-
-							}
-							if(!missingAttributes.isEmpty())
-								error(ent.getName() + " or " + emove.getName() + " are missing the attribute(s): " + missingAttributes + " to use the effect " + move.getMoveEName().getName(),
-									ent, RPGPackage.Literals.ENTITY__ATTRIBUTES, MISSING_ATTRIBUTE); //put effect name and variable name in map of set
-						}
-						
-
-					}
-				}
-
+	public void checkMissingAttribute(Entity ent) {
+		List<String> entityAttributes = new ArrayList<>();					
+		for(EntityAttribute ea : ent.getAttributes()) {
+			if(ea instanceof LocalAttribute) {
+				entityAttributes.add(((LocalAttribute) ea).getName());
+			}
+			if(ea instanceof AltAttribute) {
+				entityAttributes.add(((AltAttribute) ea).getAttribute().getName());
+			}
+		}
+		
+		for(Move emove : ent.getEMoves().getMove()) {
+			List<String> moveAttributes = new ArrayList<>();
+			for(AltAttribute attribute : emove.getAtt()) {
+				moveAttributes.add(attribute.getAttribute().getName());
 			}
 			
+			for (BEffect buff : emove.getBEffect()) {
+				Set<String> variables = new HashSet<>();
+				for(LocalTarget localTarget : buff.getBuffEName().getReference().getLocal()) {
+					if(!moveAttributes.contains(localTarget.getAttribute().getName())) variables.add(localTarget.getAttribute().getName());
+				}
+				for(Target target : buff.getBuffEName().getReference().getTarget()) {
+					if(!moveAttributes.contains(target.getTarget().getName())) variables.add(target.getTarget().getName());
+				}
+				
+				List<String> missingAttributes = new ArrayList<>();
+				for(String attributeName : variables) {
+					if(!entityAttributes.contains(attributeName)) missingAttributes.add(attributeName);
+	
+				}
+				if(!missingAttributes.isEmpty())
+					error(ent.getName() + " or " + emove.getName() + " are missing the attribute(s): " + missingAttributes + " to use the effect " + buff.getBuffEName().getName(),
+						ent, RPGPackage.Literals.ENTITY__ATTRIBUTES, MISSING_ATTRIBUTE); //put effect name and variable name in map of set
+			}
+			
+			for (MEffect move : emove.getMEffect()) {
+				Set<String> variables = new HashSet<>();
+				
+				for(Self selfTarget : move.getMoveEName().getReference().getSelfT()) {
+					if(!moveAttributes.contains(selfTarget.getTarget().getName())) variables.add(selfTarget.getTarget().getName());
+				}
+				List<String> missingAttributes = new ArrayList<>();
+				for(String attributeName : variables) {
+					if(!entityAttributes.contains(attributeName)) missingAttributes.add(attributeName);
+	
+				}
+				if(!missingAttributes.isEmpty())
+					error(ent.getName() + " or " + emove.getName() + " are missing the attribute(s): " + missingAttributes + " to use the effect " + move.getMoveEName().getName(),
+						ent, RPGPackage.Literals.ENTITY__ATTRIBUTES, MISSING_ATTRIBUTE); //put effect name and variable name in map of set
+			}
 		}
 	}
-	
+
 
 	
 	public Attribute getSpeedAttribute(SystemRPG sysrpg) {
