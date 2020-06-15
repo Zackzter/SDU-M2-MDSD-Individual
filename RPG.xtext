@@ -1,0 +1,217 @@
+grammar mdsd.RPG with org.eclipse.xtext.common.Terminals
+
+generate rPG "http://www.RPG.mdsd"
+
+SystemRPG:
+	'game' name=ID declarations+=Declaration*
+;
+	
+Declaration:
+	Locations | Relations | Moves | Entities | Teams | Death | Attributes | Effects | Speed
+;
+
+Speed:
+	'speed_value' speedValue=[Attribute]
+;
+
+Effects:
+	'effects' effect+=Effect+
+;
+
+Effect:
+	'effect' (Buff | MoveE)
+;
+
+Buff:
+	'buff' name=ID rule=Rule? reference=AttributeBuff
+;
+
+MoveE:
+	'move' name=ID rule=Rule? reference=AttributeReference
+;
+
+Rule:
+	'if' or = ORcondition 'then'
+;
+
+
+AttributeBuff:
+	(target += Target | local +=LocalTarget)+
+;
+
+AttributeReference:
+	(selfT+=Self | target+=Target)+
+;
+
+Self:
+	'self' target=[Attribute] 'is' sum=Sum
+;
+
+Target:
+	'target' target=[Attribute] 'is' sum=Sum
+;
+
+LocalTarget:
+	'local' attribute=[LocalAttribute] 'is' sum=Sum
+;
+
+
+Attributes:
+	'attributes' attribute+=Attribute+
+;
+
+Attribute:
+	'attribute' name=ID aVal=AttributeValues
+;
+
+	
+Locations:
+	'location' loc+=Loc+
+;
+
+Loc:
+	name=ID 'opponents' team=[Team] terrain=Terrain
+;
+
+Terrain:
+	'terrain' name=ID eType=EType 
+;
+
+Relations:
+	'relations' type+=Type+
+;
+
+Type:
+	'type' name=ID tExpression=TypeExpression?
+;
+
+TypeExpression:
+	strong=[Type] (',' strong2+=[Type])*  '<' currentT=[Type] '<' weak=[Type] (',' weak2+=[Type])*
+;
+
+
+Moves:
+	'moves' move+=Move+
+;
+
+Move:
+	'move' name=ID eType=EType att+=AltAttribute* (mEffect+=MEffect | bEffect+=BEffect)*
+;
+
+MEffect:
+	'effect' 'move' moveEName=[MoveE]
+;
+
+BEffect:
+	'effect' 'buff' buffEName=[Buff]
+;
+
+EType:
+	'type' type=[Type]
+;
+
+AttributeValues:
+	'is' (lTypes=LegalType | an=ActualNumbers)
+;
+
+AltAttribute:
+	 'attribute' attribute=[Attribute] av=AttributeValues?
+;
+
+Entities:
+	'entities' entity+=Entity+
+;
+
+Death:
+	'death' req=Require
+;
+
+Entity:
+	'entity' name=ID eType=EType attributes+=EntityAttribute* eMoves=EntityMoves
+;
+
+EntityAttribute:
+	 AltAttribute | LocalAttribute
+;
+
+LocalAttribute:
+	'local' name=ID aval=AttributeValues
+;
+
+EntityMoves:
+	'move' move+=[Move]+
+;
+
+Teams:
+	'teams' size=TeamSize  team+=Team+
+;
+
+TeamSize:
+	'size' value=INT
+;
+
+Team:
+	'team' name=ID members=Members
+;
+
+Members:
+	'members' entity+=[Entity]+
+;
+
+Require:
+	'require' log=ORcondition
+;
+
+ORcondition returns Proposition:
+	ANDcondition ('OR' {Or.left=current} right=ANDcondition)*
+;
+
+ANDcondition returns Proposition:
+	Statement ('AND'{And.left=current} right=Statement)*
+	
+;
+
+Statement returns Proposition:
+	NumberComparing | '(' ORcondition ')'
+;
+
+NumberComparing:
+	left=Sum comp=Comparator right=Sum
+;
+
+Comparator:
+	{Smaller}'<' | {SmallerEq}'<=' | {Eq} '==' | {BiggerEq}'>=' | {Bigger}'>' | {NEq}'!='
+;
+
+Sum:
+	Multiply (('+' {Add.left=current} | '-' {Sub.left=current}) right=Multiply)*
+;
+
+Multiply:
+	AtomicNumber (('*' {Mult.left=current} | '/' {Div.left=current}) right=AtomicNumber)*
+;
+
+AtomicNumber:
+	ActualNumbers | NameAttribute 
+;
+
+ActualNumbers:
+	FloatNum | IntNum
+;
+
+NameAttribute:
+	attribute=[Attribute] | 'local' local = [LocalAttribute]
+;
+
+
+IntNum:
+	value=INT
+;
+
+FloatNum:
+	i=INT '.' decimal=INT
+;
+
+LegalType:
+	'Float' | 'Integer'
+;
